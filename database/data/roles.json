@@ -1,0 +1,35 @@
+{
+    "roles":[
+        {
+            "name" : "Admin",
+            "short_code" : "AD",
+            "role_type" : "admin"
+        },
+        {
+            "name" : "Branch Manager",
+            "short_code" : "branch_manager",
+            "role_type" : "admin"
+        },
+        {
+            "name" : "Employees",
+            "short_code" : "employee",
+            "role_type" : "employee"
+        },
+        {
+            "name" : "Superviser",
+            "short_code" : "superviser",
+            "role_type" : "admin"
+        },
+        {
+            "name" : "HR",
+            "short_code" : "hr",
+            "role_type" : "hr"
+        },
+        {
+            "name" : "Team Lead",
+            "short_code" : "TL",
+            "role_type" : "employee"
+        }
+       
+    ]
+}

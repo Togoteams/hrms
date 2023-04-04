@@ -1,0 +1,337 @@
+{
+    "permissions":[
+        {
+            "name" : "View Dashboard"
+        },
+        {
+            "name" : "Add Applications"
+        },
+        {
+            "name" : "Edit Applications"
+        },
+        {
+            "name" : "Delete Applications"
+        },
+        {
+            "name" : "View Applications"
+        },
+        {
+            "name" : "Add Jobs"
+        },
+        {
+            "name" : "Edit Jobs"
+        },
+        {
+            "name" : "View Jobs"
+        },
+        {
+            "name" : "Delete Jobs"
+        },
+        {
+            "name" : "Add Company"
+        },
+        {
+            "name" : "Edit Company"
+        },
+        {
+            "name" : "Delete Company"
+        },
+        {
+            "name" : "View Company"
+        },
+        {
+            "name" : "Add Recruiters"
+        },
+        {
+            "name" : "Edit Recruiters"
+        },
+        {
+            "name" : "View Recruiters"
+        },
+        {
+            "name" : "Delete Recruiters"
+        },
+        {
+            "name" : "Add Candidates"
+        },
+        {
+            "name" : "Edit Candidates"
+        },
+        {
+            "name" : "View Candidates"
+        },
+        {
+            "name" : "Delete Candidates"
+        },
+        {
+            "name" : "Add Skill Category"
+        },
+        {
+            "name" : "Edit Skill Category"
+        },
+        {
+            "name" : "View Skill Category"
+        },
+        {
+            "name" : "Delete Skill Category"
+        },
+        {
+            "name" : "Add Skills"
+        },
+        {
+            "name" : "Edit Skills"
+        },
+        {
+            "name" : "View Skills"
+        },
+        {
+            "name" : "Delete Skills"
+        },
+        {
+            "name" : "Add Product"
+        },
+        {
+            "name" : "Edit Product"
+        },
+        {
+            "name" : "View Product"
+        },
+        {
+            "name" : "Delete Product"
+        },
+        {
+            "name" : "Add Attribute"
+        },
+        {
+            "name" : "Edit Attribute"
+        },
+        {
+            "name" : "View Attribute"
+        },
+        {
+            "name" : "Delete Attribute"
+        },
+        {
+            "name" : "Add Stock"
+        },
+        {
+            "name" : "Edit Stock"
+        },
+        {
+            "name" : "View Stock"
+        },
+        {
+            "name" : "Delete Stock"
+        },
+        {
+            "name" : "Add Order"
+        },
+        {
+            "name" : "Edit Order"
+        },
+        {
+            "name" : "Delete Order"
+        },
+        {
+            "name" : "View Order"
+        },
+        {
+            "name" : "View Delivery"
+        },
+        {
+            "name" : "Edit Delivery"
+        },
+        {
+            "name" : "Add Coupon"
+        },
+        {
+            "name" : "Edit Coupon"
+        },
+        {
+            "name" : "View Coupon"
+        },
+        {
+            "name" : "Delete Coupon"
+        },
+        {
+            "name" : "Add Menu"
+        },
+        {
+            "name" : "Edit Menu"
+        },
+        {
+            "name" : "View Menu"
+        },
+        {
+            "name" : "Delete Menu"
+        },
+        {
+            "name" : "Add Blog"
+        },
+        {
+            "name" : "Edit Blog"
+        },
+        {
+            "name" : "View Blog"
+        },
+        {
+            "name" : "Delete Blog"
+        },
+        {
+            "name" : "Add Faq"
+        },
+        {
+            "name" : "Edit Faq"
+        },
+        {
+            "name" : "View Faq"
+        },
+        {
+            "name" : "Delete Faq"
+        },
+        {
+            "name" : "Add Testimonial"
+        },
+        {
+            "name" : "Edit Testimonial"
+        },
+        {
+            "name" : "View Testimonial"
+        },
+        {
+            "name" : "Delete Testimonial"
+        },
+        {
+            "name" : "Add Store Location"
+        },
+        {
+            "name" : "Edit Store Location"
+        },
+        {
+            "name" : "View Store Location"
+        },
+        {
+            "name" : "Delete Store Location"
+        },
+        {
+            "name" : "Delete Social Media"
+        },
+        {
+            "name" : "Add Social Media"
+        },
+        {
+            "name" : "Edit Social Media"
+        },
+        {
+            "name" : "View Social Media"
+        },
+        {
+            "name" : "Delete Industry"
+        },
+        {
+            "name" : "Add Industry"
+        },
+        {
+            "name" : "Edit Industry"
+        },
+        {
+            "name" : "View Industry"
+        },
+        {
+            "name" : "Delete Api Keys"
+        },
+        {
+            "name" : "Add Api Keys"
+        },
+        {
+            "name" : "Edit Api Keys"
+        },
+        {
+            "name" : "View Api Keys"
+        },
+        {
+            "name" : "Delete Static Page"
+        },
+        {
+            "name" : "Add Static Page"
+        },
+        {
+            "name" : "Edit Static Page"
+        },
+        {
+            "name" : "View Static Page"
+        },
+        {
+            "name" : "Delete AI Products"
+        },
+        {
+            "name" : "Add AI Products"
+        },
+        {
+            "name" : "Edit AI Products"
+        },
+        {
+            "name" : "View AI Products"
+        },
+        {
+            "name" : "Delete AI Products Features"
+        },
+        {
+            "name" : "Add AI Products Features"
+        },
+        {
+            "name" : "Edit AI Products Features"
+        },
+        {
+            "name" : "View AI Products Features"
+        },
+        {
+            "name" : "Delete Package Types"
+        },
+        {
+            "name" : "Add Package Types"
+        },
+        {
+            "name" : "Edit Package Types"
+        },
+        {
+            "name" : "View Package Types"
+        },
+        {
+            "name" : "Delete Subscriptions"
+        },
+        {
+            "name" : "Add Subscriptions"
+        },
+        {
+            "name" : "Edit Subscriptions"
+        },
+        {
+            "name" : "View Subscriptions"
+        },
+        {
+            "name" : "Delete Package"
+        },
+        {
+            "name" : "Add Package"
+        },
+        {
+            "name" : "Edit Package"
+        },
+        {
+            "name" : "View Package"
+        },
+        {
+            "name" : "Delete Static Pages"
+        },
+        {
+            "name" : "Add Static Pages"
+        },
+        {
+            "name" : "Edit Static Pages"
+        },
+        {
+            "name" : "View Static Pages"
+        }
+    ]
+}
