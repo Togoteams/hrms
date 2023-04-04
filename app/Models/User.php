@@ -53,6 +53,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function scopeListCustomer($query)
+    {
+        
+        return $query->whereHas('user_role',function($q){
+            return $q->where('user_id','2')
+        });
+    }
     
   
     

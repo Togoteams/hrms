@@ -38,13 +38,13 @@ class RoleController extends BaseController
             'role_type' => 'required|min:3|string',
         ]);
 
-        $data = [
-            'name' => $request->name,
-            'short_code' => $request->short_code,
-            'role_type' => $request->role_type,
-            'description' => $request->description,
-            'status' => $request->status,
-        ];
+        // $data = [
+        //     'name' => $request->name,
+        //     'short_code' => $request->short_code,
+        //     'role_type' => $request->role_type,
+        //     'description' => $request->description,
+        //     'status' => $request->status,
+        // ];
         $isRoleCreated= $this->roleService->createOrUpdateRole($request->except('_token'));
         if ($isRoleCreated) {
             return   $this->sendResponse($isRoleCreated, $message);

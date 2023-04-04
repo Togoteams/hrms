@@ -30,7 +30,7 @@ class UserTableSeeder extends Seeder
         $user->email = 'admin@togoteams.com';
         $user->mobile = 9999988888;
         $user->email_verified_at = $faker->dateTime();
-        $user->password = Hash::make('User@123');
+        $user->password = Hash::make('12345678');
         if($user->save()){
             $user->roles()->attach($isAdminRole);
             $permissions= Permission::get();
