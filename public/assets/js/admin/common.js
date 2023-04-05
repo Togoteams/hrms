@@ -329,89 +329,6 @@ $(document).ready(function (e) {
         });
     });
 
-    $('.custom-data-table').on('click', '.edit-mfi', function (e) {
-        var $this = $(this);
-        var uuid = $this.data('uuid');
-        var find = $this.data('table');
-        var message = $this.data('message') ?? 'test message';
-        console.log(uuid);
-        //var routeURL= baseUrl + 'ajax/edit-mfi'
-        // Swal.fire({
-        //     title: 'Are you sure you want to edit it?',
-        //     icon: 'warning',
-        //     showCancelButton: true,
-        //     confirmButtonColor: '#3085d6',
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonText: 'Yes, edit it!'
-        // }).then((result) => {
-        // if (result.isConfirmed) {
-        $('#add').text('Update');
-        // $('#update').show();
-        $.ajax({
-            type: "post",
-            url: baseUrl + 'ajax/edit-mfi',
-            data: { 'uuid': uuid, 'find': find },
-            cache: false,
-            dataType: "json",
-            success: function (data) {
-                console.log(data);
-                if (data.status) {
-                    var userdata = data.data;
-                    let update = $("#slide-from-right").find('button[type="submit"]').html('Update');
-                    $("#slide-from-right").find('button[type="reset"]').addClass('reload');
-                    $("#slide-from-right").find('button[type="reset"]').html('Cancel');
-
-                    $.each( data.data, function (index, valueMessage) {
-                        console.log(index);
-                        $("#" + index).val(valueMessage);
-                    });
-                    $('#login_id').attr('readonly', true);
-                    $('#code').attr('readonly', true);
-                    // $('#id').val(userdata.uuid);
-                    // $('#name').val(userdata.name);
-                    // $('#code').val(userdata.code);
-                    // $('#registration_number').val(userdata.registration_number);
-                    // $('#login_id').val(userdata.user.login_id).attr('readonly', 'true');
-                    // $('#contact_person_name').val(userdata.user.first_name);
-                    // $('#user_id').val(userdata.user.id);
-                    // // $('#branch_id').val(userdata.user.branch.id);
-                    // $('#contact_person_email').val(userdata.user.email);
-                    // $('#contact_person_phone').val(userdata.user.mobile_number);
-                    // $('#landmark').val(userdata.landmark);
-                    // $('#country_name').val(userdata.country_name);
-                    // $('#state_name').val(userdata.state_name);
-                    // $('#city_name').val(userdata.city_name);
-                    // $('#zip_code').val(userdata.zip_code);
-                    // $('#full_address').val(userdata.full_address);
-                    $("#logo").css('display','block');
-                    $("#logo").html(`<img src = "${userdata.logo_picture}" alt="image">`);
-
-
-                    /* $("#btnText").removeText('ADD');
-                    $("#btnText").addText('UPDATE'); */
-                    $("#slide-from-right").addClass("show-side-form");
-                    $('.formsubmit').attr('action', baseUrl + 'admin/mfis/update');
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'We are facing some technical issue now.',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-            },
-            error: function (response) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'We are facing some technical issue now. Please try again after some time',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        });
-        // });
-    });
-
     $('.close-btn').click(function (e) {
         $('.formsubmit').trigger('reset');
         $(".slide-from-right").removeClass("show-side-form");
@@ -419,7 +336,7 @@ $(document).ready(function (e) {
 
 
 
-    $('.custom-data-table').on('click', '.changeStatus', function (e) {
+    $('.card-table').on('click', '.changeStatus', function (e) {
         var $this = $(this);
         var uuid = $this.data('uuid');
         var value = $this.data('value');
@@ -436,8 +353,8 @@ $(document).ready(function (e) {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    type: "put",
-                    url: baseUrl + 'ajax/updateStatus',
+                    type: "get",
+                    url: baseUrl + 'admin/ajax/update-status',
                     data: { 'uuid': uuid, 'find': find, 'value': value },
                     cache: false,
                     dataType: "json",
@@ -478,7 +395,7 @@ $(document).ready(function (e) {
             }
         });
     });
-    $('.custom-data-table').on('click', '.deleteData', function (e) {
+    $('.card-table').on('click', '.deleteData', function (e) {
         var $this = $(this);
         var uuid = $this.data('uuid');
         var find = $this.data('table');
@@ -494,8 +411,8 @@ $(document).ready(function (e) {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    type: "delete",
-                    url: baseUrl + 'ajax/deleteData',
+                    type: "get",
+                    url: baseUrl + 'admin/ajax/delete',
                     data: { 'uuid': uuid, 'find': find },
                     cache: false,
                     dataType: "json",
@@ -536,7 +453,7 @@ $(document).ready(function (e) {
             }
         });
     });
-    $('.custom-data-table').on('click', '.editData', function (e) {
+    $('.card-table').on('click', '.editData', function (e) {
         var $this = $(this);
         var uuid = $this.data('uuid');
         var find = $this.data('table');
@@ -545,7 +462,7 @@ $(document).ready(function (e) {
 
         $.ajax({
             type: "get",
-            url: baseUrl + 'ajax/edit-data',
+            url: baseUrl + 'admin/ajax/edit',
             data: { 'uuid': uuid, 'find': find },
             cache: false,
             dataType: "json",
@@ -558,9 +475,9 @@ $(document).ready(function (e) {
                     // $("#" + formModal).find('button[type="reset"]').attr('disabled', 'disabled');
                     $("#" + formModal).find('button[type="reset"]').html('Cancel');
                     $("#" + formModal).find('button[type="reset"]').addClass('reload');
-                    $("#" + formModal).addClass("show-side-form");
+                    $("#" + formModal).modal("show");
                     $.each(response.data, function (index, valueMessage) {
-                        console.log(index);
+                        // console.log(index);
                         $("#" + index).val(valueMessage);
                     });
                     if(response.data.code){
@@ -593,7 +510,7 @@ $(document).ready(function (e) {
         });
 
     });
-    $('.custom-data-table').on('click', '.viewStatus', function (e) {
+    $('.card-table').on('click', '.viewStatus', function (e) {
         // setTimeout(function () {
         //     var demand_value = $('#demand_status').val();
         //     deMandStatus(demand_value);
@@ -739,7 +656,7 @@ $(document).ready(function (e) {
         });
     });
 
-    $('.custom-data-table').on('click', '.changeUserStatus,.changeUserBlock', function (e) {
+    $('.card-table').on('click', '.changeUserStatus,.changeUserBlock', function (e) {
         var $this = $(this);
         var uuid = $this.data('uuid');
         if ($this.hasClass('changeUserStatus')) {
@@ -985,7 +902,7 @@ $(document).ready(function (e) {
             e.clearSelection();
         });
     }
-    // $('.custom-data-table').on('click', '.loan_id', function (e) {
+    // $('.card-table').on('click', '.loan_id', function (e) {
     $('.formsubmit').on('change','#loan_id',function(e) {
         //console.log("test");
         // var $this = $(this);

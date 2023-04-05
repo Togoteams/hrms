@@ -533,8 +533,13 @@
                 <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal" data-bs-target="#addEditPermissionModal">
                   <i class="bi-pencil-fill me-1"></i> Permission
                 </button>
-                <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal" data-action="item" data-bs-target="#addEditRoleModal">
+                <button type="button"  data-table="roles" data-form-modal="addEditRoleModal" data-message="inactive"
+                data-uuid="{{ $role->uuid }}" class="btn btn-white btn-sm editData" >
                   <i class="bi-pencil-fill me-1"></i> Edit
+                </button>
+                <button type="button"  data-table="roles"  data-message="inactive"
+                data-uuid="{{ $role->uuid }}" class="btn btn-white btn-sm deleteData" >
+                  <i class="bi-pencil-fill me-1"></i> Delete
                 </button>
               </td>
             </tr>
@@ -608,6 +613,8 @@
           <div class="row mb-4">
             <label for="name" class="col-sm-3 col-form-label form-label">Name</label>
             <div class="col-sm-9">
+              <input type="hidden" class="form-control" name="role_id" id="role_id">
+
               <input type="text" class="form-control" name="name" id="name" placeholder="Name" aria-label="name">
             </div>
           </div>

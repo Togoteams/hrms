@@ -34,10 +34,11 @@ class RoleController extends BaseController
 
         $request->validate([
             'name'     =>  'required|string',
-            'short_code' => 'required|min:3|string',
+            'short_code' => 'required|min:2|string',
             'role_type' => 'required|min:3|string',
         ]);
 
+        // dd($request->all());
         // $data = [
         //     'name' => $request->name,
         //     'short_code' => $request->short_code,
@@ -45,9 +46,9 @@ class RoleController extends BaseController
         //     'description' => $request->description,
         //     'status' => $request->status,
         // ];
-        $isRoleCreated= $this->roleService->createOrUpdateRole($request->except('_token'));
+        $isRoleCreated= $this->roleService->createOrUpdateRole($request->except('_token'),$roleId);
         if ($isRoleCreated) {
-            return   $this->sendResponse($isRoleCreated, $message);
+            return   $this->responseJson($isRoleCreated, $message);
         }
     }
 
@@ -61,11 +62,11 @@ class RoleController extends BaseController
                 if ($isRoleDeleted) {
                     DB::commit();
                     $message = 'Role  deleted successfully';
-                    return $this->sendResponse('admin.roles.list', $message);
+                    return $this->responseJson('admin.roles.list', $message);
                 }
             } else {
                 $message = 'Role  not found';
-                return $this->sendResponse('admin.roles.list', $message);
+                return $this->responseJson('admin.roles.list', $message);
             }
         } catch (\Exception $e) {
             DB::rollback();

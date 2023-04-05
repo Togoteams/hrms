@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -43,6 +44,11 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
         Route::match(['get', 'post'], 'add', 'addUser')->name('add');
         Route::match(['get', 'post', 'put'], 'edit/{uuid}', 'getUser')->name('edit');
         Route::get('/delete/{uuid}', 'deleteUser')->name('delete');
+    });
+    Route::controller(AjaxController::class)->as('ajax.')->prefix('ajax/')->group(function () {
+        Route::get('/edit', 'editData')->name('list');
+        Route::get('/update-status', 'setStatus')->name('update.status');
+        Route::get('/delete', 'deleteData')->name('delete');
     });
 
 });

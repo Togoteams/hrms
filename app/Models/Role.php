@@ -26,7 +26,8 @@ class Role extends Model
     protected $fillable =[
         'name',
         'short_code',
-        'role_type'
+        'role_type',
+        'description'
     ];
     public static function boot()
     {

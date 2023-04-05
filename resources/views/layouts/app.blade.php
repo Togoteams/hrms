@@ -321,6 +321,7 @@
     </div>
     <!-- End Create a new user Modal -->
     @include('layouts.partials.footer')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('custom-scripts')
     <script>
         var APP_URL= "{{url('/')}}";

@@ -5,7 +5,8 @@ namespace App\Services\User;
 use Str;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
-use App\Repositories\Users\UserRepository;
+use App\Repositories\User\UserRepository;
+use App\Contracts\User\UserContract;
 
 class UserService
 {
@@ -17,7 +18,7 @@ class UserService
     /**
      * UserService constructor
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserContract $userRepository)
     {
         $this->userRepository              = $userRepository;
     }
@@ -110,6 +111,17 @@ class UserService
     {
         $currentHashedPassword = $this->userRepository->find($userId)->password;
         return Hash::check($password, $currentHashedPassword);
+    }
+
+    public function deleteUser($id){
+        $user=$this->userRepository->find($id);
+        $isUserDeleted= $user->delete($id);
+       
+        return $isUserDeleted;
+    }
+    public function updateStatus(array $attributes,$id){
+        $attributes['value'] == '1' ? 1 : 0;
+        return $this->userRepository->updateUser($attributes, $id);
     }
 
 }

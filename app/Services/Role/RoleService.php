@@ -38,10 +38,13 @@ class RoleService
         return $this->roleRepository->find($id);
     }
 
-    public function findRoleBy(array $where)
-    {
-        return $this->roleRepository->findOneBy($where);
-    }
+    public function deleteRole($id){
+        $role=$this->roleRepository->find($id);
+        $isRoleDeleted= $role->delete($id);
+       
+        return $isRoleDeleted;
+      }
+    
 
   
     public function createOrUpdateRole(array $attributes, $id = null){
@@ -50,6 +53,10 @@ class RoleService
         } else {
             return $this->roleRepository->updateRole($attributes, $id);
         }
+    }
+    public function updateStatus(array $attributes,$id){
+        $attributes['value'] == '1' ? 1 : 0;
+        return $this->roleRepository->updateRole($attributes, $id);
     }
 
     
