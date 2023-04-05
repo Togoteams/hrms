@@ -70,7 +70,7 @@
                          
 
                             <div class="nav-item">
-                                <a class="nav-link " href="apps-file-manager.html" data-placement="left">
+                                <a class="nav-link" href="{{route('admin.holiday.list')}}" data-placement="left">
                                     <i class="bi-folder2-open nav-icon"></i>
                                     <span class="nav-link-title">Holidays</span>
                                 </a>

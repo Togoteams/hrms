@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\Admin\HolidayController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +36,10 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
+    });
+    Route::controller(HolidayController::class)->as('holiday.')->prefix('holidays/')->group(function () {
+        Route::get('/', 'viewHoliday')->name('list');
+        Route::match(['get', 'post'], 'add', 'addHoliday')->name('add');
     });
     Route::controller(UserController::class)->as('user.')->prefix('users/')->group(function () {
         Route::get('/', 'viewUser')->name('list');
