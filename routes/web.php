@@ -36,8 +36,6 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
-        Route::match(['get', 'post', 'put'], 'edit/{uuid}', 'getRole')->name('edit');
-        Route::get('/delete/{uuid}', 'deleteRole')->name('delete');
     });
     Route::controller(UserController::class)->as('user.')->prefix('users/')->group(function () {
         Route::get('/', 'viewUser')->name('list');
