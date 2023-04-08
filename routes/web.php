@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\HolidayController;
+use App\Http\Controllers\Admin\EmployeeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,6 +54,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
         Route::get('/update-status', 'setStatus')->name('update.status');
         Route::get('/delete', 'deleteData')->name('delete');
     });
+    Route::resource('employees', EmployeeController::class);
 
 });
 

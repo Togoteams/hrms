@@ -59,7 +59,23 @@
                                 </div>
                             </div>
                             <!-- End Collapse -->
+                            <div id="employee">
 
+                                <!-- End Collapse -->
+                                <div class="nav-item">
+                                    <a class="nav-link dropdown-toggle " href="#employees" role="button"
+                                        data-bs-toggle="collapse" data-bs-target="#employees" aria-expanded="false"
+                                        aria-controls="employees">
+                                        <i class="bi-person nav-icon"></i>
+                                        <span class="nav-link-title">Employee</span>
+                                    </a>
+       
+                                    <div id="employees" class="nav-collapse collapse " data-bs-parent="#employee">
+                                        <a class="nav-link " href="{{ route('admin.employees.index') }}">Employees Managment</a>
+                                    </div>
+                                </div>
+                                <!-- End Collapse -->
+                            </div>
                       
 
                             <!-- End Collapse -->
