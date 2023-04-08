@@ -1,7 +1,11 @@
 // crud start
-function ajaxCall(form_id, url_name, target_id, method = "POST") {
+function ajaxCall(form_id, target_id = "", method = "POST") {
     // getting the all from form
     var form = document.getElementById(form_id);
+    var url_name = form.action;
+    if (target_id == "") {
+        target_id = form_id
+    }
     // setting all input into the forData object
     var formdata = new FormData(form);
     if (formValidate(form.elements, form)) {
@@ -11,7 +15,9 @@ function ajaxCall(form_id, url_name, target_id, method = "POST") {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById(target_id).innerHTML = this.responseText;
+                // document.getElementById(target_id).innerHTML = this.responseText;
+                t_id = document.getElementById(target_id);
+                backEndValidate(this.responseText, t_id)
                 stopPreloader(formElements_button, "span");
             }
         };
@@ -50,6 +56,7 @@ function deleteForm(url_name, table_id, target_id, method = "POST") {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById(target_id).innerHTML = this.responseText;
+                backEndValidate(this.responseText, target_id);
                 stopPreloader('', target_id);
             }
         };
@@ -124,12 +131,37 @@ function formValidate(el, form_id) {
     return flag;
 }
 
+function backEndValidate(responseData, target_id) {
+    var obj = JSON.parse(responseData);
+    if ("success" in obj) {
+        setSuccess(obj['success'], target_id)
+    } else {
+        for (let key in obj) {
+            let value;
+            // get the value
+            value = obj[key];
+            var element = document.getElementsByName(key)[0];
+            setError(element,  value, target_id)
+        }
+    }
+
+}
+function setSuccess(errr_message, form_id) {
+    createdd_element = createMenuItem("div", {
+        name: errr_message,
+        class: "alert alert-success mt-3",
+        id: "lol",
+        size: "13px",
+    });
+    form_id.appendChild(createdd_element);
+}
+
 function setError(el, errr_message, form_id) {
-    createdd_element = createMenuItem("span", {
-        name: el.name + errr_message,
+    createdd_element = createMenuItem("p", {
+        name: el.name +" - " + el.name + "  "+errr_message,
         class: "text-danger",
         id: "lol",
-        size: "12px",
+        size: "13px",
     });
     el.style.borderColor = "#dc3545"
     form_id.appendChild(createdd_element);

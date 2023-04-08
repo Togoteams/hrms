@@ -13,16 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-icons/font/bootstrap-icons.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-icons/font/bootstrap-icons.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('assets/vendor/daterangepicker/daterangepicker.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css') }}">
 
     <!-- CSS HRMS Template -->
 
-    <link rel="preload" href="{{ asset('assets/css/theme.min.css')}}" data-hs-appearance="default" as="style">
-    <link rel="preload" href="{{ asset('assets/css/theme-dark.min.css')}}" data-hs-appearance="dark" as="style">
-
+    <link rel="preload" href="{{ asset('assets/css/theme.min.css') }}" data-hs-appearance="default" as="style">
+    <link rel="preload" href="{{ asset('assets/css/theme-dark.min.css') }}" data-hs-appearance="dark" as="style">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <style data-hs-appearance-onload-styles>
         * {
             transition: unset !important;
@@ -76,8 +76,17 @@
                 "lang": "en"
             },
             "skipFilesFromBundle": {
-                "dist": ["assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "assets/js/demo.js"],
-                "build": ["assets/css/theme.css", "assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js", "assets/js/demo.html", "assets/css/theme-dark.html", "assets/css/docs.html", "assets/vendor/icon-set/style.html", "assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.html", "assets/js/demo.js"]
+                "dist": ["assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js",
+                    "assets/js/demo.js"
+                ],
+                "build": ["assets/css/theme.css",
+                    "assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js",
+                    "assets/js/demo.html", "assets/css/theme-dark.html", "assets/css/docs.html",
+                    "assets/vendor/icon-set/style.html", "assets/js/hs.theme-appearance.js",
+                    "assets/js/hs.theme-appearance-charts.js",
+                    "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.html",
+                    "assets/js/demo.js"
+                ]
             },
             "minifyCSSFiles": ["assets/css/theme.css", "assets/css/theme-dark.css"],
             "copyDependencies": {

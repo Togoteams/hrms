@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AjaxController;
+use App\Http\Controllers\Admin\DesignationContoller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -55,6 +56,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
         Route::get('/delete', 'deleteData')->name('delete');
     });
     Route::resource('employees', EmployeeController::class);
+    Route::resource('designation', DesignationContoller::class);
 
 });
 
