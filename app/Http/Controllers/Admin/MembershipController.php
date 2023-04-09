@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Designation;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
-class DesignationContoller extends Controller
+use App\Models\Membership;
+use Exception;
+class MembershipController extends Controller
 {
-    public $page_name = "Designation";
+    public $page_name = "Membership";
 
     public function index()
     {
-        $data =  Designation::all();
-        return view('admin.designation.index', ['page' => $this->page_name, 'data' => $data]);
+        $data =  Membership::all();
+        return view('admin.membership.index', ['page' => $this->page_name, 'data' => $data]);
     }
 
 
@@ -33,13 +32,13 @@ class DesignationContoller extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:designations,name,except,id',
+            'name' => 'string|required',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            Designation::create($request->except('_token'));
+            Membership::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
     }
@@ -57,8 +56,8 @@ class DesignationContoller extends Controller
      */
     public function edit(string $id)
     {
-        $data = Designation::find($id);
-        return view('admin.designation.ediit', ['data' => $data, 'page' => $this->page_name]);
+        $data = Membership::find($id);
+        return view('admin.membership.ediit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**
@@ -67,13 +66,13 @@ class DesignationContoller extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:designations,name,except,id',
+            'name' => 'string|required',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            Designation::where('id', $id)->update($request->except('_token', '_method'));
+            Membership::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
     }
@@ -83,12 +82,11 @@ class DesignationContoller extends Controller
      */
     public function destroy(string $id)
     {
-        try{
-        Designation::destroy($id);
-        return "Delete";
-
-        }catch(Exception $e){
-            return response()->json(["error"=>$this->page_name ."Can't Be Delete this May having some Employee"]);
+        try {
+            Membership::destroy($id);
+            return "Delete";
+        } catch (Exception $e) {
+            return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
         }
     }
 }

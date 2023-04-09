@@ -72,6 +72,7 @@
                             
                                     <div id="employees" class="nav-collapse collapse " data-bs-parent="#employee">
                                         <a class="nav-link " href="{{ route('admin.designation.index') }}">Designation</a>
+                                        <a class="nav-link " href="{{ route('admin.membership.index') }}">Membership</a>
 
                                         <a class="nav-link " href="{{ route('admin.employees.index') }}">Employees Managment</a>
                                     </div>

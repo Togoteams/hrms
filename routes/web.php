@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\EmployeeController;
-
+use App\Http\Controllers\Admin\MembershipController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +57,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     });
     Route::resource('employees', EmployeeController::class);
     Route::resource('designation', DesignationContoller::class);
+    Route::resource('membership', MembershipController::class);
 
 });
 

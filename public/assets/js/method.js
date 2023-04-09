@@ -57,14 +57,12 @@ function deleteRow(form_id, target_id = "", method = "POST") {
         var formdata = new FormData(form);
         var formElements_button = Array.from(form.elements).pop();
         // getting the button of the form and passing into the preloader function
-       // preloader(formElements_button);
+        // preloader(formElements_button);
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                // document.getElementById(target_id).innerHTML = this.responseText;
-                t_id = document.getElementById(target_id);
-                //stopPreloader(formElements_button,'span',target_id);
-                backEndValidate(this.responseText, t_id)
+                document.getElementById(target_id).innerHTML = this.responseText;
+              formElements_button.disabled=true
             }
         };
         xhttp.open(method, url_name, true);
@@ -168,6 +166,7 @@ function backEndValidate(responseData, target_id) {
     var obj = JSON.parse(responseData);
     if ("success" in obj) {
         setSuccess(obj['success'], target_id)
+
     }
     else if ("delete" in obj) {
         setDelete(obj['delete'], target_id)
@@ -177,7 +176,8 @@ function backEndValidate(responseData, target_id) {
             let value;
             // get the value
             value = obj[key];
-            var element = document.getElementsByName(key)[0];
+            var return_element = document.getElementsByName(key)
+            var element = return_element[return_element.length - 1];
             setError(element, value, target_id)
         }
     }

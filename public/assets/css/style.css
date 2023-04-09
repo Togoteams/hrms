@@ -1,6 +1,7 @@
 label{
     font-weight: 800;
     font-size: 13px;
+    text-transform: capitalize;
 }
 .btn-sm{
     padding: 6px  10px!important;
