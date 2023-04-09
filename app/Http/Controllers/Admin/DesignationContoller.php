@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Designation;
+use Exception;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class DesignationContoller extends Controller
 {
@@ -13,8 +14,8 @@ class DesignationContoller extends Controller
 
     public function index()
     {
-
-        return view('admin.designation.index', ['page' => $this->page_name]);
+        $data =  Designation::all();
+        return view('admin.designation.index', ['page' => $this->page_name, 'data' => $data]);
     }
 
 
@@ -31,17 +32,15 @@ class DesignationContoller extends Controller
      */
     public function store(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
-            'name' => 'string|max:5',
-            'description' => 'string'
+            'name' => 'string|required|unique:designations,name,except,id',
+            'description' => 'string|required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             Designation::create($request->except('_token'));
-            return response()->json(['success' => $this->page_name . "Added Successfully"]);
+            return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
     }
 
@@ -58,7 +57,8 @@ class DesignationContoller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Designation::find($id);
+        return view('admin.designation.ediit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**
@@ -66,7 +66,16 @@ class DesignationContoller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|required|unique:designations,name,except,id',
+            'description' => 'string|required'
+        ]);
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            Designation::where('id', $id)->update($request->except('_token', '_method'));
+            return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+        }
     }
 
     /**
@@ -74,6 +83,12 @@ class DesignationContoller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try{
+        Designation::destroy($id);
+        return response()->json(['delete' =>  "Deleted"]);
+
+        }catch(Exception $e){
+            return response()->json(["error"=>$this->page_name ."Can't Be Delete this May having some Employee"]);
+        }
     }
 }

@@ -18,7 +18,7 @@ function ajaxCall(form_id, target_id = "", method = "POST") {
                 // document.getElementById(target_id).innerHTML = this.responseText;
                 t_id = document.getElementById(target_id);
                 backEndValidate(this.responseText, t_id)
-                stopPreloader(formElements_button, "span");
+                stopPreloader(formElements_button);
             }
         };
         xhttp.open(method, url_name, true);
@@ -27,7 +27,7 @@ function ajaxCall(form_id, target_id = "", method = "POST") {
 }
 
 
-function editForm(url_name, target_id, method = "POST", table_id) {
+function editForm(url_name, target_id, method = "GET", table_id = '') {
 
     preloader('', target_id);
     // getting the button of the form and passing into the preloader function
@@ -45,38 +45,71 @@ function editForm(url_name, target_id, method = "POST", table_id) {
     xhttp.send();
 }
 
+function deleteRow(form_id, target_id = "", method = "POST") {
+    if (confirm('Are sure to delete  !!!')) {
+        // getting the all from form
+        var form = document.getElementById(form_id);
+        var url_name = form.action;
+        if (target_id == "") {
+            target_id = form_id
+        }
+        // setting all input into the forData object
+        var formdata = new FormData(form);
+        var formElements_button = Array.from(form.elements).pop();
+        // getting the button of the form and passing into the preloader function
+       // preloader(formElements_button);
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // document.getElementById(target_id).innerHTML = this.responseText;
+                t_id = document.getElementById(target_id);
+                //stopPreloader(formElements_button,'span',target_id);
+                backEndValidate(this.responseText, t_id)
+            }
+        };
+        xhttp.open(method, url_name, true);
+        xhttp.send(formdata);
+
+    }
+}
 
 
 
-function deleteForm(url_name, table_id, target_id, method = "POST") {
+function deleteForm(url_name, target_id, method = "POST", table_id = '') {
     if (confirm('Are sure to delete !!!')) {
         preloader('', target_id);
         // getting the button of the form and passing into the preloader function
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById(target_id).innerHTML = this.responseText;
-                backEndValidate(this.responseText, target_id);
+                t_id = document.getElementById(target_id);
                 stopPreloader('', target_id);
             }
         };
-        xhttp.open(method, url_name + "?id=" + table_id, true);
+        if (table_id != '') {
+            url_name = url_name + "?id=" + table_id
+        }
+        xhttp.open(method, url_name, true);
         xhttp.send();
     }
 }
 
-function changeStatus(url_name, table_id, target_id, method = "POST") {
+function changeStatus(url_name, target_id, method = "POST", table_id = '') {
     if (confirm('Are sure to Change Status !!!')) {
         preloader('', target_id);
         // getting the button of the form and passing into the preloader function
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById(target_id).innerHTML = this.responseText;
+                t_id = document.getElementById(target_id);
+                backEndValidate(this.responseText, t_id)
                 stopPreloader('', target_id);
             }
         };
-        xhttp.open(method, url_name + "?id=" + table_id, true);
+        if (table_id != '') {
+            url_name = url_name + "?id=" + table_id
+        }
+        xhttp.open(method, url_name, true);
         xhttp.send();
     }
 }
@@ -135,17 +168,32 @@ function backEndValidate(responseData, target_id) {
     var obj = JSON.parse(responseData);
     if ("success" in obj) {
         setSuccess(obj['success'], target_id)
-    } else {
+    }
+    else if ("delete" in obj) {
+        setDelete(obj['delete'], target_id)
+    }
+    else {
         for (let key in obj) {
             let value;
             // get the value
             value = obj[key];
             var element = document.getElementsByName(key)[0];
-            setError(element,  value, target_id)
+            setError(element, value, target_id)
         }
     }
 
 }
+
+function setDelete(errr_message, form_id) {
+    createdd_element = createMenuItem("span", {
+        name: errr_message,
+        class: "text-white",
+        id: "lol",
+        size: "13px",
+    });
+    form_id.appendChild(createdd_element);
+}
+
 function setSuccess(errr_message, form_id) {
     createdd_element = createMenuItem("div", {
         name: errr_message,
@@ -158,7 +206,7 @@ function setSuccess(errr_message, form_id) {
 
 function setError(el, errr_message, form_id) {
     createdd_element = createMenuItem("p", {
-        name: el.name +" - " + el.name + "  "+errr_message,
+        name: el.name + " - " + el.name + "  " + errr_message,
         class: "text-danger",
         id: "lol",
         size: "13px",
@@ -166,6 +214,7 @@ function setError(el, errr_message, form_id) {
     el.style.borderColor = "#dc3545"
     form_id.appendChild(createdd_element);
 }
+
 
 
 function preloader(element_data, id = "") {

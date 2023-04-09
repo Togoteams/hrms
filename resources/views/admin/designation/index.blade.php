@@ -40,7 +40,7 @@
 
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
-        
+
 
                 <!-- Table -->
                 <div class="table-responsive datatable-custom">
@@ -49,54 +49,55 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" class="table-column-pe-0">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="datatableCheckAll">
-                                        <label class="form-check-label" for="datatableCheckAll"></label>
-                                    </div>
+
                                 </th>
-                                <th class="table-column-ps-0">Full name</th>
-                                <th>Status</th>
-                                <th>Type</th>
-                                <th>Email</th>
-                                <th>Signed up</th>
-                                <th>User ID</th>
+                                <th class="table-column-ps-0">S.no</th>
+                                <th>Name</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td class="table-column-pe-0">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="usersDataCheck2">
-                                        <label class="form-check-label" for="usersDataCheck2"></label>
-                                    </div>
-                                </td>
-                                <td class="table-column-ps-0">
-                                    <a class="d-flex align-items-center" href="user-profile.html">
-                                        <div class="flex-shrink-0">
-                                            <div class="avatar avatar-sm avatar-circle">
-                                                <img class="avatar-img" src="{{ asset('assets/img/160x160/img10.jpg') }}"
-                                                    alt="Image Description">
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <h5 class="text-inherit mb-0">Amanda Harvey <i
-                                                    class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Top endorsed"></i></h5>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td>
-                                    <span class="legend-indicator bg-success"></span>Successful
-                                </td>
-                                <td>Unassigned</td>
-                                <td>amanda@site.com</td>
-                                <td>1 year ago</td>
-                                <td>67989</td>
-                            </tr>
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td class="table-column-pe-0">
+                                        {{ $loop->index + 1 }}
+                                    </td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->description }}</td>
+
+                                    <td>
 
 
+                                        <form id="edit{{ $item->id }}"
+                                            action="{{ route('admin.designation.destroy', $item->id) }}">
+                                            <button type="button"
+                                                onclick="editForm('{{ route('admin.designation.edit', $item->id) }}', 'edit')"
+                                                href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                                class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="button" id="delete{{ $item->id }}"
+                                                onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
+                                                class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                        {{-- <button target="_blank" href="{{ route('admin.designation.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm"><i class="far fa-show"></i></button> --}}
+
+                                        {{-- <button href="{{ route('admin.designation.status', $item->id) }}"
+                                            class="btn @if ($item->status == 1) btn-success @endif btn-secondary  btn-sm">
+                                            @if ($item->status == 1)
+                                                Active
+                                            @else
+                                                Deactive
+                                            @endif
+                                        </button> --}}
+                                    </td>
+
+
+                                </tr>
+                            @endforeach
 
 
                         </tbody>
@@ -108,7 +109,25 @@
             </div>
             <!-- End Card -->
 
+            {{-- edit form model start --}}
+            <!-- Modal -->
+            <div class="modal fade" id="modaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="edit">
 
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {{-- edit form model end  --}}
         </div>
 
     </main>
