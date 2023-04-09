@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AjaxController;
+use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationContoller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
@@ -8,16 +9,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\MembershipController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
@@ -26,13 +17,13 @@ Route::get('/', function () {
 
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
 
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        });
-        // Route::get('/users', function () {
-        //     return view('admin.user.users');
-        // });
-       
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+    // Route::get('/users', function () {
+    //     return view('admin.user.users');
+    // });
+
     // Route::controller(DashboardController::class)->as('dashboard.')->prefix('dashboard/')->group(function () {
     //     Route::get('/', 'viewDashboard')->name('view');
     // });
@@ -58,11 +49,11 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('designation', DesignationContoller::class);
     Route::resource('membership', MembershipController::class);
-
+    Route::resource('branch', BranchController::class);
+    Route::get('branch/status/{id}', [BranchController::class , 'status'])->name('branch.status');
 });
 
 
 Route::controller(LoginController::class)->as('login.')->prefix('login/')->group(function () {
-        Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
+    Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
-

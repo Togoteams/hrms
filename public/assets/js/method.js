@@ -92,7 +92,7 @@ function deleteForm(url_name, target_id, method = "POST", table_id = '') {
     }
 }
 
-function changeStatus(url_name, target_id, method = "POST", table_id = '') {
+function changeStatus(url_name, target_id, method = "GET", table_id = '') {
     if (confirm('Are sure to Change Status !!!')) {
         preloader('', target_id);
         // getting the button of the form and passing into the preloader function
@@ -100,7 +100,7 @@ function changeStatus(url_name, target_id, method = "POST", table_id = '') {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 t_id = document.getElementById(target_id);
-                backEndValidate(this.responseText, t_id)
+                document.getElementById(target_id).innerHTML = this.responseText;
                 stopPreloader('', target_id);
             }
         };
