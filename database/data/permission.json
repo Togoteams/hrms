@@ -4,334 +4,108 @@
             "name" : "View Dashboard"
         },
         {
-            "name" : "Add Applications"
+            "name" : "Add Roles"
         },
         {
-            "name" : "Edit Applications"
+            "name" : "Edit Roles"
         },
         {
-            "name" : "Delete Applications"
+            "name" : "Delete Roles"
         },
         {
-            "name" : "View Applications"
+            "name" : "View Roles"
         },
         {
-            "name" : "Add Jobs"
+            "name" : "Add Users"
         },
         {
-            "name" : "Edit Jobs"
+            "name" : "Edit Users"
         },
         {
-            "name" : "View Jobs"
+            "name" : "View Users"
         },
         {
-            "name" : "Delete Jobs"
+            "name" : "Delete Users"
         },
         {
-            "name" : "Add Company"
+            "name" : "Add Holidays"
         },
         {
-            "name" : "Edit Company"
+            "name" : "Edit Holidays"
         },
         {
-            "name" : "Delete Company"
+            "name" : "Delete Holidays"
         },
         {
-            "name" : "View Company"
+            "name" : "View Holidays"
         },
         {
-            "name" : "Add Recruiters"
+            "name" : "Add Employees"
         },
         {
-            "name" : "Edit Recruiters"
+            "name" : "Edit Employees"
         },
         {
-            "name" : "View Recruiters"
+            "name" : "View Employees"
         },
         {
-            "name" : "Delete Recruiters"
+            "name" : "Delete Employees"
         },
         {
-            "name" : "Add Candidates"
+            "name" : "Add Branch"
         },
         {
-            "name" : "Edit Candidates"
+            "name" : "Edit Branch"
         },
         {
-            "name" : "View Candidates"
+            "name" : "View Branch"
         },
         {
-            "name" : "Delete Candidates"
+            "name" : "Delete Branch"
         },
+        
         {
-            "name" : "Add Skill Category"
+            "name" : "Add Designations"
         },
         {
-            "name" : "Edit Skill Category"
+            "name" : "Edit Designations"
         },
         {
-            "name" : "View Skill Category"
+            "name" : "View Designations"
         },
         {
-            "name" : "Delete Skill Category"
+            "name" : "Delete Designations"
         },
         {
-            "name" : "Add Skills"
+            "name" : "Add Memberships"
         },
         {
-            "name" : "Edit Skills"
+            "name" : "Edit Memberships"
         },
         {
-            "name" : "View Skills"
+            "name" : "View Memberships"
         },
         {
-            "name" : "Delete Skills"
+            "name" : "Delete Memberships"
         },
         {
-            "name" : "Add Product"
+            "name" : "Profile Update"
         },
         {
-            "name" : "Edit Product"
+            "name" : "Change Password"
         },
         {
-            "name" : "View Product"
+            "name" : "Add Leaves"
         },
         {
-            "name" : "Delete Product"
+            "name" : "Edit Leaves"
         },
         {
-            "name" : "Add Attribute"
+            "name" : "View Leaves"
         },
         {
-            "name" : "Edit Attribute"
-        },
-        {
-            "name" : "View Attribute"
-        },
-        {
-            "name" : "Delete Attribute"
-        },
-        {
-            "name" : "Add Stock"
-        },
-        {
-            "name" : "Edit Stock"
-        },
-        {
-            "name" : "View Stock"
-        },
-        {
-            "name" : "Delete Stock"
-        },
-        {
-            "name" : "Add Order"
-        },
-        {
-            "name" : "Edit Order"
-        },
-        {
-            "name" : "Delete Order"
-        },
-        {
-            "name" : "View Order"
-        },
-        {
-            "name" : "View Delivery"
-        },
-        {
-            "name" : "Edit Delivery"
-        },
-        {
-            "name" : "Add Coupon"
-        },
-        {
-            "name" : "Edit Coupon"
-        },
-        {
-            "name" : "View Coupon"
-        },
-        {
-            "name" : "Delete Coupon"
-        },
-        {
-            "name" : "Add Menu"
-        },
-        {
-            "name" : "Edit Menu"
-        },
-        {
-            "name" : "View Menu"
-        },
-        {
-            "name" : "Delete Menu"
-        },
-        {
-            "name" : "Add Blog"
-        },
-        {
-            "name" : "Edit Blog"
-        },
-        {
-            "name" : "View Blog"
-        },
-        {
-            "name" : "Delete Blog"
-        },
-        {
-            "name" : "Add Faq"
-        },
-        {
-            "name" : "Edit Faq"
-        },
-        {
-            "name" : "View Faq"
-        },
-        {
-            "name" : "Delete Faq"
-        },
-        {
-            "name" : "Add Testimonial"
-        },
-        {
-            "name" : "Edit Testimonial"
-        },
-        {
-            "name" : "View Testimonial"
-        },
-        {
-            "name" : "Delete Testimonial"
-        },
-        {
-            "name" : "Add Store Location"
-        },
-        {
-            "name" : "Edit Store Location"
-        },
-        {
-            "name" : "View Store Location"
-        },
-        {
-            "name" : "Delete Store Location"
-        },
-        {
-            "name" : "Delete Social Media"
-        },
-        {
-            "name" : "Add Social Media"
-        },
-        {
-            "name" : "Edit Social Media"
-        },
-        {
-            "name" : "View Social Media"
-        },
-        {
-            "name" : "Delete Industry"
-        },
-        {
-            "name" : "Add Industry"
-        },
-        {
-            "name" : "Edit Industry"
-        },
-        {
-            "name" : "View Industry"
-        },
-        {
-            "name" : "Delete Api Keys"
-        },
-        {
-            "name" : "Add Api Keys"
-        },
-        {
-            "name" : "Edit Api Keys"
-        },
-        {
-            "name" : "View Api Keys"
-        },
-        {
-            "name" : "Delete Static Page"
-        },
-        {
-            "name" : "Add Static Page"
-        },
-        {
-            "name" : "Edit Static Page"
-        },
-        {
-            "name" : "View Static Page"
-        },
-        {
-            "name" : "Delete AI Products"
-        },
-        {
-            "name" : "Add AI Products"
-        },
-        {
-            "name" : "Edit AI Products"
-        },
-        {
-            "name" : "View AI Products"
-        },
-        {
-            "name" : "Delete AI Products Features"
-        },
-        {
-            "name" : "Add AI Products Features"
-        },
-        {
-            "name" : "Edit AI Products Features"
-        },
-        {
-            "name" : "View AI Products Features"
-        },
-        {
-            "name" : "Delete Package Types"
-        },
-        {
-            "name" : "Add Package Types"
-        },
-        {
-            "name" : "Edit Package Types"
-        },
-        {
-            "name" : "View Package Types"
-        },
-        {
-            "name" : "Delete Subscriptions"
-        },
-        {
-            "name" : "Add Subscriptions"
-        },
-        {
-            "name" : "Edit Subscriptions"
-        },
-        {
-            "name" : "View Subscriptions"
-        },
-        {
-            "name" : "Delete Package"
-        },
-        {
-            "name" : "Add Package"
-        },
-        {
-            "name" : "Edit Package"
-        },
-        {
-            "name" : "View Package"
-        },
-        {
-            "name" : "Delete Static Pages"
-        },
-        {
-            "name" : "Add Static Pages"
-        },
-        {
-            "name" : "Edit Static Pages"
-        },
-        {
-            "name" : "View Static Pages"
+            "name" : "Delete Leaves"
         }
+        
     ]
 }
