@@ -67,7 +67,7 @@ class DesignationContoller extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:designations,name,except,id',
+            'name' => 'string|required|unique:designations,name,.$id',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {

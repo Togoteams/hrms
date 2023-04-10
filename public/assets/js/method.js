@@ -134,11 +134,7 @@ function fetchApi(form_id, url_name, target_id, method = "POST") {
         .catch((error) => console.error("Error:", error));
 }
 
-fetch("test.php", {})
-    .then(function (data) {
-        console.log(data);
-    })
-    .catch((error) => console.error("Error:", error));
+
 // crud end
 
 // some special fucntion start

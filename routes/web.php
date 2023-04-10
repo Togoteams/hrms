@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\MembershipController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', function () {
@@ -17,16 +18,16 @@ Route::get('/', function () {
 
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // });
     // Route::get('/users', function () {
     //     return view('admin.user.users');
     // });
 
-    // Route::controller(DashboardController::class)->as('dashboard.')->prefix('dashboard/')->group(function () {
-    //     Route::get('/', 'viewDashboard')->name('view');
-    // });
+    Route::controller(DashboardController::class)->as('dashboard.')->prefix('dashboard/')->group(function () {
+        Route::get('/', 'viewDashboard')->name('view');
+    });
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
