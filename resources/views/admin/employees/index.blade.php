@@ -12,7 +12,6 @@
                         <h1 class="page-header-title">{{ $page }}</h1>
                     </div>
                     <!-- End Col -->
-
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -36,36 +35,28 @@
                 </div>
             </div>
             @include('admin.employees.create')
-
-
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
-             
-
-                <!-- Table -->
-                <div class="table-responsive datatable-custom">
+            <div class="card mb-3 mb-lg-5">>
+                <div class="table-responsive mt-3 p-2">
                     <table id="datatable"
-                        class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead class="thead-light">
+                        class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                        <thead>
                             <tr>
-                                <th>S.no</th>
-                                <th class="table-column-ps-0">Full name</th>
-                                <th>Status</th>
-                                <th>Type</th>
-                                <th>Email</th>
-                                <th>Signed up</th>
-                                <th>User ID</th>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th width="100px">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
-
                         </tbody>
                     </table>
                 </div>
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
                 <script type="text/javascript">
                     $(function() {
-                        var table = $('#datatable').DataTable({
+
+                        var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
                             ajax: "{{ route('admin.employees.index') }}",
@@ -73,13 +64,10 @@
                                     data: 'id',
                                     name: 'id'
                                 },
+
                                 {
-                                    data: 'name',
-                                    name: 'name'
-                                },
-                                {
-                                    data: 'email',
-                                    name: 'email'
+                                    data: 'emp_id',
+                                    name: 'emp_id'
                                 },
                                 {
                                     data: 'action',
@@ -89,6 +77,7 @@
                                 },
                             ]
                         });
+
                     });
                 </script>
                 <!-- End Table -->

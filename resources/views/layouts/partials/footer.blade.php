@@ -18,14 +18,12 @@
 <script src="{{ asset('assets/vendor/clipboard/dist/clipboard.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/datatables.net.extensions/select/select.min.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" ></script>
 <!-- JS HRMS -->
 <script src="{{ asset('assets/js/theme.min.js') }}"></script>
 <script src="{{ asset('assets/js/hs.theme-appearance-charts.js') }}"></script>
 <script src="{{ asset('assets/js/method.js') }}"></script>
 <!-- JS Plugins Init. -->
-<script>
+{{-- <script>
     $(document).on('ready', function() {
         // INITIALIZATION OF DATERANGEPICKER
         // =======================================================
@@ -302,4 +300,4 @@
             setActiveStyle()
         })
     })()
-</script>
+</script> --}}

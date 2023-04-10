@@ -13,18 +13,24 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Employee::all();
-        return Datatables::of($data)->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $btn = '<a href="javascript:void(0)" class="btn btn-primary btn-sm">View</a>';
-                return $btn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-        //  return view('admin.employees.index', ['page' => $this->page_name]);
+
+        if ($request->ajax()) {
+            $data = Employee::select('*');
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = view('layouts.buttons',['item'=>$row,"route"=>'employees']);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('admin.employees.index', ['page' => $this->page_name]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -64,6 +70,17 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+
+    public function status($id)
+    {
+        if (Employee::find($id)->status == "active") {
+            Employee::where('id', $id)->update(['status' => 'inactive']);
+            return "InActive";
+        } else {
+            Employee::where('id', $id)->update(['status' => 'active']);
+            return "Active";
+        }
     }
 
     /**
