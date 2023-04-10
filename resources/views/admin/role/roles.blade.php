@@ -73,10 +73,8 @@
                                     </td>
 
                                     <td>
-                                        <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#addEditPermissionModal">
-                                            <i class="bi-pencil-fill me-1"></i> Permission
-                                        </button>
+                                      
+                                        <a type="button" class="btn btn-white btn-sm" href="{{route('admin.role.attach.permission',$role->id)}}"><i class="bi-pencil-fill me-1"></i> Permission</a>
                                         <button type="button" data-table="roles" data-form-modal="addEditRoleModal"
                                             data-message="inactive" data-uuid="{{ $role->uuid }}"
                                             class="btn btn-white btn-sm editData">

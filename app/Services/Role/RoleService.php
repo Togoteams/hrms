@@ -37,6 +37,10 @@ class RoleService
     {
         return $this->roleRepository->find($id);
     }
+    public function getAllPermissions()
+    {
+        return $this->roleRepository->getAllPermissions();
+    }   
 
     public function deleteRole($id){
         $role=$this->roleRepository->find($id);

@@ -21,7 +21,9 @@ class Permission extends Model
         'name'
     ];
 
-   
+    public function scopeNotDashboard($query){
+        return $query->whereNotIn('slug', ['view-dashboard']);
+    }
 
     public function roles() {
         return $this->belongsToMany(Role::class,'roles_permissions');

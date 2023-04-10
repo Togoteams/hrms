@@ -31,6 +31,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
+        Route::match(['get', 'post'], '/{id}/attach-permission', 'attachPermission')->name('attach.permission');
     });
     Route::controller(HolidayController::class)->as('holiday.')->prefix('holidays/')->group(function () {
         Route::get('/', 'viewHoliday')->name('list');

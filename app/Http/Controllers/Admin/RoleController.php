@@ -74,4 +74,29 @@ class RoleController extends BaseController
             logger($e->getMessage() . ' -- ' . $e->getLine() . ' -- ' . $e->getFile());
         }
     }
+
+    public function attachPermission(Request $request,$id)
+    {
+        $roleData= $this->roleService->findRole($id);
+        $permissions= $this->roleService->getAllPermissions();
+        $permissions= $permissions->chunk(ceil($permissions->count()/13));
+        if($request->post()){
+            DB::begintransaction();
+            try{
+                $roleData->permissions()->detach();
+                $isPermissionAttached= $roleData->givePermissionsTo( (array) $request->permission);
+                if($isPermissionAttached){
+                    DB::commit();
+                    return $this->responseRedirect('admin.role.list','Permission attached successfully','success');
+                }
+            }catch(\Exception $e){
+                DB::rollBack();
+                logger($e->getMessage() . ' -- ' . $e->getLine() . ' -- ' . $e->getFile());
+                return $this->responseRedirectBack('Something Went Wrong','error',true);
+            }
+        }
+
+        return view('admin.role.attach-permission',compact('permissions','roleData'));
+
+    }
 }

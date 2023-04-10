@@ -4,6 +4,7 @@ namespace App\Repositories\Role;
 use App\Models\Role;
 use App\Contracts\Role\RoleContract;
 use App\Models\Category;
+use App\Models\Permission;
 use App\Repositories\BaseRepository;
 /**
  * Class PageRepository
@@ -13,6 +14,7 @@ use App\Repositories\BaseRepository;
 class RoleRepository extends BaseRepository implements RoleContract
 {
     protected $categoryModel;
+    protected $permissionModel;
     /**
      * RoleRepository constructor
      *
@@ -24,10 +26,11 @@ class RoleRepository extends BaseRepository implements RoleContract
      *
      *
      */
-    public function __construct(Role $model)
+    public function __construct(Role $model,Permission $permissionModel)
     {
         parent::__construct($model);
         $this->model = $model;
+        $this->permissionModel= $permissionModel;
 
     }
 
@@ -109,5 +112,8 @@ class RoleRepository extends BaseRepository implements RoleContract
      */
     public function setRoleStatus($attributes, $id){
         return $this->update($attributes, $id);
+    }
+    public function getAllPermissions(){
+        return $this->permissionModel->NotDashboard()->get();
     }
 }
