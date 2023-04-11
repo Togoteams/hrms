@@ -153,24 +153,28 @@
                 <!-- Body -->
                 <div class="modal-body">
                     <!-- Nav Scroller -->
-                    <form method="post" action="{{ route('admin.user.add') }}" class="formsubmit">
-                        @csrf
+                    <form>
                         <!-- Profile Cover -->
                         <div class="profile-cover">
                             <div class="profile-cover-img-wrapper">
                                 <img id="editProfileCoverImgModal" class="profile-cover-img"
-                                    src="{{url('assets/img/1920x400/img1.jpg')}}" alt="Image Description">
+                                    src="assets/img/1920x400/img1.jpg" alt="Image Description">
 
                                 <!-- Custom File Cover -->
                                 <div class="profile-cover-content profile-cover-uploader p-3">
                                     <input type="file" class="js-file-attach profile-cover-uploader-input"
                                         id="editProfileCoverUplaoderModal"
-                                       >
-                                    {{-- <label class="profile-cover-uploader-label btn btn-sm btn-white"
+                                        data-hs-file-attach-options='{
+                                  "textTarget": "#editProfileCoverImgModal",
+                                  "mode": "image",
+                                  "targetAttr": "src",
+                                  "allowTypes": [".png", ".jpeg", ".jpg"]
+                               }'>
+                                    <label class="profile-cover-uploader-label btn btn-sm btn-white"
                                         for="editProfileCoverUplaoderModal">
                                         <i class="bi-camera-fill"></i>
                                         <span class="d-none d-sm-inline-block ms-1">Upload header</span>
-                                    </label> --}}
+                                    </label>
                                 </div>
                                 <!-- End Custom File Cover -->
                             </div>
@@ -180,12 +184,17 @@
                         <!-- Avatar -->
                         <label class="avatar avatar-xxl avatar-circle avatar-uploader profile-cover-avatar mb-5"
                             for="editAvatarUploaderModal">
-                            <img id="editAvatarImgModal" class="avatar-img" src="{{url('assets/img/160x160/img9.jpg')}}"
+                            <img id="editAvatarImgModal" class="avatar-img" src="assets/img/160x160/img9.jpg"
                                 alt="Image Description">
 
                             <input type="file" class="js-file-attach avatar-uploader-input"
                                 id="editAvatarUploaderModal"
-                               >
+                                data-hs-file-attach-options='{
+                              "textTarget": "#editAvatarImgModal",
+                              "mode": "image",
+                              "targetAttr": "src",
+                              "allowTypes": [".png", ".jpeg", ".jpg"]
+                           }'>
 
                             <span class="avatar-uploader-trigger">
                                 <i class="bi-pencil-fill avatar-uploader-icon shadow-sm"></i>
@@ -202,12 +211,12 @@
 
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
-                                    <input type="text" class="form-control" name="first_name"
-                                        id="first_name" placeholder="Your first name"
-                                        aria-label="Your first name" >
-                                    <input type="text" class="form-control" name="last_name"
-                                        id="last_name" placeholder="Your last name"
-                                        aria-label="Your last name">
+                                    <input type="text" class="form-control" name="editFirstNameModal"
+                                        id="editFirstNameModalLabel" placeholder="Your first name"
+                                        aria-label="Your first name" value="Ella">
+                                    <input type="text" class="form-control" name="editLastNameModal"
+                                        id="editLastNameModalLabel" placeholder="Your last name"
+                                        aria-label="Your last name" value="Lauda">
                                 </div>
                             </div>
                         </div>
@@ -218,64 +227,68 @@
                             <label for="editEmailModalLabel" class="col-sm-3 col-form-label form-label">Email</label>
 
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="email"
-                                    id="email" placeholder="Email" aria-label="Email"
-                                   >
+                                <input type="email" class="form-control" name="editEmailModal"
+                                    id="editEmailModalLabel" placeholder="Email" aria-label="Email"
+                                    value="ella@site.com">
                             </div>
                         </div>
                         <!-- End Form -->
 
                         <!-- Form -->
                         <div class="row mb-4">
-                            <label for="mobile" class="col-sm-3 col-form-label form-label">Phone</label>
+                            <label for="editPhoneLabel" class="col-sm-3 col-form-label form-label">Phone</label>
 
-                            <div class="col-sm-12">
+                            <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
-                                    <input type="text" class="js-masked-input form-control" name="mobile"
-                                        id="mobile" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx"
-                                       
+                                    <input type="text" class="js-masked-input form-control" name="phone"
+                                        id="editPhoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx"
+                                        value="1(609)972-22-22"
                                         data-hs-mask-options='{
                                  "template": "+0(000)000-00-00"
                                }'>
 
                                     <!-- Select -->
-                                   
+                                    <div class="tom-select-custom">
+                                        <select class="js-select form-select" autocomplete="off" name="editPhoneSelect"
+                                            data-hs-tom-select-options='{
+                                  "searchInDropdown": false,
+                                  "hideSearch": true
+                                }'>
+                                            <option value="Mobile" selected>Mobile</option>
+                                            <option value="Home">Home</option>
+                                            <option value="Work">Work</option>
+                                            <option value="Fax">Fax</option>
+                                            <option value="Direct">Direct</option>
+                                        </select>
+                                    </div>
                                     <!-- End Select -->
                                 </div>
                             </div>
                         </div>
                         <!-- End Form -->
 
-                       
-
                         <!-- Form -->
                         <div class="row mb-4">
-                            <label for="username"
-                                class="col-sm-3 col-form-label form-label">User name</label>
+                            <label for="editOrganizationModalLabel"
+                                class="col-sm-3 col-form-label form-label">Vendor</label>
+
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="username"
-                                    id="username" placeholder="Your department"
-                                    aria-label="User Name">
+                                <input type="text" class="form-control" name="editOrganizationModal"
+                                    id="editOrganizationModalLabel" placeholder="Your organization"
+                                    aria-label="Your organization" value="Htmlstream">
                             </div>
                         </div>
                         <!-- End Form -->
+
                         <!-- Form -->
                         <div class="row mb-4">
-                            <label for="password"
-                                class="col-sm-3 col-form-label form-label">Password</label>
+                            <label for="editDepartmentModalLabel"
+                                class="col-sm-3 col-form-label form-label">Department</label>
+
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="password"
-                                    id="password" placeholder="Password"
-                                    aria-label="Password">
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <label for="confirm_password"
-                                class="col-sm-3 col-form-label form-label">Confirm Password</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="confirm_password"
-                                    id="confirm_password" placeholder="Confirm Password"
-                                    aria-label="Confirm Password">
+                                <input type="text" class="form-control" name="editDepartmentModal"
+                                    id="editDepartmentModalLabel" placeholder="Your department"
+                                    aria-label="Your department">
                             </div>
                         </div>
                         <!-- End Form -->

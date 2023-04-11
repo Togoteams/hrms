@@ -28,22 +28,27 @@ class UserController extends BaseController
         } else {
             $message = "User Created Successfully";
         }
-
+        $request->merge(['name'=>$request->first_name.' '.$request->last_name]);
         $request->validate([
             'name'     =>  'required|string',
-            'short_code' => 'required|min:3|string',
-            'user_type' => 'required|min:3|string',
+            'first_name'     =>  'required|string',
+            'last_name'     =>  'nullable|string',
+            'username' => 'required|string|unique:users,username',
+            'email' => 'required|email|string|unique:users,email',
+            'mobile' => 'required|string|unique:users,mobile',
+            'password' => 'required|min:8|string',
+            'confirm_password' => 'required|min:8|string|same:password',
         ]);
 
-        $data = [
-            'name' => $request->name,
-            'short_code' => $request->short_code,
-            'User_type' => $request->User_type,
-            'description' => $request->description,
-            'status' => $request->status,
-        ];
+        // $data = [
+        //     'name' => $request->name,
+        //     'short_code' => $request->short_code,
+        //     'User_type' => $request->User_type,
+        //     'description' => $request->description,
+        //     'status' => $request->status,
+        // ];
 
-        $isUserCreated = $this->model::updateOrCreate(['id' => $userId], $data);
+        $isUserCreated = $this->model::updateOrCreate(['id' => $userId], $request->except('_token'));
         if ($isUserCreated) {
             return   $this->sendResponse($isUserCreated, $message);
         }
