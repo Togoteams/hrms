@@ -48,7 +48,7 @@ class LeaveController extends BaseController
     {
         DB::beginTransaction();
         try {
-            $leave = $this->model::find($leaveId);
+            $isleaveCreated= $this->leaveService->findLeave($leaveId);
             if (!empty($leave)) {
                 $isleaveDeleted = $leave->delete();
                 if ($isleaveDeleted) {

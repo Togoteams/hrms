@@ -129,9 +129,9 @@
               </td>
 
               <td>
-                <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal" data-bs-target="#addEditPermissionModal">
+                {{-- <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal" data-bs-target="#addEditPermissionModal">
                   <i class="bi-pencil-fill me-1"></i> Permission
-                </button>
+                </button> --}}
                 <button type="button"  data-table="leaves" data-form-modal="addEditLeaveModal" data-message="inactive"
                 data-uuid="{{ $leave->uuid }}" class="btn btn-white btn-sm editData" >
                   <i class="bi-pencil-fill me-1"></i> Edit

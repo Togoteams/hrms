@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 return new class extends Migration
 {
     /**
@@ -22,7 +21,7 @@ return new class extends Migration
             $table->date('approved_date')->nullable();
             $table->string('is_paid')->default(0);
             $table->string('leave_reason');
-            $table->date('apply_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('apply_date')->nullable();
             $table->string('remark')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();

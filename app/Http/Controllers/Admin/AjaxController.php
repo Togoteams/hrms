@@ -12,7 +12,7 @@ use App\Services\Role\RoleService;
 use App\Services\Holiday\HolidayService;
 use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
-use App\Http\Resources\LeaveResource;
+use App\Http\Resources\Leave\LeaveResource;
 class AjaxController extends BaseController
 {
     /**
@@ -24,19 +24,19 @@ class AjaxController extends BaseController
      */
     protected $roleService;
     protected $holidayService;
-    protected $LeaveService;
+    protected $leaveService;
     public function __construct(
         RoleService $roleService,
         UserService $userService,
         HolidayService $holidayService,
-        LeaveService $LeaveService,
+        LeaveService $leaveService,
 
         )
     {
         $this->roleService = $roleService;
         $this->userService = $userService;
         $this->holidayService = $holidayService;
-        $this->LeaveService = $LeaveService;
+        $this->leaveService = $leaveService;
 
     }
 
@@ -64,8 +64,8 @@ class AjaxController extends BaseController
                     break;
                 case 'leaves':
                     $id = uuidtoid($request->uuid, $table);
-                    $leave= $this->LeaveService->findHoliday($id);
-                    $data = new LeaveResource($holiday);
+                    $leave= $this->leaveService->findLeave($id);
+                    $data = new LeaveResource($leave);
                     $message='Leave data fetched';
                     break;
                 default:
@@ -146,7 +146,7 @@ class AjaxController extends BaseController
                     break;
                 case 'leaves':
                     $id= uuidtoid($request->uuid,$table);
-                    $data= $this->leaveService->deleteHoliday($id);
+                    $data= $this->leaveService->deleteLeave($id);
                     $message='Leave Deleted';
                     break;
             }
