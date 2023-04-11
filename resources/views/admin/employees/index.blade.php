@@ -36,7 +36,7 @@
             </div>
             @include('admin.employees.create')
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">>
+            <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
                     <table id="datatable"
                         class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">

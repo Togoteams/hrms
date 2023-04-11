@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-
+use Exception;
 class EmployeeController extends Controller
 {
     public $page_name = "Employees";
@@ -21,7 +21,7 @@ class EmployeeController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('layouts.buttons',['item'=>$row,"route"=>'employees']);
+                    $actionBtn = view('layouts.buttons', ['item' => $row, "route" => 'employees']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -88,6 +88,11 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            Employee::destroy($id);
+            return "Delete";
+        } catch (Exception $e) {
+            return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
+        }
     }
 }

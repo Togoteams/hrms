@@ -212,7 +212,9 @@ function setError(el, errr_message, form_id) {
         size: "13px",
     });
     el.style.borderColor = "#dc3545"
-    form_id.appendChild(createdd_element);
+    //form_id.appendChild(createdd_element);
+    console.log(el);
+    $(el).append(createdd_element)
 }
 
 
