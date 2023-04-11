@@ -228,10 +228,13 @@ function setSuccess(errr_message, form_id) {
 function setError(el, errr_message, bcolor) {
 
     el.style.borderColor = bcolor;
+    if (errr_message != ' ') {
+        errr_message = el.name + " " + errr_message;
+    }
     el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
     var all_errors = document.getElementsByClassName("error" + el.name);
     console.log(all_errors);
-    for (i = 1; i < all_errors.length ; i++) {
+    for (i = 1; i < all_errors.length; i++) {
         all_errors[i].style.display = "none";
     }
     // form_id.appendChild(createdd_element);
