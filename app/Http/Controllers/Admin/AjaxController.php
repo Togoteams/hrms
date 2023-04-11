@@ -11,6 +11,8 @@ use App\Services\User\UserService;
 use App\Services\Role\RoleService;
 use App\Services\Holiday\HolidayService;
 use App\Http\Resources\HolidayResource;
+use App\Services\Leave\LeaveService;
+use App\Http\Resources\LeaveResource;
 class AjaxController extends BaseController
 {
     /**
@@ -22,16 +24,19 @@ class AjaxController extends BaseController
      */
     protected $roleService;
     protected $holidayService;
+    protected $LeaveService;
     public function __construct(
         RoleService $roleService,
         UserService $userService,
         HolidayService $holidayService,
+        LeaveService $LeaveService,
 
         )
     {
         $this->roleService = $roleService;
         $this->userService = $userService;
         $this->holidayService = $holidayService;
+        $this->LeaveService = $LeaveService;
 
     }
 
@@ -56,6 +61,12 @@ class AjaxController extends BaseController
                     $holiday= $this->holidayService->findHoliday($id);
                     $data = new HolidayResource($holiday);
                     $message='Holiday data fetched';
+                    break;
+                case 'leaves':
+                    $id = uuidtoid($request->uuid, $table);
+                    $leave= $this->LeaveService->findHoliday($id);
+                    $data = new LeaveResource($holiday);
+                    $message='Leave data fetched';
                     break;
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
@@ -93,6 +104,11 @@ class AjaxController extends BaseController
                     $data= $this->holidayService->updateStatus($request->except('find'),$id);
                     $message='Role Status updated';
                     break;
+                case 'leaves':
+                    $id = uuidtoid($request->uuid, $table);
+                    $data= $this->leaveService->updateStatus($request->except('find'),$id);
+                    $message='Leave Status updated';
+                    break;
                
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
@@ -127,6 +143,11 @@ class AjaxController extends BaseController
                     $id= uuidtoid($request->uuid,$table);
                     $data= $this->holidayService->deleteHoliday($id);
                     $message='Holiday Deleted';
+                    break;
+                case 'leaves':
+                    $id= uuidtoid($request->uuid,$table);
+                    $data= $this->leaveService->deleteHoliday($id);
+                    $message='Leave Deleted';
                     break;
             }
             if($data){

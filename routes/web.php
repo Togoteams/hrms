@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\LeaveController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -36,6 +37,10 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::controller(HolidayController::class)->as('holiday.')->prefix('holidays/')->group(function () {
         Route::get('/', 'viewHoliday')->name('list');
         Route::match(['get', 'post'], 'add', 'addHoliday')->name('add');
+    });
+    Route::controller(LeaveController::class)->as('leave.')->prefix('leaves/')->group(function () {
+        Route::get('/', 'viewLeave')->name('list');
+        Route::match(['get', 'post'], 'add', 'addLeave')->name('add');
     });
     Route::controller(UserController::class)->as('user.')->prefix('users/')->group(function () {
         Route::get('/', 'viewUser')->name('list');

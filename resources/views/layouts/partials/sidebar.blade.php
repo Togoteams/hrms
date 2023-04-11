@@ -118,6 +118,7 @@
                                 <div id="masters" class="nav-collapse collapse " data-bs-parent="#master">
                                    
                                     <a class="nav-link " href="{{ route('admin.holiday.list') }}">Holidays</a>
+                                    <a class="nav-link " href="{{ route('admin.leave.list') }}">Leaves</a>
                                     <a class="nav-link " href="{{ route('admin.designation.index') }}">Designation</a>
                                     <a class="nav-link " href="{{ route('admin.membership.index') }}">Membership</a>
                                     <a class="nav-link " href="{{ route('admin.branch.index') }}">Branch</a>
