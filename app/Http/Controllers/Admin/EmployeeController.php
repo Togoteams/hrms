@@ -61,7 +61,7 @@ class EmployeeController extends Controller
             'mobile' => ['required', 'numeric', 'min:10'],
             'username' => ['required', 'string', 'min:5', 'unique:users'],
             'password' => ['required', 'confirmed', Password::defaults()],
-            ''
+            
         ]);
 
         if ($validator->fails()) {
@@ -77,7 +77,6 @@ class EmployeeController extends Controller
             ]);
 
             Employee::insertGetId($request->except('_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation'));
-
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
 
