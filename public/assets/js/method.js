@@ -45,6 +45,25 @@ function editForm(url_name, target_id, method = "GET", table_id = '') {
     xhttp.send();
 }
 
+function checkInput(url_name, data, method = "GET") {
+
+    preloader('', target_id);
+    // getting the button of the form and passing into the preloader function
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(target_id).innerHTML = this.responseText;
+            stopPreloader('', target_id);
+        }
+    };
+    if (table_id != '') {
+        url_name = url_name + "?data=" + data
+    }
+    xhttp.open(method, url_name, true);
+    xhttp.send();
+}
+
+
 function deleteRow(form_id, target_id = "", method = "POST") {
     if (confirm('Are sure to delete  !!!')) {
         // getting the all from form
@@ -62,7 +81,7 @@ function deleteRow(form_id, target_id = "", method = "POST") {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById(target_id).innerHTML = this.responseText;
-              formElements_button.disabled=true
+                formElements_button.disabled = true
             }
         };
         xhttp.open(method, url_name, true);
@@ -134,11 +153,7 @@ function fetchApi(form_id, url_name, target_id, method = "POST") {
         .catch((error) => console.error("Error:", error));
 }
 
-fetch("test.php", {})
-    .then(function (data) {
-        console.log(data);
-    })
-    .catch((error) => console.error("Error:", error));
+
 // crud end
 
 // some special fucntion start
@@ -146,6 +161,7 @@ fetch("test.php", {})
 
 function formValidate(el, form_id) {
     var flag = true;
+
     for (f = 0; f < el.length; f++) {
 
         if (el[f].required && el[f].value == '') {
@@ -205,16 +221,15 @@ function setSuccess(errr_message, form_id) {
 }
 
 function setError(el, errr_message, form_id) {
-    createdd_element = createMenuItem("p", {
-        name: el.name + " - " + el.name + "  " + errr_message,
-        class: "text-danger",
-        id: "lol",
-        size: "13px",
-    });
+
     el.style.borderColor = "#dc3545"
-    //form_id.appendChild(createdd_element);
-    console.log(el);
-    $(el).append(createdd_element)
+    el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
+    var all_errors = document.getElementsByClassName("error" + el.name);
+    console.log(all_errors);
+    for (i = 0; i < all_errors.length - 1; i++) {
+        all_errors[i].style.display = "none";
+    }
+    // form_id.appendChild(createdd_element);
 }
 
 

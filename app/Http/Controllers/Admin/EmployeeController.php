@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Models\Branch;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Validator;
 use Exception;
+
 class EmployeeController extends Controller
 {
     public $page_name = "Employees";
@@ -15,7 +23,6 @@ class EmployeeController extends Controller
      */
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
             $data = Employee::select('*');
             return Datatables::of($data)
@@ -27,8 +34,10 @@ class EmployeeController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-
-        return view('admin.employees.index', ['page' => $this->page_name]);
+        $designation = Designation::all();
+        $membership = Membership::all();
+        $branch = Branch::where('status', 'active')->get();
+        return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
 
@@ -45,7 +54,37 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile' => ['required', 'numeric', 'min:10'],
+            'username' => ['required', 'string', 'min:5', 'unique:users'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+            ''
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'username' => $request->username,
+                'mobile' => $request->mobile,
+                'password' => Hash::make($request->password),
+            ]);
+
+            Employee::insertGetId($request->except('_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation'));
+
+            return response()->json(['success' => $this->page_name . " Added Successfully"]);
+        }
+
+
+
+
+        dd($request);
     }
 
     /**
