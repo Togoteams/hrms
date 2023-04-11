@@ -165,13 +165,18 @@ function formValidate(el, form_id) {
     for (f = 0; f < el.length; f++) {
 
         if (el[f].required && el[f].value == '') {
-            setError(el[f], " is Required filed please Input", form_id)
+            setError(el[f], " is Required filed please Input", "red")
             flag = false;
+        } else {
+            setError(el[f], " ", "green")
         }
-
-        if ('max' in el && el[f].value <= el[f].max) {
-            setError(el[f], " is Required filed please Input", form_id)
-            flag = false;
+        if ('max' in el) {
+            if (el[f].value <= el[f].max) {
+                setError(el[f], " is Required filed please Input", "red")
+                flag = false;
+            } else {
+                setError(el[f], " ", "green")
+            }
         }
 
     }
@@ -220,13 +225,13 @@ function setSuccess(errr_message, form_id) {
     form_id.appendChild(createdd_element);
 }
 
-function setError(el, errr_message, form_id) {
+function setError(el, errr_message, bcolor) {
 
-    el.style.borderColor = "#dc3545"
+    el.style.borderColor = bcolor;
     el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
     var all_errors = document.getElementsByClassName("error" + el.name);
     console.log(all_errors);
-    for (i = 0; i < all_errors.length - 1; i++) {
+    for (i = 1; i < all_errors.length ; i++) {
         all_errors[i].style.display = "none";
     }
     // form_id.appendChild(createdd_element);
