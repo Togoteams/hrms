@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('emp_id')->unique();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->unsignedBigInteger('designatin_id')->unique();
+            $table->unsignedBigInteger('designatin_id');
             $table->string('ec_number');
             $table->string('gender');
             $table->string('id_number');
@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('bank_account_number');
             $table->string('bank_holder_name');
             $table->string('ifsc');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

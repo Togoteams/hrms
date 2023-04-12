@@ -10,27 +10,21 @@
                 <div class="modal-body">
                     <form id="form_data" action="{{ route('admin.employees.store') }}">
                         @csrf
+                        <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
+
                         <div class="row">
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="user_id">Employee Id</label>
-                                    <input required placeholder="Enter correct Emplooye  id " type="number"
-                                        name="emp_id" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="user_id">Employee Name</label>
-                                    <input required placeholder="Enter correct Emplooye  Name " type="text"
-                                        name="name" class="form-control form-control-sm ">
+                                    <label for="name">Employee Name</label>
+                                    <input  id="name" required placeholder="Enter correct Emplooye  Name "
+                                        type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="user_id">Employee User Name</label>
-                                    <input required placeholder="Enter correct Emplooye  User Name " type="text"
-                                        name="username" class="form-control form-control-sm ">
+                                    <label for="username">Employee User Name</label>
+                                    <input id="username" required placeholder="Enter correct Emplooye  User Name "
+                                        type="text" name="username" class="form-control form-control-sm ">
                                 </div>
                             </div>
 
@@ -58,14 +52,15 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="password_confirmation">confirm password </label>
-                                    <input required id="password_confirmation" placeholder="Enter correct password_confirmation   "
-                                        type="password" name="password_confirmation" class="form-control form-control-sm ">
+                                    <input required id="password_confirmation"
+                                        placeholder="Enter correct password confirmation   " type="password"
+                                        name="password_confirmation" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="designatin_id">designatin </label>
-                                    <select required id="designatin_id" placeholder="Enter correct Emplooye   " 
+                                    <select required id="designatin_id" placeholder="Enter correct Emplooye   "
                                         name="designatin_id" class="form-control form-control-sm ">
                                         <option selected disabled> -Select Designation- </option>
                                         @foreach ($designation as $deg)
@@ -74,11 +69,20 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-sm-4 mb-2">
+                                <div class="form-group">
+                                    <label for="ec_number">ec number </label>
+                                    <input required id="ec_number" placeholder="Enter correct ec number   "
+                                        type="text" name="ec_number" class="form-control form-control-sm ">
+                                </div>
+                            </div>
+
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="gender">gender </label>
-                                    <select required id="gender" placeholder="Enter correct gender   " 
-                                        name="gender" class="form-control form-control-sm ">
+                                    <select required id="gender" placeholder="Enter correct gender   " name="gender"
+                                        class="form-control form-control-sm ">
                                         <option selected disabled> - Select Gender- </option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -89,63 +93,63 @@
 
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="id_number">id_number </label>
-                                    <input required id="id_number" placeholder="Enter correct id_number   " type="text"
-                                        name="id_number" class="form-control form-control-sm ">
+                                    <label for="id_number">id number </label>
+                                    <input required id="id_number" placeholder="Enter correct id number   "
+                                        type="text" name="id_number" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="contract_duration">contract_duration </label>
-                                    <input required id="contract_duration" placeholder="Enter correct contract_duration   "
-                                        type="text" name="contract_duration"
-                                        class="form-control form-control-sm ">
+                                    <label for="contract_duration">contract duration </label>
+                                    <input required id="contract_duration"
+                                        placeholder="Enter correct contract duration   " type="text"
+                                        name="contract_duration" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="basic_salary">basic_salary </label>
-                                    <input required id="basic_salary" placeholder="Enter correct basic_salary   "
+                                    <label for="basic_salary">basic salary </label>
+                                    <input required id="basic_salary" placeholder="Enter correct basic salary   "
                                         type="number" name="basic_salary" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="date_of_current_basic">date_of_current_basic </label>
+                                    <label for="date_of_current_basic">date of current basic </label>
                                     <input required id="date_of_current_basic"
-                                        placeholder="Enter correct date_of_current_basic   " type="text"
+                                        placeholder="Enter correct date of current_basic   " type="datetime-local"
                                         name="date_of_current_basic" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="date_of_birth">date_of_birth </label>
-                                    <input required id="date_of_birth" placeholder="Enter correct date_of_birth   "
+                                    <label for="date_of_birth">date of birth </label>
+                                    <input required id="date_of_birth" placeholder="Enter correct date of birth   "
                                         type="date" name="date_of_birth" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="start_date">start_date </label>
-                                    <input required id="start_date" placeholder="Enter correct start_date   " type="date"
-                                        name="start_date" class="form-control form-control-sm ">
+                                    <label for="start_date">start date </label>
+                                    <input required id="start_date" placeholder="Enter correct start date   "
+                                        type="date" name="start_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="branch_id">branch  </label>
-                                    <select required id="branch_id" placeholder="Enter correct branch_id   " name="branch_id"
+                                    <label for="branch_id">branch </label>
+                                    <select required id="branch_id" name="branch_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Branch - </option>
-                                    @foreach ($branch as $br )
-                                        <option value="{{$br->id}}">{{$br->name}}</option>
-                                    @endforeach
+                                        @foreach ($branch as $br)
+                                            <option value="{{ $br->id }}">{{ $br->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="pension_contribution">pension_contribution </label>
+                                    <label for="pension_contribution">pension contribution </label>
                                     <input required id="pension_contribution"
                                         placeholder="Enter correct pension_contribution   " type="number"
                                         name="pension_contribution" class="form-control form-control-sm ">
@@ -153,21 +157,21 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="unique_membership_id">unique membership  </label>
+                                    <label for="unique_membership_id">unique membership </label>
                                     <select required id="unique_membership_id"
                                         placeholder="Enter correct unique_membership_id   "
                                         name="unique_membership_id" class="form-control form-control-sm ">
                                         <option selected disabled> - Select unique_membership_id - </option>
                                         @foreach ($membership as $mem)
-                                            <option value="{{$mem->id}}">{{$mem->name}}</option>
+                                            <option value="{{ $mem->id }}">{{ $mem->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label
-                                        for="amount_payable_to_bomaind_each_year">amount_payable_to_bomaind_each_year
+                                    <label for="amount_payable_to_bomaind_each_year">amount_payable to bomaind each
+                                        year
                                     </label>
                                     <input required id="amount_payable_to_bomaind_each_year"
                                         placeholder="Enter correct amount_payable_to_bomaind_each_year   "
@@ -178,30 +182,31 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="currency">currency </label>
-                                    <input required id="currency" placeholder="Enter correct currency   " type="text"
-                                        name="currency" class="form-control form-control-sm ">
+                                    <input required id="currency" placeholder="Enter correct currency   "
+                                        type="text" name="currency" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="bank_name">bank_name </label>
-                                    <input required id="bank_name" placeholder="Enter correct bank_name   " type="text"
-                                        name="bank_name" class="form-control form-control-sm ">
+                                    <label for="bank_name">bank name </label>
+                                    <input required id="bank_name" placeholder="Enter correct bank_name   "
+                                        type="text" name="bank_name" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="bank_account_number">bank_account_number </label>
-                                    <input required id="bank_account_number" placeholder="Enter correct bank_account_number   "
-                                        type="text" name="bank_account_number"
-                                        class="form-control form-control-sm ">
+                                    <label for="bank_account_number">bank account number </label>
+                                    <input required id="bank_account_number"
+                                        placeholder="Enter correct bank account number   " type="text"
+                                        name="bank_account_number" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="bank_holder_name">bank_holder_name </label>
-                                    <input required id="bank_holder_name" placeholder="Enter correct bank_holder_name   "
-                                        type="text" name="bank_holder_name" class="form-control form-control-sm ">
+                                    <label for="bank_holder_name">bank holder name </label>
+                                    <input required id="bank_holder_name"
+                                        placeholder="Enter correct bank holder name   " type="text"
+                                        name="bank_holder_name" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">

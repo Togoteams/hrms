@@ -199,7 +199,7 @@ function backEndValidate(responseData, target_id) {
             value = obj[key];
             var return_element = document.getElementsByName(key)
             var element = return_element[return_element.length - 1];
-            setError(element, value, target_id)
+            setError(element, value, "red")
         }
     }
 
@@ -233,7 +233,6 @@ function setError(el, errr_message, bcolor) {
     }
     el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
     var all_errors = document.getElementsByClassName("error" + el.name);
-    console.log(all_errors);
     for (i = 1; i < all_errors.length; i++) {
         all_errors[i].style.display = "none";
     }
