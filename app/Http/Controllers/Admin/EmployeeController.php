@@ -24,11 +24,11 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Employee::select('*');
+            $data = Employee::with('user')->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('layouts.buttons', ['item' => $row, "route" => 'employees']);
+                    $actionBtn = view('admin.employees.buttons', ['item' => $row, "route" => 'employees']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -110,7 +110,11 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $designation = Designation::all();
+        $membership = Membership::all();
+        $branch = Branch::where('status', 'active')->get();
+        $data = Employee::find($id);
+        return view('admin.employees.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
     /**
@@ -122,7 +126,7 @@ class EmployeeController extends Controller
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
         $data = Employee::find($id);
-        return view('admin.employees.ediit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        return view('admin.employees.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
     /**
@@ -156,7 +160,7 @@ class EmployeeController extends Controller
             return $validator->errors();
         } else {
             try {
-                Employee::where('id',$id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
+                Employee::where('id', $id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['success' => $e->getMessage()]);

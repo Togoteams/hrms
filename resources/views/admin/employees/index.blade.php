@@ -43,7 +43,12 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Name</th>
+                                <th>Employee Id</th>
+                                <th>Employee name</th>
+                                <th>Employee Email</th>
+                                <th>Employee username</th>
+                                <th>Employee Phone</th>
+                                <th>Employee Gender</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -55,19 +60,40 @@
 
                 <script type="text/javascript">
                     $(function() {
-
+                        var i = 1;
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
                             ajax: "{{ route('admin.employees.index') }}",
+
                             columns: [{
-                                    data: 'id',
-                                    name: 'id'
+                                    "render": function() {
+                                        return i++;
+                                    }
                                 },
 
                                 {
                                     data: 'emp_id',
                                     name: 'emp_id'
+                                },
+                                {
+                                    data: 'user.name',
+                                    name: 'user.name'
+                                }, {
+                                    data: 'user.email',
+                                    name: 'user.email'
+                                }, {
+                                    data: 'user.username',
+                                    name: 'user.username'
+                                },
+                                {
+                                    data: 'user.mobile',
+                                    name: 'user.mobile'
+                                },
+
+                                {
+                                    data: 'gender',
+                                    name: 'gender'
                                 },
                                 {
                                     data: 'action',
@@ -96,6 +122,26 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="edit">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {{-- edit form model end  --}}
+
+               {{-- edit form model start --}}
+            <!-- Modal -->
+            <div class="modal fade" id="modalshow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+                            <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="show">
 
                         </div>
 
