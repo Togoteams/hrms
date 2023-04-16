@@ -17,7 +17,6 @@
 <script src="{{ asset('assets/vendor/clipboard/dist/clipboard.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/datatables.net.extensions/select/select.min.js') }}"></script>
-
 <!-- JS HRMS -->
 <script src="{{ asset('assets/js/theme.min.js') }}"></script>
 <script src="{{ asset('assets/js/hs.theme-appearance-charts.js') }}"></script>

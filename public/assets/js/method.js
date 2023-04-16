@@ -45,6 +45,25 @@ function editForm(url_name, target_id, method = "GET", table_id = '') {
     xhttp.send();
 }
 
+function checkInput(url_name, data, method = "GET") {
+
+    preloader('', target_id);
+    // getting the button of the form and passing into the preloader function
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById(target_id).innerHTML = this.responseText;
+            stopPreloader('', target_id);
+        }
+    };
+    if (table_id != '') {
+        url_name = url_name + "?data=" + data
+    }
+    xhttp.open(method, url_name, true);
+    xhttp.send();
+}
+
+
 function deleteRow(form_id, target_id = "", method = "POST") {
     if (confirm('Are sure to delete  !!!')) {
         // getting the all from form
@@ -62,7 +81,7 @@ function deleteRow(form_id, target_id = "", method = "POST") {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById(target_id).innerHTML = this.responseText;
-              formElements_button.disabled=true
+                formElements_button.disabled = true
             }
         };
         xhttp.open(method, url_name, true);
@@ -142,16 +161,22 @@ function fetchApi(form_id, url_name, target_id, method = "POST") {
 
 function formValidate(el, form_id) {
     var flag = true;
+
     for (f = 0; f < el.length; f++) {
 
         if (el[f].required && el[f].value == '') {
-            setError(el[f], " is Required filed please Input", form_id)
+            setError(el[f], " is Required filed please Input", "red")
             flag = false;
+        } else {
+            setError(el[f], " ", "green")
         }
-
-        if ('max' in el && el[f].value <= el[f].max) {
-            setError(el[f], " is Required filed please Input", form_id)
-            flag = false;
+        if ('max' in el) {
+            if (el[f].value <= el[f].max) {
+                setError(el[f], " is Required filed please Input", "red")
+                flag = false;
+            } else {
+                setError(el[f], " ", "green")
+            }
         }
 
     }
@@ -174,7 +199,7 @@ function backEndValidate(responseData, target_id) {
             value = obj[key];
             var return_element = document.getElementsByName(key)
             var element = return_element[return_element.length - 1];
-            setError(element, value, target_id)
+            setError(element, value, "red")
         }
     }
 
@@ -200,15 +225,18 @@ function setSuccess(errr_message, form_id) {
     form_id.appendChild(createdd_element);
 }
 
-function setError(el, errr_message, form_id) {
-    createdd_element = createMenuItem("p", {
-        name: el.name + " - " + el.name + "  " + errr_message,
-        class: "text-danger",
-        id: "lol",
-        size: "13px",
-    });
-    el.style.borderColor = "#dc3545"
-    form_id.appendChild(createdd_element);
+function setError(el, errr_message, bcolor) {
+
+    el.style.borderColor = bcolor;
+    if (errr_message != ' ') {
+        errr_message = el.name + " " + errr_message;
+    }
+    el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
+    var all_errors = document.getElementsByClassName("error" + el.name);
+    for (i = 1; i < all_errors.length; i++) {
+        all_errors[i].style.display = "none";
+    }
+    // form_id.appendChild(createdd_element);
 }
 
 

@@ -54,10 +54,13 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
         Route::get('/delete', 'deleteData')->name('delete');
     });
     Route::resource('employees', EmployeeController::class);
+    Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
+    Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
+
     Route::resource('designation', DesignationContoller::class);
     Route::resource('membership', MembershipController::class);
     Route::resource('branch', BranchController::class);
-    Route::get('branch/status/{id}', [BranchController::class , 'status'])->name('branch.status');
+    Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
 });
 
 

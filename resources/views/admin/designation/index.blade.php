@@ -28,7 +28,7 @@
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
