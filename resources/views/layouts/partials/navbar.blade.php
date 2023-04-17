@@ -666,17 +666,17 @@
                              <a class="dropdown-item" href="#">Profile &amp; account</a>
                              <a class="dropdown-item" href="#">Settings</a>
 
-                             <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div>
 
-                             <a class="dropdown-item" href="#">Sign out</a>
-                         </div>
-                     </div>
-                     <!-- End Account -->
-                 </li>
-             </ul>
-             <!-- End Navbar -->
-         </div>
-     </div>
- </header>
+                                <a class="dropdown-item" href="#">Sign out</a>
+                            </div>
+                        </div>
+                        <!-- End Account -->
+                    </li>
+                </ul>
+                <!-- End Navbar -->
+            </div>
+        </div>
+    </header>
 
  <!-- ========== END HEADER ========== -->

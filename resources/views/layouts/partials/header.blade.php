@@ -31,9 +31,7 @@
             transition: unset !important;
         }
 
-        body {
-            opacity: 0;
-        }
+  
     </style>
 
     <script>
