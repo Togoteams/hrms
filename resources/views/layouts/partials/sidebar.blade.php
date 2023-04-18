@@ -34,12 +34,15 @@
              <div class="navbar-vertical-content">
                  <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                      <!-- Collapse -->
-                     <div class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.dashboard') }}" data-placement="left">
-                            <i class="bi bi-speedometer nav-icon"></i>
-                            <span class="nav-link-title">Dashboards</span>
-                        </a>
-                    </div>
+                     @can('view_dashboard')
+                        <div class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.dashboard') }}" data-placement="left">
+                                <i class="bi bi-speedometer nav-icon"></i>
+                                <span class="nav-link-title">Dashboards</span>
+                            </a>
+                        </div>
+                     @endcan
+                     
                      {{-- <div class="nav-item">
                          <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
                              data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards"
