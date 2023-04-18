@@ -34,18 +34,6 @@
                     {{ csrf_field() }}
 
                     <div class="form-group mr-bot">
-                        <img class="img-profile rounded-circle"
-                            src="{{ url('web_assets/images/profile_photo_path') }}/{{ Auth::user()->profile_photo_path }}"
-                            id="profile_photo_path" style="height: 70px;">
-                        </a>
-                    </div>
-                    <div class="form-group mr-bot">
-
-                        <label>Profile</label>
-                        <input type="file" name="profile_photo_path" id="validatedCustomFile"
-                            onchange="document.getElementById('profile_photo_path').src = window.URL.createObjectURL(this.files[0])">
-                    </div>
-                    <div class="form-group mr-bot">
                         <label for="name">Name<span style="color:red;">*</span></label>
                         <input type="text" name="name" value="{{ Auth::user()->name }}"
                             class="form-control capitalize" id="name" required>
