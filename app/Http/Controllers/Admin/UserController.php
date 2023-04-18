@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
 use App\Models\Role;
 use App\Models\User;
+use Hash;
 class UserController extends BaseController
 {
     protected $model;
@@ -46,7 +47,7 @@ class UserController extends BaseController
             'username' => $request->username,
             'email' => $request->email,
             'mobile' => $request->mobile,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
         ];
         $isUserCreated = $this->model::updateOrCreate(['id' => $userId], $data);
         if ($isUserCreated) {
