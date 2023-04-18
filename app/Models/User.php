@@ -23,6 +23,17 @@ class User extends Authenticatable
         });
     }
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'first_name',
+        'last_name',
+        'full_name',
+        'role', // role -> name
+    ];
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -54,7 +65,58 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+     /**
+     * Set the user's first name.
+     *
+     * @param  string $value
+     * @return void
+     */
+    public function getFirstNameAttribute()
+    {
+        if (!empty($this->name)) {
+          $arr = splitName($this->name);
+          return $arr[0];
+        }
+        return ;
+    }
+
+    /**
+     * Set the user's last name.
+     *
+     * @param  string $value
+     * @return void
+     */
+    public function getLastNameAttribute()
+    {
+        if (!empty($this->name)) {
+          $arr = splitName($this->name);
+          return $arr[1];
+        }
+        return ;
+    }
+
+    /**
+     * Set the user's full name.
+     *
+     * @param  string $value
+     * @return void
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->name}";
+    }
+    /**
+     * Set the user's role name.
+     *
+     * @param  string $value
+     * @return void
+     */
+    public function getRoleAttribute()
+    {
+        return $this->roles ? $this->roles?->first()?->name : "";
+        // return Role::find($this->role_id)->name;
+    }
+
   
     
     public function media()

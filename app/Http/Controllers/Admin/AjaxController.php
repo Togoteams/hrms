@@ -68,6 +68,12 @@ class AjaxController extends BaseController
                     $data = new LeaveResource($leave);
                     $message='Leave data fetched';
                     break;
+                case 'users':
+                    $id = uuidtoid($request->uuid, $table);
+                    $leave= $this->userService->findUser($id);
+                    $data = new UserResource($leave);
+                    $message='User data fetched';
+                    break;
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
             }

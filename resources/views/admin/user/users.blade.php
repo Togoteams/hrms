@@ -79,12 +79,14 @@
                                     </td>
                                     <td><span class="d-block fs-5">{{ $user->username }}</span></td>
                                     <td>
-                                        <span class="legend-indicator bg-success"></span>{{ $user->status??"Active" }}
+                                        <span class="legend-indicator bg-success"></span>{{ $user->status ?? 'Active' }}
                                     </td>
 
 
                                     <td>
-                                        <button type="button" class="btn btn-white btn-sm">
+                                        <button type="button" class="btn btn-white btn-sm editData" data-table="users"
+                                            data-form-modal="editUserModal" data-message="inactive"
+                                            data-uuid="{{ $user->uuid }}">
                                             <i class="bi-pencil-fill me-1"></i> Edit
                                         </button>
                                     </td>
@@ -159,7 +161,7 @@
                 <div class="modal-body">
                     <!-- Nav Scroller -->
                     <form method="post" action="{{ route('admin.user.add') }}" class="formsubmit">
-                      @csrf
+                        @csrf
                         <!-- Form -->
                         <div class="row mb-4">
                             <label for="first_name" class="col-sm-3 col-form-label form-label">Full name <i
@@ -168,12 +170,11 @@
 
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
-                                    <input type="text" class="form-control" name="first_name"
-                                        id="first_name" placeholder="Your first name"
-                                        aria-label="Your first name">
-                                    <input type="text" class="form-control" name="last_name"
-                                        id="last_name" placeholder="Your last name"
-                                        aria-label="Your last name" >
+                                    <input type="hidden" class="form-control" name="user_id" id="user_id">
+                                    <input type="text" class="form-control" name="first_name" id="first_name"
+                                        placeholder="Your first name" aria-label="Your first name">
+                                    <input type="text" class="form-control" name="last_name" id="last_name"
+                                        placeholder="Your last name" aria-label="Your last name">
                                 </div>
                             </div>
                         </div>
@@ -184,9 +185,8 @@
                             <label for="email" class="col-sm-3 col-form-label form-label">Email</label>
 
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="email"
-                                    id="email" placeholder="Email" aria-label="Email"
-                                    >
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Email" aria-label="Email">
                             </div>
                         </div>
                         <!-- End Form -->
@@ -196,11 +196,9 @@
                             <label for="mobile" class="col-sm-3 col-form-label form-label">Mobile</label>
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
-                                    <input type="text" class=" form-control" name="mobile"
-                                        id="mobile" 
-                                      >
+                                    <input type="text" class=" form-control" name="mobile" id="mobile">
 
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -212,43 +210,39 @@
                                 class="col-sm-3 col-form-label form-label">Role</label>
 
                             <div class="col-sm-9">
-                              <select class="js-select form-select" autocomplete="off" id="role_id" name="role_id"
-                           >
-                              <option value="" selected>Roles</option>
-                             @foreach ($roles as $role )
-                             <option value="{{$role->id}}">{{$role->name}}</option>
-
-                             @endforeach
-                          </select>
+                                <select class="js-select form-select" autocomplete="off" id="role_id" name="role_id">
+                                    <option value="" selected>Roles</option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <!-- End Form -->
 
                         <!-- Form -->
                         <div class="row mb-4">
-                          <label for="username" class="col-sm-3 col-form-label form-label">Username</label>
+                            <label for="username" class="col-sm-3 col-form-label form-label">Username</label>
 
-                          <div class="col-sm-9">
-                              <input type="username" class="form-control" name="username"
-                                  id="username" placeholder="username" aria-label="username"
-                                  >
-                          </div>
+                            <div class="col-sm-9">
+                                <input type="username" class="form-control" name="username" id="username"
+                                    placeholder="username" aria-label="username">
+                            </div>
                         </div>
                         <div class="row mb-4">
-                          <label for="password" class="col-sm-3 col-form-label form-label">Password <i
-                                  class="tio-help-outlined text-body ms-1"></i></label>
+                            <label for="password" class="col-sm-3 col-form-label form-label">Password <i
+                                    class="tio-help-outlined text-body ms-1"></i></label>
 
-                          <div class="col-sm-9">
-                              <div class="input-group input-group-sm-vertical">
-                                  <input type="password" class="form-control" name="password"
-                                      id="password" placeholder="password"
-                                      aria-label="Your login password">
-                                  <input type="password" class="form-control" name="confirm_password"
-                                      id="confirm_password" placeholder="Confirm Password"
-                                      aria-label="Confirm Password Should be similar as password" >
-                              </div>
-                          </div>
-                      </div>
+                            <div class="col-sm-9">
+                                <div class="input-group input-group-sm-vertical">
+                                    <input type="password" class="form-control" name="password" id="password"
+                                        placeholder="password" aria-label="Your login password">
+                                    <input type="password" class="form-control" name="confirm_password"
+                                        id="confirm_password" placeholder="Confirm Password"
+                                        aria-label="Confirm Password Should be similar as password">
+                                </div>
+                            </div>
+                        </div>
                         <!-- End Form -->
 
                         <div class="d-flex justify-content-end">

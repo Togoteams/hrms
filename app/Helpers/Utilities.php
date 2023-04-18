@@ -15,6 +15,20 @@ if (!function_exists('isSluggable')) {
     }
 }
 
+if (!function_exists('splitName')) {
+ function splitName($name)
+{
+  $name_arr = [];
+  if (!empty($name)) {
+    $name_arr2 = explode(" ", $name);
+
+    $name_arr[] = trim($name_arr2[0]);
+    $name_arr[] = trim(!empty($name_arr2[1]) ? substr($name, strlen($name_arr2[0]) + 1) : '');
+  }
+
+  return $name_arr;
+}
+}
 
 
 if (!function_exists('isMobileDevice')) {
