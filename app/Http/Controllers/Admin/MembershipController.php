@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Membership;
 use Exception;
+
 class MembershipController extends Controller
 {
     public $page_name = "Membership";
@@ -33,6 +34,7 @@ class MembershipController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required',
+            'amount' => 'numeric|required',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {
