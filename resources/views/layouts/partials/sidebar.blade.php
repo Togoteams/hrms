@@ -93,8 +93,8 @@
                          <!-- End Collapse -->
                          <div id="employee">
                              @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees',
-                                 'add-designation', 'edit-designation', 'view-designation', 'delete-designation',
-                                 'add-membership', 'edit-membership', 'view-membership', 'delete-membership',
+                                 'add-designations', 'edit-designations', 'view-designations', 'delete-designations',
+                                 'add-memberships', 'edit-memberships', 'view-memberships', 'delete-memberships',
                                  'add-branch', 'edit-branch', 'view-branch', 'delete-branch'])
                                  <!-- End Collapse -->
                                  <div class="nav-item">
@@ -107,13 +107,13 @@
                                      <div id="employees"
                                          class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index']) }}  "
                                          data-bs-parent="#employee">
-                                         @canany(['add-designation', 'edit-designation', 'view-designation',
-                                             'delete-designation'])
+                                         @canany(['add-designations', 'edit-designations', 'view-designations',
+                                             'delete-designations'])
                                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
                                                  href="{{ route('admin.designation.index') }}">Designation</a>
                                          @endcanany
-                                         @canany(['add-membership', 'edit-membership', 'view-membership',
-                                             'delete-membership'])
+                                         @canany(['add-memberships', 'edit-memberships', 'view-memberships',
+                                             'delete-memberships'])
                                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
                                                  href="{{ route('admin.membership.index') }}">Membership</a>
                                          @endcanany
