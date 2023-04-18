@@ -55,7 +55,7 @@
                                 <th>address</th>
                                 <th>city</th>
                                 <th>state</th>
-                                <th>countery</th>
+                                <th>country</th>
                                 <th>landmark</th>
                                 <th>description</th>
                                 <th>Action</th>
@@ -73,7 +73,7 @@
                                     <td>{{ $item->address }}</td>
                                     <td>{{ $item->city }}</td>
                                     <td>{{ $item->state }}</td>
-                                    <td>{{ $item->countery }}</td>
+                                    <td>{{ $item->country }}</td>
                                     <td>{{ $item->landmark }}</td>
                                     <td>{{ $item->description }}</td>
 

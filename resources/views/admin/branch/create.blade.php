@@ -41,9 +41,9 @@
                                 </div>
                             </div>     <div class="col-sm-6 mb-2">
                                 <div class="form-group">
-                                    <label for="countery">countery </label>
-                                    <input required id="countery" placeholder="Enter Countery of Branch "
-                                        type="text" name="countery" class="form-control form-control-sm ">
+                                    <label for="country">Country </label>
+                                    <input required id="country" placeholder="Enter Country of Branch "
+                                        type="text" name="country" class="form-control form-control-sm ">
                                 </div>
                             </div>     <div class="col-sm-6 mb-2">
                                 <div class="form-group">

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('state');
-            $table->string('countery');
+            $table->string('country');
             $table->string('landmark');
             $table->string('status')->default('active');
             $table->text('description');
