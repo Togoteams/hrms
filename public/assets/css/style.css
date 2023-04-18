@@ -7,3 +7,6 @@ label{
     padding: 6px  10px!important;
 
 }
+.form-group span{
+    text-transform: capitalize;
+}
