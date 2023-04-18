@@ -35,6 +35,12 @@
                  <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                      <!-- Collapse -->
                      <div class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.dashboard') }}" data-placement="left">
+                            <i class="bi bi-speedometer nav-icon"></i>
+                            <span class="nav-link-title">Dashboards</span>
+                        </a>
+                    </div>
+                     {{-- <div class="nav-item">
                          <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
                              data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards"
                              aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
@@ -46,7 +52,7 @@
                              data-bs-parent="#navbarVerticalMenu">
                              <a class="nav-link active" href="index-2.html">Default</a>
                          </div>
-                     </div>
+                     </div> --}}
                      <!-- End Collapse -->
 
                      <span class="dropdown-header mt-4">Pages</span>
