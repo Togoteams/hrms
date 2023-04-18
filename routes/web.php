@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\UserAccountController;
 
 Route::get('/',[LoginController::class,'authentication']);
 
@@ -56,6 +57,11 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('membership', MembershipController::class);
     Route::resource('branch', BranchController::class);
     Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
+
+    Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
+    Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
+    Route::get('password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('password');
+    Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
 });
 
 

@@ -663,8 +663,8 @@
 
                              <div class="dropdown-divider"></div>
 
-                             <a class="dropdown-item" href="#">Profile &amp; account</a>
-                             <a class="dropdown-item" href="#">Settings</a>
+                             <a class="dropdown-item" href="{{route('admin.profile')}}">Profile</a>
+                             <a class="dropdown-item" href="{{route('admin.password')}}">Password Setting</a>
 
                              <div class="dropdown-divider"></div>
                              <form  class="dropdown-item" method="POST" action="{{ route('logout') }}">

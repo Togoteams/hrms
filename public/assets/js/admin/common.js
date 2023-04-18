@@ -190,7 +190,7 @@ $(document).ready(function (e) {
             },
             success: function (response) {
                 if (response.status) {
-                    
+
                     if($('#lead_uuid').val())
                     {
                         Swal.fire({
@@ -245,7 +245,7 @@ $(document).ready(function (e) {
         });
 
     });
-    
+
 
     $(document).ready(function () {
         $('#country_name').on('change', function () {
@@ -515,8 +515,8 @@ $(document).ready(function (e) {
         //     var demand_value = $('#demand_status').val();
         //     deMandStatus(demand_value);
         // }, 1000);
-        
-       
+
+
         var $this = $(this);
         var uuid = $this.data('uuid');
         console.log(uuid);
@@ -524,7 +524,7 @@ $(document).ready(function (e) {
         var viewModal = $this.data('view-modal');
         var message = $this.data('message') ?? 'test message';
 
-        
+
 
         $.ajax({
             type: "get",
@@ -594,10 +594,10 @@ $(document).ready(function (e) {
         $('#user_id').val(user_id);
         $("#slide-from-right-demand").addClass("show-side-form");
         //alert(user_id);
-        
-        
+
+
     });
-    
+
     $('.deleteDocument').on('click', function (e) {
         var $this = $(this);
         var uuid = $this.data('uuid');
@@ -915,12 +915,12 @@ $(document).ready(function (e) {
             $("#loan_amount").val("");
             $("#loan_amount").attr('readonly', false);
         }
-       
+
     });
     $('.formsubmit').on('change','#demand_status',function(e) {
         var demand_value = $(this).val();
         deMandStatus();
-       
+
         //alert(demand_value);
         //alert('click');
         //console.log("test");
@@ -934,7 +934,7 @@ $(document).ready(function (e) {
             $("#loan_amount").val("");
             $("#loan_amount").attr('readonly', false);
         } */
-       
+
     });
 
 });
@@ -958,7 +958,7 @@ $(".compare_section").click(function () {
 
 function deMandStatus(){
     let demand_value = $('#demand_status').val();
-    
+
     if (demand_value == '') {
         $('#disbursedListShow').hide();
     } else if (demand_value == '0') {
@@ -1050,7 +1050,7 @@ function showToast(type, title, message) {
 
 function makeArray(params) {
     var dataArray = {}; // note this
-    $.each(params, function (key, value) { 
+    $.each(params, function (key, value) {
         dataArray[key] =  value ;
     });
     return dataArray;

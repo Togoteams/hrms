@@ -5,17 +5,18 @@
 
 <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
 
-    <script src="{{asset('assets/js/hs.theme-appearance.js')}}"></script>
+    <script src="{{ asset('assets/js/hs.theme-appearance.js') }}"></script>
 
-    <script src="{{asset('assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js')}}"></script>
+    <script src="{{ asset('assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js') }}">
+    </script>
 
     @include('layouts.partials.navbar')
 
     <!-- ========== MAIN CONTENT ========== -->
-   
+
     @include('layouts.partials.sidebar')
 
-   
+
     @yield('content')
     <!-- ========== END MAIN CONTENT ========== -->
 
@@ -27,7 +28,8 @@
             <div class="modal-content">
                 <!-- Header -->
                 <div class="modal-close">
-                    <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn btn-ghost-secondary btn-icon btn-sm" data-bs-dismiss="modal"
+                        aria-label="Close">
                         <i class="bi-x-lg"></i>
                     </button>
                 </div>
@@ -37,8 +39,11 @@
                 <div class="modal-body p-sm-5">
                     <div class="text-center">
                         <div class="w-75 w-sm-50 mx-auto mb-4">
-                            <img class="img-fluid" src="{{asset('assets/svg/illustrations/oc-collaboration.svg')}}" alt="Image Description" data-hs-theme-appearance="default">
-                            <img class="img-fluid" src="{{asset('assets/svg/illustrations-light/oc-collaboration.svg')}}" alt="Image Description" data-hs-theme-appearance="dark">
+                            <img class="img-fluid" src="{{ asset('assets/svg/illustrations/oc-collaboration.svg') }}"
+                                alt="Image Description" data-hs-theme-appearance="default">
+                            <img class="img-fluid"
+                                src="{{ asset('assets/svg/illustrations-light/oc-collaboration.svg') }}"
+                                alt="Image Description" data-hs-theme-appearance="dark">
                         </div>
 
                         <h4 class="h1">Welcome to HRMS</h4>
@@ -55,16 +60,20 @@
                     <div class="w-85 mx-auto">
                         <div class="row justify-content-between">
                             <div class="col">
-                                <img class="img-fluid" src="{{asset('assets/svg/brands/gitlab-gray.svg')}}" alt="Image Description">
+                                <img class="img-fluid" src="{{ asset('assets/svg/brands/gitlab-gray.svg') }}"
+                                    alt="Image Description">
                             </div>
                             <div class="col">
-                                <img class="img-fluid" src="{{asset('assets/svg/brands/fitbit-gray.svg')}}" alt="Image Description">
+                                <img class="img-fluid" src="{{ asset('assets/svg/brands/fitbit-gray.svg') }}"
+                                    alt="Image Description">
                             </div>
                             <div class="col">
-                                <img class="img-fluid" src="{{asset('assets/svg/brands/flow-xo-gray.svg')}}" alt="Image Description">
+                                <img class="img-fluid" src="{{ asset('assets/svg/brands/flow-xo-gray.svg') }}"
+                                    alt="Image Description">
                             </div>
                             <div class="col">
-                                <img class="img-fluid" src="{{asset('assets/svg/brands/layar-gray.svg')}}" alt="Image Description">
+                                <img class="img-fluid" src="{{ asset('assets/svg/brands/layar-gray.svg') }}"
+                                    alt="Image Description">
                             </div>
                         </div>
                     </div>
@@ -77,7 +86,8 @@
     <!-- End Welcome Message Modal -->
 
     <!-- Create a new user Modal -->
-    <div class="modal fade" id="inviteUserModal" tabindex="-1" aria-labelledby="inviteUserModalLabel" aria-hidden="true">
+    <div class="modal fade" id="inviteUserModal" tabindex="-1" aria-labelledby="inviteUserModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,12 +100,14 @@
                     <!-- Form -->
                     <div class="mb-4">
                         <div class="input-group mb-2 mb-sm-0">
-                            <input type="text" class="form-control" name="fullName" placeholder="Search name or emails" aria-label="Search name or emails">
+                            <input type="text" class="form-control" name="fullName"
+                                placeholder="Search name or emails" aria-label="Search name or emails">
 
                             <div class="input-group-append input-group-append-last-sm-down-none">
                                 <!-- Select -->
                                 <div class="tom-select-custom tom-select-custom-end">
-                                    <select class="js-select form-select" autocomplete="off" data-hs-tom-select-options='{
+                                    <select class="js-select form-select" autocomplete="off"
+                                        data-hs-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true,
                             "dropdownWidth": "11rem"
@@ -121,7 +133,8 @@
 
                         <div class="col-auto">
                             <a class="d-flex align-items-center small text-body" href="#">
-                                <img class="avatar avatar-xss avatar-4x3 me-2" src="{{asset('assets/svg/brands/gmail-icon.svg')}}" alt="Image Description">
+                                <img class="avatar avatar-xss avatar-4x3 me-2"
+                                    src="{{ asset('assets/svg/brands/gmail-icon.svg') }}" alt="Image Description">
                                 Import contacts
                             </a>
                         </div>
@@ -135,21 +148,27 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <img class="avatar-img" src="{{asset('assets/img/160x160/img10.jpg')}}" alt="Image Description">
+                                        <img class="avatar-img" src="{{ asset('assets/img/160x160/img10.jpg') }}"
+                                            alt="Image Description">
                                     </div>
                                 </div>
 
                                 <div class="flex-grow-1 ms-3">
                                     <div class="row align-items-center">
                                         <div class="col-sm">
-                                            <h5 class="mb-0">Amanda Harvey <i class="bi-patch-check-fill text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></h5>
+                                            <h5 class="mb-0">Amanda Harvey <i
+                                                    class="bi-patch-check-fill text-primary" data-toggle="tooltip"
+                                                    data-placement="top" title="Top endorsed"></i></h5>
                                             <span class="d-block small">amanda@site.com</span>
                                         </div>
 
                                         <div class="col-sm-auto">
                                             <!-- Select -->
                                             <div class="tom-select-custom tom-select-custom-sm-end">
-                                                <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                                <select
+                                                    class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0"
+                                                    autocomplete="off"
+                                                    data-hs-tom-select-options='{
                                   "searchInDropdown": false,
                                   "hideSearch": true,
                                   "dropdownWidth": "11rem"
@@ -158,7 +177,9 @@
                                                     <option value="can edit">Can edit</option>
                                                     <option value="can comment">Can comment</option>
                                                     <option value="full access">Full access</option>
-                                                    <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                                                    <option value="remove"
+                                                        data-option-template='<div class="text-danger">Remove</div>'>
+                                                        Remove</option>
                                                 </select>
                                             </div>
                                             <!-- End Select -->
@@ -175,7 +196,8 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <img class="avatar-img" src="{{asset('assets/img/160x160/img3.jpg')}}" alt="Image Description">
+                                        <img class="avatar-img" src="{{ asset('assets/img/160x160/img3.jpg') }}"
+                                            alt="Image Description">
                                     </div>
                                 </div>
 
@@ -189,7 +211,10 @@
                                         <div class="col-sm-auto">
                                             <!-- Select -->
                                             <div class="tom-select-custom tom-select-custom-sm-end">
-                                                <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                                <select
+                                                    class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0"
+                                                    autocomplete="off"
+                                                    data-hs-tom-select-options='{
                                   "searchInDropdown": false,
                                   "hideSearch": true,
                                   "dropdownWidth": "11rem"
@@ -198,7 +223,9 @@
                                                     <option value="can edit">Can edit</option>
                                                     <option value="can comment">Can comment</option>
                                                     <option value="full access">Full access</option>
-                                                    <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                                                    <option value="remove"
+                                                        data-option-template='<div class="text-danger">Remove</div>'>
+                                                        Remove</option>
                                                 </select>
                                             </div>
                                             <!-- End Select -->
@@ -215,21 +242,27 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0">
                                     <div class="avatar avatar-sm avatar-circle">
-                                        <img class="avatar-img" src="{{asset('assets/img/160x160/img9.jpg')}}" alt="Image Description">
+                                        <img class="avatar-img" src="{{ asset('assets/img/160x160/img9.jpg') }}"
+                                            alt="Image Description">
                                     </div>
                                 </div>
 
                                 <div class="flex-grow-1 ms-3">
                                     <div class="row align-items-center">
                                         <div class="col-sm">
-                                            <h5 class="mb-0">Ella Lauda <i class="bi-patch-check-fill text-primary" data-toggle="tooltip" data-placement="top" title="Top endorsed"></i></h5>
+                                            <h5 class="mb-0">Ella Lauda <i class="bi-patch-check-fill text-primary"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="Top endorsed"></i></h5>
                                             <span class="d-block small">Markvt@site.com</span>
                                         </div>
 
                                         <div class="col-sm-auto">
                                             <!-- Select -->
                                             <div class="tom-select-custom tom-select-custom-sm-end">
-                                                <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                                <select
+                                                    class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0"
+                                                    autocomplete="off"
+                                                    data-hs-tom-select-options='{
                                   "searchInDropdown": false,
                                   "hideSearch": true,
                                   "dropdownWidth": "11rem"
@@ -238,7 +271,9 @@
                                                     <option value="can edit">Can edit</option>
                                                     <option value="can comment">Can comment</option>
                                                     <option value="full access">Full access</option>
-                                                    <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                                                    <option value="remove"
+                                                        data-option-template='<div class="text-danger">Remove</div>'>
+                                                        Remove</option>
                                                 </select>
                                             </div>
                                             <!-- End Select -->
@@ -269,7 +304,10 @@
                                         <div class="col-sm-auto">
                                             <!-- Select -->
                                             <div class="tom-select-custom tom-select-custom-sm-end">
-                                                <select class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0" autocomplete="off" data-hs-tom-select-options='{
+                                                <select
+                                                    class="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0"
+                                                    autocomplete="off"
+                                                    data-hs-tom-select-options='{
                                   "searchInDropdown": false,
                                   "hideSearch": true,
                                   "dropdownWidth": "11rem"
@@ -278,7 +316,9 @@
                                                     <option value="can edit">Can edit</option>
                                                     <option value="can comment">Can comment</option>
                                                     <option value="full access">Full access</option>
-                                                    <option value="remove" data-option-template='<div class="text-danger">Remove</div>'>Remove</option>
+                                                    <option value="remove"
+                                                        data-option-template='<div class="text-danger">Remove</div>'>
+                                                        Remove</option>
                                                 </select>
                                             </div>
                                             <!-- End Select -->
@@ -300,12 +340,15 @@
                             <input type="hidden" id="inviteUserPublicClipboard" value="/">
 
                             <p class="modal-footer-text">The public share <a href="#">link settings</a>
-                                <i class="bi-question-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="The public share link allows people to view the project without giving access to full collaboration features."></i>
+                                <i class="bi-question-circle" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="The public share link allows people to view the project without giving access to full collaboration features."></i>
                             </p>
                         </div>
 
                         <div class="col-sm-3 text-sm-end">
-                            <a class="js-clipboard btn btn-white btn-sm text-nowrap" href="javascript:;" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard!" data-hs-clipboard-options='{
+                            <a class="js-clipboard btn btn-white btn-sm text-nowrap" href="javascript:;"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard!"
+                                data-hs-clipboard-options='{
                   "type": "tooltip",
                   "successText": "Copied!",
                   "contentTarget": "#inviteUserPublicClipboard",
@@ -324,10 +367,25 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('custom-scripts')
     <script>
-        var APP_URL= "{{url('/')}}";
+        var APP_URL = "{{ url('/') }}";
     </script>
-    <script src="{{asset('assets/js/admin/common.js')}}"></script>
+    <script src="{{ asset('assets/js/admin/common.js') }}"></script>
     <!-- End Style Switcher JS -->
+
+    @if (Session::get('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ Session::get('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+        @php
+            Session::forget('success');
+        @endphp
+    @endif
+
 </body>
 
 </html>
