@@ -92,6 +92,19 @@
 @endsection
 
 @push('custom-scripts')
+    @if (!empty(Session::get('success')))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '{{ Session::get('success') }}',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+    @php
+        Session::forget('success');
+    @endphp
+    @endif
     {{-- Passwords Update Validation --}}
 
     <script>

@@ -372,19 +372,7 @@
     <script src="{{ asset('assets/js/admin/common.js') }}"></script>
     <!-- End Style Switcher JS -->
 
-    @if (Session::get('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
+    
 
 </body>
 
