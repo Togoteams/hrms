@@ -123,6 +123,12 @@
                                  <span class="nav-link-title">Holidays</span>
                              </a>
                          </div>
+                         <div class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.leave.list') }}" data-placement="left">
+                                <i class="bi-folder2-open nav-icon"></i>
+                                <span class="nav-link-title">Leave</span>
+                            </a>
+                        </div>
 
 
 
