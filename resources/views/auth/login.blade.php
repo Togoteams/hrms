@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Working Spider</title>
+    <title>Bank of Baroda Ltd. (Botswana)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Togoteams" name="author" />
     <!-- App favicon -->
@@ -79,7 +79,9 @@
 
                                     <div class="mb-3">
                                         <div class="float-end">
-                                            <a href="{{url('forgot-password')}}" class="text-muted">Forgot password?</a>
+                                            <a href="{{ route('forgot.password') }}" class="text-muted">
+                                                Forgot password?
+                                            </a>
                                         </div>
                                         <label for="password" class="form-label">{{ __('Password') }}</label>
                                         <div class="input-group auth-pass-inputgroup">

@@ -73,7 +73,8 @@
         border-radius: 90%;
 
     }
-    .font-12{
+
+    .font-12 {
         font-size: 12px;
     }
 </style>

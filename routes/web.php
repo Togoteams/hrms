@@ -65,6 +65,8 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
 });
 
+Route::get('user-forgot-password', [UserAccountController::class, 'viewForgotPasswordPage'])->name('forgot.password');
+Route::post('user-forgot-password', [UserAccountController::class, 'forgotPassword'])->name('forgot.password.post');
 
 Route::controller(LoginController::class)->as('login.')->prefix('login/')->group(function () {
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
