@@ -34,12 +34,14 @@
              <div class="navbar-vertical-content">
                  <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                      <!-- Collapse -->
+                     @can('view-dashboard')
                          <div class="nav-item">
                              <a class="nav-link" href="{{ route('admin.dashboard') }}" data-placement="left">
                                  <i class="bi bi-speedometer nav-icon"></i>
                                  <span class="nav-link-title">Dashboards</span>
                              </a>
                          </div>
+                     @endcan
 
                      {{-- <div class="nav-item">
                          <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
@@ -65,7 +67,8 @@
                      </div>
                      <div id="navbarVerticalMenuPagesMenu">
                          <!-- Collapse -->
-                  
+                         @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
+                             'delete-roles', 'view-roles'])
                              <div class="nav-item">
                                  <a class="nav-link dropdown-toggle " href="#navbarVerticalMenuPagesUserProfileMenu"
                                      role="button" data-bs-toggle="collapse"
@@ -78,14 +81,21 @@
                                  <div id="navbarVerticalMenuPagesUserProfileMenu" class="nav-collapse collapse "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
+                                     @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
                                          <a class="nav-link " href="{{ url('admin/roles') }}">Roles</a>
-                                     
+                                     @endcanany
+                                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users'])
                                          <a class="nav-link " href="{{ url('admin/users') }}">Users</a>
+                                     @endcanany
                                  </div>
                              </div>
+                         @endcanany
                          <!-- End Collapse -->
                          <div id="employee">
-                            
+                             @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees',
+                                 'add-designation', 'edit-designation', 'view-designation', 'delete-designation',
+                                 'add-membership', 'edit-membership', 'view-membership', 'delete-membership',
+                                 'add-branch', 'edit-branch', 'view-branch', 'delete-branch'])
                                  <!-- End Collapse -->
                                  <div class="nav-item">
                                      <a class="nav-link dropdown-toggle " href="#employees" role="button"
@@ -97,22 +107,28 @@
                                      <div id="employees"
                                          class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index']) }}  "
                                          data-bs-parent="#employee">
-                                        
+                                         @canany(['add-designation', 'edit-designation', 'view-designation',
+                                             'delete-designation'])
                                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
                                                  href="{{ route('admin.designation.index') }}">Designation</a>
-                                        
+                                         @endcanany
+                                         @canany(['add-membership', 'edit-membership', 'view-membership',
+                                             'delete-membership'])
                                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
                                                  href="{{ route('admin.membership.index') }}">Membership</a>
-                                         
+                                         @endcanany
+                                         @canany(['add-branch', 'edit-branch', 'view-branch', 'delete-branch'])
                                              <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"
                                                  href="{{ route('admin.branch.index') }}">Branch</a>
-                                        
+                                         @endcanany
+                                         @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees'])
                                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
                                                  href="{{ route('admin.employees.index') }}">Employees</a>
+                                         @endcanany
                                      </div>
                                  </div>
                                  <!-- End Collapse -->
-                            
+                             @endcanany
                          </div>
 
 
@@ -122,19 +138,22 @@
                          <small class="bi-three-dots nav-subtitle-replacer"></small>
 
 
+                         @canany(['add-holidays', 'edit-holidays', 'view-holidays', 'delete-holidays'])
                              <div class="nav-item">
                                  <a class="nav-link" href="{{ route('admin.holiday.list') }}" data-placement="left">
                                      <i class="bi-folder2-open nav-icon"></i>
                                      <span class="nav-link-title">Holidays</span>
                                  </a>
                              </div>
-                         
+                         @endcanany
+                         @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves'])
                              <div class="nav-item">
                                  <a class="nav-link" href="{{ route('admin.leave.list') }}" data-placement="left">
                                      <i class="bi-folder2-open nav-icon"></i>
                                      <span class="nav-link-title">Leave</span>
                                  </a>
                              </div>
+                         @endcanany
 
 
 

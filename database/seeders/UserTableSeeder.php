@@ -21,8 +21,6 @@ class UserTableSeeder extends Seeder
         $faker = Faker::create();
 
         $isAdminRole = Role::where('slug', 'admin')->first();
-        
-
         $user = new User();
         $user->uuid = $faker->uuid;
         $user->name = 'Admin';
