@@ -46,14 +46,14 @@
                                 <div class="form-group">
                                     <label for="password">password </label>
                                     <input required id="password" placeholder="Enter correct password   "
-                                        type="text" name="password" class="form-control form-control-sm ">
+                                        type="password" name="password" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="password_confirmation">confirm password </label>
                                     <input required id="password_confirmation"
-                                        placeholder="Enter correct password confirmation   " type="password"
+                                        placeholder="Enter correct password confirmation" type="password"
                                         name="password_confirmation" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                                 <div class="form-group">
                                     <label for="pension_contribution">pension contribution </label>
                                     <input required id="pension_contribution"
-                                        placeholder="Enter correct pension_contribution   " type="number"
+                                        placeholder="Enter correct pension contribution   " type="number"
                                         name="pension_contribution" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -170,12 +170,12 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="amount_payable_to_bomaind_each_year">amount_payable to bomaind each
+                                    <label for="amount_payable_to_bomaind_each_year">amount payable to bomaind each
                                         year
                                     </label>
                                     <input required id="amount_payable_to_bomaind_each_year"
-                                        placeholder="Enter correct amount_payable_to_bomaind_each_year   "
-                                        type="text" name="amount_payable_to_bomaind_each_year"
+                                        placeholder="Enter correct amount_payable to bomaind each year   "
+                                        type="text" name="amount payable to bomaind each year"
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -189,8 +189,8 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="bank_name">bank name </label>
-                                    <input required id="bank_name" placeholder="Enter correct bank_name   "
-                                        type="text" name="bank_name" class="form-control form-control-sm ">
+                                    <input required id="bank name" placeholder="Enter correct bank_name   "
+                                        type="text" name="bank name" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
