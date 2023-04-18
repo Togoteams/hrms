@@ -75,11 +75,11 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <span class="d-block h5 mb-0">{{ $user->roles->first() }}</span>
+                                        <span class="d-block h5 mb-0">{{ $user->roles?->first()?->name }}</span>
                                     </td>
-                                    <td><span class="d-block fs-5">Human resources</span></td>
+                                    <td><span class="d-block fs-5">{{ $user->username }}</span></td>
                                     <td>
-                                        <span class="legend-indicator bg-success"></span>Active
+                                        <span class="legend-indicator bg-success"></span>{{ $user->status??"Active" }}
                                     </td>
 
 
@@ -158,7 +158,8 @@
                 <!-- Body -->
                 <div class="modal-body">
                     <!-- Nav Scroller -->
-                    <form>
+                    <form method="post" action="{{ route('admin.user.add') }}" class="formsubmit">
+                      @csrf
                         <!-- Form -->
                         <div class="row mb-4">
                             <label for="first_name" class="col-sm-3 col-form-label form-label">Full name <i
@@ -180,44 +181,26 @@
 
                         <!-- Form -->
                         <div class="row mb-4">
-                            <label for="editEmailModalLabel" class="col-sm-3 col-form-label form-label">Email</label>
+                            <label for="email" class="col-sm-3 col-form-label form-label">Email</label>
 
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="editEmailModal"
-                                    id="editEmailModalLabel" placeholder="Email" aria-label="Email"
-                                    value="ella@site.com">
+                                <input type="email" class="form-control" name="email"
+                                    id="email" placeholder="Email" aria-label="Email"
+                                    >
                             </div>
                         </div>
                         <!-- End Form -->
 
                         <!-- Form -->
                         <div class="row mb-4">
-                            <label for="editPhoneLabel" class="col-sm-3 col-form-label form-label">Phone</label>
-
+                            <label for="mobile" class="col-sm-3 col-form-label form-label">Mobile</label>
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
-                                    <input type="text" class="js-masked-input form-control" name="phone"
-                                        id="editPhoneLabel" placeholder="+x(xxx)xxx-xx-xx" aria-label="+x(xxx)xxx-xx-xx"
-                                        value="1(609)972-22-22"
-                                        data-hs-mask-options='{
-                                 "template": "+0(000)000-00-00"
-                               }'>
+                                    <input type="text" class=" form-control" name="mobile"
+                                        id="mobile" 
+                                      >
 
-                                    <!-- Select -->
-                                    <div class="tom-select-custom">
-                                        <select class="js-select form-select" autocomplete="off" name="editPhoneSelect"
-                                            data-hs-tom-select-options='{
-                                  "searchInDropdown": false,
-                                  "hideSearch": true
-                                }'>
-                                            <option value="Mobile" selected>Mobile</option>
-                                            <option value="Home">Home</option>
-                                            <option value="Work">Work</option>
-                                            <option value="Fax">Fax</option>
-                                            <option value="Direct">Direct</option>
-                                        </select>
-                                    </div>
-                                    <!-- End Select -->
+                                   
                                 </div>
                             </div>
                         </div>
@@ -226,27 +209,46 @@
                         <!-- Form -->
                         <div class="row mb-4">
                             <label for="editOrganizationModalLabel"
-                                class="col-sm-3 col-form-label form-label">Vendor</label>
+                                class="col-sm-3 col-form-label form-label">Role</label>
 
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="editOrganizationModal"
-                                    id="editOrganizationModalLabel" placeholder="Your organization"
-                                    aria-label="Your organization" value="Htmlstream">
+                              <select class="js-select form-select" autocomplete="off" id="role_id" name="role_id"
+                           >
+                              <option value="" selected>Roles</option>
+                             @foreach ($roles as $role )
+                             <option value="{{$role->id}}">{{$role->name}}</option>
+
+                             @endforeach
+                          </select>
                             </div>
                         </div>
                         <!-- End Form -->
 
                         <!-- Form -->
                         <div class="row mb-4">
-                            <label for="editDepartmentModalLabel"
-                                class="col-sm-3 col-form-label form-label">Department</label>
+                          <label for="username" class="col-sm-3 col-form-label form-label">Username</label>
 
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="editDepartmentModal"
-                                    id="editDepartmentModalLabel" placeholder="Your department"
-                                    aria-label="Your department">
-                            </div>
+                          <div class="col-sm-9">
+                              <input type="username" class="form-control" name="username"
+                                  id="username" placeholder="username" aria-label="username"
+                                  >
+                          </div>
                         </div>
+                        <div class="row mb-4">
+                          <label for="password" class="col-sm-3 col-form-label form-label">Password <i
+                                  class="tio-help-outlined text-body ms-1"></i></label>
+
+                          <div class="col-sm-9">
+                              <div class="input-group input-group-sm-vertical">
+                                  <input type="password" class="form-control" name="password"
+                                      id="password" placeholder="password"
+                                      aria-label="Your login password">
+                                  <input type="password" class="form-control" name="confirm_password"
+                                      id="confirm_password" placeholder="Confirm Password"
+                                      aria-label="Confirm Password Should be similar as password" >
+                              </div>
+                          </div>
+                      </div>
                         <!-- End Form -->
 
                         <div class="d-flex justify-content-end">

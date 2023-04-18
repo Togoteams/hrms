@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('mobile')->nullable();   
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->bigInteger('department_id')->nullable();
+            $table->string('status')->default('active')->nullable();
+            // $table->bigInteger('department_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             // $table->bigInteger('created_by')->nullable();

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
+use App\Models\Role;
 use App\Models\User;
-
 class UserController extends BaseController
 {
     protected $model;
@@ -15,9 +15,10 @@ class UserController extends BaseController
     }
     
     public function viewUser()
-    {
+    {   
         $users = $this->model::get();
-        return view('admin.user.users', compact('users'));
+        $roles = Role::where('role_type','!=','admin')->get();
+        return view('admin.user.users', compact('users','roles'));
     }
 
     public function addUser(Request $request)
@@ -28,29 +29,29 @@ class UserController extends BaseController
         } else {
             $message = "User Created Successfully";
         }
-        $request->merge(['name'=>$request->first_name.' '.$request->last_name]);
+        
         $request->validate([
-            'name'     =>  'required|string',
+            // 'name'     =>  'required|string',
             'first_name'     =>  'required|string',
-            'last_name'     =>  'nullable|string',
-            'username' => 'required|string|unique:users,username',
-            'email' => 'required|email|string|unique:users,email',
-            'mobile' => 'required|string|unique:users,mobile',
-            'password' => 'required|min:8|string',
-            'confirm_password' => 'required|min:8|string|same:password',
+            'role_id'     =>  'required|exists:roles,id',
+            'username' => 'required|min:3|string|unique:users,username,'.$userId,
+            'email' => 'required|min:3|string|unique:users,email,'.$userId,
+            'mobile' => 'required|min:3|string|unique:users,mobile,'.$userId,
+            'password'=>'required|min:8|string',
+            'confirm_password'=>'required|min:8|string|same:password',
         ]);
-
-        // $data = [
-        //     'name' => $request->name,
-        //     'short_code' => $request->short_code,
-        //     'User_type' => $request->User_type,
-        //     'description' => $request->description,
-        //     'status' => $request->status,
-        // ];
-
-        $isUserCreated = $this->model::updateOrCreate(['id' => $userId], $request->except('_token'));
+        $request->merge(['name'=>$request->first_name." ".$request->last_name]);
+        $data = [
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'password' => $request->password,
+        ];
+        $isUserCreated = $this->model::updateOrCreate(['id' => $userId], $data);
         if ($isUserCreated) {
-            return   $this->sendResponse($isUserCreated, $message);
+            $isUserCreated->roles()->sync($request->role_id);
+            return   $this->responseJson(true,200, $message,$isUserCreated);
         }
     }
 
@@ -64,11 +65,11 @@ class UserController extends BaseController
                 if ($isUserDeleted) {
                     DB::commit();
                     $message = 'User deleted successfully';
-                    return $this->sendResponse('admin.users.user', $message);
+                    return $this->responseJson(true,200, $message,$isUserDeleted);
                 }
             } else {
                 $message = 'User not found';
-                return $this->sendResponse('admin.users.user', $message);
+                return $this->responseJson(false,200, $message);
             }
         } catch (\Exception $e) {
             DB::rollback();

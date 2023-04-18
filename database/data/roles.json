@@ -8,7 +8,7 @@
         {
             "name" : "Branch Manager",
             "short_code" : "branch_manager",
-            "role_type" : "admin"
+            "role_type" : "branch_manager"
         },
         {
             "name" : "Employees",
@@ -18,7 +18,7 @@
         {
             "name" : "Superviser",
             "short_code" : "superviser",
-            "role_type" : "admin"
+            "role_type" : "superviser"
         },
         {
             "name" : "HR",
