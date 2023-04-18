@@ -15,9 +15,12 @@
         <!-- End Col -->
 
         <div class="col-sm-auto">
-          <a class="btn btn-primary g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add" data-bs-target="#addEditHolidayModal">
-            <i class="bi-person-plus-fill me-1"></i> Add Holiday
-          </a>
+          @can('add-holidays')
+            <a class="btn btn-primary g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add" data-bs-target="#addEditHolidayModal">
+              <i class="bi-person-plus-fill me-1"></i> Add Holiday
+            </a>
+          @endcan
+          
         </div>
         <!-- End Col -->
       </div>
