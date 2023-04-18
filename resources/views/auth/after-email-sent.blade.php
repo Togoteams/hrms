@@ -91,6 +91,11 @@
         .rounded-social-buttons .social-button.instagram {
             background: #125688;
         }
+
+        .hyperlink {
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 
@@ -159,17 +164,16 @@
                                                 style="color:#000000; font-weight:600;">check your
                                                 spam</span> folder.
                                         </p>
-                                        <p style="color:#455056; font-size:12px;line-height:13px; margin-top:20px;">
+                                        <p style="color:#455056; font-size:12px;line-height:13px; margin-top:30px;">
                                             Still can't find the eamil?
                                         </p>
-                                        <a href="javascript:void(0);"
-                                            style="background:#006ecd;text-decoration:none !important; font-weight:500; margin-top:20px; color:#fff;font-size:14px;padding:10px 24px;display:inline-block;border-radius:20px;">
-                                            Reset Password</a>
+                                        <a href="{{route('forgot.password')}}"
+                                            style="background:#006ecd;text-decoration:none !important; font-weight:500; color:#fff;font-size:14px;padding:10px 24px;display:inline-block;border-radius:20px;">
+                                            Go to: Forgot Password
+                                        </a>
                                         <p
                                             style="color:#455056; font-size:12px;line-height:24px; margin:0; margin: 12px; line-height: 18px;">
-                                            We cannot simply send you your old password. A unique link to reset your<br>
-                                            password has been generated for you. To reset your password, click the
-                                            <br>following link and follow the instructions.
+                                            To send mail again.
                                         </p>
 
                                     </td>
@@ -186,15 +190,17 @@
                         <td style="text-align:center;">
                             <p
                                 style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">
-                                &copy; <strong>www.togoteams.com</strong></p>
+                                &copy; {{ date('Y') }} Bank of Baroda Ltd. (Botswana) Crafted by
+                                <strong>
+                                    <a class="hyperlink" href="https://togoteams.com">TogoTeams</a>
+                                </strong>
+                            </p>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <p style="text-align: center; font-size: 13px; color: #999;">This email template was sent to
-                                you becouse we want to make the world a better place.<br> You could change your
-                                subscription settings anytime.</p>
+                            <p style="text-align: center; font-size: 13px; color: #999; margin-bottom:20px;"></p>
                         </td>
                     </tr>
                     <tr>
@@ -218,12 +224,6 @@
                                         target="_blank"><i class="fab fa-instagram"></i></a>
                                 </div>
                             </footer>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <p style="text-align: center; font-size: 13px; color: #999;"><u>Unsubscribes</u></p>
                         </td>
                     </tr>
                     <tr>

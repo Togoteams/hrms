@@ -3,7 +3,7 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>Reset Password Email Template</title>
+    <title>Forgot Password | Bank of Baroda Ltd. (Botswana)</title>
     <meta name="description" content="Reset Password Email Template.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,7 +141,9 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p style="color:#000000; font-size:15px; font-weight:600; margin: 0;">Hello Jhon Doe</p>
+                                        <p style="color:#000000; font-size:15px; font-weight:600; margin: 0;">
+                                            Hello {{$data['user_name']}}
+                                        </p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -153,7 +155,7 @@
                                             Someone requested that password for your saas account to be reset.
                                         </p>
 
-                                        <a href="javascript:void(0);"
+                                        <a href="{{$data['password_reset_link']}}"
                                             style="background:#006ecd;text-decoration:none !important; font-weight:500; margin-top:20px; color:#fff;font-size:14px;padding:10px 24px;display:inline-block;border-radius:20px;">Reset
                                             Password</a>
                                         <p

@@ -100,15 +100,6 @@
             border-radius: 5px;
             font-size: 16px;
         }
-
-        .hyperlink {
-            text-decoration: none;
-            color: inherit;
-        }
-        .invalid-feedback
-        {
-            color: #9f005d;
-        }
     </style>
 </head>
 
@@ -123,14 +114,6 @@
                     <tr>
                         <td style="height:80px;">&nbsp;</td>
                     </tr>
-                    <!-- <tr>
-                        <td style="text-align:center;">
-                            <a href="https://rakeshmandal.com" title="logo" target="_blank">
-                                <img width="200" src="https://togoteams.com/assets/images/logo-dark.png" title="logo"
-                                    alt="logo">
-                            </a>
-                        </td>
-                    </tr> -->
                     <tr>
                         <td style="height:20px;">&nbsp;</td>
                     </tr>
@@ -145,18 +128,8 @@
                                     <td style="">
                                         <h1
                                             style="color:#1e1e2d; font-weight:500; margin:0;font-size:22px;font-family:'Work Sans', sans-serif!important;">
-                                            Forgot Password?
+                                            Password Changed
                                         </h1>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height:20px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <img width="80"
-                                            src="https://cdn-icons-png.flaticon.com/512/6587/6587395.png" title=""
-                                            alt="">
                                     </td>
                                 </tr>
                                 <tr>
@@ -164,37 +137,28 @@
 
                                         <span style="display:inline-block; vertical-align:middle;  width:100px;"></span>
                                         <p style="color:#455056; font-size:12px;line-height:12px; margin:0;">
-                                            Please enter your email address.
+                                            Congratulation,
                                         </p>
-                                        <br>
-
-                                        <form action="{{ route('forgot.password.post') }}" method="post">
-                                            @csrf
-
-                                            <input id="email" class="form-control " type="email" name="email"
-                                                placeholder="Enter your email" :value="old('email')" required
-                                                autofocus />
-                                            <br>
-                                            @error('email')
-                                                <span class="d-block invalid-feedback">{{ $message }}</span>
-                                                <br>
-                                            @enderror
-
-
-                                            <button
-                                                style="background:#006ecd;text-decoration:none !important; font-weight:500;
-                                                margin-top:20px; color:#fff; font-size:14px; padding:10px 24px;
-                                                display:inline-block;border-radius:20px; border: none; cursor:pointer;">
-                                                Reset Password
-                                            </button>
-
-                                        </form>
-
-                                        <p
-                                            style="color:#455056; font-size:12px;line-height:24px; margin:0; margin: 12px; line-height: 18px;">
-                                            You will receive a link to create a new password via email.
+                                        <p style="color:#455056; font-size:12px;line-height:12px; margin:0;">
+                                            Password has been Reset Successfully.
                                         </p>
 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img width="200" src="{{ url('admin/assets/png/password.png') }}"
+                                            title="" alt="">
+
+                                        <p style="color:#455056; font-size:12px;line-height:13px;">
+                                            Now you can Sign In.
+                                        </p>
+
+                                        <a href="{{ url('login') }}"
+                                            style="background:#006ecd;text-decoration:none !important; font-weight:500;
+                                            color:#fff;font-size:14px;padding:10px 24px;display:inline-block;border-radius:20px;">
+                                            Sign in
+                                        </a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -205,47 +169,7 @@
                     <tr>
                         <td style="height:10px;">&nbsp;</td>
                     </tr>
-                    <tr>
-                        <td style="text-align:center;">
-                            <p
-                                style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">
-                                &copy; {{ date('Y') }} Bank of Baroda Ltd. (Botswana) Crafted by
-                                <strong>
-                                    <a class="hyperlink" href="https://togoteams.com">TogoTeams</a>
-                                </strong>
-                            </p>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <p style="text-align: center; font-size: 13px; color: #999; margin-bottom:20px;">
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
-                                integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous">
-                            </script>
-
-
-                            <footer>
-                                <div class="rounded-social-buttons">
-                                    <a class="social-button facebook" href="https://www.facebook.com/"
-                                        target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="social-button twitter" href="https://www.twitter.com/" target="_blank"><i
-                                            class="fab fa-twitter"></i></a>
-                                    <a class="social-button linkedin" href="https://www.linkedin.com/"
-                                        target="_blank"><i class="fab fa-linkedin"></i></a>
-                                    <a class="social-button youtube" href="https://www.youtube.com/" target="_blank"><i
-                                            class="fab fa-youtube"></i></a>
-                                    <a class="social-button instagram" href="https://www.instagram.com/"
-                                        target="_blank"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </footer>
-                        </td>
-                    </tr>
                     <tr>
                         <td style="height:40px;">&nbsp;</td>
                     </tr>

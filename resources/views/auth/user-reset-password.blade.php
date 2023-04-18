@@ -3,7 +3,7 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>Forgot Password | Bank of Baroda Ltd. (Botswana)</title>
+    <title>Reset Password Email Template</title>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
     <meta name="description" content="Reset Password Email Template.">
@@ -105,8 +105,8 @@
             text-decoration: none;
             color: inherit;
         }
-        .invalid-feedback
-        {
+
+        .invalid-feedback {
             color: #9f005d;
         }
     </style>
@@ -168,20 +168,22 @@
                                         </p>
                                         <br>
 
-                                        <form action="{{ route('forgot.password.post') }}" method="post">
+                                        <form action="{{ route('reset.password.post') }}" method="post">
                                             @csrf
-
-                                            <input id="email" class="form-control " type="email" name="email"
-                                                placeholder="Enter your email" :value="old('email')" required
-                                                autofocus />
-                                            <br>
-                                            @error('email')
-                                                <span class="d-block invalid-feedback">{{ $message }}</span>
-                                                <br>
+                                            <input type="hidden" name="id" value="{{$data['id']}}">
+                                            <input id="password" class="form-control " type="password" name="password"
+                                                placeholder="Enter new password" required autofocus />
+                                            <p class="invalid-feedback" id="password_error"></p>
+                                            @error('password')
+                                                <p class="d-block invalid-feedback">{{ $message }}</p>
                                             @enderror
+                                            <input id="password_confirmation" class="form-control " type="password"
+                                                name="password_confirmation" placeholder="Enter your password again"
+                                                required autofocus />
+                                            <br>
+                                            <p class="invalid-feedback" id="password_confirmation_error"></p>
 
-
-                                            <button
+                                            <button id="formSubmit" onclick="return formValidate();"
                                                 style="background:#006ecd;text-decoration:none !important; font-weight:500;
                                                 margin-top:20px; color:#fff; font-size:14px; padding:10px 24px;
                                                 display:inline-block;border-radius:20px; border: none; cursor:pointer;">
@@ -238,8 +240,8 @@
                                             class="fab fa-twitter"></i></a>
                                     <a class="social-button linkedin" href="https://www.linkedin.com/"
                                         target="_blank"><i class="fab fa-linkedin"></i></a>
-                                    <a class="social-button youtube" href="https://www.youtube.com/" target="_blank"><i
-                                            class="fab fa-youtube"></i></a>
+                                    <a class="social-button youtube" href="https://www.youtube.com/"
+                                        target="_blank"><i class="fab fa-youtube"></i></a>
                                     <a class="social-button instagram" href="https://www.instagram.com/"
                                         target="_blank"><i class="fab fa-instagram"></i></a>
                                 </div>
@@ -254,6 +256,110 @@
         </tr>
     </table>
     <!--/100% body table-->
+
+    {{-- Passwords Update Validation --}}
+    {{-- Jquery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        'use strict';
+
+        let password_error = true;
+        let password_confirmation_error = true;
+
+        $(document).ready(function() {
+            $(document).on("change", "#password", function(e) {
+                passwordValidate();
+            });
+            $(document).on("change", "#password_confirmation", function(e) {
+                confirmPasswordValidate();
+            });
+            $(document).on("submit", "#formSubmit", function(e) {
+                paswordsMatch();
+            });
+        });
+
+        //Password Validation
+        function passwordValidate() {
+            let password = $.trim($("#password").val());
+            if (!password) {
+                password_error = true;
+                $("#password").addClass("is-invalid");
+                return $("#password_error").html("Password is Required");
+            } else if (password.length < 8) {
+                password_error = true;
+                $("#password").addClass("is-invalid");
+                return $("#password_error").html(
+                    "Password must be of 8 characters"
+                );
+            }
+            password_error = false;
+            $("#password").removeClass("is-invalid");
+            $("#password_error").html("");
+        }
+
+        //Confirm Password Validation
+        function confirmPasswordValidate() {
+            let password_confirmation = $.trim(
+                $("#password_confirmation").val()
+            );
+            if (!password_confirmation) {
+                password_confirmation_error = true;
+                $("#password_confirmation").addClass("is-invalid");
+                return $("#password_confirmation_error").html(
+                    "Confirm Password is Required"
+                );
+            }
+            password_confirmation_error = false;
+            $("#password_confirmation").removeClass("is-invalid");
+            $("#password_confirmation_error").html("");
+        }
+
+        // Passwords Matching Validation
+        function paswordsMatch() {
+            let password = $.trim($("#password").val());
+            let password_confirmation = $.trim(
+                $("#password_confirmation").val()
+            );
+            if (password != password_confirmation) {
+                password_confirmation_error = true;
+                $("#password_confirmation").addClass("is-invalid");
+                return $("#password_confirmation_error").html(
+                    "Password And Confirm Password must be Same"
+                );
+            }
+            password_confirmation_error = false;
+            $("#password_confirmation").removeClass("is-invalid");
+            $("#password_confirmation_error").html("");
+        }
+
+        function formValidate() {
+            passwordValidate();
+            confirmPasswordValidate();
+            paswordsMatch();
+
+            if (password_error || password_confirmation_error) {
+                swal("Please Fill Carefully!", "", "error");
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+
+    {{-- SWEETALERT --}}
+    @if (session('success'))
+        <script>
+            swal({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                type: 'success',
+                icon: "success",
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 </body>
 
 </html>
