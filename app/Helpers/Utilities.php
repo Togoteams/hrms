@@ -381,8 +381,9 @@ function show($all_routes)
 {
     // checking route is exits or not 
     foreach ($all_routes as $routes) {
-        Route::getCurrentRoute()->getName() == 'admin.'.$routes;
+       if( Route::getCurrentRoute()->getName() == 'admin.'.$routes){
         echo "show";
         break;
+       }
     }
 }

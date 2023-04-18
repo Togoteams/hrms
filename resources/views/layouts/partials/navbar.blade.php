@@ -669,7 +669,7 @@
                              <div class="dropdown-divider"></div>
                              <form  class="dropdown-item" method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                 <button>Sign Out</button>
+                                 <button class="border border-0 bg-none">Sign Out</button>
                              </form>
                              {{-- <a class="dropdown-item" href="#">Sign out</a> --}}
                          </div>

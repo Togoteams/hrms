@@ -57,7 +57,7 @@ Route::controller(LoginController::class)->as('login.')->prefix('login/')->group
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
 
-Route::get('/dashboard', function () {
+Route::get('admin/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
