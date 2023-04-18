@@ -1,5 +1,5 @@
 <?php
-use 
+
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationContoller;
