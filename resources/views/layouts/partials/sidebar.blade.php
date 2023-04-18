@@ -100,7 +100,7 @@
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"
                                          href="{{ route('admin.branch.index') }}">Branch</a>
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
-                                         href="{{ route('admin.employees.index') }}">Employees Managment</a>
+                                         href="{{ route('admin.employees.index') }}">Employees</a>
                                  </div>
                              </div>
                              <!-- End Collapse -->
