@@ -666,17 +666,20 @@
                              <a class="dropdown-item" href="#">Profile &amp; account</a>
                              <a class="dropdown-item" href="#">Settings</a>
 
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="#">Sign out</a>
-                            </div>
-                        </div>
-                        <!-- End Account -->
-                    </li>
-                </ul>
-                <!-- End Navbar -->
-            </div>
-        </div>
-    </header>
+                             <div class="dropdown-divider"></div>
+                             <form  class="dropdown-item" method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                 <button class="border border-0 bg-none">Sign Out</button>
+                             </form>
+                             {{-- <a class="dropdown-item" href="#">Sign out</a> --}}
+                         </div>
+                     </div>
+                     <!-- End Account -->
+                 </li>
+             </ul>
+             <!-- End Navbar -->
+         </div>
+     </div>
+ </header>
 
  <!-- ========== END HEADER ========== -->

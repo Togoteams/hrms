@@ -34,6 +34,12 @@
              <div class="navbar-vertical-content">
                  <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                      <!-- Collapse -->
+                     <div class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.dashboard') }}" data-placement="left">
+                            <i class="bi bi-speedometer nav-icon"></i>
+                            <span class="nav-link-title">Dashboards</span>
+                        </a>
+                    </div>
                      {{-- <div class="nav-item">
                          <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
                              data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards"
@@ -47,15 +53,9 @@
                              <a class="nav-link active" href="index-2.html">Default</a>
                          </div>
                      </div> --}}
-                    <div class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.dashboard.view') }}" data-placement="left">
-                            <i class="bi-house-door nav-icon"></i>
-                            <span class="nav-link-title">Dashboard</span>
-                        </a>
-                    </div>
                      <!-- End Collapse -->
 
-                     <span class="dropdown-header mt-4">Feature</span>
+                     <span class="dropdown-header mt-4">Pages</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                      <!-- Collapse -->
@@ -87,18 +87,24 @@
                                  <a class="nav-link dropdown-toggle " href="#employees" role="button"
                                      data-bs-toggle="collapse" data-bs-target="#employees" aria-expanded="false"
                                      aria-controls="employees">
-                                     <i class="bi-person nav-icon"></i>
-                                     <span class="nav-link-title">Employee</span>
+                                     <i class="fas fa-users nav-icon"></i>
+                                     <span class="nav-link-title">Employees</span>
                                  </a>
-
-                                 <div id="employees" class="nav-collapse collapse " data-bs-parent="#employee">
-                                    
-                                     <a class="nav-link " href="{{ route('admin.employees.index') }}">Employees</a>
+                                 <div id="employees"
+                                     class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index']) }}  "
+                                     data-bs-parent="#employee">
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.designation.index') }}">Designation</a>
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.membership.index') }}">Membership</a>
+                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"
+                                         href="{{ route('admin.branch.index') }}">Branch</a>
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.employees.index') }}">Employees Managment</a>
                                  </div>
                              </div>
                              <!-- End Collapse -->
                          </div>
-                        
 
 
                          <!-- End Collapse -->
@@ -106,28 +112,18 @@
                          <span class="dropdown-header mt-4">Master</span>
                          <small class="bi-three-dots nav-subtitle-replacer"></small>
 
-                         <div id="master">
-                            <!-- End Collapse -->
-                            <div class="nav-item">
-                                <a class="nav-link dropdown-toggle " href="#masters" role="button"
-                                    data-bs-toggle="collapse" data-bs-target="#masters" aria-expanded="false"
-                                    aria-controls="masters">
-                                    <i class="bi-person nav-icon"></i>
-                                    <span class="nav-link-title">Master</span>
-                                </a>
-                                <div id="masters" class="nav-collapse collapse " data-bs-parent="#master">
-                                   
-                                    <a class="nav-link " href="{{ route('admin.holiday.list') }}">Holidays</a>
-                                    <a class="nav-link " href="{{ route('admin.leave.list') }}">Leaves</a>
-                                    <a class="nav-link " href="{{ route('admin.designation.index') }}">Designation</a>
-                                    <a class="nav-link " href="{{ route('admin.membership.index') }}">Membership</a>
-                                    <a class="nav-link " href="{{ route('admin.branch.index') }}">Branch</a>
-                                </div>
-                            </div>
-                            <!-- End Collapse -->
-                        </div>
 
-                        
+
+                         <div class="nav-item">
+                             <a class="nav-link" href="{{ route('admin.holiday.list') }}" data-placement="left">
+                                 <i class="bi-folder2-open nav-icon"></i>
+                                 <span class="nav-link-title">Holidays</span>
+                             </a>
+                         </div>
+
+
+
+
                      </div>
                      <!-- End Content -->
 

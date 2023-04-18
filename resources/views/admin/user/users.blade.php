@@ -2,107 +2,126 @@
 @push('styles')
 @endpush
 @section('content')
-    <main id="content" role="main" class="main">
-        <!-- Content -->
-        <div class="content container-fluid">
-            <!-- Page Header -->
-            <div class="page-header">
-                <div class="row align-items-end">
-                    <div class="col-sm mb-2 mb-sm-0">
-                        <h1 class="page-header-title">Users</h1>
-                    </div>
-                    <!-- End Col -->
+<main id="content" role="main" class="main">
+  <!-- Content -->
+  <div class="content container-fluid">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row align-items-end">
+        <div class="col-sm mb-2 mb-sm-0">
+          {{-- <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-no-gutter">
+              <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
+              <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Users</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Overview</li>
+            </ol>
+          </nav> --}}
 
-                    <div class="col-sm-auto">
-                        <a class="btn btn-primary" href="users-add-user.html">
-                            <i class="bi-person-plus-fill me-1"></i> Add user
-                        </a>
-                    </div>
-                    <!-- End Col -->
+          <h1 class="page-header-title">Users</h1>
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm-auto">
+          <a class="btn btn-primary" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#editUserModal">
+            <i class="bi-person-plus-fill me-1"></i> Add user
+          </a>
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Page Header -->
+
+    <!-- Card -->
+    <div class="card">
+     
+      <!-- Table -->
+      <div class="table-responsive datatable-custom position-relative">
+        <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+                   "columnDefs": [{
+                      "targets": [0, 7],
+                      "orderable": false
+                    }],
+                   "order": [],
+                   "info": {
+                     "totalQty": "#datatableWithPaginationInfoTotalQty"
+                   },
+                   "search": "#datatableSearch",
+                   "entries": "#datatableEntries",
+                   "pageLength": 15,
+                   "isResponsive": false,
+                   "isShowPaging": false,
+                   "pagination": "datatablePagination"
+                 }'>
+          <thead class="thead-light">
+            <tr>
+              <th class="table-column-pe-0">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="datatableCheckAll">
+                  <label class="form-check-label" for="datatableCheckAll"></label>
                 </div>
-                <!-- End Row -->
-            </div>
-            <!-- End Page Header -->
-            <!-- Card -->
-            <div class="card">
-                <!-- Table -->
-                <div class="table-responsive datatable-custom position-relative">
-                    <table id="datatable"
-                        class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th class="table-column-pe-0">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="datatableCheckAll">
-                                        <label class="form-check-label" for="datatableCheckAll"></label>
-                                    </div>
-                                </th>
-                                <th class="table-column-ps-0">Name</th>
-                                <th>Position</th>
-                                <th>Roles</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+              </th>
+              <th class="table-column-ps-0">Name</th>
+              <th>Department</th>
+              <th>Roles</th>
+              <th>Status</th>
+              
+              <th></th>
+            </tr>
+          </thead>
 
-                        <tbody>
-                            <tr>
-                                <td class="table-column-pe-0">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="datatableCheckAll1">
-                                        <label class="form-check-label" for="datatableCheckAll1"></label>
-                                    </div>
-                                </td>
-                                <td class="table-column-ps-0">
-                                    <a class="d-flex align-items-center" href="user-profile.html">
-                                        <div class="avatar avatar-circle">
-                                            <img class="avatar-img" src="assets/img/160x160/img10.jpg"
-                                                alt="Image Description">
-                                        </div>
-                                        <div class="ms-3">
-                                            <span class="d-block h5 text-inherit mb-0">Amanda Harvey <i
-                                                    class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Top endorsed"></i></span>
-                                            <span class="d-block fs-5 text-body">amanda@site.com</span>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td>
-                                    <span class="d-block h5 mb-0">Director</span>
-                                    <span class="d-block fs-5">Human resources</span>
-                                </td>
-                                <td>United Kingdom</td>
-                                <td>
-                                    <span class="legend-indicator bg-success"></span>Active
-                                </td>
-
-
-                                <td>
-                                    <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#editUserModal">
-                                        <i class="bi-pencil-fill me-1"></i> Edit
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+          <tbody>
+            @foreach ($users as $user )
+            <tr>
+              <td class="table-column-pe-0">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="datatableCheckAll1">
+                  <label class="form-check-label" for="datatableCheckAll1"></label>
                 </div>
-                <!-- End Table -->
+              </td>
+              <td class="table-column-ps-0">
+                <a class="d-flex align-items-center" href="user-profile.html">
+                  {{-- <div class="avatar avatar-circle">
+                    <img class="avatar-img" src="{{asset('assets/img/160x160/img10.jpg')}}" alt="Image Description">
+                  </div> --}}
+                  <div class="ms-3">
+                    <span class="d-block h5 text-inherit mb-0">{{$user->name}} <i class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Top endorsed"></i></span>
+                    <span class="d-block fs-5 text-body">{{$user->email}} </span>
+                  </div>
+                </a>
+              </td>
+              <td>
+                <span class="d-block h5 mb-0">{{$user->roles->first()}}</span>
+              </td>
+              <td><span class="d-block fs-5">Human resources</span></td>
+              <td>
+                <span class="legend-indicator bg-success"></span>Active
+              </td>
 
-                <!-- Footer -->
-                <div class="card-footer">
-                    <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
-                        <div class="col-sm mb-2 mb-sm-0">
-                            <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                                <span class="me-2">Showing:</span>
 
-                                <!-- Select -->
-                                <div class="tom-select-custom">
-                                    <select id="datatableEntries"
-                                        class="js-select form-select form-select-borderless w-auto" autocomplete="off"
-                                        data-hs-tom-select-options='{
+              <td>
+                <button type="button" class="btn btn-white btn-sm" >
+                  <i class="bi-pencil-fill me-1"></i> Edit
+                </button>
+              </td>
+            </tr>
+            @endforeach
+           
+          </tbody>
+        </table>
+      </div>
+      <!-- End Table -->
+
+      <!-- Footer -->
+      <div class="card-footer">
+        <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+          <div class="col-sm mb-2 mb-sm-0">
+            <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+              <span class="me-2">Showing:</span>
+
+              <!-- Select -->
+              <div class="tom-select-custom">
+                <select id="datatableEntries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" data-hs-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true
                           }'>
@@ -150,55 +169,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <!-- Body -->
-                <div class="modal-body">
-                    <!-- Nav Scroller -->
-                    <form method="post" action="{{ route('admin.user.add') }}" class="formsubmit">
-                        @csrf
-                        <!-- Profile Cover -->
-                        <div class="profile-cover">
-                            <div class="profile-cover-img-wrapper">
-                                <img id="editProfileCoverImgModal" class="profile-cover-img"
-                                    src="{{url('assets/img/1920x400/img1.jpg')}}" alt="Image Description">
-
-                                <!-- Custom File Cover -->
-                                <div class="profile-cover-content profile-cover-uploader p-3">
-                                    <input type="file" class="js-file-attach profile-cover-uploader-input"
-                                        id="editProfileCoverUplaoderModal"
-                                       >
-                                    {{-- <label class="profile-cover-uploader-label btn btn-sm btn-white"
-                                        for="editProfileCoverUplaoderModal">
-                                        <i class="bi-camera-fill"></i>
-                                        <span class="d-none d-sm-inline-block ms-1">Upload header</span>
-                                    </label> --}}
-                                </div>
-                                <!-- End Custom File Cover -->
-                            </div>
-                        </div>
-                        <!-- End Profile Cover -->
-
-                        <!-- Avatar -->
-                        <label class="avatar avatar-xxl avatar-circle avatar-uploader profile-cover-avatar mb-5"
-                            for="editAvatarUploaderModal">
-                            <img id="editAvatarImgModal" class="avatar-img" src="{{url('assets/img/160x160/img9.jpg')}}"
-                                alt="Image Description">
-
-                            <input type="file" class="js-file-attach avatar-uploader-input"
-                                id="editAvatarUploaderModal"
-                               >
-
-                            <span class="avatar-uploader-trigger">
-                                <i class="bi-pencil-fill avatar-uploader-icon shadow-sm"></i>
-                            </span>
-                        </label>
-                        <!-- End Avatar -->
-
-                        <!-- Form -->
-                        <div class="row mb-4">
-                            <label for="editFirstNameModalLabel" class="col-sm-3 col-form-label form-label">Full name <i
-                                    class="tio-help-outlined text-body ms-1" data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Displayed on public forums, such as Front."></i></label>
+      <!-- Body -->
+      <div class="modal-body">
+        <!-- Nav Scroller -->
+        <form >
+        
+          <!-- Form -->
+          <div class="row mb-4">
+            <label for="editFirstNameModalLabel" class="col-sm-3 col-form-label form-label">Full name <i class="tio-help-outlined text-body ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Displayed on public forums, such as Front."></i></label>
 
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">

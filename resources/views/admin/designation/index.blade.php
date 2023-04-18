@@ -48,11 +48,10 @@
                         class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col" class="table-column-pe-0">
 
-                                </th>
-                                <th class="table-column-ps-0">S.no</th>
+                                <th>S.no</th>
                                 <th>Name</th>
+                                <th>Description</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -65,10 +64,7 @@
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->description }}</td>
-
                                     <td>
-
-
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.designation.destroy', $item->id) }}">
                                             <button type="button"

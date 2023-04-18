@@ -33,7 +33,7 @@ class DesignationContoller extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:designations,name,except,id',
+            'name' => 'string|required|unique:designations,name',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {
@@ -83,12 +83,11 @@ class DesignationContoller extends Controller
      */
     public function destroy(string $id)
     {
-        try{
-        Designation::destroy($id);
-        return "Delete";
-
-        }catch(Exception $e){
-            return response()->json(["error"=>$this->page_name ."Can't Be Delete this May having some Employee"]);
+        try {
+            Designation::destroy($id);
+            return "Delete";
+        } catch (Exception $e) {
+            return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
         }
     }
 }

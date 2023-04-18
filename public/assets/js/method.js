@@ -187,10 +187,12 @@ function backEndValidate(responseData, target_id) {
     var obj = JSON.parse(responseData);
     if ("success" in obj) {
         setSuccess(obj['success'], target_id)
+        refreshPage(500);
 
     }
     else if ("delete" in obj) {
         setDelete(obj['delete'], target_id)
+        refreshPage(500);
     }
     else {
         for (let key in obj) {
@@ -278,6 +280,13 @@ function createMenuItem(element, data) {
     created_element.setAttribute("style", "font-size:" + data.size);
     return created_element;
 }
+
+function refreshPage(miliSecond) {
+    setTimeout(() => {
+        document.location.reload();
+    }, miliSecond);
+}
+
 // some special function end
 
 

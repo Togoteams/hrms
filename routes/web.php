@@ -1,5 +1,4 @@
 <?php
-use 
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationContoller;
@@ -14,13 +13,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\ProfileController;
 
-
+Route::get('/',[LoginController::class,'authentication']);
 
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
 
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard');
-    // });
     // Route::get('/users', function () {
     //     return view('admin.user.users');
     // });
@@ -67,9 +63,9 @@ Route::controller(LoginController::class)->as('login.')->prefix('login/')->group
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
 
-Route::get('/dashboard', function () {
+Route::get('admin/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -77,4 +73,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';

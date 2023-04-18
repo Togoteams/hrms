@@ -14,7 +14,7 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="name">Name </label>
-                                    <input required id="name" placeholder="Enter Name of Designation "
+                                    <input required id="name" placeholder="Enter Name of Membership "
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -22,14 +22,14 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="amount">amount </label>
-                                    <input required id="amount" placeholder="Enter amount of Designation "
+                                    <input required id="amount" placeholder="Enter Amount of Membership "
                                         type="text" name="amount" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="type">type </label>
-                                    <input required id="type" placeholder="Enter type of Designation "
+                                    <input required id="type" placeholder="Enter type of Membership "
                                         type="text" name="type" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label for="membership_code">membership code </label>
                                     <input required id="membership_code"
-                                        placeholder="Enter membership_code of Designation " type="text"
+                                        placeholder="Enter Membership Code of Membership " type="text"
                                         name="membership_code" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="description">Description </label>
-                                    <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"
+                                    <textarea required id="description" placeholder="Enter Short Description of Membership   " type="text"
                                         name="description" class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>

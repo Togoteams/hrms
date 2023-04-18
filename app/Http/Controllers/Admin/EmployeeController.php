@@ -185,10 +185,12 @@ class EmployeeController extends Controller
     public function destroy(string $id)
     {
         try {
+            $user =  Employee::find($id);
             Employee::destroy($id);
+            User::destroy($user->user_id);
             return "Delete";
         } catch (Exception $e) {
-            return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
+            return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
         }
     }
 }
