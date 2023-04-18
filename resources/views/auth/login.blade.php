@@ -1,176 +1,145 @@
-<!DOCTYPE html>
-<html lang="en" dir="" class="h-100">
+<!doctype html>
+<html lang="en">
+
 
 <head>
-    <!-- Required Meta Tags Always Come First -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Title -->
-    <title>Login | HRMS</title>
+    <meta charset="utf-8" />
+    <title>Working Spider</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Togoteams" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
+        type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{ asset('admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{ asset('admin/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet">
-
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-icons/font/bootstrap-icons.css') }}">
-
-    <!-- CSS Front Template -->
-    <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}">
 </head>
 
-<body class="d-flex align-items-center min-h-100">
-    <!-- ========== HEADER ========== -->
-    <header id="header" class="navbar navbar-expand navbar-light navbar-absolute-top">
-        <div class="container-fluid">
-            <nav class="navbar-nav-wrap">
-
-
-
-            </nav>
-        </div>
-    </header>
-    <!-- ========== END HEADER ========== -->
-
-    <!-- ========== MAIN CONTENT ========== -->
-    <main id="content" role="main" class="flex-grow-1">
-        <!-- Form -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-5 col-xl-4 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-dark"
-                    style="background-image: url(assets/svg/components/wave-pattern-light.svg);">
-                    <div class="flex-grow-1 p-5">
-                        <!-- Blockquote -->
-                        <figure class="text-center">
-                            <div class="mb-4">
-                                <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo">
+<body>
+    <div class="account-pages my-5 pt-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary bg-soft">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="text-primary p-4">
+                                        <h5 class="text-primary">{{ __('Login') }}</h5>
+                                        <p>BANK OF BARODA LTD. (BOTSWANA)</p>
+                                    </div>
+                                </div>
+                                <div class="col-5 align-self-end">
+                                    <img src="{{ asset('admin/assets/images/profile-img.png') }}" alt=""
+                                        class="img-fluid">
+                                </div>
                             </div>
-
-                            <!-- <blockquote class="blockquote blockquote-light">“ Welcome To HRMS ”</blockquote> -->
-
-                            <!-- <figcaption class="blockquote-footer blockquote-light">
-                <div class="mb-3">
-                  <img class="avatar avatar-circle" src="{{ asset('assets/img/160x160/img9.jpg') }}" alt="Image Description">
-                </div>
-              </figcaption>         -->
-                        </figure>
-                        <!-- End Blockquote -->
-
-
-                    </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-lg-7 col-xl-8 d-flex justify-content-center align-items-center min-vh-lg-100">
-                    <div class="flex-grow-1 mx-auto" style="max-width: 28rem;">
-                        <!-- Heading -->
-                        <div class="text-center mb-5 mb-md-7">
-                            <h1 class="h2">Welcome back</h1>
-                            <p>Login to manage your account.</p>
                         </div>
-                        <!-- End Heading -->
+                        <div class="card-body pt-0">
+                            <div class="auth-logo">
+                                <a href="index.html" class="auth-logo-light">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="{{ asset('admin/assets/images/logo.webp') }}" alt=""
+                                                class="rounded-circle" height="34">
+                                        </span>
+                                    </div>
+                                </a>
 
-                        <!-- Form -->
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <!-- Form -->
-                            <div class="mb-4">
-                                <label class="form-label" for="signupModalFormLoginEmail">Your email</label>
-                                <input type="email"
-                                    class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                    value="{{ old('email') }}" name="email" id="signupModalFormLoginEmail"
-                                    placeholder="email@site.com" aria-label="email@site.com" required>
-                                <span class="invalid-feedback">Please enter a valid email address.</span>
+                                <a href="{{ asset('admin/assets/images/logo/logo.png') }}" class="auth-logo-dark">
+                                    <div class="avatar-md profile-user-wid mb-4">
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="{{ asset('admin/assets/images/logo/logo.png') }}" alt=""
+                                                class="rounded-circle" height="60">
+                                        </span>
+                                    </div>
+                                </a>
                             </div>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            <!-- End Form -->
+                            <div class="p-2">
+                                <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                                        <input input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email" autofocus
+                                            placeholder="eg. abc@xyz.com">
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
 
-                            <!-- Form -->
-                            <div class="mb-4">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <label class="form-label" for="signupModalFormLoginPassword">Password</label>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">{{ __('Password') }}</label>
+                                        <div class="input-group auth-pass-inputgroup">
+                                            <input type="password" id="password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                name="password" required autocomplete="current-password"
+                                                placeholder="Enter Password">
+                                            <button class="btn btn-light " type="button" id="password-addon">
+                                                <i class="mdi mdi-eye-outline"></i>
+                                            </button>
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
 
-                                    <a class="form-label-link" href="{{ route('password.request') }}">Forgot Password?</a>
-                                </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                            {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Remember Me') }}
+                                        </label>
+                                    </div>
 
-
-                                <div class="input-group input-group-merge" data-hs-validation-validate-class>
-                                    <input type="password" class="js-toggle-password form-control form-control-lg"
-                                        name="password" id="signupModalFormLoginPassword"
-                                        placeholder="8+ characters required" aria-label="8+ characters required"
-                                        required minlength="8"
-                                        data-hs-toggle-password-options='{
-                         "target": "#changePassTarget",
-                         "defaultClass": "bi-eye-slash",
-                         "showClass": "bi-eye",
-                         "classChangeTarget": "#changePassIcon"
-                       }'>
-                                    <a id="changePassTarget" class="input-group-append input-group-text"
-                                        href="javascript:;">
-                                        <i id="changePassIcon" class="bi-eye"></i>
-                                    </a>
-                                </div>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                                <span class="invalid-feedback">Please enter a valid password.</span>
+                                    <div class="mt-3 d-grid">
+                                        <button class="btn btn-primary waves-effect waves-light"
+                                            type="submit">{{ __('Login') }}</button>
+                                    </div>
+                                </form>
                             </div>
-                            <!-- End Form -->
 
-                            <div class="d-grid mb-3">
-                                <button type="submit" class="btn btn-primary btn-lg">Log in</button>
-                            </div>
-
-
-                        </form>
-                        <!-- End Form -->
+                        </div>
                     </div>
+                    <div class="mt-5 text-center">
+
+                        <div>
+                            <p>©
+                                {{ date('Y') }} Bank of Baroda Ltd. (Botswana) Crafted with <i
+                                    class="mdi mdi-heart text-danger"></i>
+                                by <a href="https://togoteams.com">TogoTeams</a>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
-                <!-- End Col -->
             </div>
-            <!-- End Row -->
         </div>
-        <!-- End Form -->
-    </main>
-    <!-- ========== END MAIN CONTENT ========== -->
+    </div>
+    <!-- end account-pages -->
 
-    <!-- JS Global Compulsory  -->
-    <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- JAVASCRIPT -->
+    <script src="{{ asset('admin/assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/libs/node-waves/waves.min.js') }}"></script>
 
-    <!-- JS Implementing Plugins -->
-    <script src="{{ asset('assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js') }}"></script>
-
-    <!-- JS Front -->
-    <script src="{{ asset('assets/js/theme.min.js') }}"></script>
-
-    <!-- JS Plugins Init. -->
-    <script>
-        (function() {
-            // INITIALIZATION OF BOOTSTRAP VALIDATION
-            // =======================================================
-            HSBsValidation.init('.js-validate', {
-                onSubmit: data => {
-                    data.event.preventDefault()
-                    alert('Submited')
-                }
-            })
-
-
-            // INITIALIZATION OF TOGGLE PASSWORD
-            // =======================================================
-            new HSTogglePassword('.js-toggle-password')
-        })()
-    </script>
+    <!-- App js -->
+    <script src="{{ asset('admin/assets/js/app.js') }}"></script>
 </body>
+
+<!-- Mirrored from themesbrand.com/skote/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Mar 2022 05:51:25 GMT -->
 
 </html>
