@@ -82,6 +82,7 @@ function deleteRow(form_id, target_id = "", method = "POST") {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById(target_id).innerHTML = this.responseText;
                 formElements_button.disabled = true
+                refreshPage(500)
             }
         };
         xhttp.open(method, url_name, true);
@@ -121,6 +122,8 @@ function changeStatus(url_name, target_id, method = "GET", table_id = '') {
                 t_id = document.getElementById(target_id);
                 document.getElementById(target_id).innerHTML = this.responseText;
                 stopPreloader('', target_id);
+                refreshPage(500)
+
             }
         };
         if (table_id != '') {
@@ -231,7 +234,7 @@ function setError(el, errr_message, bcolor) {
 
     el.style.borderColor = bcolor;
     if (errr_message != ' ') {
-        errr_message = el.name + " " + errr_message;
+        errr_message = el.name.replaceAll("_", " ") + " " + errr_message;
     }
     el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
     var all_errors = document.getElementsByClassName("error" + el.name);

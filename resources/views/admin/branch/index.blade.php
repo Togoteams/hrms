@@ -51,9 +51,12 @@
 
                                 <th>S.no</th>
                                 <th>Name</th>
-                                <th>Amount</th>
-                                <th>Type</th>
-                                <th>Membership Code</th>
+                                <th>Code</th>
+                                <th>address</th>
+                                <th>city</th>
+                                <th>state</th>
+                                <th>countery</th>
+                                <th>landmark</th>
                                 <th>description</th>
                                 <th>Action</th>
                             </tr>
@@ -66,9 +69,12 @@
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->amount }}</td>
-                                    <td>{{ $item->type }}</td>
-                                    <td>{{ $item->membership_code }}</td>
+                                    <td>{{ $item->code }}</td>
+                                    <td>{{ $item->address }}</td>
+                                    <td>{{ $item->city }}</td>
+                                    <td>{{ $item->state }}</td>
+                                    <td>{{ $item->countery }}</td>
+                                    <td>{{ $item->landmark }}</td>
                                     <td>{{ $item->description }}</td>
 
                                     <td>
@@ -87,8 +93,10 @@
                                                 class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>
                                             </button>
 
-                                            <button type="button"  onclick="changeStatus('{{route('admin.branch.status', $item->id)}}','status{{ $item->id }}')"
-                                                id="status{{ $item->id }}"  class="btn {{ $item->status == 'active' ? 'btn-success' : 'btn-secondary' }}  btn-sm">
+                                            <button type="button"
+                                                onclick="changeStatus('{{ route('admin.branch.status', $item->id) }}','status{{ $item->id }}')"
+                                                id="status{{ $item->id }}"
+                                                class="btn {{ $item->status == 'active' ? 'btn-success' : 'btn-secondary' }}  btn-sm">
                                                 @if ($item->status == 'active')
                                                     <i class="fas fa-check-circle"></i>
                                                 @else
