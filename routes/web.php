@@ -12,13 +12,10 @@ use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
 
-
+Route::get('/',[LoginController::class,'authentication']);
 
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
     // Route::get('/users', function () {
     //     return view('admin.user.users');
     // });
@@ -70,4 +67,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';
