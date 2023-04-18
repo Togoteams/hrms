@@ -82,14 +82,19 @@
                                      data-bs-toggle="collapse" data-bs-target="#employees" aria-expanded="false"
                                      aria-controls="employees">
                                      <i class="fas fa-users nav-icon"></i>
-                                      <span class="nav-link-title">Employees</span>
+                                     <span class="nav-link-title">Employees</span>
                                  </a>
-                                 <div id="employees" class="nav-collapse collapse {{ show(['designation.index','membership.index','branch.index','employees.index'],)}}  " data-bs-parent="#employee">
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName()=="admin.designation.index"?"active":"" }} " href="{{ route('admin.designation.index') }}">Designation</a>
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName()=="admin.membership.index"?"active":"" }} " href="{{ route('admin.membership.index') }}">Membership</a>
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName()=="admin.branch.index"?"active":"" }}" href="{{ route('admin.branch.index') }}">Branch</a>
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName()=="admin.employees.index"?"active":"" }} " href="{{ route('admin.employees.index') }}">Employees
-                                         Managment</a>
+                                 <div id="employees"
+                                     class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index']) }}  "
+                                     data-bs-parent="#employee">
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.designation.index') }}">Designation</a>
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.membership.index') }}">Membership</a>
+                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"
+                                         href="{{ route('admin.branch.index') }}">Branch</a>
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.employees.index') }}">Employees Managment</a>
                                  </div>
                              </div>
                              <!-- End Collapse -->
