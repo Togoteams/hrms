@@ -192,6 +192,7 @@ function backEndValidate(responseData, target_id) {
     }
     else if ("delete" in obj) {
         setDelete(obj['delete'], target_id)
+        refreshPage(500);
     }
     else {
         for (let key in obj) {
