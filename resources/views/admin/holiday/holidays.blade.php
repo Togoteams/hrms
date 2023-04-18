@@ -121,15 +121,18 @@
               </td>
 
               <td>
-                
+                @can('edit-holidays')
                 <button type="button"  data-table="holidays" data-form-modal="addEditHolidayModal" data-message="inactive"
                 data-uuid="{{ $holiday->uuid }}" class="btn btn-white btn-sm editData" >
                   <i class="bi-pencil-fill me-1"></i> Edit
                 </button>
+                @endcan
+                @can('delete-holidays')
                 <button type="button"  data-table="holidays"  data-message="inactive"
                 data-uuid="{{ $holiday->uuid }}" class="btn btn-white btn-sm deleteData" >
                   <i class="bi-pencil-fill me-1"></i> Delete
                 </button>
+                @endcan
               </td>
             </tr>
             @endforeach
