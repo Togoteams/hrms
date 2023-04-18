@@ -5,7 +5,7 @@
             <div class="form-group">
                 <label for="user_id">Employee Id</label>
                 <input disabled required placeholder="Enter correct Emplooye  id " value="{{ $data->emp_id }}" readonly
-                    type="number" name="emp_id" class="form-control form-control-sm ">
+                    type="text" name="emp_id" class="form-control form-control-sm ">
             </div>
         </div>
 
@@ -113,7 +113,7 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="date_of_current_basic">date of current basic </label>
-                <input disabled required id="date_of_current_basic" placeholder="Enter correct date of current_basic   "
+                <input disabled required id="date_of_current_basic" placeholder="Enter correct date of current basic   "
                     value="{{ $data->date_of_current_basic }}" type="datetime-local" name="date_of_current_basic"
                     class="form-control form-control-sm ">
             </div>
@@ -147,7 +147,7 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="pension_contribution">pension contribution </label>
-                <input disabled required id="pension_contribution" placeholder="Enter correct pension_contribution   "
+                <input disabled required id="pension_contribution" placeholder="Enter correct pension contribution   "
                     value="{{ $data->pension_contribution }}" type="number" name="pension_contribution"
                     class="form-control form-control-sm ">
             </div>
@@ -155,7 +155,7 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="unique_membership_id">unique membership </label>
-                <select disabled required id="unique_membership_id" placeholder="Enter correct unique_membership_id   "
+                <select disabled required id="unique_membership_id" placeholder="Enter correct unique membership id   "
                     name="unique_membership_id" class="form-control form-control-sm ">
                     <option selected disabled> - Select unique_membership_id - </option>
                     @foreach ($membership as $mem)
@@ -167,9 +167,9 @@
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="amount_payable_to_bomaind_each_year">amount_payable to bomaind each year
+                <label for="amount_payable_to_bomaind_each_year">amount payable to bomaind each year
                 </label>
-                <input disabled required id="amount_payable_to_bomaind_each_year"
+                <input disabled required id="amount payable to bomaind each year"
                     value="{{ $data->amount_payable_to_bomaind_each_year }}"
                     placeholder="Enter correct amount_payable_to_bomaind_each_year   " type="text"
                     name="amount_payable_to_bomaind_each_year" class="form-control form-control-sm ">

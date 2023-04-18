@@ -8,7 +8,7 @@
             <div class="form-group">
                 <label for="user_id">Employee Id</label>
                 <input disabled required placeholder="Enter correct Emplooye  id " value="{{ $data->emp_id }}" readonly
-                    type="number" name="emp_id" class="form-control form-control-sm ">
+                    type="text" name="emp_id" class="form-control form-control-sm ">
             </div>
         </div>
 
@@ -158,7 +158,7 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="unique_membership_id">unique membership </label>
-                <select required id="unique_membership_id" placeholder="Enter correct unique_membership_id   "
+                <select required id="unique_membership_id" placeholder="Enter correct unique membership id   "
                     name="unique_membership_id" class="form-control form-control-sm ">
                     <option selected disabled> - Select unique_membership_id - </option>
                     @foreach ($membership as $mem)
@@ -170,11 +170,11 @@
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="amount_payable_to_bomaind_each_year">amount_payable to bomaind each year
+                <label for="amount_payable_to_bomaind_each_year">amount payable to bomaind each year
                 </label>
                 <input required id="amount_payable_to_bomaind_each_year"
                     value="{{ $data->amount_payable_to_bomaind_each_year }}"
-                    placeholder="Enter correct amount_payable_to_bomaind_each_year   " type="text"
+                    placeholder="Enter correct amount payable to bomaind each year   " type="text"
                     name="amount_payable_to_bomaind_each_year" class="form-control form-control-sm ">
             </div>
         </div>

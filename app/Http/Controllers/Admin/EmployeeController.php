@@ -76,9 +76,9 @@ class EmployeeController extends Controller
             'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
             'currency' => ['required', 'string'],
             'bank_name' => ['required', 'string'],
-            'bank_account_number' => ['required', 'numeric'],
+            'bank_account_number' => ['required', 'numeric','min:8','max:18'],
             'bank_holder_name' => ['required', 'string'],
-            'ifsc' => ['required', 'string'],
+            'ifsc' => ['required', 'string','min:11'],
 
         ]);
 
