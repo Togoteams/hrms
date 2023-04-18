@@ -78,6 +78,9 @@
                                     </div>
 
                                     <div class="mb-3">
+                                        <div class="float-end">
+                                            <a href="{{url('forgot-password')}}" class="text-muted">Forgot password?</a>
+                                        </div>
                                         <label for="password" class="form-label">{{ __('Password') }}</label>
                                         <div class="input-group auth-pass-inputgroup">
                                             <input type="password" id="password"
