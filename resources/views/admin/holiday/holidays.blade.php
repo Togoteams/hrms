@@ -9,14 +9,7 @@
     <div class="page-header">
       <div class="row align-items-end">
         <div class="col-sm mb-2 mb-sm-0">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb breadcrumb-no-gutter">
-              <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Pages</a></li>
-              <li class="breadcrumb-item"><a class="breadcrumb-link" href="javascript:;">Holidays</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Overview</li>
-            </ol>
-          </nav>
-
+        
           <h1 class="page-header-title">Holidays</h1>
         </div>
         <!-- End Col -->
@@ -125,9 +118,7 @@
               </td>
 
               <td>
-                <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal" data-bs-target="#addEditPermissionModal">
-                  <i class="bi-pencil-fill me-1"></i> Permission
-                </button>
+                
                 <button type="button"  data-table="holidays" data-form-modal="addEditHolidayModal" data-message="inactive"
                 data-uuid="{{ $holiday->uuid }}" class="btn btn-white btn-sm editData" >
                   <i class="bi-pencil-fill me-1"></i> Edit
