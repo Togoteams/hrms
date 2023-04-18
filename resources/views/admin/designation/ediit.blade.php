@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="description">Designation </label>
                 <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"
-                    name="description" class="form-control form-control-sm "> {{ $data->name }} </textarea>
+                    name="description" class="form-control form-control-sm "> {{ $data->description }} </textarea>
             </div>
         </div>
 
