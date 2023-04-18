@@ -34,6 +34,18 @@
                     {{ csrf_field() }}
 
                     <div class="form-group mr-bot">
+                        <img class="img-profile rounded-circle"
+                            src="{{ url('web_assets/images/profile_photo_path') }}/{{ Auth::user()->profile_photo_path }}"
+                            id="profile_photo_path" style="height: 70px;">
+                        </a>
+                    </div>
+                    <div class="form-group mr-bot">
+
+                        <label>Profile</label>
+                        <input type="file" name="profile_photo_path" id="validatedCustomFile"
+                            onchange="document.getElementById('profile_photo_path').src = window.URL.createObjectURL(this.files[0])">
+                    </div>
+                    <div class="form-group mr-bot">
                         <label for="name">Name<span style="color:red;">*</span></label>
                         <input type="text" name="name" value="{{ Auth::user()->name }}"
                             class="form-control capitalize" id="name" required>
@@ -133,6 +145,59 @@
                 return false;
             } else {
                 return true;
+            }
+        }
+
+
+        function validateimg(ctrl) {
+            var fileUpload = ctrl;
+            var regex = new RegExp("([a-zA-Z0-9\s_\\.\-:])+(.jpg|.PNG|.JPG|.jpeg|.png)$");
+            if (regex.test(fileUpload.value.toLowerCase())) {
+                if (typeof(fileUpload.files) != "undefined") {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(fileUpload.files[0]);
+                    reader.onload = function(e) {
+                        var image = new Image();
+                        image.src = e.target.result;
+                        image.onload = function() {
+                            var height = this.height;
+                            var width = this.width;
+                            // if (height < 500 || width < 500) {
+                            //     alert("At least you can upload a 500*500 photo size.");
+                            //     return false;
+                            // } else {
+                            // alert("Uploaded image has valid Height and Width.");
+                            var validExtensions = ['jpg', 'png', 'jpeg', 'PNG',
+                                'JPG'
+                            ]; //array of valid extensions
+                            var fileName = fileUpload.files[0].name;
+                            var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+                            if ($.inArray(fileNameExt, validExtensions) == -1) {
+                                fileUpload.type = ''
+                                fileUpload.type = 'file'
+                                $('#user_img').attr('src', "");
+                                // fileUpload.val()
+                                alert("Only these file types are accepted : " + validExtensions.join(', '));
+                            } else {
+                                if (fileUpload.files || fileUpload.files[0]) {
+                                    var filerdr = new FileReader();
+                                    filerdr.onload = function(e) {
+                                        $('#user_img').attr('src', e.target.result);
+                                    }
+                                    filerdr.readAsDataURL(fileUpload.files[0]);
+                                }
+                                // }
+                                // return true;
+                            }
+                        };
+                    }
+                } else {
+                    alert("This browser does not support HTML5.");
+                    return false;
+                }
+            } else {
+                alert("Please select a valid Image file.");
+                return false;
             }
         }
     </script>
