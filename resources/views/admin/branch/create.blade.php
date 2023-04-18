@@ -22,39 +22,39 @@
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="code">code </label>
-                                    <input required id="code" placeholder="Enter code of Branch "
+                                    <input required id="code" placeholder="Enter Code of Branch "
                                         type="text" name="code" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="city">city </label>
-                                    <input required id="city" placeholder="Enter city of Branch "
+                                    <input required id="city" placeholder="Enter City of Branch "
                                         type="text" name="city" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="state">state </label>
-                                    <input required id="state" placeholder="Enter state of Branch "
+                                    <input required id="state" placeholder="Enter State of Branch "
                                         type="text" name="state" class="form-control form-control-sm ">
                                 </div>
                             </div>     <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="countery">countery </label>
-                                    <input required id="countery" placeholder="Enter countery of Branch "
+                                    <input required id="countery" placeholder="Enter Countery of Branch "
                                         type="text" name="countery" class="form-control form-control-sm ">
                                 </div>
                             </div>     <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="landmark">landmark </label>
-                                    <input required id="landmark" placeholder="Enter landmark of Branch "
+                                    <input required id="landmark" placeholder="Enter Landmark of Branch "
                                         type="text" name="landmark" class="form-control form-control-sm ">
                                 </div>
                             </div>     <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="status">status </label>
-                                    <select required id="status" placeholder="Enter status of Branch "
+                                    <select required id="status" 
                                         name="status" class="form-control form-control-sm ">
                                     <option value="active">Active</option>
                                     <option value="inactive">InActive</option>
@@ -64,7 +64,7 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="address">Address </label>
-                                    <textarea required id="address" placeholder="Enter Short address of Branch   " type="text"
+                                    <textarea required id="address" placeholder="Enter Short Address of Branch   " type="text"
                                         name="address" class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>
