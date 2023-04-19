@@ -355,7 +355,7 @@
                                     <div class="d-flex">
                                         <div class="flex-shrink-0">
                                             <img class="avatar avatar-xs avatar-4x3"
-                                                src="{{ url('assets/admin/svg/brands/google-webdev-icon.svg') }}"
+                                                src="{{ url('assets/svg/brands/google-webdev-icon.svg') }}"
                                                 alt="Image Description">
                                         </div>
                                         <div class="flex-grow-1 ms-3">
@@ -386,7 +386,7 @@
                                     <div class="d-flex">
                                         <div class="flex-shrink-0">
                                             <img class="avatar avatar-xs avatar-4x3"
-                                                src="{{ url('assets/admin/svg/brands/google-webdev-icon.svg') }}"
+                                                src="{{ url('assets/svg/brands/google-webdev-icon.svg') }}"
                                                 alt="Image Description">
                                         </div>
                                         <div class="flex-grow-1 ms-3">
@@ -725,7 +725,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img10.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img10.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
@@ -787,7 +787,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img3.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img3.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
@@ -818,7 +818,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img5.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img5.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
@@ -878,7 +878,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img9.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img9.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
@@ -911,7 +911,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img4.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img4.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
@@ -942,7 +942,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img6.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img6.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
@@ -1031,7 +1031,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img8.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img8.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
@@ -1122,7 +1122,7 @@
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-sm avatar-circle">
                                                 <img class="avatar-img"
-                                                    src="{{ url('assets/admin/img/160x160/img7.jpg') }}"
+                                                    src="{{ url('assets/img/160x160/img7.jpg') }}"
                                                     alt="Image Description">
                                             </div>
                                         </div>
