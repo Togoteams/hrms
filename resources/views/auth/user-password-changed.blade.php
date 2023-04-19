@@ -3,10 +3,10 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>Forgot Password | Bank of Baroda Ltd. (Botswana)</title>
+    <title>Password Changed | Bank of Baroda Ltd. (Botswana)</title>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
-    <meta name="description" content="Reset Password Email Template.">
+    <meta name="description" content="Password Changed | Bank of Baroda Ltd. (Botswana)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
