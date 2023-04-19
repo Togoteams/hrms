@@ -65,10 +65,11 @@
                      <div class="navbar-nav nav-compact">
 
                      </div>
-                     <div id="navbarVerticalMenuPagesMenu">
-                         <!-- Collapse -->
-                         @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
-                             'delete-roles', 'view-roles'])
+                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
+                         'delete-roles', 'view-roles'])
+                         <div id="navbarVerticalMenuPagesMenu">
+                             <!-- Collapse -->
+
                              <div class="nav-item">
                                  <a class="nav-link dropdown-toggle " href="#navbarVerticalMenuPagesUserProfileMenu"
                                      role="button" data-bs-toggle="collapse"
@@ -78,163 +79,215 @@
                                      <span class="nav-link-title">User Accounts</span>
                                  </a>
 
-                                 <div id="navbarVerticalMenuPagesUserProfileMenu" class="nav-collapse collapse "
+                                 <div id="navbarVerticalMenuPagesUserProfileMenu"
+                                     class="nav-collapse collapse {{ show(['role.list', 'user.list']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                      @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
-                                         <a class="nav-link " href="{{ url('admin/roles') }}">Roles</a>
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.role.list' ? 'active' : '' }}  "
+                                             href="{{ route('admin.role.list') }}">Roles</a>
                                      @endcanany
                                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users'])
-                                         <a class="nav-link " href="{{ url('admin/users') }}">Users</a>
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.user.list' ? 'active' : '' }} "
+                                             href="{{ route('admin.user.list') }}">Users</a>
                                      @endcanany
                                  </div>
                              </div>
-                         @endcanany
-                         <!-- End Collapse -->
-                         <div id="employee">
-                             @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees',
-                                 'add-designations', 'edit-designations', 'view-designations', 'delete-designations',
-                                 'add-memberships', 'edit-memberships', 'view-memberships', 'delete-memberships',
-                                 'add-branch', 'edit-branch', 'view-branch', 'delete-branch'])
-                                 <!-- End Collapse -->
-                                 <div class="nav-item">
-                                     <a class="nav-link dropdown-toggle " href="#employees" role="button"
-                                         data-bs-toggle="collapse" data-bs-target="#employees" aria-expanded="false"
-                                         aria-controls="employees">
-                                         <i class="fas fa-users nav-icon"></i>
-                                         <span class="nav-link-title">Employees</span>
-                                     </a>
-                                     <div id="employees"
-                                         class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index']) }}  "
-                                         data-bs-parent="#employee">
-                                         @canany(['add-designations', 'edit-designations', 'view-designations',
-                                             'delete-designations'])
-                                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
-                                                 href="{{ route('admin.designation.index') }}">Designation</a>
-                                         @endcanany
-                                         @canany(['add-memberships', 'edit-memberships', 'view-memberships',
-                                             'delete-memberships'])
-                                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
-                                                 href="{{ route('admin.membership.index') }}">Membership</a>
-                                         @endcanany
-                                         @canany(['add-branch', 'edit-branch', 'view-branch', 'delete-branch'])
-                                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"
-                                                 href="{{ route('admin.branch.index') }}">Branch</a>
-                                         @endcanany
-                                         @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees'])
-                                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
-                                                 href="{{ route('admin.employees.index') }}">Employees</a>
-                                         @endcanany
-                                     </div>
+                         </div>
+                     @endcanany
+                     <!-- End Collapse -->
+                     <div id="employee">
+                         @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees',
+                             'add-designations', 'edit-designations', 'view-designations', 'delete-designations',
+                             'add-memberships', 'edit-memberships', 'view-memberships', 'delete-memberships', 'add-branch',
+                             'edit-branch', 'view-branch', 'delete-branch'])
+                             <!-- End Collapse -->
+                             <div class="nav-item">
+                                 <a class="nav-link dropdown-toggle " href="#employees" role="button"
+                                     data-bs-toggle="collapse" data-bs-target="#employees" aria-expanded="false"
+                                     aria-controls="employees">
+                                     <i class="fas fa-users nav-icon"></i>
+                                     <span class="nav-link-title">Employees</span>
+                                 </a>
+                                 <div id="employees"
+                                     class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index']) }}  "
+                                     data-bs-parent="#employee">
+                                     @canany(['add-designations', 'edit-designations', 'view-designations',
+                                         'delete-designations'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
+                                             href="{{ route('admin.designation.index') }}">Designation</a>
+                                     @endcanany
+                                     @canany(['add-memberships', 'edit-memberships', 'view-memberships',
+                                         'delete-memberships'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
+                                             href="{{ route('admin.membership.index') }}">Membership</a>
+                                     @endcanany
+                                     @canany(['add-branch', 'edit-branch', 'view-branch', 'delete-branch'])
+                                         <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"
+                                             href="{{ route('admin.branch.index') }}">Branch</a>
+                                     @endcanany
+                                     @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
+                                             href="{{ route('admin.employees.index') }}">Employees</a>
+                                     @endcanany
                                  </div>
-                                 <!-- End Collapse -->
-                             @endcanany
+                             </div>
+                             <!-- End Collapse -->
+                         @endcanany
+                     </div>
+
+                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
+                         'delete-roles', 'view-roles'])
+                         <div id="navbarVerticalMenuPagesMenu">
+                             <!-- Collapse -->
+
+                             <div class="nav-item">
+                                 <a class="nav-link dropdown-toggle " href="#empsalary" role="button"
+                                     data-bs-toggle="collapse" data-bs-target="#empsalary" aria-expanded="false"
+                                     aria-controls="empsalary">
+                                     <i class="fas fa-money-bill-wave nav-icon"></i>
+                                     <span class="nav-link-title">Salary</span>
+                                 </a>
+
+                                 <div id="empsalary" class="nav-collapse collapse {{ show(['emp_salary.index']) }} "
+                                     data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                                     @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.emp_salary.index' ? 'active' : '' }}  "
+                                             href="{{ route('admin.emp_salary.index') }}"> Employee Salay</a>
+                                     @endcanany
+                             
+                                 </div>
+                             </div>
+                         </div>
+                     @endcanany
+
+                     <!-- End Collapse -->
+
+                     <span class="dropdown-header mt-4">Master</span>
+                     <small class="bi-three-dots nav-subtitle-replacer"></small>
+
+
+                     @canany(['add-holidays', 'edit-holidays', 'view-holidays', 'delete-holidays'])
+                         <div class="nav-item">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.holiday.list' ? 'active' : '' }}"
+                                 href="{{ route('admin.holiday.list') }}" data-placement="left">
+                                 <i class="bi-folder2-open nav-icon"></i>
+                                 <span class="nav-link-title">Holidays</span>
+                             </a>
+                         </div>
+                     @endcanany
+
+                     @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves'])
+                         <div class="nav-item">
+                             <a class="nav-link dropdown-toggle " href="#leave" role="button"
+                                 data-bs-toggle="collapse" data-bs-target="#leave" aria-expanded="false"
+                                 aria-controls="leave">
+                                 <i class="bi-person nav-icon"></i>
+                                 <span class="nav-link-title">Leave</span>
+                             </a>
+
+                             <div id="leave"
+                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave.list']) }} "
+                                 data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
+                                     href="{{ route('admin.leave_type.index') }}"><i
+                                         class="fal fa-calendar-edit nav-icon"></i>Leave Types</a>
+
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave.list' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave.list') }}" data-placement="left">
+                                     <i class="far fa-desktop-alt  nav-icon "></i> <span class="nav-link-title">Leave
+                                         Apply</span>
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 @endcanany
+
+
+
+
+
+
+
+             </div>
+             <!-- End Content -->
+
+             <!-- Footer -->
+             <div class="navbar-vertical-footer">
+                 <ul class="navbar-vertical-footer-list">
+                     <li class="navbar-vertical-footer-list-item">
+                         <!-- Style Switcher -->
+                         <div class="dropdown dropup">
+                             <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                                 id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                                 data-bs-dropdown-animation>
+
+                             </button>
+
+                             <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless"
+                                 aria-labelledby="selectThemeDropdown">
+                                 <a class="dropdown-item" href="#" data-icon="bi-moon-stars"
+                                     data-value="auto">
+                                     <i class="bi-moon-stars me-2"></i>
+                                     <span class="text-truncate" title="Auto (system default)">Auto (system
+                                         default)</span>
+                                 </a>
+                                 <a class="dropdown-item" href="#" data-icon="bi-brightness-high"
+                                     data-value="default">
+                                     <i class="bi-brightness-high me-2"></i>
+                                     <span class="text-truncate" title="Default (light mode)">Default (light
+                                         mode)</span>
+                                 </a>
+                                 <a class="dropdown-item active" href="#" data-icon="bi-moon"
+                                     data-value="dark">
+                                     <i class="bi-moon me-2"></i>
+                                     <span class="text-truncate" title="Dark">Dark</span>
+                                 </a>
+                             </div>
                          </div>
 
+                         <!-- End Style Switcher -->
+                     </li>
 
-                         <!-- End Collapse -->
+                     <li class="navbar-vertical-footer-list-item">
+                         <!-- Other Links -->
+                         <div class="dropdown dropup">
+                             <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
+                                 id="otherLinksDropdown" data-bs-toggle="dropdown" aria-expanded="false"
+                                 data-bs-dropdown-animation>
+                                 <i class="bi-info-circle"></i>
+                             </button>
 
-                         <span class="dropdown-header mt-4">Master</span>
-                         <small class="bi-three-dots nav-subtitle-replacer"></small>
-
-
-                         @canany(['add-holidays', 'edit-holidays', 'view-holidays', 'delete-holidays'])
-                             <div class="nav-item">
-                                 <a class="nav-link" href="{{ route('admin.holiday.list') }}" data-placement="left">
-                                     <i class="bi-folder2-open nav-icon"></i>
-                                     <span class="nav-link-title">Holidays</span>
+                             <div class="dropdown-menu navbar-dropdown-menu-borderless"
+                                 aria-labelledby="otherLinksDropdown">
+                                 <span class="dropdown-header">Help</span>
+                                 <a class="dropdown-item" href="#">
+                                     <i class="bi-journals dropdown-item-icon"></i>
+                                     <span class="text-truncate" title="Resources &amp; tutorials">Resources
+                                         &amp; tutorials</span>
+                                 </a>
+                                 <a class="dropdown-item" href="#">
+                                     <i class="bi-gift dropdown-item-icon"></i>
+                                     <span class="text-truncate" title="What's new?">What's new?</span>
+                                 </a>
+                                 <div class="dropdown-divider"></div>
+                                 <span class="dropdown-header">Contacts</span>
+                                 <a class="dropdown-item" href="#">
+                                     <i class="bi-chat-left-dots dropdown-item-icon"></i>
+                                     <span class="text-truncate" title="Contact support">Developer Help</span>
                                  </a>
                              </div>
-                         @endcanany
-                         @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves'])
-                             <div class="nav-item">
-                                 <a class="nav-link" href="{{ route('admin.leave.list') }}" data-placement="left">
-                                     <i class="bi-folder2-open nav-icon"></i>
-                                     <span class="nav-link-title">Leave</span>
-                                 </a>
-                             </div>
-                         @endcanany
+                         </div>
+                         <!-- End Other Links -->
+                     </li>
 
-
-
-
-                     </div>
-                     <!-- End Content -->
-
-                     <!-- Footer -->
-                     <div class="navbar-vertical-footer">
-                         <ul class="navbar-vertical-footer-list">
-                             <li class="navbar-vertical-footer-list-item">
-                                 <!-- Style Switcher -->
-                                 <div class="dropdown dropup">
-                                     <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
-                                         id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false"
-                                         data-bs-dropdown-animation>
-
-                                     </button>
-
-                                     <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless"
-                                         aria-labelledby="selectThemeDropdown">
-                                         <a class="dropdown-item" href="#" data-icon="bi-moon-stars"
-                                             data-value="auto">
-                                             <i class="bi-moon-stars me-2"></i>
-                                             <span class="text-truncate" title="Auto (system default)">Auto (system
-                                                 default)</span>
-                                         </a>
-                                         <a class="dropdown-item" href="#" data-icon="bi-brightness-high"
-                                             data-value="default">
-                                             <i class="bi-brightness-high me-2"></i>
-                                             <span class="text-truncate" title="Default (light mode)">Default (light
-                                                 mode)</span>
-                                         </a>
-                                         <a class="dropdown-item active" href="#" data-icon="bi-moon"
-                                             data-value="dark">
-                                             <i class="bi-moon me-2"></i>
-                                             <span class="text-truncate" title="Dark">Dark</span>
-                                         </a>
-                                     </div>
-                                 </div>
-
-                                 <!-- End Style Switcher -->
-                             </li>
-
-                             <li class="navbar-vertical-footer-list-item">
-                                 <!-- Other Links -->
-                                 <div class="dropdown dropup">
-                                     <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle"
-                                         id="otherLinksDropdown" data-bs-toggle="dropdown" aria-expanded="false"
-                                         data-bs-dropdown-animation>
-                                         <i class="bi-info-circle"></i>
-                                     </button>
-
-                                     <div class="dropdown-menu navbar-dropdown-menu-borderless"
-                                         aria-labelledby="otherLinksDropdown">
-                                         <span class="dropdown-header">Help</span>
-                                         <a class="dropdown-item" href="#">
-                                             <i class="bi-journals dropdown-item-icon"></i>
-                                             <span class="text-truncate" title="Resources &amp; tutorials">Resources
-                                                 &amp; tutorials</span>
-                                         </a>
-                                         <a class="dropdown-item" href="#">
-                                             <i class="bi-gift dropdown-item-icon"></i>
-                                             <span class="text-truncate" title="What's new?">What's new?</span>
-                                         </a>
-                                         <div class="dropdown-divider"></div>
-                                         <span class="dropdown-header">Contacts</span>
-                                         <a class="dropdown-item" href="#">
-                                             <i class="bi-chat-left-dots dropdown-item-icon"></i>
-                                             <span class="text-truncate" title="Contact support">Developer Help</span>
-                                         </a>
-                                     </div>
-                                 </div>
-                                 <!-- End Other Links -->
-                             </li>
-
-                         </ul>
-                     </div>
-                     <!-- End Footer -->
-                 </div>
+                 </ul>
              </div>
+             <!-- End Footer -->
+         </div>
+     </div>
  </aside>
 
  <!-- End Navbar Vertical -->

@@ -1,5 +1,6 @@
 <?php
 
+use App\Contracts\Leave\LeaveContract;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationContoller;
@@ -10,10 +11,13 @@ use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmployeeSalaryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\LeaveController;
+use App\Http\Controllers\Admin\LeaveTypeCobntroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserAccountController;
+use App\Models\EmployeeSalary;
 
 Route::get('/', [LoginController::class, 'authentication']);
 
@@ -58,6 +62,11 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('membership', MembershipController::class);
     Route::resource('branch', BranchController::class);
     Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
+    Route::resource('leave_type', LeaveTypeCobntroller::class);
+    Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');
+
+    Route::resource('emp_salary', EmployeeSalaryController::class);
+    Route::get('emp_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('emp_salary.status');
 
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
