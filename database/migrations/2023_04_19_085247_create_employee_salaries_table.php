@@ -45,14 +45,13 @@ return new class extends Migration
             $table->decimal('penalty_deductions');
             $table->decimal('fixed_deductions');
             $table->decimal('other_deductions');
-            $table->decimal('gross_earning');
             $table->decimal('net_take_home');
-            $table->decimal('total_deduction');
             $table->decimal('ctc');
             $table->decimal('total_employer_contribution');
             $table->decimal('total_deduction');
-            $table->decimal('total_deduction');
             $table->string('status')->default('active');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('employee_id')->references('id')->on('employees');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
