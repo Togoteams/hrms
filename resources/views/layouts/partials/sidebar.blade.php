@@ -149,12 +149,12 @@
                                      <span class="nav-link-title">Salary</span>
                                  </a>
 
-                                 <div id="empsalary" class="nav-collapse collapse {{ show(['emp_salary.index']) }} "
+                                 <div id="empsalary" class="nav-collapse collapse {{ show(['employees_salary.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                      @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
-                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.emp_salary.index' ? 'active' : '' }}  "
-                                             href="{{ route('admin.emp_salary.index') }}"> Employee Salay</a>
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees_salary.index' ? 'active' : '' }}  "
+                                             href="{{ route('admin.employees_salary.index') }}"> Employee Salay</a>
                                      @endcanany
                              
                                  </div>

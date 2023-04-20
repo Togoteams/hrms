@@ -65,8 +65,8 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('leave_type', LeaveTypeCobntroller::class);
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');
 
-    Route::resource('emp_salary', EmployeeSalaryController::class);
-    Route::get('emp_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('emp_salary.status');
+    Route::resource('employees_salary', EmployeeSalaryController::class);
+    Route::get('employees_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('employees_salary.status');
 
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');

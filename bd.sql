@@ -296,7 +296,7 @@ CREATE TABLE `emp_payscale` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `emp_salary` (
+CREATE TABLE `employees_salary` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
 	`basic` DECIMAL NOT NULL,
@@ -358,7 +358,7 @@ ALTER TABLE `roles_permissions` ADD CONSTRAINT `roles_permissions_fk1` FOREIGN K
 
 ALTER TABLE `emp_payscale` ADD CONSTRAINT `emp_payscale_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
-ALTER TABLE `emp_salary` ADD CONSTRAINT `emp_salary_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
+ALTER TABLE `employees_salary` ADD CONSTRAINT `employees_salary_fk0` FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`);
 
 
 

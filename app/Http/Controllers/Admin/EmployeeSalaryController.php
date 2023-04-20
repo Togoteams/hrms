@@ -14,6 +14,7 @@ use App\Models\Membership;
 use App\Models\Branch;
 use App\Models\User;
 use App\Models\Designation;
+use App\Models\Employee;
 
 class EmployeeSalaryController extends Controller
 {
@@ -28,7 +29,7 @@ class EmployeeSalaryController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.employees.buttons', ['item' => $row, "route" => 'employees']);
+                    $actionBtn = view('admin.employees_salary.buttons', ['item' => $row, "route" => 'employees']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -36,8 +37,9 @@ class EmployeeSalaryController extends Controller
         }
         $designation = Designation::all();
         $membership = Membership::all();
+        $users = User::all();
         $branch = Branch::where('status', 'active')->get();
-        return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        return view('admin.employees_salary.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch, 'users' => $users]);
     }
     /**
      * Show the form for creating a new resource.
@@ -53,51 +55,54 @@ class EmployeeSalaryController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'mobile' => ['required', 'numeric', 'min:10'],
-            'username' => ['required', 'string', 'min:5', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::defaults()],
-            'designatin_id' => ['required', 'numeric'],
-            'ec_number' => ['required', 'numeric'],
-            'ec_number' => ['required', 'numeric'],
-            'id_number' => ['required', 'numeric'],
-            'contract_duration' => ['required', 'numeric'],
-            'basic_salary' => ['required', 'numeric'],
-            'date_of_current_basic' => ['required', 'date'],
-            'date_of_birth' => ['required', 'date'],
-            'start_date' => ['required', 'date'],
-            'branch_id' => ['required', 'numeric'],
-            'pension_contribution' => ['required', 'numeric'],
-            'unique_membership_id' => ['required', 'numeric'],
-            'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
-            'currency' => ['required', 'string'],
-            'bank_name' => ['required', 'string'],
-            'bank_account_number' => ['required', 'numeric'],
-            'bank_holder_name' => ['required', 'string'],
-            'ifsc' => ['required', 'string','min:11'],
-
+            // `user_id` => ['required', 'numeric'],
+            // `basic` => ['required', 'numeric'],
+            // `hra` => ['required', 'numeric'],
+            // `overtime` => ['required', 'numeric'],
+            // `arrear` => ['required', 'numeric'],
+            // `union_membership` => ['required', 'numeric'],
+            // `pf_per` => ['required', 'numeric'],
+            // `pf_amount` => ['required', 'numeric'],
+            // `pension_per` => ['required', 'numeric'],
+            // `pension_amount` => ['required', 'numeric'],
+            // `loans_deduction` => ['required', 'numeric'],
+            // `no_of_working_days` => ['required', 'numeric'],
+            // `no_of_paid_leaves` => ['required', 'numeric'],
+            // `shift` => ['required', 'string'],
+            // `working_hours_start` => ['required', 'string'],
+            // `working_hours_end` => ['required', 'string'],
+            // `no_of_payable_days` => ['required', 'numeric'],
+            // `conveyance` => ['required', 'numeric'],
+            // `special` => ['required', 'numeric'],
+            // `mobile` => ['required', 'numeric'],
+            // `bonus` => ['required', 'numeric'],
+            // `bonus` => ['required', 'numeric'],
+            // `transportation` => ['required', 'numeric'],
+            // `food` => ['required', 'numeric'],
+            // `medical` => ['required', 'numeric'],
+            // `gross_earning` => ['required', 'numeric'],
+            // `esi_per` => ['required', 'numeric'],
+            // `esi_amount` => ['required', 'numeric'],
+            // `income_tax_deductions` => ['required', 'numeric'],
+            // `penalty_deductions` => ['required', 'numeric'],
+            // `fixed_deductions` => ['required', 'numeric'],
+            // `other_deductions` => ['required', 'numeric'],
+            // `net_take_home` => ['required', 'numeric'],
+            // `ctc` => ['required', 'numeric'],
+            // `total_employer_contribution` => ['required', 'numeric'],
+            // `total_deduction` => ['required', 'numeric']
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
+            // try {
+            $request->request->add(['employee_id' => Employee::where('user_id', $request->user_id)->first()->id ?? 0]);
+            EmployeeSalary::insertGetId($request->except(['_token', '_method']));
+            return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            // } catch (Exception $e) {
 
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'username' => $request->username,
-                'mobile' => $request->mobile,
-                'password' => Hash::make($request->password),
-            ]);
-            try {
-                $request->request->add(['user_id' => $user->id]);
-                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . EmployeeSalary::count('emp_id') + 1]);
-                EmployeeSalary::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
-                return response()->json(['success' => $this->page_name . " Added Successfully"]);
-            } catch (Exception $e) {
-                User::destroy($user->id);
-                return response()->json(['success' => $e->getMessage()]);
-            }
+            //     return response()->json(['success' => $e->getMessage()]);
+            // }
         }
     }
 
@@ -110,7 +115,7 @@ class EmployeeSalaryController extends Controller
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
         $data = EmployeeSalary::find($id);
-        return view('admin.employees.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        return view('admin.employees_salary.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -121,7 +126,7 @@ class EmployeeSalaryController extends Controller
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
         $data = EmployeeSalary::find($id);
-        return view('admin.employees.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        return view('admin.employees_salary.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
     /**
      * Update the specified resource in storage.
@@ -129,24 +134,42 @@ class EmployeeSalaryController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'designatin_id' => ['required', 'numeric'],
-            'ec_number' => ['required', 'numeric'],
-            'ec_number' => ['required', 'numeric'],
-            'id_number' => ['required', 'numeric'],
-            'contract_duration' => ['required', 'numeric'],
-            'basic_salary' => ['required', 'numeric'],
-            'date_of_current_basic' => ['required', 'date'],
-            'date_of_birth' => ['required', 'date'],
-            'start_date' => ['required', 'date'],
-            'branch_id' => ['required', 'numeric'],
-            'pension_contribution' => ['required', 'numeric'],
-            'unique_membership_id' => ['required', 'numeric'],
-            'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
-            'currency' => ['required', 'string'],
-            'bank_name' => ['required', 'string'],
-            'bank_account_number' => ['required', 'numeric'],
-            'bank_holder_name' => ['required', 'string'],
-            'ifsc' => ['required', 'string'],
+            `user_id` => ['required', 'numeric'],
+            `basic` => ['required', 'numeric'],
+            `hra` => ['required', 'numeric'],
+            `overtime` => ['required', 'numeric'],
+            `arrear` => ['required', 'numeric'],
+            `union_membership` => ['required', 'numeric'],
+            `pf_per` => ['required', 'numeric'],
+            `pf_amount` => ['required', 'numeric'],
+            `pension_per` => ['required', 'numeric'],
+            `pension_amount` => ['required', 'numeric'],
+            `loans_deduction` => ['required', 'numeric'],
+            `no_of_working_days` => ['required', 'numeric'],
+            `no_of_paid_leaves` => ['required', 'numeric'],
+            `shift` => ['required', 'string'],
+            `working_hours_start` => ['required', 'string'],
+            `working_hours_end` => ['required', 'string'],
+            `no_of_payable_days` => ['required', 'numeric'],
+            `conveyance` => ['required', 'numeric'],
+            `special` => ['required', 'numeric'],
+            `mobile` => ['required', 'numeric'],
+            `bonus` => ['required', 'numeric'],
+            `bonus` => ['required', 'numeric'],
+            `transportation` => ['required', 'numeric'],
+            `food` => ['required', 'numeric'],
+            `medical` => ['required', 'numeric'],
+            `gross_earning` => ['required', 'numeric'],
+            `esi_per` => ['required', 'numeric'],
+            `esi_amount` => ['required', 'numeric'],
+            `income_tax_deductions` => ['required', 'numeric'],
+            `penalty_deductions` => ['required', 'numeric'],
+            `fixed_deductions` => ['required', 'numeric'],
+            `other_deductions` => ['required', 'numeric'],
+            `net_take_home` => ['required', 'numeric'],
+            `ctc` => ['required', 'numeric'],
+            `total_employer_contribution` => ['required', 'numeric'],
+            `total_deduction` => ['required', 'numeric']
 
         ]);
 
@@ -177,9 +200,7 @@ class EmployeeSalaryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $user =  EmployeeSalary::find($id);
             EmployeeSalary::destroy($id);
-            User::destroy($user->user_id);
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
