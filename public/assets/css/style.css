@@ -11,3 +11,11 @@ label{
     text-transform: capitalize;
 }
 
+.datatable-custom .dataTables_filter, .datatable-custom .dataTables_info, .datatable-custom .dataTables_length, .datatable-custom .dataTables_paginate {
+    display: block  !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#datatable_wrapper{
+    padding: 10px;
+}

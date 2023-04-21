@@ -24,3 +24,7 @@
 <!-- JS Plugins Init. -->
 
 
+<script>
+    $('#datatable').DataTable();
+    
+</script>
