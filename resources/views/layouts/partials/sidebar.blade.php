@@ -141,6 +141,37 @@
                              <!-- End Collapse -->
                          @endcanany
                      </div>
+                     <div id="me">
+                         @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves'])
+                             <div class="nav-item">
+                                 <a class="nav-link dropdown-toggle " href="#loans" role="button"
+                                     data-bs-toggle="collapse" data-bs-target="#loans" aria-expanded="false"
+                                     aria-controls="loans">
+                                     <i class="bi-person nav-icon"></i>
+                                     <span class="nav-link-title">Loans</span>
+                                 </a>
+
+                                 <div id="loans"
+                                     class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index']) }} "
+                                     data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
+                                         href="{{ route('admin.loans.index') }}"><i
+                                             class="fal fa-calendar-edit nav-icon"></i>Loans Types</a>
+
+                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
+                                         href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                         <i class="far fa-desktop-alt  nav-icon "></i> <span
+                                             class="nav-link-title">Emplooye
+                                             Loans </span>
+                                     </a>
+                                 </div>
+                             </div>
+                         @endcanany
+                     </div>
+
+
+
 
                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
                          'delete-roles', 'view-roles'])
@@ -155,7 +186,8 @@
                                      <span class="nav-link-title">Salary</span>
                                  </a>
 
-                                 <div id="empsalary" class="nav-collapse collapse {{ show(['employees_salary.index']) }} "
+                                 <div id="empsalary"
+                                     class="nav-collapse collapse {{ show(['employees_salary.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                      @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
