@@ -90,6 +90,17 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-sm-4 mb-2">
+                                <div class="form-group">
+                                    <label for="employment_type">employment_type </label>
+                                    <select required id="employment_type" placeholder="Enter correct employment_type   " name="employment_type"
+                                    class="form-control form-control-sm ">
+                                    <option selected disabled> - Select employment type- </option>
+                                    <option value="indian">Indian</option>
+                                    <option value="nri">NRI</option>
+                                </select>
+                                </div>
+                            </div>
 
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">

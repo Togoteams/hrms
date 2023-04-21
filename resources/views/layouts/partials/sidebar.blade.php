@@ -110,13 +110,19 @@
                                      <span class="nav-link-title">Employees</span>
                                  </a>
                                  <div id="employees"
-                                     class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index']) }}  "
+                                     class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index', 'tex.index']) }}  "
                                      data-bs-parent="#employee">
                                      @canany(['add-designations', 'edit-designations', 'view-designations',
                                          'delete-designations'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
                                              href="{{ route('admin.designation.index') }}">Designation</a>
                                      @endcanany
+                                     {{-- 
+                                     @canany(['add-tax', 'edit-tax', 'view-tax', 'delete-tax']) --}}
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.tax.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.tax.index') }}"> Manage Tax </a>
+                                     {{-- @endcanany --}}
+
                                      @canany(['add-memberships', 'edit-memberships', 'view-memberships',
                                          'delete-memberships'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
@@ -156,7 +162,7 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees_salary.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.employees_salary.index') }}"> Employee Salay</a>
                                      @endcanany
-                             
+
                                  </div>
                              </div>
                          </div>
@@ -188,15 +194,15 @@
                              </a>
 
                              <div id="leave"
-                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave.list']) }} "
+                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index']) }} "
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
                                      href="{{ route('admin.leave_type.index') }}"><i
                                          class="fal fa-calendar-edit nav-icon"></i>Leave Types</a>
 
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave.list' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave.list') }}" data-placement="left">
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
                                      <i class="far fa-desktop-alt  nav-icon "></i> <span class="nav-link-title">Leave
                                          Apply</span>
                                  </a>

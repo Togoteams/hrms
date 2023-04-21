@@ -12,9 +12,11 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmployeeSalaryController;
+use App\Http\Controllers\Admin\LeaveApplyController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\LeaveTypeCobntroller;
+use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserAccountController;
 use App\Models\EmployeeSalary;
@@ -59,10 +61,14 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
 
     Route::resource('designation', DesignationContoller::class);
+    Route::resource('tax', TaxController::class);
     Route::resource('membership', MembershipController::class);
     Route::resource('branch', BranchController::class);
     Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
     Route::resource('leave_type', LeaveTypeCobntroller::class);
+    Route::resource('leave_apply', LeaveApplyController::class);
+    Route::get('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
+
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');
 
     Route::resource('employees_salary', EmployeeSalaryController::class);

@@ -1,7 +1,7 @@
 <form id="form_edit" action="{{ route('admin.employees.update', $data->id) }}">
     @csrf
     <input type="hidden" name="_method" value="PUT">
-    <input type="hidden" name="updated_at" value="{{date('Y-m-d h:s:i')}}">
+    <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="row">
         <div class="col-sm-4 mb-2">
@@ -22,16 +22,18 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="user_id">Employee User Name</label>
-                <input disabled required placeholder="Enter correct Emplooye  User Name " value="{{ $data->user->username }}"
-                    type="text" name="username" class="form-control form-control-sm ">
+                <input disabled required placeholder="Enter correct Emplooye  User Name "
+                    value="{{ $data->user->username }}" type="text" name="username"
+                    class="form-control form-control-sm ">
             </div>
         </div>
 
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="email">Email </label>
-                <input disabled required id="email" placeholder="Enter correct email   " value="{{ $data->user->email }}"
-                    type="email" name="email" class="form-control form-control-sm ">
+                <input disabled required id="email" placeholder="Enter correct email   "
+                    value="{{ $data->user->email }}" type="email" name="email"
+                    class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
@@ -90,7 +92,18 @@
                 </select>
             </div>
         </div>
-
+        <div class="col-sm-4 mb-2">
+            <div class="form-group">
+                <label for="employment_type">employment_type </label>
+                <select required id="employment_type" placeholder="Enter correct employment_type   "
+                    name="employment_type" class="form-control form-control-sm ">
+                    <option  disabled> - Select employment type- </option>
+                    <option {{ $data->employment_type == 'indian' ? 'indian' : '' }} value="indian">Indian</option>
+                    <option {{ $data->employment_type == 'nri' ? 'nri' : '' }} value="nri">NRI</option>
+          
+                </select>
+            </div>
+        </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="id_number">id number </label>
