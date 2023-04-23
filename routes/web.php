@@ -72,8 +72,8 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('loans',LoansController::class);
     Route::get('loans/status/{id}', [LoansController::class, 'status'])->name('loans.status');
 
-    Route::resource('emplooye_loans', EmplooyeLoansController::class);
-    Route::get('emplooye_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('loans.status');
+    Route::resource('employees_loans', EmplooyeLoansController::class);
+    Route::get('emplooye_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('employee_loans.status');
 
     Route::resource('employees_salary', EmployeeSalaryController::class);
 

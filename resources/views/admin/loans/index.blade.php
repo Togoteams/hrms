@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            @include('admin.leave_type.create')
+            @include('admin.loans.create')
 
 
             <!-- Card -->
@@ -66,9 +66,9 @@
                                     <td>{{ $item->description }}</td>
                                     <td>
                                         <form id="edit{{ $item->id }}"
-                                            action="{{ route('admin.leave_type.destroy', $item->id) }}">
+                                            action="{{ route('admin.loans.destroy', $item->id) }}">
                                             <button type="button"
-                                                onclick="editForm('{{ route('admin.leave_type.edit', $item->id) }}', 'edit')"
+                                                onclick="editForm('{{ route('admin.loans.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
                                                 class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
                                             @csrf
@@ -78,7 +78,7 @@
                                                 class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>
                                             </button>
                                             <button type="button"
-                                                onclick="changeStatus('{{ route('admin.leave_type.status', $item->id) }}','status{{ $item->id }}')"
+                                                onclick="changeStatus('{{ route('admin.loans.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"
                                                 class="btn {{ $item->status == 'active' ? 'btn-success' : 'btn-secondary' }}  btn-sm">
                                                 @if ($item->status == 'active')
@@ -109,7 +109,7 @@
             <!-- Modal -->
             <div class="modal fade" id="modaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content ">
                         <div class="modal-header ">
                             <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>

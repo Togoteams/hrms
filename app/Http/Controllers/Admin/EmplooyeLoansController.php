@@ -10,6 +10,8 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
+use App\Models\EmplooyeLoans;
+use App\Models\Loans;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -18,27 +20,26 @@ use Exception;
 
 class EmplooyeLoansController extends Controller
 {
-    public $page_name = "Employees";
+    public $page_name = "Apply Loans";
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Employee::with('user')->select('*');
+            $data = EmplooyeLoans::with('user')->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.employees.buttons', ['item' => $row, "route" => 'employees']);
+                    $actionBtn = view('admin.employees_loans.buttons', ['item' => $row, "route" => 'employees']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $designation = Designation::all();
-        $membership = Membership::all();
-        $branch = Branch::where('status', 'active')->get();
-        return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        $all_users = User::get();
+        $loans=Loans::where('status','active')->get();
+        return view('admin.employees_loans.index', ['page' => $this->page_name, 'all_users' => $all_users,'loans'=>$loans]);
     }
 
 
@@ -79,7 +80,7 @@ class EmplooyeLoansController extends Controller
             'bank_name' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric'],
             'bank_holder_name' => ['required', 'string'],
-            'ifsc' => ['required', 'string','min:11'],
+            'ifsc' => ['required', 'string', 'min:11'],
 
         ]);
 
@@ -96,8 +97,8 @@ class EmplooyeLoansController extends Controller
             ]);
             try {
                 $request->request->add(['user_id' => $user->id]);
-                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
-                Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
+                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . EmplooyeLoans::count('emp_id') + 1]);
+                EmplooyeLoans::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
                 User::destroy($user->id);
@@ -114,8 +115,8 @@ class EmplooyeLoansController extends Controller
         $designation = Designation::all();
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
-        $data = Employee::find($id);
-        return view('admin.employees.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        $data = EmplooyeLoans::find($id);
+        return view('admin.employees_loans.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
     /**
@@ -126,8 +127,8 @@ class EmplooyeLoansController extends Controller
         $designation = Designation::all();
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
-        $data = Employee::find($id);
-        return view('admin.employees.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        $data = EmplooyeLoans::find($id);
+        return view('admin.employees_loans.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
     /**
@@ -161,7 +162,7 @@ class EmplooyeLoansController extends Controller
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
+                EmplooyeLoans::where('id', $id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['success' => $e->getMessage()]);
@@ -171,11 +172,11 @@ class EmplooyeLoansController extends Controller
 
     public function status($id)
     {
-        if (Employee::find($id)->status == "active") {
-            Employee::where('id', $id)->update(['status' => 'inactive']);
+        if (EmplooyeLoans::find($id)->status == "active") {
+            EmplooyeLoans::where('id', $id)->update(['status' => 'inactive']);
             return "InActive";
         } else {
-            Employee::where('id', $id)->update(['status' => 'active']);
+            EmplooyeLoans::where('id', $id)->update(['status' => 'active']);
             return "Active";
         }
     }
@@ -186,8 +187,8 @@ class EmplooyeLoansController extends Controller
     public function destroy(string $id)
     {
         try {
-            $user =  Employee::find($id);
-            Employee::destroy($id);
+            $user =  EmplooyeLoans::find($id);
+            EmplooyeLoans::destroy($id);
             User::destroy($user->user_id);
             return "Delete";
         } catch (Exception $e) {

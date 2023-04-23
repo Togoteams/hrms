@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('emplooye_loans', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('loan_id');
             $table->date('start_date');
             $table->date('end_date');
@@ -22,11 +24,15 @@ return new class extends Migration
             $table->integer('tenure');
             $table->integer('sanctioned');
             $table->integer('sanctioned_amount');
-            $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
+            $table->string('status')->default('active');
             $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->timestamps();
         });
     }
 

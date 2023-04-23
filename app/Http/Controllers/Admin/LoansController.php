@@ -7,6 +7,7 @@ use App\Models\Loans;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class LoansController extends Controller
 {
@@ -19,9 +20,6 @@ class LoansController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -33,13 +31,23 @@ class LoansController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:designations,name',
-            'description' => 'string|required'
+            'name' => 'string|required|unique:loans,name',
+            'start_amount' => 'required|numeric',
+            'end_amount' => 'required|numeric',
+            'late_fine_amount' => 'required|numeric',
+            'late_fine_amount_type' => 'required|string',
+            'no_min_installment' => 'required|numeric',
+            'no_max_installment' => 'required|numeric',
+            'max_installment_amount' => 'required|numeric',
+            'min_installment_amount' => 'required|numeric',
+            'rate_of_interest' => 'required|numeric',
+            'description' => 'string|required',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            Loans::create($request->except('_token'));
+            $request->request->add(['created_by' => Auth::user()->id]);
+            Loans::insert($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
     }
@@ -68,7 +76,16 @@ class LoansController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required|unique:designations,name,' . $id,
-            'description' => 'string|required'
+            'start_amount' => 'required|numeric',
+            'end_amount' => 'required|numeric',
+            'late_fine_amount' => 'required|numeric',
+            'late_fine_amount_type' => 'required|string',
+            'no_min_installment' => 'required|numeric',
+            'no_max_installment' => 'required|numeric',
+            'max_installment_amount' => 'required|numeric',
+            'min_installment_amount' => 'required|numeric',
+            'rate_of_interest' => 'required|numeric',
+            'description' => 'string|required',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -77,7 +94,16 @@ class LoansController extends Controller
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
     }
-
+    public function status($id)
+    {
+        if (Loans::find($id)->status == "active") {
+            Loans::where('id', $id)->update(['status' => 'inactive']);
+            return "InActive";
+        } else {
+            Loans::where('id', $id)->update(['status' => 'active']);
+            return "Active";
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

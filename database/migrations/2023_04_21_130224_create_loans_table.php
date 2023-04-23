@@ -23,9 +23,11 @@ return new class extends Migration
             $table->decimal('max_installment_amount');
             $table->decimal('min_installment_amount');
             $table->integer('rate_of_interest');
+            $table->text('description');
             $table->timestamp('deleted_at')->nullable();
+            $table->string('status')->default('active');
             $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->timestamps();

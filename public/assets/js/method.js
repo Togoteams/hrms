@@ -35,6 +35,7 @@ function editForm(url_name, target_id, method = "GET", table_id = '') {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById(target_id).innerHTML = this.responseText;
+            underscore_remover();
             stopPreloader('', target_id);
         }
     };
@@ -329,14 +330,17 @@ function multiselect(selectBox, input_id) {
 
 // for replacing _ underscore into the empty space
 // for workig smothly please use class form-group
-var form_group = document.getElementsByClassName('form-group');
-for (i = 0; i <= form_group.length; i++) {
-    var all_child_nodes = form_group[i].childNodes;
-    all_child_nodes[1].innerText = all_child_nodes[1].innerText.replaceAll("_", " ");
-    var all_placeholder = all_child_nodes[3].placeholder;
-    if (all_placeholder != null) {
-        console.log(all_placeholder.replaceAll("_", " "));
-        all_child_nodes[3].placeholder = all_child_nodes[3].placeholder.replaceAll("_", " ");
+underscore_remover();
+function underscore_remover() {
+    var form_group = document.getElementsByClassName('form-group');
+    for (i = 0; i <= form_group.length; i++) {
+        var all_child_nodes = form_group[i].childNodes;
+        all_child_nodes[1].innerText = all_child_nodes[1].innerText.replaceAll("_", " ");
+        var all_placeholder = all_child_nodes[3].placeholder;
+        if (all_placeholder != null) {
+            console.log(all_placeholder.replaceAll("_", " "));
+            all_child_nodes[3].placeholder = all_child_nodes[3].placeholder.replaceAll("_", " ");
 
+        }
     }
 }

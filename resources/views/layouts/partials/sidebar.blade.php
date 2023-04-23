@@ -152,7 +152,7 @@
                                  </a>
 
                                  <div id="loans"
-                                     class="nav-collapse collapse {{ show(['loans.index', 'loans_apply.index']) }} "
+                                     class="nav-collapse collapse {{ show(['loans.index', 'employees_loans.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.loans.index' ? 'active' : '' }}  "
@@ -160,7 +160,7 @@
                                              class="fal fa-calendar-edit nav-icon"></i>Loans Types</a>
 
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.emplooye_loans.index' ? 'active' : '' }}"
-                                         href="{{ route('admin.emplooye_loans.index') }}" data-placement="left">
+                                         href="{{ route('admin.employees_loans.index') }}" data-placement="left">
                                          <i class="far fa-desktop-alt  nav-icon "></i> <span
                                              class="nav-link-title">Apply
                                              Loans </span>
