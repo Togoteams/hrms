@@ -152,27 +152,23 @@
                                  </a>
 
                                  <div id="loans"
-                                     class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index']) }} "
+                                     class="nav-collapse collapse {{ show(['loans.index', 'loans_apply.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.loans.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.loans.index') }}"><i
                                              class="fal fa-calendar-edit nav-icon"></i>Loans Types</a>
 
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.emplooye_loans.index' ? 'active' : '' }}"
+                                         href="{{ route('admin.emplooye_loans.index') }}" data-placement="left">
                                          <i class="far fa-desktop-alt  nav-icon "></i> <span
-                                             class="nav-link-title">Emplooye
+                                             class="nav-link-title">Apply
                                              Loans </span>
                                      </a>
                                  </div>
                              </div>
                          @endcanany
                      </div>
-
-
-
-
                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
                          'delete-roles', 'view-roles'])
                          <div id="navbarVerticalMenuPagesMenu">
@@ -242,13 +238,6 @@
                          </div>
                      </div>
                  @endcanany
-
-
-
-
-
-
-
              </div>
              <!-- End Content -->
 

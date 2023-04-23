@@ -69,7 +69,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('leave_apply', LeaveApplyController::class);
     Route::get('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
 
-    Route::resource('loans', LoansController::class);
+    Route::resource('loans',LoansController::class);
     Route::get('loans/status/{id}', [LoansController::class, 'status'])->name('loans.status');
 
     Route::resource('emplooye_loans', EmplooyeLoansController::class);

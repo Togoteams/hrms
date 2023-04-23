@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('is_approved')->default(0);
             $table->string('approved_by')->nullable();
-            $table->date('approved_date')->nullable();
+            $table->timestamp('approved_at')->nullable();
             $table->string('is_paid')->default(0);
             $table->string('leave_reason');
             $table->date('apply_date')->nullable();
