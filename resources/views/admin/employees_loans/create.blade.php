@@ -20,8 +20,8 @@
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Employees- </option>
                                         @foreach ($all_users as $au)
-                                            <option value="{{ $au->id }}">{{ $au->name }} -
-                                                {{ $au->email }}</option>
+                                            <option value="{{ $au->user->id }}">{{ $au->user->name }} -
+                                                {{ $au->user->email }}</option>
                                         @endforeach
                                     </select>
                                 </div>

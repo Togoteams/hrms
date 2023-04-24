@@ -38,17 +38,18 @@
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
-                    <table 
-                        class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Employee Id</th>
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
-                                <th>Employee username</th>
                                 <th>Employee Phone</th>
-                                <th>Employee Gender</th>
+                                <th>From</th>
+                                <th>to </th>
+                                <th>principal amount </th>
+                                <th>maturity amount </th>
+                                <th>tenure </th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -73,28 +74,37 @@
                                 },
 
                                 {
-                                    data: 'emp_id',
-                                    name: 'emp_id'
-                                },
-                                {
                                     data: 'user.name',
                                     name: 'user.name'
                                 }, {
                                     data: 'user.email',
                                     name: 'user.email'
-                                }, {
-                                    data: 'user.username',
-                                    name: 'user.username'
                                 },
                                 {
                                     data: 'user.mobile',
                                     name: 'user.mobile'
                                 },
-
                                 {
-                                    data: 'gender',
-                                    name: 'gender'
+                                    data: 'start_date',
+                                    name: 'start_date'
                                 },
+                                {
+                                    data: 'end_date',
+                                    name: 'end_date'
+                                },
+                                {
+                                    data: 'principal_amount',
+                                    name: 'principal_amount'
+                                },
+                                {
+                                    data: 'maturity_amount',
+                                    name: 'maturity_amount'
+                                },
+                                {
+                                    data: 'tenure',
+                                    name: 'tenure'
+                                },
+
                                 {
                                     data: 'action',
                                     name: 'action',
@@ -131,7 +141,7 @@
 
             {{-- edit form model end  --}}
 
-               {{-- edit form model start --}}
+            {{-- edit form model start --}}
             <!-- Modal -->
             <div class="modal fade" id="modalshow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">

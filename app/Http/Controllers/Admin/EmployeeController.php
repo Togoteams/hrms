@@ -100,7 +100,7 @@ class EmployeeController extends Controller
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
                 User::destroy($user->id);
-                return response()->json(['success' => $e->getMessage()]);
+                return response()->json(['error' => $e->getMessage()]);
             }
         }
     }

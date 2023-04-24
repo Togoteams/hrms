@@ -194,6 +194,11 @@ function backEndValidate(responseData, target_id) {
         refreshPage(500);
 
     }
+
+    else if ("error" in obj) {
+        setErrorMsg(obj['error'], target_id)
+    }
+
     else if ("delete" in obj) {
         setDelete(obj['delete'], target_id)
         refreshPage(500);
@@ -230,6 +235,16 @@ function setSuccess(errr_message, form_id) {
     });
     form_id.appendChild(createdd_element);
 }
+function setErrorMsg(errr_message, form_id) {
+    createdd_element = createMenuItem("div", {
+        name: errr_message,
+        class: "alert alert-danger mt-3",
+        id: "lol",
+        size: "13px",
+    });
+    form_id.appendChild(createdd_element);
+}
+
 
 function setError(el, errr_message, bcolor) {
 

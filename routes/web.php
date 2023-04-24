@@ -20,8 +20,8 @@ use App\Http\Controllers\Admin\LoansController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
 
-Route::get('/', [LoginController::class, 'authentication']);
 
+Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
 
     // Route::get('/users', function () {
@@ -69,11 +69,11 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('leave_apply', LeaveApplyController::class);
     Route::get('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
 
-    Route::resource('loans',LoansController::class);
+    Route::resource('loans', LoansController::class);
     Route::get('loans/status/{id}', [LoansController::class, 'status'])->name('loans.status');
 
     Route::resource('employees_loans', EmplooyeLoansController::class);
-    Route::get('emplooye_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('employee_loans.status');
+    Route::get('employees_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('employees_loans.status');
 
     Route::resource('employees_salary', EmployeeSalaryController::class);
 
@@ -99,3 +99,5 @@ Route::get('admin/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('admin.dashboard');
 require __DIR__ . '/auth.php';
+
+
