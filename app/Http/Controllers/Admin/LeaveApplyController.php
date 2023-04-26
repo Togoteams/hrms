@@ -8,6 +8,7 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
+use App\Models\Employee;
 use App\Models\LeaveApply;
 use App\Models\LeaveType;
 use App\Models\User;
@@ -24,7 +25,7 @@ class LeaveApplyController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = LeaveApply::with('user','leave_type')->select('*');
+            $data = LeaveApply::with('user', 'leave_type')->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -34,7 +35,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveType::where('status', 'active')->get();
+        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type??'')->get();
         return view('admin.leave_apply.index', ['page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
@@ -68,6 +69,7 @@ class LeaveApplyController extends Controller
                     'doc' =>  $this->insert_image($request->file('doc1'), 'leave_doc'),
                     'uuid' => Auth::user()->uuid,
                     'user_id' => Auth::user()->id,
+                    'created_by' => Auth::user()->id,
                 ]);
                 LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
@@ -99,6 +101,13 @@ class LeaveApplyController extends Controller
         return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
+    public function status_modal($id)
+    {
+        $leave_type = LeaveType::where('status', 'active')->get();
+
+        $data = LeaveApply::find($id);
+        return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -117,7 +126,12 @@ class LeaveApplyController extends Controller
             return $validator->errors();
         } else {
             try {
-                LeaveApply::where('id', $id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
+                $request->request->add([
+                    'doc' =>  $this->insert_image($request->file('doc1'), 'leave_doc'),
+                    'created_by' => Auth::user()->id,
+                ]);
+
+                LeaveApply::where('id', $id)->update($request->except(['_token',  '_method']));
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['success' => $e->getMessage()]);
@@ -125,14 +139,16 @@ class LeaveApplyController extends Controller
         }
     }
 
-    public function status($id)
+    public function status(Request $request, $id)
     {
-        if (LeaveApply::find($id)->status == "active") {
-            LeaveApply::where('id', $id)->update(['status' => 'inactive']);
-            return "InActive";
-        } else {
-            LeaveApply::where('id', $id)->update(['status' => 'active']);
-            return "Active";
+        try {
+            LeaveApply::where('id', $id)->update([
+                'status' => $request->status,
+                'status_remarks' => $request->status_remarks,
+            ]);
+            return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+        } catch (Exception $e) {
+            return response()->json(['errors' => "Somthing wen Wrong"]);
         }
     }
 

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
 use App\Models\Permission;
+use Illuminate\Support\Facades\DB;
 class RolesTableSeeder extends Seeder
 {
     /**
@@ -14,10 +15,13 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('roles')->delete();
+
         $permissions= Permission::get();
         $json  = file_get_contents(database_path() . '/data/roles.json');
         $data  = json_decode($json);
         $permissions= Permission::get();
+
         foreach ($data->roles as $key => $value) {
             Role::updateOrCreate([
                 'name'=> $value->name,

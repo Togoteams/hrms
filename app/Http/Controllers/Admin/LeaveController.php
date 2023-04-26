@@ -6,7 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Leave\LeaveService;
-use DB;
+use Illuminate\Support\Facades\DB;
 class LeaveController extends BaseController
 {
     protected $leaveService;

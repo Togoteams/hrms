@@ -26,10 +26,15 @@ return new class extends Migration
             $table->string('leave_reason');
             $table->date('apply_date')->nullable();
             $table->string('remark')->nullable();
+            $table->string('status_remarks')->nullable();
             $table->string('status')->default('pending');
             $table->string('doc');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('leave_type_id')->references('id')->on('leave_types');
             $table->foreign('user_id')->references('id')->on('users');
         });

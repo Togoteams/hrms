@@ -8,7 +8,7 @@ use App\Models\Role;
 use App\Models\Permission;
 use App\Models\User;
 use Faker\Factory as Faker;
-
+use Illuminate\Support\Facades\DB;
 class UserTableSeeder extends Seeder
 {
     /**
@@ -29,6 +29,8 @@ class UserTableSeeder extends Seeder
         $user->mobile = 9999988888;
         $user->email_verified_at = $faker->dateTime();
         $user->password = Hash::make('User@123');
+        DB::table('users')->delete();
+
         if($user->save()){
             $user->roles()->attach($isAdminRole);
             $permissions= Permission::get();

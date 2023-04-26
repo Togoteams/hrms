@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('taxes', function (Blueprint $table) {
             $table->id();
-            $table->integer('name')->unique();
+            $table->string('name')->unique();
+            $table->string('type');
+            $table->integer('value');
             $table->text('description');
-            $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
+            $table->string('status')->default('active');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 

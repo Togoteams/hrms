@@ -50,7 +50,9 @@
                             <tr>
 
                                 <th>S.no</th>
-                                <th>Tax Percentage</th>
+                                <th>Tax Name</th>
+                                <th>Type</th>
+                                <th>Value</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
@@ -62,7 +64,9 @@
                                     <td class="table-column-pe-0">
                                         {{ $loop->index + 1 }}
                                     </td>
-                                    <td>{{ $item->name }}%</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->type }}</td>
+                                    <td>{{ $item->value }}</td>
                                     <td>{{ $item->description }}</td>
                                     <td>
                                         <form id="edit{{ $item->id }}"

@@ -40,8 +40,7 @@
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
-                    <table 
-                        class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -159,6 +158,26 @@
             </div>
 
             {{-- edit form model end  --}}
+
+            {{-- status form model start --}}
+            <!-- Modal -->
+            <div class="modal fade" id="modalstatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+                            <h5 class="modal-title" id="staticBackdropLabel"> Status chnage of {{ $page }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="statuschange">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {{-- status form model end  --}}
 
         </div>
 

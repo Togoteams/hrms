@@ -1,7 +1,6 @@
 <form id="edit{{ $item->id }}" action="{{ route('admin.' . $route . '.destroy', $item->id) }}">
     <button type="button" onclick="editForm('{{ route('admin.' . $route . '.show', $item->id) }}', 'show')" href="#"
-        data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i
-            class="fas fa-eye"></i></button>
+        data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
 
     <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')"
         href="#" data-bs-toggle="modal" data-bs-target="#modaledit" class="btn btn-warning btn-sm"><i
@@ -13,7 +12,11 @@
             class="fas fa-trash-alt"></i>
     </button>
 
-    <button type="button"
+    <button type="button" onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"
+        href="#" data-bs-toggle="modal" data-bs-target="#modalstatus"
+        class="btn btn-secondary btn-sm">{{ $item->status }}</button>
+
+    {{-- <button type="button"
         onclick="changeStatus('{{ route('admin.' . $route . '.status', $item->id) }}','status{{ $item->id }}')"
         id="status{{ $item->id }}"
         class="btn {{ $item->status == 'active' ? 'btn-success' : 'btn-secondary' }}  btn-sm">
@@ -22,5 +25,5 @@
         @else
             <i class="fas fa-times-circle"></i>
         @endif
-    </button>
+    </button> --}}
 </form>
