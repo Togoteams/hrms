@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Designation;
-use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Models\Branch;
 use App\Models\Employee;
 use App\Models\LeaveApply;
 use App\Models\LeaveType;
@@ -25,7 +22,13 @@ class LeaveApplyController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = LeaveApply::with('user', 'leave_type')->select('*');
+            // if user is not equal to employee then show all data
+            if (isemplooye()) {
+                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+            } else {
+
+                $data = LeaveApply::with('user', 'leave_type')->select('*');
+            }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -35,8 +38,9 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type??'')->get();
-        return view('admin.leave_apply.index', ['page' => $this->page_name, 'leave_type' => $leave_type]);
+        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        $all_users = Employee::where('status', 'active')->get();
+        return view('admin.leave_apply.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
 
 
@@ -54,21 +58,27 @@ class LeaveApplyController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'leave_type_id' => ['required', 'numeric'],
+            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
             'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
-            "doc1" => ["required", "mimetypes:application/pdf", "max:10000"]
+            "doc1" => ["mimetypes:application/pdf", "max:10000"]
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
+                if (isset($request->user_id) && $request->user_id != '') {
+                    $user = User::find($request->user_id);
+                } else {
+                    $user = Auth::user();
+                }
+
                 $request->request->add([
-                    'doc' =>  $this->insert_image($request->file('doc1'), 'leave_doc'),
-                    'uuid' => Auth::user()->uuid,
-                    'user_id' => Auth::user()->id,
+                    'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
+                    'uuid' => $user->uuid,
+                    'user_id' => $user->id,
                     'created_by' => Auth::user()->id,
                 ]);
                 LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
@@ -95,9 +105,10 @@ class LeaveApplyController extends Controller
      */
     public function edit(string $id)
     {
-        $leave_type = LeaveType::where('status', 'active')->get();
-
+     
         $data = LeaveApply::find($id);
+            $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->get();
+     
         return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
@@ -118,7 +129,7 @@ class LeaveApplyController extends Controller
             'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
-            "file" => ["mimetypes:application/pdf", "max:10000"]
+            "doc1" => ["mimetypes:application/pdf", "max:10000"]
 
         ]);
 
@@ -127,14 +138,13 @@ class LeaveApplyController extends Controller
         } else {
             try {
                 $request->request->add([
-                    'doc' =>  $this->insert_image($request->file('doc1'), 'leave_doc'),
-                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id
                 ]);
-
-                LeaveApply::where('id', $id)->update($request->except(['_token',  '_method']));
+                LeaveApply::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));
+                $request->has('doc1') ? $this->update_images('leave_applies', $id, $request->file('doc1'), 'leave_doc', 'doc') : LeaveApply::find($id)->doc;
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
-                return response()->json(['success' => $e->getMessage()]);
+                return response()->json(['error' => $e->getMessage()]);
             }
         }
     }
@@ -164,6 +174,15 @@ class LeaveApplyController extends Controller
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
+        }
+    }
+    public function get_leave(Request $request)
+    {
+        $user_id = $request->user_id;
+        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', $user_id)->first()->employment_type ?? '')->get();
+        echo '<option> -Select Leave Type - </option>';
+        foreach ($leave_type as $l_type) {
+            echo '  <option value="' . $l_type->id . '">' . $l_type->name . '</option>';
         }
     }
 }

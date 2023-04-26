@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('remark')->nullable();
             $table->string('status_remarks')->nullable();
             $table->string('status')->default('pending');
-            $table->string('doc');
+            $table->string('doc')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
             $table->unsignedBigInteger('created_by');

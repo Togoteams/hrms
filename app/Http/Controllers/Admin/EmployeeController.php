@@ -9,6 +9,7 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -78,7 +79,7 @@ class EmployeeController extends Controller
             'bank_name' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric'],
             'bank_holder_name' => ['required', 'string'],
-            'ifsc' => ['required', 'string','min:11'],
+            'ifsc' => ['required', 'string', 'min:11'],
 
         ]);
 
@@ -97,6 +98,8 @@ class EmployeeController extends Controller
                 $request->request->add(['user_id' => $user->id]);
                 $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
                 Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
+                $role_id = Role::where('short_code', 'employee')->value('id');
+                $user->roles()->sync($role_id);
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
                 User::destroy($user->id);
@@ -193,4 +196,6 @@ class EmployeeController extends Controller
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
         }
     }
+
+   
 }

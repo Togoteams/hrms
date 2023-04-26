@@ -14,7 +14,7 @@
 
     <button type="button" onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"
         href="#" data-bs-toggle="modal" data-bs-target="#modalstatus"
-        class="btn btn-secondary btn-sm">{{ $item->status }}</button>
+        class="btn @if($item->status=="pending") btn-warning @elseif ($item->status=="reject") btn-danger @elseif($item->status=="approved") btn-success @else btn-secondary @endif btn-sm">{{ $item->status }}</button>
 
     {{-- <button type="button"
         onclick="changeStatus('{{ route('admin.' . $route . '.status', $item->id) }}','status{{ $item->id }}')"

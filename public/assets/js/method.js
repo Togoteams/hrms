@@ -64,6 +64,31 @@ function checkInput(url_name, data, method = "GET") {
     xhttp.send();
 }
 
+function selectDrop(form_id, url_name, target_id, method = "POST") {
+    // getting the all from form
+    var form = document.getElementById(form_id);
+    // var url_name = form.action;
+    if (target_id == "") {
+        target_id = form_id
+    }
+    // setting all input into the forData object
+    var formdata = new FormData(form);
+    var formElements_button = Array.from(form.elements).pop();
+    // getting the button of the form and passing into the preloader function
+    preloader(formElements_button);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // document.getElementById(target_id).innerHTML = this.responseText;
+            document.getElementById(target_id).innerHTML = this.responseText;
+            stopPreloader(formElements_button);
+        }
+    };
+    xhttp.open(method, url_name, true);
+    xhttp.send(formdata);
+}
+
+
 
 function deleteRow(form_id, target_id = "", method = "POST") {
     if (confirm('Are sure to delete  !!!')) {

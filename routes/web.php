@@ -69,6 +69,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('leave_apply', LeaveApplyController::class);
     Route::get('leave_apply/status_modal/{id}', [LeaveApplyController::class, 'status_modal'])->name('leave_apply.status_modal');
     Route::put('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
+    Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
 
     Route::resource('loans', LoansController::class);
     Route::get('loans/status/{id}', [LoansController::class, 'status'])->name('loans.status');

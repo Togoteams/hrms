@@ -14,6 +14,22 @@
 
 
                         <div class="row">
+
+                            @if (!isemplooye())
+                                <div class="col-sm-6 mb-2">
+                                    <div class="form-group">
+                                        <label for="user_id"> </label>
+                                        <select onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')" required id="user_id" placeholder="Enter correct user_id   "
+                                            type="text" name="user_id" class="form-control form-control-sm ">
+                                            <option selected disabled> -Select User - </option>
+                                            @foreach ($all_user as $user)
+                                                <option value="{{ $user->user->id }}">{{ $user->user->name }} -  {{$user->user->email}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types </label>
@@ -55,8 +71,9 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="doc">Required Document </label>
-                                    <input accept="application/pdf" required id="doc" placeholder="Enter correct Document   "
-                                        type="file" name="doc1" class="form-control form-control-sm ">
+                                    <input accept="application/pdf" id="doc"
+                                        placeholder="Enter correct Document   " type="file" name="doc1"
+                                        class="form-control form-control-sm ">
                                 </div>
                             </div>
 

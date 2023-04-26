@@ -1,8 +1,11 @@
 <?php
 
+use App\Models\Role;
+use App\Models\UsersRoles;
 use Illuminate\Support\Str;
 use Intervention\Image\Image;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -16,18 +19,18 @@ if (!function_exists('isSluggable')) {
 }
 
 if (!function_exists('splitName')) {
- function splitName($name)
-{
-  $name_arr = [];
-  if (!empty($name)) {
-    $name_arr2 = explode(" ", $name);
+    function splitName($name)
+    {
+        $name_arr = [];
+        if (!empty($name)) {
+            $name_arr2 = explode(" ", $name);
 
-    $name_arr[] = trim($name_arr2[0]);
-    $name_arr[] = trim(!empty($name_arr2[1]) ? substr($name, strlen($name_arr2[0]) + 1) : '');
-  }
+            $name_arr[] = trim($name_arr2[0]);
+            $name_arr[] = trim(!empty($name_arr2[1]) ? substr($name, strlen($name_arr2[0]) + 1) : '');
+        }
 
-  return $name_arr;
-}
+        return $name_arr;
+    }
 }
 
 
@@ -395,9 +398,24 @@ function show($all_routes)
 {
     // checking route is exits or not 
     foreach ($all_routes as $routes) {
-       if( Route::getCurrentRoute()->getName() == 'admin.'.$routes){
-        echo "show";
-        break;
-       }
+        if (Route::getCurrentRoute()->getName() == 'admin.' . $routes) {
+            echo "show";
+            break;
+        }
+    }
+}
+
+function isemplooye()
+{
+    try {
+        $id = Auth::user()->id;
+        $check = Role::where('id', UsersRoles::where('user_id', $id)->first()->role_id)->where('short_code', 'employee')->first();
+        if ($check != '') {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (Exception $e) {
+        return  false;
     }
 }

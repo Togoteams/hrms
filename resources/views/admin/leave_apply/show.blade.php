@@ -26,7 +26,7 @@
     <div class="col-sm-4 mb-2">
         <div class="form-group">
             <label for="start_date">start_date </label>
-            <input required id="start_date" placeholder="Enter correct start_date   " type="date"
+            <input disabled required id="start_date" placeholder="Enter correct start_date   " type="date"
                 value="{{ $data->start_date }}" name="start_date" class="form-control form-control-sm ">
         </div>
     </div>
