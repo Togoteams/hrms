@@ -13,18 +13,29 @@
                         <div class="row">
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="name">Name </label>
-                                    <input required id="name" placeholder="Enter Name of leave_type " type="text"
-                                        name="name" class="form-control form-control-sm ">
+                                    <label for="leave_for">Leave For </label>
+                                    <select required id="leave_for" placeholder="Enter leave_for of leave_type "
+                                        type="text" name="leave_for" class="form-control form-control-sm ">
+                                        <option selected disabled> - Select - </option>
+                                        <option value="local">Local</option>
+                                        <option value="expatriate">Expatriate</option>
+                                    </select>
                                 </div>
                             </div>
 
-
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="description">leave_type </label>
-                                    <textarea required id="description" placeholder="Enter Short Description of leave_type   " type="text" name="description"
-                                        class="form-control form-control-sm "></textarea>
+                                    <label for="name">Name </label>
+                                    <input required id="name" placeholder="Enter Name of leave_type "
+                                        type="text" name="name" class="form-control form-control-sm ">
+                                </div>
+                            </div>
+                
+                            <div class="col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label for="description">description </label>
+                                    <textarea required id="description" placeholder="Enter Short Description of leave_type   " type="text"
+                                        name="description" class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>
 

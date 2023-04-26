@@ -50,6 +50,7 @@
                             <tr>
 
                                 <th>S.no</th>
+                                <th>Leave for</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Action</th>
@@ -62,6 +63,7 @@
                                     <td class="table-column-pe-0">
                                         {{ $loop->index + 1 }}
                                     </td>
+                                    <td>{{$item->leave_for}}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->description }}</td>
                                     <td>

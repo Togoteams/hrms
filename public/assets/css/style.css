@@ -19,3 +19,6 @@ label{
 #datatable_wrapper{
     padding: 10px;
 }
+td{
+    text-transform: capitalize;
+}

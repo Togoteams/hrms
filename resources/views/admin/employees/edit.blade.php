@@ -98,8 +98,8 @@
                 <select required id="employment_type" placeholder="Enter correct employment_type   "
                     name="employment_type" class="form-control form-control-sm ">
                     <option  disabled> - Select employment type- </option>
-                    <option {{ $data->employment_type == 'indian' ? 'indian' : '' }} value="indian">Indian</option>
-                    <option {{ $data->employment_type == 'nri' ? 'nri' : '' }} value="nri">NRI</option>
+                    <option {{ $data->employment_type == 'local' ? 'selected' : '' }} value="local">Local</option>
+                    <option {{ $data->employment_type == 'expatriate' ? 'selected' : '' }} value="expatriate">Expatriate</option>
           
                 </select>
             </div>

@@ -96,8 +96,8 @@
                                     <select required id="employment_type" placeholder="Enter correct employment_type   " name="employment_type"
                                     class="form-control form-control-sm ">
                                     <option selected disabled> - Select employment type- </option>
-                                    <option value="indian">Indian</option>
-                                    <option value="nri">NRI</option>
+                                    <option value="local">Local</option>
+                                    <option value="expatriate">Expatriate</option>
                                 </select>
                                 </div>
                             </div>
