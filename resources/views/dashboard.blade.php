@@ -19,7 +19,7 @@
                     <!-- Card -->
                     <a class="card card-hover-shadow card-dashboard pb-5" href="#">
                         <div class="card-body text-center">
-                            <h6 class="card-subtitle pb-2"> <i class="bi-person nav-icon"></i></h6>
+                            <h6 class="card-subtitle pb-2"><i class="fa-solid fa-blog"></i></h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="">
@@ -38,7 +38,7 @@
                     <!-- Card -->
                     <a class="card card-hover-shadow card-dashboard pb-5" href="#">
                         <div class="card-body text-center">
-                            <h6 class="card-subtitle pb-2"> <i class="bi-person nav-icon"></i></h6>
+                            <h6 class="card-subtitle pb-2"><i class="fa-sharp fa-solid fa-user-tie"></i></h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="">
@@ -57,7 +57,7 @@
                     <!-- Card -->
                     <a class="card card-hover-shadow card-dashboard pb-5" href="#">
                         <div class="card-body text-center">
-                            <h6 class="card-subtitle pb-2"> <i class="bi-person nav-icon"></i></h6>
+                            <h6 class="card-subtitle pb-2"><i class="fa-solid fa-user-shield"></i></h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="">
@@ -76,7 +76,7 @@
                     <!-- Card -->
                     <a class="card card-hover-shadow card-dashboard pb-5" href="#">
                         <div class="card-body text-center">
-                            <h6 class="card-subtitle pb-2"> <i class="bi-person nav-icon"></i></h6>
+                            <h6 class="card-subtitle pb-2"><i class="fa-solid fa-virus"></i></h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="">
@@ -95,7 +95,7 @@
                     <!-- Card -->
                     <a class="card card-hover-shadow card-dashboard pb-5" href="#">
                         <div class="card-body text-center">
-                            <h6 class="card-subtitle pb-2"> <i class="bi-person nav-icon"></i></h6>
+                            <h6 class="card-subtitle pb-2"><i class="fa-sharp fa-solid fa-money-bill"></i></h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="">
@@ -114,7 +114,7 @@
                     <!-- Card -->
                     <a class="card card-hover-shadow card-dashboard pb-5" href="#">
                         <div class="card-body text-center">
-                            <h6 class="card-subtitle pb-2"> <i class="bi-person nav-icon"></i></h6>
+                            <h6 class="card-subtitle pb-2"><i class="fa-solid fa-file"></i></h6>
 
                             <div class="row align-items-center gx-2">
                                 <div class="">
