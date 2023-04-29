@@ -22,3 +22,16 @@ label{
 td{
     text-transform: capitalize;
 }
+.card-dashboard {
+    background-color: rgb(244, 74, 12) !important;
+    color: #fff !important;
+    min-height: 200px;
+    padding-top: 15px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+}
+
+
+.card-dashboard i{
+    font-size: 40px;
+    color:#fff;
+}
