@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\LeaveTypeCobntroller;
 use App\Http\Controllers\Admin\LoansController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
-
+use App\Models\LeaveEncashment;
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
@@ -66,11 +66,15 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
     Route::resource('leave_type', LeaveTypeCobntroller::class);
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');
+    // leave route start
     Route::resource('leave_apply', LeaveApplyController::class);
+    Route::get('leave_apply/balance_history/', [LeaveApplyController::class, 'balance_history'])->name('leave_apply.balance_history');
+    Route::get('leave_apply/request_history/', [LeaveApplyController::class, 'request_history'])->name('leave_apply.request_history');
     Route::get('leave_apply/status_modal/{id}', [LeaveApplyController::class, 'status_modal'])->name('leave_apply.status_modal');
     Route::put('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
-
+    Route::resource('leave_encashment', LeaveEncashment::class);
+    // leave route start
     Route::resource('loans', LoansController::class);
     Route::get('loans/status/{id}', [LoansController::class, 'status'])->name('loans.status');
 
@@ -101,5 +105,3 @@ Route::get('admin/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('admin.dashboard');
 require __DIR__ . '/auth.php';
-
-

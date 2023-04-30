@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Designation;
+use App\Models\Membership;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +20,10 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             RolesTableSeeder::class,
             LeaveTypes::class,
+            Designationseeders::class,
+            Brachseeders::class,
+            Taxseeders::class,
+            Membershipseeders::class,
         ]);
     }
 }

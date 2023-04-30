@@ -240,14 +240,14 @@
 
 
                                  </a>
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.balance_history' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.balance_history') }}" data-placement="left">
                                      <span class="nav-link-title">LEAVE BALANCE REPORT</span>
 
 
                                  </a>
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.request_history' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.request_history') }}" data-placement="left">
                                      <span class="nav-link-title">LEAVE REQUEST HISTORY</span>
 
 
