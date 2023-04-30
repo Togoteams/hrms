@@ -32,9 +32,7 @@ class LeaveTypes extends Seeder
 
 
         );
-        DB::table('leave_types')->delete();
         foreach ($all_leaves as $leaves) {
-
             LeaveType::insert($leaves);
         }
     }
