@@ -75,3 +75,15 @@ aside{
 .nav-link:hover i{
     color: #fff !important;
 }
+
+.nav-vertical.nav-pills .nav-item .nav-collapse.show .nav-link.active {
+    color: #ffffff !important;
+    background-color: rgb(248 81 9) !important;
+}
+a {
+    color: #f85109 !important;
+    text-decoration: none;
+}
+.btn{
+    color: #fff !important;
+}

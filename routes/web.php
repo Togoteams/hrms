@@ -15,11 +15,11 @@ use App\Http\Controllers\Admin\EmployeeSalaryController;
 use App\Http\Controllers\Admin\LeaveApplyController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\LeaveController;
+use App\Http\Controllers\Admin\LeaveEncashmentController;
 use App\Http\Controllers\Admin\LeaveTypeCobntroller;
 use App\Http\Controllers\Admin\LoansController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
-use App\Models\LeaveEncashment;
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
@@ -73,7 +73,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::get('leave_apply/status_modal/{id}', [LeaveApplyController::class, 'status_modal'])->name('leave_apply.status_modal');
     Route::put('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
-    Route::resource('leave_encashment', LeaveEncashment::class);
+    Route::resource('leave_encashment', LeaveEncashmentController::class);
     // leave route start
     Route::resource('loans', LoansController::class);
     Route::get('loans/status/{id}', [LoansController::class, 'status'])->name('loans.status');
@@ -84,7 +84,6 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::resource('employees_salary', EmployeeSalaryController::class);
 
     Route::get('employees_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('employees_salary.status');
-
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
     Route::get('password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('password');

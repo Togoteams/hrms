@@ -190,6 +190,8 @@ class LeaveApplyController extends Controller
 
     public function balance_history(Request $request)
     {
+        dd($request);
+
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
@@ -215,18 +217,18 @@ class LeaveApplyController extends Controller
 
     public function request_history(Request $request)
     {
+        dd($request);
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
                 $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
             } else {
-
                 $data = LeaveApply::with('user', 'leave_type')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
+                    $actionBtn ='';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -234,6 +236,6 @@ class LeaveApplyController extends Controller
         }
         $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
-        return view('admin.leave_apply.leave_request', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
+        return view('admin.leave_apply.leave_request_history', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
 }

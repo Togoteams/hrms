@@ -221,7 +221,7 @@
                              </a>
 
                              <div id="leave"
-                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index']) }} "
+                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index','leave_encashment.index','leave_apply.balance_history','leave_apply.request_history']) }} "
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
@@ -234,8 +234,8 @@
 
                                  </a>
 
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_encashment.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_encashment.index') }}" data-placement="left">
                                      <span class="nav-link-title">LEAVE ENCASHMENT</span>
 
 
