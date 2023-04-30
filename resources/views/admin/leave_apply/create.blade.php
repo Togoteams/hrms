@@ -95,7 +95,7 @@
                         </div>
                         <hr>
                         <div class="text-center ">
-                            <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">Add
+                            <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">
                                 {{ $page }}</button>
                         </div>
                     </form>

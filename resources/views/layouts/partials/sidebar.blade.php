@@ -161,8 +161,7 @@
 
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.emplooye_loans.index' ? 'active' : '' }}"
                                          href="{{ route('admin.employees_loans.index') }}" data-placement="left">
-                                         <i class="far fa-desktop-alt  nav-icon "></i> <span
-                                             class="nav-link-title">Apply
+                                         <i class="far fa-desktop-alt  nav-icon "></i> <span class="nav-link-title">Apply
                                              Loans </span>
                                      </a>
                                  </div>
@@ -226,13 +225,32 @@
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
-                                     href="{{ route('admin.leave_type.index') }}"><i
-                                         class="fal fa-calendar-edit nav-icon"></i>Leave Types</a>
+                                     href="{{ route('admin.leave_type.index') }}">Leave Types</a>
 
                                  <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
                                      href="{{ route('admin.leave_apply.index') }}" data-placement="left">
-                                     <i class="far fa-desktop-alt  nav-icon "></i> <span class="nav-link-title">Leave
-                                         Apply</span>
+                                     <span class="nav-link-title">LEAVE Apply/Modify</span>
+
+
+                                 </a>
+
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                     <span class="nav-link-title">LEAVE ENCASHMENT</span>
+
+
+                                 </a>
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                     <span class="nav-link-title">LEAVE BALANCE REPORT</span>
+
+
+                                 </a>
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                     <span class="nav-link-title">LEAVE REQUEST HISTORY</span>
+
+
                                  </a>
                              </div>
                          </div>

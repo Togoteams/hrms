@@ -185,4 +185,6 @@ class LeaveApplyController extends Controller
             echo '  <option value="' . $l_type->id . '">' . $l_type->name . '</option>';
         }
     }
+
+
 }

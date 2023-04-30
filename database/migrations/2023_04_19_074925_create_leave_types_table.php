@@ -15,10 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('leave_for');
             $table->string('name');
+            $table->string('nature_of_leave');
+            $table->integer('no_of_days')->default('0');
             $table->text('description');
-            $table->string('status')->default('active');
-            $table->unique(['name','leave_for']);
+            $table->unique(['name', 'leave_for']);
             $table->timestamps();
+            $table->string('status')->default('active');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
             $table->timestamp('deleted_at')->nullable();
         });
     }

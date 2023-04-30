@@ -30,7 +30,28 @@
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                
+
+                            <div class="col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label for="nature_of_leave">nature_of_leave </label>
+                                    <select required id="nature_of_leave"
+                                      
+                                        name="nature_of_leave" class="form-control form-control-sm ">
+                                        <option selected disabled> - Select Nature of Leave - </option>
+                                        <option value="paid"> Paid</option>
+                                        <option value="unpaid">Unpaid</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label for="no_of_days">no_of_days </label>
+                                    <input required id="no_of_days" placeholder="Enter no_of_days of leave_type "
+                                        type="text" value="0" name="no_of_days"
+                                        class="form-control form-control-sm ">
+                                </div>
+                            </div>
+
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="description">description </label>

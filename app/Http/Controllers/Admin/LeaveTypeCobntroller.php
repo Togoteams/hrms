@@ -14,7 +14,7 @@ class LeaveTypeCobntroller extends Controller
 
     public function index()
     {
-        $data =  LeaveType::all();
+        $data =  LeaveType::orderByDesc('id')->get();
         return view('admin.leave_type.index', ['page' => $this->page_name, 'data' => $data]);
     }
 
@@ -34,11 +34,14 @@ class LeaveTypeCobntroller extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required|unique:leave_types,name',
+            'nature_of_leave' => 'required|string',
+            'no_of_days' => 'required|numeric',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
+            $request->request->add(['created_by'=>auth()->user()->id]);
             LeaveType::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
@@ -68,7 +71,9 @@ class LeaveTypeCobntroller extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required|unique:leave_types,name,' . $id,
-            'description' => 'string|required'
+            'description' => 'string|required',
+            'nature_of_leave' => 'required|string',
+            'no_of_days' => 'required|numeric'
         ]);
         if ($validator->fails()) {
             return $validator->errors();

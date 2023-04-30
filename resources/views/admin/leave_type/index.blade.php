@@ -52,6 +52,8 @@
                                 <th>S.no</th>
                                 <th>Leave for</th>
                                 <th>Name</th>
+                                <th>Nature of Leave</th>
+                                <th>No Of Days</th>
                                 <th>Description</th>
                                 <th>Action</th>
                             </tr>
@@ -65,6 +67,8 @@
                                     </td>
                                     <td>{{$item->leave_for}}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->nature_of_leave }}</td>
+                                    <td>{{ $item->no_of_days }}</td>
                                     <td>{{ $item->description }}</td>
                                     <td>
                                         <form id="edit{{ $item->id }}"
