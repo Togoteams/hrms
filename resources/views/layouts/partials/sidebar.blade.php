@@ -7,7 +7,7 @@
              <!-- Logo -->
 
              <a class="navbar-brand" href="index-2.html" aria-label="Front">
-                 <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo" data-hs-theme-appearance="default" height="300">
+                 <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo" data-hs-theme-appearance="default">
                  <img class="navbar-brand-logo" src="{{ asset('assets/svg/logos-light/logo.svg') }}" alt="Logo"
                      data-hs-theme-appearance="dark">
                  <img class="navbar-brand-logo-mini" src="{{ asset('assets/svg/logos/logo-short.svg') }}" alt="Logo"
