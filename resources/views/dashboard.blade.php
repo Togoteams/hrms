@@ -7,9 +7,7 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
-                    <div class="col">
-                        <h1 class="page-header-title">Dashboard</h1>
-                    </div>
+
                     <!-- End Col -->
             <!-- End Page Header -->
 

@@ -35,3 +35,43 @@ td{
     font-size: 40px;
     color:#fff;
 }
+
+.active-class{
+    background:  #f85109 !important;
+    color: #fff !important;
+}
+
+.active-class i
+{
+    color: #fff !important;
+}
+aside{
+    background:  #fff !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
+}
+.navbar-container{
+    background-color: #f85109 !important;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px !important;
+
+}
+.navbar-container h1{
+   color: #fff !important;
+
+
+}
+.nav-icon{
+    color: #f85109 !important;
+}
+
+.dropdown-header{
+    color: #f85109 !important;
+}
+
+.nav-link:hover{
+    background:  #f85109 !important;
+    color: #fff !important;
+}
+
+.nav-link:hover i{
+    color: #fff !important;
+}

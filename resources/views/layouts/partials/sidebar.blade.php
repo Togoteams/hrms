@@ -1,13 +1,13 @@
  <!-- Navbar Vertical -->
 
  <aside
-     class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
+     class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl   ">
      <div class="navbar-vertical-container">
          <div class="navbar-vertical-footer-offset">
              <!-- Logo -->
 
              <a class="navbar-brand" href="index-2.html" aria-label="Front">
-                 <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo" data-hs-theme-appearance="default">
+                 <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo" data-hs-theme-appearance="default" height="300">
                  <img class="navbar-brand-logo" src="{{ asset('assets/svg/logos-light/logo.svg') }}" alt="Logo"
                      data-hs-theme-appearance="dark">
                  <img class="navbar-brand-logo-mini" src="{{ asset('assets/svg/logos/logo-short.svg') }}" alt="Logo"
@@ -36,7 +36,7 @@
                      <!-- Collapse -->
                      @can('view-dashboard')
                          <div class="nav-item">
-                             <a class="nav-link" href="{{ route('admin.dashboard') }}" data-placement="left">
+                             <a class="nav-link active-class" href="{{ route('admin.dashboard') }}" data-placement="left">
                                  <i class="bi bi-speedometer nav-icon"></i>
                                  <span class="nav-link-title">Dashboards</span>
                              </a>
@@ -117,7 +117,7 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.designation.index' ? 'active' : '' }} "
                                              href="{{ route('admin.designation.index') }}">Designation</a>
                                      @endcanany
-                                     {{-- 
+                                     {{--
                                      @canany(['add-tax', 'edit-tax', 'view-tax', 'delete-tax']) --}}
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.tax.index' ? 'active' : '' }} "
                                          href="{{ route('admin.tax.index') }}"> Manage Tax </a>
