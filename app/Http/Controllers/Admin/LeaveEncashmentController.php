@@ -33,7 +33,7 @@ class LeaveEncashmentController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.leave_encashment.buttons', ['item' => $row, "route" => 'leave_apply']);
+                    $actionBtn = view('admin.leave_encashment.buttons', ['item' => $row, "route" => 'leave_encashment']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -59,12 +59,9 @@ class LeaveEncashmentController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
-            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'leave_applies_for' => ['required', 'string'],
-            'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
-            "doc1" => ["mimetypes:application/pdf", "max:10000"]
+            'no_of_days' => 'required|numeric|min:1',
+            'description' => ['required', 'string'],
+
         ]);
 
         if ($validator->fails()) {
@@ -76,14 +73,13 @@ class LeaveEncashmentController extends Controller
                 } else {
                     $user = Auth::user();
                 }
-
                 $request->request->add([
-                    'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
                     'uuid' => $user->uuid,
                     'user_id' => $user->id,
                     'created_by' => Auth::user()->id,
+                    'employee_id'=>Employee::where('user_id',$user->id)->first()->id
                 ]);
-                LeaveEncashment::insertGetId($request->except(['_token', 'doc1', '_method']));
+                LeaveEncashment::insertGetId($request->except(['_token',  '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
@@ -127,12 +123,8 @@ class LeaveEncashmentController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
-            'leave_type_id' => ['required', 'numeric'],
-            'leave_applies_for' => ['required', 'string'],
-            'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
-            "doc1" => ["mimetypes:application/pdf", "max:10000"]
+            'no_of_days' => 'required|numeric|min:1',
+            'description' => ['required', 'string'],
 
         ]);
 
@@ -144,7 +136,6 @@ class LeaveEncashmentController extends Controller
                     'updated_by' => Auth::user()->id
                 ]);
                 LeaveEncashment::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));
-                $request->has('doc1') ? $this->update_images('leave_applies', $id, $request->file('doc1'), 'leave_doc', 'doc') : LeaveEncashment::find($id)->doc;
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
@@ -161,7 +152,7 @@ class LeaveEncashmentController extends Controller
             ]);
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         } catch (Exception $e) {
-            return response()->json(['errors' => "Somthing wen Wrong"]);
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 

@@ -35,6 +35,12 @@ class LeaveApplyController extends Controller
                     $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
                     return $actionBtn;
                 })
+                ->editColumn('start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->start_date )->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('end_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->end_date )->isoFormat('DD.MM.YYYY');
+                })
                 ->rawColumns(['action'])
                 ->make(true);
         }
@@ -58,7 +64,6 @@ class LeaveApplyController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
             'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
@@ -126,7 +131,6 @@ class LeaveApplyController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
             'leave_type_id' => ['required', 'numeric'],
             'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
@@ -190,21 +194,26 @@ class LeaveApplyController extends Controller
 
     public function balance_history(Request $request)
     {
-        dd($request);
 
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status','approved')->select('*');
             } else {
 
-                $data = LeaveApply::with('user', 'leave_type')->select('*');
+                $data = LeaveApply::with('user', 'leave_type')->where('status','approved')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
                     return $actionBtn;
+                })
+                ->editColumn('start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->start_date )->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('end_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->end_date )->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -217,19 +226,24 @@ class LeaveApplyController extends Controller
 
     public function request_history(Request $request)
     {
-        dd($request);
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status','pending')->get();
             } else {
-                $data = LeaveApply::with('user', 'leave_type')->select('*');
+                $data = LeaveApply::with('user', 'leave_type')->where('status','pending')->get();
             }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn ='';
+                    $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
                     return $actionBtn;
+                })
+                ->editColumn('start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->start_date )->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('end_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->end_date )->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);

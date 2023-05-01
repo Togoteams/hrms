@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class LeaveEncashment extends Model
 {
     use HasFactory;
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    function leave_type(){
+        return $this->belongsTo(LeaveType::class);
+    }
 }

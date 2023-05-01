@@ -30,13 +30,13 @@
                         @can('add-leaves')
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
-                                 {{ $page }}
+                                {{ $page }}
                             </button>
                         @endcan
                     </div>
                 </div>
             </div>
-            @include('admin.leave_apply.create')
+            @include('admin.leave_encashment.create')
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
@@ -47,9 +47,7 @@
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
-                                <th>leave type</th>
-                                <th>From </th>
-                                <th>To</th>
+                                <th>No of Days</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -66,14 +64,13 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.leave_apply.index') }}",
+                            ajax: "{{ route('admin.leave_encashment.index') }}",
 
                             columns: [{
                                     "render": function() {
                                         return i++;
                                     }
                                 },
-
 
                                 {
                                     data: 'user.name',
@@ -86,18 +83,12 @@
                                     data: 'user.mobile',
                                     name: 'user.mobile'
                                 },
+
                                 {
-                                    data: 'leave_type.name',
-                                    name: 'leave_type.name'
+                                    data: 'no_of_days',
+                                    name: 'no_of_days'
                                 },
-                                {
-                                    data: 'start_date',
-                                    name: 'start_date'
-                                },
-                                {
-                                    data: 'end_date',
-                                    name: 'end_date'
-                                },
+
                                 {
                                     data: 'status',
                                     name: 'status'

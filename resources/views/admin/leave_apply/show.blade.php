@@ -43,8 +43,9 @@
             <label for="doc">Required Document </label>
             <div class="row">
 
-
+                @if ($data->doc!='')
                 <iframe class="img-fluid" src="{{ asset('upload/leave_doc/' . $data->doc) }}" frameborder="1"></iframe>
+                @endif
             </div>
         </div>
     </div>

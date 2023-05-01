@@ -36,7 +36,7 @@
                      <!-- Collapse -->
                      @can('view-dashboard')
                          <div class="nav-item">
-                             <a class="nav-link active-class" href="{{ route('admin.dashboard') }}" data-placement="left">
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.dashboard' ? 'active-class' : '' }}" href="{{ route('admin.dashboard') }}" data-placement="left">
                                  <i class="bi bi-speedometer nav-icon"></i>
                                  <span class="nav-link-title">Dashboards</span>
                              </a>
@@ -211,7 +211,7 @@
                          </div>
                      @endcanany
 
-                     @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves'])
+                     {{-- @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves']) --}}
                          <div class="nav-item">
                              <a class="nav-link dropdown-toggle " href="#leave" role="button"
                                  data-bs-toggle="collapse" data-bs-target="#leave" aria-expanded="false"
@@ -255,7 +255,7 @@
                              </div>
                          </div>
                      </div>
-                 @endcanany
+                 {{-- @endcanany --}}
              </div>
              <!-- End Content -->
 

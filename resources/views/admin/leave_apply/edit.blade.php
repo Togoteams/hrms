@@ -49,10 +49,13 @@
                 <div class="row">
                     <div class="col-6"> <input accept="application/pdf" id="doc"
                             placeholder="Enter correct Document   " type="file" name="doc1"
-                            class="form-control form-control-sm "></div>
+                            class="form-control form-control-sm ">
+                    </div>
 
-                    <a class="col-6" href="{{ asset('upload/leave_doc/' . $data->doc) }}"> <iframe class="img-fluid"
-                            src="{{ asset('upload/leave_doc/' . $data->doc) }}" frameborder="0"></iframe> </a>
+                  @if ($data->doc!='')
+                  <a class="col-6" href="{{ asset('upload/leave_doc/' . $data->doc) }}"> <iframe class="img-fluid"
+                    src="{{ asset('upload/leave_doc/' . $data->doc) }}" frameborder="0"></iframe> </a>
+                  @endif
                 </div>
             </div>
         </div>

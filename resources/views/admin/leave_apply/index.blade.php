@@ -27,12 +27,12 @@
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
-                        @can('add-leaves')
+                        {{-- @can('add-leaves') --}}
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                                  {{ $page }}
                             </button>
-                        @endcan
+                        {{-- @endcan --}}
                     </div>
                 </div>
             </div>

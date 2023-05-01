@@ -66,7 +66,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.leave_apply.index') }}",
+                            ajax: "{{ route('admin.leave_apply.balance_history') }}",
 
                             columns: [{
                                     "render": function() {

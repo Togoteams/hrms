@@ -18,8 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->integer('no_of_days');
             $table->text('description');
+            $table->text('status_remarks')->nullable();
             $table->timestamp('deleted_at')->nullable();
-            $table->string('status')->default('active');
+            $table->string('status')->default('pending');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');

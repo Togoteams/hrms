@@ -15,9 +15,10 @@ class Taxseeders extends Seeder
     {
         $all_taxes = array(
             // for local all leaves
-            [ 'name' => "test",'type'=>'percentage','value'=>200,'created_by'=>1, 'description' => "none"],
-            [ 'name' => "test1",'type'=>'flat','value'=>2000,'created_by'=>1, 'description' => "none"],
-            [ 'name' => "test2",'type'=>'percentage','value'=>200,'created_by'=>1, 'description' => "none"],
+            [ 'name' => "Profesional tax",'type'=>'percentage','value'=>200,'created_by'=>1, 'description' => "none"],
+            [ 'name' => "Gst tax",'type'=>'flat','value'=>2000,'created_by'=>1, 'description' => "none"],
+            [ 'name' => "Pf Tax",'type'=>'percentage','value'=>200,'created_by'=>1, 'description' => "none"],
+            [ 'name' => "Esi Tax",'type'=>'percentage','value'=>200,'created_by'=>1, 'description' => "none"],
         
         );
         foreach ($all_taxes as $all) {
