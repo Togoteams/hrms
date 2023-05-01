@@ -87,3 +87,11 @@ a {
 .btn{
     color: #fff !important;
 }
+
+.text-left{
+    text-align: left;
+}
+
+.bt:hover{
+    background-color: #f85109 !important;
+}

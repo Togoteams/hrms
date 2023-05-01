@@ -1,111 +1,110 @@
 {
-    "permissions":[
+    "permissions": [
         {
-            "name" : "View Dashboard"
+            "name": "View Dashboard"
         },
         {
-            "name" : "Add Roles"
+            "name": "Add Roles"
         },
         {
-            "name" : "Edit Roles"
+            "name": "Edit Roles"
         },
         {
-            "name" : "Delete Roles"
+            "name": "Delete Roles"
         },
         {
-            "name" : "View Roles"
+            "name": "View Roles"
         },
         {
-            "name" : "Add Users"
+            "name": "Add Users"
         },
         {
-            "name" : "Edit Users"
+            "name": "Edit Users"
         },
         {
-            "name" : "View Users"
+            "name": "View Users"
         },
         {
-            "name" : "Delete Users"
+            "name": "Delete Users"
         },
         {
-            "name" : "Add Holidays"
+            "name": "Add Holidays"
         },
         {
-            "name" : "Edit Holidays"
+            "name": "Edit Holidays"
         },
         {
-            "name" : "Delete Holidays"
+            "name": "Delete Holidays"
         },
         {
-            "name" : "View Holidays"
+            "name": "View Holidays"
         },
         {
-            "name" : "Add Employees"
+            "name": "Add Employees"
         },
         {
-            "name" : "Edit Employees"
+            "name": "Edit Employees"
         },
         {
-            "name" : "View Employees"
+            "name": "View Employees"
         },
         {
-            "name" : "Delete Employees"
+            "name": "Delete Employees"
         },
         {
-            "name" : "Add Branch"
+            "name": "Add Branch"
         },
         {
-            "name" : "Edit Branch"
+            "name": "Edit Branch"
         },
         {
-            "name" : "View Branch"
+            "name": "View Branch"
         },
         {
-            "name" : "Delete Branch"
+            "name": "Delete Branch"
         },
-        
+
         {
-            "name" : "Add Designations"
-        },
-        {
-            "name" : "Edit Designations"
+            "name": "Add Designations"
         },
         {
-            "name" : "View Designations"
+            "name": "Edit Designations"
         },
         {
-            "name" : "Delete Designations"
+            "name": "View Designations"
         },
         {
-            "name" : "Add Memberships"
+            "name": "Delete Designations"
         },
         {
-            "name" : "Edit Memberships"
+            "name": "Add Memberships"
         },
         {
-            "name" : "View Memberships"
+            "name": "Edit Memberships"
         },
         {
-            "name" : "Delete Memberships"
+            "name": "View Memberships"
         },
         {
-            "name" : "Profile Update"
+            "name": "Delete Memberships"
         },
         {
-            "name" : "Change Password"
+            "name": "Profile Update"
         },
         {
-            "name" : "Add Leaves"
+            "name": "Change Password"
         },
         {
-            "name" : "Edit Leaves"
+            "name": "Add Leaves"
         },
         {
-            "name" : "View Leaves"
+            "name": "Edit Leaves"
         },
         {
-            "name" : "Delete Leaves"
+            "name": "View Leaves"
+        },
+        {
+            "name": "Delete Leaves"
         }
-        
     ]
 }

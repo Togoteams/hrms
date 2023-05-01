@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('employment_type');
             $table->string('ec_number');
             $table->string('gender');
+            $table->string('emergency_contact')->nullable();
             $table->string('id_number');
             $table->string('contract_duration');
             $table->decimal('basic_salary');

@@ -86,9 +86,9 @@
                 <select required id="gender" placeholder="Enter correct gender   " name="gender"
                     class="form-control form-control-sm ">
                     <option disabled> - Select Gender- </option>
-                    <option {{ $data->gender == 'male' ? 'male' : '' }} value="male">Male</option>
-                    <option {{ $data->gender == 'male' ? 'female' : '' }} value="female">Female</option>
-                    <option {{ $data->gender == 'male' ? 'others' : '' }} value="others">others</option>
+                    <option {{ $data->gender == 'male' ? 'selected' : '' }} value="male">Male</option>
+                    <option {{ $data->gender == 'female' ? 'selected' : '' }} value="female">Female</option>
+                    <option {{ $data->gender == 'others' ? 'selected' : '' }} value="others">others</option>
                 </select>
             </div>
         </div>
@@ -100,7 +100,7 @@
                     <option  disabled> - Select employment type- </option>
                     <option {{ $data->employment_type == 'local' ? 'selected' : '' }} value="local">Local</option>
                     <option {{ $data->employment_type == 'expatriate' ? 'selected' : '' }} value="expatriate">Expatriate</option>
-          
+
                 </select>
             </div>
         </div>

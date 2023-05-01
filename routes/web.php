@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\LeaveTypeCobntroller;
 use App\Http\Controllers\Admin\LoansController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
+use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
@@ -31,6 +32,31 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::controller(DashboardController::class)->as('dashboard.')->prefix('dashboard/')->group(function () {
         Route::get('/', 'viewDashboard')->name('view');
     });
+    Route::controller(PersonalInformationController::class)
+        ->as('personal.info.')
+        ->prefix('personal-info')
+        ->group(function () {
+            Route::get('/employee-details', 'viewEmployeeDetails')->name('employee.details');
+            Route::post('/update-employee-details/{id}', 'updateEmployeeDetails')->name('employee.details.update');
+
+            Route::get('/contact-details', 'viewContact')->name('contact');
+            Route::post(
+                '/update-contact',
+                'updateContact'
+            )->name('contact.update');
+
+            Route::get('/address-details', 'viewAddress')->name('address');
+            Route::post('/update-address/{id}', 'updateAddress')->name('address.update');
+
+            Route::get('/dob-details', 'viewDobDetails')->name('dob.details');
+            Route::post('/update-dob-details/{id}', 'updateDobDetails')->name('dob.details.update');
+
+            Route::get('/passport-details', 'viewPassport')->name('passport');
+            Route::post('/update-passport/{id}', 'updatePassport')->name('passport.update');
+
+            Route::get('/emergency-contact-details', 'viewEmergencyContact')->name('emergency.contact');
+            Route::post('/update-emergency-contact/{id}', 'updateEmergencyContact')->name('emergency.contact.update');
+        });
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
@@ -68,14 +94,14 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');
     // leave route start
     Route::resource('leave_apply', LeaveApplyController::class);
-  
+
     Route::get('leave_balance_history/', [LeaveApplyController::class, 'balance_history'])->name('leave_apply.balance_history');
     Route::get('leave_request_history/', [LeaveApplyController::class, 'request_history'])->name('leave_apply.request_history');
-   
+
     Route::get('leave_apply/status_modal/{id}', [LeaveApplyController::class, 'status_modal'])->name('leave_apply.status_modal');
     Route::put('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
- 
+
     //   encashemnt start
     Route::resource('leave_encashment', LeaveEncashmentController::class);
     Route::put('leave_encashment/status/{id}', [LeaveEncashmentController::class, 'status'])->name('leave_encashment.status');
