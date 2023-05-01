@@ -30,7 +30,7 @@
              <!-- End Navbar Vertical Toggle -->
 
              <!-- Search Form -->
-             <h1 class="page-header-title">Dashboard</h1>
+             <h1 class="page-header-title">HRMS</h1>
 
 
              <!-- End Search Form -->
@@ -48,7 +48,7 @@
                              data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"
                              data-bs-dropdown-animation>
                              <div class="avatar avatar-sm avatar-circle">
-                                 <img class="avatar-img" src="{{ asset('assets/img/160x160/img6.jpg') }}"
+                                 <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}"
                                      alt="Image Description">
                                  <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                              </div>
@@ -59,7 +59,7 @@
                              <div class="dropdown-item-text">
                                  <div class="d-flex align-items-center">
                                      <div class="avatar avatar-sm avatar-circle">
-                                         <img class="avatar-img" src="{{ asset('assets/img/160x160/img6.jpg') }}"
+                                         <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}"
                                              alt="Image Description">
                                      </div>
                                      <div class="flex-grow-1 ms-3">
