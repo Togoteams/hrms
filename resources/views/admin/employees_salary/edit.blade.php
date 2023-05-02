@@ -58,12 +58,12 @@
         </div> --}}
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="designatin_id">designatin </label>
-                <select required id="designatin_id" placeholder="Enter correct Emplooye   " name="designatin_id"
+                <label for="designation_id">designatin </label>
+                <select required id="designation_id" placeholder="Enter correct Emplooye   " name="designation_id"
                     class="form-control form-control-sm ">
                     <option disabled> -Select Designation- </option>
                     @foreach ($designation as $deg)
-                        <option {{ $deg->id == $data->designatin_id ? 'selected' : '' }} value="{{ $deg->id }}">
+                        <option {{ $deg->id == $data->designation_id ? 'selected' : '' }} value="{{ $deg->id }}">
                             {{ $deg->name }}</option>
                     @endforeach
                 </select>

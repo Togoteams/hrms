@@ -28,16 +28,26 @@
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
                         {{-- @can('add-leaves') --}}
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                 {{ $page }}
-                            </button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                            {{ $page }}
+                        </button>
                         {{-- @endcan --}}
                     </div>
                 </div>
             </div>
             @include('admin.leave_apply.create')
             <!-- Card -->
+            {{-- @if (isemplooye()) --}}
+                <div class="text-center p-3">
+                    <button class="btn btn-primary ">Total Leave Applied - {{ $data->count('*')}}</button>
+                    <button class="btn btn-warning ">Total Leave Pedding - {{ $data->where('status','pending')->count('*')}} </button>
+                    <button class="btn btn-danger ">Total Leave Rejected - {{ $data->where('status','reject')->count('*')}} </button>
+                    <button class="btn btn-success ">Total Leave Approved - {{ $data->where('status','approved')->count('*')}} </button>
+                    <button class="btn btn-info ">Total Remaining Leave -  </button>
+                </div>
+            {{-- @endif --}}
+
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
                     <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">

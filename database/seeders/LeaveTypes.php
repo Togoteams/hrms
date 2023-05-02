@@ -23,6 +23,7 @@ class LeaveTypes extends Seeder
             ['leave_for' => "local", 'name' => "BEREAVEMENT LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
             ['leave_for' => "local", 'name' => "LEAVE WITHOUT PAY", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
             // for expatriate all leaves
+            ['leave_for' => "expatriate", 'name' => "SICK LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 20, "created_by" => 1],
             ['leave_for' => "expatriate", 'name' => "CASUAL LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 20, "created_by" => 1],
             ['leave_for' => "expatriate", 'name' => "MATERNITY LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
             ['leave_for' => "expatriate", 'name' => "PRIVILEGED LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],

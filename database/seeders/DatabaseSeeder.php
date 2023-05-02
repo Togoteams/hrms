@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             Brachseeders::class,
             Taxseeders::class,
             Membershipseeders::class,
+            Employeeseeders::class,
         ]);
     }
 }

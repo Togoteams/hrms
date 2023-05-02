@@ -62,7 +62,7 @@ class EmployeeController extends Controller
             'mobile' => ['required', 'numeric', 'min:10'],
             'username' => ['required', 'string', 'min:5', 'unique:users'],
             'password' => ['required', 'confirmed', Password::defaults()],
-            'designatin_id' => ['required', 'numeric'],
+            'designation_id' => ['required', 'numeric'],
             'ec_number' => ['required', 'numeric'],
             'ec_number' => ['required', 'numeric'],
             'id_number' => ['required', 'numeric'],
@@ -138,7 +138,7 @@ class EmployeeController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'designatin_id' => ['required', 'numeric'],
+            'designation_id' => ['required', 'numeric'],
             'ec_number' => ['required', 'numeric'],
             'ec_number' => ['required', 'numeric'],
             'id_number' => ['required', 'numeric'],

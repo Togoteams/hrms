@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('emp_id')->unique();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->unsignedBigInteger('designatin_id');
+            $table->unsignedBigInteger('designation_id');
             // $table->unsignedBigInteger('tax_id');
             $table->string('employment_type');
             $table->string('ec_number');
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('status')->default('active');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('designatin_id')->references('id')->on('designations');
+            // $table->foreign('designation_id')->references('id')->on('designations');
             // $table->foreign('branch_id')->references('id')->on('branches');
             // $table->foreign('tax_id')->references('id')->on('taxes');
 

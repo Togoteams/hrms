@@ -64,7 +64,7 @@ class PersonalInformationController extends Controller
             'user_id' => ['required', 'numeric'],
             'username' => ['required', 'string'],
             'gender' => ['required', 'string'],
-            'designatin_id' => ['required', 'numeric'],
+            'designation_id' => ['required', 'numeric'],
             'basic_salary' => ['required', 'numeric'],
         ]);
 
@@ -73,7 +73,7 @@ class PersonalInformationController extends Controller
         } else {
             try {
                 Employee::where('id', $id)->update($request->except(['_token', 'user_id','name', 'username']));
-                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designatin_id', 'basic_salary']));
+                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);

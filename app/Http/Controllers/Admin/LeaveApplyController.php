@@ -44,9 +44,12 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+
         $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
-        return view('admin.leave_apply.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
+
+        return view('admin.leave_apply.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users,'data'=>$data]);
     }
 
 
