@@ -46,13 +46,13 @@ class LeaveApplyController extends Controller
         }
         if (isemplooye()) {
             $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
-            $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('is_paid', 'unpaid')->count('*');
+            $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
             $total_pedding = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'pending')->count('*');
             $total_approved = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'reject')->count('*');
             $total_reject = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->count('*');
         } else {
             $data = LeaveApply::with('user', 'leave_type')->select('*');
-            $total_upaid_leave = LeaveApply::where('is_paid', 'unpaid')->count('*');
+            $total_upaid_leave = LeaveApply::where('is_paid', 'unpaid')->where('status', 'approved')->count('*');
             $total_pedding = LeaveApply::where('status', 'pending')->count('*');
             $total_approved = LeaveApply::where('status', 'reject')->count('*');
             $total_reject = LeaveApply::where('status', 'approved')->count('*');
@@ -96,30 +96,38 @@ class LeaveApplyController extends Controller
             "doc1" => ["mimetypes:application/pdf", "max:10000"]
         ]);
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                if (isset($request->user_id) && $request->user_id != '') {
-                    $user = User::find($request->user_id);
-                } else {
-                    $user = Auth::user();
+        $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
+        $total_leave_days = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->where('nature_of_leave', 'unpaid')->sum('no_of_days');
+
+        if ($total_leave_days >= $total_upaid_leave) {
+
+
+            if ($validator->fails()) {
+                return $validator->errors();
+            } else {
+                try {
+                    if (isset($request->user_id) && $request->user_id != '') {
+                        $user = User::find($request->user_id);
+                    } else {
+                        $user = Auth::user();
+                    }
+                    $request->request->add([
+                        'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
+                        'uuid' => $user->uuid,
+                        'user_id' => $user->id,
+                        'created_by' => Auth::user()->id,
+                        'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave
+                    ]);
+                    LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
+                    return response()->json(['success' => $this->page_name . " Added Successfully"]);
+                } catch (Exception $e) {
+                    return response()->json(['error' => $e->getMessage()]);
                 }
-                $request->request->add([
-                    'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
-                    'uuid' => $user->uuid,
-                    'user_id' => $user->id,
-                    'created_by' => Auth::user()->id,
-                    'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave
-                ]);
-                LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
-                return response()->json(['success' => $this->page_name . " Added Successfully"]);
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
             }
+        } else {
+            return response()->json(['error' => "You have Applied Maximum number of leave"]);
         }
     }
-
     /**
      * Display the specified resource.
      */

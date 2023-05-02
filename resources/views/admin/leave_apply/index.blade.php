@@ -61,6 +61,7 @@
                                 <th>leave type</th>
                                 <th>From </th>
                                 <th>To</th>
+                                <th>Paid/Unpaid</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -108,6 +109,10 @@
                                 {
                                     data: 'end_date',
                                     name: 'end_date'
+                                },
+                                {
+                                    data: 'is_paid',
+                                    name: 'is_paid'
                                 },
                                 {
                                     data: 'status',
