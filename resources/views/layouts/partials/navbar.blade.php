@@ -37,7 +37,7 @@
          </div>
          <div class=" mx-auto text-center nav-center-logo">
 
-            <img class="navbar-brand-logo" src="{{ asset('assets/img/logo.svg') }}" alt="Logo"
+            <img class="navbar-brand-logo" src="{{ asset('assets/img/logo-cropped.svg') }}" alt="Logo"
             data-hs-theme-appearance="default">
 
 
