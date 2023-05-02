@@ -50,12 +50,12 @@ aside{
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
 }
 .navbar-container{
-    background-color: #ffffff !important;
+    background-color: #f85109 !important;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px !important;
 
 }
 .navbar-container h1{
-   color: #f85109 !important;
+   color: #fff !important;
 
 
 }
@@ -97,9 +97,13 @@ a {
 }
 
 .nav-center-logo img{
-   min-width: 170px !important;
-   zoom: 250%;
+   max-width: 20px !important;
+   zoom: 190%;
    padding-top: 3px;
+   padding-bottom: 3px;
+   background:#fff;
+   padding: 2px 3px 2px 3px ;
+   border-radius: 4px;
 }
 
 .name-title{
@@ -114,3 +118,4 @@ a {
 .tittle-nav{
     font-size: 30px;
 }
+
