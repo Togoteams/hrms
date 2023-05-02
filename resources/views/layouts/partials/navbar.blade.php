@@ -16,7 +16,7 @@
          </a>
          <!-- End Logo -->
 
-         <div class="navbar-nav-wrap-content-start">
+         <div class="navbar-nav-wrap-content mr-auto">
              <!-- Navbar Vertical Toggle -->
              <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                  <i class="bi-arrow-bar-left navbar-toggler-short-align"
@@ -44,7 +44,7 @@
             <!-- End Search Form -->
         </div>
 
-         <div class="navbar-nav-wrap-content-end">
+         <div class="navbar-nav-wrap-content ml-auto">
              <!-- Navbar -->
              <ul class="navbar-nav">
 
