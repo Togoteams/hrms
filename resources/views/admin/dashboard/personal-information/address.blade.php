@@ -14,19 +14,24 @@
                     <!-- Stats -->
                     <div class="mt-5">
 
-                        <div class="d-flex align-items-start">
-                            @include('admin.dashboard.personal-information.aside')
-                            <div class="tab-content" id="v-pills-tabContent">
+                        <div class="row d-flex align-items-start">
+                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                                @include('admin.dashboard.personal-information.aside')
                                 <div class="tab-pane fade ms-5 show active">
+                                </div>
+                            </div>
+                            <div class="col-6 border border-1 border-color rounded  mx-3">
 
-                                    <div class="border border-1 border-color rounded">
+                                <div class="tab-content" id="v-pills-tabContent">
+
+                                    <div class=" ">
                                         <div class="container mt-2 mb-2 ms-1">
                                             <div class="row">
-                                                <div class="col-md-10">
+                                                <div class="col-md-10 py-4">
                                                     <div class="left-div">
                                                         <div class="row">
-                                                            <div class="col-4">Gender:</div>
-                                                            <div class="col-8">{{ $data->gender }}</div>
+                                                            <div class="col-3">Gender:</div>
+                                                            <div class="col-7">{{ $data->gender }}</div>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -16,7 +16,7 @@
          </a>
          <!-- End Logo -->
 
-         <div class="navbar-nav-wrap-content-start">
+         <div class="navbar-nav-wrap-content mr-auto">
              <!-- Navbar Vertical Toggle -->
              <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                  <i class="bi-arrow-bar-left navbar-toggler-short-align"
@@ -30,13 +30,21 @@
              <!-- End Navbar Vertical Toggle -->
 
              <!-- Search Form -->
-             <h1 class="page-header-title">HRMS</h1>
+             <h1 class="tittle-nav">HRMS</h1>
 
 
              <!-- End Search Form -->
          </div>
+         <div class=" mx-auto text-center nav-center-logo">
 
-         <div class="navbar-nav-wrap-content-end">
+            <img class="navbar-brand-logo" src="{{ asset('assets/img/logo.svg') }}" alt="Logo"
+            data-hs-theme-appearance="default">
+
+
+            <!-- End Search Form -->
+        </div>
+
+         <div class="navbar-nav-wrap-content ml-auto">
              <!-- Navbar -->
              <ul class="navbar-nav">
 
