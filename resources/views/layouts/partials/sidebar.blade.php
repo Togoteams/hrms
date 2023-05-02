@@ -19,7 +19,8 @@
              <!-- End Logo -->
              <div class="text-center pt-3">
                 <a class="">
-                    <span class="name-title"><i>Bank Of Baroda</i></span>
+                    <span class="name-title"><i>Bank of Baroda Ltd.
+                        <br>(Botswana)</i></span>
                 </a>
             </div>
              <!-- Navbar Vertical Toggle -->
