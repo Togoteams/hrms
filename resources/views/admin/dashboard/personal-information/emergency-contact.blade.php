@@ -19,7 +19,7 @@
                             <div class="tab-content" id="v-pills-tabContent">
                                 <div class="tab-pane fade ms-5 show active">
 
-                                    <div class="border border-1 border-color rounded w-75">
+                                    <div class="border border-1 border-color rounded">
                                         <div class="container mt-2 mb-2 ms-1">
                                             <div class="row">
                                                 <div class="col-md-10">
