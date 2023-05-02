@@ -6,7 +6,7 @@
          <div class="navbar-vertical-footer-offset">
              <!-- Logo -->
 
-             <a class="navbar-brand" href="index-2.html" aria-label="Front">
+             {{-- <a class="navbar-brand" href="index-2.html" aria-label="Front">
                  <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo" data-hs-theme-appearance="default">
                  <img class="navbar-brand-logo" src="{{ asset('assets/svg/logos-light/logo.svg') }}" alt="Logo"
                      data-hs-theme-appearance="dark">
@@ -14,10 +14,14 @@
                      data-hs-theme-appearance="default">
                  <img class="navbar-brand-logo-mini" src="{{ asset('assets/svg/logos-light/logo-short.svg') }}"
                      alt="Logo" data-hs-theme-appearance="dark">
-             </a>
+             </a> --}}
 
              <!-- End Logo -->
-
+             <div class="text-center pt-3">
+                <a class="">
+                    <span class="name-title"><i>Bank Of Baroda</i></span>
+                </a>
+            </div>
              <!-- Navbar Vertical Toggle -->
              <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                  <i class="bi-arrow-bar-left navbar-toggler-short-align"

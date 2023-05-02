@@ -50,12 +50,12 @@ aside{
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px !important;
 }
 .navbar-container{
-    background-color: #f85109 !important;
+    background-color: #ffffff !important;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px !important;
 
 }
 .navbar-container h1{
-   color: #fff !important;
+   color: #f85109 !important;
 
 
 }
@@ -96,6 +96,12 @@ a {
     background-color: #f85109 !important;
 }
 
-.center-logo img{
+.nav-center-logo img{
    min-width: 200px !important;
+}
+
+.name-title{
+    font-size: 24px !important;
+    font-weight: bold !important;
+    font-family: 'Arial ', sans-serif !important;
 }

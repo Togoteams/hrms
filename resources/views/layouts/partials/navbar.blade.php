@@ -35,6 +35,14 @@
 
              <!-- End Search Form -->
          </div>
+         <div class=" mx-auto text-center nav-center-logo">
+
+            <img class="navbar-brand-logo" src="{{ asset('assets/img/logo.svg') }}" alt="Logo"
+            data-hs-theme-appearance="default">
+
+
+            <!-- End Search Form -->
+        </div>
 
          <div class="navbar-nav-wrap-content-end">
              <!-- Navbar -->
