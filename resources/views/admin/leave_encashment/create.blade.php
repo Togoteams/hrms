@@ -12,8 +12,6 @@
                         enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
-
-
                         <div class="row">
 
                             @if (!isemplooye())
@@ -31,14 +29,11 @@
                                     </div>
                                 </div>
                             @endif
-
-
-
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="no_of_days">no_of_days.. </label>
-                                    <input required id="no_of_days" placeholder="Enter correct no_of_days..   "
-                                        type="text" value="{{ '0' }}" name="no_of_days"
+                                    <input readonly required id="no_of_days" placeholder="Enter correct no_of_days..   "
+                                        type="text" value="{{ $total_remaining_leave }}" name="no_of_days"
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>

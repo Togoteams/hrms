@@ -4,10 +4,6 @@
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="row">
-
-
-
-
         <div class="col-sm-6 mb-2">
             <div class="form-group">
                 <label for="no_of_days">no_of_days.. </label>

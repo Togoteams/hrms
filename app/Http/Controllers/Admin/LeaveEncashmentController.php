@@ -39,9 +39,12 @@ class LeaveEncashmentController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
+        $total_leave_days = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->where('nature_of_leave', 'unpaid')->sum('no_of_days');
+        $total_remaining_leave = $total_leave_days - $total_upaid_leave;
         $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
-        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
+        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users, 'total_remaining_leave' => $total_remaining_leave]);
     }
 
 
@@ -77,7 +80,7 @@ class LeaveEncashmentController extends Controller
                     'uuid' => $user->uuid,
                     'user_id' => $user->id,
                     'created_by' => Auth::user()->id,
-                    'employee_id'=>Employee::where('user_id',$user->id)->first()->id
+                    'employee_id' => Employee::where('user_id', $user->id)->first()->id
                 ]);
                 LeaveEncashment::insertGetId($request->except(['_token',  '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
@@ -93,9 +96,11 @@ class LeaveEncashmentController extends Controller
     public function show(string $id)
     {
         $leave_type = LeaveType::where('status', 'active')->get();
-
+        $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
+        $total_leave_days = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->where('nature_of_leave', 'unpaid')->sum('no_of_days');
+        $total_remaining_leave = $total_leave_days - $total_upaid_leave;
         $data = LeaveEncashment::find($id);
-        return view('admin.leave_encashment.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
+        return view('admin.leave_encashment.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'total_remaining_leave' => $total_remaining_leave]);
     }
 
     /**

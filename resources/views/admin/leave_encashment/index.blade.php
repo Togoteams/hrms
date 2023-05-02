@@ -27,12 +27,12 @@
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
-                        @can('add-leaves')
+                        {{-- @can('add-leaves') --}}
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                                 {{ $page }}
                             </button>
-                        @endcan
+                        {{-- @endcan --}}
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content ">
                         <div class="modal-header ">
-                            <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Show {{ $page }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="show">

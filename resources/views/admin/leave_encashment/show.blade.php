@@ -3,7 +3,7 @@
         <div class="form-group">
             <label for="no_of_days">no_of_days.. </label>
             <input disabled required id="no_of_days" placeholder="Enter correct no_of_days..   " type="text"
-                value="{{ '0' }}" name="no_of_days" class="form-control form-control-sm ">
+                value="{{ $total_remaining_leave }}" name="no_of_days" class="form-control form-control-sm ">
         </div>
     </div>
 
