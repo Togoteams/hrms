@@ -14,36 +14,41 @@
                     <!-- Stats -->
                     <div class="mt-5">
 
-                        <div class="d-flex align-items-start">
-                            @include('admin.dashboard.personal-information.aside')
-                            <div class="tab-content" id="v-pills-tabContent">
+                        <div class="row d-flex align-items-start">
+                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                                @include('admin.dashboard.personal-information.aside')
                                 <div class="tab-pane fade ms-5 show active">
+                                </div>
+                            </div>
+                            <div class="col-6 border border-1 border-color rounded  mx-3">
 
-                                    <div class="border border-1 border-color rounded w-50">
+                                <div class="tab-content" id="v-pills-tabContent">
+
+                                    <div class=" ">
                                         <div class="container mt-2 mb-2 ms-1">
                                             <div class="row">
-                                                <div class="col-md-10">
+                                                <div class="col-md-10 py-4">
                                                     <div class="left-div">
                                                         <div class="row">
-                                                            <div class="col-5">Name:</div>
+                                                            <div class="col-3">Name:</div>
                                                             <div class="col-7">{{ $data->user->name }}</div>
 
-                                                            <div class="col-5">Gender:</div>
+                                                            <div class="col-3">Gender:</div>
                                                             <div class="col-7">{{ $data->gender }}</div>
 
-                                                            <div class="col-5">User Name:</div>
+                                                            <div class="col-3">User Name:</div>
                                                             <div class="col-7">{{ $data->user->username }}</div>
 
-                                                            <div class="col-5">Designation:</div>
+                                                            <div class="col-3">Designation:</div>
                                                             <div class="col-7">{{ $data->designation->name }}</div>
 
-                                                            <div class="col-5">Basic Salary:</div>
+                                                            <div class="col-3">Basic Salary:</div>
                                                             <div class="col-7">{{ $data->basic_salary }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 text-end">
-                                                    <div class="right-div">
+                                                    <div class="pt-2">
                                                         <!-- Your content for right div goes here -->
                                                         <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
                                                             data-bs-target="#modaledit">
@@ -92,11 +97,14 @@
                                                 <select required id="gender" placeholder="Enter correct gender   "
                                                     name="gender" class="form-control form-control-sm ">
                                                     <option disabled> - Select Gender- </option>
-                                                    <option {{ $data->gender == 'male' ? 'selected' : '' }} value="male">Male
+                                                    <option {{ $data->gender == 'male' ? 'selected' : '' }} value="male">
+                                                        Male
                                                     </option>
-                                                    <option {{ $data->gender == 'female' ? 'selected' : '' }} value="female">
+                                                    <option {{ $data->gender == 'female' ? 'selected' : '' }}
+                                                        value="female">
                                                         Female</option>
-                                                    <option {{ $data->gender == 'others' ? 'selected' : '' }} value="others">
+                                                    <option {{ $data->gender == 'others' ? 'selected' : '' }}
+                                                        value="others">
                                                         others</option>
                                                 </select>
                                             </div>

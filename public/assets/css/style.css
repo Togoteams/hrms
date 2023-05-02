@@ -95,3 +95,7 @@ a {
 .bt:hover{
     background-color: #f85109 !important;
 }
+
+.center-logo img{
+   min-width: 200px !important;
+}
