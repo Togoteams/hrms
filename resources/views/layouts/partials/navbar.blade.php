@@ -30,7 +30,7 @@
              <!-- End Navbar Vertical Toggle -->
 
              <!-- Search Form -->
-             <h1 class="page-header-title">HRMS</h1>
+             <h1 class="tittle-nav">HRMS</h1>
 
 
              <!-- End Search Form -->

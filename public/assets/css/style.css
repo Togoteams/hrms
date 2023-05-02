@@ -97,11 +97,16 @@ a {
 }
 
 .nav-center-logo img{
-   min-width: 200px !important;
+   min-width: 170px !important;
+   zoom: 220%;
 }
 
 .name-title{
     font-size: 24px !important;
     font-weight: bold !important;
     font-family: 'Arial ', sans-serif !important;
+}
+
+.tittle-nav{
+    font-size: 30px;
 }
