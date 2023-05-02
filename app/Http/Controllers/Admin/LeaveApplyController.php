@@ -36,20 +36,42 @@ class LeaveApplyController extends Controller
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date )->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->editColumn('end_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->end_date )->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+        if (isemplooye()) {
+            $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+            $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('is_paid', 'unpaid')->count('*');
+            $total_pedding = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'pending')->count('*');
+            $total_approved = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'reject')->count('*');
+            $total_reject = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->count('*');
+        } else {
+            $data = LeaveApply::with('user', 'leave_type')->select('*');
+            $total_upaid_leave = LeaveApply::where('is_paid', 'unpaid')->count('*');
+            $total_pedding = LeaveApply::where('status', 'pending')->count('*');
+            $total_approved = LeaveApply::where('status', 'reject')->count('*');
+            $total_reject = LeaveApply::where('status', 'approved')->count('*');
+        }
 
         $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
 
-        return view('admin.leave_apply.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users,'data'=>$data]);
+        return view('admin.leave_apply.index', [
+            'page' => $this->page_name,
+            'leave_type' => $leave_type,
+            'all_user' => $all_users,
+            'data' => $data,
+            'total_upaid_leave' => $total_upaid_leave,
+            'total_pedding' => $total_pedding,
+            'total_approved' => $total_approved,
+            'total_reject' => $total_reject,
+
+        ]);
     }
 
 
@@ -83,12 +105,12 @@ class LeaveApplyController extends Controller
                 } else {
                     $user = Auth::user();
                 }
-
                 $request->request->add([
                     'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
                     'uuid' => $user->uuid,
                     'user_id' => $user->id,
                     'created_by' => Auth::user()->id,
+                    'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave
                 ]);
                 LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
@@ -147,7 +169,8 @@ class LeaveApplyController extends Controller
         } else {
             try {
                 $request->request->add([
-                    'updated_by' => Auth::user()->id
+                    'updated_by' => Auth::user()->id,
+                    'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave
                 ]);
                 LeaveApply::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));
                 $request->has('doc1') ? $this->update_images('leave_applies', $id, $request->file('doc1'), 'leave_doc', 'doc') : LeaveApply::find($id)->doc;
@@ -201,10 +224,10 @@ class LeaveApplyController extends Controller
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status','approved')->select('*');
+                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status', 'approved')->select('*');
             } else {
 
-                $data = LeaveApply::with('user', 'leave_type')->where('status','approved')->select('*');
+                $data = LeaveApply::with('user', 'leave_type')->where('status', 'approved')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -213,10 +236,10 @@ class LeaveApplyController extends Controller
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date )->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->editColumn('end_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->end_date )->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -232,9 +255,9 @@ class LeaveApplyController extends Controller
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status','pending')->get();
+                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
             } else {
-                $data = LeaveApply::with('user', 'leave_type')->where('status','pending')->get();
+                $data = LeaveApply::with('user', 'leave_type')->where('status', 'pending')->get();
             }
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -243,10 +266,10 @@ class LeaveApplyController extends Controller
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date )->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->editColumn('end_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->end_date )->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);

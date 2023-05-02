@@ -38,15 +38,16 @@
             </div>
             @include('admin.leave_apply.create')
             <!-- Card -->
-            {{-- @if (isemplooye()) --}}
-                <div class="text-center p-3">
-                    <button class="btn btn-primary ">Total Leave Applied - {{ $data->count('*')}}</button>
-                    <button class="btn btn-warning ">Total Leave Pedding - {{ $data->where('status','pending')->count('*')}} </button>
-                    <button class="btn btn-danger ">Total Leave Rejected - {{ $data->where('status','reject')->count('*')}} </button>
-                    <button class="btn btn-success ">Total Leave Approved - {{ $data->where('status','approved')->count('*')}} </button>
-                    <button class="btn btn-info ">Total Remaining Leave -  </button>
-                </div>
-            {{-- @endif --}}
+            <div class="text-center p-3">
+                <a href="{{ route('admin.leave_apply.index')}}" class="btn btn-primary ">Total Leave Applied - {{ $data->count('*') }}</a>
+                <a href="{{ route('admin.leave_apply.request_history') }}" class="btn btn-warning ">Total Leave Pedding - {{ $total_pedding }} </a>
+                <a href="" class="btn btn-danger ">Total Leave Rejected - {{ $total_approved }} </a>
+                <a href="{{ route('admin.leave_apply.balance_history') }}" class="btn btn-success ">Total Leave Approved - {{ $total_reject }} </a>
+                @if (isemplooye())
+                    <a class="btn btn-info ">Total Remaining Leave - {{ $leave_type->where('nature_of_leave','unpaid')->sum('no_of_days')-$total_upaid_leave }} </a>
+                @endif
+
+            </div>
 
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
@@ -156,7 +157,7 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content ">
                         <div class="modal-header ">
-                            <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel"> Show {{ $page }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="show">

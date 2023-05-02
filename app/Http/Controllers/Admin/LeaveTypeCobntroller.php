@@ -70,7 +70,7 @@ class LeaveTypeCobntroller extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:leave_types,name,' . $id,
+            'name' => 'string|required',
             'description' => 'string|required',
             'nature_of_leave' => 'required|string',
             'no_of_days' => 'required|numeric'
