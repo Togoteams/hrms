@@ -18,9 +18,10 @@
 
              <!-- End Logo -->
              <div class="text-center pt-3">
-                <a class="">
-                    <span class="name-title"><i>Bank Of Baroda</i></span>
-                </a>
+
+                   <i class="name-title">Bank of Baroda Ltd.
+
+                        (Botswana)</i>
             </div>
              <!-- Navbar Vertical Toggle -->
              <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
