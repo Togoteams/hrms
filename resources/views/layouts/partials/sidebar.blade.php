@@ -19,10 +19,10 @@
              <!-- End Logo -->
              <div class="text-center pt-3">
 
-                   <i class="name-title">Bank of Baroda Ltd.
+                 <i class="name-title">Bank of Baroda Ltd.
 
-                        (Botswana)</i>
-            </div>
+                     (Botswana)</i>
+             </div>
              <!-- Navbar Vertical Toggle -->
              <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                  <i class="bi-arrow-bar-left navbar-toggler-short-align"
@@ -41,7 +41,8 @@
                      <!-- Collapse -->
                      @can('view-dashboard')
                          <div class="nav-item">
-                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.dashboard' ? 'active-class' : '' }}" href="{{ route('admin.dashboard') }}" data-placement="left">
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.dashboard' ? 'active-class' : '' }}"
+                                 href="{{ route('admin.dashboard') }}" data-placement="left">
                                  <i class="bi bi-speedometer nav-icon"></i>
                                  <span class="nav-link-title">Dashboards</span>
                              </a>
@@ -217,49 +218,51 @@
                      @endcanany
 
                      {{-- @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves']) --}}
-                         <div class="nav-item">
-                             <a class="nav-link dropdown-toggle " href="#leave" role="button"
-                                 data-bs-toggle="collapse" data-bs-target="#leave" aria-expanded="false"
-                                 aria-controls="leave">
-                                 <i class="bi-person nav-icon"></i>
-                                 <span class="nav-link-title">Leave</span>
-                             </a>
+                     <div class="nav-item">
+                         <a class="nav-link dropdown-toggle " href="#leave" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#leave" aria-expanded="false"
+                             aria-controls="leave">
+                             <i class="bi-person nav-icon"></i>
+                             <span class="nav-link-title">Leave</span>
+                         </a>
 
-                             <div id="leave"
-                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index','leave_encashment.index','leave_apply.balance_history','leave_apply.request_history']) }} "
-                                 data-bs-parent="#navbarVerticalMenuPagesMenu">
-
+                         <div id="leave"
+                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history']) }} "
+                             data-bs-parent="#navbarVerticalMenuPagesMenu">
+                          
+                             @if (!isemplooye())
                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
                                      href="{{ route('admin.leave_type.index') }}">Leave Types</a>
+                             @endif
 
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
-                                     <span class="nav-link-title">LEAVE Apply/Modify</span>
-
-
-                                 </a>
-
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_encashment.index' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave_encashment.index') }}" data-placement="left">
-                                     <span class="nav-link-title">LEAVE ENCASHMENT</span>
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
+                                 href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                 <span class="nav-link-title">LEAVE Apply/Modify</span>
 
 
-                                 </a>
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.balance_history' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave_apply.balance_history') }}" data-placement="left">
-                                     <span class="nav-link-title">LEAVE BALANCE REPORT</span>
+                             </a>
+
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_encashment.index' ? 'active' : '' }}"
+                                 href="{{ route('admin.leave_encashment.index') }}" data-placement="left">
+                                 <span class="nav-link-title">LEAVE ENCASHMENT</span>
 
 
-                                 </a>
-                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.request_history' ? 'active' : '' }}"
-                                     href="{{ route('admin.leave_apply.request_history') }}" data-placement="left">
-                                     <span class="nav-link-title">LEAVE REQUEST HISTORY</span>
+                             </a>
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.balance_history' ? 'active' : '' }}"
+                                 href="{{ route('admin.leave_apply.balance_history') }}" data-placement="left">
+                                 <span class="nav-link-title">LEAVE BALANCE REPORT</span>
 
 
-                                 </a>
-                             </div>
+                             </a>
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.request_history' ? 'active' : '' }}"
+                                 href="{{ route('admin.leave_apply.request_history') }}" data-placement="left">
+                                 <span class="nav-link-title">LEAVE REQUEST HISTORY</span>
+
+
+                             </a>
                          </div>
                      </div>
+                 </div>
                  {{-- @endcanany --}}
              </div>
              <!-- End Content -->

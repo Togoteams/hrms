@@ -47,6 +47,10 @@
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
+                                <th>Ec number</th>
+                                <th>Designation</th>
+                                <th>Join Date</th>
+                                <th>Apply Date</th>
                                 <th>No of Days</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
@@ -82,6 +86,23 @@
                                 {
                                     data: 'user.mobile',
                                     name: 'user.mobile'
+                                },
+                             
+                                {
+                                    data: 'employee.ec_number',
+                                    name: 'employee.ec_number'
+                                },
+                                {
+                                    data: 'employee.designation.name',
+                                    name: 'employee.designation.name'
+                                },
+                                {
+                                    data: 'employee.start_date',
+                                    name: 'employee.start_date'
+                                },
+                                {
+                                    data: 'apply_date',
+                                    name: 'apply_date'
                                 },
 
                                 {

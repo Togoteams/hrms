@@ -44,7 +44,7 @@
                 <a href="" class="btn btn-danger ">Total Leave Rejected - {{ $total_approved }} </a>
                 <a href="{{ route('admin.leave_apply.balance_history') }}" class="btn btn-success ">Total Leave Approved - {{ $total_reject }} </a>
                 @if (isemplooye())
-                    <a class="btn btn-info ">Total Remaining Leave - {{ $leave_type->where('nature_of_leave','unpaid')->sum('no_of_days')-$total_upaid_leave }} </a>
+                    <a class="btn btn-info ">Total Remaining Leave - {{ total_remaining_leave(Auth::user()->id) }} </a>
                 @endif
 
             </div>
@@ -122,8 +122,8 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
-                                    searchable: true
+                                    orderable: false,
+                                    searchable: false
                                 },
                             ]
                         });

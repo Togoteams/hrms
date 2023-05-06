@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Designation;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Employee;
@@ -20,31 +21,40 @@ class LeaveEncashmentController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveEncashment::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+                $data = LeaveEncashment::with('user', 'leave_type', 'employee','employee.designation')->where('user_id', Auth::user()->id)->select('*');
             } else {
 
-                $data = LeaveEncashment::with('user', 'leave_type')->select('*');
+                $data = LeaveEncashment::with('user', 'leave_type', 'employee','employee.designation')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
+              
+                ->editColumn('employee.start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->employee->start_date)->isoFormat('DD.MM.YYYY');
+                })
+                ->addColumn('apply_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->created_at)->isoFormat('DD.MM.YYYY');
+                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_encashment.buttons', ['item' => $row, "route" => 'leave_encashment']);
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'designation'])
                 ->make(true);
         }
-        $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
-        $total_leave_days = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->where('nature_of_leave', 'unpaid')->sum('no_of_days');
-        $total_remaining_leave = $total_leave_days - $total_upaid_leave;
+
         $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
-        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users, 'total_remaining_leave' => $total_remaining_leave]);
+        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users, 'total_remaining_leave' => $this->total_remaining_leave()]);
     }
 
 
@@ -80,7 +90,8 @@ class LeaveEncashmentController extends Controller
                     'uuid' => $user->uuid,
                     'user_id' => $user->id,
                     'created_by' => Auth::user()->id,
-                    'employee_id' => Employee::where('user_id', $user->id)->first()->id
+                    'employee_id' => Employee::where('user_id', $user->id)->first()->id,
+
                 ]);
                 LeaveEncashment::insertGetId($request->except(['_token',  '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);

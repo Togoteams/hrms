@@ -50,6 +50,7 @@
                                 <th>leave type</th>
                                 <th>From </th>
                                 <th>To</th>
+                                <th>Balance Leave</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -97,6 +98,10 @@
                                 {
                                     data: 'end_date',
                                     name: 'end_date'
+                                },
+                                {
+                                    data:'remaining_leave',
+                                    name:'remaining_leave'
                                 },
                                 {
                                     data: 'status',

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('is_paid')->default(0);
             $table->string('leave_reason');
             $table->date('apply_date')->nullable();
+            $table->integer('remaining_leave');
             $table->string('remark')->nullable();
             $table->string('status_remarks')->nullable();
             $table->string('status')->default('pending');

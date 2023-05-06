@@ -19,6 +19,9 @@ class LeaveApplyController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -95,28 +98,26 @@ class LeaveApplyController extends Controller
             'end_date' => ['required', 'date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"]
         ]);
+        if (isset($request->user_id) && $request->user_id != '') {
+            $user = User::find($request->user_id);
+        } else {
+            $user = Auth::user();
+        }
 
-        $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
-        $total_leave_days = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->where('nature_of_leave', 'unpaid')->sum('no_of_days');
-
-        if ($total_leave_days >= $total_upaid_leave) {
-
-
+        if (total_remaining_leave($user->id) > 0) {
             if ($validator->fails()) {
                 return $validator->errors();
             } else {
                 try {
-                    if (isset($request->user_id) && $request->user_id != '') {
-                        $user = User::find($request->user_id);
-                    } else {
-                        $user = Auth::user();
-                    }
+
                     $request->request->add([
                         'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
                         'uuid' => $user->uuid,
                         'user_id' => $user->id,
                         'created_by' => Auth::user()->id,
-                        'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave
+                        'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave,
+                        'remaining_leave' => (int)$this->total_remaining_leave($user->id)
+
                     ]);
                     LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
                     return response()->json(['success' => $this->page_name . " Added Successfully"]);
@@ -178,7 +179,8 @@ class LeaveApplyController extends Controller
             try {
                 $request->request->add([
                     'updated_by' => Auth::user()->id,
-                    'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave
+                    'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave,
+
                 ]);
                 LeaveApply::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));
                 $request->has('doc1') ? $this->update_images('leave_applies', $id, $request->file('doc1'), 'leave_doc', 'doc') : LeaveApply::find($id)->doc;
@@ -195,6 +197,8 @@ class LeaveApplyController extends Controller
             LeaveApply::where('id', $id)->update([
                 'status' => $request->status,
                 'status_remarks' => $request->status_remarks,
+                'remaining_leave' =>  $request->status == "approved" ? (int)$this->total_remaining_leave($id) - 1 : (int)$this->total_remaining_leave($id),
+
             ]);
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         } catch (Exception $e) {
