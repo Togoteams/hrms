@@ -19,11 +19,14 @@
                                 <div class="col-sm-6 mb-2">
                                     <div class="form-group">
                                         <label for="user_id"> </label>
-                                        <select onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')" required id="user_id" placeholder="Enter correct user_id   "
+                                        <select
+                                            onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
+                                            required id="user_id" placeholder="Enter correct user_id   "
                                             type="text" name="user_id" class="form-control form-control-sm ">
                                             <option selected disabled> -Select User - </option>
                                             @foreach ($all_user as $user)
-                                                <option value="{{ $user->user->id }}">{{ $user->user->name }} -  {{$user->user->email}}</option>
+                                                <option value="{{ $user->user->id }}">{{ $user->user->name }} -
+                                                    {{ $user->user->email }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -33,14 +36,24 @@
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types </label>
-                                    <select required id="leave_type_id" placeholder="Enter correct leave_type_id   "
-                                        type="text" name="leave_type_id" class="form-control form-control-sm ">
+                                    <select required id="leave_type_id"
+                                        onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')"
+                                        placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
+                                        class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
                                         @foreach ($leave_type as $l_type)
                                             <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
                                         @endforeach
                                     </select>
 
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <div class="form-group">
+                                    <label for="balance_leave1">balance_leave </label>
+                                    <input readonly required id="balance_leave1" placeholder="Enter correct balance_leave"
+                                         type="text" name="remaining_leave"
+                                        class="form-control form-control-sm ">
                                 </div>
                             </div>
 

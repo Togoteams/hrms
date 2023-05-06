@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('employee_id');
             $table->integer('no_of_days');
+            $table->unsignedBigInteger('leave_type_id');
             $table->text('description');
             $table->text('status_remarks')->nullable();
             $table->timestamp('deleted_at')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('leave_type_id')->references('id')->on('leave_types');
             $table->timestamps();
         });
     }

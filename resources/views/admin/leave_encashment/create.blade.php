@@ -14,11 +14,14 @@
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
                         <div class="row">
 
+
                             @if (!isemplooye())
                                 <div class="col-sm-6 mb-2">
                                     <div class="form-group">
                                         <label for="user_id"> </label>
-                                        <select required id="user_id" placeholder="Enter correct user_id   "
+                                        <select
+                                            onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_encash_leave') }}', 'leave_type_id')"
+                                            required id="user_id" placeholder="Enter correct user_id   "
                                             type="text" name="user_id" class="form-control form-control-sm ">
                                             <option selected disabled> -Select User - </option>
                                             @foreach ($all_user as $user)
@@ -29,11 +32,31 @@
                                     </div>
                                 </div>
                             @endif
+
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
-                                    <label for="no_of_days">no_of_days.. </label>
-                                    <input readonly required id="no_of_days" placeholder="Enter correct no_of_days..   "
-                                        type="text" value="{{ $total_remaining_leave }}" name="no_of_days"
+                                    <label for="leave_type_id">Leave Types </label>
+                                    <select required id="leave_type_id"
+                                        onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')"
+                                        placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
+                                        class="form-control form-control-sm ">
+                                        <option selected disabled> -Select Leave Types- </option>
+                                        @foreach ($leave_type as $l_type)
+                                            @if (islocal() && $l_type->name == 'EARNED LEAVE' && $l_type->leave_for == 'local')
+                                                <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
+                                            @elseif ($l_type->name == 'PRIVILEGED LEAVE' && $l_type->leave_for != 'local')
+                                                <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-2">
+                                <div class="form-group">
+                                    <label for="balance_leave1">balance_leave </label>
+                                    <input readonly required id="balance_leave1"
+                                        placeholder="Enter correct balance_leave" type="text" name="no_of_days"
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>

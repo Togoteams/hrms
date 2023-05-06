@@ -100,12 +100,16 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
 
     Route::get('leave_apply/status_modal/{id}', [LeaveApplyController::class, 'status_modal'])->name('leave_apply.status_modal');
     Route::put('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
+
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
+    Route::post('get_balance_leave/', [LeaveApplyController::class, 'get_balance_leave'])->name('leave_apply.get_balance_leave');
 
     //   encashemnt start
     Route::resource('leave_encashment', LeaveEncashmentController::class);
     Route::put('leave_encashment/status/{id}', [LeaveEncashmentController::class, 'status'])->name('leave_encashment.status');
     Route::get('leave_encashment/status_modal/{id}', [LeaveEncashmentController::class, 'status_modal'])->name('leave_encashment.status_modal');
+    Route::post('get_encash_leave/', [LeaveEncashmentController::class, 'get_encash_leave'])->name('leave_apply.get_encash_leave');
+   
     // encashment end
     // leave route start
     Route::resource('loans', LoansController::class);

@@ -12,9 +12,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use App\Traits\LeaveTraits;
 
 class LeaveApplyController extends Controller
 {
+    use LeaveTraits;
     public $page_name = " Apply Leave";
     /**
      * Display a listing of the resource.
@@ -96,7 +98,8 @@ class LeaveApplyController extends Controller
             'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
-            "doc1" => ["mimetypes:application/pdf", "max:10000"]
+            "doc1" => ["mimetypes:application/pdf", "max:10000"],
+            'remaining_leave' => 'required|min:1|numeric'
         ]);
         if (isset($request->user_id) && $request->user_id != '') {
             $user = User::find($request->user_id);
@@ -116,7 +119,7 @@ class LeaveApplyController extends Controller
                         'user_id' => $user->id,
                         'created_by' => Auth::user()->id,
                         'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave,
-                        'remaining_leave' => (int)$this->total_remaining_leave($user->id)
+                        'remaining_leave' => (int)$this->balance_leave_by_type($request->leave_type_id,$user->id)
 
                     ]);
                     LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
@@ -197,7 +200,7 @@ class LeaveApplyController extends Controller
             LeaveApply::where('id', $id)->update([
                 'status' => $request->status,
                 'status_remarks' => $request->status_remarks,
-                'remaining_leave' =>  $request->status == "approved" ? (int)$this->total_remaining_leave($id) - 1 : (int)$this->total_remaining_leave($id),
+                'remaining_leave' =>  $request->status == "approved" ? (int)$this->balance_leave_by_type($request->leave_type_id,$id) - 1 : (int)$this->balance_leave_by_type($request->leave_type_id,$id) ,
 
             ]);
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
@@ -229,6 +232,12 @@ class LeaveApplyController extends Controller
             echo '  <option value="' . $l_type->id . '">' . $l_type->name . '</option>';
         }
     }
+
+    public function get_balance_leave(Request $request)
+    {
+        return  $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
+    }
+
 
     public function balance_history(Request $request)
     {

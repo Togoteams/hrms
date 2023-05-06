@@ -80,7 +80,10 @@ function selectDrop(form_id, url_name, target_id, method = "POST") {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             // document.getElementById(target_id).innerHTML = this.responseText;
+           
+            document.getElementById(target_id).value = this.responseText;
             document.getElementById(target_id).innerHTML = this.responseText;
+            
             stopPreloader(formElements_button);
         }
     };

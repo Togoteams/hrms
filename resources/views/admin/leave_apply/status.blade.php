@@ -7,6 +7,8 @@
         <div class="col-sm-12 mb-2">
             <div class="form-group">
                 <label for="status">Leave Status </label>
+                <input type="hidden" name="leave_type_id" value="{{ $data->leave_type_id}}">
+
                 <select required id="status" placeholder="Enter correct status   " type="text" name="status"
                     class="form-control form-control-sm ">
                     <option disabled> -Select Leave Types- </option>

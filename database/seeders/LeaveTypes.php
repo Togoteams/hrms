@@ -17,19 +17,19 @@ class LeaveTypes extends Seeder
 
         $all_leaves = array(
             // for local all leaves
-            ['leave_for' => "local", 'name' => "EARNED LEAVE", 'description' => "none", "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
-            ['leave_for' => "local", 'name' => "SICK LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 20, "created_by" => 1],
-            ['leave_for' => "local", 'name' => "MATERNITY LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
-            ['leave_for' => "local", 'name' => "BEREAVEMENT LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
-            ['leave_for' => "local", 'name' => "LEAVE WITHOUT PAY", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
+            ['leave_for' => "local", 'name' => "EARNED LEAVE", 'description' => "none", "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
+            ['leave_for' => "local", 'name' => "SICK LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 24, "created_by" => 1],
+            ['leave_for' => "local", 'name' => "MATERNITY LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
+            ['leave_for' => "local", 'name' => "BEREAVEMENT LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
+            ['leave_for' => "local", 'name' => "LEAVE WITHOUT PAY", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
             // for expatriate all leaves
-            ['leave_for' => "expatriate", 'name' => "SICK LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 20, "created_by" => 1],
-            ['leave_for' => "expatriate", 'name' => "CASUAL LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 20, "created_by" => 1],
-            ['leave_for' => "expatriate", 'name' => "MATERNITY LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
-            ['leave_for' => "expatriate", 'name' => "PRIVILEGED LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
-            ['leave_for' => "expatriate",  'name' => "LEAVE WITHOUT PAY", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
-            ['leave_for' => "expatriate",  'name' => "LEAVE ENCASHMENT", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
-            ['leave_for' => "expatriate", 'name' => "LEAVE ON REPATRIATION", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 0, "created_by" => 1],
+            ['leave_for' => "expatriate", 'name' => "SICK LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 24, "created_by" => 1],
+            ['leave_for' => "expatriate", 'name' => "CASUAL LEAVE", 'description' => "none",  "nature_of_leave" => "unpaid", "no_of_days" => 24, "created_by" => 1],
+            ['leave_for' => "expatriate", 'name' => "MATERNITY LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
+            ['leave_for' => "expatriate", 'name' => "PRIVILEGED LEAVE", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
+            ['leave_for' => "expatriate",  'name' => "LEAVE WITHOUT PAY", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
+            ['leave_for' => "expatriate",  'name' => "LEAVE ENCASHMENT", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
+            ['leave_for' => "expatriate", 'name' => "LEAVE ON REPATRIATION", 'description' => "none",  "nature_of_leave" => "paid", "no_of_days" => 4, "created_by" => 1],
 
 
         );

@@ -427,7 +427,7 @@ function total_remaining_leave($user_id = '')
 {
     if ($user_id == '') {
         // for autheticated user
-        $user_id = Auth::user()->id;
+        $user_id = auth()->user()->id;
     }
     $total_leave_days = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', $user_id)->first()->employment_type ?? '')->where('nature_of_leave', 'unpaid')->sum('no_of_days');
 
@@ -435,4 +435,14 @@ function total_remaining_leave($user_id = '')
     $total_encash_leave = LeaveEncashment::where('user_id', $user_id)->where('status', 'approved')->where('created_at', 'LIKE', '%' . date('Y') . '%')->sum('no_of_days');
     $total_remaining_leave = $total_leave_days - $total_upaid_leave - $total_encash_leave;
     return  $total_remaining_leave;
+}
+
+function islocal()
+{
+    $user_id = auth()->user()->id;
+    if (Employee::where('user_id', $user_id)->first()->employment_type == "local") {
+        return true;
+    } else {
+        return  false;
+    }
 }

@@ -30,14 +30,14 @@ class LeaveEncashmentController extends Controller
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveEncashment::with('user', 'leave_type', 'employee','employee.designation')->where('user_id', Auth::user()->id)->select('*');
+                $data = LeaveEncashment::with('user', 'leave_type', 'employee', 'employee.designation')->where('user_id', Auth::user()->id)->select('*');
             } else {
 
-                $data = LeaveEncashment::with('user', 'leave_type', 'employee','employee.designation')->select('*');
+                $data = LeaveEncashment::with('user', 'leave_type', 'employee', 'employee.designation')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
-              
+
                 ->editColumn('employee.start_date', function ($data) {
                     return \Carbon\Carbon::parse($data->employee->start_date)->isoFormat('DD.MM.YYYY');
                 })
@@ -48,7 +48,7 @@ class LeaveEncashmentController extends Controller
                     $actionBtn = view('admin.leave_encashment.buttons', ['item' => $row, "route" => 'leave_encashment']);
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'designation'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
 
@@ -184,6 +184,20 @@ class LeaveEncashmentController extends Controller
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
+        }
+    }
+
+    public function get_encash_leave(Request $request)
+    {
+        $user_id = $request->user_id;
+        $emploment_type = Employee::where('user_id', $user_id)->first()->employment_type ?? '';
+        echo '<option> -Select Leave Type - </option>';
+        if ($emploment_type == "local") {
+            $leave_type = LeaveType::where('status', 'active')->where('name', 'EARNED LEAVE')->first();
+            echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
+        } else {
+            $leave_type = LeaveType::where('status', 'active')->where('name', 'PRIVILEGED LEAVE')->first();
+            echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
         }
     }
 }
