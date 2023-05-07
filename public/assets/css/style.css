@@ -119,3 +119,20 @@ a {
     font-size: 30px;
 }
 
+.btn-outline-primary{
+    border-color:  rgb(248 81 9) !important;
+   
+
+}
+.text-primary {
+    --bs-text-opacity: 1;
+    color: #f85109 !important;
+}
+.btn:hover {
+    color: #fff !important;
+    background-color: #f85109 !important;
+    border-color: var(--bs-btn-hover-border-color);
+}
+.text-orenge{
+    color:#f85109 !important;
+}

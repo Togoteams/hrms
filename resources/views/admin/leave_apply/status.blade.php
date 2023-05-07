@@ -4,6 +4,15 @@
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="row">
+
+        <div class="col-sm-12 mb-2">
+            <div class="form-group">
+                <label for="remaining_leave"> Balance Leave </label>
+                <input rows="12" required id="remaining_leave" placeholder="Enter correct remaining_leave   "
+                    name="remaining_leave" type="text" readonly value="{{ $remaining_leave }}" class="form-control form-control-sm ">
+            </div>
+        </div>
+
         <div class="col-sm-12 mb-2">
             <div class="form-group">
                 <label for="status">Leave Status </label>

@@ -227,7 +227,7 @@
                          </a>
 
                          <div id="leave"
-                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history']) }} "
+                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history','leave_reports.index']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
                           
                              @if (!isemplooye())
@@ -260,6 +260,14 @@
 
 
                              </a>
+
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
+                                href="{{ route('admin.leave_reports.index') }}" data-placement="left">
+                                <span class="nav-link-title">LEAVE REPORTS</span>
+
+
+                            </a>
+
                          </div>
                      </div>
                  </div>

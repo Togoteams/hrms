@@ -24,35 +24,65 @@
                 <!-- End Row -->
             </div>
             <div class="row">
-                <div class="col-sm-9"></div>
+                <div class="col-3">
+
+                </div>
+                <div class="col-sm-6 p-3">
+                    <form action="{{ route('admin.leave_reports.index') }}">
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label for="star_date"> Start Date</label>
+                                    <input id="star_date" name="start" type="date"
+                                        class="form-control form-control-sm">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label for="end_date"> End Date</label>
+                                    <input id="end_date" name="end" type="date"
+                                        class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-primary btn-sm  mt-4">Go</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
-                        {{-- @can('add-leaves') --}}
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            {{ $page }}
-                        </button>
-                        {{-- @endcan --}}
+
                     </div>
                 </div>
             </div>
-            @include('admin.leave_apply.create')
-            <!-- Card -->
             <div class="text-center p-1">
-                <a href="{{ route('admin.leave_apply.index') }}" class="btn btn-primary ">Total Leave Applied -
-                    {{ $data->count('*') }}</a>
-                <a href="{{ route('admin.leave_apply.request_history') }}" class="btn btn-warning ">Total Leave Pedding -
-                    {{ $total_pedding }} </a>
-                <a href="" class="btn btn-danger ">Total Leave Rejected - {{ $total_approved }} </a>
-                <a href="{{ route('admin.leave_apply.balance_history') }}" class="btn btn-success ">Total Leave Approved -
-                    {{ $total_reject }} </a>
-                @if (isemplooye())
-                    <a class="btn btn-info ">Total Remaining Leave - {{ total_remaining_leave(auth()->user()->id) }} </a>
-                @endif
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    @foreach ($leave_type as $lt)
+                        @php
+                            // by user
+                            if (isemplooye()) {
+                                $total_approved_leave = DB::table('leave_applies')
+                                    ->where('user_id', auth()->user()->id)
+                                    ->where('leave_type_id', $lt->id)
+                                    ->where('status', 'approved')
+                                    ->count('*');
+                            } else {
+                                $total_approved_leave = DB::table('leave_applies')
+                                    ->where('leave_type_id', $lt->id)
+                                    ->where('status', 'approved')
+                                    ->count('*');
+                            }
+                        @endphp
 
-            </div>
-            <hr>
+                        <button type="button" class="btn btn-outline-primary text-orenge">{{ $lt->name }} <br>
+                            {{ $total_approved_leave }}</button>
+                    @endforeach
 
+                </div>
+            </div> <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
                     <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
@@ -63,10 +93,9 @@
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
                                 <th>leave type</th>
-                                <th>Balance Leave</th>
                                 <th>From </th>
                                 <th>To</th>
-                                <th>Paid/Unpaid</th>
+                                <th>Balance Leave</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -81,13 +110,10 @@
                     $(function() {
                         var i = 1;
                         var table = $('.data-table').DataTable({
-
-
-
-
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.leave_apply.index') }}",
+
+                            ajax: "{{ route('admin.leave_reports.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
@@ -95,6 +121,7 @@
                                     orderable: false,
                                     searchable: false
                                 },
+
 
                                 {
                                     data: 'user.name',
@@ -110,10 +137,7 @@
                                 {
                                     data: 'leave_type.name',
                                     name: 'leave_type.name'
-                                },
-                                {
-                                    data: 'remaining_leave',
-                                    name: 'remaining_leave'
+
                                 },
                                 {
                                     data: 'start_date',
@@ -124,12 +148,13 @@
                                     name: 'end_date'
                                 },
                                 {
-                                    data: 'is_paid',
-                                    name: 'is_paid'
+                                    data: 'remaining_leave',
+                                    name: 'remaining_leave'
                                 },
                                 {
                                     data: 'status',
                                     name: 'status'
+
                                 },
 
                                 {
@@ -141,13 +166,7 @@
                             ]
                         });
 
-
-
                     });
-
-
-
-                    // Apply the search
                 </script>
                 <!-- End Table -->
 
@@ -181,7 +200,7 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content ">
                         <div class="modal-header ">
-                            <h5 class="modal-title" id="staticBackdropLabel"> Show {{ $page }}</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Show {{ $page }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="show">

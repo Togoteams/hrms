@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\LoansController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
+use App\Http\Controllers\Admin\LeaveReportsController;
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
@@ -109,8 +110,16 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::put('leave_encashment/status/{id}', [LeaveEncashmentController::class, 'status'])->name('leave_encashment.status');
     Route::get('leave_encashment/status_modal/{id}', [LeaveEncashmentController::class, 'status_modal'])->name('leave_encashment.status_modal');
     Route::post('get_encash_leave/', [LeaveEncashmentController::class, 'get_encash_leave'])->name('leave_apply.get_encash_leave');
-   
+
     // encashment end
+
+    // leave Reports start
+    Route::resource('leave_reports', LeaveReportsController::class);
+
+    // leave Reports End
+
+
+
     // leave route start
     Route::resource('loans', LoansController::class);
     Route::get('loans/status/{id}', [LoansController::class, 'status'])->name('loans.status');

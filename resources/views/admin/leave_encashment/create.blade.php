@@ -55,7 +55,7 @@
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
                                     <label for="balance_leave1">balance_leave </label>
-                                    <input readonly required id="balance_leave1"
+                                    <input  required id="balance_leave1"
                                         placeholder="Enter correct balance_leave" type="text" name="no_of_days"
                                         class="form-control form-control-sm ">
                                 </div>

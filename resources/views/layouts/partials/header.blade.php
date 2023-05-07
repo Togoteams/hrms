@@ -23,7 +23,6 @@
 
     <link rel="preload" href="{{ asset('assets/css/theme.min.css') }}" data-hs-appearance="default" as="style">
     <link rel="preload" href="{{ asset('assets/css/theme-dark.min.css') }}" data-hs-appearance="dark" as="style">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
     <link rel="stylesheet" href="{{'https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css'}}">
@@ -202,4 +201,6 @@
             return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
         }
     </script>
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
 </head>

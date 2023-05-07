@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LeaveEncashment;
+use App\Traits\LeaveTraits;
 
 class LeaveEncashmentController extends Controller
 {
+    use LeaveTraits;
     public $page_name = " Leave Encashment";
     /**
      * Display a listing of the resource.
@@ -162,9 +164,11 @@ class LeaveEncashmentController extends Controller
     public function status(Request $request, $id)
     {
         try {
+           $leave_encashment= LeaveEncashment::find($id);
             LeaveEncashment::where('id', $id)->update([
                 'status' => $request->status,
                 'status_remarks' => $request->status_remarks,
+                'no_of_days'=> (int)$this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id)
             ]);
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         } catch (Exception $e) {
