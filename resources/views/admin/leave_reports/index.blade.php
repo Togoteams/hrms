@@ -27,14 +27,14 @@
                 <div class="col-3">
 
                 </div>
-                <div class="col-sm-6 p-3">
+                {{-- <div class="col-sm-6 p-3">
                     <form action="{{ route('admin.leave_reports.index') }}">
 
                         <div class="row">
                             <div class="col-sm-5">
                                 <div class="form-group">
                                     <label for="star_date"> Start Date</label>
-                                    <input id="star_date" name="start" type="date"
+                                    <input id="star_date" name="start_date" type="date"
                                         class="form-control form-control-sm">
 
                                 </div>
@@ -42,7 +42,7 @@
                             <div class="col-sm-5">
                                 <div class="form-group">
                                     <label for="end_date"> End Date</label>
-                                    <input id="end_date" name="end" type="date"
+                                    <input id="end_date" name="end_date" type="date"
                                         class="form-control form-control-sm">
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
 
@@ -114,15 +114,15 @@
                             serverSide: true,
 
                             ajax: "{{ route('admin.leave_reports.index') }}",
-
+                            data: {
+                                start_date: "test"
+                            },
                             columns: [{
                                     data: 'DT_RowIndex',
                                     name: 'DT_RowIndex',
                                     orderable: false,
                                     searchable: false
                                 },
-
-
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
@@ -154,7 +154,6 @@
                                 {
                                     data: 'status',
                                     name: 'status'
-
                                 },
 
                                 {

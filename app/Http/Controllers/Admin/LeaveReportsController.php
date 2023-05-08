@@ -27,8 +27,10 @@ class LeaveReportsController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->ajax()) {
+        $start_date = $request->start;
+        $end_date = $request->end;
 
+        if ($request->ajax()) {
 
             if (isemplooye()) {
                 $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('leave_applies.status', 'approved')->select('*');
