@@ -93,15 +93,15 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason </label>
-                                    <input required id="leave_reason" placeholder="Enter correct leave_reason   "
+                                    <input required id="leave_reason" placeholder="Enter correct leave_reason ex - i want to 2 days for my sister merage  "
                                         type="text" name="leave_reason" class="form-control form-control-sm ">
                                 </div>
                             </div>
 
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="remark">remark </label>
-                                    <textarea rows="12" required id="remark" placeholder="Enter correct remark   " name="remark"
+                                    <label for="remark"> Describe the Leave reason  (optional)</label>
+                                    <textarea rows="12"  id="remark" placeholder="Describe the Leave reason  " name="remark"
                                         class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>

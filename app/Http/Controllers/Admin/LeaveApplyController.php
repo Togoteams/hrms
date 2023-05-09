@@ -107,7 +107,7 @@ class LeaveApplyController extends Controller
             $user = Auth::user();
         }
 
-        if (total_remaining_leave($user->id) > 0) {
+        if ($this->balance_leave_by_type($request->leave_type_id, $user->id) > 0) {
             if ($validator->fails()) {
                 return $validator->errors();
             } else {
@@ -161,7 +161,7 @@ class LeaveApplyController extends Controller
 
         $data = LeaveApply::find($id);
         $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id);
-        return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type,'remaining_leave'=>$remaining_leave]);
+        return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'remaining_leave' => $remaining_leave]);
     }
     /**
      * Update the specified resource in storage.
@@ -213,9 +213,13 @@ class LeaveApplyController extends Controller
                 LeaveApply::where('id', $id)->update([
                     'status' => $request->status,
                     'status_remarks' => $request->status_remarks,
-                    'remaining_leave' =>  $request->status == "approved" ? (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) - 1 : (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
 
                 ]);
+                LeaveApply::where('id', $id)->update([
+                    'remaining_leave' =>  $request->status == "approved" ? (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) : (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
+                ]);
+
+
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['errors' => "Somthing wen Wrong"]);
