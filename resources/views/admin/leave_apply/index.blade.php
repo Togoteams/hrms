@@ -43,7 +43,8 @@
                     {{ $data->count('*') }}</a>
                 <a href="{{ route('admin.leave_apply.request_history') }}" class="btn btn-warning ">Total Leave Pedding -
                     {{ $total_pedding }} </a>
-                <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class="btn btn-danger ">Total Leave Rejected - {{ $total_approved }} </a>
+                <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class="btn btn-danger ">Total Leave Rejected -
+                    {{ $total_approved }} </a>
                 <a href="{{ route('admin.leave_apply.balance_history') }}" class="btn btn-success ">Total Leave Approved -
                     {{ $total_reject }} </a>
                 @if (isemplooye())
@@ -150,7 +151,15 @@
                     // Apply the search
                 </script>
                 <!-- End Table -->
-
+                <script type="text/javascript">
+                    window.onload = function() { //from ww  w . j  a  va2s. c  o  m
+                        var today = new Date().toISOString().split('T')[0];
+                        document.getElementsByName("start_date")[0].setAttribute('min', today);
+                        document.getElementsByName("end_date")[0].setAttribute('min', today);
+                        document.getElementsByName("start_date1")[0].setAttribute('min', today);
+                        document.getElementsByName("end_date1")[0].setAttribute('min', today);
+                    }
+                </script>
 
             </div>
             <!-- End Card -->

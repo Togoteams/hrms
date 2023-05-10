@@ -30,15 +30,15 @@
 
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="start_date">start_date </label>
-                <input required id="start_date" placeholder="Enter correct start_date   " type="date"
+                <label for="start_date1">start_date </label>
+                <input required id="start_date1" placeholder="Enter correct start_date   " type="date"
                     value="{{ $data->start_date }}" name="start_date" class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="end_date">end_date </label>
-                <input required id="end_date" placeholder="Enter correct end_date   " type="date"
+                <label for="end_date1">end_date </label>
+                <input required id="end_date1" placeholder="Enter correct end_date   " type="date"
                     value="{{ $data->end_date }}" name="end_date" class="form-control form-control-sm ">
             </div>
         </div>
@@ -83,3 +83,11 @@
             {{ $page }}</button>
     </div>
 </form>
+<script type="text/javascript">
+    window.onload = function() { //from ww  w . j  a  va2s. c  o  m
+        var today = new Date().toISOString().split('T')[0];
+  
+        document.getElementsByName("start_date1")[0].setAttribute('min', today);
+        document.getElementsByName("end_date1")[0].setAttribute('min', today);
+    }
+</script>
