@@ -221,13 +221,12 @@ class LeaveApplyController extends Controller
                 }
                 if ($request->status == "approved") {
               
-
                     // checking how many leave is remaining for a particular user
                     if ($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) >= get_day($leave_apply->start_date, $leave_apply->end_date)) {
                         LeaveApply::where('id', $id)->update([
                             'status' => $request->status,
                         ]);
-                        
+
                         LeaveApply::where('id', $id)->update([
                             'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
                         ]);
