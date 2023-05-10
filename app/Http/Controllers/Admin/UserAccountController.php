@@ -140,7 +140,7 @@ class UserAccountController extends Controller
         );
         $user = User::where('uuid', $request->id)->first();
         $user->password = Hash::make($request->password);
-        $user->password_is_changed=1;
+        // $user->password_is_changed=1;
         $user->save();
 
         return redirect()->route('password.changed');

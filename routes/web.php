@@ -145,7 +145,7 @@ Route::get('password-changed', [UserAccountController::class, 'viewPasswordChang
 Route::controller(LoginController::class)->as('login.')->prefix('login/')->group(function () {
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
-Route::get('password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('admin.password')->middleware('auth');
+Route::get('admin/password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('admin.password')->middleware('auth');
 
 Route::get('admin/dashboard', function () {
     return view('dashboard');
