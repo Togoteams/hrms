@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;
 
 Route::get('/', [LoginController::class, 'authentication']);
-Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth','changed.password'])->group(function () {
 
     // Route::get('/users', function () {
     //     return view('admin.user.users');
@@ -104,6 +104,7 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
 
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
     Route::post('get_balance_leave/', [LeaveApplyController::class, 'get_balance_leave'])->name('leave_apply.get_balance_leave');
+    Route::get('rejected_leave/', [LeaveApplyController::class, 'get_rejected_leave'])->name('leave_apply.get_rejected_leave');
 
     //   encashemnt start
     Route::resource('leave_encashment', LeaveEncashmentController::class);
@@ -132,7 +133,6 @@ Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
     Route::get('employees_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('employees_salary.status');
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
-    Route::get('password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('password');
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
 });
 
@@ -145,6 +145,7 @@ Route::get('password-changed', [UserAccountController::class, 'viewPasswordChang
 Route::controller(LoginController::class)->as('login.')->prefix('login/')->group(function () {
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
+Route::get('password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('admin.password')->middleware('auth');
 
 Route::get('admin/dashboard', function () {
     return view('dashboard');

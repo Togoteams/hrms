@@ -24,6 +24,7 @@ class UserTableSeeder extends Seeder
         $user = new User();
         $user->uuid = $faker->uuid;
         $user->name = 'Admin';
+        $user->password_is_changed=1;
         $user->username = 'admin-togoteams';
         $user->email = 'admin@togoteams.com';
         $user->mobile = 9999988888;

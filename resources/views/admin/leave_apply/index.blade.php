@@ -43,7 +43,7 @@
                     {{ $data->count('*') }}</a>
                 <a href="{{ route('admin.leave_apply.request_history') }}" class="btn btn-warning ">Total Leave Pedding -
                     {{ $total_pedding }} </a>
-                <a href="" class="btn btn-danger ">Total Leave Rejected - {{ $total_approved }} </a>
+                <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class="btn btn-danger ">Total Leave Rejected - {{ $total_approved }} </a>
                 <a href="{{ route('admin.leave_apply.balance_history') }}" class="btn btn-success ">Total Leave Approved -
                     {{ $total_reject }} </a>
                 @if (isemplooye())

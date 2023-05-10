@@ -317,4 +317,33 @@ class LeaveApplyController extends Controller
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_request_history', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
+
+    public function get_rejected_leave(Request $request)
+    {
+        if ($request->ajax()) {
+            // if user is not equal to employee then show all data
+            if (isemplooye()) {
+                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status', 'reject')->get();
+            } else {
+                $data = LeaveApply::with('user', 'leave_type')->where('status', 'reject')->get();
+            }
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
+                    return $actionBtn;
+                })
+                ->editColumn('start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('end_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        $all_users = Employee::where('status', 'active')->get();
+        return view('admin.leave_apply.leave_request_rejected', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
+    }
 }

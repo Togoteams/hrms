@@ -227,7 +227,7 @@
                          </a>
 
                          <div id="leave"
-                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history','leave_reports.index']) }} "
+                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history','leave_reports.index','leave_apply.get_rejected_leave']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
                           
                              @if (!isemplooye())
@@ -257,9 +257,14 @@
                              <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.request_history' ? 'active' : '' }}"
                                  href="{{ route('admin.leave_apply.request_history') }}" data-placement="left">
                                  <span class="nav-link-title">LEAVE REQUEST HISTORY</span>
-
-
                              </a>
+
+                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.get_rejected_leave' ? 'active' : '' }}"
+                                href="{{ route('admin.leave_apply.get_rejected_leave') }}" data-placement="left">
+                                <span class="nav-link-title">LEAVE REQUEST REJECTED</span>
+
+
+                            </a>
 
                              <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
                                 href="{{ route('admin.leave_reports.index') }}" data-placement="left">
