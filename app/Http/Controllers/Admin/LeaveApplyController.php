@@ -207,19 +207,34 @@ class LeaveApplyController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
+            $leave_apply = LeaveApply::find($id);
+
+
             try {
-                $leave_apply = LeaveApply::find($id);
+                if ($request->status != "approved") {
 
-                LeaveApply::where('id', $id)->update([
-                    'status' => $request->status,
-                    'status_remarks' => $request->status_remarks,
+                    LeaveApply::where('id', $id)->update([
+                        'status' => $request->status,
+                        'status_remarks' => $request->status_remarks,
 
-                ]);
-                LeaveApply::where('id', $id)->update([
-                    'remaining_leave' =>  $request->status == "approved" ? (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) : (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
-                ]);
+                    ]);
+                }
+                if ($request->status == "approved") {
+              
 
-
+                    // checking how many leave is remaining for a particular user
+                    if ($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) >= get_day($leave_apply->start_date, $leave_apply->end_date)) {
+                        LeaveApply::where('id', $id)->update([
+                            'status' => $request->status,
+                        ]);
+                        
+                        LeaveApply::where('id', $id)->update([
+                            'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
+                        ]);
+                    } else {
+                        return response()->json(['error' => " Applied leave is " . get_day($leave_apply->start_date, $leave_apply->end_date) . " but  they have only " . $this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
+                    }
+                }
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['errors' => "Somthing wen Wrong"]);

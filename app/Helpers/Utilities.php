@@ -446,3 +446,11 @@ function islocal()
         return  false;
     }
 }
+
+function get_day($date1, $date2)
+{
+    $date1 = date_create($date1);
+    $date2 = date_create($date2);
+    $diff = date_diff($date1, $date2);
+    return (int)round($diff->format("%R%a"));
+}
