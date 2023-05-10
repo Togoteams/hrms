@@ -9,6 +9,7 @@ use App\Services\Leave\LeaveService;
 use Illuminate\Support\Facades\DB;
 class LeaveController extends BaseController
 {
+    // i have added somthing here
     protected $leaveService;
     public function __construct(LeaveService $leaveService)
     {
