@@ -24,7 +24,7 @@ use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;
 
 Route::get('/', [LoginController::class, 'authentication']);
-Route::prefix('admin')->as('admin.')->middleware(['auth','changed.password'])->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->group(function () {
 
     // Route::get('/users', function () {
     //     return view('admin.user.users');
@@ -136,6 +136,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth','changed.password'])->g
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
 });
 
+// this group only for update password and +
+Route::prefix('admin')->as('admin.')->middleware(['auth',])->group(function () {
+    Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
+    Route::get('password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('password');
+});
+
 Route::get('user-forgot-password', [UserAccountController::class, 'viewForgotPasswordPage'])->name('forgot.password');
 Route::post('user-forgot-password', [UserAccountController::class, 'forgotPassword'])->name('forgot.password.post');
 Route::get('user-reset-password/{unique_key}', [UserAccountController::class, 'resetPassword'])->name('forgot.password.reset');
@@ -145,9 +151,8 @@ Route::get('password-changed', [UserAccountController::class, 'viewPasswordChang
 Route::controller(LoginController::class)->as('login.')->prefix('login/')->group(function () {
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
-Route::get('admin/password-reset', [UserAccountController::class, 'viewPasswordReset'])->name('admin.password')->middleware('auth');
 
 Route::get('admin/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('admin.dashboard');
+})->middleware(['auth', 'verified','changed.password'])->name('admin.dashboard');
 require __DIR__ . '/auth.php';

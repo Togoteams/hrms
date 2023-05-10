@@ -119,6 +119,8 @@ class UserAccountController extends Controller
         );
         $profile = User::where('id', Auth::user()->id)->first();
         $profile->password = Hash::make($request->password);
+        $profile->password_is_changed=1;
+
         $profile->save();
 
         return redirect()->back()->with('success', 'Password has been Changeded successfully!');
@@ -140,7 +142,6 @@ class UserAccountController extends Controller
         );
         $user = User::where('uuid', $request->id)->first();
         $user->password = Hash::make($request->password);
-        // $user->password_is_changed=1;
         $user->save();
 
         return redirect()->route('password.changed');
