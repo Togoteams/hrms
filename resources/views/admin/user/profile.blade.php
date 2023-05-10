@@ -47,18 +47,10 @@
                         <p class="invalid-feedback" id="email_error"></p>
                     </div>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <center>
-                                        <button type="submit" class="btn btn-sm btn-primary" id="formSubmit"
-                                            onclick="return formValidate();">
-                                            Update
-                                        </button>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary" id="formSubmit"
+                            onclick="return formValidate();">
+                            Update
+                        </button>
                     </div>
                 </form>
             </div>
@@ -68,7 +60,7 @@
 @endsection
 @push('custom-scripts')
 
-@if (!empty(Session::get('success')))
+    @if (!empty(Session::get('success')))
         <script>
             Swal.fire({
                 icon: 'success',
