@@ -164,12 +164,23 @@ class LeaveEncashmentController extends Controller
     public function status(Request $request, $id)
     {
         try {
-           $leave_encashment= LeaveEncashment::find($id);
-            LeaveEncashment::where('id', $id)->update([
-                'status' => $request->status,
-                'status_remarks' => $request->status_remarks,
-                'no_of_days'=> (int)$this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id)
-            ]);
+            $leave_encashment = LeaveEncashment::find($id);
+            if ($request->status == "approved") {
+                if ($this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) >= $leave_encashment->no_of_days) {
+
+                    LeaveEncashment::where('id', $id)->update([
+                        'status' => $request->status,
+                        'status_remarks' => $request->status_remarks,
+                    ]);
+                } else {
+                    return response()->json(['error' => " Applied leave is " . $leave_encashment->no_of_days . " but  they have only " . $this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) . " leave"]);
+                }
+            } else if ($request->status != "approved") {
+                LeaveEncashment::where('id', $id)->update([
+                    'status' => $request->status,
+                    'status_remarks' => $request->status_remarks,
+                ]);
+            }
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
