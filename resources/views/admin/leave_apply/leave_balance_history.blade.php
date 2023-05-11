@@ -37,6 +37,8 @@
                 </div>
             </div>
             @include('admin.leave_apply.create')
+            @include('admin.leave_apply.type_of_leave')
+
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">

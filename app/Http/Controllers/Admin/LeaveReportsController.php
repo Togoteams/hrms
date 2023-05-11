@@ -63,31 +63,15 @@ class LeaveReportsController extends Controller
 
         if (isemplooye()) {
             $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
-            $total_upaid_leave = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
-            $total_pedding = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'pending')->count('*');
-            $total_approved = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'reject')->count('*');
-            $total_reject = LeaveApply::where('user_id', Auth::user()->id)->where('status', 'approved')->count('*');
         } else {
             $data = LeaveApply::with('user', 'leave_type')->select('*');
-            $total_upaid_leave = LeaveApply::where('is_paid', 'unpaid')->where('status', 'approved')->count('*');
-            $total_pedding = LeaveApply::where('status', 'pending')->count('*');
-            $total_approved = LeaveApply::where('status', 'reject')->count('*');
-            $total_reject = LeaveApply::where('status', 'approved')->count('*');
         }
-
- 
 
         return view('admin.leave_reports.index', [
             'page' => $this->page_name,
-           
             'all_user' => $all_users,
-            'data' => $data,
-            'total_upaid_leave' => $total_upaid_leave,
-            'total_pedding' => $total_pedding,
-            'total_approved' => $total_approved,
-            'total_reject' => $total_reject,
-            'leave_type' => $leave_type
-
+            'leave_type'=>$leave_type,
+            'data' => $data
         ]);
     }
 
@@ -101,7 +85,7 @@ class LeaveReportsController extends Controller
         return view('admin.leave_reports.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
-  
+
 
     public function get_balance_leave(Request $request)
     {

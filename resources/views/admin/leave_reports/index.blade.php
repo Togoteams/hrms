@@ -83,23 +83,7 @@
 
                 </div>
                 <hr>
-                <div class="text-center p-1">
-                    <a href="{{ route('admin.leave_apply.index') }}" class="btn btn-primary ">Total Leave Applied -
-                        {{ $data->count('*') }}</a>
-                    <a href="{{ route('admin.leave_apply.request_history') }}" class="btn btn-warning ">Total Leave Pedding
-                        -
-                        {{ $total_pedding }} </a>
-                    <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class="btn btn-danger ">Total Leave
-                        Rejected - {{ $total_approved }} </a>
-                    <a href="{{ route('admin.leave_apply.balance_history') }}" class="btn btn-success ">Total Leave
-                        Approved -
-                        {{ $total_reject }} </a>
-                    @if (isemplooye())
-                        <a class="btn btn-info ">Total Remaining Leave - {{ total_remaining_leave(auth()->user()->id) }}
-                        </a>
-                    @endif
-
-                </div>
+               @include('admin.leave_apply.type_of_leave')
             </div> <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
