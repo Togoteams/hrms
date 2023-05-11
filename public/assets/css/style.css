@@ -23,17 +23,59 @@ td{
     text-transform: capitalize;
 }
 .card-dashboard {
-    background-color: rgb(244, 74, 12) !important;
-    color: #fff !important;
-    min-height: 200px;
-    padding-top: 15px !important;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    background-color:#fff !important;
+    border: 2px solid rgb(244, 74, 12) !important;
+    color: #000 !important;
+    padding-top: 5px !important;
+    padding: 0 auto !important;
+    border-radius: 7px !important;
 }
+
+.card-leavtype {
+    background-color:#fff !important;
+    border: 2px solid rgb(244, 127, 10) !important;
+    color: #000 !important;
+    padding-top: 5px !important;
+    padding: 0 auto !important;
+    border-radius: 7px !important;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+.filters button{
+    font-size: 22px !important;
+    color: rgb(244, 127, 10);
+}
+
+.card-leavtype:hover {
+    background-color:rgb(244, 127, 10) !important;
+    color: #fff;
+
+}
+
+
+.card-leavtype a{
+
+    color: #000 !important;
+
+}
+.card-leavtype:hover a{
+
+    color: #fff !important;
+
+}
+
 
 
 .card-dashboard i{
     font-size: 40px;
-    color:#fff;
+    color:rgb(244, 74, 12);
+}
+.card-dashboard h2{
+    font-size: 12px;
+    text-align: left !important;
+    color:#000 !important;
 }
 
 .active-class{
@@ -121,7 +163,7 @@ a {
 
 .btn-outline-primary{
     border-color:  rgb(248 81 9) !important;
-   
+
 
 }
 .text-primary {

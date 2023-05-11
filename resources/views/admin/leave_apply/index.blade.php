@@ -41,6 +41,20 @@
             @include('admin.leave_apply.type_of_leave')
 
             <div class="card mb-3 mb-lg-5">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header col-lg-3 filters flex">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Advanced Filters
+                          </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          
+                        </div>
+                      </div>
+                    </div>
+                </div>
                 <div class="table-responsive mt-3 p-2">
                     <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
