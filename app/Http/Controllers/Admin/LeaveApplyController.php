@@ -51,10 +51,8 @@ class LeaveApplyController extends Controller
         }
         if (isemplooye()) {
             $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
-
         } else {
             $data = LeaveApply::with('user', 'leave_type')->select('*');
-
         }
 
         $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
@@ -65,7 +63,7 @@ class LeaveApplyController extends Controller
             'leave_type' => $leave_type,
             'all_user' => $all_users,
             'data' => $data,
-          
+
 
         ]);
     }
@@ -211,7 +209,7 @@ class LeaveApplyController extends Controller
                     ]);
                 }
                 if ($request->status == "approved") {
-              
+
                     // checking how many leave is remaining for a particular user
                     if ($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) >= get_day($leave_apply->start_date, $leave_apply->end_date)) {
                         LeaveApply::where('id', $id)->update([
@@ -258,7 +256,13 @@ class LeaveApplyController extends Controller
 
     public function get_balance_leave(Request $request)
     {
-        return  $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
+        $remaining_leave = 0;
+        if (isemplooye()) {
+            $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id)/2;
+        } else {
+            $remaining_leave = $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
+        }
+        return $remaining_leave;
     }
 
 

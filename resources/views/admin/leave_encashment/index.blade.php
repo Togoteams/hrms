@@ -28,15 +28,31 @@
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
                         {{-- @can('add-leaves') --}}
+                        @if (isemplooye())
+                            @php
+                                $emp = DB::table('employees')
+                                    ->where('user_id', auth()->user()->id)
+                                    ->first();
+                            @endphp
+                            @if (get_day($emp->start_date, date('Y-m-d')) >= 730)
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    {{ $page }}
+                                </button>
+                                @include('admin.leave_encashment.create')
+                            @endif
+                        @else
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                                 {{ $page }}
                             </button>
+                            @include('admin.leave_encashment.create')
+                        @endif
+
                         {{-- @endcan --}}
                     </div>
                 </div>
             </div>
-            @include('admin.leave_encashment.create')
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
@@ -87,7 +103,7 @@
                                     data: 'user.mobile',
                                     name: 'user.mobile'
                                 },
-                             
+
                                 {
                                     data: 'employee.ec_number',
                                     name: 'employee.ec_number'
