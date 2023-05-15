@@ -289,6 +289,9 @@
                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.list' ? 'active' : '' }}  "
                                     href="{{ route('admin.payroll.pay-scale.list') }}"> Pay Scale</a>
 
+                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.add-pay-scale.list' ? 'active' : '' }}  "
+                                        href="{{ route('admin.payroll.add-pay-scale.list') }}">Add Pay Scale</a>
+
 
                         </div>
                     </div>

@@ -185,3 +185,21 @@ a {
     margin: auto;
     border-radius: 4px;
 }
+
+.table-pay-scale thead{
+    border:.5px solid #fac0a7 !important;
+}
+
+.table-pay-scale th{
+    border:.5px solid #dedede;
+    background:#f6f5f5 !important;
+}
+
+.table-pay-scale td{
+    border:.5px solid #edebeb;
+
+}
+
+.table-pay-scale tr td:nth-child(3) {
+    background: rgb(249, 248, 245);
+}

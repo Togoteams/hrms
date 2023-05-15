@@ -20,11 +20,65 @@
                     <!-- End Col -->
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        
-                    </div>
-                    <div class="col-md-6">
-                        
+                    <div class="table-responsive mt-4 pt-4">
+                        <table
+                            class="table data-table table-pay-scale  table-thead-bordered table-nowrap table-align-middle card-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Employee Id</th>
+                                    <th>Employee name</th>
+                                    <th>Employee Email</th>
+                                    <th>Employee username</th>
+                                    <th>Employee Phone</th>
+                                    <th>Employee Gender</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Employee Id</td>
+                                    <td>Employee name</td>
+                                    <td>Employee Email</td>
+                                    <td>Employee username</td>
+                                    <td>Employee Phone</td>
+                                    <td>Employee Gender</th>
+
+                                </tr>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Employee Id</td>
+                                    <td>Employee name</td>
+                                    <td>Employee Email</td>
+                                    <td>Employee username</td>
+                                    <td>Employee Phone</td>
+                                    <td>Employee Gender</th>
+
+                                </tr>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Employee Id</td>
+                                    <td>Employee name</td>
+                                    <td>Employee Email</td>
+                                    <td>Employee username</td>
+                                    <td>Employee Phone</td>
+                                    <td>Employee Gender</th>
+
+                                </tr>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Employee Id</td>
+                                    <td>Employee name</td>
+                                    <td>Employee Email</td>
+                                    <td>Employee username</td>
+                                    <td>Employee Phone</td>
+                                    <td>Employee Gender</th>
+
+                                </tr>
+                            </tbody>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!-- Button trigger modal -->
