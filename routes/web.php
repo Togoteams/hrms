@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;
 use App\Http\Controllers\Admin\Payroll\PayscaleController;
+use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
 
 
 Route::get('/', [LoginController::class, 'authentication']);
@@ -59,6 +60,15 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
             Route::get('/emergency-contact-details', 'viewEmergencyContact')->name('emergency.contact');
             Route::post('/update-emergency-contact/{id}', 'updateEmergencyContact')->name('emergency.contact.update');
+        });
+    Route::controller(PersonProfileController::class)
+        ->as('person.profile.')
+        ->prefix('person-profile')
+        ->group(function () {
+            Route::get('/qualifications', 'viewQualifications')->name('qualifications.view');
+            Route::post('/add-qualification', 'addQualification')->name('qualification.add');
+            Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
+            Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
         });
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
@@ -141,13 +151,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::prefix('payroll')->as('payroll.')->group(function () {
         Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
             Route::get('/', 'listPayscale')->name('list');
-            Route::match(['get', 'post'],'add', 'addPayscale')->name('add');
-         
-        }); 
+            Route::match(['get', 'post'], 'add', 'addPayscale')->name('add');
+        });
     });
-
-
-
 });
 
 // this group only for update password and +

@@ -35,7 +35,7 @@
 
                         <div class="col-sm-6 col-lg-2 mb-3 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard" href="#">
+                            <a class="card card-hover-shadow card-dashboard" href="{{ url('admin/person-profile/qualifications') }}">
                                 <div class="card-body text-center">
                                     <h2 class="card-title text-white">Person Profile</h2>
                                     <h6 class="card-subtitle pt-3"><i class="fa-sharp fa-solid fa-user-tie"></i></h6>
