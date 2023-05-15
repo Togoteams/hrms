@@ -141,7 +141,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::prefix('payroll')->as('payroll.')->group(function () {
         Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
             Route::get('/', 'listPayscale')->name('list');
-            Route::match(['get', 'post'], 'addPayscale')->name('add');
+            Route::match(['get', 'post'],'add', 'addPayscale')->name('add');
          
         }); 
     });

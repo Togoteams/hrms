@@ -15,6 +15,7 @@ class PayscaleController extends Controller
     }
     public function addPayscale(Request $request)
     {
-        return view('admin.payroll.add-pay-scale');
+        $pageName = "Add Pay Scale";
+        return view('admin.payroll.add-pay-scale',['page' => $pageName]);
     }
 }
