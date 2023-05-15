@@ -1,7 +1,7 @@
  <!-- Navbar Vertical -->
 
  <aside
-     class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl   ">
+     class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl ">
      <div class="navbar-vertical-container">
          <div class="navbar-vertical-footer-offset">
              <!-- Logo -->
@@ -17,7 +17,7 @@
              </a> --}}
 
              <!-- End Logo -->
-             <div class="text-center pt-3">
+             <div class="pt-3 text-center">
 
                  <i class="name-title">Bank of Baroda Ltd.
 
@@ -64,7 +64,7 @@
                      </div> --}}
                      <!-- End Collapse -->
 
-                     <span class="dropdown-header mt-4">Pages</span>
+                     <span class="mt-4 dropdown-header">Pages</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                      <!-- Collapse -->
@@ -167,7 +167,7 @@
 
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.emplooye_loans.index' ? 'active' : '' }}"
                                          href="{{ route('admin.employees_loans.index') }}" data-placement="left">
-                                         <i class="far fa-desktop-alt  nav-icon "></i> <span class="nav-link-title">Apply
+                                         <i class="far fa-desktop-alt nav-icon "></i> <span class="nav-link-title">Apply
                                              Loans </span>
                                      </a>
                                  </div>
@@ -203,7 +203,7 @@
 
                      <!-- End Collapse -->
 
-                     <span class="dropdown-header mt-4">Master</span>
+                     <span class="mt-4 dropdown-header">Master</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
 
@@ -276,20 +276,18 @@
                          </div>
                      </div>
                      <div class="nav-item">
-                        <a class="nav-link dropdown-toggle " href="#empsalary" role="button"
-                            data-bs-toggle="collapse" data-bs-target="#empsalary" aria-expanded="false"
-                            aria-controls="empsalary">
+                        <a class="nav-link dropdown-toggle " href="#emppayroll" role="button"
+                            data-bs-toggle="collapse" data-bs-target="#emppayroll" aria-expanded="false"
+                            aria-controls="emppayroll">
                             <i class="fas fa-money-bill-wave nav-icon"></i>
                             <span class="nav-link-title">Payroll</span>
                         </a>
 
-                        <div id="empsalary"
+                        <div id="emppayroll"
                             class="nav-collapse collapse "
                             data-bs-parent="#navbarVerticalMenuPagesMenu">
-
-
-                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale' ? 'active' : '' }}  "
-                                    href="{{ route('admin.payroll.pay-scale') }}"> Pay Scale</a>
+                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.list' ? 'active' : '' }}  "
+                                    href="{{ route('admin.payroll.pay-scale.list') }}"> Pay Scale</a>
 
 
                         </div>

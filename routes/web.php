@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;
+use App\Http\Controllers\Admin\Payroll\PayscaleController;
+
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->group(function () {
@@ -134,6 +136,18 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
+
+    // Payroll
+    Route::prefix('payroll')->as('payroll.')->group(function () {
+        Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
+            Route::get('/', 'listPayscale')->name('list');
+            Route::match(['get', 'post'], 'addPayscale')->name('add');
+         
+        }); 
+    });
+
+
+
 });
 
 // this group only for update password and +
@@ -154,5 +168,5 @@ Route::controller(LoginController::class)->as('login.')->prefix('login/')->group
 
 Route::get('admin/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified','changed.password'])->name('admin.dashboard');
+})->middleware(['auth', 'verified', 'changed.password'])->name('admin.dashboard');
 require __DIR__ . '/auth.php';
