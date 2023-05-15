@@ -229,7 +229,7 @@
                          <div id="leave"
                              class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history','leave_reports.index','leave_apply.get_rejected_leave']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
-                          
+
                              @if (!isemplooye())
                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
                                      href="{{ route('admin.leave_type.index') }}">Leave Types</a>
@@ -275,6 +275,26 @@
 
                          </div>
                      </div>
+                     <div class="nav-item">
+                        <a class="nav-link dropdown-toggle " href="#empsalary" role="button"
+                            data-bs-toggle="collapse" data-bs-target="#empsalary" aria-expanded="false"
+                            aria-controls="empsalary">
+                            <i class="fas fa-money-bill-wave nav-icon"></i>
+                            <span class="nav-link-title">Pay Role</span>
+                        </a>
+
+                        <div id="empsalary"
+                            class="nav-collapse collapse {{ show(['admin.pay-role.pay-scale']) }} "
+                            data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                            @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
+                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.pay-role.pay-scale' ? 'active' : '' }}  "
+                                    href="{{ route('admin.pay-role.pay-scale') }}"> Pay Scale</a>
+                            @endcanany
+
+                        </div>
+                    </div>
+
                  </div>
                  {{-- @endcanany --}}
              </div>

@@ -39,7 +39,7 @@ td{
     padding: 0 auto !important;
     border-radius: 7px !important;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 2px !important;
 }
 
 
@@ -48,19 +48,19 @@ td{
     color: rgb(244, 127, 10);
 }
 
-.card-leavtype:hover {
+.card-leavtype:hover{
     background-color:rgb(244, 127, 10) !important;
     color: #fff;
 
 }
 
 
-.card-leavtype a{
+.card-leavtype{
 
     color: #000 !important;
 
 }
-.card-leavtype:hover a{
+.card-leavtype:hover{
 
     color: #fff !important;
 
@@ -73,7 +73,7 @@ td{
     color:rgb(244, 74, 12);
 }
 .card-dashboard h2{
-    font-size: 12px;
+    font-size: 10px;
     text-align: left !important;
     color:#000 !important;
 }
