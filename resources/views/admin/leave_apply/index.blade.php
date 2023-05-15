@@ -50,7 +50,36 @@
                       </h2>
                       <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                          
+                          <div class="row py-5">
+                            <div class="col-3">
+                                <select class="px-2 py-2 filter" width="full">
+                                    <option>
+                                        Filter 1
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <select class="px-2 py-2 filter" width="full">
+                                    <option>
+                                        Filter 2
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <select class="px-2 py-2 filter" width="full">
+                                    <option>
+                                        Filter 3
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <select class="px-2 py-2 filter" width="full">
+                                    <option>
+                                        Filter 4
+                                    </option>
+                                </select>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
