@@ -25,54 +25,80 @@
                             class="table data-table table-pay-scale  table-thead-bordered table-nowrap table-align-middle card-table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Employee Id</th>
-                                    <th>Employee name</th>
+                                    <th>S.No</th>
+                                    <th>Employee Name</th>
                                     <th>Employee Email</th>
-                                    <th>Employee username</th>
                                     <th>Employee Phone</th>
-                                    <th>Employee Gender</th>
+                                    <th>Basic Payment</th>
+                                    <th>Total Tax Detection</th>
+                                    <th>Total Detection</th>
+                                    <th>Total Sallery</th>
+                                    <th>Total Ammount</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>No</td>
-                                    <td>Employee Id</td>
-                                    <td>Employee name</td>
-                                    <td>Employee Email</td>
-                                    <td>Employee username</td>
-                                    <td>Employee Phone</td>
-                                    <td>Employee Gender</th>
+                                    <td>1</td>
+                                    <td>Surya Prakash</td>
+                                    <td>surya@togoteams.com</td>
+                                    <td>9123456789</td>
+                                    <td>50000</td>
+                                    <td>5000</td>
+                                    <td>12000</th>
+                                        <td>60000</th>
+                                            <td>55000</th>
 
                                 </tr>
+
                                 <tr>
-                                    <td>No</td>
-                                    <td>Employee Id</td>
-                                    <td>Employee name</td>
-                                    <td>Employee Email</td>
-                                    <td>Employee username</td>
-                                    <td>Employee Phone</td>
-                                    <td>Employee Gender</th>
+                                    <td>2</td>
+                                    <td>Surya Prakash</td>
+                                    <td>surya@togoteams.com</td>
+                                    <td>9123456789</td>
+                                    <td>50000</td>
+                                    <td>5000</td>
+                                    <td>12000</th>
+                                        <td>60000</th>
+                                            <td>55000</th>
 
                                 </tr>
+
                                 <tr>
-                                    <td>No</td>
-                                    <td>Employee Id</td>
-                                    <td>Employee name</td>
-                                    <td>Employee Email</td>
-                                    <td>Employee username</td>
-                                    <td>Employee Phone</td>
-                                    <td>Employee Gender</th>
+                                    <td>3</td>
+                                    <td>Surya Prakash</td>
+                                    <td>surya@togoteams.com</td>
+                                    <td>9123456789</td>
+                                    <td>50000</td>
+                                    <td>5000</td>
+                                    <td>12000</th>
+                                        <td>60000</th>
+                                            <td>55000</th>
 
                                 </tr>
+
                                 <tr>
-                                    <td>No</td>
-                                    <td>Employee Id</td>
-                                    <td>Employee name</td>
-                                    <td>Employee Email</td>
-                                    <td>Employee username</td>
-                                    <td>Employee Phone</td>
-                                    <td>Employee Gender</th>
+                                    <td>4</td>
+                                    <td>Surya Prakash</td>
+                                    <td>surya@togoteams.com</td>
+                                    <td>9123456789</td>
+                                    <td>50000</td>
+                                    <td>5000</td>
+                                    <td>12000</th>
+                                        <td>60000</th>
+                                            <td>55000</th>
+
+                                </tr>
+
+                                <tr>
+                                    <td>5</td>
+                                    <td>Surya Prakash</td>
+                                    <td>surya@togoteams.com</td>
+                                    <td>9123456789</td>
+                                    <td>50000</td>
+                                    <td>5000</td>
+                                    <td>12000</th>
+                                        <td>60000</th>
+                                            <td>55000</th>
 
                                 </tr>
                             </tbody>

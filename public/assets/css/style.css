@@ -203,3 +203,9 @@ a {
 .table-pay-scale tr td:nth-child(3) {
     background: rgb(249, 248, 245);
 }
+
+
+.table-pay-scale tr td:nth-child(7) {
+    background: rgb(249, 248, 245);
+}
+
