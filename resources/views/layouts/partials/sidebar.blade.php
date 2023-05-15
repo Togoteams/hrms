@@ -280,17 +280,17 @@
                             data-bs-toggle="collapse" data-bs-target="#empsalary" aria-expanded="false"
                             aria-controls="empsalary">
                             <i class="fas fa-money-bill-wave nav-icon"></i>
-                            <span class="nav-link-title">Pay Role</span>
+                            <span class="nav-link-title">Payroll</span>
                         </a>
 
                         <div id="empsalary"
-                            class="nav-collapse collapse {{ show(['admin.pay-role.pay-scale']) }} "
+                            class="nav-collapse collapse "
                             data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                            @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
-                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.pay-role.pay-scale' ? 'active' : '' }}  "
-                                    href="{{ route('admin.pay-role.pay-scale') }}"> Pay Scale</a>
-                            @endcanany
+
+                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale' ? 'active' : '' }}  "
+                                    href="{{ route('admin.payroll.pay-scale') }}"> Pay Scale</a>
+
 
                         </div>
                     </div>
