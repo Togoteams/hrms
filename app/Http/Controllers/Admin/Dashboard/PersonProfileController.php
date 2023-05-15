@@ -14,7 +14,6 @@ class PersonProfileController extends Controller
     public function viewQualifications()
     {
         $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        // return $datas;
         return view('admin.dashboard.person-profile.qualification', ['datas' => $datas]);
     }
 
@@ -69,5 +68,72 @@ class PersonProfileController extends Controller
     {
         $data = Qualification::find($id);
         return response()->json(["status" => true, "data" => $data]);
+    }
+
+
+    public function viewPlaceOfDomicile()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.place-of-domicile');
+    }
+
+    public function viewTrainingDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.training-details');
+    }
+
+    public function viewUnionDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.union-details');
+    }
+
+    public function viewPermanentContractual()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.permanent-contractual');
+    }
+
+    public function viewSportsCulturalDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.sports-cultural-details');
+    }
+
+    public function viewAwardsDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.awards-details');
+    }
+
+    public function viewMedicalInsuranceBomaidDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.medical-insurance-bomaid-details');
+    }
+
+    public function viewDrivingLicenseDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.driving-license-details');
+    }
+
+    public function viewPreviousEmploymentDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.previous-employment-details');
+    }
+
+    public function viewLanguageKnown()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.language-known');
+    }
+
+    public function viewFunctionalCompetancyDetails()
+    {
+        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.functional-competancy-details');
     }
 }

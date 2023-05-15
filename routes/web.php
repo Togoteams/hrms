@@ -69,6 +69,18 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/add-qualification', 'addQualification')->name('qualification.add');
             Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
             Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
+
+            Route::get('/place-of-domicile', 'viewPlaceOfDomicile')->name('place.of.domicile.view');
+            Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');
+            Route::get('/union-details', 'viewUnionDetails')->name('union.details.view');
+            Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');
+            Route::get('/sports-cultural-details', 'viewSportsCulturalDetails')->name('sports.cultural.details.view');
+            Route::get('/awards-details', 'viewAwardsDetails')->name('awards.details.view');
+            Route::get('/medical-insurance-bomaid-details', 'viewMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.view');
+            Route::get('/driving-license-details', 'viewDrivingLicenseDetails')->name('driving.license.details.view');
+            Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
+            Route::get('/language-known', 'viewLanguageKnown')->name('language.known.view');
+            Route::get('/functional-competancy-details', 'viewFunctionalCompetancyDetails')->name('functional.competancy.details.view');
         });
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');

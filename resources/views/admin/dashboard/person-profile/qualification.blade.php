@@ -25,20 +25,19 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-right">
-                                        <button class="btn add-btn btn-sm bt" data-bs-toggle="modal"
-                                        data-bs-target="#formModal" title="Add">
-                                        <i class="bi bi-plus-lg"></i>Add Qualification
-                                    </button>
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#formModal" title="Add Qualification">
+                                                Add Qualification
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="row">
-                                    @foreach ($datas as $data)
-
-                                                    <div class="col-xl-6 col-xxl-4 pb-4">
-                                                        <div class="card p-3">
+                                        @foreach ($datas as $data)
+                                            <div class="col-xl-6 col-xxl-4 pb-4">
+                                                <div class="card p-3">
+                                                    <div class="row">
+                                                        <div class="col-10">
                                                             <div class="row">
-                                                            <div class="col-10">
-                                                                <div class="row">
                                                                 <div class="col-6">Exam Name:</div>
                                                                 <div class="col-6">{{ $data->exam_name }}</div>
 
@@ -57,26 +56,25 @@
                                                                 <div class="col-6">marks Name:</div>
                                                                 <div class="col-6">{{ $data->marks }}</div>
                                                             </div>
-                                                            </div>
-                                                            <div class="col-1 text-end">
-                                                                <div class="right-div">
-                                                                    <!-- Your content for right div goes here -->
-
-                                                                    <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
-                                                                        onclick="editQualification('{{ route('admin.person.profile.qualification.edit', $data->id) }}',
-                                                                                                    '{{ route('admin.person.profile.qualification.update') }}')"
-                                                                        title="Edit">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
                                                         </div>
+                                                        <div class="col-1 text-end">
+                                                            <div class="right-div">
+                                                                <!-- Your content for right div goes here -->
+
+                                                                <button class="btn btn-warning btn-sm bt"
+                                                                    data-bs-toggle="modal"
+                                                                    onclick="editQualification('{{ route('admin.person.profile.qualification.edit', $data->id) }}',
+                                                                                                    '{{ route('admin.person.profile.qualification.update') }}')"
+                                                                    title="Edit">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-
-
-                                    @endforeach
-                                </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +98,7 @@
                                 <form id="form_id" action="{{ route('admin.person.profile.qualification.add') }}">
                                     @csrf
                                     <input type="hidden" name="id" id="id" value="">
-                                    <input type="hidden" name="user_id" id="user_id" value="{{ $datas[0]->user_id }}">
+                                    <input type="hidden" name="user_id" id="user_id" value="{{ count($datas) ? $datas[0]->user_id : '' }}">
 
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
@@ -122,8 +120,8 @@
                                             <div class="form-group">
                                                 <label for="institute_name">Institute Name</label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
-                                                    type="text" name="institute_name" class="form-control form-control-"
-                                                    value="">
+                                                    type="text" name="institute_name"
+                                                    class="form-control form-control-" value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
