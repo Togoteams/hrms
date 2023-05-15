@@ -26,92 +26,92 @@
             <div class="row">
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
 
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>'<div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
                 <div class="mb-2 col-sm-4">
                     <div class="form-group">
-                        <label >Employee Id</label>
-                        <input disabled required placeholder="Enter correct Emplooye"
+                        <label >Name</label>
+                        <input required placeholder="Name"
                             type="text"  class="form-control form-control-sm ">
                     </div>
                 </div>
