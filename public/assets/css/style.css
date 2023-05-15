@@ -209,3 +209,10 @@ a {
     background: rgb(249, 248, 245);
 }
 
+.text-right{
+    text-align: right;
+}
+.add-btn
+{
+    background-color: #f85109 !important;
+}

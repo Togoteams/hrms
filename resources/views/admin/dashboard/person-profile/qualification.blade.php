@@ -20,57 +20,63 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-6 border border-1 border-color rounded  mx-3">
+                            <div class="col-9 border border-1 border-color rounded  mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
+                                    <div class="row py-3">
+                                        <div class="text-right">
+                                        <button class="btn add-btn btn-sm bt" data-bs-toggle="modal"
+                                        data-bs-target="#formModal" title="Add">
+                                        <i class="bi bi-plus-lg"></i>Add Qualification
+                                    </button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                     @foreach ($datas as $data)
-                                        <div>
-                                            <div class="container mt-2 mb-2 ms-1">
-                                                <div class="row">
-                                                    <div class="col-md-10 py-4">
-                                                        <div class="left-div">
+
+                                                    <div class="col-4 pb-4">
+                                                        <div class="card p-3">
                                                             <div class="row">
-                                                                <div class="col-3">Exam Name:</div>
-                                                                <div class="col-7">{{ $data->exam_name }}</div>
+                                                            <div class="col-10">
+                                                                <div class="row">
+                                                                <div class="col-6">Exam Name:</div>
+                                                                <div class="col-6">{{ $data->exam_name }}</div>
 
-                                                                <div class="col-3">Specialization:</div>
-                                                                <div class="col-7">{{ $data->specialization }}</div>
+                                                                <div class="col-6">Specialization:</div>
+                                                                <div class="col-6">{{ $data->specialization }}</div>
 
-                                                                <div class="col-3">Institute Name:</div>
-                                                                <div class="col-7">{{ $data->institute_name }}</div>
+                                                                <div class="col-6">Institute Name:</div>
+                                                                <div class="col-6">{{ $data->institute_name }}</div>
 
-                                                                <div class="col-3">University:</div>
-                                                                <div class="col-7">{{ $data->university }}</div>
+                                                                <div class="col-6">University:</div>
+                                                                <div class="col-6">{{ $data->university }}</div>
 
-                                                                <div class="col-3">Year of passing:</div>
-                                                                <div class="col-7">{{ $data->year_of_passing }}</div>
+                                                                <div class="col-6">Year of passing:</div>
+                                                                <div class="col-6">{{ $data->year_of_passing }}</div>
 
-                                                                <div class="col-3">marks Name:</div>
-                                                                <div class="col-7">{{ $data->marks }}</div>
+                                                                <div class="col-6">marks Name:</div>
+                                                                <div class="col-6">{{ $data->marks }}</div>
+                                                            </div>
+                                                            </div>
+                                                            <div class="col-2 text-end">
+                                                                <div class="right-div">
+                                                                    <!-- Your content for right div goes here -->
 
+                                                                    <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
+                                                                        onclick="editQualification('{{ route('admin.person.profile.qualification.edit', $data->id) }}',
+                                                                                                    '{{ route('admin.person.profile.qualification.update') }}')"
+                                                                        title="Edit">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-2 text-end">
-                                                        <div class="right-div">
-                                                            <!-- Your content for right div goes here -->
-                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
-                                                                data-bs-target="#formModal" title="Add">
-                                                                <i class="bi bi-plus-lg"></i>
-                                                            </button>
-                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
-                                                                onclick="editQualification('{{ route('admin.person.profile.qualification.edit', $data->id) }}',
-                                                                                            '{{ route('admin.person.profile.qualification.update') }}')"
-                                                                title="Edit">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
 
+
+                                    @endforeach
+                                </div>
                                 </div>
                             </div>
                         </div>
