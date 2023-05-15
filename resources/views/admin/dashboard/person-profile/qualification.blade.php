@@ -58,7 +58,7 @@
                                                                 <div class="col-6">{{ $data->marks }}</div>
                                                             </div>
                                                             </div>
-                                                            <div class="col-2 text-end">
+                                                            <div class="col-1 text-end">
                                                                 <div class="right-div">
                                                                     <!-- Your content for right div goes here -->
 
