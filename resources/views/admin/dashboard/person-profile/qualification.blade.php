@@ -20,7 +20,7 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-9 border border-1 border-color rounded  mx-3">
+                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
@@ -34,7 +34,7 @@
                                     <div class="row">
                                     @foreach ($datas as $data)
 
-                                                    <div class="col-4 pb-4">
+                                                    <div class="col-xl-6 col-xxl-4 pb-4">
                                                         <div class="card p-3">
                                                             <div class="row">
                                                             <div class="col-10">
