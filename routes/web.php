@@ -166,6 +166,16 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::match(['get', 'post'], 'add', 'addPayscale')->name('add');
         });
     });
+
+    // Salary
+    Route::prefix('salary')->as('salary.')->group(function () {
+        Route::get('view-salary', function () {
+            return view('admin.salary.salary-view');
+        })->name('view.salary');
+        Route::get('add-salary', function () {
+            return view('admin.salary.add-salary');
+        })->name('add.salary');
+    });
 });
 
 // this group only for update password and +

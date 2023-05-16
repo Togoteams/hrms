@@ -9,13 +9,13 @@
             <div class="mt-2 mb-2">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h1 class="page-header-title">{{ $page }}</h1>
+                        <h1 class="page-header-title">Add Salary</h1>
                     </div>
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
                             Home
-                        </a>/ {{ $page }}
+                        </a>/ Add Salary
                     </div>
                     <!-- End Col -->
                 </div>
