@@ -30,82 +30,59 @@
                                     <th>Employee Email</th>
                                     <th>Employee Phone</th>
                                     <th>Basic Payment</th>
-                                    <th>Total Tax Detection</th>
-                                    <th>Total Detection</th>
-                                    <th>Total Sallery</th>
-                                    <th>Total Ammount</th>
+                                    <th>Total Deduction</th>
+                                    <th>Total Tax Deduction</th>
+                                    <th>Total Salary</th>
+                                    <th>Total Amount</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Surya Prakash</td>
-                                    <td>surya@togoteams.com</td>
-                                    <td>9123456789</td>
-                                    <td>50000</td>
-                                    <td>5000</td>
-                                    <td>12000</th>
-                                        <td>60000</th>
-                                            <td>55000</th>
-
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Surya Prakash</td>
-                                    <td>surya@togoteams.com</td>
-                                    <td>9123456789</td>
-                                    <td>50000</td>
-                                    <td>5000</td>
-                                    <td>12000</th>
-                                        <td>60000</th>
-                                            <td>55000</th>
-
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Surya Prakash</td>
-                                    <td>surya@togoteams.com</td>
-                                    <td>9123456789</td>
-                                    <td>50000</td>
-                                    <td>5000</td>
-                                    <td>12000</th>
-                                        <td>60000</th>
-                                            <td>55000</th>
-
-                                </tr>
-
-                                <tr>
-                                    <td>4</td>
-                                    <td>Surya Prakash</td>
-                                    <td>surya@togoteams.com</td>
-                                    <td>9123456789</td>
-                                    <td>50000</td>
-                                    <td>5000</td>
-                                    <td>12000</th>
-                                        <td>60000</th>
-                                            <td>55000</th>
-
-                                </tr>
-
-                                <tr>
-                                    <td>5</td>
-                                    <td>Surya Prakash</td>
-                                    <td>surya@togoteams.com</td>
-                                    <td>9123456789</td>
-                                    <td>50000</td>
-                                    <td>5000</td>
-                                    <td>12000</th>
-                                        <td>60000</th>
-                                            <td>55000</th>
-
-                                </tr>
-                            </tbody>
                             <tbody>
                             </tbody>
                         </table>
                     </div>
+
+                    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+                    <script type="text/javascript">
+                        $(function() {
+                            var i = 1;
+                            var table = $('.data-table').DataTable({
+                                processing: true,
+                                serverSide: true,
+                                ajax: "{{ route('admin.payroll.pay-scale.list') }}",
+
+                                columns: [{
+                                        "render": function() {
+                                            return i++;
+                                        }
+                                    },
+                                    {
+                                        data: 'user.name',
+                                        name: 'user.name'
+                                    }, {
+                                        data: 'user.email',
+                                        name: 'user.email'
+                                    },
+                                    {
+                                        data: 'user.mobile',
+                                        name: 'user.mobile'
+                                    },
+
+                                    {
+                                        data: 'basic',
+                                        name: 'basic'
+                                    },
+                                    {
+                                        data: 'total_deduction',
+                                        name: 'total_deduction'
+                                    },
+                                ]
+                            });
+
+                        });
+                    </script>
+                    <!-- End Table -->
+
                 </div>
                 <!-- Button trigger modal -->
 

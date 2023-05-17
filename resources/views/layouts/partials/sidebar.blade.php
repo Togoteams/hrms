@@ -283,7 +283,8 @@
                              <span class="nav-link-title">Payroll</span>
                          </a>
 
-                         <div id="emppayroll" class="nav-collapse collapse "
+                         <div id="emppayroll"
+                             class="nav-collapse  {{ show(['admin.payroll.pay-scale.list', 'admin.payroll.pay-scale.add']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.list' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.pay-scale.list') }}"> Pay Scale</a>
@@ -303,13 +304,14 @@
                              <span class="nav-link-title">Salary</span>
                          </a>
 
-                         <div id="empSalary" class="nav-collapse collapse "
+                         <div id="empSalary"
+                             class="nav-collapse  {{ show(['admin.salary.list', 'admin.salary.add']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.view.salary' ? 'active' : '' }}  "
-                                 href="{{ route('admin.salary.view.salary') }}"> View Salary</a>
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.list' ? 'active' : '' }}  "
+                                 href="{{ route('admin.salary.list') }}"> View Salary</a>
 
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.add.salary' ? 'active' : '' }}  "
-                                 href="{{ route('admin.salary.add.salary') }}">Add Salary</a>
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.add' ? 'active' : '' }}  "
+                                 href="{{ route('admin.salary.add') }}">Add Salary</a>
 
 
                          </div>

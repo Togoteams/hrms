@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;
 use App\Http\Controllers\Admin\Payroll\PayscaleController;
+use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
 
 
@@ -163,18 +164,19 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::prefix('payroll')->as('payroll.')->group(function () {
         Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
             Route::get('/', 'listPayscale')->name('list');
-            Route::match(['get', 'post'], 'add', 'addPayscale')->name('add');
+            Route::get('add', 'addPayscalePage')->name('add');
+            Route::post('store', 'storePayscale')->name('store');
+            Route::get('get-payscale/{id}', 'getPayscale')->name('get');
         });
     });
 
     // Salary
     Route::prefix('salary')->as('salary.')->group(function () {
-        Route::get('view-salary', function () {
-            return view('admin.salary.salary-view');
-        })->name('view.salary');
-        Route::get('add-salary', function () {
-            return view('admin.salary.add-salary');
-        })->name('add.salary');
+        Route::controller(SalaryController::class)->group(function () {
+            Route::get('/', 'listSalary')->name('list');
+            Route::get('add', 'addSalaryPage')->name('add');
+            Route::post('store', 'storeSalary')->name('store');
+        });
     });
 });
 
