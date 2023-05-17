@@ -36,7 +36,7 @@
     </div>
     <div class="col-lg-3">
 
-    <a href="{{ route('admin.leave_apply.request_history') }}" class=""> <div class="card py-5 card-hover-shadow card-leavtype">Total Leave Pedding -
+    <a href="{{ route('admin.leave_apply.request_history') }}" class=""> <div class="card py-5 card-hover-shadow card-leavtype">Total Leave pending -
         {{ $total_pedding }} </div></a>
 
     </div>
