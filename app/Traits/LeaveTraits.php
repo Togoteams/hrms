@@ -22,7 +22,7 @@ trait LeaveTraits
                 $date2 = date_create($value->end_date);
                 $no_of_days = date_diff($date1, $date2)->format("%R%a");
                 $no_of_days = (int)round($no_of_days, 0);
-                 $total_apply_leave = $total_apply_leave + $no_of_days;
+                $total_apply_leave = $total_apply_leave + $no_of_days +1;
             }
         }
 

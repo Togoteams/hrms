@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3">
-                    <div class="mb-2 col-auto">
+                    <div class="col-auto mb-2">
                         {{-- @can('add-leaves') --}}
                         @if (isemplooye())
                             @php
@@ -54,9 +54,9 @@
                 </div>
             </div>
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
-                <div class="table-responsive mt-3 p-2">
-                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+            <div class="mb-3 card mb-lg-5">
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>

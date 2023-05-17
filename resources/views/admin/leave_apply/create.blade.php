@@ -16,14 +16,14 @@
                         <div class="row">
 
                             @if (!isemplooye())
-                                <div class="col-sm-6 mb-2">
+                                <div class="mb-2 col-sm-6">
                                     <div class="form-group">
-                                        <label for="user_id"> </label>
+                                        <label for="user_id">Employee</label>
                                         <select
                                             onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
                                             required id="user_id" placeholder="Enter correct user_id   "
                                             type="text" name="user_id" class="form-control form-control-sm ">
-                                            <option selected disabled> -Select User - </option>
+                                            <option selected disabled> -Select Employee - </option>
                                             @foreach ($all_user as $user)
                                                 <option value="{{ $user->user->id }}">{{ $user->user->name }} -
                                                     {{ $user->user->email }}</option>
@@ -33,7 +33,7 @@
                                 </div>
                             @endif
 
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types </label>
                                     <select required id="leave_type_id"
@@ -48,7 +48,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="balance_leave1">balance_leave </label>
                                     <input readonly required id="balance_leave1" placeholder="Enter correct balance_leave"
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="leave_applies_for">leave_applies_for </label>
                                     <input required id="leave_applies_for"
@@ -66,14 +66,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 mb-2">
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="start_date">start_date </label>
                                     <input  required id="start_date" placeholder="Enter correct start_date   "
                                         type="date" name="start_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-2">
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="end_date">end_date </label>
                                     <input required id="end_date" placeholder="Enter correct end_date   "
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 mb-2">
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="doc">Required Document </label>
                                     <input accept="application/pdf" id="doc"
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason </label>
                                     <input required id="leave_reason" placeholder="Enter correct leave_reason ex - i want to 2 days for my sister merage  "
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="remark"> Describe the Leave reason  (optional)</label>
                                     <textarea rows="12"  id="remark" placeholder="Describe the Leave reason  " name="remark"

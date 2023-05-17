@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3">
-                    <div class="mb-2 col-auto">
+                    <div class="col-auto mb-2">
                         {{-- @can('add-leaves') --}}
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
@@ -40,17 +40,17 @@
             <!-- Card -->
             @include('admin.leave_apply.type_of_leave')
 
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
-                      <h2 class="accordion-header col-lg-3 filters flex">
+                      <h2 class="flex accordion-header col-lg-3 filters">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             Advanced Filters
                           </button>
                       </h2>
                       <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                          <div class="row py-5">
+                          <div class="py-5 row">
                             <div class="col-3">
                                 <select class="px-2 py-2 filter" width="full">
                                     <option>
@@ -84,8 +84,8 @@
                       </div>
                     </div>
                 </div>
-                <div class="table-responsive mt-3 p-2">
-                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
