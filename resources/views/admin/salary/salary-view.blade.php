@@ -2,6 +2,7 @@
 @push('styles')
 @endpush
 @section('content')
+
     <main id="content" role="main" class="main">
         <!-- Content -->
         <div class="content container-fluid">
@@ -75,6 +76,12 @@
                                         data: 'total_deduction',
                                         name: 'total_deduction'
                                     },
+                                    {
+                                        data: 'action',
+                                        name: 'action',
+                                        orderable: true,
+                                        searchable: true
+                                    },
                                 ]
                             });
 
@@ -90,3 +97,11 @@
 
     </main>
 @endsection
+@push('custom-scripts')
+<script>
+    function printSalary(salaryId) {
+        const salaryUrl = `/admin/salary/get-salary-print/${salaryId}`;
+            window.open(salaryUrl, '_blank');
+    }
+</script>
+@endpush

@@ -176,6 +176,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/', 'listSalary')->name('list');
             Route::get('add', 'addSalaryPage')->name('add');
             Route::post('store', 'storeSalary')->name('store');
+            Route::get('get-salary-print/{id}', 'printSalary')->name('print');
         });
     });
 });

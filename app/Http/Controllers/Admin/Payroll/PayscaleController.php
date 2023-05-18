@@ -61,7 +61,6 @@ class PayscaleController extends Controller
         //     `special` => ['required', 'numeric'],
         //     `mobile` => ['required', 'numeric'],
         //     `bonus` => ['required', 'numeric'],
-        //     `bonus` => ['required', 'numeric'],
         //     `transportation` => ['required', 'numeric'],
         //     `food` => ['required', 'numeric'],
         //     `medical` => ['required', 'numeric'],

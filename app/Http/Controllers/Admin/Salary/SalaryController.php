@@ -22,16 +22,21 @@ class SalaryController extends Controller
             $data = EmpSalary::with('user')->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<i class="bi bi-printer-fill pointer" onclick="printSalary(' . $row->id . ')" target="_blank"></i>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.salary.salary-view',['page' => $pageName]);
+        return view('admin.salary.salary-view', ['page' => $pageName]);
     }
     public function addSalaryPage()
     {
         $pageName = "Add Salary";
         $membership = Membership::all();
         $users = User::all();
-        return view('admin.salary.add-salary',['page' => $pageName, 'users' =>$users, 'membership' => $membership]);
+        return view('admin.salary.add-salary', ['page' => $pageName, 'users' => $users, 'membership' => $membership]);
     }
     public function storeSalary(Request $request)
     {
@@ -58,7 +63,6 @@ class SalaryController extends Controller
             // `conveyance` => ['required', 'numeric'],
             // `special` => ['required', 'numeric'],
             // `mobile` => ['required', 'numeric'],
-            // `bonus` => ['required', 'numeric'],
             // `bonus` => ['required', 'numeric'],
             // `transportation` => ['required', 'numeric'],
             // `food` => ['required', 'numeric'],
@@ -89,5 +93,62 @@ class SalaryController extends Controller
                 return response()->json(['success' => $e->getMessage()]);
             }
         }
+    }
+
+    public function printSalary($id)
+    {
+        $toArray = [];
+        $empSal = EmpSalary::findOrFail($id);
+        $toArray = [
+            'basic' => $empSal->basic,
+            'hra' => $empSal->hra,
+            'overtime' => $empSal->overtime,
+            'arrear' => $empSal->arrear,
+            'conveyance' => $empSal->conveyance,
+            'special' => $empSal->special,
+            'mobile' => $empSal->mobile,
+            'bonus' => $empSal->bonus,
+            'transportation' => $empSal->transportation,
+            'food' => $empSal->food,
+            'medical' => $empSal->medical,
+
+
+
+            'pf_amount' => $empSal->pf_amount,
+            'esi_amount' => $empSal->esi_amount,
+            'pension_amount' => $empSal->pension_amount,
+            'union_membership' => $empSal->membership->amount,
+            'loans_deduction' => $empSal->loans_deduction,
+            'income_tax_deductions' => $empSal->income_tax_deductions,
+            'penalty_deductions' => $empSal->penalty_deductions,
+            'fixed_deductions' => $empSal->fixed_deductions,
+            'other_deductions' => $empSal->other_deductions,
+
+
+        ];
+
+        $total_earning = $empSal->basic + $empSal->hra +
+            $empSal->overtime + $empSal->arrear +
+            $empSal->conveyance + $empSal->special +
+            $empSal->mobile + $empSal->bonus +
+            $empSal->transportation + $empSal->food +
+            $empSal->medical;
+        $total_deductions = $empSal->pf_amount + $empSal->esi_amount +
+            $empSal->pension_amount + $empSal->union_membership +
+            $empSal->loans_deduction + $empSal->income_tax_deductions +
+            $empSal->penalty_deductions + $empSal->fixed_deductions +
+            $empSal->other_deductions;
+
+        $net_pay = $total_earning - $total_deductions;
+
+        $dataSet = [
+            'total_earning' => number_format($total_earning, 2, '.', ''),
+            'total_deductions' => number_format($total_deductions, 2, '.', ''),
+            'net_pay' => number_format($net_pay, 2, '.', ''),
+            'emp_name' => $empSal->user->name,
+            'emp_code' => $empSal->employee->emp_id,
+        ];
+
+        return view('admin.salary.salary-slip', ['data' => $toArray, 'dataSet' => $dataSet]);
     }
 }
