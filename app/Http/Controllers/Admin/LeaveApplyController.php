@@ -201,10 +201,13 @@ class LeaveApplyController extends Controller
 
             try {
                 if ($request->status != "approved") {
-
                     LeaveApply::where('id', $id)->update([
                         'status' => $request->status,
+                    ]);
+
+                    LeaveApply::where('id', $id)->update([
                         'status_remarks' => $request->status_remarks,
+                        'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
 
                     ]);
                 }
@@ -217,6 +220,7 @@ class LeaveApplyController extends Controller
                         ]);
 
                         LeaveApply::where('id', $id)->update([
+                            'status_remarks' => $request->status_remarks,
                             'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
                         ]);
                     } else {
@@ -258,7 +262,7 @@ class LeaveApplyController extends Controller
     {
         $remaining_leave = 0;
         if (isemplooye()) {
-            $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id)/2;
+            $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id) / 2;
         } else {
             $remaining_leave = $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
         }

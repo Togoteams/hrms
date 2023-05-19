@@ -15,15 +15,15 @@ trait LeaveTraits
         }
         $total_apply_leave = 0;
         $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->where('status', 'approved')->get();
-
-        if ($total_apply_leaves) {
+        if (count($total_apply_leaves) > 0) {
             foreach ($total_apply_leaves as  $value) {
                 $date1 = date_create($value->start_date);
                 $date2 = date_create($value->end_date);
                 $no_of_days = date_diff($date1, $date2)->format("%R%a");
                 $no_of_days = (int)round($no_of_days, 0);
-                 $total_apply_leave = $total_apply_leave + $no_of_days;
+                $total_apply_leave = $total_apply_leave + $no_of_days;
             }
+            $total_apply_leave = $total_apply_leave + 1;
         }
 
         $total_leave = LeaveType::find($leave_type_id)->no_of_days;
