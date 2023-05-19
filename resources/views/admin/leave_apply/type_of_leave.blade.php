@@ -29,28 +29,28 @@
 
 <div class="row text-center p-1 mt-4">
     <div class="col-lg-3 ">
-        <div class="card py-5 card-hover-shadow card-leavtype">
-    <a href="{{ route('admin.leave_apply.index') }}" class="">Total Leave Applied -
-        {{ $data->count('*') }}</a>
-    </div>
+
+    <a href="{{ route('admin.leave_apply.index') }}" class=""><div class="card py-5 card-hover-shadow card-leavtype">Total Leave Applied -
+        {{ $data->count('*') }} </div></a>
+
     </div>
     <div class="col-lg-3">
-        <div class="card py-5 card-hover-shadow card-leavtype">
-    <a href="{{ route('admin.leave_apply.request_history') }}" class="">Total Leave Pedding -
-        {{ $total_pedding }} </a>
-        </div>
+
+    <a href="{{ route('admin.leave_apply.request_history') }}" class=""> <div class="card py-5 card-hover-shadow card-leavtype">Total Leave pending -
+        {{ $total_pedding }} </div></a>
+
     </div>
     <div class="col-lg-3 ">
-        <div class="card py-5 card-hover-shadow card-leavtype">
-    <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class="">Total Leave Rejected -
-        {{ $total_approved }} </a>
-        </div>
+
+    <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class=""><div class="card py-5 card-hover-shadow card-leavtype">Total Leave Rejected -
+        {{ $total_approved }}  </div></a>
+
     </div>
         <div class="col-lg-3">
-            <div class="card py-5 card-hover-shadow card-leavtype">
-    <a href="{{ route('admin.leave_apply.balance_history') }}" class=" ">Total Leave Approved -
-        {{ $total_reject }} </a>
-            </div>
+
+    <a href="{{ route('admin.leave_apply.balance_history') }}" class=" "><div class="card py-5 card-hover-shadow card-leavtype">Total Leave Approved -
+        {{ $total_reject }}   </div> </a>
+
         </div>
 
     @if (isemplooye())

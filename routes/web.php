@@ -22,6 +22,10 @@ use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;
+use App\Http\Controllers\Admin\Payroll\PayscaleController;
+use App\Http\Controllers\Admin\Salary\SalaryController;
+use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
+
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->group(function () {
@@ -57,6 +61,27 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
             Route::get('/emergency-contact-details', 'viewEmergencyContact')->name('emergency.contact');
             Route::post('/update-emergency-contact/{id}', 'updateEmergencyContact')->name('emergency.contact.update');
+        });
+    Route::controller(PersonProfileController::class)
+        ->as('person.profile.')
+        ->prefix('person-profile')
+        ->group(function () {
+            Route::get('/qualifications', 'viewQualifications')->name('qualifications.view');
+            Route::post('/add-qualification', 'addQualification')->name('qualification.add');
+            Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
+            Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
+
+            Route::get('/place-of-domicile', 'viewPlaceOfDomicile')->name('place.of.domicile.view');
+            Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');
+            Route::get('/union-details', 'viewUnionDetails')->name('union.details.view');
+            Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');
+            Route::get('/sports-cultural-details', 'viewSportsCulturalDetails')->name('sports.cultural.details.view');
+            Route::get('/awards-details', 'viewAwardsDetails')->name('awards.details.view');
+            Route::get('/medical-insurance-bomaid-details', 'viewMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.view');
+            Route::get('/driving-license-details', 'viewDrivingLicenseDetails')->name('driving.license.details.view');
+            Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
+            Route::get('/language-known', 'viewLanguageKnown')->name('language.known.view');
+            Route::get('/functional-competancy-details', 'viewFunctionalCompetancyDetails')->name('functional.competancy.details.view');
         });
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
@@ -134,6 +159,26 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
+
+    // Payroll
+    Route::prefix('payroll')->as('payroll.')->group(function () {
+        Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
+            Route::get('/', 'listPayscale')->name('list');
+            Route::get('add', 'addPayscalePage')->name('add');
+            Route::post('store', 'storePayscale')->name('store');
+            Route::get('get-payscale/{id}', 'getPayscale')->name('get');
+        });
+    });
+
+    // Salary
+    Route::prefix('salary')->as('salary.')->group(function () {
+        Route::controller(SalaryController::class)->group(function () {
+            Route::get('/', 'listSalary')->name('list');
+            Route::get('add', 'addSalaryPage')->name('add');
+            Route::post('store', 'storeSalary')->name('store');
+            Route::get('get-salary-print/{id}', 'printSalary')->name('print');
+        });
+    });
 });
 
 // this group only for update password and +
@@ -154,5 +199,5 @@ Route::controller(LoginController::class)->as('login.')->prefix('login/')->group
 
 Route::get('admin/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified','changed.password'])->name('admin.dashboard');
+})->middleware(['auth', 'verified', 'changed.password'])->name('admin.dashboard');
 require __DIR__ . '/auth.php';

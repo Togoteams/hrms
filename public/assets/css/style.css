@@ -29,6 +29,7 @@ td{
     padding-top: 5px !important;
     padding: 0 auto !important;
     border-radius: 7px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 }
 
 .card-leavtype {
@@ -39,7 +40,7 @@ td{
     padding: 0 auto !important;
     border-radius: 7px !important;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 2px !important;
 }
 
 
@@ -48,19 +49,20 @@ td{
     color: rgb(244, 127, 10);
 }
 
-.card-leavtype:hover {
+.card-leavtype:hover{
     background-color:rgb(244, 127, 10) !important;
     color: #fff;
 
 }
 
 
-.card-leavtype a{
+.card-leavtype{
 
     color: #000 !important;
+    font-size: 18px !important;
 
 }
-.card-leavtype:hover a{
+.card-leavtype:hover{
 
     color: #fff !important;
 
@@ -69,7 +71,7 @@ td{
 
 
 .card-dashboard i{
-    font-size: 40px;
+    font-size: 50px;
     color:rgb(244, 74, 12);
 }
 .card-dashboard h2{
@@ -177,4 +179,43 @@ a {
 }
 .text-orenge{
     color:#f85109 !important;
+}
+
+
+.filter{
+    width: 90%;
+    margin: auto;
+    border-radius: 4px;
+}
+
+.table-pay-scale thead{
+    border:.5px solid #fac0a7 !important;
+}
+
+.table-pay-scale th{
+    border:.5px solid #dedede;
+    background:#f6f5f5 !important;
+}
+
+.table-pay-scale td{
+    border:.5px solid #edebeb;
+
+}
+
+.table-pay-scale tr td:nth-child(3) {
+    background: rgb(249, 248, 245);
+}
+
+
+.table-pay-scale tr td:nth-child(8) {
+    background: #f85109;
+    color: #fff;
+}
+
+.text-right{
+    text-align: right;
+}
+.add-btn
+{
+    background-color: #f85109 !important;
 }

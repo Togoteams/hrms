@@ -16,11 +16,11 @@
 
 
                             @if (!isemplooye())
-                                <div class="col-sm-6 mb-2">
+                                <div class="mb-2 col-sm-6">
                                     <div class="form-group">
-                                        <label for="user_id"> </label>
+                                        <label for="user_id">Employee </label>
                                         <select
-                                            onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_encash_leave') }}', 'leave_type_id')"
+                                            onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_encash_leave') }}', 'leave_type_id')"
                                             required id="user_id" placeholder="Enter correct user_id   "
                                             type="text" name="user_id" class="form-control form-control-sm ">
                                             <option selected disabled> -Select User - </option>
@@ -33,7 +33,7 @@
                                 </div>
                             @endif
 
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types </label>
                                     <select required id="leave_type_id"
@@ -52,7 +52,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="balance_leave1">balance_leave </label>
                                     <input   required id="balance_leave1"
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">description </label>
                                     <textarea rows="12" required id="description" placeholder="Enter correct description   " name="description"

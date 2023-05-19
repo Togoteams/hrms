@@ -1,7 +1,7 @@
  <!-- Navbar Vertical -->
 
  <aside
-     class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl   ">
+     class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl ">
      <div class="navbar-vertical-container">
          <div class="navbar-vertical-footer-offset">
              <!-- Logo -->
@@ -17,7 +17,7 @@
              </a> --}}
 
              <!-- End Logo -->
-             <div class="text-center pt-3">
+             <div class="pt-3 text-center">
 
                  <i class="name-title">Bank of Baroda Ltd.
 
@@ -64,7 +64,7 @@
                      </div> --}}
                      <!-- End Collapse -->
 
-                     <span class="dropdown-header mt-4">Pages</span>
+                     <span class="mt-4 dropdown-header">Pages</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                      <!-- Collapse -->
@@ -167,7 +167,7 @@
 
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.emplooye_loans.index' ? 'active' : '' }}"
                                          href="{{ route('admin.employees_loans.index') }}" data-placement="left">
-                                         <i class="far fa-desktop-alt  nav-icon "></i> <span class="nav-link-title">Apply
+                                         <i class="far fa-desktop-alt nav-icon "></i> <span class="nav-link-title">Apply
                                              Loans </span>
                                      </a>
                                  </div>
@@ -203,7 +203,7 @@
 
                      <!-- End Collapse -->
 
-                     <span class="dropdown-header mt-4">Master</span>
+                     <span class="mt-4 dropdown-header">Master</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
 
@@ -227,9 +227,9 @@
                          </a>
 
                          <div id="leave"
-                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history','leave_reports.index','leave_apply.get_rejected_leave']) }} "
+                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
-                          
+
                              @if (!isemplooye())
                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
                                      href="{{ route('admin.leave_type.index') }}">Leave Types</a>
@@ -260,21 +260,63 @@
                              </a>
 
                              <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.get_rejected_leave' ? 'active' : '' }}"
-                                href="{{ route('admin.leave_apply.get_rejected_leave') }}" data-placement="left">
-                                <span class="nav-link-title">LEAVE REQUEST REJECTED</span>
+                                 href="{{ route('admin.leave_apply.get_rejected_leave') }}" data-placement="left">
+                                 <span class="nav-link-title">LEAVE REQUEST REJECTED</span>
 
 
-                            </a>
+                             </a>
 
                              <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
-                                href="{{ route('admin.leave_reports.index') }}" data-placement="left">
-                                <span class="nav-link-title">LEAVE REPORTS</span>
+                                 href="{{ route('admin.leave_reports.index') }}" data-placement="left">
+                                 <span class="nav-link-title">LEAVE REPORTS</span>
 
 
-                            </a>
+                             </a>
 
                          </div>
                      </div>
+                     <div class="nav-item">
+                         <a class="nav-link dropdown-toggle " href="#emppayroll" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#emppayroll" aria-expanded="false"
+                             aria-controls="emppayroll">
+                             <i class="fas fa-money-bill-wave nav-icon"></i>
+                             <span class="nav-link-title">Payroll</span>
+                         </a>
+
+                         <div id="emppayroll"
+                             class="nav-collapse  {{ show(['admin.payroll.pay-scale.list', 'admin.payroll.pay-scale.add']) }} "
+                             data-bs-parent="#navbarVerticalMenuPagesMenu">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.list' ? 'active' : '' }}  "
+                                 href="{{ route('admin.payroll.pay-scale.list') }}"> Pay Scale</a>
+
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.add' ? 'active' : '' }}  "
+                                 href="{{ route('admin.payroll.pay-scale.add') }}">Add Pay Scale</a>
+
+
+                         </div>
+                     </div>
+
+                     <div class="nav-item">
+                         <a class="nav-link dropdown-toggle " href="#empSalary" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#empSalary" aria-expanded="false"
+                             aria-controls="empSalary">
+                             <i class="fas fa-money-bill-wave nav-icon"></i>
+                             <span class="nav-link-title">Salary</span>
+                         </a>
+
+                         <div id="empSalary"
+                             class="nav-collapse  {{ show(['admin.salary.list', 'admin.salary.add']) }} "
+                             data-bs-parent="#navbarVerticalMenuPagesMenu">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.list' ? 'active' : '' }}  "
+                                 href="{{ route('admin.salary.list') }}"> View Salary</a>
+
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.add' ? 'active' : '' }}  "
+                                 href="{{ route('admin.salary.add') }}">Add Salary</a>
+
+
+                         </div>
+                     </div>
+
                  </div>
                  {{-- @endcanany --}}
              </div>
