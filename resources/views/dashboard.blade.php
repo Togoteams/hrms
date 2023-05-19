@@ -277,7 +277,7 @@
                             <a class="card card-hover-shadow card-dashboard " href="#">
                                 <div class="card-body text-center">
                                     <div class="">
-                                        <h2 class="card-title text-white">Profile Approvel History</h2>
+                                        <h2 class="card-title text-white">Profile Approvel </h2>
                                     </div>
                                     <h6 class="card-subtitle pt-4"><i class="fa-solid fa-user-check"></i></h6>
 
@@ -297,7 +297,7 @@
                             <a class="card card-hover-shadow card-dashboard " href="#">
                                 <div class="card-body text-center">
                                     <div class="">
-                                        <h2 class="card-title text-white">Self Service Applications</h2>
+                                        <h2 class="card-title text-white">Self Service </h2>
                                     </div>
                                     <h6 class="card-subtitle pt-4"><i class="fa-solid fa-bullhorn"></i></h6>
 

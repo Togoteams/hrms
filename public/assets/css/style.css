@@ -29,6 +29,7 @@ td{
     padding-top: 5px !important;
     padding: 0 auto !important;
     border-radius: 7px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
 }
 
 .card-leavtype {
@@ -74,7 +75,7 @@ td{
     color:rgb(244, 74, 12);
 }
 .card-dashboard h2{
-    font-size: 10px;
+    font-size: 12px;
     text-align: left !important;
     color:#000 !important;
 }
