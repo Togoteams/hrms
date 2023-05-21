@@ -41,12 +41,56 @@
                                                 <div class="col-md-2 text-end">
                                                     <div class="pt-2">
                                                         <!-- Your content for right div goes here -->
-                                                        <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
-                                                            data-bs-target="#modaledit">
+                                                        {{-- <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal" data-bs-target="#modaledit"> --}}
+                                                        <button class="btn btn-warning btn-sm bt" onclick="openForm()">
                                                             <i class="fas fa-edit"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="container mt-2 mb-2 ms-1 d-none" id="formDiv">
+                                            <form id="form_edit" action="{{ route('admin.personal.info.contact.update') }}">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="py-4">
+                                                        <div class="left-div">
+                                                            <div class="row">
+                                                                <div class="col-3 pt-2">Email.:</div>
+                                                                <div class="col-5">
+                                                                    <input required id="email"
+                                                                        placeholder="Enter correct email   "
+                                                                        value="{{ $data->user->email }}" type="email"
+                                                                        name="email"
+                                                                        class="form-control form-control-sm ">
+                                                                </div>
+                                                                <div class="col-2">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row pt-2">
+                                                                <div class="col-3 pt-2">Mobile No. :</div>
+                                                                <div class="col-5">
+                                                                    <input required id="mobile"
+                                                                        placeholder="Enter correct Mobile No   "
+                                                                        value="{{ $data->user->mobile }}" type="number"
+                                                                        name="mobile"
+                                                                        class="form-control form-control-sm ">
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <button onclick="ajaxCall('form_edit','','POST')"
+                                                                        type="button"
+                                                                        class="btn btn-primary btn-sm">Update</button>
+                                                                </div>
+                                                                <div class="col-2 text-end">
+                                                                    <div class=" px-2">
+                                                                        <i class="bi bi-x-square-fill fs-2 text-danger pointer"
+                                                                            title="Cancel" onclick="closeForm()"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +102,7 @@
                 </div>
                 {{-- edit form model start --}}
                 <!-- Modal -->
-                <div class="modal fade" id="modaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                {{-- <div class="modal fade" id="modaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content ">
@@ -84,8 +128,7 @@
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="mobile">Mobile No. </label>
-                                                <input required id="mobile"
-                                                    placeholder="Enter correct Mobile No   "
+                                                <input required id="mobile" placeholder="Enter correct Mobile No   "
                                                     value="{{ $data->user->mobile }}" type="number" name="mobile"
                                                     class="form-control form-control-sm ">
                                             </div>
@@ -103,6 +146,17 @@
 
                         </div>
                     </div>
-                </div>
+                </div> --}}
     </main>
 @endsection
+@push('custom-scripts')
+    <script>
+        function openForm() {
+            $("#formDiv").removeClass("d-none");
+        }
+
+        function closeForm() {
+            $("#formDiv").addClass("d-none");
+        }
+    </script>
+@endpush

@@ -8,12 +8,14 @@ use App\Models\Employee;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class PersonalInformationController extends Controller
 {
 
-    public function viewEmployeeDetails(){
+    public function viewEmployeeDetails()
+    {
         $page_name = "Employee";
         $data = Employee::first();
         $designation = Designation::all();
@@ -37,7 +39,7 @@ class PersonalInformationController extends Controller
 
     public function viewDobDetails()
     {
-        $page_name = "Date of Birts";
+        $page_name = "Date of Birth";
         $data = Employee::first();
         return view('admin.dashboard.personal-information.dob', ['data' => $data, 'page' => $page_name]);
     }
@@ -72,7 +74,7 @@ class PersonalInformationController extends Controller
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $id)->update($request->except(['_token', 'user_id','name', 'username']));
+                Employee::where('id', $id)->update($request->except(['_token', 'user_id', 'name', 'username']));
                 User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
@@ -132,7 +134,10 @@ class PersonalInformationController extends Controller
         } else {
             try {
                 Employee::where('id', $id)->update($request->except(['_token']));
-                return response()->json(['success' => $page_name . " Updated Successfully"]);
+                // return response()->json(['success' => $page_name . " Updated Successfully"]);
+                $message = $page_name . " Updated Successfully";
+                Session::put('success', $message);
+                return redirect()->back();
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }
