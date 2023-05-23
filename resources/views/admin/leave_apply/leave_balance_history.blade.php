@@ -23,20 +23,7 @@
 
                 <!-- End Row -->
             </div>
-            <div class="row">
-                <div class="col-sm-9"></div>
-                <div class="col-sm-3">
-                    <div class="mb-2 col-auto">
-                        @can('add-leaves')
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                 {{ $page }}
-                            </button>
-                        @endcan
-                    </div>
-                </div>
-            </div>
-            @include('admin.leave_apply.create')
+         
             @include('admin.leave_apply.type_of_leave')
 
             <!-- Card -->

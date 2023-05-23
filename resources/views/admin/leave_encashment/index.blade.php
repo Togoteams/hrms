@@ -44,7 +44,7 @@
                         @else
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
-                                {{ $page }}
+                                Apply  {{ $page }}
                             </button>
                             @include('admin.leave_encashment.create')
                         @endif
