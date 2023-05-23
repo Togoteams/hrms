@@ -73,6 +73,7 @@
             Session::forget('success');
         @endphp
     @endif
+    
     {{-- Profile Update Validation --}}
     <script>
         'use strict';
