@@ -173,7 +173,7 @@
 
 
             </div>
-        
+
 
             {{-- edit form model start --}}
             <!-- Modal -->
@@ -195,7 +195,7 @@
 
             {{-- edit form model end  --}}
 
-         
+
 
         </div>
 

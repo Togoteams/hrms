@@ -73,16 +73,17 @@
 
                                     <td>
 
-                                        <a type="button" class="btn btn-white btn-sm"
+                                        <a type="button" class="btn btn-white btn-sm btn-bg-color"
                                             href="{{ route('admin.role.attach.permission', $role->id) }}"><i
                                                 class="bi-pencil-fill me-1"></i> Permission</a>
                                         <button type="button" data-table="roles" data-form-modal="addEditRoleModal"
                                             data-message="inactive" data-uuid="{{ $role->uuid }}"
-                                            class="btn btn-white btn-sm editData">
+                                            class="btn btn-white btn-sm btn-bg-color editData">
                                             <i class="bi-pencil-fill me-1"></i> Edit
                                         </button>
                                         <button type="button" data-table="roles" data-message="inactive"
-                                            data-uuid="{{ $role->uuid }}" class="btn btn-white btn-sm deleteData">
+                                            data-uuid="{{ $role->uuid }}"
+                                            class="btn btn-white btn-sm btn-bg-color deleteData">
                                             <i class="bi-pencil-fill me-1"></i> Delete
                                         </button>
                                     </td>

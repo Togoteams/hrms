@@ -84,8 +84,8 @@
 
 
                                     <td>
-                                        <button type="button" class="btn btn-white btn-sm editData" data-table="users"
-                                            data-form-modal="editUserModal" data-message="inactive"
+                                        <button type="button" class="btn btn-white btn-sm btn-bg-color editData"
+                                            data-table="users" data-form-modal="editUserModal" data-message="inactive"
                                             data-uuid="{{ $user->uuid }}">
                                             <i class="bi-pencil-fill me-1"></i> Edit
                                         </button>

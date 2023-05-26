@@ -61,7 +61,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Employee name</th>
-                                <th>Employee Email</th>
+                                <th>Employee ID</th>
                                 <th>Employee Phone</th>
                                 <th>Ec number</th>
                                 <th>Designation</th>
@@ -96,8 +96,8 @@
                                     data: 'user.name',
                                     name: 'user.name'
                                 }, {
-                                    data: 'user.email',
-                                    name: 'user.email'
+                                    data: 'employee.emp_id',
+                                    name: 'employee.emp_id'
                                 },
                                 {
                                     data: 'user.mobile',

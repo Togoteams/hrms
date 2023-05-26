@@ -3,13 +3,19 @@
 
 @include('layouts.partials.header')
 <style>
-    .pointer{
-            cursor: pointer;
-        }
-    .pointer:hover{
+    .pointer {
+        cursor: pointer;
+    }
+
+    .pointer:hover {
         color: #f85109;
     }
+
+    .btn-bg-color {
+        background-color: #f85109d6 !important;
+    }
 </style>
+
 <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
 
     <script src="{{ asset('assets/js/hs.theme-appearance.js') }}"></script>
