@@ -25,15 +25,14 @@
             </div>
             <div class="row">
                 <div class="col-sm-9"></div>
-                <div class="col-sm-3">
-                    <div class="col-auto mb-2">
+                <div class="col-sm-3 text-right auto mb-5 mt-2">
                         {{-- @can('add-leaves') --}}
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             {{ $page }}
                         </button>
                         {{-- @endcan --}}
-                    </div>
+                  
                 </div>
             </div>
             @include('admin.leave_apply.create')

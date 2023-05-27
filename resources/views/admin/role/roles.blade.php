@@ -45,7 +45,7 @@
                                 <th>Type</th>
                                 <th>Description</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th class="text-right">Action</th>
                             </tr>
                         </thead>
 
@@ -71,20 +71,20 @@
                                         <span class="legend-indicator bg-success"></span>{{ $role->status ?? 'Active' }}
                                     </td>
 
-                                    <td>
+                                    <td class="">
 
-                                        <a type="button" class="btn btn-white btn-sm btn-bg-color"
+                                        <a type="button" class="btn btn-success btn-sm"
                                             href="{{ route('admin.role.attach.permission', $role->id) }}"><i
-                                                class="bi-pencil-fill me-1"></i> Permission</a>
+                                                class="fa fa-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Permission"></i> </a>
                                         <button type="button" data-table="roles" data-form-modal="addEditRoleModal"
                                             data-message="inactive" data-uuid="{{ $role->uuid }}"
-                                            class="btn btn-white btn-sm btn-bg-color editData">
-                                            <i class="bi-pencil-fill me-1"></i> Edit
+                                            class="btn btn-warning btn-sm editData" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                            <i class="fas fa-edit"></i>
                                         </button>
                                         <button type="button" data-table="roles" data-message="inactive"
                                             data-uuid="{{ $role->uuid }}"
-                                            class="btn btn-white btn-sm btn-bg-color deleteData">
-                                            <i class="bi-pencil-fill me-1"></i> Delete
+                                            class="btn btn-danger btn-sm deleteData" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
                                 </tr>

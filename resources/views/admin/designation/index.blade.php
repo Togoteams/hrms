@@ -26,13 +26,13 @@
             </div>
             <div class="row">
                 <div class="col-sm-9"></div>
-                <div class="col-sm-3">
-                    <div class="mb-2 col-auto">
+                <div class="col-sm-3 text-right auto mb-5 mt-2">
+
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
-                    </div>
+
                 </div>
             </div>
             @include('admin.designation.create')
@@ -70,12 +70,12 @@
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.designation.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                                class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
+                                                class="btn btn-warning btn-sm" ><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="button" id="delete{{ $item->id }}"
                                                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
-                                                class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>
+                                                class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
                                         {{-- <button target="_blank" href="{{ route('admin.designation.edit', $item->id) }}"

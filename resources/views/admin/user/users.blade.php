@@ -47,7 +47,7 @@
                                 <th>Department</th>
                                 <th>Roles</th>
                                 <th>Status</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 
@@ -84,11 +84,10 @@
 
 
                                     <td>
-                                        <button type="button" class="btn btn-white btn-sm btn-bg-color editData"
+                                        <button type="button" class="btn btn-warning btn-sm editData"
                                             data-table="users" data-form-modal="editUserModal" data-message="inactive"
-                                            data-uuid="{{ $user->uuid }}">
-                                            <i class="bi-pencil-fill me-1"></i> Edit
-                                        </button>
+                                            data-uuid="{{ $user->uuid }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                           <i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
