@@ -26,13 +26,12 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        {{-- @can('add-leaves') --}}
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            {{ $page }}
-                        </button>
-                        {{-- @endcan --}}
-                  
+                    {{-- @can('add-leaves') --}}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        {{ $page }}
+                    </button>
+                    {{-- @endcan --}}
+
                 </div>
             </div>
             @include('admin.leave_apply.create')
@@ -42,45 +41,46 @@
             <div class="mb-3 card mb-lg-5">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
-                      <h2 class="flex accordion-header col-lg-3 filters">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Advanced Filters
-                          </button>
-                      </h2>
-                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                          <div class="py-5 row">
-                            <div class="col-3">
-                                <select class="px-2 py-2 filter" width="full">
-                                    <option>
-                                        Filter 1
-                                    </option>
-                                </select>
+                        <h2 class="flex accordion-header col-lg-3 filters">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Advanced Filters
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="py-5 row">
+                                    <div class="col-3">
+                                        <select class="px-2 py-2 filter" width="full">
+                                            <option>
+                                                Filter 1
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <select class="px-2 py-2 filter" width="full">
+                                            <option>
+                                                Filter 2
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <select class="px-2 py-2 filter" width="full">
+                                            <option>
+                                                Filter 3
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <select class="px-2 py-2 filter" width="full">
+                                            <option>
+                                                Filter 4
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-3">
-                                <select class="px-2 py-2 filter" width="full">
-                                    <option>
-                                        Filter 2
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="px-2 py-2 filter" width="full">
-                                    <option>
-                                        Filter 3
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="px-2 py-2 filter" width="full">
-                                    <option>
-                                        Filter 4
-                                    </option>
-                                </select>
-                            </div>
-                          </div>
                         </div>
-                      </div>
                     </div>
                 </div>
                 <div class="p-2 mt-3 table-responsive">
@@ -238,7 +238,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content ">
                         <div class="modal-header ">
-                            <h5 class="modal-title" id="staticBackdropLabel"> Status chnage of {{ $page }}</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel"> Status change of {{ $page }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="statuschange">
