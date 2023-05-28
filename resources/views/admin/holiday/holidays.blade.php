@@ -130,15 +130,15 @@
                                         @can('edit-holidays')
                                             <button type="button" data-table="holidays" data-form-modal="addEditHolidayModal"
                                                 data-message="inactive" data-uuid="{{ $holiday->uuid }}"
-                                                class="btn btn-white btn-sm btn-bg-color editData">
-                                                <i class="bi-pencil-fill me-1"></i> Edit
+                                                class="btn btn-warning btn-sm editData">
+                                               <i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
                                             </button>
                                         @endcan
                                         @can('delete-holidays')
                                             <button type="button" data-table="holidays" data-message="inactive"
                                                 data-uuid="{{ $holiday->uuid }}"
-                                                class="btn btn-white btn-sm btn-bg-color deleteData">
-                                                <i class="bi-pencil-fill me-1"></i> Delete
+                                                class="btn btn-danger btn-sm deleteData">
+                                                <i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
                                             </button>
                                         @endcan
                                     </td>
@@ -258,7 +258,7 @@
 
                         <div class="d-flex justify-content-end">
                             <div class="d-flex gap-3">
-                                <button type="button" class="btn btn-white" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>

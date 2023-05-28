@@ -28,8 +28,7 @@
     <div class="content container-fluid mr-2p">
         <h3 class="text-center font-weight-bold txt-color .mr-m-2p">Profile Update</h3>
         <div class="row mx-auto justify-content-center">
-            <div class="col-3"></div>
-            <div class="col-6 bg-white form-div">
+            <div class="col-8 bg-white card form-div auto">
                 <form action="{{ route('admin.profile.update') }}" method="post" enctype='multipart/form-data'>
                     {{ csrf_field() }}
 
@@ -54,7 +53,6 @@
                     </div>
                 </form>
             </div>
-            <div class="col-3"></div>
         </div>
     </div>
 @endsection
@@ -73,7 +71,7 @@
             Session::forget('success');
         @endphp
     @endif
-    
+
     {{-- Profile Update Validation --}}
     <script>
         'use strict';
