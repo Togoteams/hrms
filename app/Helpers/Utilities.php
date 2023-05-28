@@ -434,7 +434,7 @@ function total_remaining_leave($user_id = '')
     $total_upaid_leave = LeaveApply::where('user_id', $user_id)->where('status', 'approved')->where('is_paid', 'unpaid')->count('*');
     $total_encash_leave = LeaveEncashment::where('user_id', $user_id)->where('status', 'approved')->where('created_at', 'LIKE', '%' . date('Y') . '%')->sum('no_of_days');
     $total_remaining_leave = $total_leave_days - $total_upaid_leave - $total_encash_leave;
-    return  $total_remaining_leave;
+    return  $total_remaining_leave-1;
 }
 
 function islocal()

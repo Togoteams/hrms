@@ -13,7 +13,7 @@
             <thead>
                 <tr>
                     <th>S.No</th>
-                    <th> Name </th>
+                    <th>Name </th>
                     <th>email</th>
                     <th>from</th>
                     <th>to</th>
@@ -85,3 +85,4 @@
             {{ $page }}</button>
     </div>
 </form>
+

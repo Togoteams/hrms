@@ -38,6 +38,7 @@
                                     <label for="leave_type_id">Leave Types </label>
                                     <select required id="leave_type_id"
                                         onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')"
+                                        onchange="change_leave(this.value)"
                                         placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
@@ -117,3 +118,8 @@
             </div>
         </div>
     </div>
+    <script>
+        function change_leave(value){
+            
+        }
+    </script>
