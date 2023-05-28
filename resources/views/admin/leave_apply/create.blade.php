@@ -20,7 +20,7 @@
                                     <div class="form-group">
                                         <label for="user_id">Employee</label>
                                         <select
-                                            onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
+                                            onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
                                             required id="user_id" placeholder="Enter correct user_id   "
                                             type="text" name="user_id" class="form-control form-control-sm ">
                                             <option selected disabled> -Select Employee - </option>
@@ -37,7 +37,6 @@
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types </label>
                                     <select required id="leave_type_id"
-                                        onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')"
                                         onchange="change_leave(this)" placeholder="Enter correct leave_type_id   "
                                         type="text" name="leave_type_id" class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
@@ -124,6 +123,11 @@
             if (text == "SICK LEAVE") {
                 document.getElementById('doc').setAttribute("required", "");
 
+            }else
+            {
+                document.getElementById('doc').removeAttribute("required", "");
+
             }
+            selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
         }
     </script>
