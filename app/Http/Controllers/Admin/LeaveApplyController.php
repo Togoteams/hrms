@@ -149,7 +149,7 @@ class LeaveApplyController extends Controller
         $leave_type = LeaveType::where('status', 'active')->get();
 
         $data = LeaveApply::find($id);
-        $leave_emp_data=LeaveApply::where('status','approved')->where('start_date','>=',$data->start_date)->orWhere('end_date','<=',$data->end_date)->get();
+        $leave_emp_data=LeaveApply::where('start_date','>=',$data->start_date)->Where('end_date','<=',$data->end_date)->where('status','approved')->get();
        
         $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id);
         return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'remaining_leave' => $remaining_leave,'leave_emp_data'=>$leave_emp_data]);
