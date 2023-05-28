@@ -26,30 +26,28 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        {{-- @can('add-leaves') --}}
-                        @if (isemplooye())
-                            @php
-                                $emp = DB::table('employees')
-                                    ->where('user_id', auth()->user()->id)
-                                    ->first();
-                            @endphp
-                            @if (get_day($emp->start_date, date('Y-m-d')) >= 730)
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
-                                    {{ $page }}
-                                </button>
-                                @include('admin.leave_encashment.create')
-                            @endif
-                        @else
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                Apply  {{ $page }}
-                            </button>
-                            @include('admin.leave_encashment.create')
-                        @endif
+                    {{-- @can('add-leaves') --}}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        {{ $page }}
+                    </button>
 
-                        {{-- @endcan --}}
-                    
+                    @if (isemplooye())
+                        @php
+                            $emp = DB::table('employees')
+                                ->where('user_id', auth()->user()->id)
+                                ->first();
+                        @endphp
+                        @if (get_day($emp->start_date, date('Y-m-d')) >= 730)
+                            @include('admin.leave_encashment.create')
+                        @else
+                            @include('admin.leave_encashment.error')
+                        @endif
+                    @else
+                        @include('admin.leave_encashment.create')
+                    @endif
+
+                    {{-- @endcan --}}
+
                 </div>
             </div>
             <!-- Card -->

@@ -109,7 +109,7 @@ class LeaveEncashmentController extends Controller
     public function show(string $id)
     {
         $leave_type = LeaveType::where('status', 'active')->get();
-      
+
         $data = LeaveEncashment::find($id);
         return view('admin.leave_encashment.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'total_remaining_leave' => $this->balance_leave_by_type($data->leave_type_id, $data->user_id)]);
     }
@@ -212,5 +212,15 @@ class LeaveEncashmentController extends Controller
             $leave_type = LeaveType::where('status', 'active')->where('name', 'PRIVILEGED LEAVE')->first();
             echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
         }
+    }
+
+
+    public function get_balance_leave(Request $request)
+    {
+        $remaining_leave = 0;
+
+        $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id) / 2;
+
+        return $remaining_leave;
     }
 }

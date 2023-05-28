@@ -76,14 +76,15 @@
                                     ->count('*');
                             }
                         @endphp
-
-                        <button type="button" class="btn btn-outline-primary text-orenge">{{ $lt->name }} <br>
-                            {{ $total_approved_leave }}</button>
+                        @if (isemplooye())
+                            <button type="button" class="btn btn-outline-primary text-orenge">{{ $lt->name }} <br>
+                                {{ $total_approved_leave }}</button>
+                        @endif
                     @endforeach
 
                 </div>
                 <hr>
-               @include('admin.leave_apply.type_of_leave')
+                @include('admin.leave_apply.type_of_leave')
             </div> <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">

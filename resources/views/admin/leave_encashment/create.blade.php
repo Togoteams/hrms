@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types </label>
                                     <select required id="leave_type_id"
-                                        onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')"
+                                        onchange=" selectDrop('form_data','{{ route('admin.leave_encashment.get_balance_encah_leave') }}', 'balance_leave1')"
                                         placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>

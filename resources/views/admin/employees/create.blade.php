@@ -98,6 +98,8 @@
                                     <option selected disabled> - Select employment type- </option>
                                     <option value="local">Local</option>
                                     <option value="expatriate">Expatriate</option>
+                                    <option value="local-contractual ">Local-Contractual </option>
+
                                 </select>
                                 </div>
                             </div>

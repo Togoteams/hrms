@@ -149,8 +149,10 @@ class LeaveApplyController extends Controller
         $leave_type = LeaveType::where('status', 'active')->get();
 
         $data = LeaveApply::find($id);
+        $leave_emp_data=LeaveApply::where('status','approved')->where('start_date','>=',$data->start_date)->orWhere('end_date','<=',$data->end_date)->get();
+       
         $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id);
-        return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'remaining_leave' => $remaining_leave]);
+        return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'remaining_leave' => $remaining_leave,'leave_emp_data'=>$leave_emp_data]);
     }
     /**
      * Update the specified resource in storage.
@@ -261,11 +263,9 @@ class LeaveApplyController extends Controller
     public function get_balance_leave(Request $request)
     {
         $remaining_leave = 0;
-        if (isemplooye()) {
-            $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id) / 2;
-        } else {
-            $remaining_leave = $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
-        }
+
+        $remaining_leave = $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
+
         return $remaining_leave;
     }
 

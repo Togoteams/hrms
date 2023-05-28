@@ -100,6 +100,7 @@
                     <option  disabled> - Select employment type- </option>
                     <option {{ $data->employment_type == 'local' ? 'selected' : '' }} value="local">Local</option>
                     <option {{ $data->employment_type == 'expatriate' ? 'selected' : '' }} value="expatriate">Expatriate</option>
+                    <option {{ $data->employment_type == 'local-contractual' ? 'selected' : '' }} value="local-contractual">Local-Contractual </option>
 
                 </select>
             </div>
