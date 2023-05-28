@@ -27,7 +27,7 @@
                 <div class="col-3">
 
                 </div>
-                {{-- <div class="col-sm-6 p-3">
+                <div class="col-sm-6 p-3">
                     <form action="{{ route('admin.leave_reports.index') }}">
 
                         <div class="row">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </form>
-                </div> --}}
+                </div>
                 <div class="col-sm-3">
                     <div class="mb-2 col-auto">
 
