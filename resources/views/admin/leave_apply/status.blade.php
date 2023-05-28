@@ -8,31 +8,33 @@
 
         <div class="table-responsive">
             Total Employee on the leave - <strong class="text-bob">{{ $leave_emp_data->count('*')}}</strong> between <span class="text-bob">{{ date('d-M-Y', strtotime($data->start_date)) }}</span> to <span class="text-bob">{{ date('d-M-Y', strtotime($data->end_date)) }}</span>
-            <table class="table table-striped ">
-                <thead>
+         @if ( $leave_emp_data->count('*')>0)
+         <table class="table table-striped ">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th> Name </th>
+                    <th>email</th>
+                    <th>from</th>
+                    <th>to</th>
+                    <th>Days</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($leave_emp_data as $leave_data)
                     <tr>
-                        <th>S.No</th>
-                        <th> Name </th>
-                        <th>email</th>
-                        <th>from</th>
-                        <th>to</th>
-                        <th>Days</th>
+                        <th scope="row">{{ $loop->index + 1 }}</th>
+                        <td>{{ $leave_data->user->name }}</td>
+                        <td>{{ $leave_data->user->email }}</td>
+                        <td>{{ date('d-M-Y', strtotime($leave_data->start_date)) }}</td>
+                        <td>{{ date('d-M-Y', strtotime($leave_data->end_date)) }}</td>
+                        <td>{{ get_day($leave_data->start_date, $leave_data->end_date) + 1 }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($leave_emp_data as $leave_data)
-                        <tr>
-                            <th scope="row">{{ $loop->index + 1 }}</th>
-                            <td>{{ $leave_data->user->name }}</td>
-                            <td>{{ $leave_data->user->email }}</td>
-                            <td>{{ date('d-M-Y', strtotime($leave_data->start_date)) }}</td>
-                            <td>{{ date('d-M-Y', strtotime($leave_data->end_date)) }}</td>
-                            <td>{{ get_day($leave_data->start_date, $leave_data->end_date) + 1 }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-    
-            </table>
+                @endforeach
+            </tbody>
+
+        </table>
+         @endif
         </div>
 
 
