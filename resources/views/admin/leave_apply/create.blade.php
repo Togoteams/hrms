@@ -20,7 +20,7 @@
                                     <div class="form-group">
                                         <label for="user_id">Employee</label>
                                         <select
-                                            onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
+                                            onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
                                             required id="user_id" placeholder="Enter correct user_id   "
                                             type="text" name="user_id" class="form-control form-control-sm ">
                                             <option selected disabled> -Select Employee - </option>
@@ -37,10 +37,8 @@
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types </label>
                                     <select required id="leave_type_id"
-                                        onchange=" selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')"
-                                        onchange="change_leave(this.value)"
-                                        placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
-                                        class="form-control form-control-sm ">
+                                        onchange="change_leave(this)" placeholder="Enter correct leave_type_id   "
+                                        type="text" name="leave_type_id" class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
                                         @foreach ($leave_type as $l_type)
                                             <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
@@ -52,8 +50,8 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="balance_leave1">balance_leave </label>
-                                    <input readonly required id="balance_leave1" placeholder="Enter correct balance_leave"
-                                         type="text" name="remaining_leave"
+                                    <input readonly required id="balance_leave1"
+                                        placeholder="Enter correct balance_leave" type="text" name="remaining_leave"
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -70,7 +68,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="start_date">start_date </label>
-                                    <input  required id="start_date" placeholder="Enter correct start_date   "
+                                    <input required id="start_date" placeholder="Enter correct start_date   "
                                         type="date" name="start_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -94,15 +92,16 @@
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason </label>
-                                    <input required id="leave_reason" placeholder="Enter correct leave_reason ex - i want to 2 days for my sister merage  "
+                                    <input required id="leave_reason"
+                                        placeholder="Enter correct leave_reason ex - i want to 2 days for my sister merage  "
                                         type="text" name="leave_reason" class="form-control form-control-sm ">
                                 </div>
                             </div>
 
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
-                                    <label for="remark"> Describe the Leave reason  (optional)</label>
-                                    <textarea rows="12"  id="remark" placeholder="Describe the Leave reason  " name="remark"
+                                    <label for="remark"> Describe the Leave reason (optional)</label>
+                                    <textarea rows="12" id="remark" placeholder="Describe the Leave reason  " name="remark"
                                         class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>
@@ -119,7 +118,16 @@
         </div>
     </div>
     <script>
-        function change_leave(value){
-            
+        function change_leave(e) {
+            var text = e.options[e.selectedIndex].text;
+            if (text == "SICK LEAVE") {
+                document.getElementById('doc').setAttribute("required", "");
+
+            }else
+            {
+                document.getElementById('doc').removeAttribute("required", "");
+
+            }
+            selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
         }
     </script>
