@@ -201,7 +201,7 @@
 
                         <div class="d-flex justify-content-end">
                             <div class="d-flex gap-3">
-                                <button type="button" class="btn btn-white" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>

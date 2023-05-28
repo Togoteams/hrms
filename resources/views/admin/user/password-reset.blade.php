@@ -30,10 +30,10 @@
         }
     </style>
     <div class="content container-fluid mr-2p">
-        <h3 class="text-center font-weight-bold txt-color mr-m-2p">Password Reset</h3>
         <div class="row mx-auto justify-content-center">
-            <div class="col-3"></div>
-            <div class="col-6 bg-white form-div">
+            <div class="col-6 bg-white form-div card">
+                <h3 class="text-center font-weight-bold txt-color mr-m-2p">Password Reset</h3>
+
                 <form action="{{ route('admin.password.reset') }}" method="post">
                     @csrf()
 
@@ -86,7 +86,6 @@
                     </div>
                 </form>
             </div>
-            <div class="col-3"></div>
         </div>
     </div>
 @endsection

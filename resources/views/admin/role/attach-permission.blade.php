@@ -18,12 +18,12 @@
             <!-- End Page Header -->
             <!-- Card -->
             <div class="card">
-                <div class="border-t border-slate-200">
+                <div class="b-t b-slate-200 p-5">
                     <form method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="col mb-2">
                             <div
-                                class="col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-lg rounded-sm border border-slate-200">
+                                class="col-span-full sm:col-span-6 xl:col-span-4 bg-white s rounded-sm b b-slate-200">
                                 <div class="flex flex-col h-full">
                                     <!-- Card top -->
                                     <div class="grow p-3">
@@ -48,7 +48,7 @@
                             @forelse ($permissions as $chunk)
                                 <!-- Card 1 -->
                                 <div
-                                    class="col-span-full sm:col-span-6 xl:col-span-3 bg-white shadow-lg rounded-sm border border-slate-200">
+                                    class="col-span-full sm:col-span-6 xl:col-span-3 bg-white s rounded-sm b b-slate-200">
                                     <div class="flex flex-col h-full">
                                         <!-- Card top -->
                                         <div class="grow p-3">
@@ -70,7 +70,7 @@
                                 </div>
                             @empty
                             @endforelse
-                            <div class="col-span-full sm:col-span-6 xl:col-span-3 bg-white shadow-lg rounded-sm border border-slate-200">
+                            <div class="col-span-full sm:col-span-6 xl:col-span-3 bg-white s rounded-sm b b-slate-200">
                                 <div class="flex flex-col h-full">
                                     <!-- Card top -->
                                     <div class="grow p-3">
