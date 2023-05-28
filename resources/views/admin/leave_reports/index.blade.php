@@ -29,7 +29,6 @@
                 </div>
                 <div class="col-sm-6 p-3">
                     <form action="{{ route('admin.leave_reports.index') }}">
-
                         <div class="row">
                             <div class="col-sm-5">
                                 <div class="form-group">
