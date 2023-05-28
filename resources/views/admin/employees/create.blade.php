@@ -168,9 +168,9 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="unique_membership_id">unique membership </label>
+                                    <label for="unique_membership_id">union membership </label>
                                     <select required id="unique_membership_id"
-                                        placeholder="Enter correct unique_membership_id   "
+                                        placeholder="Enter correct union_membership_id   "
                                         name="unique_membership_id" class="form-control form-control-sm ">
                                         <option selected disabled> - Select unique_membership_id - </option>
                                         @foreach ($membership as $mem)

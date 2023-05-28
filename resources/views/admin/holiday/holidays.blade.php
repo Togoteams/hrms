@@ -231,7 +231,7 @@
                         </div>
                         <!-- End Form -->
                         <div class="row mb-4">
-                            <label for="description" class="col-sm-3 col-form-label form-label">Is Optional</label>
+                            <label for="description" class="col-sm-3 col-form-label form-label">Is Paid</label>
                             <div class="col-sm-9">
                                 <select class="js-select form-select" autocomplete="off" name="is_optional"
                                     id="is_optional"
