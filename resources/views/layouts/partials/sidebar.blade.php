@@ -64,7 +64,7 @@
                      </div> --}}
                      <!-- End Collapse -->
 
-                     <span class="mt-4 dropdown-header">Pages</span>
+                     {{-- <span class="mt-4 dropdown-header">Pages</span> --}}
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                      <!-- Collapse -->

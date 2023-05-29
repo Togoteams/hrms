@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -27,7 +27,7 @@
                 <div class="col-3">
 
                 </div>
-                <div class="col-sm-6 p-3">
+                {{-- <div class="p-3 col-sm-6">
                     <form action="{{ route('admin.leave_reports.index') }}">
                         <div class="row">
                             <div class="col-sm-5">
@@ -46,19 +46,19 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-primary btn-sm  mt-4">Go</button>
+                                <button class="mt-4 btn btn-primary btn-sm">Go</button>
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
                 <div class="col-sm-3">
-                    <div class="mb-2 col-auto">
+                    <div class="col-auto mb-2">
 
                     </div>
                 </div>
             </div>
-            <div class="text-center p-1">
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <div class="p-1 text-center">
+                <div class="btn-group" role="group" style="width: 100%;" aria-label="Basic outlined example">
                     @foreach ($leave_type as $lt)
                         @php
                             // by user
@@ -85,9 +85,9 @@
                 <hr>
                 @include('admin.leave_apply.type_of_leave')
             </div> <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
-                <div class="table-responsive mt-3 p-2">
-                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+            <div class="mb-3 card mb-lg-5">
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
