@@ -6,7 +6,6 @@
         <div class="content container-fluid">
             <!-- Page Header -->
             <div class="page-header">
-                @if(isemplooye())
                 <div class="row align-items-center">
 
                     <!-- End Col -->
@@ -318,6 +317,5 @@
                     </div>
                     <!-- End Stats -->
                 </div>
-                @endif
     </main>
 @endsection
