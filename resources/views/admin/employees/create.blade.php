@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="designation_id">designatin </label>
+                                    <label for="designation_id">designation </label>
                                     <select required id="designation_id" placeholder="Enter correct Emplooye   "
                                         name="designation_id" class="form-control form-control-sm ">
                                         <option selected disabled> -Select Designation- </option>
