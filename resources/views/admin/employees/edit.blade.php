@@ -95,7 +95,7 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="employment_type">employment_type </label>
-                <select required id="employment_type" placeholder="Enter correct employment_type   "
+                <select required id="employment_type_edit" placeholder="Enter correct employment_type   "
                     name="employment_type" class="form-control form-control-sm ">
                     <option  disabled> - Select employment type- </option>
                     <option {{ $data->employment_type == 'local' ? 'selected' : '' }} value="local">Local</option>
@@ -112,10 +112,10 @@
                     type="text" name="id_number" class="form-control form-control-sm ">
             </div>
         </div>
-        <div class="col-sm-4 mb-2">
+        <div class="col-sm-4 mb-2" id="contractDivEdit">
             <div class="form-group">
                 <label for="contract_duration">contract duration </label>
-                <input required id="contract_duration" placeholder="Enter correct contract duration   " type="text"
+                <input required id="contract_duration_edit" placeholder="Enter correct contract duration   " type="text"
                     value="{{ $data->contract_duration }}" name="contract_duration"
                     class="form-control form-control-sm ">
             </div>
@@ -201,17 +201,17 @@
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="bank_name">bank name </label>
-                <input required id="bank_name" placeholder="Enter correct bank_name   " type="text"
-                    value="{{ $data->bank_name }}" name="bank_name" class="form-control form-control-sm ">
-            </div>
-        </div>
-        <div class="col-sm-4 mb-2">
-            <div class="form-group">
                 <label for="bank_account_number">bank account number </label>
                 <input required id="bank_account_number" placeholder="Enter correct bank account number   "
                     value="{{ $data->bank_account_number }}" type="text" name="bank_account_number"
                     class="form-control form-control-sm ">
+            </div>
+        </div>
+        {{-- <div class="col-sm-4 mb-2">
+            <div class="form-group">
+                <label for="bank_name">bank name </label>
+                <input required id="bank_name" placeholder="Enter correct bank_name   " type="text"
+                    value="{{ $data->bank_name }}" name="bank_name" class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
@@ -228,7 +228,7 @@
                 <input required id="ifsc" placeholder="Enter correct ifsc   " type="text" name="ifsc"
                     value="{{ $data->ifsc }}" class="form-control form-control-sm ">
             </div>
-        </div>
+        </div> --}}
 
     </div>
     <hr>

@@ -98,7 +98,7 @@
                                     <option selected disabled> - Select employment type- </option>
                                     <option value="local">Local</option>
                                     <option value="expatriate">Expatriate</option>
-                                    <option value="local-contractual ">Local-Contractual </option>
+                                    <option value="local-contractual">Local-Contractual </option>
 
                                 </select>
                                 </div>
@@ -111,10 +111,10 @@
                                         type="text" name="id_number" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-2">
+                            <div class="col-sm-4 mb-2" id="contractDiv">
                                 <div class="form-group">
                                     <label for="contract_duration">contract duration </label>
-                                    <input required id="contract_duration"
+                                    <input id="contract_duration" value=""
                                         placeholder="Enter correct contract duration   " type="text"
                                         name="contract_duration" class="form-control form-control-sm ">
                                 </div>
@@ -201,17 +201,17 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="bank_name">bank name </label>
-                                    <input required id="bank name" placeholder="Enter correct bank_name   "
-                                        type="text" name="bank name" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
                                     <label for="bank_account_number">bank account number </label>
                                     <input required id="bank_account_number"
                                         placeholder="Enter correct bank account number   " type="text"
                                         name="bank_account_number" class="form-control form-control-sm ">
+                                </div>
+                            </div>
+                            {{-- <div class="col-sm-4 mb-2">
+                                <div class="form-group">
+                                    <label for="bank_name">bank name </label>
+                                    <input required id="bank name" placeholder="Enter correct bank_name   "
+                                        type="text" name="bank name" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
@@ -228,7 +228,7 @@
                                     <input required id="ifsc" placeholder="Enter correct ifsc   " type="text"
                                         name="ifsc" class="form-control form-control-sm ">
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                         <hr>

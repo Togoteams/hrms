@@ -26,12 +26,11 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        @can('add-employees')
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
+                    @can('add-employees')
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
-                        @endcan
+                    @endcan
 
                 </div>
             </div>
@@ -39,8 +38,7 @@
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
-                    <table
-                        class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -132,7 +130,7 @@
 
             {{-- edit form model end  --}}
 
-               {{-- edit form model start --}}
+            {{-- edit form model start --}}
             <!-- Modal -->
             <div class="modal fade" id="modalshow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -156,3 +154,31 @@
 
     </main>
 @endsection
+@push('custom-scripts')
+    <script>
+        $(document).ready(function() {
+            //For Creation Time
+            $("#contractDiv").hide();
+
+            //For Edit Time
+            $("#employment_type_edit").val() == "local-contractual" ?
+                $("#contractDivEdit").show() && $("#contract_duration_edit").prop("required", true) :
+                $("#contractDivEdit").hide() && $("#contract_duration").val("");
+        });
+
+        //For Creation Time
+        $("#employment_type").change(() => {
+            $("#employment_type").val() == "local-contractual" ?
+                $("#contractDiv").show() && $("#contract_duration").prop("required", true) :
+                $("#contractDiv").hide() && $("#contract_duration").val("") &&
+                $("#contract_duration").removeAttr("required");
+        });
+
+        //For Edit Time
+        $("#employment_type_edit").change(() => {
+            $("#employment_type_edit").val() == "local-contractual" ?
+                $("#contractDivEdit").show() :
+                $("#contractDivEdit").hide() && $("#contract_duration").val("");
+        });
+    </script>
+@endpush
