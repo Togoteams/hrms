@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="mobile">Mobile No </label>
                                     <input required id="mobile" placeholder="Enter correct Mobile No   "
-                                        type="number" name="mobile" class="form-control form-control-sm ">
+                                        type="tel" name="mobile" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">

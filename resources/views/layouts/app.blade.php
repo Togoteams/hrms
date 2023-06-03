@@ -384,6 +384,7 @@
     </script>
     <script src="{{ asset('assets/js/admin/common.js') }}"></script>
     <!-- End Style Switcher JS -->
+    <script src="{{ asset('assets/js/method.js') }}"></script>
 
 
 

@@ -1,4 +1,5 @@
 // crud start
+console.log(lol);
 function ajaxCall(form_id, target_id = "", method = "POST") {
     // getting the all from form
     var form = document.getElementById(form_id);
@@ -80,12 +81,12 @@ function selectDrop(form_id, url_name, target_id, method = "POST") {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             // document.getElementById(target_id).innerHTML = this.responseText;
-           
+
             document.getElementById(target_id).value = this.responseText;
             document.getElementById(target_id).innerHTML = this.responseText;
-            
+
             stopPreloader(formElements_button);
-        }
+        } method
     };
     xhttp.open(method, url_name, true);
     xhttp.send(formdata);
@@ -190,7 +191,7 @@ function fetchApi(form_id, url_name, target_id, method = "POST") {
 
 // some special fucntion start
 
-
+// this function is responsival for front end validation
 function formValidate(el, form_id) {
     var flag = true;
 
@@ -209,6 +210,19 @@ function formValidate(el, form_id) {
             } else {
                 setError(el[f], " ", "green")
             }
+        }
+        if (flag == true && el[f].type == "email") {
+            flag = validateEmail(el[f])
+        }
+        if (flag == true && el[f].type == "tel") {
+            flag = validatePhone(el[f]);
+        }
+        if (flag == true && el[f].type == "url") {
+            flag = validateUrl(el[f]);
+        }
+        if (el[f].tagName == "SELECT") {
+            flag = validateSelect(el[f]);
+
         }
 
     }
@@ -371,6 +385,68 @@ function multiselect(selectBox, input_id) {
     }
 }
 
+// this function is reponsival for validate the email 
+function validateEmail(email_input) {
+    var email_value = email_input.value;
+    var data = email_value.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+    if (data == null) {
+        setError(email_input, "Is Invalid Please Enter valid Email", "red")
+        return false
+    } else {
+        setError(email_input, " ", "green")
+        return true;
+    }
+}
+
+// this function is reponsival for validate the phone number 
+// for correctly use this function please add  input type = 'phone'
+function validatePhone(phone_input) {
+    var phone_value = phone_input.value;
+    var data = phone_value.match(
+        /^[1-9]\d{9}$/
+    );
+    if (data == null) {
+        setError(phone_input, "Is Invalid Please Enter valid " + phone_input.name + " number", "red")
+        return false
+    } else {
+        setError(phone_input, " ", "green");
+        return true;
+    }
+}
+
+// this function is reponsival for validate the phone number 
+// for correctly use this function please add  input type = 'phone'
+function validateUrl(url_input) {
+    var url_value = url_input.value;
+    var data = url_value.match(
+        /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/
+    );
+    if (data == null) {
+        setError(url_input, "Is Invalid Please Enter valid " + url_input.name + " url", "red")
+        return false
+    } else {
+        setError(url_input, " ", "green")
+        return true;
+    }
+}
+
+function validateSelect(select_input) {
+    if (select_input.required && select_input[select_input.selectedIndex].disabled) {
+        setError(select_input, " is Required filed please Input", "red")
+        return false
+    } else {
+        setError(select_input, " ", "green")
+        return true;
+    }
+}
+
+
+
+
+
+
 // for replacing _ underscore into the empty space
 // for workig smothly please use class form-group
 underscore_remover();
@@ -381,7 +457,6 @@ function underscore_remover() {
         all_child_nodes[1].innerText = all_child_nodes[1].innerText.replaceAll("_", " ");
         var all_placeholder = all_child_nodes[3].placeholder;
         if (all_placeholder != null) {
-            console.log(all_placeholder.replaceAll("_", " "));
             all_child_nodes[3].placeholder = all_child_nodes[3].placeholder.replaceAll("_", " ");
 
         }

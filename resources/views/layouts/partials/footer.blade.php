@@ -20,7 +20,6 @@
 <!-- JS HRMS -->
 <script src="{{ asset('assets/js/theme.min.js') }}"></script>
 <script src="{{ asset('assets/js/hs.theme-appearance-charts.js') }}"></script>
-<script src="{{ asset('assets/js/method.js') }}"></script>
 <!-- JS Plugins Init. -->
 
 
