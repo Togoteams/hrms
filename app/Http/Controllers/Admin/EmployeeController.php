@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Exception;
 
 class EmployeeController extends Controller
@@ -66,7 +67,13 @@ class EmployeeController extends Controller
             'ec_number' => ['required', 'numeric'],
             'ec_number' => ['required', 'numeric'],
             'id_number' => ['required', 'numeric'],
-            'contract_duration' => ['required', 'numeric'],
+            'employment_type' => ['required', 'string'],
+            'contract_duration' => [
+                Rule::requiredIf(function () {
+                    return $this->input('employment_type') === 'local-contractual';
+                }),
+                'numeric',
+            ],
             'basic_salary' => ['required', 'numeric'],
             'date_of_current_basic' => ['required', 'date'],
             'date_of_birth' => ['required', 'date'],
@@ -76,10 +83,10 @@ class EmployeeController extends Controller
             'unique_membership_id' => ['required', 'numeric'],
             'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
             'currency' => ['required', 'string'],
-            'bank_name' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric'],
-            'bank_holder_name' => ['required', 'string'],
-            'ifsc' => ['required', 'string', 'min:11'],
+            // 'bank_name' => ['required', 'string'],
+            // 'bank_holder_name' => ['required', 'string'],
+            // 'ifsc' => ['required', 'string', 'min:11'],
 
         ]);
 
@@ -142,7 +149,13 @@ class EmployeeController extends Controller
             'ec_number' => ['required', 'numeric'],
             'ec_number' => ['required', 'numeric'],
             'id_number' => ['required', 'numeric'],
-            'contract_duration' => ['required', 'numeric'],
+            'employment_type' => ['required', 'string'],
+            'contract_duration' => [
+                Rule::requiredIf(function () {
+                    return $this->input('employment_type') === 'local-contractual';
+                }),
+                'numeric',
+            ],
             'basic_salary' => ['required', 'numeric'],
             'date_of_current_basic' => ['required', 'date'],
             'date_of_birth' => ['required', 'date'],
@@ -152,10 +165,10 @@ class EmployeeController extends Controller
             'unique_membership_id' => ['required', 'numeric'],
             'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
             'currency' => ['required', 'string'],
-            'bank_name' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric'],
-            'bank_holder_name' => ['required', 'string'],
-            'ifsc' => ['required', 'string'],
+            // 'bank_name' => ['required', 'string'],
+            // 'bank_holder_name' => ['required', 'string'],
+            // 'ifsc' => ['required', 'string'],
 
         ]);
 
@@ -196,6 +209,4 @@ class EmployeeController extends Controller
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
         }
     }
-
-   
 }

@@ -23,7 +23,7 @@
 
                 <!-- End Row -->
             </div>
-       
+
             @include('admin.leave_apply.type_of_leave')
 
             <div class="card mb-3 mb-lg-5">
@@ -154,7 +154,7 @@
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content ">
                         <div class="modal-header ">
-                            <h5 class="modal-title" id="staticBackdropLabel"> Status chnage of {{ $page }}</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel"> Status change of {{ $page }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="statuschange">

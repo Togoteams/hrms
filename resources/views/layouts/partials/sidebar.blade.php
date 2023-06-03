@@ -39,7 +39,6 @@
              <div class="navbar-vertical-content">
                  <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                      <!-- Collapse -->
-                     @can('view-dashboard')
                          <div class="nav-item">
                              <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.dashboard' ? 'active-class' : '' }}"
                                  href="{{ route('admin.dashboard') }}" data-placement="left">
@@ -47,7 +46,6 @@
                                  <span class="nav-link-title">Dashboards</span>
                              </a>
                          </div>
-                     @endcan
 
                      {{-- <div class="nav-item">
                          <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
@@ -64,7 +62,7 @@
                      </div> --}}
                      <!-- End Collapse -->
 
-                     <span class="mt-4 dropdown-header">Pages</span>
+                     {{-- <span class="mt-4 dropdown-header">Pages</span> --}}
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                      <!-- Collapse -->

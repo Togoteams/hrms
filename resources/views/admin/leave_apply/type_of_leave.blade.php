@@ -27,35 +27,49 @@
     }
 @endphp
 
-<div class="row text-center p-1 mt-4">
+<div class="p-1 mt-4 text-center row">
+    @if (isemplooye())
+    <div class="col-lg-3">
+        <a href="#" class="">
+            <div class="py-5 card card-hover-shadow card-leavtype">Total Remaining Leave - 
+                {{ total_remaining_leave(auth()->user()->id) }} </div>
+        </a>
+    </div>
+    @endif
     <div class="col-lg-3 ">
 
-    <a href="{{ route('admin.leave_apply.index') }}" class=""><div class="card py-5 card-hover-shadow card-leavtype">Total Leave Applied -
-        {{ $data->count('*') }} </div></a>
+        <a href="{{ route('admin.leave_apply.index') }}" class="">
+            <div class="py-5 card card-hover-shadow card-leavtype">Total Leave Applied -
+                {{ $data->count('*') }} </div>
+        </a>
 
     </div>
     <div class="col-lg-3">
 
-    <a href="{{ route('admin.leave_apply.request_history') }}" class=""> <div class="card py-5 card-hover-shadow card-leavtype">Total Leave pending -
-        {{ $total_pedding }} </div></a>
+        <a href="{{ route('admin.leave_apply.request_history') }}" class="">
+            <div class="py-5 card card-hover-shadow card-leavtype">Total Leave pending -
+                {{ $total_pedding }} </div>
+        </a>
 
     </div>
     <div class="col-lg-3 ">
 
-    <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class=""><div class="card py-5 card-hover-shadow card-leavtype">Total Leave Rejected -
-        {{ $total_approved }}  </div></a>
+        <a href="{{ route('admin.leave_apply.get_rejected_leave') }}" class="">
+            <div class="py-5 card card-hover-shadow card-leavtype">Total Leave Rejected -
+                {{ $total_approved }} </div>
+        </a>
 
     </div>
-        <div class="col-lg-3">
+    <div class="col-lg-3">
 
-    <a href="{{ route('admin.leave_apply.balance_history') }}" class=" "><div class="card py-5 card-hover-shadow card-leavtype">Total Leave Approved -
-        {{ $total_reject }}   </div> </a>
+        <a href="{{ route('admin.leave_apply.balance_history') }}" class="">
+            <div class="py-5 card card-hover-shadow card-leavtype">Total Leave Approved -
+                {{ $total_reject }} </div>
+        </a>
 
-        </div>
+    </div>
 
-    @if (isemplooye())
-        <a class="btn btn-info ">Total Remaining Leave - {{ total_remaining_leave(auth()->user()->id) }} </a>
-    @endif
+   
 
 </div>
 <hr>

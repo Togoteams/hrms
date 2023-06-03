@@ -32,10 +32,10 @@ return new class extends Migration
             $table->string('unique_membership_id');
             $table->string('amount_payable_to_bomaind_each_year');
             $table->string('currency');
-            $table->string('bank_name');
             $table->string('bank_account_number');
-            $table->string('bank_holder_name');
-            $table->string('ifsc');
+            // $table->string('bank_name');
+            // $table->string('bank_holder_name');
+            // $table->string('ifsc');
             $table->string('status')->default('active');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
