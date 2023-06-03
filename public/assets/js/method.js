@@ -211,6 +211,11 @@ function formValidate(el, form_id) {
                 setError(el[f], " ", "green")
             }
         }
+
+        if (flag == true && el[f].type == "text") {
+            flag = validateText(el[f]);
+        }
+
         if (flag == true && el[f].type == "email") {
             flag = validateEmail(el[f])
         }
@@ -384,6 +389,24 @@ function multiselect(selectBox, input_id) {
         document.getElementById(input_id).options[selected_array[i]].classList.add('fa-check')
     }
 }
+
+
+// this function is reponsival for validate the email 
+function validateText(text_input) {
+    var text_value = text_input.value;
+    var data = text_value.match(
+        /^[0-9a-zA-Z]+$/
+    );
+    console.log(text_input);
+    if (data == null) {
+        setError(text_input, "Is Invalid Please Enter valid "+text_input.type+" You can't use "+text_input.value, "red")
+        return false
+    } else {
+        setError(text_input, " ", "green")
+        return true;
+    }
+}
+
 
 // this function is reponsival for validate the email 
 function validateEmail(email_input) {
