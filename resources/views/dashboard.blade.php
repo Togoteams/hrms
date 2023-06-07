@@ -97,7 +97,8 @@
                         </div>
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard "
+                                href="{{ route('admin.payroll.pay-scale.list') }}">
                                 <div class="text-center card-body">
                                     <div class="">
                                         <h2 class="text-white card-title">Payroll</h2>
