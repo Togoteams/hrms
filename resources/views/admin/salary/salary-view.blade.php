@@ -2,7 +2,6 @@
 @push('styles')
 @endpush
 @section('content')
-
     <main id="content" role="main" class="main">
         <!-- Content -->
         <div class="content container-fluid">
@@ -19,6 +18,19 @@
                         </a>/ {{ $page }}
                     </div>
                     <!-- End Col -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-3 text-right auto mb-5 mt-2">
+                        {{-- @can('add-employees_salary') --}}
+                        <a href="{{ route('admin.salary.add') }}">
+                            <button type="button" class="btn btn-primary">
+                                Add {{ $page }}
+                            </button>
+                        </a>
+                        {{-- @endcan --}}
+
+                    </div>
                 </div>
                 <div class="row">
                     <div class="table-responsive mt-4 pt-4">
@@ -98,10 +110,10 @@
     </main>
 @endsection
 @push('custom-scripts')
-<script>
-    function printSalary(salaryId) {
-        const salaryUrl = `/admin/salary/get-salary-print/${salaryId}`;
+    <script>
+        function printSalary(salaryId) {
+            const salaryUrl = `/admin/salary/get-salary-print/${salaryId}`;
             window.open(salaryUrl, '_blank');
-    }
-</script>
+        }
+    </script>
 @endpush

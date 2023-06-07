@@ -39,13 +39,13 @@
              <div class="navbar-vertical-content">
                  <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
                      <!-- Collapse -->
-                         <div class="nav-item">
-                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.dashboard' ? 'active-class' : '' }}"
-                                 href="{{ route('admin.dashboard') }}" data-placement="left">
-                                 <i class="bi bi-speedometer nav-icon"></i>
-                                 <span class="nav-link-title">Dashboards</span>
-                             </a>
-                         </div>
+                     <div class="nav-item">
+                         <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.dashboard' ? 'active-class' : '' }}"
+                             href="{{ route('admin.dashboard') }}" data-placement="left">
+                             <i class="bi bi-speedometer nav-icon"></i>
+                             <span class="nav-link-title">Dashboards</span>
+                         </a>
+                     </div>
 
                      {{-- <div class="nav-item">
                          <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
@@ -282,36 +282,14 @@
                          </a>
 
                          <div id="emppayroll"
-                             class="nav-collapse  {{ show(['admin.payroll.pay-scale.list', 'admin.payroll.pay-scale.add']) }} "
+                             class="nav-collapse collapse {{ show(['admin.payroll.pay-scale.list', 'admin.payroll.pay-scale.add']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
+
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.list' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.pay-scale.list') }}"> Pay Scale</a>
 
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.add' ? 'active' : '' }}  "
-                                 href="{{ route('admin.payroll.pay-scale.add') }}">Add Pay Scale</a>
-
-
-                         </div>
-                     </div>
-
-                     <div class="nav-item">
-                         <a class="nav-link dropdown-toggle " href="#empSalary" role="button"
-                             data-bs-toggle="collapse" data-bs-target="#empSalary" aria-expanded="false"
-                             aria-controls="empSalary">
-                             <i class="fas fa-money-bill-wave nav-icon"></i>
-                             <span class="nav-link-title">Salary</span>
-                         </a>
-
-                         <div id="empSalary"
-                             class="nav-collapse  {{ show(['admin.salary.list', 'admin.salary.add']) }} "
-                             data-bs-parent="#navbarVerticalMenuPagesMenu">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.list' ? 'active' : '' }}  "
-                                 href="{{ route('admin.salary.list') }}"> View Salary</a>
-
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.add' ? 'active' : '' }}  "
-                                 href="{{ route('admin.salary.add') }}">Add Salary</a>
-
-
+                                 href="{{ route('admin.salary.list') }}"> Salary</a>
                          </div>
                      </div>
 

@@ -18,8 +18,8 @@
                     <!-- End Page Header -->
 
                     <!-- Stats -->
+                    <span class="name-title">Personal Information</span>
                     <div class="mt-5">
-
                         <div class="row d-flex align-items-start">
                             <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
                                 @include('admin.dashboard.personal-information.aside')

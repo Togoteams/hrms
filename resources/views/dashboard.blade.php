@@ -75,7 +75,7 @@
 
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard " href="{{url('/admin/leave_apply')}}">
                                 <div class="text-center card-body">
                                     <div class="">
                                         <h2 class="text-white card-title">Leave</h2>
@@ -132,7 +132,7 @@
                             <!-- End Card -->
                         </div>
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard " href="#">
                                 <div class="text-center card-body">
@@ -150,7 +150,7 @@
                                 </div>
                             </a>
                             <!-- End Card -->
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
