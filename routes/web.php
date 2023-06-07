@@ -83,6 +83,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/language-known', 'viewLanguageKnown')->name('language.known.view');
             Route::get('/functional-competancy-details', 'viewFunctionalCompetancyDetails')->name('functional.competancy.details.view');
         });
+    Route::get('/download/{filename}', [DashboardController::class, 'userManualDownload'])->name('userManualDownload');
+
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
