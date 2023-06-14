@@ -25,36 +25,52 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-right">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-6 col-xxl-4 pb-4">
+                                        <div class="col-xl-10 col-xxl-8 pb-4">
                                             <div class="card p-3">
-                                                <div class="row">
-                                                    <div class="col-10">
-                                                        <div class="row">
-                                                            <div class="col-6">Field:</div>
-                                                            <div class="col-6">Field Data</div>
-
-                                                            <div class="col-6">Field:</div>
-                                                            <div class="col-6">Field Data</div>
+                                                <form method="POST"
+                                                    action="{{ route('admin.person.profile.driving.license.details.update') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                                    <div class="row">
+                                                        <div class="col-10">
+                                                            <div class="row">
+                                                                <div class="col-5 pt-1">Driving License No:</div>
+                                                                <div class="col-5 pt-1" id="licenseData">
+                                                                    {{ $data->license_no }}</div>
+                                                                <div class="col-5 margin-style d-none" id="inputData">
+                                                                    <input required value="{{ $data->license_no }}"
+                                                                        id="license_no" name="license_no"
+                                                                        placeholder="Enter Driving License No"
+                                                                        type="text" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-2 margin-style d-none" id="formButton">
+                                                                    <button class="btn btn-primary btn-sm">
+                                                                        Update
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2 text-end">
+                                                            <div class="right-div">
+                                                                <button type="button" class="btn btn-warning btn-sm bt"
+                                                                    id="openButton" title="Edit" onclick="openForm()">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                                <div class="px-2 d-none" id="closeButton">
+                                                                    <i class="bi bi-x-square-fill fs-2 text-danger pointer"
+                                                                        title="Cancel" onclick="closeForm()"></i>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-1 text-end">
-                                                        <div class="right-div">
-                                                            <!-- Your content for right div goes here -->
-
-                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
-                                                                title="Edit">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -69,4 +85,37 @@
     </main>
 @endsection
 @push('custom-scripts')
+    @if (!empty(Session::get('success')))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ Session::get('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+        @php
+            Session::forget('success');
+        @endphp
+    @endif
+
+    <script>
+        function openForm() {
+            $("#inputData").removeClass("d-none");
+            $("#formButton").removeClass("d-none");
+            $("#closeButton").removeClass("d-none");
+            $("#licenseData").addClass("d-none");
+            $("#idData").addClass("d-none");
+            $("#openButton").addClass("d-none");
+        }
+
+        function closeForm() {
+            $("#licenseData").removeClass("d-none");
+            $("#idData").removeClass("d-none");
+            $("#openButton").removeClass("d-none");
+            $("#inputData").addClass("d-none");
+            $("#formButton").addClass("d-none");
+            $("#closeButton").addClass("d-none");
+        }
+    </script>
 @endpush

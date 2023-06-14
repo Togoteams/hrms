@@ -25,36 +25,62 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-right">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-6 col-xxl-4 pb-4">
+                                        <div class="col-xl-10 col-xxl-8 pb-4">
                                             <div class="card p-3">
-                                                <div class="row">
-                                                    <div class="col-10">
-                                                        <div class="row">
-                                                            <div class="col-6">Field:</div>
-                                                            <div class="col-6">Field Data</div>
+                                                <form method="POST"
+                                                    action="{{ route('admin.person.profile.medical.insurance.bomaid.details.update') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                                    <div class="row">
+                                                        <div class="col-10">
+                                                            <div class="row">
+                                                                <div class="col-5 pt-1">Insurance Company Name:</div>
+                                                                <div class="col-5 pt-1" id="nameData">
+                                                                    {{ $data->company_name }}</div>
+                                                                <div class="col-5 margin-style d-none" id="inputData1">
+                                                                    <input required value="{{ $data->company_name }}"
+                                                                        id="company_name" name="company_name"
+                                                                        placeholder="Enter Insurance Company Name"
+                                                                        type="text" class="form-control form-control-sm">
+                                                                </div>
 
-                                                            <div class="col-6">Field:</div>
-                                                            <div class="col-6">Field Data</div>
+                                                                <div class="col-5 pt-3">Insurance ID:</div>
+                                                                <div class="col-5 pt-3" id="idData">
+                                                                    {{ $data->insurance_id }}</div>
+                                                                <div class="col-5 pt-2 margin-style d-none" id="inputData2">
+                                                                    <input required value="{{ $data->insurance_id }}"
+                                                                        id="insurance_id" name="insurance_id"
+                                                                        placeholder="Enter Insurance Company Name"
+                                                                        type="number" class="form-control form-control-sm">
+                                                                </div>
+                                                                <div class="col-2 margin-style d-none" id="formButton">
+                                                                    <button class="btn btn-primary btn-sm">
+                                                                        Update
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2 text-end">
+                                                            <div class="right-div">
+                                                                <button type="button" class="btn btn-warning btn-sm bt"
+                                                                    id="openButton" title="Edit" onclick="openForm()">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                                <div class="pt-2 px-2 d-none" id="closeButton">
+                                                                    <i class="bi bi-x-square-fill fs-2 text-danger pointer"
+                                                                        title="Cancel" onclick="closeForm()"></i>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-1 text-end">
-                                                        <div class="right-div">
-                                                            <!-- Your content for right div goes here -->
-
-                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
-                                                                title="Edit">
-                                                                <i class="fas fa-edit"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -69,4 +95,40 @@
     </main>
 @endsection
 @push('custom-scripts')
+
+    @if (!empty(Session::get('success')))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ Session::get('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+        @php
+            Session::forget('success');
+        @endphp
+    @endif
+
+    <script>
+        function openForm() {
+            $("#inputData1").removeClass("d-none");
+            $("#inputData2").removeClass("d-none");
+            $("#formButton").removeClass("d-none");
+            $("#closeButton").removeClass("d-none");
+            $("#nameData").addClass("d-none");
+            $("#idData").addClass("d-none");
+            $("#openButton").addClass("d-none");
+        }
+
+        function closeForm() {
+            $("#nameData").removeClass("d-none");
+            $("#idData").removeClass("d-none");
+            $("#openButton").removeClass("d-none");
+            $("#inputData1").addClass("d-none");
+            $("#inputData2").addClass("d-none");
+            $("#formButton").addClass("d-none");
+            $("#closeButton").addClass("d-none");
+        }
+    </script>
 @endpush

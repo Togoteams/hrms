@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmpDrivingLicense;
+use App\Models\EmploymentHistory;
+use App\Models\EmpMedicalInsurance;
 use App\Models\Qualification;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class PersonProfileController extends Controller
@@ -32,7 +36,7 @@ class PersonProfileController extends Controller
             return $validator->errors();
         } else {
             try {
-                Qualification::insertGetId($request->except(['_token','id']));
+                Qualification::insertGetId($request->except(['_token', 'id']));
                 return response()->json(['success' => "Qualification added successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
@@ -95,45 +99,118 @@ class PersonProfileController extends Controller
         return view('admin.dashboard.person-profile.permanent-contractual');
     }
 
-    public function viewSportsCulturalDetails()
-    {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.sports-cultural-details');
-    }
-
-    public function viewAwardsDetails()
-    {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.awards-details');
-    }
 
     public function viewMedicalInsuranceBomaidDetails()
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.medical-insurance-bomaid-details');
+        $data = EmpMedicalInsurance::where('user_id', Auth::user()->id)->first();
+        // return $data;
+        return view('admin.dashboard.person-profile.medical-insurance-bomaid-details', ['data' => $data]);
+    }
+
+    public function updateMedicalInsuranceBomaidDetails(Request $request)
+    {
+        // return $request;
+        $validator = Validator::make($request->all(), [
+            'company_name' => ['required', 'string'],
+            'insurance_id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'id']));
+                // return response()->json(['success' => $page_name . " Updated Successfully"]);
+                $message = "Record Updated Successfully";
+                Session::put('success', $message);
+                return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
     }
 
     public function viewDrivingLicenseDetails()
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.driving-license-details');
+        $data = EmpDrivingLicense::where('user_id', Auth::user()->id)->first();
+        // return $data;
+        return view('admin.dashboard.person-profile.driving-license-details', ['data' => $data]);
+    }
+
+    public function updateDrivingLicenseDetails(Request $request)
+    {
+        // return $request;
+        $validator = Validator::make($request->all(), [
+            'license_no' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                EmpDrivingLicense::where('id', $request->id)->update($request->except(['_token', 'id']));
+                // return response()->json(['success' => $page_name . " Updated Successfully"]);
+                $message = "Record Updated Successfully";
+                Session::put('success', $message);
+                return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
     }
 
     public function viewPreviousEmploymentDetails()
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.previous-employment-details');
+        $datas = EmploymentHistory::where('user_id', Auth::user()->id)->get();
+        // return $datas;
+        return view('admin.dashboard.person-profile.previous-employment-details', ['datas' => $datas]);
     }
 
-    public function viewLanguageKnown()
+    public function addPreviousEmploymentDetails(Request $request)
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.language-known');
+
+        $validator = Validator::make($request->all(), [
+            'user_id'       => ['required', 'numeric'],
+            'company_name'  => ['required', 'string'],
+            'start_date'    => ['required', 'date'],
+            'end_date'      => ['required', 'date'],
+
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                EmploymentHistory::insertGetId($request->except(['_token', 'id']));
+                $message = "Record Created Successfully";
+                return response()->json(['success' => $message]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
     }
 
-    public function viewFunctionalCompetancyDetails()
+    public function updatePreviousEmploymentDetails(Request $request)
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.functional-competancy-details');
+        // return $request;
+        $validator = Validator::make($request->all(), [
+            'company_name' => ['required', 'string'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                EmploymentHistory::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                $message = "Record Updated Successfully";
+
+                Session::put('success', $message);
+                return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
     }
 }

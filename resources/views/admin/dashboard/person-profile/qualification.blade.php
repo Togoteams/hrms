@@ -98,7 +98,8 @@
                                 <form id="form_id" action="{{ route('admin.person.profile.qualification.add') }}">
                                     @csrf
                                     <input type="hidden" name="id" id="id" value="">
-                                    <input type="hidden" name="user_id" id="user_id" value="{{ count($datas) ? $datas[0]->user_id : '' }}">
+                                    <input type="hidden" name="user_id" id="user_id"
+                                        value="{{ count($datas) ? $datas[0]->user_id : '' }}">
 
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
@@ -120,8 +121,8 @@
                                             <div class="form-group">
                                                 <label for="institute_name">Institute Name</label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
-                                                    type="text" name="institute_name"
-                                                    class="form-control form-control-" value="">
+                                                    type="text" name="institute_name" class="form-control form-control-"
+                                                    value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">

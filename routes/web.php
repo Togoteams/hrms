@@ -57,7 +57,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/update-dob-details/{id}', 'updateDobDetails')->name('dob.details.update');
 
             Route::get('/passport-details', 'viewPassport')->name('passport');
-            Route::post('/update-passport/{id}', 'updatePassport')->name('passport.update');
+            Route::post('/update-passport', 'updatePassport')->name('passport.update');
 
             Route::get('/emergency-contact-details', 'viewEmergencyContact')->name('emergency.contact');
             Route::post('/update-emergency-contact/{id}', 'updateEmergencyContact')->name('emergency.contact.update');
@@ -71,17 +71,20 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
             Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
 
+            Route::get('/medical-insurance-bomaid-details', 'viewMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.view');
+            Route::post('/update-medical-insurance-bomaid-details', 'updateMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.update');
+
+            Route::get('/driving-license-details', 'viewDrivingLicenseDetails')->name('driving.license.details.view');
+            Route::post('/update-driving-license-details', 'updateDrivingLicenseDetails')->name('driving.license.details.update');
+
+            Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
+            Route::post('/add-previous-employment-details', 'addPreviousEmploymentDetails')->name('previous.employment.details.add');
+            Route::post('/update-previous-employment-details', 'updatePreviousEmploymentDetails')->name('previous.employment.details.post');
+
             Route::get('/place-of-domicile', 'viewPlaceOfDomicile')->name('place.of.domicile.view');
             Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');
             Route::get('/union-details', 'viewUnionDetails')->name('union.details.view');
             Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');
-            Route::get('/sports-cultural-details', 'viewSportsCulturalDetails')->name('sports.cultural.details.view');
-            Route::get('/awards-details', 'viewAwardsDetails')->name('awards.details.view');
-            Route::get('/medical-insurance-bomaid-details', 'viewMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.view');
-            Route::get('/driving-license-details', 'viewDrivingLicenseDetails')->name('driving.license.details.view');
-            Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
-            Route::get('/language-known', 'viewLanguageKnown')->name('language.known.view');
-            Route::get('/functional-competancy-details', 'viewFunctionalCompetancyDetails')->name('functional.competancy.details.view');
         });
     Route::get('/download/{filename}', [DashboardController::class, 'userManualDownload'])->name('userManualDownload');
 

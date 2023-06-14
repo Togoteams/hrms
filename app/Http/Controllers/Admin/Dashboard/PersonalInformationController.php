@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\EmpPassportOmang;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -47,7 +49,7 @@ class PersonalInformationController extends Controller
     public function viewPassport()
     {
         $page_name = "Passport";
-        $data = Employee::first();
+        $data = EmpPassportOmang::where('user_id', Auth::user()->id)->first();
         return view('admin.dashboard.personal-information.passport', ['data' => $data, 'page' => $page_name]);
     }
 
@@ -144,19 +146,27 @@ class PersonalInformationController extends Controller
         }
     }
 
-    public function updatePassport(Request $request, $id)
+    public function updatePassport(Request $request)
     {
         $page_name = "Passport";
         $validator = Validator::make($request->all(), [
-            'gender' => ['required', 'string'],
+            'passport_no'       => ['numeric'],
+            'passport_expiry'   => ['date'],
+            'omang_no'          => ['numeric'],
+            'omang_expiry'      => ['date'],
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $id)->update($request->except(['_token']));
-                return response()->json(['success' => $page_name . " Updated Successfully"]);
+                if ($request->id == '') {
+                    EmpPassportOmang::insertGetId($request->except(['_token', 'id']));
+                    return response()->json(['success' => $page_name . " Created Successfully"]);
+                } else {
+                    EmpPassportOmang::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    return response()->json(['success' => $page_name . " Updated Successfully"]);
+                }
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }
