@@ -25,8 +25,8 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-right">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#formModal" title="Add Qualification">
+                                            <button type="button" class="btn btn-primary btn-sm" title="Add Qualification"
+                                                onclick="addQualification({{ Auth::user()->id }})">
                                                 Add Qualification
                                             </button>
                                         </div>
@@ -53,7 +53,7 @@
                                                                 <div class="col-6">Year of passing:</div>
                                                                 <div class="col-6">{{ $data->year_of_passing }}</div>
 
-                                                                <div class="col-6">marks Name:</div>
+                                                                <div class="col-6">Marks:</div>
                                                                 <div class="col-6">{{ $data->marks }}</div>
                                                             </div>
                                                         </div>
@@ -61,11 +61,15 @@
                                                             <div class="right-div">
                                                                 <!-- Your content for right div goes here -->
 
-                                                                <button class="btn btn-warning btn-sm bt"
-                                                                    data-bs-toggle="modal"
-                                                                    onclick="editQualification('{{ route('admin.person.profile.qualification.edit', $data->id) }}',
-                                                                                                    '{{ route('admin.person.profile.qualification.update') }}')"
-                                                                    title="Edit">
+                                                                <button class="btn btn-warning btn-sm bt" title="Edit"
+                                                                    id="editButton" data-id="{{ $data->id }}"
+                                                                    data-user_id="{{ Auth::user()->id }}"
+                                                                    data-exam_name="{{ $data->exam_name }}"
+                                                                    data-specialization="{{ $data->specialization }}"
+                                                                    data-institute_name="{{ $data->institute_name }}"
+                                                                    data-university="{{ $data->university }}"
+                                                                    data-year_of_passing="{{ $data->year_of_passing }}"
+                                                                    data-marks="{{ $data->marks }}">
                                                                     <i class="fas fa-edit"></i>
                                                                 </button>
                                                             </div>
@@ -90,16 +94,15 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content ">
                             <div class="modal-header ">
-                                <h5 class="modal-title" id="staticBackdropLabel">Add Qualification</h5>
+                                <h5 class="modal-title" id="modalTitle"></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="add">
-                                <form id="form_id" action="{{ route('admin.person.profile.qualification.add') }}">
+                                <form id="form_id" action="{{ route('admin.person.profile.qualification.post') }}">
                                     @csrf
-                                    <input type="hidden" name="id" id="id" value="">
-                                    <input type="hidden" name="user_id" id="user_id"
-                                        value="{{ count($datas) ? $datas[0]->user_id : '' }}">
+                                    <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="user_id" id="user_id">
 
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
@@ -121,8 +124,8 @@
                                             <div class="form-group">
                                                 <label for="institute_name">Institute Name</label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
-                                                    type="text" name="institute_name" class="form-control form-control-"
-                                                    value="">
+                                                    type="text" name="institute_name"
+                                                    class="form-control form-control-" value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
@@ -153,7 +156,7 @@
                                     <hr>
                                     <div class="text-center ">
                                         <button onclick="ajaxCall('form_id','','POST')" type="button"
-                                            class="btn btn-primary" id="buttonName">Add Qualification
+                                            class="btn btn-primary" id="btnSave">
                                         </button>
                                     </div>
                                 </form>
@@ -168,26 +171,40 @@
 @endsection
 @push('custom-scripts')
     <script>
-        function editQualification(editURL, updateURL) {
-            $('#formModal').trigger("reset");
-            $.ajax({
-                url: editURL,
-                method: "GET",
-                contentType: 'application/json',
-                dataType: "json",
-                success: function(data) {
-                    $('#id').val(data.data.id);
-                    $('#exam_name').val(data.data.exam_name);
-                    $('#specialization').val(data.data.specialization);
-                    $('#institute_name').val(data.data.institute_name);
-                    $('#university').val(data.data.university);
-                    $('#year_of_passing').val(data.data.year_of_passing);
-                    $('#marks').val(data.data.marks);
-                }
-            });
-            $("#buttonName").html("Edit Qualification");
+        function addQualification(user_id) {
+            $('#form_id').trigger("reset");
+            $("#id").val("");
             $('#formModal').modal('show');
-            $('#form_id').attr('action', updateURL);
+            $("#modalTitle").html("Add: Qualification");
+            $("#btnSave").html("CREATE");
+            $("#user_id").val(user_id);
         }
+        $(document).ready(() => {
+            $(document).on("click", "#editButton", (event) => {
+                $('#form_id').trigger("reset");
+                $("#modalTitle").html("Edit: Qualification");
+                $("#btnSave").html("UPDATE");
+
+                let id = $(event.currentTarget).data("id");
+                let user_id = $(event.currentTarget).data("user_id");
+                let exam_name = $(event.currentTarget).data("exam_name");
+                let specialization = $(event.currentTarget).data("specialization");
+                let institute_name = $(event.currentTarget).data("institute_name");
+                let university = $(event.currentTarget).data("university");
+                let year_of_passing = $(event.currentTarget).data("year_of_passing");
+                let marks = $(event.currentTarget).data("marks");
+
+                $("#id").val(id);
+                $("#user_id").val(user_id);
+                $("#exam_name").val(exam_name);
+                $("#specialization").val(specialization);
+                $("#institute_name").val(institute_name);
+                $("#university").val(university);
+                $("#year_of_passing").val(year_of_passing);
+                $("#marks").val(marks);
+
+                $('#formModal').modal('show');
+            });
+        });
     </script>
 @endpush

@@ -67,9 +67,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         ->prefix('person-profile')
         ->group(function () {
             Route::get('/qualifications', 'viewQualifications')->name('qualifications.view');
-            Route::post('/add-qualification', 'addQualification')->name('qualification.add');
-            Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
-            Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
+            Route::post('/post-qualification', 'postQualification')->name('qualification.post');
+            // Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
+            // Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
 
             Route::get('/medical-insurance-bomaid-details', 'viewMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.view');
             Route::post('/update-medical-insurance-bomaid-details', 'updateMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.update');
@@ -78,8 +78,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/update-driving-license-details', 'updateDrivingLicenseDetails')->name('driving.license.details.update');
 
             Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
-            Route::post('/add-previous-employment-details', 'addPreviousEmploymentDetails')->name('previous.employment.details.add');
-            Route::post('/update-previous-employment-details', 'updatePreviousEmploymentDetails')->name('previous.employment.details.post');
+            Route::post('/post-previous-employment-details', 'postPreviousEmploymentDetails')->name('previous.employment.details.post');
 
             Route::get('/place-of-domicile', 'viewPlaceOfDomicile')->name('place.of.domicile.view');
             Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');

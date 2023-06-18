@@ -25,8 +25,8 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-right">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#formModal" title="Add Previous Employment">
+                                            <button type="button" class="btn btn-primary btn-sm"
+                                                onclick="addForm({{ Auth::user()->id }})">
                                                 Add Previous Employment
                                             </button>
                                         </div>
@@ -35,72 +35,36 @@
                                         <div class="row">
                                             <div class="col-xl-12 col-xxl-10 pb-4">
                                                 <div class="card p-3">
-                                                    <form method="POST"
-                                                        action="{{ route('admin.person.profile.previous.employment.details.post') }}">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{ $data->id }}">
-                                                        <div class="row">
-                                                            <div class="col-10">
-                                                                <div class="row">
-                                                                    <div class="col-5 pt-1">Company Name:</div>
-                                                                    <div class="col-5 pt-1" id="nameData">
-                                                                        {{ $data->company_name }}</div>
-                                                                    <div class="col-5 margin-style d-none" id="inputData1">
-                                                                        <input required value="{{ $data->company_name }}"
-                                                                            name="company_name" type="text"
-                                                                            placeholder="Enter Insurance Company Name"
-                                                                            class="form-control form-control-sm">
-                                                                    </div>
-
-                                                                    <div class="col-5 pt-3">Period of employment:</div>
-                                                                    <div class="col-5 pt-3" id="yearData">
-                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
-                                                                        -
-                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
-                                                                    </div>
-                                                                    <div class="col-5 pt-2 margin-style d-none"
-                                                                        id="inputData2">
-                                                                        <div class="form-row">
-                                                                            <div class="col-6 float-start">
-                                                                                <input required
-                                                                                    value="{{ $data->start_date }}"
-                                                                                    name="start_date" type="date"
-                                                                                    placeholder="Start Year"
-                                                                                    class="form-control form-control-sm">
-                                                                            </div>
-                                                                            <div class="col-6 float-start">
-                                                                                -
-                                                                            </div>
-                                                                            <div class="col-6 float-start">
-                                                                                <input required
-                                                                                    value="{{ $data->end_date }}"
-                                                                                    type="date" name="end_date"
-                                                                                    placeholder="End Year"
-                                                                                    class="form-control form-control-sm">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-2 margin-style d-none" id="formButton">
-                                                                        <button class="btn btn-primary btn-sm">
-                                                                            Update
-                                                                        </button>
-                                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-10">
+                                                            <div class="row">
+                                                                <div class="col-5 pt-1">Company Name:</div>
+                                                                <div class="col-5 pt-1">
+                                                                    {{ $data->company_name }}
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-2 text-end">
-                                                                <div class="right-div">
-                                                                    <button type="button" class="btn btn-warning btn-sm bt"
-                                                                        id="openButton" title="Edit" onclick="openForm()">
-                                                                        <i class="fas fa-edit"></i>
-                                                                    </button>
-                                                                    <div class="pt-2 px-2 d-none" id="closeButton">
-                                                                        <i class="bi bi-x-square-fill fs-2 text-danger pointer"
-                                                                            title="Cancel" onclick="closeForm()"></i>
-                                                                    </div>
+
+                                                                <div class="col-5 pt-3">Period of employment:</div>
+                                                                <div class="col-5 pt-3">
+                                                                    {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
+                                                                    -
+                                                                    {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                        <div class="col-2 text-end">
+                                                            <div class="right-div">
+                                                                <button type="button"
+                                                                    class="btn btn-warning btn-sm bt editButton"
+                                                                    title="Edit" data-id="{{ $data->id }}"
+                                                                    data-user_id="{{ Auth::user()->id }}"
+                                                                    data-company_name="{{ $data->company_name }}"
+                                                                    data-start_date="{{ $data->start_date }}"
+                                                                    data-end_date="{{ $data->end_date }}">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,23 +85,23 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content ">
                             <div class="modal-header ">
-                                <h5 class="modal-title" id="staticBackdropLabel">Add Previous Employment</h5>
+                                <h5 class="modal-title" id="modalTitle"></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="edit">
                                 <form id="form_add"
-                                    action="{{ route('admin.person.profile.previous.employment.details.add') }}">
+                                    action="{{ route('admin.person.profile.previous.employment.details.post') }}">
                                     @csrf
                                     <input type="hidden" id="id" name="id" value="">
-                                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" id="user_id" name="user_id">
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="passport_no">Company Name </label>
-                                                <input required value="" id="company_name" name="company_name"
-                                                    placeholder="Enter Insurance Company Name" type="text"
-                                                    class="form-control form-control-sm">
+                                                <input type="text" id="company_name" name="company_name"
+                                                    placeholder="Enter Insurance Company Name"
+                                                    class="form-control form-control-sm" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
@@ -165,7 +129,7 @@
                                     <hr>
                                     <div class="text-center ">
                                         <button onclick="ajaxCall('form_add','','POST')" type="button"
-                                            class="btn btn-primary">
+                                            class="btn btn-primary" id="btnSave">
                                             Add
                                         </button>
                                     </div>
@@ -196,25 +160,33 @@
     @endif
 
     <script>
-        function openForm() {
-            $("#inputData1").removeClass("d-none");
-            $("#inputData2").removeClass("d-none");
-            $("#formButton").removeClass("d-none");
-            $("#closeButton").removeClass("d-none");
-            $("#nameData").addClass("d-none");
-            $("#yearData").addClass("d-none");
-            $("#openButton").addClass("d-none");
+        function addForm(user_id) {
+            $('#form_add').trigger("reset");
+            $("#id").val("");
+            $('#formModal').modal('show');
+            $("#modalTitle").html("Add: Previous Employment");
+            $("#btnSave").html("CREATE");
+            $("#user_id").val(user_id);
         }
+        $(document).ready(() => {
+            $(document).on("click", ".editButton", (event) => {
+                $('#formModal').modal('show');
+                $("#modalTitle").html("Edit: Previous Employment");
+                $("#btnSave").html("Update");
 
-        function closeForm() {
-            $("#nameData").removeClass("d-none");
-            $("#yearData").removeClass("d-none");
-            $("#openButton").removeClass("d-none");
-            $("#inputData1").addClass("d-none");
-            $("#inputData2").addClass("d-none");
-            $("#formButton").addClass("d-none");
-            $("#closeButton").addClass("d-none");
-        }
+                let id = $(event.currentTarget).data("id");
+                let user_id = $(event.currentTarget).data("user_id");
+                let company_name = $(event.currentTarget).data("company_name");
+                let start_date = $(event.currentTarget).data("start_date");
+                let end_date = $(event.currentTarget).data("end_date");
+
+                $("#id").val(id);
+                $("#user_id").val(user_id);
+                $("#company_name").val(company_name);
+                $("#start_date").val(start_date);
+                $("#end_date").val(end_date);
+            });
+        });
     </script>
 
 @endpush

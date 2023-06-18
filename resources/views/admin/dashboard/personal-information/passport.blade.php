@@ -99,7 +99,7 @@
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="passport_no">Passport No. </label>
-                                                <input required id="passport_no" placeholder="Enter Passport No."
+                                                <input id="passport_no" placeholder="Enter Passport No."
                                                     type="number" value="{{ $data->passport_no ?? '' }}" name="passport_no"
                                                     class="form-control form-control-sm ">
                                                 </select>
@@ -108,7 +108,7 @@
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="passport_expiry">Passport Expiry </label>
-                                                <input required id="passport_expiry"
+                                                <input id="passport_expiry"
                                                     placeholder="Enter Date of Passport Expiry" type="date"
                                                     value="{{ $data->passport_expiry ?? '' }}" name="passport_expiry"
                                                     class="form-control form-control-sm ">
@@ -118,7 +118,7 @@
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="omang_no">OMANG No. </label>
-                                                <input required id="omang_no" placeholder="Enter omang No." type="number"
+                                                <input id="omang_no" placeholder="Enter omang No." type="number"
                                                     value="{{ $data->omang_no ?? '' }}" name="omang_no"
                                                     class="form-control form-control-sm ">
                                                 </select>
@@ -127,7 +127,7 @@
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="omang_expiry">OMANG Expiry </label>
-                                                <input required id="omang_expiry" placeholder="Enter Date of OMANG Expiry"
+                                                <input id="omang_expiry" placeholder="Enter Date of OMANG Expiry"
                                                     type="date" value="{{ $data->omang_expiry ?? '' }}"
                                                     name="omang_expiry" class="form-control form-control-sm ">
                                                 </select>

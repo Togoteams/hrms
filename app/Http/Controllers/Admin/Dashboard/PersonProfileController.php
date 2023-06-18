@@ -21,7 +21,7 @@ class PersonProfileController extends Controller
         return view('admin.dashboard.person-profile.qualification', ['datas' => $datas]);
     }
 
-    public function addQualification(Request $request)
+    public function postQualification(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'exam_name' => ['string', 'required'],
@@ -36,43 +36,49 @@ class PersonProfileController extends Controller
             return $validator->errors();
         } else {
             try {
-                Qualification::insertGetId($request->except(['_token', 'id']));
-                return response()->json(['success' => "Qualification added successfully"]);
+                if (empty($request->id)) {
+                    Qualification::insertGetId($request->except(['_token', 'id']));
+                    $message = "Qualification added successfully";
+                } else {
+                    Qualification::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id', 'id']));
+                    $message = "Qualification updated successfully";
+                }
+                return response()->json(['success' => $message]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
     }
 
-    public function updateQualification(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'id' => ['required'],
-            'exam_name' => ['string', 'required'],
-            'specialization' => ['string', 'required'],
-            'institute_name' => ['string', 'required'],
-            'university' => ['string', 'required'],
-            'year_of_passing' => ['numeric', 'required'],
-            'marks' => ['numeric', 'required'],
-        ]);
+    // public function updateQualification(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'id' => ['required'],
+    //         'exam_name' => ['string', 'required'],
+    //         'specialization' => ['string', 'required'],
+    //         'institute_name' => ['string', 'required'],
+    //         'university' => ['string', 'required'],
+    //         'year_of_passing' => ['numeric', 'required'],
+    //         'marks' => ['numeric', 'required'],
+    //     ]);
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                Qualification::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
-                return response()->json(['success' => "Qualification added successfully"]);
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
-            }
-        }
-    }
+    //     if ($validator->fails()) {
+    //         return $validator->errors();
+    //     } else {
+    //         try {
+    //             Qualification::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+    //             return response()->json(['success' => "Qualification added successfully"]);
+    //         } catch (Exception $e) {
+    //             return response()->json(['error' => $e->getMessage()]);
+    //         }
+    //     }
+    // }
 
-    public function editQualification(string $id)
-    {
-        $data = Qualification::find($id);
-        return response()->json(["status" => true, "data" => $data]);
-    }
+    // public function editQualification(string $id)
+    // {
+    //     $data = Qualification::find($id);
+    //     return response()->json(["status" => true, "data" => $data]);
+    // }
 
 
     public function viewPlaceOfDomicile()
@@ -166,33 +172,8 @@ class PersonProfileController extends Controller
         return view('admin.dashboard.person-profile.previous-employment-details', ['datas' => $datas]);
     }
 
-    public function addPreviousEmploymentDetails(Request $request)
+    public function postPreviousEmploymentDetails(Request $request)
     {
-
-        $validator = Validator::make($request->all(), [
-            'user_id'       => ['required', 'numeric'],
-            'company_name'  => ['required', 'string'],
-            'start_date'    => ['required', 'date'],
-            'end_date'      => ['required', 'date'],
-
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                EmploymentHistory::insertGetId($request->except(['_token', 'id']));
-                $message = "Record Created Successfully";
-                return response()->json(['success' => $message]);
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
-            }
-        }
-    }
-
-    public function updatePreviousEmploymentDetails(Request $request)
-    {
-        // return $request;
         $validator = Validator::make($request->all(), [
             'company_name' => ['required', 'string'],
             'start_date' => ['required', 'date'],
@@ -203,11 +184,16 @@ class PersonProfileController extends Controller
             return $validator->errors();
         } else {
             try {
-                EmploymentHistory::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
-                $message = "Record Updated Successfully";
-
-                Session::put('success', $message);
-                return redirect()->back();
+                if (empty($request->id)) {
+                    EmploymentHistory::insertGetId($request->except(['_token', 'id']));
+                    $message = "Record Created Successfully";
+                } else {
+                    EmploymentHistory::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    $message = "Record Updated Successfully";
+                }
+                return response()->json(['success' => $message]);
+                // Session::put('success', $message);
+                // return redirect()->back();
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }

@@ -150,10 +150,10 @@ class PersonalInformationController extends Controller
     {
         $page_name = "Passport";
         $validator = Validator::make($request->all(), [
-            'passport_no'       => ['numeric'],
-            'passport_expiry'   => ['date'],
-            'omang_no'          => ['numeric'],
-            'omang_expiry'      => ['date'],
+            'passport_no'       => ['nullable', 'numeric'],
+            'passport_expiry'   => ['nullable', 'date'],
+            'omang_no'          => ['nullable', 'numeric'],
+            'omang_expiry'      => ['nullable', 'date'],
         ]);
 
         if ($validator->fails()) {
