@@ -96,7 +96,7 @@
                                     <input type="hidden" id="id" name="id" value="">
                                     <input type="hidden" id="user_id" name="user_id">
                                     <div class="row">
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <div class="form-group">
                                                 <label for="passport_no">Company Name </label>
                                                 <input type="text" id="company_name" name="company_name"
@@ -104,27 +104,40 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="col-md-3 mb-2">
                                             <div class="form-group">
-                                                <label for="passport_expiry">Period of employment </label>
-                                                <div class="form-row">
-                                                    <div class="col-6 float-start">
-                                                        <input required value="" id="start_date" name="start_date"
-                                                            placeholder="Start Year" type="date"
-                                                            class="form-control form-control-sm">
-                                                    </div>
-                                                    <div class="col-6 float-start">
-                                                        -
-                                                    </div>
-                                                    <div class="col-6 float-start">
-                                                        <input required value="" id="end_date" name="end_date"
-                                                            placeholder="End Year" type="date"
-                                                            class="form-control form-control-sm">
-                                                    </div>
-                                                </div>
+                                                <label for="">Period of employment </label>
+                                                <input required value="" id="start_date" name="start_date"
+                                                    placeholder="Start Year" type="date"
+                                                    class="form-control form-control-sm">
                                             </div>
                                         </div>
+                                        <div class="col-md-3 mb-2">
+                                            <label for=""></label>
+                                            <input required value="" id="end_date" name="end_date"
+                                                placeholder="End Year" type="date" class="form-control form-control-sm">
+                                        </div>
+                                        {{-- <div class="form-group">
+                                            <label for="passport_expiry">Period of employment </label>
+                                            <div class="form-row">
+                                                <div class="col-6 float-start">
+                                                    <input required value="" id="start_date" name="start_date"
+                                                        placeholder="Start Year" type="date"
+                                                        class="form-control form-control-sm">
+                                                </div>
+                                                <div class="col-6 float-start">
+                                                    -
+                                                </div>
+                                                <div class="col-6 float-start">
+                                                    <input required value="" id="end_date" name="end_date"
+                                                        placeholder="End Year" type="date"
+                                                        class="form-control form-control-sm">
+                                                </div>
+                                            </div>
 
+
+
+                                        </div> --}}
                                     </div>
                                     <hr>
                                     <div class="text-center ">
