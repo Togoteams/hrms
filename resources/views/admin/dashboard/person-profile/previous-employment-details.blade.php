@@ -2,6 +2,11 @@
 @push('styles')
 @endpush
 @section('content')
+    <style>
+        .float-right {
+            float: right;
+        }
+    </style>
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -36,32 +41,36 @@
                                             <div class="col-xl-10 col-xxl-8 pb-4">
                                                 <div class="card p-3">
                                                     <div class="row">
-                                                        <div class="col-10">
+                                                        <div class="col-9">
                                                             <div class="row text-dark">
-                                                                <div class="col-4 fw-semibold pt-1">Company Name:</div>
-                                                                <div class="col-6 pt-1">
+                                                                <div class="col-5 fw-semibold pt-1">Company Name:</div>
+                                                                <div class="col-5 pt-1">
                                                                     {{ $data->company_name }}
                                                                 </div>
 
-                                                                <div class="col-4 fw-semibold pt-3">Period of employment:</div>
-                                                                <div class="col-6 pt-3">
+                                                                <div class="col-5 fw-semibold pt-3">Period of employment:
+                                                                </div>
+                                                                <div class="col-5 pt-3">
                                                                     {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
                                                                     -
                                                                     {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-2 text-end">
+                                                        <div class="col-3 text-end">
                                                             <div class="right-div">
-                                                                <form id="form_id" action="{{ route('admin.person.profile.previous.employment.details.delete') }}" method="post">
+                                                                <form id="form_id" class="float-right mx-1"
+                                                                    action="{{ route('admin.person.profile.previous.employment.details.delete') }}"
+                                                                    method="post">
                                                                     @csrf
-                                                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                                                    <input type="hidden" name="id"
+                                                                        value="{{ $data->id }}">
                                                                     <button class="btn btn-danger btn-sm bt" title="Delete">
                                                                         <i class="fa-solid fa-trash fa-lg"></i>
                                                                     </button>
                                                                 </form>
                                                                 <button type="button"
-                                                                    class="btn btn-warning btn-sm bt editButton"
+                                                                    class="btn btn-warning btn-sm bt editButton float-right"
                                                                     title="Edit" data-id="{{ $data->id }}"
                                                                     data-user_id="{{ Auth::user()->id }}"
                                                                     data-company_name="{{ $data->company_name }}"
@@ -122,7 +131,8 @@
                                         <div class="col-md-3 mb-2">
                                             <label for=""></label>
                                             <input required value="" id="end_date" name="end_date"
-                                                placeholder="End Year" type="date" class="form-control form-control-sm">
+                                                placeholder="End Year" type="date"
+                                                class="form-control form-control-sm">
                                         </div>
                                         {{-- <div class="form-group">
                                             <label for="passport_expiry">Period of employment </label>

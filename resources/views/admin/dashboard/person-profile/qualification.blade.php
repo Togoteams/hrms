@@ -3,7 +3,9 @@
 @endpush
 @section('content')
     <style>
-
+        .float-right{
+            float: right;
+        }
     </style>
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
@@ -63,14 +65,14 @@
                                                         <div class="col-3 text-end">
                                                             <div class="right-div">
                                                                 <!-- Your content for right div goes here -->
-                                                                <form id="form_id" action="{{ route('admin.person.profile.qualification.delete') }}" method="post">
+                                                                <form id="form_id" action="{{ route('admin.person.profile.qualification.delete') }}" class="float-right mx-1" method="post">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="{{ $data->id }}">
                                                                     <button class="btn btn-danger btn-sm bt" title="Delete">
                                                                         <i class="fa-solid fa-trash fa-lg"></i>
                                                                     </button>
                                                                 </form>
-                                                                <button class="btn btn-warning btn-sm bt" title="Edit"
+                                                                <button class="btn btn-warning btn-sm bt float-right" title="Edit"
                                                                     id="editButton" data-id="{{ $data->id }}"
                                                                     data-user_id="{{ Auth::user()->id }}"
                                                                     data-exam_name="{{ $data->exam_name }}"
