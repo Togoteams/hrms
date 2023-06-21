@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Designation;
+use App\Models\EmpAddress;
 use App\Models\Employee;
 use App\Models\EmpPassportOmang;
 use App\Models\User;
@@ -35,7 +36,8 @@ class PersonalInformationController extends Controller
     public function viewAddress()
     {
         $page_name = "Address";
-        $data = Employee::first();
+        $data = EmpAddress::where('user_id', Auth::user()->id)->first();
+        // return $data;
         return view('admin.dashboard.personal-information.address', ['data' => $data, 'page' => $page_name]);
     }
 
@@ -105,19 +107,28 @@ class PersonalInformationController extends Controller
         }
     }
 
-    public function updateAddress(Request $request, $id)
+    public function postAddress(Request $request)
     {
-        $page_name = "Address";
         $validator = Validator::make($request->all(), [
-            'gender' => ['required', 'string'],
+            'address'   => ['required', 'string'],
+            'zip'       => ['required', 'string'],
+            'city'      => ['required', 'string'],
+            'state'     => ['required', 'string'],
+            'country'   => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $id)->update($request->except(['_token']));
-                return response()->json(['success' => $page_name . " Updated Successfully"]);
+                if ($request->id == '') {
+                    EmpAddress::insertGetId($request->except(['_token', 'id']));
+                    $message = "Address Created Successfully";
+                } else {
+                    EmpAddress::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    $message = "Address Updated Successfully";
+                }
+                return response()->json(['success' => $message]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }
@@ -173,7 +184,7 @@ class PersonalInformationController extends Controller
         }
     }
 
-    public function updateEmergencyContact(Request $request, $id)
+    public function postEmergencyContact(Request $request)
     {
         $page_name = "Emergency Contact";
         $validator = Validator::make($request->all(), [
@@ -184,7 +195,7 @@ class PersonalInformationController extends Controller
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $id)->update($request->except(['_token']));
+                Employee::where('id', $request->id)->update($request->except(['_token']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);

@@ -40,11 +40,11 @@
                                                     <input type="hidden" name="id" value="{{ $data->id }}">
                                                     <div class="row">
                                                         <div class="col-10">
-                                                            <div class="row">
-                                                                <div class="col-5 pt-1">Driving License No:</div>
-                                                                <div class="col-5 pt-1" id="licenseData">
+                                                            <div class="row text-dark">
+                                                                <div class="col-4 fw-semibold pt-1">Driving License No:</div>
+                                                                <div class="col-6 pt-1" id="licenseData">
                                                                     {{ $data->license_no }}</div>
-                                                                <div class="col-5 margin-style d-none" id="inputData">
+                                                                <div class="col-6 margin-style d-none" id="inputData">
                                                                     <input required value="{{ $data->license_no }}"
                                                                         id="license_no" name="license_no"
                                                                         placeholder="Enter Driving License No"

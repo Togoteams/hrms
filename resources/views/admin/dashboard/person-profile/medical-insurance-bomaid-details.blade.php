@@ -40,21 +40,21 @@
                                                     <input type="hidden" name="id" value="{{ $data->id }}">
                                                     <div class="row">
                                                         <div class="col-10">
-                                                            <div class="row">
-                                                                <div class="col-5 pt-1">Insurance Company Name:</div>
-                                                                <div class="col-5 pt-1" id="nameData">
+                                                            <div class="row text-dark">
+                                                                <div class="col-4 fw-semibold pt-1">Insurance Company Name:</div>
+                                                                <div class="col-6 pt-1" id="nameData">
                                                                     {{ $data->company_name }}</div>
-                                                                <div class="col-5 margin-style d-none" id="inputData1">
+                                                                <div class="col-6 margin-style d-none" id="inputData1">
                                                                     <input required value="{{ $data->company_name }}"
                                                                         id="company_name" name="company_name"
                                                                         placeholder="Enter Insurance Company Name"
                                                                         type="text" class="form-control form-control-sm">
                                                                 </div>
 
-                                                                <div class="col-5 pt-3">Insurance ID:</div>
-                                                                <div class="col-5 pt-3" id="idData">
+                                                                <div class="col-4 fw-semibold pt-3">Insurance ID:</div>
+                                                                <div class="col-6 pt-3" id="idData">
                                                                     {{ $data->insurance_id }}</div>
-                                                                <div class="col-5 pt-2 margin-style d-none" id="inputData2">
+                                                                <div class="col-6 pt-2 margin-style d-none" id="inputData2">
                                                                     <input required value="{{ $data->insurance_id }}"
                                                                         id="insurance_id" name="insurance_id"
                                                                         placeholder="Enter Insurance Company Name"

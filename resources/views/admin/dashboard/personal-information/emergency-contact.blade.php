@@ -2,6 +2,12 @@
 @push('styles')
 @endpush
 @section('content')
+    <style>
+        .margin-style {
+            margin-top: -8px;
+            margin-left: -15px;
+        }
+    </style>
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -26,26 +32,58 @@
 
                                     <div class=" ">
                                         <div class="container mt-2 mb-2 ms-1">
-                                            <div class="row">
-                                                <div class="col-md-10 py-4">
-                                                    <div class="left-div">
-                                                        <div class="row">
-                                                            <div class="col-5">Emergerncy Mobile:</div>
-                                                            <div class="col-7">{{ $data->emergency_contact }}</div>
+                                            <form id="form_edit" method="POST"
+                                                action="{{ route('admin.personal.info.emergency.contact.post') }}">
+                                                @csrf
+                                                <input type="hidden" id="id" name="id" value="{{ $data->id }}">
+                                                <div class="row">
+                                                    <div class="col-md-10 py-4">
+                                                        {{-- @if (!empty($data->emergency_contact)) --}}
+                                                            <div class="left-div">
+                                                                <div class="row text-dark">
+                                                                    <div class="col-4 fw-semibold" id="labelData">Emergerncy Mobile:
+                                                                    </div>
+                                                                    <div class="col-6" id="contactData">
+                                                                        {{ $data->emergency_contact }}</div>
+                                                                    <div class="col-6 margin-style d-none" id="inputData">
+                                                                        <input required id="emergency_contact"
+                                                                            placeholder="Enter correct Emergency Contact No."
+                                                                            value="{{ $data->emergency_contact }}"
+                                                                            type="number" name="emergency_contact"
+                                                                            class="form-control form-control-sm ">
+                                                                    </div>
+                                                                    <div class="col-2 margin-style d-none" id="formButton">
+                                                                        <button onclick="ajaxCall('form_edit','','POST')"
+                                                                            type="button" class="btn btn-primary btn-sm">
+                                                                            Update
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {{-- @endif --}}
+                                                    </div>
+                                                    <div class="col-md-2 text-end">
+                                                        <div class="pt-2">
+                                                            <!-- Your content for right div goes here -->
+                                                            @if (!empty($data->emergency_contact))
+                                                                <button class="btn btn-warning btn-sm bt" id="editButton"
+                                                                    type="button" title="Edit" onclick="openForm()">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </button>
+                                                            @else
+                                                                <button class="btn btn-primary btn-sm bt" id="addButton"
+                                                                    type="button" onclick="openForm()">
+                                                                    Add
+                                                                </button>
+                                                            @endif
+                                                            <i class="bi bi-x-square-fill fs-2 text-danger pointer d-none"
+                                                                title="Cancel" id="closeButton" onclick="closeForm()"></i>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2 text-end">
-                                                    <div class="pt-2">
-                                                        <!-- Your content for right div goes here -->
-                                                        {{-- <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal" data-bs-target="#modaledit"> --}}
-                                                        <button class="btn btn-warning btn-sm bt" onclick="openForm()">
-                                                            <i class="fas fa-edit"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                        <div class="container mt-2 mb-2 ms-1 d-none" id="formDiv">
+                                        {{-- <div class="container mt-2 mb-2 ms-1 d-none" id="formDiv">
                                             <form id="form_edit"
                                                 action="{{ route('admin.personal.info.emergency.contact.update', $data->id) }}">
                                                 @csrf
@@ -53,7 +91,7 @@
                                                     <div class="col-md-10 py-4">
                                                         <div class="left-div">
                                                             <div class="row">
-                                                                <div class="col-4">Emergency Contact No.:</div>
+                                                                <div class="col-4">Emergency Mobile:</div>
                                                                 <div class="col-5">
                                                                     <input required id="emergency_contact"
                                                                         placeholder="Enter correct Emergency Contact No."
@@ -77,7 +115,7 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -129,13 +167,39 @@
     </main>
 @endsection
 @push('custom-scripts')
-    <script>
+    {{-- <script>
         function openForm() {
             $("#formDiv").removeClass("d-none");
+            $("#closeButton").removeClass("d-none");
+            $("#editButton").addClass("d-none");
+            $("#addButton").addClass("d-none");
         }
 
         function closeForm() {
             $("#formDiv").addClass("d-none");
+            $("#closeButton").addClass("d-none");
+            $("#editButton").removeClass("d-none");
+            $("#addButton").removeClass("d-none");
+        }
+    </script> --}}
+
+    <script>
+        function openForm() {
+            $("#inputData").removeClass("d-none");
+            $("#formButton").removeClass("d-none");
+            $("#closeButton").removeClass("d-none");
+            $("#contactData").addClass("d-none");
+            $("#editButton").addClass("d-none");
+            $("#addButton").addClass("d-none");
+        }
+
+        function closeForm() {
+            $("#contactData").removeClass("d-none");
+            $("#inputData").addClass("d-none");
+            $("#formButton").addClass("d-none");
+            $("#closeButton").addClass("d-none");
+            $("#editButton").removeClass("d-none");
+            $("#addButton").removeClass("d-none");
         }
     </script>
 @endpush

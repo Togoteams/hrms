@@ -33,31 +33,31 @@
                                     </div>
                                     <div class="row">
                                         @foreach ($datas as $data)
-                                            <div class="col-xl-6 col-xxl-4 pb-4">
+                                            <div class="col-xl-10 col-xxl-8 pb-4">
                                                 <div class="card p-3">
                                                     <div class="row">
                                                         <div class="col-10">
-                                                            <div class="row">
-                                                                <div class="col-6">Exam Name:</div>
+                                                            <div class="row text-dark">
+                                                                <div class="col-4 fw-semibold">Exam Name:</div>
                                                                 <div class="col-6">{{ $data->exam_name }}</div>
 
-                                                                <div class="col-6">Specialization:</div>
+                                                                <div class="col-4 fw-semibold">Specialization:</div>
                                                                 <div class="col-6">{{ $data->specialization }}</div>
 
-                                                                <div class="col-6">Institute Name:</div>
+                                                                <div class="col-4 fw-semibold">Institute Name:</div>
                                                                 <div class="col-6">{{ $data->institute_name }}</div>
 
-                                                                <div class="col-6">University:</div>
+                                                                <div class="col-4 fw-semibold">University:</div>
                                                                 <div class="col-6">{{ $data->university }}</div>
 
-                                                                <div class="col-6">Year of passing:</div>
+                                                                <div class="col-4 fw-semibold">Year of passing:</div>
                                                                 <div class="col-6">{{ $data->year_of_passing }}</div>
 
-                                                                <div class="col-6">Marks:</div>
+                                                                <div class="col-4 fw-semibold">Marks:</div>
                                                                 <div class="col-6">{{ $data->marks }}</div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-1 text-end">
+                                                        <div class="col-2 text-end">
                                                             <div class="right-div">
                                                                 <!-- Your content for right div goes here -->
 

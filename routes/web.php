@@ -51,7 +51,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             )->name('contact.update');
 
             Route::get('/address-details', 'viewAddress')->name('address');
-            Route::post('/update-address/{id}', 'updateAddress')->name('address.update');
+            Route::post('/post-address', 'postAddress')->name('address.post');
 
             Route::get('/dob-details', 'viewDobDetails')->name('dob.details');
             Route::post('/update-dob-details/{id}', 'updateDobDetails')->name('dob.details.update');
@@ -60,7 +60,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/update-passport', 'updatePassport')->name('passport.update');
 
             Route::get('/emergency-contact-details', 'viewEmergencyContact')->name('emergency.contact');
-            Route::post('/update-emergency-contact/{id}', 'updateEmergencyContact')->name('emergency.contact.update');
+            Route::post('/post-emergency-contact', 'postEmergencyContact')->name('emergency.contact.post');
         });
     Route::controller(PersonProfileController::class)
         ->as('person.profile.')

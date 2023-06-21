@@ -29,21 +29,21 @@
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
                                                     <div class="left-div">
-                                                        <div class="row">
-                                                            <div class="col-3">Name:</div>
-                                                            <div class="col-7">{{ $data->user->name }}</div>
+                                                        <div class="row text-dark">
+                                                            <div class="col-4 fw-semibold">Name:</div>
+                                                            <div class="col-6">{{ $data->user->name }}</div>
 
-                                                            <div class="col-3">Gender:</div>
-                                                            <div class="col-7">{{ $data->gender }}</div>
+                                                            <div class="col-4 fw-semibold">Gender:</div>
+                                                            <div class="col-6">{{ $data->gender }}</div>
 
-                                                            <div class="col-3">User Name:</div>
-                                                            <div class="col-7">{{ $data->user->username }}</div>
+                                                            <div class="col-4 fw-semibold">User Name:</div>
+                                                            <div class="col-6">{{ $data->user->username }}</div>
 
-                                                            <div class="col-3">Designation:</div>
-                                                            <div class="col-7">{{ $data->designation->name }}</div>
+                                                            <div class="col-4 fw-semibold">Designation:</div>
+                                                            <div class="col-6">{{ $data->designation->name }}</div>
 
-                                                            <div class="col-3">Basic Salary:</div>
-                                                            <div class="col-7">{{ $data->basic_salary }}</div>
+                                                            <div class="col-4 fw-semibold">Basic Salary:</div>
+                                                            <div class="col-6">{{ $data->basic_salary }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -119,7 +119,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="designation_id">designatin </label>
+                                                <label for="designation_id">designation </label>
                                                 <select required id="designation_id" placeholder="Enter correct Emplooye   "
                                                     name="designation_id" class="form-control form-control-sm ">
                                                     <option disabled> -Select Designation- </option>

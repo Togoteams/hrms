@@ -33,18 +33,18 @@
                                     </div>
                                     @foreach ($datas as $key => $data)
                                         <div class="row">
-                                            <div class="col-xl-12 col-xxl-10 pb-4">
+                                            <div class="col-xl-10 col-xxl-8 pb-4">
                                                 <div class="card p-3">
                                                     <div class="row">
                                                         <div class="col-10">
-                                                            <div class="row">
-                                                                <div class="col-5 pt-1">Company Name:</div>
-                                                                <div class="col-5 pt-1">
+                                                            <div class="row text-dark">
+                                                                <div class="col-4 fw-semibold pt-1">Company Name:</div>
+                                                                <div class="col-6 pt-1">
                                                                     {{ $data->company_name }}
                                                                 </div>
 
-                                                                <div class="col-5 pt-3">Period of employment:</div>
-                                                                <div class="col-5 pt-3">
+                                                                <div class="col-4 fw-semibold pt-3">Period of employment:</div>
+                                                                <div class="col-6 pt-3">
                                                                     {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
                                                                     -
                                                                     {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}

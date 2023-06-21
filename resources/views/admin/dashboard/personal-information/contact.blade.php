@@ -29,12 +29,12 @@
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
                                                     <div class="left-div">
-                                                        <div class="row">
-                                                            <div class="col-3">Email:</div>
-                                                            <div class="col-7">{{ $data->user->email }}</div>
+                                                        <div class="row text-dark">
+                                                            <div class="col-4 fw-semibold">Email:</div>
+                                                            <div class="col-6">{{ $data->user->email }}</div>
 
-                                                            <div class="col-3">Mobile:</div>
-                                                            <div class="col-7">{{ $data->user->mobile }}</div>
+                                                            <div class="col-4 fw-semibold">Mobile:</div>
+                                                            <div class="col-6">{{ $data->user->mobile }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -42,8 +42,11 @@
                                                     <div class="pt-2">
                                                         <!-- Your content for right div goes here -->
                                                         {{-- <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal" data-bs-target="#modaledit"> --}}
-                                                        <button class="btn btn-warning btn-sm bt" onclick="openForm()">
-                                                            <i class="fas fa-edit"></i></button>
+                                                        <button class="btn btn-warning btn-sm bt" id="editButton" onclick="openForm()">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <i class="bi bi-x-square-fill fs-2 text-danger pointer d-none"
+                                                            title="Cancel" id="closeButton" onclick="closeForm()"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -82,8 +85,8 @@
                                                                 </div>
                                                                 <div class="col-2 text-end">
                                                                     <div class=" px-2">
-                                                                        <i class="bi bi-x-square-fill fs-2 text-danger pointer"
-                                                                            title="Cancel" onclick="closeForm()"></i>
+                                                                        {{-- <i class="bi bi-x-square-fill fs-2 text-danger pointer"
+                                                                            title="Cancel" onclick="closeForm()"></i> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -153,10 +156,14 @@
     <script>
         function openForm() {
             $("#formDiv").removeClass("d-none");
+            $("#closeButton").removeClass("d-none");
+            $("#editButton").addClass("d-none");
         }
 
         function closeForm() {
             $("#formDiv").addClass("d-none");
+            $("#closeButton").addClass("d-none");
+            $("#editButton").removeClass("d-none");
         }
     </script>
 @endpush

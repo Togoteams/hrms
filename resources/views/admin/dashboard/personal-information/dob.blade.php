@@ -38,8 +38,8 @@
                                                 <div class="row">
                                                     <div class="col-md-10 py-4">
                                                         <div class="left-div">
-                                                            <div class="row">
-                                                                <div class="col-4" id="labelData">Date of Birth:</div>
+                                                            <div class="row text-dark">
+                                                                <div class="col-4 fw-semibold" id="labelData">Date of Birth:</div>
                                                                 <div class="col-4" id="dobData">
                                                                     {{ date_format(date_create_from_format('Y-m-d', $data->date_of_birth), 'd/m/Y') }}
                                                                 </div>

@@ -31,7 +31,8 @@
 
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/medical-insurance-bomaid-details') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ url('admin/person-profile/medical-insurance-bomaid-details') }}';">
+        type="button"
+        onclick="window.location.href='{{ url('admin/person-profile/medical-insurance-bomaid-details') }}';">
         Medical Insurance / Bomaid
     </button>
 
