@@ -53,6 +53,13 @@
                                                         </div>
                                                         <div class="col-2 text-end">
                                                             <div class="right-div">
+                                                                <form id="form_id" action="{{ route('admin.person.profile.previous.employment.details.delete') }}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                                                    <button class="btn btn-danger btn-sm bt" title="Delete">
+                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                    </button>
+                                                                </form>
                                                                 <button type="button"
                                                                     class="btn btn-warning btn-sm bt editButton"
                                                                     title="Edit" data-id="{{ $data->id }}"

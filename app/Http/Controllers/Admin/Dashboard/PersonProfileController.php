@@ -50,6 +50,31 @@ class PersonProfileController extends Controller
         }
     }
 
+    public function deleteQualification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $qualification = Qualification::find($request->id);
+                if ($qualification) {
+                    $qualification->delete();
+                    $message = "Record deleted Successfully";
+                    Session::put('success', $message);
+                    return redirect()->back();
+                } else {
+                    return response()->json(['error' => 'Qualification not found']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
     // public function updateQualification(Request $request)
     // {
     //     $validator = Validator::make($request->all(), [
@@ -194,6 +219,31 @@ class PersonProfileController extends Controller
                 return response()->json(['success' => $message]);
                 // Session::put('success', $message);
                 // return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function deletePreviousEmploymentDetails(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $qualification = EmploymentHistory::find($request->id);
+                if ($qualification) {
+                    $qualification->delete();
+                    $message = "Record deleted Successfully";
+                    Session::put('success', $message);
+                    return redirect()->back();
+                } else {
+                    return response()->json(['error' => 'Qualification not found']);
+                }
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }

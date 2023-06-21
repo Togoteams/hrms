@@ -45,10 +45,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/update-employee-details/{id}', 'updateEmployeeDetails')->name('employee.details.update');
 
             Route::get('/contact-details', 'viewContact')->name('contact');
-            Route::post(
-                '/update-contact',
-                'updateContact'
-            )->name('contact.update');
+            Route::post('/update-contact', 'updateContact')->name('contact.update');
 
             Route::get('/address-details', 'viewAddress')->name('address');
             Route::post('/post-address', 'postAddress')->name('address.post');
@@ -68,6 +65,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         ->group(function () {
             Route::get('/qualifications', 'viewQualifications')->name('qualifications.view');
             Route::post('/post-qualification', 'postQualification')->name('qualification.post');
+            Route::post('/delete-qualification', 'deleteQualification')->name('qualification.delete');
             // Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
             // Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
 
@@ -79,6 +77,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
             Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
             Route::post('/post-previous-employment-details', 'postPreviousEmploymentDetails')->name('previous.employment.details.post');
+            Route::post('/delete-previous-employment-details', 'deletePreviousEmploymentDetails')->name('previous.employment.details.delete');
 
             Route::get('/place-of-domicile', 'viewPlaceOfDomicile')->name('place.of.domicile.view');
             Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');
