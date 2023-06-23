@@ -20,7 +20,7 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-6 border border-1 border-color rounded  mx-3">
+                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
@@ -29,14 +29,14 @@
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
                                                     <div class="left-div">
-                                                        @if (!empty($data->id))
+                                                        @if (!empty($data->passport_no) || !empty($data->omang_no) )
                                                             <div class="row text-dark">
                                                                 @if (!empty($data->passport_no))
-                                                                    <div class="col-4 fw-semibold">Passport No:</div>
-                                                                    <div class="col-6">{{ $data->passport_no ?? '' }}</div>
+                                                                    <div class="col-3 fw-semibold">Passport No:</div>
+                                                                    <div class="col-7">{{ $data->passport_no ?? '' }}</div>
 
-                                                                    <div class="col-4 fw-semibold">Expiry Date:</div>
-                                                                    <div class="col-6">
+                                                                    <div class="col-3 fw-semibold">Expiry Date:</div>
+                                                                    <div class="col-7">
                                                                         {{ !empty($data->passport_expiry) ? date_format(date_create_from_format('Y-m-d', $data->passport_expiry), 'd/m/Y') : '' }}
                                                                     </div>
                                                                 @endif
@@ -53,6 +53,8 @@
                                                                     </div>
                                                                 @endif
                                                             </div>
+                                                        @else
+                                                            No data to show
                                                         @endif
                                                     </div>
                                                 </div>
@@ -97,7 +99,7 @@
                             <div class="modal-body" id="edit">
                                 <form id="form_edit" action="{{ route('admin.personal.info.passport.update') }}">
                                     @csrf
-                                    <input type="hidden" id="id" name="id" value="{{ $data->id ?? '' }}">
+                                    <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
                                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">

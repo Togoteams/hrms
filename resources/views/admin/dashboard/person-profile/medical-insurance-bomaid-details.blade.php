@@ -24,7 +24,7 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
-                                        <div class="text-right">
+                                        <div class="text-left">
                                             {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
@@ -32,35 +32,36 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-10 col-xxl-8 pb-4">
+                                        <div class="pb-4">
                                             <div class="card p-3">
                                                 <form method="POST"
                                                     action="{{ route('admin.person.profile.medical.insurance.bomaid.details.update') }}">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ $data->id }}">
                                                     <div class="row">
-                                                        <div class="col-10">
-                                                            <div class="row text-dark">
-                                                                <div class="col-4 fw-semibold pt-1">Insurance Company Name:</div>
-                                                                <div class="col-6 pt-1" id="nameData">
+                                                        <div class="col-10 text-dark">
+                                                            <div class="row">
+                                                                <div class="col-3 fw-semibold pt-1">Insurance Company Name:</div>
+                                                                <div class="col-3 pt-1" id="nameData">
                                                                     {{ $data->company_name }}</div>
-                                                                <div class="col-6 margin-style d-none" id="inputData1">
+                                                                <div class="col-3 margin-style d-none" id="inputData1">
                                                                     <input required value="{{ $data->company_name }}"
                                                                         id="company_name" name="company_name"
                                                                         placeholder="Enter Insurance Company Name"
                                                                         type="text" class="form-control form-control-sm">
                                                                 </div>
-
-                                                                <div class="col-4 fw-semibold pt-3">Insurance ID:</div>
-                                                                <div class="col-6 pt-3" id="idData">
+                                                                </div>
+                                                                <div class="row">
+                                                                <div class="col-3 fw-semibold pt-3">Insurance ID:</div>
+                                                                <div class="col-3 pt-3" id="idData">
                                                                     {{ $data->insurance_id }}</div>
-                                                                <div class="col-6 pt-2 margin-style d-none" id="inputData2">
+                                                                <div class="col-3 pt-2 margin-style d-none" id="inputData2">
                                                                     <input required value="{{ $data->insurance_id }}"
                                                                         id="insurance_id" name="insurance_id"
                                                                         placeholder="Enter Insurance Company Name"
                                                                         type="number" class="form-control form-control-sm">
                                                                 </div>
-                                                                <div class="col-2 margin-style d-none" id="formButton">
+                                                                <div class="col-2 margin-style pt-2 d-none" id="formButton">
                                                                     <button class="btn btn-primary btn-sm">
                                                                         Update
                                                                     </button>

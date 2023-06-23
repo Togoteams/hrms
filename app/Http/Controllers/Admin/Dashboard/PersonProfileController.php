@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\EmpDrivingLicense;
+use App\Models\Employee;
 use App\Models\EmploymentHistory;
 use App\Models\EmpMedicalInsurance;
 use App\Models\Qualification;
@@ -120,14 +121,14 @@ class PersonProfileController extends Controller
 
     public function viewUnionDetails()
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.union-details');
+        $data = Employee::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.union-details', ['data' => $data[0]]);
     }
 
     public function viewPermanentContractual()
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.permanent-contractual');
+        $data = Employee::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.permanent-contractual', ['data' => $data[0]]);
     }
 
 

@@ -29,7 +29,7 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
-                                        <div class="text-right">
+                                        <div class="text-left">
                                             <button type="button" class="btn btn-primary btn-sm" title="Add Qualification"
                                                 onclick="addQualification({{ Auth::user()->id }})">
                                                 Add Qualification
@@ -38,28 +38,28 @@
                                     </div>
                                     <div class="row">
                                         @foreach ($datas as $data)
-                                            <div class="col-xl-10 col-xxl-8 pb-4">
+                                            <div class="pb-4">
                                                 <div class="card p-3">
                                                     <div class="row">
                                                         <div class="col-9">
                                                             <div class="row text-dark">
-                                                                <div class="col-5 fw-semibold">Exam Name:</div>
-                                                                <div class="col-5">{{ $data->exam_name }}</div>
+                                                                <div class="col-4 fw-semibold">Exam Name:</div>
+                                                                <div class="col-6">{{ $data->exam_name }}</div>
 
-                                                                <div class="col-5 fw-semibold">Specialization:</div>
-                                                                <div class="col-5">{{ $data->specialization }}</div>
+                                                                <div class="col-4 fw-semibold">Specialization:</div>
+                                                                <div class="col-6">{{ $data->specialization }}</div>
 
-                                                                <div class="col-5 fw-semibold">Institute Name:</div>
-                                                                <div class="col-5">{{ $data->institute_name }}</div>
+                                                                <div class="col-4 fw-semibold">Institute Name:</div>
+                                                                <div class="col-6">{{ $data->institute_name }}</div>
 
-                                                                <div class="col-5 fw-semibold">University:</div>
-                                                                <div class="col-5">{{ $data->university }}</div>
+                                                                <div class="col-4 fw-semibold">University:</div>
+                                                                <div class="col-6">{{ $data->university }}</div>
 
-                                                                <div class="col-5 fw-semibold">Year of passing:</div>
-                                                                <div class="col-5">{{ $data->year_of_passing }}</div>
+                                                                <div class="col-4 fw-semibold">Year of passing:</div>
+                                                                <div class="col-6">{{ $data->year_of_passing }}</div>
 
-                                                                <div class="col-5 fw-semibold">Marks:</div>
-                                                                <div class="col-5">{{ $data->marks }}</div>
+                                                                <div class="col-4 fw-semibold">Marks:</div>
+                                                                <div class="col-6">{{ $data->marks }}</div>
                                                             </div>
                                                         </div>
                                                         <div class="col-3 text-end">

@@ -20,7 +20,7 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-6 border border-1 border-color rounded  mx-3">
+                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
@@ -31,26 +31,28 @@
                                                     @if (!empty($data))
                                                         <div class="left-div text-dark">
                                                             <div class="row">
-                                                                <div class="col-4 fw-semibold">Address:</div>
-                                                                <div class="col-6">{{ $data ? $data->address : '' }}</div>
+                                                                <div class="col-3 fw-semibold">Address:</div>
+                                                                <div class="col-7">{{ $data ? $data->address : '' }}</div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-4 fw-semibold">Zip:</div>
-                                                                <div class="col-6">{{ $data ? $data->zip : '' }}</div>
+                                                                <div class="col-3 fw-semibold">Zip:</div>
+                                                                <div class="col-7">{{ $data ? $data->zip : '' }}</div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-4 fw-semibold">City:</div>
-                                                                <div class="col-6">{{ $data ? $data->city : '' }}</div>
+                                                                <div class="col-3 fw-semibold">City:</div>
+                                                                <div class="col-7">{{ $data ? $data->city : '' }}</div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-4 fw-semibold">State:</div>
-                                                                <div class="col-6">{{ $data ? $data->state : '' }}</div>
+                                                                <div class="col-3 fw-semibold">State:</div>
+                                                                <div class="col-7">{{ $data ? $data->state : '' }}</div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-4 fw-semibold">Country:</div>
-                                                                <div class="col-6">{{ $data ? $data->country : '' }}</div>
+                                                                <div class="col-3 fw-semibold">Country:</div>
+                                                                <div class="col-7">{{ $data ? $data->country : '' }}</div>
                                                             </div>
                                                         </div>
+                                                    @else
+                                                    No data to show
                                                     @endif
                                                 </div>
                                                 <div class="col-md-2 text-end">
@@ -96,8 +98,7 @@
                                 <form id="form_edit" action="{{ route('admin.personal.info.address.post') }}">
                                     @csrf
                                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-                                    <input type="hidden" id="id" name="id"
-                                        value="{{ $data ? $data->id : '' }}">
+                                    <input type="hidden" id="id" name="id" value="{{ $data->id ?? '' }}">
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <div class="form-group">

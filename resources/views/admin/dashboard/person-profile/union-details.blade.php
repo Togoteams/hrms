@@ -24,34 +24,36 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
-                                        <div class="text-right">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                        <div class="text-left">
+                                            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
-                                            </button>
+                                            </button> --}}
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-10 col-xxl-8 pb-4">
+                                        <div class="pb-4">
                                             <div class="card p-3">
                                                 <div class="row">
-                                                    <div class="col-10">
-                                                        <div class="row text-dark">
-                                                            <div class="col-4 fw-semibold">Field:</div>
-                                                            <div class="col-6">Field Data</div>
+                                                    <div class="col-10 text-dark">
+                                                        <div class="row">
+                                                            <div class="col-3 fw-semibold">Union Membership:</div>
+                                                            <div class="col-7">{{ $data->union->name }}</div>
+                                                        </div>
 
-                                                            <div class="col-4 fw-semibold">Field:</div>
-                                                            <div class="col-6">Field Data</div>
+                                                        <div class="row">
+                                                            <div class="col-3 fw-semibold">Amount:</div>
+                                                            <div class="col-7">{{ $data->union->amount }}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-2 text-end">
                                                         <div class="right-div">
                                                             <!-- Your content for right div goes here -->
 
-                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
+                                                            {{-- <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
                                                                 title="Edit">
                                                                 <i class="fas fa-edit"></i>
-                                                            </button>
+                                                            </button> --}}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -24,7 +24,7 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
-                                        <div class="text-right">
+                                        <div class="text-left">
                                             {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
@@ -32,7 +32,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-10 col-xxl-8 pb-4">
+                                        <div class="pb-4">
                                             <div class="card p-3">
                                                 <form method="POST"
                                                     action="{{ route('admin.person.profile.driving.license.details.update') }}">
@@ -41,10 +41,10 @@
                                                     <div class="row">
                                                         <div class="col-10">
                                                             <div class="row text-dark">
-                                                                <div class="col-4 fw-semibold pt-1">Driving License No:</div>
-                                                                <div class="col-6 pt-1" id="licenseData">
+                                                                <div class="col-3 fw-semibold pt-1">Driving License No:</div>
+                                                                <div class="col-3 pt-1" id="licenseData">
                                                                     {{ $data->license_no }}</div>
-                                                                <div class="col-6 margin-style d-none" id="inputData">
+                                                                <div class="col-3 margin-style d-none" id="inputData">
                                                                     <input required value="{{ $data->license_no }}"
                                                                         id="license_no" name="license_no"
                                                                         placeholder="Enter Driving License No"

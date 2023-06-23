@@ -1,19 +1,21 @@
 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <button
-        class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/place-of-domicile') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ url('admin/person-profile/place-of-domicile') }}';">
-        Place of Domicile
-    </button>
-
-    <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/qualifications') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ url('admin/person-profile/qualifications') }}';">
         Qualifications
     </button>
 
     <button
+        class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/place-of-domicile') ? 'active-class' : '' }}"
+        {{-- type="button" onclick="window.location.href='{{ url('admin/person-profile/place-of-domicile') }}';"> --}}
+        type="button" href="#">
+        Place of Domicile
+    </button>
+
+    <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/training-details') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ url('admin/person-profile/training-details') }}';">
+        {{-- type="button" onclick="window.location.href='{{ url('admin/person-profile/training-details') }}';"> --}}
+        type="button" href="#">
         Training
     </button>
 

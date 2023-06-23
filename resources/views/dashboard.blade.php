@@ -37,7 +37,7 @@
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard"
-                                href="{{ url('admin/person-profile/place-of-domicile') }}">
+                                href="{{ url('admin/person-profile/qualifications') }}">
                                 <div class="text-center card-body">
                                     <h2 class="text-white card-title">Person Profile</h2>
                                     <h6 class="pt-3 card-subtitle"><i class="fa-sharp fa-solid fa-user-tie"></i></h6>

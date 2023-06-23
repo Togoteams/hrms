@@ -24,7 +24,7 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
-                                        <div class="text-right">
+                                        <div class="text-left">
                                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
@@ -32,16 +32,16 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xl-10 col-xxl-8 pb-4">
+                                        <div class="pb-4">
                                             <div class="card p-3">
                                                 <div class="row">
                                                     <div class="col-10">
                                                         <div class="row text-dark">
-                                                            <div class="col-4 fw-semibold">Field:</div>
-                                                            <div class="col-6">Field Data</div>
+                                                            <div class="col-3 fw-semibold">Field:</div>
+                                                            <div class="col-7">Field Data</div>
 
-                                                            <div class="col-4 fw-semibold">Field:</div>
-                                                            <div class="col-6">Field Data</div>
+                                                            <div class="col-3 fw-semibold">Field:</div>
+                                                            <div class="col-7">Field Data</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-2 text-end">

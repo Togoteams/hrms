@@ -28,4 +28,9 @@ class Employee extends Model
     {
         return $this->belongsTo(Designation::class);
     }
+
+    public function union()
+    {
+        return $this->belongsTo(Membership::class, 'unique_membership_id', 'id');
+    }
 }

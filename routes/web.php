@@ -42,7 +42,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         ->prefix('personal-info')
         ->group(function () {
             Route::get('/employee-details', 'viewEmployeeDetails')->name('employee.details');
-            Route::post('/update-employee-details/{id}', 'updateEmployeeDetails')->name('employee.details.update');
+            Route::post('/update-employee-details', 'updateEmployeeDetails')->name('employee.details.update');
 
             Route::get('/contact-details', 'viewContact')->name('contact');
             Route::post('/update-contact', 'updateContact')->name('contact.update');
@@ -51,7 +51,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/post-address', 'postAddress')->name('address.post');
 
             Route::get('/dob-details', 'viewDobDetails')->name('dob.details');
-            Route::post('/update-dob-details/{id}', 'updateDobDetails')->name('dob.details.update');
+            Route::post('/update-dob-details', 'updateDobDetails')->name('dob.details.update');
 
             Route::get('/passport-details', 'viewPassport')->name('passport');
             Route::post('/update-passport', 'updatePassport')->name('passport.update');

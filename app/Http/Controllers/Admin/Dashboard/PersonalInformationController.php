@@ -62,7 +62,7 @@ class PersonalInformationController extends Controller
         return view('admin.dashboard.personal-information.emergency-contact', ['data' => $data, 'page' => $page_name]);
     }
 
-    public function updateEmployeeDetails(Request $request, $id)
+    public function updateEmployeeDetails(Request $request)
     {
         $page_name = "Employee";
         $validator = Validator::make($request->all(), [
@@ -78,7 +78,7 @@ class PersonalInformationController extends Controller
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $id)->update($request->except(['_token', 'user_id', 'name', 'username']));
+                Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
                 User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
@@ -135,7 +135,7 @@ class PersonalInformationController extends Controller
         }
     }
 
-    public function updateDobDetails(Request $request, $id)
+    public function updateDobDetails(Request $request)
     {
         $page_name = "Date of Birth";
         $validator = Validator::make($request->all(), [
@@ -146,8 +146,7 @@ class PersonalInformationController extends Controller
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $id)->update($request->except(['_token']));
-                // return response()->json(['success' => $page_name . " Updated Successfully"]);
+                Employee::where('id', $request->id)->update($request->except(['_token']));
                 $message = $page_name . " Updated Successfully";
                 Session::put('success', $message);
                 return redirect()->back();

@@ -26,38 +26,45 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-6 border border-1 border-color rounded  mx-3">
+                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
                                     <div class=" ">
                                         <div class="container mt-2 mb-2 ms-1">
                                             <form id="form_edit" method="POST"
-                                                action="{{ route('admin.personal.info.dob.details.update', $data->id) }}">
+                                                action="{{ route('admin.personal.info.dob.details.update') }}">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
                                                 <div class="row">
                                                     <div class="col-md-10 py-4">
-                                                        <div class="left-div">
-                                                            <div class="row text-dark">
-                                                                <div class="col-4 fw-semibold" id="labelData">Date of Birth:</div>
-                                                                <div class="col-4" id="dobData">
-                                                                    {{ date_format(date_create_from_format('Y-m-d', $data->date_of_birth), 'd/m/Y') }}
-                                                                </div>
-                                                                <div class="col-4 margin-style d-none" id="inputData">
-                                                                    <input required id="date_of_birth"
-                                                                        placeholder="Enter correct date of birth"
-                                                                        type="date" value="{{ $data->date_of_birth }}"
-                                                                        name="date_of_birth"
-                                                                        class="form-control form-control-sm">
-                                                                </div>
-                                                                <div class="col-4 margin-style d-none" id="formButton">
-                                                                    <button onclick="ajaxCall('form_edit','','POST')"
-                                                                        class="btn btn-primary btn-sm">
-                                                                        Update
-                                                                    </button>
+                                                        @if (!empty($data->date_of_birth))
+                                                            <div class="left-div">
+                                                                <div class="row text-dark">
+                                                                    <div class="col-3 fw-semibold" id="labelData">Date of
+                                                                        Birth:</div>
+                                                                    <div class="col-3" id="dobData">
+                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->date_of_birth), 'd/m/Y') }}
+                                                                    </div>
+                                                                    <div class="col-3 margin-style d-none" id="inputData">
+                                                                        <input required id="date_of_birth"
+                                                                            placeholder="Enter correct date of birth"
+                                                                            type="date"
+                                                                            value="{{ $data->date_of_birth }}"
+                                                                            name="date_of_birth"
+                                                                            class="form-control form-control-sm">
+                                                                    </div>
+                                                                    <div class="col-4 margin-style d-none" id="formButton">
+                                                                        <button onclick="ajaxCall('form_edit','','POST')"
+                                                                            class="btn btn-primary btn-sm">
+                                                                            Update
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        @else
+                                                            No data to show
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-2 text-end">
                                                         <div class="pt-2">
@@ -76,39 +83,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        {{-- <div class="container mt-2 mb-2 ms-1 d-none" id="formDiv">
-                                            <form id="form_edit"
-                                                action="{{ route('admin.personal.info.dob.details.update', $data->id) }}">
-                                                @csrf
-                                                <div class="row">
-                                                    <div class="col-md-8 py-4">
-                                                        <div class="left-div">
-                                                            <div class="row">
-                                                                <div class="col-4">Date of Birth:</div>
-                                                                <div class="col-5">
-                                                                    <input required id="date_of_birth"
-                                                                        placeholder="Enter correct date of birth"
-                                                                        type="date" value="{{ $data->date_of_birth }}"
-                                                                        name="date_of_birth"
-                                                                        class="form-control form-control-sm ">
-                                                                </div>
-                                                                <div class="col-3">
-                                                                    <button onclick="ajaxCall('form_edit','','POST')"
-                                                                        type="button"
-                                                                        class="btn btn-primary btn-sm">Update</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 text-end">
-                                                        <div class="pt-4 px-2">
-                                                            <i class="bi bi-x-square-fill fs-2 text-danger pointer"
-                                                                title="Cancel" onclick="closeForm()"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div> --}}
                                     </div>
 
                                 </div>

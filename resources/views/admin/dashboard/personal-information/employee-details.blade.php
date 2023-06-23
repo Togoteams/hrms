@@ -20,7 +20,7 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-6 border border-1 border-color rounded  mx-3">
+                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
@@ -28,24 +28,28 @@
                                         <div class="container mt-2 mb-2 ms-1">
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
-                                                    <div class="left-div">
-                                                        <div class="row text-dark">
-                                                            <div class="col-4 fw-semibold">Name:</div>
-                                                            <div class="col-6">{{ $data->user->name }}</div>
+                                                    @if (!empty($data))
+                                                        <div class="left-div">
+                                                            <div class="row text-dark">
+                                                                <div class="col-3 fw-semibold">Name:</div>
+                                                                <div class="col-7">{{ $data->user->name }}</div>
 
-                                                            <div class="col-4 fw-semibold">Gender:</div>
-                                                            <div class="col-6">{{ $data->gender }}</div>
+                                                                <div class="col-3 fw-semibold">Gender:</div>
+                                                                <div class="col-7">{{ $data->gender }}</div>
 
-                                                            <div class="col-4 fw-semibold">User Name:</div>
-                                                            <div class="col-6">{{ $data->user->username }}</div>
+                                                                <div class="col-3 fw-semibold">User Name:</div>
+                                                                <div class="col-7">{{ $data->user->username }}</div>
 
-                                                            <div class="col-4 fw-semibold">Designation:</div>
-                                                            <div class="col-6">{{ $data->designation->name }}</div>
+                                                                <div class="col-3 fw-semibold">Designation:</div>
+                                                                <div class="col-7">{{ $data->designation->name }}</div>
 
-                                                            <div class="col-4 fw-semibold">Basic Salary:</div>
-                                                            <div class="col-6">{{ $data->basic_salary }}</div>
+                                                                <div class="col-3 fw-semibold">Basic Salary:</div>
+                                                                <div class="col-7">{{ $data->basic_salary }}</div>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @else
+                                                        No data to show
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-2 text-end">
                                                     <div class="pt-2">
@@ -78,9 +82,10 @@
                             </div>
                             <div class="modal-body" id="edit">
                                 <form id="form_edit"
-                                    action="{{ route('admin.personal.info.employee.details.update', $data->id) }}">
+                                    action="{{ route('admin.personal.info.employee.details.update') }}">
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{ $data->user_id }}">
+                                    <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
 
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">

@@ -20,7 +20,7 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-6 border border-1 border-color rounded  mx-3">
+                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
@@ -30,11 +30,11 @@
                                                 <div class="col-md-10 py-4">
                                                     <div class="left-div">
                                                         <div class="row text-dark">
-                                                            <div class="col-4 fw-semibold">Email:</div>
-                                                            <div class="col-6">{{ $data->user->email }}</div>
+                                                            <div class="col-3 fw-semibold">Email:</div>
+                                                            <div class="col-7">{{ $data->user->email }}</div>
 
-                                                            <div class="col-4 fw-semibold">Mobile:</div>
-                                                            <div class="col-6">{{ $data->user->mobile }}</div>
+                                                            <div class="col-3 fw-semibold">Mobile:</div>
+                                                            <div class="col-7">{{ $data->user->mobile }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -42,7 +42,8 @@
                                                     <div class="pt-2">
                                                         <!-- Your content for right div goes here -->
                                                         {{-- <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal" data-bs-target="#modaledit"> --}}
-                                                        <button class="btn btn-warning btn-sm bt" id="editButton" onclick="openForm()">
+                                                        <button class="btn btn-warning btn-sm bt" id="editButton"
+                                                            onclick="openForm()">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
                                                         <i class="bi bi-x-square-fill fs-2 text-danger pointer d-none"
@@ -54,12 +55,13 @@
                                         <div class="container mt-2 mb-2 ms-1 d-none" id="formDiv">
                                             <form id="form_edit" action="{{ route('admin.personal.info.contact.update') }}">
                                                 @csrf
-                                                <div class="row">
-                                                    <div class="py-4">
+                                                <input type="hidden" id="id" name="id" value="{{ $data->id ?? '' }}">
+                                                <div class="row text-dark">
+                                                    <div class="col-md-10 py-4">
                                                         <div class="left-div">
                                                             <div class="row">
-                                                                <div class="col-3 pt-2">Email.:</div>
-                                                                <div class="col-5">
+                                                                <div class="col-3 pt-2 fw-semibold">Email.:</div>
+                                                                <div class="col-3">
                                                                     <input required id="email"
                                                                         placeholder="Enter correct email   "
                                                                         value="{{ $data->user->email }}" type="email"
@@ -70,8 +72,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row pt-2">
-                                                                <div class="col-3 pt-2">Mobile No. :</div>
-                                                                <div class="col-5">
+                                                                <div class="col-3 pt-2 fw-semibold">Mobile No. :</div>
+                                                                <div class="col-3">
                                                                     <input required id="mobile"
                                                                         placeholder="Enter correct Mobile No   "
                                                                         value="{{ $data->user->mobile }}" type="number"
@@ -103,53 +105,6 @@
                     </div>
                     <!-- End Stats -->
                 </div>
-                {{-- edit form model start --}}
-                <!-- Modal -->
-                {{-- <div class="modal fade" id="modaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content ">
-                            <div class="modal-header ">
-                                <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body" id="edit">
-                                <form id="form_edit" action="{{ route('admin.personal.info.contact.update') }}">
-                                    @csrf
-                                    <input type="hidden" name="user_id" value="{{ $data->user_id }}">
-
-                                    <div class="row">
-                                        <div class="col-sm-6 mb-2">
-                                            <div class="form-group">
-                                                <label for="email">Email </label>
-                                                <input required id="email" placeholder="Enter correct email   "
-                                                    value="{{ $data->user->email }}" type="email" name="email"
-                                                    class="form-control form-control-sm ">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 mb-2">
-                                            <div class="form-group">
-                                                <label for="mobile">Mobile No. </label>
-                                                <input required id="mobile" placeholder="Enter correct Mobile No   "
-                                                    value="{{ $data->user->mobile }}" type="number" name="mobile"
-                                                    class="form-control form-control-sm ">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="text-center ">
-                                        <button onclick="ajaxCall('form_edit','','POST')" type="button"
-                                            class="btn btn-primary">Update
-                                            {{ $page }}</button>
-                                    </div>
-                                </form>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div> --}}
     </main>
 @endsection
 @push('custom-scripts')
