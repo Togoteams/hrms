@@ -38,7 +38,16 @@
                                                     <div class="col-10">
                                                         <div class="row text-dark">
                                                             <div class="col-3 fw-semibold">Employment Type:</div>
-                                                            <div class="col-7">{{$data->employment_type == 'local-contractual' ? 'Contractual' : 'Permanent'}}</div>
+                                                            <div class="col-7">
+                                                                {{ $data->employment_type == 'local-contractual' ? 'Contractual' : 'Permanent' }}
+                                                            </div>
+
+                                                            @if ($data->employment_type == 'local-contractual' && !empty($data->contract_duration))
+                                                                <div class="col-3 fw-semibold">Contract Duration:</div>
+                                                                <div class="col-7">
+                                                                    {{ $data->contract_duration }} Months
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <div class="col-2 text-end">

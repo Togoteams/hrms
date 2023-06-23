@@ -42,6 +42,10 @@ class EmployeeController extends Controller
         return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
+    public function add(){
+        return "Helklo";
+    }
+
 
     /**
      * Show the form for creating a new resource.

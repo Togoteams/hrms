@@ -113,6 +113,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('employees', EmployeeController::class);
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
+    Route::get('employees/add-employee', [EmployeeController::class, 'add'])->name('employee.add.view');
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);
