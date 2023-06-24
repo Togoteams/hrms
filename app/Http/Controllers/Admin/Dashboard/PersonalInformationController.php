@@ -20,7 +20,7 @@ class PersonalInformationController extends Controller
     public function viewEmployeeDetails()
     {
         $page_name = "Employee";
-        $data = Employee::first();
+        $data = Employee::where('user_id', Auth::user()->id)->first();
         $designation = Designation::all();
         // $data = Employee::where('user_id', Auth::user()->id)->get();
         return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation, 'page' => $page_name]);
@@ -29,7 +29,7 @@ class PersonalInformationController extends Controller
     public function viewContact()
     {
         $page_name = "Contact";
-        $data = Employee::first();
+        $data = Employee::where('user_id', Auth::user()->id)->first();
         return view('admin.dashboard.personal-information.contact', ['data' => $data, 'page' => $page_name]);
     }
 
@@ -41,25 +41,11 @@ class PersonalInformationController extends Controller
         return view('admin.dashboard.personal-information.address', ['data' => $data, 'page' => $page_name]);
     }
 
-    public function viewDobDetails()
-    {
-        $page_name = "Date of Birth";
-        $data = Employee::first();
-        return view('admin.dashboard.personal-information.dob', ['data' => $data, 'page' => $page_name]);
-    }
-
     public function viewPassport()
     {
         $page_name = "Passport";
         $data = EmpPassportOmang::where('user_id', Auth::user()->id)->first();
         return view('admin.dashboard.personal-information.passport', ['data' => $data, 'page' => $page_name]);
-    }
-
-    public function viewEmergencyContact()
-    {
-        $page_name = "Emergency Contact";
-        $data = Employee::first();
-        return view('admin.dashboard.personal-information.emergency-contact', ['data' => $data, 'page' => $page_name]);
     }
 
     public function updateEmployeeDetails(Request $request)
@@ -93,13 +79,15 @@ class PersonalInformationController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => ['string', 'email', 'max:255', 'unique:users'],
             'mobile' => ['numeric', 'min:10'],
+            'emergency_contact' => ['numeric', 'min:10'],
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id']));
+                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'id', 'emergency_contact']));
+                Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'email', 'mobile']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
@@ -135,27 +123,6 @@ class PersonalInformationController extends Controller
         }
     }
 
-    public function updateDobDetails(Request $request)
-    {
-        $page_name = "Date of Birth";
-        $validator = Validator::make($request->all(), [
-            'date_of_birth' => ['required', 'date'],
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                Employee::where('id', $request->id)->update($request->except(['_token']));
-                $message = $page_name . " Updated Successfully";
-                Session::put('success', $message);
-                return redirect()->back();
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
-            }
-        }
-    }
-
     public function updatePassport(Request $request)
     {
         $page_name = "Passport";
@@ -177,25 +144,6 @@ class PersonalInformationController extends Controller
                     EmpPassportOmang::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
                     return response()->json(['success' => $page_name . " Updated Successfully"]);
                 }
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
-            }
-        }
-    }
-
-    public function postEmergencyContact(Request $request)
-    {
-        $page_name = "Emergency Contact";
-        $validator = Validator::make($request->all(), [
-            'emergency_contact' => ['required', 'numeric', 'min:10'],
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                Employee::where('id', $request->id)->update($request->except(['_token']));
-                return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }

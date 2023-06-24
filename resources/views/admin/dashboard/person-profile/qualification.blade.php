@@ -43,23 +43,23 @@
                                                     <div class="row">
                                                         <div class="col-9">
                                                             <div class="row text-dark">
-                                                                <div class="col-4 fw-semibold">Exam Name:</div>
-                                                                <div class="col-6">{{ $data->exam_name }}</div>
+                                                                <div class="col-3 fw-semibold">Exam Name:</div>
+                                                                <div class="col-3">{{ $data->exam_name }}</div>
 
-                                                                <div class="col-4 fw-semibold">Specialization:</div>
-                                                                <div class="col-6">{{ $data->specialization }}</div>
+                                                                <div class="col-3 fw-semibold">Specialization:</div>
+                                                                <div class="col-3">{{ $data->specialization }}</div>
 
-                                                                <div class="col-4 fw-semibold">Institute Name:</div>
-                                                                <div class="col-6">{{ $data->institute_name }}</div>
+                                                                <div class="col-3 fw-semibold">Institute Name:</div>
+                                                                <div class="col-3">{{ $data->institute_name }}</div>
 
-                                                                <div class="col-4 fw-semibold">University:</div>
-                                                                <div class="col-6">{{ $data->university }}</div>
+                                                                <div class="col-3 fw-semibold">University:</div>
+                                                                <div class="col-3">{{ $data->university }}</div>
 
-                                                                <div class="col-4 fw-semibold">Year of passing:</div>
-                                                                <div class="col-6">{{ $data->year_of_passing }}</div>
+                                                                <div class="col-3 fw-semibold">Year of passing:</div>
+                                                                <div class="col-3">{{ $data->year_of_passing }}</div>
 
-                                                                <div class="col-4 fw-semibold">Marks:</div>
-                                                                <div class="col-6">{{ $data->marks }}</div>
+                                                                <div class="col-3 fw-semibold">Marks:</div>
+                                                                <div class="col-3">{{ $data->marks }}</div>
                                                             </div>
                                                         </div>
                                                         <div class="col-3 text-end">

@@ -14,20 +14,8 @@
         Address
     </button>
 
-    <button class="nav-link text-left mb-2 {{ Request::is('admin/personal-info/dob-details') ? 'active-class' : '' }}"
-        data-bs-toggle="pill" onclick="window.location.href='{{ url('admin/personal-info/dob-details') }}';">
-        DOB
-    </button>
-
     <button class="nav-link text-left mb-2 {{ Request::is('admin/personal-info/passport-details') ? 'active-class' : '' }}"
         data-bs-toggle="pill" onclick="window.location.href='{{ url('admin/personal-info/passport-details') }}';">
         Passport / Omang
-    </button>
-
-    <button
-        class="nav-link text-left mb-2 {{ Request::is('admin/personal-info/emergency-contact-details') ? 'active-class' : '' }}"
-        data-bs-toggle="pill"
-        onclick="window.location.href='{{ url('admin/personal-info/emergency-contact-details') }}';">
-        Emergency Contact
     </button>
 </div>

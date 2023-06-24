@@ -29,26 +29,25 @@
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
                                                     <div class="left-div">
-                                                        @if (!empty($data->passport_no) || !empty($data->omang_no) )
+                                                        @if (!empty($data->passport_no) || !empty($data->omang_no))
                                                             <div class="row text-dark">
                                                                 @if (!empty($data->passport_no))
                                                                     <div class="col-3 fw-semibold">Passport No:</div>
-                                                                    <div class="col-7">{{ $data->passport_no ?? '' }}</div>
+                                                                    <div class="col-3">{{ $data->passport_no ?? '' }}</div>
 
-                                                                    <div class="col-3 fw-semibold">Expiry Date:</div>
-                                                                    <div class="col-7">
+                                                                    <div class="col-3 fw-semibold">Passport Expiry:</div>
+                                                                    <div class="col-3">
                                                                         {{ !empty($data->passport_expiry) ? date_format(date_create_from_format('Y-m-d', $data->passport_expiry), 'd/m/Y') : '' }}
                                                                     </div>
                                                                 @endif
-
-                                                                <br><br>
+                                                                {{-- <br><br> --}}
 
                                                                 @if (!empty($data->omang_no))
-                                                                    <div class="col-4 fw-semibold">OMANG No:</div>
-                                                                    <div class="col-6">{{ $data->omang_no ?? '' }}</div>
+                                                                    <div class="col-3 fw-semibold">OMANG No:</div>
+                                                                    <div class="col-3">{{ $data->omang_no ?? '' }}</div>
 
-                                                                    <div class="col-4 fw-semibold">Expiry Date:</div>
-                                                                    <div class="col-6">
+                                                                    <div class="col-3 fw-semibold">OMANG Expiry:</div>
+                                                                    <div class="col-3">
                                                                         {{ !empty($data->omang_expiry) ? date_format(date_create_from_format('Y-m-d', $data->omang_expiry), 'd/m/Y') : '' }}
                                                                     </div>
                                                                 @endif

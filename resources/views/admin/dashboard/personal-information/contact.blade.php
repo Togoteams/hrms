@@ -35,6 +35,9 @@
 
                                                             <div class="col-3 fw-semibold">Mobile:</div>
                                                             <div class="col-7">{{ $data->user->mobile }}</div>
+
+                                                            <div class="col-3 fw-semibold">Emergency Mobile:</div>
+                                                            <div class="col-7">{{ $data->emergency_contact }}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -55,7 +58,8 @@
                                         <div class="container mt-2 mb-2 ms-1 d-none" id="formDiv">
                                             <form id="form_edit" action="{{ route('admin.personal.info.contact.update') }}">
                                                 @csrf
-                                                <input type="hidden" id="id" name="id" value="{{ $data->id ?? '' }}">
+                                                <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
+                                                <input type="hidden" name="user_id" value="{{ $data->user_id ?? '' }}">
                                                 <div class="row text-dark">
                                                     <div class="col-md-10 py-4">
                                                         <div class="left-div">
@@ -79,6 +83,18 @@
                                                                         value="{{ $data->user->mobile }}" type="number"
                                                                         name="mobile"
                                                                         class="form-control form-control-sm ">
+                                                                </div>
+                                                                <div class="col-2">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row pt-2">
+                                                                <div class="col-3 pt-2 fw-semibold">Emergerncy Mobile:</div>
+                                                                <div class="col-3">
+                                                                    <input required id="emergency_contact"
+                                                                            placeholder="Enter correct Emergency Contact No."
+                                                                            value="{{ $data->emergency_contact }}"
+                                                                            type="number" name="emergency_contact"
+                                                                            class="form-control form-control-sm ">
                                                                 </div>
                                                                 <div class="col-2">
                                                                     <button onclick="ajaxCall('form_edit','','POST')"

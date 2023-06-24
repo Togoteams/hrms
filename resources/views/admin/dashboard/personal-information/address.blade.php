@@ -29,27 +29,17 @@
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
                                                     @if (!empty($data))
-                                                        <div class="left-div text-dark">
-                                                            <div class="row">
-                                                                <div class="col-3 fw-semibold">Address:</div>
-                                                                <div class="col-7">{{ $data ? $data->address : '' }}</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-3 fw-semibold">Zip:</div>
-                                                                <div class="col-7">{{ $data ? $data->zip : '' }}</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-3 fw-semibold">City:</div>
-                                                                <div class="col-7">{{ $data ? $data->city : '' }}</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-3 fw-semibold">State:</div>
-                                                                <div class="col-7">{{ $data ? $data->state : '' }}</div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-3 fw-semibold">Country:</div>
-                                                                <div class="col-7">{{ $data ? $data->country : '' }}</div>
-                                                            </div>
+                                                        <div class="row left-div text-dark">
+                                                            <div class="col-2 fw-semibold">City:</div>
+                                                            <div class="col-4">{{ $data ? $data->city : '' }}</div>
+                                                            <div class="col-2 fw-semibold">State:</div>
+                                                            <div class="col-4">{{ $data ? $data->state : '' }}</div>
+                                                            <div class="col-2 fw-semibold">Country:</div>
+                                                            <div class="col-4">{{ $data ? $data->country : '' }}</div>
+                                                            <div class="col-2 fw-semibold">Zip:</div>
+                                                            <div class="col-4">{{ $data ? $data->zip : '' }}</div>
+                                                            <div class="col-2 fw-semibold">Address:</div>
+                                                            <div class="col-4">{{ $data ? $data->address : '' }}</div>
                                                         </div>
                                                     @else
                                                     No data to show

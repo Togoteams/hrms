@@ -32,19 +32,22 @@
                                                         <div class="left-div">
                                                             <div class="row text-dark">
                                                                 <div class="col-3 fw-semibold">Name:</div>
-                                                                <div class="col-7">{{ $data->user->name }}</div>
+                                                                <div class="col-3">{{ $data->user->name }}</div>
 
                                                                 <div class="col-3 fw-semibold">Gender:</div>
-                                                                <div class="col-7">{{ $data->gender }}</div>
+                                                                <div class="col-3">{{ $data->gender }}</div>
 
                                                                 <div class="col-3 fw-semibold">User Name:</div>
-                                                                <div class="col-7">{{ $data->user->username }}</div>
+                                                                <div class="col-3">{{ $data->user->username }}</div>
 
                                                                 <div class="col-3 fw-semibold">Designation:</div>
-                                                                <div class="col-7">{{ $data->designation->name }}</div>
+                                                                <div class="col-3">{{ $data->designation->name }}</div>
 
                                                                 <div class="col-3 fw-semibold">Basic Salary:</div>
-                                                                <div class="col-7">{{ $data->basic_salary }}</div>
+                                                                <div class="col-3">{{ $data->basic_salary }}</div>
+
+                                                                <div class="col-3 fw-semibold">Date of Birth:</div>
+                                                                <div class="col-3">{{ $data->date_of_birth }}</div>
                                                             </div>
                                                         </div>
                                                     @else
@@ -81,8 +84,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="edit">
-                                <form id="form_edit"
-                                    action="{{ route('admin.personal.info.employee.details.update') }}">
+                                <form id="form_edit" action="{{ route('admin.personal.info.employee.details.update') }}">
                                     @csrf
                                     <input type="hidden" name="user_id" value="{{ $data->user_id }}">
                                     <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
@@ -143,6 +145,15 @@
                                                     placeholder="Enter Basic Salary of Branch " type="text"
                                                     name="basic_salary" class="form-control form-control-"
                                                     value="{{ $data->basic_salary }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="date_of_birth">Date of Birth </label>
+                                                <input required id="date_of_birth"
+                                                    placeholder="Enter correct date of birth" type="date"
+                                                    value="{{ $data->date_of_birth }}" name="date_of_birth"
+                                                    class="form-control form-control-sm">
                                             </div>
                                         </div>
                                     </div>
