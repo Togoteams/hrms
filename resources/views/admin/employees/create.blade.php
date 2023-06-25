@@ -16,7 +16,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="name">Employee Name</label>
-                                    <input  id="name" required placeholder="Enter correct Emplooye  Name "
+                                    <input id="name" required placeholder="Enter correct Emplooye  Name "
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -93,14 +93,14 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="employment_type">Employment Type </label>
-                                    <select required id="employment_type" placeholder="Enter correct Employment Type" name="employment_type"
-                                    class="form-control form-control-sm">
-                                    <option selected disabled> - Select employment type- </option>
-                                    <option value="local">Local</option>
-                                    <option value="expatriate">Expatriate</option>
-                                    <option value="local-contractual">Local-Contractual </option>
+                                    <select required id="employment_type" placeholder="Enter correct Employment Type"
+                                        name="employment_type" class="form-control form-control-sm">
+                                        <option selected disabled> - Select employment type- </option>
+                                        <option value="local">Local</option>
+                                        <option value="expatriate">Expatriate</option>
+                                        <option value="local-contractual">Local-Contractual </option>
 
-                                </select>
+                                    </select>
                                 </div>
                             </div>
 
@@ -164,7 +164,7 @@
                                 <div class="form-group">
                                     <label for="pension_contribution">pension contribution </label>
                                     <input required id="pension_contribution"
-                                        placeholder="Enter correct pension contribution   " type="number"
+                                        placeholder="Enter pension contribution" type="number"
                                         name="pension_contribution" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -172,8 +172,8 @@
                                 <div class="form-group">
                                     <label for="unique_membership_id">union membership </label>
                                     <select required id="unique_membership_id"
-                                        placeholder="Enter correct union_membership_id   "
-                                        name="unique_membership_id" class="form-control form-control-sm ">
+                                        placeholder="Enter union_membership_id" name="unique_membership_id"
+                                        class="form-control form-control-sm ">
                                         <option selected disabled> - Select unique_membership_id - </option>
                                         @foreach ($membership as $mem)
                                             <option value="{{ $mem->id }}">{{ $mem->name }}</option>

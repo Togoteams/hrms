@@ -42,8 +42,106 @@ class EmployeeController extends Controller
         return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
-    public function add(){
-        return "Helklo";
+    public function viewUserDetails()
+    {
+        return view('admin.employees.user-details');
+    }
+
+    public function postUserDetails(Request $request)
+    {
+        // return $request;
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'min:5', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile' => ['required', 'numeric', 'min:10'],
+            'password' => ['required', 'confirmed', Password::defaults()],
+
+            'gender' => ['required'],
+            'date_of_birth' => ['required', 'date'],
+            'emergency_contact' => ['nullable', 'numeric', 'min:10'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+
+            $user = User::create([
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'mobile' => $request->mobile,
+                'password' => Hash::make($request->password),
+            ]);
+            try {
+                $request->request->add(['user_id' => $user->id]);
+                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
+                Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation']));
+                $role_id = Role::where('short_code', 'employee')->value('id');
+                $user->roles()->sync($role_id);
+                return response()->json(['success' => "User Details Added Successfully"]);
+            } catch (Exception $e) {
+                User::destroy($user->id);
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function viewEmployeeDetails()
+    {
+        $designation = Designation::all();
+        $membership = Membership::all();
+        $branch = Branch::where('status', 'active')->get();
+        return view(
+            'admin.employees.employee-details',
+            ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]
+        );
+    }
+
+    public function postEmployeeDetails(Request $request)
+    {
+        // return $request;
+        $validator = Validator::make($request->all(), [
+
+            'branch_id' => ['required', 'numeric'],
+            'designation_id' => ['required', 'numeric'],
+            'ec_number' => ['required', 'numeric'],
+            'id_number' => ['required', 'numeric'],
+            'start_date' => ['required', 'date'],
+            'currency' => ['required', 'string'],
+            'basic_salary' => ['required', 'numeric'],
+            'date_of_current_basic' => ['required', 'date'],
+            'employment_type' => ['required', 'string'],
+            // 'contract_duration' => [
+            //     Rule::requiredIf(function () {
+            //         return $this->input('employment_type') === 'local-contractual';
+            //     }),
+            //     'numeric',
+            // ],
+            'pension_contribution' => ['required', 'numeric'],
+            'union_membership_id' => ['required', 'numeric'],
+            'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
+            'bank_account_number' => ['required', 'numeric'],
+
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+
+            // $user = User::find('user_id');
+            $user = User::find(15);
+            // return $user;
+            try {
+                // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                Employee::where('id', 6)->update($request->except(['_token']));
+                // return "Test OK";
+                return response()->json(['success' => "Employee Details Added Successfully"]);
+            } catch (Exception $e) {
+                User::destroy($user->id);
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
     }
 
 

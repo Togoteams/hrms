@@ -9,6 +9,7 @@ use Webpatser\Uuid\Uuid;
 class Employee extends Model
 {
     use HasFactory;
+    protected $fillable = ['gender', 'date_of_birth', 'emergency_contact', 'user_id', 'emp_id'];
 
     public static function boot()
     {
