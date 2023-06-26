@@ -16,6 +16,7 @@ use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Exception;
+use Illuminate\Support\Facades\Redirect;
 
 class EmployeeController extends Controller
 {
@@ -42,9 +43,15 @@ class EmployeeController extends Controller
         return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
-    public function viewUserDetails()
+    public function viewUserDetails($eid = '')
     {
-        return view('admin.employees.user-details');
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            $employee = '';
+        }
+        return view('admin.employees.user-details', ['employee' => $employee]);
     }
 
     public function postUserDetails(Request $request)
@@ -66,20 +73,37 @@ class EmployeeController extends Controller
             return $validator->errors();
         } else {
 
-            $user = User::create([
-                'name' => $request->name,
-                'username' => $request->username,
-                'email' => $request->email,
-                'mobile' => $request->mobile,
-                'password' => Hash::make($request->password),
-            ]);
+            if (empty($request->user_id)) {
+                $user = new User();
+            } else {
+                $user = User::find('user_id');
+            }
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->mobile = $request->mobile;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
             try {
-                $request->request->add(['user_id' => $user->id]);
-                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
-                Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation']));
-                $role_id = Role::where('short_code', 'employee')->value('id');
-                $user->roles()->sync($role_id);
-                return response()->json(['success' => "User Details Added Successfully"]);
+                if (empty($request->id)) {
+                    $request->request->add(['user_id' => $user->id]);
+                    $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
+                    $employee = Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id']));
+                    $role_id = Role::where('short_code', 'employee')->value('id');
+                    $user->roles()->sync($role_id);
+                } else {
+                    Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
+                }
+
+                if (!empty($user) && !empty($employee)) {
+                    $msg = "User Details Added Successfully";
+                    return Redirect::route('admin.employee.userDetails.form')
+                        ->with([
+                            'success'  => $msg,
+                            'employee' => $employee
+                        ]);
+                }
             } catch (Exception $e) {
                 User::destroy($user->id);
                 return response()->json(['error' => $e->getMessage()]);
@@ -87,20 +111,31 @@ class EmployeeController extends Controller
         }
     }
 
-    public function viewEmployeeDetails()
+    public function viewEmployeeDetails($eid = '')
     {
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            $employee = '';
+        }
         $designation = Designation::all();
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
         return view(
             'admin.employees.employee-details',
-            ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]
+            [
+                'page'          => $this->page_name,
+                'designation'   => $designation,
+                'membership'    => $membership,
+                'branch'        => $branch,
+                'employee'          => $employee
+            ]
         );
     }
 
     public function postEmployeeDetails(Request $request)
     {
-        // return $request;
         $validator = Validator::make($request->all(), [
 
             'branch_id' => ['required', 'numeric'],
@@ -129,14 +164,18 @@ class EmployeeController extends Controller
             return $validator->errors();
         } else {
 
-            // $user = User::find('user_id');
-            $user = User::find(15);
-            // return $user;
+            $user = User::find($request->user_id);
             try {
-                // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
-                Employee::where('id', 6)->update($request->except(['_token']));
-                // return "Test OK";
-                return response()->json(['success' => "Employee Details Added Successfully"]);
+                $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+
+                if (!empty($employee)) {
+                    $msg = "Employee Details Added Successfully";
+                    return Redirect::route('admin.employee.viewEmployeeDetails.form')
+                        ->with([
+                            'success'  => $msg,
+                            'employee' => $employee
+                        ]);
+                }
             } catch (Exception $e) {
                 User::destroy($user->id);
                 return response()->json(['error' => $e->getMessage()]);

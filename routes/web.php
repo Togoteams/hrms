@@ -101,9 +101,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('employees', EmployeeController::class);
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
-    Route::get('employee/user-details', [EmployeeController::class, 'viewUserDetails'])->name('employee.userDetails.form');
+    Route::get('employee/user-details/{eid?}', [EmployeeController::class, 'viewUserDetails'])->name('employee.userDetails.form');
     Route::post('employee/user-details', [EmployeeController::class, 'postUserDetails'])->name('employee.userDetails.post');
-    Route::get('employee/employee-details', [EmployeeController::class, 'viewEmployeeDetails'])->name('employee.employeeDetails.form');
+    Route::get('employee/employee-details/{eid?}', [EmployeeController::class, 'viewEmployeeDetails'])->name('employee.employeeDetails.form');
     Route::post('employee/employee-details', [EmployeeController::class, 'postEmployeeDetails'])->name('employee.employeeDetails.post');
 
     Route::resource('designation', DesignationContoller::class);

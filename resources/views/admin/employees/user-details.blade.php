@@ -18,17 +18,19 @@
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <form id="form_id" action="{{ route('admin.employee.userDetails.post') }}">
+                                    <form id="form_id" action="{{ route('admin.employee.userDetails.post') }}"
+                                        method="post" class="formsubmit">
                                         @csrf
-                                        {{-- <input type="hidden" name="id" id="id">
-                                        <input type="hidden" name="user_id" id="user_id"> --}}
+                                        <input type="hidden" name="id" value="{{ !empty($employee) ? $employee->id : '' }}">
+                                        <input type="hidden" name="user_id" value="{{ !empty($employee) ? $employee->user_id : '' }}">
                                         <div class="row pb-4 p-3 text-dark">
                                             <div class="col-3 pt-2 fw-semibold">
                                                 <label for="name">Employee Name:</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="name" required placeholder="Enter Name" type="text"
-                                                    name="name" class="form-control form-control-sm">
+                                                    name="name" value="{{ !empty($employee) ? $employee->user->name : '' }}"
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-2 fw-semibold">
@@ -36,7 +38,8 @@
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="username" required placeholder="Enter User Name" type="text"
-                                                    name="username" class="form-control form-control-sm">
+                                                    name="username" value="{{ !empty($employee) ? $employee->user->username : '' }}"
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-2 fw-semibold">
@@ -46,9 +49,9 @@
                                                 <select required id="gender" placeholder="Enter gender" name="gender"
                                                     class="form-control form-control-sm">
                                                     <option selected disabled> - Select Gender- </option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="others">others</option>
+                                                    <option {{ !empty($employee) ? ($employee->gender == 'male' ? 'selected' : '') : '' }} value="male">Male</option>
+                                                    <option {{ !empty($employee) ? ($employee->gender == 'female' ? 'selected' : '') : '' }} value="female">Female</option>
+                                                    <option {{ !empty($employee) ? ($employee->gender == 'others' ? 'selected' : '') : '' }} value="others">others</option>
                                                 </select>
                                             </div>
 
@@ -57,7 +60,8 @@
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input required id="email" placeholder="Enter email" type="email"
-                                                    name="email" class="form-control form-control-sm">
+                                                    name="email" value="{{ !empty($employee) ? $employee->user->email : '' }}"
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-2 fw-semibold">
@@ -65,7 +69,8 @@
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input required id="mobile" placeholder="Enter Mobile No" type="tel"
-                                                    name="mobile" class="form-control form-control-sm">
+                                                    name="mobile" value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-2 fw-semibold">
@@ -74,6 +79,7 @@
                                             <div class="col-3 pt-2">
                                                 <input required id="emergency_contact"
                                                     placeholder="Enter Emergency Contact No." value="" type="tel"
+                                                    value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
                                                     name="emergency_contact" class="form-control form-control-sm ">
                                             </div>
 
@@ -83,6 +89,7 @@
                                             <div class="col-3 pt-2">
                                                 <input required id="date_of_birth" placeholder="Enter date of birth"
                                                     type="date" name="date_of_birth"
+                                                    value="{{ !empty($employee) ? $employee->date_of_birth : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
 
@@ -103,9 +110,7 @@
                                                     name="password_confirmation" class="form-control form-control-sm ">
                                             </div>
                                             <div class="text-center pt-5">
-                                                <button onclick="ajaxCall('form_id','','POST')" type="button"
-                                                    class="btn btn-primary btn-sm">SUBMIT</button>
-                                                {{-- <button type="submit" class="btn btn-primary btn-sm">SUBMIT</button> --}}
+                                                <button type="submit" class="btn btn-primary btn-sm">SUBMIT</button>
                                             </div>
                                         </div>
                                     </form>
@@ -119,4 +124,17 @@
     </main>
 @endsection
 @push('custom-scripts')
+    @if (!empty(Session::get('success')))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '{{ Session::get('success') }}',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        </script>
+        @php
+            Session::forget('success');
+        @endphp
+    @endif
 @endpush
