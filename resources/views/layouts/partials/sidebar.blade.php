@@ -130,7 +130,7 @@
                                      @canany(['add-memberships', 'edit-memberships', 'view-memberships',
                                          'delete-memberships'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
-                                             href="{{ route('admin.membership.index') }}">Membership</a>
+                                             href="{{ route('admin.membership.index') }}">Union Membership</a>
                                      @endcanany
                                      @canany(['add-branch', 'edit-branch', 'view-branch', 'delete-branch'])
                                          <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"

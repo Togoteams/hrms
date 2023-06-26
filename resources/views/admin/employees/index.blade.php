@@ -31,6 +31,7 @@
                         <a type="button" class="btn btn-primary" href="{{route('admin.employee.userDetails.form')}}" title="Add Employee" target="_blank">
                             Add {{ $page }}
                         </a>
+                        {{-- </button> --}}
                     @endcan
 
                 </div>
