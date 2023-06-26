@@ -27,7 +27,7 @@
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 
                                         <div class="row pb-4 p-3 text-dark">
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="branch_id">branch </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -42,7 +42,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="designation_id">Designation:</label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -57,7 +57,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="ec_number">EC Number </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -67,7 +67,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="id_number">ID Number </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -77,7 +77,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="start_date">Start Date </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -87,7 +87,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="currency">Currency </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -97,7 +97,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="basic_salary">Basic Salary </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -107,7 +107,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="date_of_current_basic">Date of Current Basic </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -118,7 +118,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="employment_type">Employment Type </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -141,7 +141,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold contractDiv">
+                                            <div class="col-3 pt-3 fw-semibold contractDiv">
                                                 <label for="contract_duration">Contract Duration </label>
                                             </div>
                                             <div class="col-3 pt-2 contractDiv">
@@ -152,7 +152,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="pension_contribution">Pension Contribution </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -163,7 +163,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="union_membership_id">Union Membership </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -180,7 +180,7 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="amount_payable_to_bomaind_each_year">
                                                     Amount Payable to Bomaind Each Year
                                                 </label>
@@ -193,7 +193,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="bank_account_number">Bank Account No </label>
                                             </div>
                                             <div class="col-3 pt-2">

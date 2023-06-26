@@ -19,61 +19,54 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" action="{{ route('admin.employee.userDetails.post') }}"
-                                        method="post" class="formsubmit">
+                                        method="post">
                                         @csrf
-                                        <input type="hidden" name="id" value="{{ !empty($employee) ? $employee->id : '' }}">
-                                        <input type="hidden" name="user_id" value="{{ !empty($employee) ? $employee->user_id : '' }}">
+                                        <input type="hidden" name="id"
+                                            value="{{ !empty($employee) ? $employee->id : '' }}">
+                                        <input type="hidden" name="user_id"
+                                            value="{{ !empty($employee) ? $employee->user_id : '' }}">
                                         <div class="row pb-4 p-3 text-dark">
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="name">Employee Name:</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="name" required placeholder="Enter Name" type="text"
-                                                    name="name" value="{{ !empty($employee) ? $employee->user->name : '' }}"
+                                                    name="name"
+                                                    value="{{ !empty($employee) ? $employee->user->name : '' }}"
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="username">User-Name:</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="username" required placeholder="Enter User Name" type="text"
-                                                    name="username" value="{{ !empty($employee) ? $employee->user->username : '' }}"
+                                                    name="username"
+                                                    value="{{ !empty($employee) ? $employee->user->username : '' }}"
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
-                                                <label for="gender">Gender:</label>
-                                            </div>
-                                            <div class="col-3 pt-2">
-                                                <select required id="gender" placeholder="Enter gender" name="gender"
-                                                    class="form-control form-control-sm">
-                                                    <option selected disabled> - Select Gender- </option>
-                                                    <option {{ !empty($employee) ? ($employee->gender == 'male' ? 'selected' : '') : '' }} value="male">Male</option>
-                                                    <option {{ !empty($employee) ? ($employee->gender == 'female' ? 'selected' : '') : '' }} value="female">Female</option>
-                                                    <option {{ !empty($employee) ? ($employee->gender == 'others' ? 'selected' : '') : '' }} value="others">others</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="email">Email:</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input required id="email" placeholder="Enter email" type="email"
-                                                    name="email" value="{{ !empty($employee) ? $employee->user->email : '' }}"
+                                                    name="email"
+                                                    value="{{ !empty($employee) ? $employee->user->email : '' }}"
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="mobile">Mobile No:</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input required id="mobile" placeholder="Enter Mobile No" type="tel"
-                                                    name="mobile" value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
+                                                    name="mobile"
+                                                    value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="emergency_contact">Emergency Contact No:</label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -83,7 +76,7 @@
                                                     name="emergency_contact" class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="date_of_birth">Date of Birth </label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -93,15 +86,70 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
+                                                <label for="gender">Gender:</label>
+                                            </div>
+                                            <div class="col-3 pt-2">
+                                                <select required id="gender" placeholder="Select gender" name="gender"
+                                                    class="form-control form-control-sm">
+                                                    <option selected disabled> - Select Gender - </option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->gender == 'male' ? 'selected' : '') : '' }}
+                                                        value="male">Male</option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->gender == 'female' ? 'selected' : '') : '' }}
+                                                        value="female">Female</option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->gender == 'others' ? 'selected' : '') : '' }}
+                                                        value="others">others</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-3 pt-3 fw-semibold">
+                                                <label for="marital_status">Marital Status:</label>
+                                            </div>
+                                            <div class="col-3 pt-2">
+                                                <select required id="marital_status" placeholder="Select Marital Status"
+                                                    name="marital_status" class="form-control form-control-sm">
+                                                    <option selected disabled> - Select Marital Status - </option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->marital_status == 'single' ? 'selected' : '') : '' }}
+                                                        value="single">
+                                                        Single
+                                                    </option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->marital_status == 'married' ? 'selected' : '') : '' }}
+                                                        value="married">
+                                                        Married
+                                                    </option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->marital_status == 'widowed' ? 'selected' : '') : '' }}
+                                                        value="widowed">
+                                                        Widowed
+                                                    </option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->marital_status == 'separated' ? 'selected' : '') : '' }}
+                                                        value="separated">
+                                                        Separated
+                                                    </option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->marital_status == 'divorced' ? 'selected' : '') : '' }}
+                                                        value="divorced">
+                                                        Divorced
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="password">Password: </label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="password" placeholder="Enter password" type="password"
-                                                    name="password" class="form-control form-control-sm ">
+                                                <input required id="password" placeholder="Enter password"
+                                                    type="password" name="password"
+                                                    class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-2 fw-semibold">
+                                            <div class="col-3 pt-3 fw-semibold">
                                                 <label for="password_confirmation">Confirm Password: </label>
                                             </div>
                                             <div class="col-3 pt-2">

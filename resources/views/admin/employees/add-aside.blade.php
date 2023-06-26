@@ -4,14 +4,45 @@
 
 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/user-details*') ? 'active-class' : '' }}"
-        type="button"
-        onclick="window.location.href='{{ route('admin.employee.userDetails.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.userDetails.form', $empId) }}';">
         User Details
     </button>
 
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/employee-details*') ? 'active-class' : '' }}"
-        type="button"
-        onclick="window.location.href='{{ route('admin.employee.employeeDetails.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.employeeDetails.form', $empId) }}';">
         Employee Details
+    </button>
+
+    <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/address*') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ route('admin.employee.address.form', $empId) }}';">
+        Address
+    </button>
+
+    <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/domicile*') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ route('admin.employee.domicile.form', $empId) }}';">
+        Domicile
+    </button>
+
+    <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/passport-omang*') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ route('admin.employee.passportOmang.form', $empId) }}';">
+        Passport / OMANG
+    </button>
+
+    <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/qualification*') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ route('admin.employee.qualification.form', $empId) }}';">
+        Qualification
+    </button>
+
+    <button
+        class="nav-link text-left mb-2 {{ Request::is('admin/employee/medical-insuarance-bomaid*') ? 'active-class' : '' }}"
+        type="button"
+        onclick="window.location.href='{{ route('admin.employee.medicalInsuaranceBomaid.form', $empId) }}';">
+        Medical Insurance / Bomaid
+    </button>
+
+    <button
+        class="nav-link text-left mb-2 {{ Request::is('admin/employee/department-history*') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ route('admin.employee.departmentHistory.form', $empId) }}';">
+        Department History
     </button>
 </div>

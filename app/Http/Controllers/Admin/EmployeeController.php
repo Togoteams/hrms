@@ -9,6 +9,11 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
+use App\Models\EmpAddress;
+use App\Models\EmpDepartmentHistory;
+use App\Models\EmpMedicalInsurance;
+use App\Models\EmpPassportOmang;
+use App\Models\Qualification;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +22,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
@@ -43,7 +49,7 @@ class EmployeeController extends Controller
         return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
 
-    public function viewUserDetails($eid = '')
+    public function viewUserDetails($eid = null)
     {
         $emp_id = $eid;
         if (!empty($emp_id)) {
@@ -65,6 +71,7 @@ class EmployeeController extends Controller
             'password' => ['required', 'confirmed', Password::defaults()],
 
             'gender' => ['required'],
+            'marital_status' => ['required'],
             'date_of_birth' => ['required', 'date'],
             'emergency_contact' => ['nullable', 'numeric', 'min:10'],
         ]);
@@ -92,13 +99,15 @@ class EmployeeController extends Controller
                     $employee = Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id']));
                     $role_id = Role::where('short_code', 'employee')->value('id');
                     $user->roles()->sync($role_id);
+                    $employee = Employee::Where('emp_id' ,$request->emp_id)->first();
                 } else {
-                    Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
+                    $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
+                    $employee = Employee::firstWhere($request->id);
                 }
 
                 if (!empty($user) && !empty($employee)) {
                     $msg = "User Details Added Successfully";
-                    return Redirect::route('admin.employee.userDetails.form')
+                    return Redirect::route('admin.employee.userDetails.form', $employee->emp_id)
                         ->with([
                             'success'  => $msg,
                             'employee' => $employee
@@ -111,7 +120,7 @@ class EmployeeController extends Controller
         }
     }
 
-    public function viewEmployeeDetails($eid = '')
+    public function viewEmployeeDetails($eid = null)
     {
         $emp_id = $eid;
         if (!empty($emp_id)) {
@@ -163,25 +172,294 @@ class EmployeeController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-
-            $user = User::find($request->user_id);
             try {
                 $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+                $employee = Employee::firstWhere($request->id);
 
                 if (!empty($employee)) {
                     $msg = "Employee Details Added Successfully";
-                    return Redirect::route('admin.employee.viewEmployeeDetails.form')
+                    return Redirect::route('admin.employee.viewEmployeeDetails.form', $employee->emp_id)
                         ->with([
                             'success'  => $msg,
                             'employee' => $employee
                         ]);
                 }
             } catch (Exception $e) {
-                User::destroy($user->id);
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
     }
+
+    public function viewAddress($eid = null)
+    {
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            $employee = '';
+        }
+        return view('admin.employees.emp-address', ['employee' => $employee]);
+    }
+
+    public function viewPassportOmang($eid = null)
+    {
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            $employee = '';
+        }
+        return view('admin.employees.emp-passport-omang', ['employee' => $employee]);
+    }
+
+    public function viewQualification($eid = null)
+    {
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+            return $employee;
+        } else {
+            $employee = '';
+        }
+        return view('admin.employees.emp-qualification', ['employee' => $employee]);
+    }
+
+    public function viewMedicalInsuaranceBomaid($eid = null)
+    {
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            $employee = '';
+        }
+        return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $employee]);
+    }
+
+    public function viewDomicile($eid = null)
+    {
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            $employee = '';
+        }
+        return view('admin.employees.emp-domicile', ['employee' => $employee]);
+    }
+
+    public function viewDepartmentHistory($eid = null)
+    {
+        $emp_id = $eid;
+        if (!empty($emp_id)) {
+            $employee = Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            $employee = '';
+        }
+        return view('admin.employees.emp-department-history', ['employee' => $employee]);
+    }
+
+    public function postAddress(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'address'   => ['required', 'string'],
+            'zip'       => ['required', 'string'],
+            'city'      => ['required', 'string'],
+            'state'     => ['required', 'string'],
+            'country'   => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                if ($request->id == '') {
+                    EmpAddress::insertGetId($request->except(['_token', 'id']));
+                    $message = "Address Created Successfully";
+                } else {
+                    EmpAddress::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    $message = "Address Updated Successfully";
+                }
+                return response()->json(['success' => $message]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+    public function postQualification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'exam_name' => ['string', 'required'],
+            'specialization' => ['string', 'required'],
+            'institute_name' => ['string', 'required'],
+            'university' => ['string', 'required'],
+            'year_of_passing' => ['numeric', 'required'],
+            'marks' => ['numeric', 'required'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                if (empty($request->id)) {
+                    Qualification::insertGetId($request->except(['_token', 'id']));
+                    $message = "Qualification added successfully";
+                } else {
+                    Qualification::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+                    $message = "Qualification updated successfully";
+                }
+                return response()->json(['success' => $message]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+    public function deleteQualification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $qualification = Qualification::find($request->id);
+                if ($qualification) {
+                    $qualification->delete();
+                    $message = "Record deleted Successfully";
+                    Session::put('success', $message);
+                    return redirect()->back();
+                } else {
+                    return response()->json(['error' => 'Qualification not found']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function postDepartmentHistory(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'department_name' => ['string', 'required'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                if (empty($request->id)) {
+                    EmpDepartmentHistory::insertGetId($request->except(['_token', 'id']));
+                    $message = "Department added successfully";
+                } else {
+                    EmpDepartmentHistory::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+                    $message = "Department updated successfully";
+                }
+                return response()->json(['success' => $message]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+    public function deleteDepartmentHistory(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $qualification = EmpDepartmentHistory::find($request->id);
+                if ($qualification) {
+                    $qualification->delete();
+                    $message = "Record deleted Successfully";
+                    Session::put('success', $message);
+                    return redirect()->back();
+                } else {
+                    return response()->json(['error' => 'Department not found']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function postPassportOmang(Request $request)
+    {
+        $page_name = "Passport";
+        $validator = Validator::make($request->all(), [
+            'passport_no'       => ['nullable', 'numeric'],
+            'passport_expiry'   => ['nullable', 'date'],
+            'omang_no'          => ['nullable', 'numeric'],
+            'omang_expiry'      => ['nullable', 'date'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                if ($request->id == '') {
+                    EmpPassportOmang::insertGetId($request->except(['_token', 'id']));
+                    return response()->json(['success' => $page_name . " Created Successfully"]);
+                } else {
+                    EmpPassportOmang::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    return response()->json(['success' => $page_name . " Updated Successfully"]);
+                }
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+    public function postMedicalInsuaranceBomaid(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'company_name' => ['required', 'string'],
+            'insurance_id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'id']));
+                $message = "Record Updated Successfully";
+                Session::put('success', $message);
+                return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+    public function postDomicile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+
+            'place_of_domicile' => ['required', 'string'],
+
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+
+                if (!empty($employee)) {
+                    $msg = "Place of Domicile Saved Successfully";
+                    return Redirect::route('admin.employee.domicile.form')
+                        ->with([
+                            'success'  => $msg,
+                            'employee' => $employee
+                        ]);
+                }
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+
 
 
     /**

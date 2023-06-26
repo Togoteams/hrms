@@ -107,7 +107,6 @@
                                                 <input id="passport_no" placeholder="Enter Passport No." type="number"
                                                     value="{{ $data->passport_no ?? '' }}" name="passport_no"
                                                     class="form-control form-control-sm ">
-                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
@@ -116,7 +115,6 @@
                                                 <input id="passport_expiry" placeholder="Enter Date of Passport Expiry"
                                                     type="date" value="{{ $data->passport_expiry ?? '' }}"
                                                     name="passport_expiry" class="form-control form-control-sm ">
-                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
@@ -125,7 +123,6 @@
                                                 <input id="omang_no" placeholder="Enter omang No." type="number"
                                                     value="{{ $data->omang_no ?? '' }}" name="omang_no"
                                                     class="form-control form-control-sm ">
-                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
@@ -134,7 +131,6 @@
                                                 <input id="omang_expiry" placeholder="Enter Date of OMANG Expiry"
                                                     type="date" value="{{ $data->omang_expiry ?? '' }}"
                                                     name="omang_expiry" class="form-control form-control-sm ">
-                                                </select>
                                             </div>
                                         </div>
                                     </div>

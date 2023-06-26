@@ -101,10 +101,32 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('employees', EmployeeController::class);
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
+
     Route::get('employee/user-details/{eid?}', [EmployeeController::class, 'viewUserDetails'])->name('employee.userDetails.form');
     Route::post('employee/user-details', [EmployeeController::class, 'postUserDetails'])->name('employee.userDetails.post');
+
     Route::get('employee/employee-details/{eid?}', [EmployeeController::class, 'viewEmployeeDetails'])->name('employee.employeeDetails.form');
     Route::post('employee/employee-details', [EmployeeController::class, 'postEmployeeDetails'])->name('employee.employeeDetails.post');
+
+    Route::get('employee/address/{eid?}', [EmployeeController::class, 'viewAddress'])->name('employee.address.form');
+    Route::post('employee/address', [EmployeeController::class, 'postAddress'])->name('employee.address.post');
+
+    Route::get('employee/passport-omang/{eid?}', [EmployeeController::class, 'viewPassportOmang'])->name('employee.passportOmang.form');
+    Route::post('employee/passport-omang', [EmployeeController::class, 'postPassportOmang'])->name('employee.passportOmang.post');
+
+    Route::get('employee/qualification/{eid?}', [EmployeeController::class, 'viewQualification'])->name('employee.qualification.form');
+    Route::post('employee/qualification', [EmployeeController::class, 'postQualification'])->name('employee.qualification.post');
+    Route::post('employee/delete-qualification', [EmployeeController::class, 'deleteQualification'])->name('employee.qualification.delete');
+
+    Route::get('employee/medical-insuarance-bomaid/{eid?}', [EmployeeController::class, 'viewMedicalInsuaranceBomaid'])->name('employee.medicalInsuaranceBomaid.form');
+    Route::post('employee/medical-insuarance-bomaid', [EmployeeController::class, 'postMedicalInsuaranceBomaid'])->name('employee.medicalInsuaranceBomaid.post');
+
+    Route::get('employee/domicile/{eid?}', [EmployeeController::class, 'viewDomicile'])->name('employee.domicile.form');
+    Route::post('employee/domicile', [EmployeeController::class, 'postDomicile'])->name('employee.domicile.post');
+
+    Route::get('employee/department-history/{eid?}', [EmployeeController::class, 'viewDepartmentHistory'])->name('employee.departmentHistory.form');
+    Route::post('employee/department-history', [EmployeeController::class, 'postDepartmentHistory'])->name('employee.departmentHistory.post');
+    Route::post('employee/delete-department-history', [EmployeeController::class, 'deleteDepartmentHistory'])->name('employee.departmentHistory.delete');
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);

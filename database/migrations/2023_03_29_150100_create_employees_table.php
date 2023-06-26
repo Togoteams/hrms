@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('employment_type')->nullable();
             $table->string('ec_number')->nullable();
             $table->string('gender')->nullable();
+            $table->string('marital_status')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->string('id_number')->nullable();
             $table->string('contract_duration')->nullable();
