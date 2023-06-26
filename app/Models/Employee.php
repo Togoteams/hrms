@@ -52,7 +52,7 @@ class Employee extends Model
 
     public function qualification()
     {
-        return $this->hasMany(Qualification::class, 'user_id');
+        return $this->hasMany(Qualification::class, 'user_id', 'user_id');
     }
 
     public function departmentHistory()

@@ -9,40 +9,47 @@
     </button>
 
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/employee-details*') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ route('admin.employee.employeeDetails.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.employeeDetails.form', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
         Employee Details
     </button>
 
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/address*') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ route('admin.employee.address.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.address.form', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
         Address
     </button>
 
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/domicile*') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ route('admin.employee.domicile.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.domicile.form', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
         Domicile
     </button>
 
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/passport-omang*') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ route('admin.employee.passportOmang.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.passportOmang.form', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
         Passport / OMANG
     </button>
 
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/qualification*') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ route('admin.employee.qualification.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.qualification.form', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
         Qualification
     </button>
 
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/employee/medical-insuarance-bomaid*') ? 'active-class' : '' }}"
         type="button"
-        onclick="window.location.href='{{ route('admin.employee.medicalInsuaranceBomaid.form', $empId) }}';">
+        onclick="window.location.href='{{ route('admin.employee.medicalInsuaranceBomaid.form', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
         Medical Insurance / Bomaid
     </button>
 
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/employee/department-history*') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ route('admin.employee.departmentHistory.form', $empId) }}';">
+        type="button" onclick="window.location.href='{{ route('admin.employee.departmentHistory.form', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
         Department History
     </button>
 </div>

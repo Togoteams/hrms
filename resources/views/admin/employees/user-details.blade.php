@@ -61,9 +61,8 @@
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input required id="mobile" placeholder="Enter Mobile No" type="tel"
-                                                    name="mobile"
                                                     value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
-                                                    class="form-control form-control-sm">
+                                                    name="mobile" class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -71,7 +70,7 @@
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input required id="emergency_contact"
-                                                    placeholder="Enter Emergency Contact No." value="" type="tel"
+                                                    placeholder="Enter Emergency Contact No." type="tel"
                                                     value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
                                                     name="emergency_contact" class="form-control form-control-sm ">
                                             </div>

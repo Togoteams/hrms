@@ -37,8 +37,8 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        {{-- @if (!empty($employee->qualification)) --}}
-                                            {{-- @foreach ($employee->qualification as $qualification)
+                                        @if (!empty($employee->qualification))
+                                            @foreach ($employee->qualification as $qualification)
                                                 <div class="pb-4">
                                                     <div class="card p-3">
                                                         <div class="row">
@@ -100,8 +100,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach --}}
-                                        {{-- @endif --}}
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

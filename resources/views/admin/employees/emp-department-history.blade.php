@@ -31,48 +31,52 @@
                                     <div class="row py-3">
                                         <div class="text-left">
                                             <button type="button" class="btn btn-primary btn-sm" title="Add Department"
-                                                onclick="addDepartment({{ $employee->user_id }})">
+                                                onclick="addDepartment({{ !empty($employee) ? $employee->user_id : '' }})">
                                                 Add Department
                                             </button>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        @foreach ($employee->departmentHistory as $department)
-                                            <div class="pb-4">
-                                                <div class="card p-3">
-                                                    <div class="row">
-                                                        <div class="col-9">
-                                                            <div class="row text-dark">
-                                                                <div class="col-3 fw-semibold">Department Name:</div>
-                                                                <div class="col-3">{{ $department->department_name }}</div>
+                                        @if (!empty($employee->departmentHistory))
+                                            @foreach ($employee->departmentHistory as $department)
+                                                <div class="pb-4">
+                                                    <div class="card p-3">
+                                                        <div class="row">
+                                                            <div class="col-9">
+                                                                <div class="row text-dark">
+                                                                    <div class="col-3 fw-semibold">Department Name:</div>
+                                                                    <div class="col-3">{{ $department->department_name }}
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3 text-end">
-                                                            <div class="right-div">
-                                                                <!-- Your content for right div goes here -->
-                                                                <form id="form_id"
-                                                                    action="{{ route('admin.employee.departmentHistory.delete') }}"
-                                                                    class="float-right mx-1" method="post">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id"
-                                                                        value="{{ $department->id }}">
-                                                                    <button class="btn btn-danger btn-sm bt" title="Delete">
-                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                            <div class="col-3 text-end">
+                                                                <div class="right-div">
+                                                                    <!-- Your content for right div goes here -->
+                                                                    <form id="form_id"
+                                                                        action="{{ route('admin.employee.departmentHistory.delete') }}"
+                                                                        class="float-right mx-1" method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id"
+                                                                            value="{{ $department->id }}">
+                                                                        <button class="btn btn-danger btn-sm bt"
+                                                                            title="Delete">
+                                                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                    <button class="btn btn-warning btn-sm bt float-right"
+                                                                        title="Edit" id="editButton"
+                                                                        data-id="{{ $department->id }}"
+                                                                        data-user_id="{{ $employee->user_id }}"
+                                                                        data-department_name="{{ $department->department_name }}">
+                                                                        <i class="fas fa-edit"></i>
                                                                     </button>
-                                                                </form>
-                                                                <button class="btn btn-warning btn-sm bt float-right"
-                                                                    title="Edit" id="editButton"
-                                                                    data-id="{{ $department->id }}"
-                                                                    data-user_id="{{ $employee->user_id }}"
-                                                                    data-department_name="{{ $department->department_name }}">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>

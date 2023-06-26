@@ -217,10 +217,10 @@ class EmployeeController extends Controller
         $emp_id = $eid;
         if (!empty($emp_id)) {
             $employee = Employee::firstWhere('emp_id', $emp_id);
-            return $employee;
         } else {
             $employee = '';
         }
+        // return $employee->qualification;
         return view('admin.employees.emp-qualification', ['employee' => $employee]);
     }
 
