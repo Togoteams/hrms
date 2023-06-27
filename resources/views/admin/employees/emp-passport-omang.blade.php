@@ -22,7 +22,7 @@
                                         method="post">
                                         @csrf
                                         <input type="hidden" name="id"
-                                            value="{{ !empty($employee) ? $employee->id : '' }}">
+                                            value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->id : '') : '' }}">
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 

@@ -21,7 +21,7 @@
                                     <form id="form_id" action="{{ route('admin.employee.address.post') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id"
-                                            value="{{ !empty($employee) ? $employee->id : '' }}">
+                                            value="{{ !empty($employee) ? (!empty($employee->address) ? $employee->address->id : '') : '' }}">
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 

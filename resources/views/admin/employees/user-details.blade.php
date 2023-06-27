@@ -43,7 +43,8 @@
                                                 <input id="username" required placeholder="Enter User Name" type="text"
                                                     name="username"
                                                     value="{{ !empty($employee) ? $employee->user->username : '' }}"
-                                                    class="form-control form-control-sm">
+                                                    class="form-control form-control-sm"
+                                                    {{ empty($empId) ? 'disabled' : '' }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -53,7 +54,8 @@
                                                 <input required id="email" placeholder="Enter email" type="email"
                                                     name="email"
                                                     value="{{ !empty($employee) ? $employee->user->email : '' }}"
-                                                    class="form-control form-control-sm">
+                                                    class="form-control form-control-sm"
+                                                    {{ empty($empId) ? 'disabled' : '' }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -139,23 +141,26 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="password">Password: </label>
-                                            </div>
-                                            <div class="col-3 pt-2">
-                                                <input required id="password" placeholder="Enter password"
-                                                    type="password" name="password"
-                                                    class="form-control form-control-sm ">
-                                            </div>
+                                            @if (!empty($empId))
+                                                <div class="col-3 pt-3 fw-semibold">
+                                                    <label for="password">Password: </label>
+                                                </div>
+                                                <div class="col-3 pt-2">
+                                                    <input required id="password" placeholder="Enter password"
+                                                        type="password" name="password"
+                                                        class="form-control form-control-sm ">
+                                                </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="password_confirmation">Confirm Password: </label>
-                                            </div>
-                                            <div class="col-3 pt-2">
-                                                <input required id="password_confirmation"
-                                                    placeholder="Enter password confirmation" type="password"
-                                                    name="password_confirmation" class="form-control form-control-sm ">
-                                            </div>
+                                                <div class="col-3 pt-3 fw-semibold">
+                                                    <label for="password_confirmation">Confirm Password: </label>
+                                                </div>
+                                                <div class="col-3 pt-2">
+                                                    <input required id="password_confirmation"
+                                                        placeholder="Enter password confirmation" type="password"
+                                                        name="password_confirmation"
+                                                        class="form-control form-control-sm ">
+                                                </div>
+                                            @endif
                                             <div class="text-center pt-5">
                                                 <button type="submit" class="btn btn-primary btn-sm">SUBMIT</button>
                                             </div>

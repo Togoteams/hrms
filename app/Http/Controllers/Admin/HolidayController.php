@@ -7,17 +7,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Holiday\HolidayService;
 use DB;
+
 class HolidayController extends BaseController
 {
     protected $holidayService;
     public function __construct(HolidayService $holidayService)
     {
-        $this->holidayService= $holidayService;
+        $this->holidayService = $holidayService;
     }
     public function viewholiday()
     {
         $filterConditions = [];
-        $holidays= $this->holidayService->listholidays($filterConditions, 'id', 'asc');
+        $holidays = $this->holidayService->listholidays($filterConditions, 'id', 'asc');
         return view('admin.holiday.holidays', compact('holidays'));
     }
 
@@ -36,8 +37,8 @@ class HolidayController extends BaseController
             'is_optional' => 'required|boolean',
         ]);
 
-       
-        $isholidayCreated= $this->holidayService->createOrUpdateholiday($request->except('_token'),$holidayId);
+
+        $isholidayCreated = $this->holidayService->createOrUpdateholiday($request->except('_token'), $holidayId);
         if ($isholidayCreated) {
             return   $this->responseJson($isholidayCreated, $message);
         }

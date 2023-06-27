@@ -123,7 +123,8 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="add">
-                                <form id="form_id" action="{{ route('admin.employee.qualification.post') }}">
+                                <form id="form_id" action="{{ route('admin.employee.qualification.post') }}"
+                                    method="post">
                                     @csrf
                                     <input type="hidden" name="id" id="id">
                                     <input type="hidden" name="user_id" id="user_id">
@@ -179,8 +180,7 @@
                                     </div>
                                     <hr>
                                     <div class="text-center ">
-                                        <button onclick="ajaxCall('form_id','','POST')" type="button"
-                                            class="btn btn-primary" id="btnSave">
+                                        <button type="submit" class="btn btn-primary" id="btnSave">
                                         </button>
                                     </div>
                                 </form>

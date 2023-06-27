@@ -19,6 +19,7 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" action="{{ route('admin.employee.employeeDetails.post') }}"
+                                        {{-- class="formsubmit" --}}
                                         method="post">
                                         @csrf
                                         <input type="hidden" name="id"
@@ -142,14 +143,16 @@
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold contractDiv">
-                                                <label for="contract_duration">Contract Duration </label>
+                                                <label for="contract_duration">Contract Duration</label>
                                             </div>
-                                            <div class="col-3 pt-2 contractDiv">
-                                                <input id="contract_duration" value=""
-                                                    placeholder="Enter contract duration" type="text"
-                                                    name="contract_duration"
+                                            <div class="col-2 pt-2 contractDiv">
+                                                <input id="contract_duration" name="contract_duration"
+                                                    placeholder="Enter Months" type="number"
                                                     value="{{ !empty($employee) ? $employee->contract_duration : '' }}"
                                                     class="form-control form-control-sm ">
+                                            </div>
+                                            <div class="col-1 pt-3 contractDiv">
+                                                Month(s)
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -232,13 +235,26 @@
         @endphp
     @endif
 
+
+    <script>
+        let isLocalContractual = false;
+    </script>
+
+
+    @if (!empty($employee) ? ($employee->employment_type == 'local-contractual' ? true : false) : false)
+        <script>
+            isLocalContractual = true;
+        </script>
+    @endif
     <script>
         $(document).ready(function() {
             //For Creation Time
-            $(".contractDiv").hide();
+            if (!isLocalContractual) {
+                $(".contractDiv").hide();
+            }
 
             //For Edit Time
-            $("#employment_type_edit").val() == "local-contractual" ?
+            $("#employment_type").val() == "local-contractual" ?
                 $(".contractDivEdit").show() && $("#contract_duration_edit").prop("required", true) :
                 $(".contractDivEdit").hide() && $("#contract_duration").val("");
         });
@@ -252,8 +268,8 @@
         });
 
         //For Edit Time
-        $("#employment_type_edit").change(() => {
-            $("#employment_type_edit").val() == "local-contractual" ?
+        $("#employment_type").change(() => {
+            $("#employment_type").val() == "local-contractual" ?
                 $(".contractDivEdit").show() :
                 $(".contractDivEdit").hide() && $("#contract_duration").val("");
         });

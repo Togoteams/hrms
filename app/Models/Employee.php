@@ -37,17 +37,17 @@ class Employee extends Model
 
     public function address()
     {
-        return $this->belongsTo(EmpAddress::class);
+        return $this->belongsTo(EmpAddress::class, 'user_id', 'user_id');
     }
 
     public function passportOmang()
     {
-        return $this->belongsTo(EmpPassportOmang::class);
+        return $this->belongsTo(EmpPassportOmang::class, 'user_id', 'user_id');
     }
 
     public function medicalBomaid()
     {
-        return $this->belongsTo(EmpMedicalInsurance::class);
+        return $this->belongsTo(EmpMedicalInsurance::class, 'user_id', 'user_id');
     }
 
     public function qualification()
@@ -57,6 +57,6 @@ class Employee extends Model
 
     public function departmentHistory()
     {
-        return $this->hasMany(EmpDepartmentHistory::class, 'user_id');
+        return $this->hasMany(EmpDepartmentHistory::class, 'user_id', 'user_id');
     }
 }
