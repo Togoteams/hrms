@@ -68,6 +68,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/delete-previous-employment-details', 'deletePreviousEmploymentDetails')->name('previous.employment.details.delete');
 
             Route::get('/place-of-domicile', 'viewPlaceOfDomicile')->name('place.of.domicile.view');
+            Route::post('/place-of-domicile', 'postPlaceOfDomicile')->name('place.of.domicile.post');
+
             Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');
             Route::get('/union-details', 'viewUnionDetails')->name('union.details.view');
             Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');

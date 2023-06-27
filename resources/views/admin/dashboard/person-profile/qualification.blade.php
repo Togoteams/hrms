@@ -3,7 +3,7 @@
 @endpush
 @section('content')
     <style>
-        .float-right{
+        .float-right {
             float: right;
         }
     </style>
@@ -36,60 +36,69 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    @if (count($datas) > 0)
                                         @foreach ($datas as $data)
-                                            <div class="pb-4">
-                                                <div class="card p-3">
-                                                    <div class="row">
-                                                        <div class="col-9">
-                                                            <div class="row text-dark">
-                                                                <div class="col-3 fw-semibold">Exam Name:</div>
-                                                                <div class="col-3">{{ $data->exam_name }}</div>
+                                            <div class="row">
+                                                <div class="pb-4">
+                                                    <div class="card p-3">
+                                                        <div class="row">
+                                                            <div class="col-9">
+                                                                <div class="row text-dark">
+                                                                    <div class="col-3 fw-semibold">Exam Name:</div>
+                                                                    <div class="col-3">{{ $data->exam_name }}</div>
 
-                                                                <div class="col-3 fw-semibold">Specialization:</div>
-                                                                <div class="col-3">{{ $data->specialization }}</div>
+                                                                    <div class="col-3 fw-semibold">Specialization:</div>
+                                                                    <div class="col-3">{{ $data->specialization }}</div>
 
-                                                                <div class="col-3 fw-semibold">Institute Name:</div>
-                                                                <div class="col-3">{{ $data->institute_name }}</div>
+                                                                    <div class="col-3 fw-semibold">Institute Name:</div>
+                                                                    <div class="col-3">{{ $data->institute_name }}</div>
 
-                                                                <div class="col-3 fw-semibold">University:</div>
-                                                                <div class="col-3">{{ $data->university }}</div>
+                                                                    <div class="col-3 fw-semibold">University:</div>
+                                                                    <div class="col-3">{{ $data->university }}</div>
 
-                                                                <div class="col-3 fw-semibold">Year of passing:</div>
-                                                                <div class="col-3">{{ $data->year_of_passing }}</div>
+                                                                    <div class="col-3 fw-semibold">Year of passing:</div>
+                                                                    <div class="col-3">{{ $data->year_of_passing }}</div>
 
-                                                                <div class="col-3 fw-semibold">Marks:</div>
-                                                                <div class="col-3">{{ $data->marks }}</div>
+                                                                    <div class="col-3 fw-semibold">Marks:</div>
+                                                                    <div class="col-3">{{ $data->marks }}</div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3 text-end">
-                                                            <div class="right-div">
-                                                                <!-- Your content for right div goes here -->
-                                                                <form id="form_id" action="{{ route('admin.person.profile.qualification.delete') }}" class="float-right mx-1" method="post">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id" value="{{ $data->id }}">
-                                                                    <button class="btn btn-danger btn-sm bt" title="Delete">
-                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                            <div class="col-3 text-end">
+                                                                <div class="right-div">
+                                                                    <!-- Your content for right div goes here -->
+                                                                    <form id="form_id"
+                                                                        action="{{ route('admin.person.profile.qualification.delete') }}"
+                                                                        class="float-right mx-1" method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id"
+                                                                            value="{{ $data->id }}">
+                                                                        <button class="btn btn-danger btn-sm bt"
+                                                                            title="Delete">
+                                                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                    <button class="btn btn-warning btn-sm bt float-right"
+                                                                        title="Edit" id="editButton"
+                                                                        data-id="{{ $data->id }}"
+                                                                        data-user_id="{{ Auth::user()->id }}"
+                                                                        data-exam_name="{{ $data->exam_name }}"
+                                                                        data-specialization="{{ $data->specialization }}"
+                                                                        data-institute_name="{{ $data->institute_name }}"
+                                                                        data-university="{{ $data->university }}"
+                                                                        data-year_of_passing="{{ $data->year_of_passing }}"
+                                                                        data-marks="{{ $data->marks }}">
+                                                                        <i class="fas fa-edit"></i>
                                                                     </button>
-                                                                </form>
-                                                                <button class="btn btn-warning btn-sm bt float-right" title="Edit"
-                                                                    id="editButton" data-id="{{ $data->id }}"
-                                                                    data-user_id="{{ Auth::user()->id }}"
-                                                                    data-exam_name="{{ $data->exam_name }}"
-                                                                    data-specialization="{{ $data->specialization }}"
-                                                                    data-institute_name="{{ $data->institute_name }}"
-                                                                    data-university="{{ $data->university }}"
-                                                                    data-year_of_passing="{{ $data->year_of_passing }}"
-                                                                    data-marks="{{ $data->marks }}">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
-                                    </div>
+                                    @else
+                                        <div class="card p-3 mb-5">No data to show</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -110,7 +119,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="add">
-                                <form id="form_id" action="{{ route('admin.person.profile.qualification.post') }}">
+                                <form id="form_add" action="{{ route('admin.person.profile.qualification.post') }}">
                                     @csrf
                                     <input type="hidden" name="id" id="id">
                                     <input type="hidden" name="user_id" id="user_id">
@@ -166,7 +175,7 @@
                                     </div>
                                     <hr>
                                     <div class="text-center ">
-                                        <button onclick="ajaxCall('form_id','','POST')" type="button"
+                                        <button onclick="ajaxCall('form_add','','POST')" type="button"
                                             class="btn btn-primary" id="btnSave">
                                         </button>
                                     </div>
@@ -197,7 +206,7 @@
 
     <script>
         function addQualification(user_id) {
-            $('#form_id').trigger("reset");
+            $('#form_add').trigger("reset");
             $("#id").val("");
             $('#formModal').modal('show');
             $("#modalTitle").html("Add: Qualification");
@@ -206,7 +215,7 @@
         }
         $(document).ready(() => {
             $(document).on("click", "#editButton", (event) => {
-                $('#form_id').trigger("reset");
+                $('#form_add').trigger("reset");
                 $("#modalTitle").html("Edit: Qualification");
                 $("#btnSave").html("UPDATE");
 

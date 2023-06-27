@@ -31,49 +31,77 @@
                                             </button> --}}
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="pb-4">
+                                    <div class="row pb-4">
+                                        <div class="">
                                             <div class="card p-3">
                                                 <form method="POST"
                                                     action="{{ route('admin.person.profile.medical.insurance.bomaid.details.update') }}">
                                                     @csrf
-                                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                                    <input type="hidden" name="id"
+                                                        value="{{ !empty($data) ? $data->id : '' }}">
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                     <div class="row">
                                                         <div class="col-10 text-dark">
-                                                            <div class="row">
-                                                                <div class="col-3 fw-semibold pt-1">Insurance Company Name:</div>
-                                                                <div class="col-3 pt-1" id="nameData">
-                                                                    {{ $data->company_name }}</div>
-                                                                <div class="col-3 margin-style d-none" id="inputData1">
-                                                                    <input required value="{{ $data->company_name }}"
-                                                                        id="company_name" name="company_name"
+                                                            @if (!empty($data))
+                                                                <div class="row showData">
+                                                                    <div class="col-3 fw-semibold pt-1">
+                                                                        Insurance Company Name:
+                                                                    </div>
+                                                                    <div class="col-3 pt-1">
+                                                                        {{ $data->company_name }}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row showData">
+                                                                    <div class="col-3 fw-semibold pt-3">Insurance ID:</div>
+                                                                    <div class="col-3 pt-3">
+                                                                        {{ $data->insurance_id }}
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <span id="noDataMsg">No data to show</span>
+                                                            @endif
+                                                            <div class="row addInputDiv d-none">
+                                                                <div class="col-3 fw-semibold pt-1">
+                                                                    Insurance Company Name:
+                                                                </div>
+                                                                <div class="col-3 margin-style">
+                                                                    <input type="text" name="company_name" required
                                                                         placeholder="Enter Insurance Company Name"
-                                                                        type="text" class="form-control form-control-sm">
+                                                                        class="form-control form-control-sm"
+                                                                        value="{{ !empty($data) ? $data->company_name : '' }}">
                                                                 </div>
+                                                            </div>
+                                                            <div class="row addInputDiv d-none">
+                                                                <div class="col-3 fw-semibold pt-3">
+                                                                    Insurance ID:
                                                                 </div>
-                                                                <div class="row">
-                                                                <div class="col-3 fw-semibold pt-3">Insurance ID:</div>
-                                                                <div class="col-3 pt-3" id="idData">
-                                                                    {{ $data->insurance_id }}</div>
-                                                                <div class="col-3 pt-2 margin-style d-none" id="inputData2">
-                                                                    <input required value="{{ $data->insurance_id }}"
-                                                                        id="insurance_id" name="insurance_id"
+                                                                <div class="col-3 pt-2 margin-style">
+                                                                    <input type="number" name="insurance_id" required
                                                                         placeholder="Enter Insurance Company Name"
-                                                                        type="number" class="form-control form-control-sm">
+                                                                        class="form-control form-control-sm"
+                                                                        value="{{ !empty($data) ? $data->insurance_id : '' }}">
                                                                 </div>
-                                                                <div class="col-2 margin-style pt-2 d-none" id="formButton">
+                                                                <div class="col-2 margin-style pt-2">
                                                                     <button class="btn btn-primary btn-sm">
-                                                                        Update
+                                                                        {{ !empty($data) ? 'Update' : 'Save' }}
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-2 text-end">
                                                             <div class="right-div">
-                                                                <button type="button" class="btn btn-warning btn-sm bt"
-                                                                    id="openButton" title="Edit" onclick="openForm()">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
+                                                                @if (!empty($data))
+                                                                    <button type="button" class="btn btn-warning btn-sm bt"
+                                                                        id="openButton" title="Edit" onclick="openForm()">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                @else
+                                                                    <button type="button" class="btn btn-primary btn-sm bt"
+                                                                        id="addButton" title="Add"
+                                                                        onclick="openAddForm()">
+                                                                        Add
+                                                                    </button>
+                                                                @endif
                                                                 <div class="pt-2 px-2 d-none" id="closeButton">
                                                                     <i class="bi bi-x-square-fill fs-2 text-danger pointer"
                                                                         title="Cancel" onclick="closeForm()"></i>
@@ -113,23 +141,26 @@
 
     <script>
         function openForm() {
-            $("#inputData1").removeClass("d-none");
-            $("#inputData2").removeClass("d-none");
-            $("#formButton").removeClass("d-none");
+            $(".addInputDiv").removeClass("d-none");
+            $(".showData").addClass("d-none");
             $("#closeButton").removeClass("d-none");
-            $("#nameData").addClass("d-none");
-            $("#idData").addClass("d-none");
             $("#openButton").addClass("d-none");
         }
 
+        function openAddForm() {
+            $("#noDataMsg").addClass("d-none");
+            $(".addInputDiv").removeClass("d-none");
+            $("#addButton").addClass("d-none");
+            $("#closeButton").removeClass("d-none");
+        }
+
         function closeForm() {
-            $("#nameData").removeClass("d-none");
-            $("#idData").removeClass("d-none");
+            $(".showData").removeClass("d-none");
             $("#openButton").removeClass("d-none");
-            $("#inputData1").addClass("d-none");
-            $("#inputData2").addClass("d-none");
-            $("#formButton").addClass("d-none");
             $("#closeButton").addClass("d-none");
+            $("#noDataMsg").removeClass("d-none");
+            $(".addInputDiv").addClass("d-none");
+            $("#addButton").removeClass("d-none");
         }
     </script>
 @endpush

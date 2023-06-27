@@ -7,8 +7,7 @@
 
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/place-of-domicile') ? 'active-class' : '' }}"
-        {{-- type="button" onclick="window.location.href='{{ url('admin/person-profile/place-of-domicile') }}';"> --}}
-        type="button" href="#">
+        type="button" onclick="window.location.href='{{ url('admin/person-profile/place-of-domicile') }}';">
         Place of Domicile
     </button>
 

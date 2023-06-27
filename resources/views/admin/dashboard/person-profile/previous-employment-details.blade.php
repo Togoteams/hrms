@@ -36,56 +36,61 @@
                                             </button>
                                         </div>
                                     </div>
-                                    @foreach ($datas as $key => $data)
-                                        <div class="row">
-                                            <div class="pb-4">
-                                                <div class="card p-3">
-                                                    <div class="row">
-                                                        <div class="col-9">
-                                                            <div class="row text-dark">
-                                                                <div class="col-4 fw-semibold pt-1">Company Name:</div>
-                                                                <div class="col-6 pt-1">
-                                                                    {{ $data->company_name }}
-                                                                </div>
+                                    @if (count($datas) > 0)
+                                        @foreach ($datas as $key => $data)
+                                            <div class="row">
+                                                <div class="pb-4">
+                                                    <div class="card p-3">
+                                                        <div class="row">
+                                                            <div class="col-9">
+                                                                <div class="row text-dark">
+                                                                    <div class="col-4 fw-semibold pt-1">Company Name:</div>
+                                                                    <div class="col-6 pt-1">
+                                                                        {{ $data->company_name }}
+                                                                    </div>
 
-                                                                <div class="col-4 fw-semibold pt-3">Period of employment:
-                                                                </div>
-                                                                <div class="col-6 pt-3">
-                                                                    {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
-                                                                    -
-                                                                    {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
+                                                                    <div class="col-4 fw-semibold pt-3">Period of
+                                                                        employment:
+                                                                    </div>
+                                                                    <div class="col-6 pt-3">
+                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
+                                                                        -
+                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-3 text-end">
-                                                            <div class="right-div">
-                                                                <form id="form_id" class="float-right mx-1"
-                                                                    action="{{ route('admin.person.profile.previous.employment.details.delete') }}"
-                                                                    method="post">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id"
-                                                                        value="{{ $data->id }}">
-                                                                    <button class="btn btn-danger btn-sm bt" title="Delete">
-                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                            <div class="col-3 text-end">
+                                                                <div class="right-div">
+                                                                    <form id="form_id" class="float-right mx-1"
+                                                                        action="{{ route('admin.person.profile.previous.employment.details.delete') }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        <input type="hidden" name="id"
+                                                                            value="{{ $data->id }}">
+                                                                        <button class="btn btn-danger btn-sm bt"
+                                                                            title="Delete">
+                                                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                    <button type="button"
+                                                                        class="btn btn-warning btn-sm bt editButton float-right"
+                                                                        title="Edit" data-id="{{ $data->id }}"
+                                                                        data-user_id="{{ Auth::user()->id }}"
+                                                                        data-company_name="{{ $data->company_name }}"
+                                                                        data-start_date="{{ $data->start_date }}"
+                                                                        data-end_date="{{ $data->end_date }}">
+                                                                        <i class="fas fa-edit"></i>
                                                                     </button>
-                                                                </form>
-                                                                <button type="button"
-                                                                    class="btn btn-warning btn-sm bt editButton float-right"
-                                                                    title="Edit" data-id="{{ $data->id }}"
-                                                                    data-user_id="{{ Auth::user()->id }}"
-                                                                    data-company_name="{{ $data->company_name }}"
-                                                                    data-start_date="{{ $data->start_date }}"
-                                                                    data-end_date="{{ $data->end_date }}">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
-
+                                        @endforeach
+                                    @else
+                                        <div class="card p-3 mb-5">No data to show</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -134,27 +139,6 @@
                                                 placeholder="End Year" type="date"
                                                 class="form-control form-control-sm">
                                         </div>
-                                        {{-- <div class="form-group">
-                                            <label for="passport_expiry">Period of employment </label>
-                                            <div class="form-row">
-                                                <div class="col-6 float-start">
-                                                    <input required value="" id="start_date" name="start_date"
-                                                        placeholder="Start Year" type="date"
-                                                        class="form-control form-control-sm">
-                                                </div>
-                                                <div class="col-6 float-start">
-                                                    -
-                                                </div>
-                                                <div class="col-6 float-start">
-                                                    <input required value="" id="end_date" name="end_date"
-                                                        placeholder="End Year" type="date"
-                                                        class="form-control form-control-sm">
-                                                </div>
-                                            </div>
-
-
-
-                                        </div> --}}
                                     </div>
                                     <hr>
                                     <div class="text-center ">

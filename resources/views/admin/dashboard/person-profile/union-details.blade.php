@@ -36,15 +36,19 @@
                                             <div class="card p-3">
                                                 <div class="row">
                                                     <div class="col-10 text-dark">
-                                                        <div class="row">
-                                                            <div class="col-3 fw-semibold">Union Membership:</div>
-                                                            <div class="col-7">{{ $data->union->name }}</div>
-                                                        </div>
+                                                        @if (!empty($data->union))
+                                                            <div class="row">
+                                                                <div class="col-3 fw-semibold">Union Membership:</div>
+                                                                <div class="col-7">{{ $data->union->name }}</div>
+                                                            </div>
 
-                                                        <div class="row">
-                                                            <div class="col-3 fw-semibold">Amount:</div>
-                                                            <div class="col-7">{{ $data->union->amount }}</div>
-                                                        </div>
+                                                            <div class="row">
+                                                                <div class="col-3 fw-semibold">Amount:</div>
+                                                                <div class="col-7">{{ $data->union->amount }}</div>
+                                                            </div>
+                                                        @else
+                                                            No data to show
+                                                        @endif
                                                     </div>
                                                     <div class="col-2 text-end">
                                                         <div class="right-div">

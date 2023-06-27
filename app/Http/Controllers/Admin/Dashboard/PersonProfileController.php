@@ -76,41 +76,36 @@ class PersonProfileController extends Controller
         }
     }
 
-    // public function updateQualification(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'id' => ['required'],
-    //         'exam_name' => ['string', 'required'],
-    //         'specialization' => ['string', 'required'],
-    //         'institute_name' => ['string', 'required'],
-    //         'university' => ['string', 'required'],
-    //         'year_of_passing' => ['numeric', 'required'],
-    //         'marks' => ['numeric', 'required'],
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return $validator->errors();
-    //     } else {
-    //         try {
-    //             Qualification::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
-    //             return response()->json(['success' => "Qualification added successfully"]);
-    //         } catch (Exception $e) {
-    //             return response()->json(['error' => $e->getMessage()]);
-    //         }
-    //     }
-    // }
-
-    // public function editQualification(string $id)
-    // {
-    //     $data = Qualification::find($id);
-    //     return response()->json(["status" => true, "data" => $data]);
-    // }
-
 
     public function viewPlaceOfDomicile()
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.place-of-domicile');
+        $data = Employee::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.place-of-domicile', ['data' => $data[0]]);
+    }
+
+    public function postPlaceOfDomicile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'place_of_domicile' => ['required', 'string'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                if (empty($request->id)) {
+                    Employee::insertGetId($request->except(['_token', 'id']));
+                    $message = "Record Created Successfully";
+                } else {
+                    Employee::where('id', $request->id)->update($request->except(['_token', 'id']));
+                }
+                $message = "Record Updated Successfully";
+                Session::put('success', $message);
+                return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
     }
 
     public function viewTrainingDetails()
@@ -151,9 +146,13 @@ class PersonProfileController extends Controller
             return $validator->errors();
         } else {
             try {
-                EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'id']));
-                // return response()->json(['success' => $page_name . " Updated Successfully"]);
-                $message = "Record Updated Successfully";
+                if (empty($request->id)) {
+                    EmpMedicalInsurance::insertGetId($request->except(['_token', 'id']));
+                    $message = "Record Created Successfully";
+                } else {
+                    EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+                    $message = "Record Updated Successfully";
+                }
                 Session::put('success', $message);
                 return redirect()->back();
             } catch (Exception $e) {
@@ -165,13 +164,11 @@ class PersonProfileController extends Controller
     public function viewDrivingLicenseDetails()
     {
         $data = EmpDrivingLicense::where('user_id', Auth::user()->id)->first();
-        // return $data;
         return view('admin.dashboard.person-profile.driving-license-details', ['data' => $data]);
     }
 
     public function updateDrivingLicenseDetails(Request $request)
     {
-        // return $request;
         $validator = Validator::make($request->all(), [
             'license_no' => ['required', 'string'],
         ]);
@@ -180,8 +177,12 @@ class PersonProfileController extends Controller
             return $validator->errors();
         } else {
             try {
-                EmpDrivingLicense::where('id', $request->id)->update($request->except(['_token', 'id']));
-                // return response()->json(['success' => $page_name . " Updated Successfully"]);
+                if (empty($request->id)) {
+                    EmpDrivingLicense::insertGetId($request->except(['_token', 'id']));
+                    $message = "Record Created Successfully";
+                } else {
+                    EmpDrivingLicense::where('id', $request->id)->update($request->except(['_token', 'id']));
+                }
                 $message = "Record Updated Successfully";
                 Session::put('success', $message);
                 return redirect()->back();
@@ -194,7 +195,6 @@ class PersonProfileController extends Controller
     public function viewPreviousEmploymentDetails()
     {
         $datas = EmploymentHistory::where('user_id', Auth::user()->id)->get();
-        // return $datas;
         return view('admin.dashboard.person-profile.previous-employment-details', ['datas' => $datas]);
     }
 

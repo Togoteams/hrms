@@ -37,32 +37,54 @@
                                                 <form method="POST"
                                                     action="{{ route('admin.person.profile.driving.license.details.update') }}">
                                                     @csrf
-                                                    <input type="hidden" name="id" value="{{ $data->id }}">
+                                                    <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
+                                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                     <div class="row">
                                                         <div class="col-10">
-                                                            <div class="row text-dark">
-                                                                <div class="col-3 fw-semibold pt-1">Driving License No:</div>
-                                                                <div class="col-3 pt-1" id="licenseData">
-                                                                    {{ $data->license_no }}</div>
-                                                                <div class="col-3 margin-style d-none" id="inputData">
-                                                                    <input required value="{{ $data->license_no }}"
+                                                            @if (!empty($data))
+                                                                <div class="row text-dark showData">
+                                                                    <div class="col-3 fw-semibold pt-1">
+                                                                        Driving License No:
+                                                                    </div>
+                                                                    <div class="col-3 pt-1">
+                                                                        {{ !empty($data) ? $data->license_no : '' }}
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <span id="noDataMsg">No data to show</span>
+                                                            @endif
+                                                            <div class="row text-dark addInputDiv d-none">
+                                                                <div class="col-3 fw-semibold pt-1">
+                                                                    Driving License No:
+                                                                </div>
+                                                                <div class="col-3 margin-style">
+                                                                    <input required
+                                                                        value="{{ !empty($data) ? $data->license_no : '' }}"
                                                                         id="license_no" name="license_no"
                                                                         placeholder="Enter Driving License No"
                                                                         type="text" class="form-control form-control-sm">
                                                                 </div>
-                                                                <div class="col-2 margin-style d-none" id="formButton">
+                                                                <div class="col-2 margin-style" id="formButton">
                                                                     <button class="btn btn-primary btn-sm">
-                                                                        Update
+                                                                        {{ !empty($data) ? 'Update' : 'Save' }}
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-2 text-end">
                                                             <div class="right-div">
-                                                                <button type="button" class="btn btn-warning btn-sm bt"
-                                                                    id="openButton" title="Edit" onclick="openForm()">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
+                                                                @if (!empty($data))
+                                                                    <button type="button" class="btn btn-warning btn-sm bt"
+                                                                        id="openButton" title="Edit" onclick="openForm()">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                @else
+                                                                    <button type="button" class="btn btn-primary btn-sm bt"
+                                                                        id="addButton" title="Add"
+                                                                        onclick="openAddForm()">
+                                                                        Add
+                                                                    </button>
+                                                                @endif
                                                                 <div class="px-2 d-none" id="closeButton">
                                                                     <i class="bi bi-x-square-fill fs-2 text-danger pointer"
                                                                         title="Cancel" onclick="closeForm()"></i>
@@ -101,21 +123,26 @@
 
     <script>
         function openForm() {
-            $("#inputData").removeClass("d-none");
-            $("#formButton").removeClass("d-none");
+            $(".addInputDiv").removeClass("d-none");
+            $(".showData").addClass("d-none");
             $("#closeButton").removeClass("d-none");
-            $("#licenseData").addClass("d-none");
-            $("#idData").addClass("d-none");
             $("#openButton").addClass("d-none");
         }
 
+        function openAddForm() {
+            $("#noDataMsg").addClass("d-none");
+            $(".addInputDiv").removeClass("d-none");
+            $("#addButton").addClass("d-none");
+            $("#closeButton").removeClass("d-none");
+        }
+
         function closeForm() {
-            $("#licenseData").removeClass("d-none");
-            $("#idData").removeClass("d-none");
+            $(".showData").removeClass("d-none");
             $("#openButton").removeClass("d-none");
-            $("#inputData").addClass("d-none");
-            $("#formButton").addClass("d-none");
             $("#closeButton").addClass("d-none");
+            $("#noDataMsg").removeClass("d-none");
+            $(".addInputDiv").addClass("d-none");
+            $("#addButton").removeClass("d-none");
         }
     </script>
 @endpush
