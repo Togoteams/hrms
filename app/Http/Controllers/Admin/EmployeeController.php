@@ -66,23 +66,28 @@ class EmployeeController extends BaseController
 
     public function postUserDetails(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'mobile' => ['required', 'numeric', 'min:10'],
-            'gender' => ['required'],
-            'marital_status' => ['required'],
-            'date_of_birth' => ['required', 'date'],
-            'emergency_contact' => ['nullable', 'numeric', 'min:10'],
-        ]);
-
-        if (!$request->has('user_id')) {
+        if (empty($request->user_id)) {
             $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'mobile' => ['required', 'numeric', 'min:10'],
+                'gender' => ['required'],
+                'marital_status' => ['required'],
+                'date_of_birth' => ['required', 'date'],
+                'emergency_contact' => ['nullable', 'numeric', 'min:10'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'username' => ['required', 'string', 'min:5', 'unique:users'],
                 'password' => ['required', 'confirmed', Password::defaults()]
             ]);
+        } else {
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'mobile' => ['required', 'numeric', 'min:10'],
+                'gender' => ['required'],
+                'marital_status' => ['required'],
+                'date_of_birth' => ['required', 'date'],
+                'emergency_contact' => ['nullable', 'numeric', 'min:10'],
+            ]);
         }
-
         if ($request->user_id == '') {
             $user = new User();
             $user->username = $request->username;

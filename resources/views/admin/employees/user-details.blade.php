@@ -60,8 +60,8 @@
                                                 <label for="email">Email:</label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="email" placeholder="Enter email" type="email"
-                                                    name="email"
+                                                <input type="email" name="email" id="email"
+                                                    placeholder="Enter email" required
                                                     value="{{ !empty($employee) ? $employee->user->email : '' }}"
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
