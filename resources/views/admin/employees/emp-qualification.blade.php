@@ -123,8 +123,8 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="add">
-                                <form id="form_id" action="{{ route('admin.employee.qualification.post') }}"
-                                    method="post">
+                                <form id="form_id" class="formsubmit" method="post"
+                                    action="{{ route('admin.employee.qualification.post') }}">
                                     @csrf
                                     <input type="hidden" name="id" id="id">
                                     <input type="hidden" name="user_id" id="user_id">
@@ -194,20 +194,6 @@
     </main>
 @endsection
 @push('custom-scripts')
-    @if (!empty(Session::get('success')))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
-
     <script>
         function addQualification(user_id) {
             $('#form_id').trigger("reset");

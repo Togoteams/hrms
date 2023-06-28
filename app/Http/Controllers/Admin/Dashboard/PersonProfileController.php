@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Dashboard;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\EmpDrivingLicense;
 use App\Models\Employee;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class PersonProfileController extends Controller
+class PersonProfileController extends BaseController
 {
     public function viewQualifications()
     {
@@ -85,26 +86,24 @@ class PersonProfileController extends Controller
 
     public function postPlaceOfDomicile(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'place_of_domicile' => ['required', 'string'],
         ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                if (empty($request->id)) {
-                    Employee::insertGetId($request->except(['_token', 'id']));
-                    $message = "Record Created Successfully";
-                } else {
-                    Employee::where('id', $request->id)->update($request->except(['_token', 'id']));
-                }
+        try {
+            if (empty($request->id)) {
+                Employee::insertGetId($request->except(['_token', 'id']));
+                $message = "Record Created Successfully";
+            } else {
+                Employee::where('id', $request->id)->update($request->except(['_token', 'id']));
                 $message = "Record Updated Successfully";
-                Session::put('success', $message);
-                return redirect()->back();
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
             }
+            return $this->responseJson(
+                true,
+                200,
+                $message
+            );
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 
@@ -136,28 +135,25 @@ class PersonProfileController extends Controller
 
     public function updateMedicalInsuranceBomaidDetails(Request $request)
     {
-        // return $request;
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'company_name' => ['required', 'string'],
             'insurance_id' => ['required', 'numeric'],
         ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                if (empty($request->id)) {
-                    EmpMedicalInsurance::insertGetId($request->except(['_token', 'id']));
-                    $message = "Record Created Successfully";
-                } else {
-                    EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
-                    $message = "Record Updated Successfully";
-                }
-                Session::put('success', $message);
-                return redirect()->back();
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+        try {
+            if (empty($request->id)) {
+                EmpMedicalInsurance::insertGetId($request->except(['_token', 'id']));
+                $message = "Record Created Successfully";
+            } else {
+                EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+                $message = "Record Updated Successfully";
             }
+            return $this->responseJson(
+                true,
+                200,
+                $message
+            );
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 
@@ -169,26 +165,24 @@ class PersonProfileController extends Controller
 
     public function updateDrivingLicenseDetails(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'license_no' => ['required', 'string'],
         ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                if (empty($request->id)) {
-                    EmpDrivingLicense::insertGetId($request->except(['_token', 'id']));
-                    $message = "Record Created Successfully";
-                } else {
-                    EmpDrivingLicense::where('id', $request->id)->update($request->except(['_token', 'id']));
-                }
+        try {
+            if (empty($request->id)) {
+                EmpDrivingLicense::insertGetId($request->except(['_token', 'id']));
+                $message = "Record Created Successfully";
+            } else {
+                EmpDrivingLicense::where('id', $request->id)->update($request->except(['_token', 'id']));
                 $message = "Record Updated Successfully";
-                Session::put('success', $message);
-                return redirect()->back();
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
             }
+            return $this->responseJson(
+                true,
+                200,
+                $message
+            );
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 

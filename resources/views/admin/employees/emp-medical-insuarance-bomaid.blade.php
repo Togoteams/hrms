@@ -18,8 +18,7 @@
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <form id="form_id" action="{{ route('admin.employee.medicalInsuaranceBomaid.post') }}"
-                                        method="post">
+                                    <form id="form_id" class="formsubmit" method="post" action="{{ route('admin.employee.medicalInsuaranceBomaid.post') }}">
                                         @csrf
                                         <input type="hidden" name="id"
                                             value="{{ $employee ? ($employee->medicalBomaid ? $employee->medicalBomaid->id : '') : '' }}">
@@ -62,18 +61,4 @@
     </main>
 @endsection
 @push('custom-scripts')
-    @if (!empty(Session::get('success')))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
-
 @endpush

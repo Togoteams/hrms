@@ -34,7 +34,7 @@
                                     <div class="row pb-4">
                                         <div class="">
                                             <div class="card p-3">
-                                                <form method="POST"
+                                                <form class="formsubmit" id="form_id" method="post"
                                                     action="{{ route('admin.person.profile.medical.insurance.bomaid.details.update') }}">
                                                     @csrf
                                                     <input type="hidden" name="id"
@@ -65,7 +65,8 @@
                                                                     Insurance Company Name:
                                                                 </div>
                                                                 <div class="col-3 margin-style">
-                                                                    <input type="text" name="company_name" required
+                                                                    <input type="text" name="company_name"
+                                                                        id="company_name" required
                                                                         placeholder="Enter Insurance Company Name"
                                                                         class="form-control form-control-sm"
                                                                         value="{{ !empty($data) ? $data->company_name : '' }}">
@@ -76,7 +77,8 @@
                                                                     Insurance ID:
                                                                 </div>
                                                                 <div class="col-3 pt-2 margin-style">
-                                                                    <input type="number" name="insurance_id" required
+                                                                    <input type="number" name="insurance_id"
+                                                                        id="insurance_id" required
                                                                         placeholder="Enter Insurance Company Name"
                                                                         class="form-control form-control-sm"
                                                                         value="{{ !empty($data) ? $data->insurance_id : '' }}">

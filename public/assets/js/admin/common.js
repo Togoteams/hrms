@@ -236,7 +236,9 @@ $(document).ready(function (e) {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        location.reload();
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1500);
                     }
                 } else {
                     Swal.fire({

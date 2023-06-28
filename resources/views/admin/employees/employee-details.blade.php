@@ -18,9 +18,8 @@
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <form id="form_id" action="{{ route('admin.employee.employeeDetails.post') }}"
-                                        {{-- class="formsubmit" --}}
-                                        method="post">
+                                    <form id="form_id" class="formsubmit" method="post"
+                                        action="{{ route('admin.employee.employeeDetails.post') }}">
                                         @csrf
                                         <input type="hidden" name="id"
                                             value="{{ !empty($employee) ? $employee->id : '' }}">
@@ -156,14 +155,20 @@
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="pension_contribution">Pension Contribution </label>
+                                                <label for="pension_opt">Pension Opt. :</label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="pension_contribution"
-                                                    placeholder="Enter pension contribution" type="number"
-                                                    name="pension_contribution"
-                                                    value="{{ !empty($employee) ? $employee->pension_contribution : '' }}"
-                                                    class="form-control form-control-sm ">
+                                                <input type="radio" id="radio1" name="pension_opt" value="0"
+                                                    class="form-check-input" title="Select NO"
+                                                    {{ !empty($employee) && $employee->pension_contribution < 1 ? 'checked' : '' }}
+                                                    />
+                                                <label class="form-check-label" title="Select NO" for="radio1">No</label>
+
+                                                <input type="radio" id="radio2" name="pension_opt" value="1"
+                                                    class="form-check-input" title="Select YES" style="margin-left: 20px"
+                                                    {{ !empty($employee) && $employee->pension_contribution > 0 ? 'checked' : '' }}
+                                                    />
+                                                <label class="form-check-label" title="Select YES" for="radio2">Yes</label>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -221,21 +226,6 @@
     </main>
 @endsection
 @push('custom-scripts')
-    @if (!empty(Session::get('success')))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
-
-
     <script>
         let isLocalContractual = false;
     </script>

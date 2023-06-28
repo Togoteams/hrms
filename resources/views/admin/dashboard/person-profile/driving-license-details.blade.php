@@ -34,7 +34,7 @@
                                     <div class="row">
                                         <div class="pb-4">
                                             <div class="card p-3">
-                                                <form method="POST"
+                                                <form class="formsubmit" id="form_id" method="post"
                                                     action="{{ route('admin.person.profile.driving.license.details.update') }}">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">

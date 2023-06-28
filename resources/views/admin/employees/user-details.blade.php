@@ -3,7 +3,7 @@
 @endpush
 @section('content')
     @php
-        function isFieldDisabled($employee)
+        function isHideCheck($employee)
         {
             if (!empty($employee)) {
                 return !empty($employee->emp_id) ? 'disabled' : '';
@@ -28,8 +28,8 @@
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <form id="form_id" action="{{ route('admin.employee.userDetails.post') }}"
-                                        method="post" class="formsubmit">
+                                    <form id="form_id" class="formsubmit" method="post"
+                                        action="{{ route('admin.employee.userDetails.post') }}">
                                         @csrf
                                         <input type="hidden" name="id"
                                             value="{{ !empty($employee) ? $employee->id : '' }}">
@@ -53,8 +53,7 @@
                                                 <input id="username" required placeholder="Enter User Name" type="text"
                                                     name="username"
                                                     value="{{ !empty($employee) ? $employee->user->username : '' }}"
-                                                    class="form-control form-control-sm"
-                                                    {{ isFieldDisabled($employee) }}>
+                                                    class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -64,8 +63,7 @@
                                                 <input required id="email" placeholder="Enter email" type="email"
                                                     name="email"
                                                     value="{{ !empty($employee) ? $employee->user->email : '' }}"
-                                                    class="form-control form-control-sm"
-                                                    {{ isFieldDisabled($employee) }}>
+                                                    class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -122,7 +120,8 @@
                                             <div class="col-3 pt-2">
                                                 <select required id="marital_status" placeholder="Select Marital Status"
                                                     name="marital_status" class="form-control form-control-sm">
-                                                    <option selected disabled value=""> - Select Marital Status - </option>
+                                                    <option selected disabled value=""> - Select Marital Status -
+                                                    </option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->marital_status == 'single' ? 'selected' : '') : '' }}
                                                         value="single">
@@ -151,7 +150,7 @@
                                                 </select>
                                             </div>
 
-                                            @if (!empty($empId))
+                                            @if (!isHideCheck($employee))
                                                 <div class="col-3 pt-3 fw-semibold">
                                                     <label for="password">Password: </label>
                                                 </div>
@@ -186,17 +185,4 @@
     </main>
 @endsection
 @push('custom-scripts')
-    @if (!empty(Session::get('success')))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
 @endpush

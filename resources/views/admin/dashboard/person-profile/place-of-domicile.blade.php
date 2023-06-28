@@ -21,8 +21,8 @@
                                     <div class="row">
                                         <div class="pb-4">
                                             <div class="card p-3">
-                                                <form id="form_id" action="{{ route('admin.person.profile.place.of.domicile.post') }}"
-                                                    method="post">
+                                                <form class="formsubmit" id="form_id" method="post"
+                                                    action="{{ route('admin.person.profile.place.of.domicile.post') }}">
                                                     @csrf
                                                     <input type="hidden" name="id"
                                                         value="{{ !empty($data) ? $data->id : '' }}">
@@ -96,19 +96,6 @@
     </main>
 @endsection
 @push('custom-scripts')
-    @if (!empty(Session::get('success')))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
 
     <script>
         function openForm() {
