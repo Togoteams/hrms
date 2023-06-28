@@ -112,6 +112,9 @@ class EmployeeController extends Controller
                 $employee = Employee::firstWhere('user_id', $user->id);
                 if (!empty($user) && !empty($employee)) {
                     $msg = "User Details Added Successfully";
+
+                    return $this->responseJson(true,200,$msg,["employee"=>$employee],['redirect_url'=>route('admin.employee.userDetails.form', $employee->emp_id)]);
+
                     return Redirect::route('admin.employee.userDetails.form', $employee->emp_id)
                         ->with([
                             'success'  => $msg,

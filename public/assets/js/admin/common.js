@@ -221,14 +221,14 @@ $(document).ready(function (e) {
             beforeSend: function () {},
             success: function (response) {
                 if (response.status) {
-                    if ($("#lead_uuid").val()) {
-                        Swal.fire({
-                            icon: "success",
-                            title: response.message,
-                            showConfirmButton: false,
-                            timer: 1500,
-                        });
-                        $(location).attr("href", customerRedirectUrl);
+                    if (response.redirect_url) {
+                        // Swal.fire({
+                        //     icon: "success",
+                        //     title: response.message,
+                        //     showConfirmButton: false,
+                        //     timer: 1500,
+                        // });
+                        $(location).attr("href", response.redirect_url);
                     } else {
                         Swal.fire({
                             icon: "success",
