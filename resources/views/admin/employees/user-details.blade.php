@@ -2,6 +2,16 @@
 @push('styles')
 @endpush
 @section('content')
+    @php
+        function isFieldDisabled($employee)
+        {
+            if (!empty($employee)) {
+                return !empty($employee->emp_id) ? 'disabled' : '';
+            }
+            return '';
+        }
+    @endphp
+
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -19,7 +29,7 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" action="{{ route('admin.employee.userDetails.post') }}"
-                                        method="post">
+                                        method="post" class="formsubmit">
                                         @csrf
                                         <input type="hidden" name="id"
                                             value="{{ !empty($employee) ? $employee->id : '' }}">
@@ -44,7 +54,7 @@
                                                     name="username"
                                                     value="{{ !empty($employee) ? $employee->user->username : '' }}"
                                                     class="form-control form-control-sm"
-                                                    {{ empty($empId) ? 'disabled' : '' }}>
+                                                    {{ isFieldDisabled($employee) }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -55,7 +65,7 @@
                                                     name="email"
                                                     value="{{ !empty($employee) ? $employee->user->email : '' }}"
                                                     class="form-control form-control-sm"
-                                                    {{ empty($empId) ? 'disabled' : '' }}>
+                                                    {{ isFieldDisabled($employee) }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
@@ -112,7 +122,7 @@
                                             <div class="col-3 pt-2">
                                                 <select required id="marital_status" placeholder="Select Marital Status"
                                                     name="marital_status" class="form-control form-control-sm">
-                                                    <option selected disabled> - Select Marital Status - </option>
+                                                    <option selected disabled value=""> - Select Marital Status - </option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->marital_status == 'single' ? 'selected' : '') : '' }}
                                                         value="single">

@@ -63,7 +63,7 @@ class EmployeeController extends Controller
     public function postUserDetails(Request $request)
     {
         // return $request;
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'mobile' => ['required', 'numeric', 'min:10'],
             // 'password' => ['required', 'confirmed', Password::defaults()],
@@ -75,16 +75,16 @@ class EmployeeController extends Controller
         ]);
 
         if (!$request->has('user_id')) {
-            $validator->addRules([
+            $request->validate->addRules([
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'username' => ['required', 'string', 'min:5', 'unique:users'],
                 'password' => ['required', 'confirmed', Password::defaults()]
             ]);
         }
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
+        // if ($validator->fails()) {
+        //     return $validator->errors();
+        // } else {
 
             if ($request->user_id == '') {
                 $user = new User();
@@ -122,7 +122,7 @@ class EmployeeController extends Controller
                 User::destroy($user->id);
                 return response()->json(['error' => $e->getMessage()]);
             }
-        }
+        // }
     }
 
     public function viewEmployeeDetails($eid = null)
