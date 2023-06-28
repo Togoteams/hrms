@@ -27,6 +27,15 @@ use Illuminate\Support\Facades\Session;
 class EmployeeController extends Controller
 {
     public $page_name = "Employees";
+
+    public function getEmployee($emp_id = null)
+    {
+        if (!empty($emp_id)) {
+            return Employee::firstWhere('emp_id', $emp_id);
+        } else {
+            return '';
+        }
+    }
     /**
      * Display a listing of the resource.
      */
@@ -51,13 +60,7 @@ class EmployeeController extends Controller
 
     public function viewUserDetails($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-        return view('admin.employees.user-details', ['employee' => $employee]);
+        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid)]);
     }
 
     public function postUserDetails(Request $request)
@@ -86,57 +89,49 @@ class EmployeeController extends Controller
         //     return $validator->errors();
         // } else {
 
-            if ($request->user_id == '') {
-                $user = new User();
-                $user->username = $request->username;
-                $user->email = $request->email;
-                $user->password = Hash::make($request->password);
+        if ($request->user_id == '') {
+            $user = new User();
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+        } else {
+            $user = User::find($request->user_id);
+        }
+        $user->name = $request->name;
+        $user->mobile = $request->mobile;
+        $user->save();
+
+        try {
+            if (empty($request->id)) {
+                $request->request->add(['user_id' => $user->id]);
+                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
+                $employee = Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id']));
+                $role_id = Role::where('short_code', 'employee')->value('id');
+                $user->roles()->sync($role_id);
             } else {
-                $user = User::find($request->user_id);
+                $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
             }
-            $user->name = $request->name;
-            $user->mobile = $request->mobile;
-            $user->save();
 
-            try {
-                if (empty($request->id)) {
-                    $request->request->add(['user_id' => $user->id]);
-                    $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
-                    $employee = Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id']));
-                    $role_id = Role::where('short_code', 'employee')->value('id');
-                    $user->roles()->sync($role_id);
-                } else {
-                    $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
-                }
+            $employee = Employee::firstWhere('user_id', $user->id);
+            if (!empty($user) && !empty($employee)) {
+                $msg = "User Details Added Successfully";
+                return $this->responseJson(true, 200, $msg, ["employee" => $employee], ['redirect_url' => route('admin.employee.userDetails.form', $employee->emp_id)]);
 
-                $employee = Employee::firstWhere('user_id', $user->id);
-                if (!empty($user) && !empty($employee)) {
-                    $msg = "User Details Added Successfully";
-
-                    return $this->responseJson(true,200,$msg,["employee"=>$employee],['redirect_url'=>route('admin.employee.userDetails.form', $employee->emp_id)]);
-
-                    return Redirect::route('admin.employee.userDetails.form', $employee->emp_id)
-                        ->with([
-                            'success'  => $msg,
-                            'employee' => $employee
-                        ]);
-                }
-            } catch (Exception $e) {
-                User::destroy($user->id);
-                return response()->json(['error' => $e->getMessage()]);
+                return Redirect::route('admin.employee.userDetails.form', $employee->emp_id)
+                    ->with([
+                        'success'  => $msg,
+                        'employee' => $employee
+                    ]);
             }
+        } catch (Exception $e) {
+            User::destroy($user->id);
+            return response()->json(['error' => $e->getMessage()]);
+        }
         // }
     }
 
     public function viewEmployeeDetails($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-        // return $employee;
         $designation = Designation::all();
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
@@ -147,7 +142,7 @@ class EmployeeController extends Controller
                 'designation'   => $designation,
                 'membership'    => $membership,
                 'branch'        => $branch,
-                'employee'      => $employee
+                'employee'      => $this->getEmployee($eid)
             ]
         );
     }
@@ -208,14 +203,7 @@ class EmployeeController extends Controller
 
     public function viewAddress($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-
-        return view('admin.employees.emp-address', ['employee' => $employee]);
+        return view('admin.employees.emp-address', ['employee' => $this->getEmployee($eid)]);
     }
 
     public function postAddress(Request $request)
@@ -253,13 +241,7 @@ class EmployeeController extends Controller
 
     public function viewPassportOmang($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-        return view('admin.employees.emp-passport-omang', ['employee' => $employee]);
+        return view('admin.employees.emp-passport-omang', ['employee' => $this->getEmployee($eid)]);
     }
 
     public function postPassportOmang(Request $request)
@@ -295,14 +277,7 @@ class EmployeeController extends Controller
 
     public function viewQualification($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-        // return $employee->qualification;
-        return view('admin.employees.emp-qualification', ['employee' => $employee]);
+        return view('admin.employees.emp-qualification', ['employee' => $this->getEmployee($eid)]);
     }
 
     public function postQualification(Request $request)
@@ -365,13 +340,7 @@ class EmployeeController extends Controller
 
     public function viewMedicalInsuaranceBomaid($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-        return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $employee]);
+        return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $this->getEmployee($eid)]);
     }
 
 
@@ -407,13 +376,7 @@ class EmployeeController extends Controller
 
     public function viewDomicile($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-        return view('admin.employees.emp-domicile', ['employee' => $employee]);
+        return view('admin.employees.emp-domicile', ['employee' => $this->getEmployee($eid)]);
     }
 
     public function postDomicile(Request $request)
@@ -447,13 +410,7 @@ class EmployeeController extends Controller
 
     public function viewDepartmentHistory($eid = null)
     {
-        $emp_id = $eid;
-        if (!empty($emp_id)) {
-            $employee = Employee::firstWhere('emp_id', $emp_id);
-        } else {
-            $employee = '';
-        }
-        return view('admin.employees.emp-department-history', ['employee' => $employee]);
+        return view('admin.employees.emp-department-history', ['employee' => $this->getEmployee($eid)]);
     }
 
     public function postDepartmentHistory(Request $request)
