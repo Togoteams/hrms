@@ -32,7 +32,7 @@ class Employee extends Model
 
     public function union()
     {
-        return $this->belongsTo(Membership::class, 'unique_membership_id', 'id');
+        return $this->belongsTo(Membership::class, 'union_membership_id', 'id');
     }
 
     public function address()

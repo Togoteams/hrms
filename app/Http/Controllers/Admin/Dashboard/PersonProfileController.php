@@ -115,8 +115,8 @@ class PersonProfileController extends BaseController
 
     public function viewUnionDetails()
     {
-        $data = Employee::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.union-details', ['data' => $data[0]]);
+        $data = Employee::firstWhere('user_id', Auth::user()->id);
+        return view('admin.dashboard.person-profile.union-details', ['data' => $data]);
     }
 
     public function viewPermanentContractual()

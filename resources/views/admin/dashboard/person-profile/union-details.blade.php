@@ -39,12 +39,16 @@
                                                         @if (!empty($data->union))
                                                             <div class="row">
                                                                 <div class="col-3 fw-semibold">Union Membership:</div>
-                                                                <div class="col-7">{{ $data->union->name }}</div>
+                                                                <div class="col-7">
+                                                                    {{ $data->union ? $data->union->name : '' }}
+                                                                </div>
                                                             </div>
 
                                                             <div class="row">
                                                                 <div class="col-3 fw-semibold">Amount:</div>
-                                                                <div class="col-7">{{ $data->union->amount }}</div>
+                                                                <div class="col-7">
+                                                                    {{ $data->union ? $data->union->amount : '' }}
+                                                                </div>
                                                             </div>
                                                         @else
                                                             No data to show

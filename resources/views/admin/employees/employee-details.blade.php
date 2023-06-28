@@ -155,31 +155,34 @@
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="pension_opt">Pension Opt. :</label>
+                                                <label for="pension_opt">Pension Contribution Opt. :</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input type="radio" id="radio1" name="pension_opt" value="0"
                                                     class="form-check-input" title="Select NO"
-                                                    {{ !empty($employee) && $employee->pension_contribution < 1 ? 'checked' : '' }}
-                                                    />
-                                                <label class="form-check-label" title="Select NO" for="radio1">No</label>
+                                                    {{ !empty($employee) && $employee->pension_contribution < 1 ? 'checked' : '' }} />
+                                                <label class="form-check-label" title="Select NO"
+                                                    for="radio1">No</label>
 
                                                 <input type="radio" id="radio2" name="pension_opt" value="1"
                                                     class="form-check-input" title="Select YES" style="margin-left: 20px"
-                                                    {{ !empty($employee) && $employee->pension_contribution > 0 ? 'checked' : '' }}
-                                                    />
-                                                <label class="form-check-label" title="Select YES" for="radio2">Yes</label>
+                                                    {{ !empty($employee) && $employee->pension_contribution > 0 ? 'checked' : '' }} />
+                                                <label class="form-check-label" title="Select YES"
+                                                    for="radio2">Yes</label>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
                                                 <label for="union_membership_id">Union Membership </label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <select required id="union_membership_id"
-                                                    placeholder="Select union membership" name="union_membership_id"
+                                                <select id="union_membership_id" name="union_membership_id"
                                                     class="form-control form-control-sm"
+                                                    placeholder="Select union membership"
                                                     value="{{ !empty($employee) ? $employee->union_membership_id : '' }}">
-                                                    <option selected disabled> - Select Union Membership ID - </option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->union_membership_id == 0 ? 'selected' : '') : '' }}
+                                                        value="0">NO</option>
+                                                    <option disabled> - Select Union Membership - </option>
                                                     @foreach ($membership as $mem)
                                                         <option
                                                             {{ !empty($employee) ? ($mem->id == $employee->union_membership_id ? 'selected' : '') : '' }}
@@ -190,14 +193,14 @@
 
                                             <div class="col-3 pt-3 fw-semibold">
                                                 <label for="amount_payable_to_bomaind_each_year">
-                                                    Amount Payable to Bomaind Each Year
+                                                    Amount Payable to Bomaid Each Year
                                                 </label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input required id="amount_payable_to_bomaind_each_year"
                                                     placeholder="Enter amount_payable to bomaind each year" type="text"
                                                     name="amount payable to bomaind each year"
-                                                    value="{{ !empty($employee) ? $employee->amount_payable_to_bomaind_each_year : '' }}"
+                                                    value="{{ !empty($employee) ? $employee->amount_payable_to_bomaind_each_year : 0 }}"
                                                     class="form-control form-control-sm ">
                                             </div>
 
