@@ -221,14 +221,16 @@ $(document).ready(function (e) {
             beforeSend: function () {},
             success: function (response) {
                 if (response.status) {
-                    if (response.redirect_url) {
-                        // Swal.fire({
-                        //     icon: "success",
-                        //     title: response.message,
-                        //     showConfirmButton: false,
-                        //     timer: 1500,
-                        // });
-                        $(location).attr("href", response.redirect_url);
+                    if (response.data.redirect_url) {
+                        Swal.fire({
+                            icon: "success",
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        setTimeout(function () {
+                            $(location).attr("href", response.data.redirect_url);
+                        }, 1500);
                     } else {
                         Swal.fire({
                             icon: "success",

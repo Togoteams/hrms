@@ -114,8 +114,10 @@ class EmployeeController extends BaseController
                     true,
                     200,
                     $message,
-                    ["employee" => $employee],
-                    ['redirect_url' => route('admin.employee.userDetails.form', $employee->emp_id)]
+                    [
+                        "employee" => $employee,
+                        'redirect_url' => route('admin.employee.userDetails.form', $employee->emp_id)
+                    ]
                 );
             }
         } catch (Exception $e) {
