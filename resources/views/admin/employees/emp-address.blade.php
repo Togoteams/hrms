@@ -28,44 +28,44 @@
 
                                         <div class="row pb-4 p-3 text-dark">
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="address">Address:</label>
+                                                <label for="address">Address<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-9 pt-2">
-                                                <textarea required id="address" placeholder="Enter Address" name="address" class="form-control">{{ $employee ? ($employee->address ? $employee->address->address : '') : '' }}</textarea>
+                                                <textarea id="address" placeholder="Enter Address" name="address" class="form-control">{{ $employee ? ($employee->address ? $employee->address->address : '') : '' }}</textarea>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="zip">Zip:</label>
+                                                <label for="zip">Zip<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="zip" placeholder="Enter Name of Zip"
+                                                <input id="zip" placeholder="Enter Name of Zip"
                                                     type="text" name="zip" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->zip : '') : '' }}">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="city">City: </label>
+                                                <label for="city">City<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="city" placeholder="Enter Name of City"
+                                                <input id="city" placeholder="Enter Name of City"
                                                     type="text" name="city" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->city : '') : '' }}">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="state">State </label>
+                                                <label for="state">State<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="state" placeholder="Enter Name of State"
+                                                <input id="state" placeholder="Enter Name of State"
                                                     type="text" name="state" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->state : '') : '' }}">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="country">Country </label>
+                                                <label for="country">Country<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="country" placeholder="Enter Name of Country"
+                                                <input id="country" placeholder="Enter Name of Country"
                                                     type="text" name="country" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->country : '') : '' }}">
                                             </div>

@@ -37,69 +37,69 @@
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
                                         <div class="row pb-4 p-3 text-dark">
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="name">Employee Name:</label>
+                                                <label for="name">Employee Name<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input id="name" required placeholder="Enter Name" type="text"
+                                                <input id="name" placeholder="Enter Name" type="text"
                                                     name="name"
                                                     value="{{ !empty($employee) ? $employee->user->name : '' }}"
                                                     class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="username">User-Name:</label>
+                                                <label for="username">User-Name<small class="required-field {{isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input id="username" required placeholder="Enter User Name" type="text"
+                                                <input id="username" placeholder="Enter User Name" type="text"
                                                     name="username"
                                                     value="{{ !empty($employee) ? $employee->user->username : '' }}"
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="email">Email:</label>
+                                                <label for="email">Email<small class="required-field {{isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input type="email" name="email" id="email"
-                                                    placeholder="Enter email" required
+                                                    placeholder="Enter email"
                                                     value="{{ !empty($employee) ? $employee->user->email : '' }}"
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="mobile">Mobile No:</label>
+                                                <label for="mobile">Mobile No<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="mobile" placeholder="Enter Mobile No" type="tel"
+                                                <input id="mobile" placeholder="Enter Mobile No" type="tel"
                                                     value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
                                                     name="mobile" class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="emergency_contact">Emergency Contact No:</label>
+                                                <label for="emergency_contact">Emergency Contact No</label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="emergency_contact"
+                                                <input id="emergency_contact"
                                                     placeholder="Enter Emergency Contact No." type="tel"
                                                     value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
                                                     name="emergency_contact" class="form-control form-control-sm ">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="date_of_birth">Date of Birth </label>
+                                                <label for="date_of_birth">Date of Birth<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input required id="date_of_birth" placeholder="Enter date of birth"
+                                                <input id="date_of_birth" placeholder="Enter date of birth"
                                                     type="date" name="date_of_birth"
                                                     value="{{ !empty($employee) ? $employee->date_of_birth : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="gender">Gender:</label>
+                                                <label for="gender">Gender<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <select required id="gender" placeholder="Select gender" name="gender"
+                                                <select id="gender" placeholder="Select gender" name="gender"
                                                     class="form-control form-control-sm">
                                                     <option selected disabled> - Select Gender - </option>
                                                     <option
@@ -115,10 +115,10 @@
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="marital_status">Marital Status:</label>
+                                                <label for="marital_status">Marital Status<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <select required id="marital_status" placeholder="Select Marital Status"
+                                                <select id="marital_status" placeholder="Select Marital Status"
                                                     name="marital_status" class="form-control form-control-sm">
                                                     <option selected disabled value=""> - Select Marital Status -
                                                     </option>
@@ -152,19 +152,19 @@
 
                                             @if (!isHideCheck($employee))
                                                 <div class="col-3 pt-3 fw-semibold">
-                                                    <label for="password">Password: </label>
+                                                    <label for="password">Password<small class="required-field">*</small></label>
                                                 </div>
                                                 <div class="col-3 pt-2">
-                                                    <input required id="password" placeholder="Enter password"
+                                                    <input id="password" placeholder="Enter password"
                                                         type="password" name="password"
                                                         class="form-control form-control-sm ">
                                                 </div>
 
                                                 <div class="col-3 pt-3 fw-semibold">
-                                                    <label for="password_confirmation">Confirm Password: </label>
+                                                    <label for="password_confirmation">Confirm Password<small class="required-field">*</small></label>
                                                 </div>
                                                 <div class="col-3 pt-2">
-                                                    <input required id="password_confirmation"
+                                                    <input id="password_confirmation"
                                                         placeholder="Enter password confirmation" type="password"
                                                         name="password_confirmation"
                                                         class="form-control form-control-sm ">

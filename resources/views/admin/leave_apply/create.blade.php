@@ -35,10 +35,10 @@
 
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="leave_type_id">Leave Types </label>
-                                    <select required id="leave_type_id"
-                                        onchange="change_leave(this)" placeholder="Enter correct leave_type_id   "
-                                        type="text" name="leave_type_id" class="form-control form-control-sm ">
+                                    <label for="leave_type_id">Leave Types</label>
+                                    <select required id="leave_type_id" onchange="change_leave(this)"
+                                        placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
+                                        class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
                                         @foreach ($leave_type as $l_type)
                                             <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="balance_leave1">balance_leave </label>
+                                    <label for="balance_leave1">balance_leave</label>
                                     <input readonly required id="balance_leave1"
                                         placeholder="Enter correct balance_leave" type="text" name="remaining_leave"
                                         class="form-control form-control-sm ">
@@ -58,7 +58,7 @@
 
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="leave_applies_for">leave_applies_for </label>
+                                    <label for="leave_applies_for">leave_applies_for</label>
                                     <input required id="leave_applies_for"
                                         placeholder="Enter correct leave_applies_for   " type="text"
                                         name="leave_applies_for" class="form-control form-control-sm ">
@@ -67,14 +67,14 @@
 
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
-                                    <label for="start_date">start_date </label>
+                                    <label for="start_date">start_date</label>
                                     <input required id="start_date" placeholder="Enter correct start_date   "
                                         type="date" name="start_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
-                                    <label for="end_date">end_date </label>
+                                    <label for="end_date">end_date</label>
                                     <input required id="end_date" placeholder="Enter correct end_date   "
                                         type="date" name="end_date" class="form-control form-control-sm ">
                                 </div>
@@ -82,7 +82,7 @@
 
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
-                                    <label for="doc">Required Document </label>
+                                    <label for="doc">Required Document</label>
                                     <input accept="application/pdf" id="doc"
                                         placeholder="Enter correct Document   " type="file" name="doc1"
                                         class="form-control form-control-sm ">
@@ -91,7 +91,7 @@
 
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
-                                    <label for="Reason">leave_reason </label>
+                                    <label for="Reason">leave_reason</label>
                                     <input required id="leave_reason"
                                         placeholder="Enter correct leave_reason ex - i want to 2 days for my sister merage  "
                                         type="text" name="leave_reason" class="form-control form-control-sm ">
@@ -123,11 +123,10 @@
             if (text == "SICK LEAVE") {
                 document.getElementById('doc').setAttribute("required", "");
 
-            }else
-            {
+            } else {
                 document.getElementById('doc').removeAttribute("required", "");
 
             }
-            selectDrop('form_data','{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
+            selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
         }
     </script>

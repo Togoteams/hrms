@@ -30,19 +30,19 @@
                                                 <div class="col-md-10 py-4">
                                                     @if (!empty($data))
                                                         <div class="row left-div text-dark">
-                                                            <div class="col-2 fw-semibold">City:</div>
+                                                            <div class="col-2 fw-semibold">City</div>
                                                             <div class="col-4">{{ $data ? $data->city : '' }}</div>
-                                                            <div class="col-2 fw-semibold">State:</div>
+                                                            <div class="col-2 fw-semibold">State</div>
                                                             <div class="col-4">{{ $data ? $data->state : '' }}</div>
-                                                            <div class="col-2 fw-semibold">Country:</div>
+                                                            <div class="col-2 fw-semibold">Country</div>
                                                             <div class="col-4">{{ $data ? $data->country : '' }}</div>
-                                                            <div class="col-2 fw-semibold">Zip:</div>
+                                                            <div class="col-2 fw-semibold">Zip</div>
                                                             <div class="col-4">{{ $data ? $data->zip : '' }}</div>
-                                                            <div class="col-2 fw-semibold">Address:</div>
+                                                            <div class="col-2 fw-semibold">Address</div>
                                                             <div class="col-4">{{ $data ? $data->address : '' }}</div>
                                                         </div>
                                                     @else
-                                                    No data to show
+                                                        No data to show
                                                     @endif
                                                 </div>
                                                 <div class="col-md-2 text-end">
@@ -92,13 +92,13 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-2">
                                             <div class="form-group">
-                                                <label for="address">Address </label>
+                                                <label for="address">Address<small class="required-field">*</small></label>
                                                 <textarea required id="address" placeholder="Enter Address" name="address" class="form-control">{{ $data ? $data->address : '' }}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <div class="form-group">
-                                                <label for="zip">Zip </label>
+                                                <label for="zip">Zip<small class="required-field">*</small></label>
                                                 <input required id="zip" placeholder="Enter Name of Zip"
                                                     type="text" name="zip" class="form-control"
                                                     value="{{ $data ? $data->zip : '' }}">
@@ -106,7 +106,7 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <div class="form-group">
-                                                <label for="city">City </label>
+                                                <label for="city">City<small class="required-field">*</small></label>
                                                 <input required id="city" placeholder="Enter Name of City"
                                                     type="text" name="city" class="form-control"
                                                     value="{{ $data ? $data->city : '' }}">
@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <div class="form-group">
-                                                <label for="state">State </label>
+                                                <label for="state">State<small class="required-field">*</small></label>
                                                 <input required id="state" placeholder="Enter Name of State"
                                                     type="text" name="state" class="form-control"
                                                     value="{{ $data ? $data->state : '' }}">
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <div class="form-group">
-                                                <label for="country">Country </label>
+                                                <label for="country">Country<small class="required-field">*</small></label>
                                                 <input required id="country" placeholder="Enter Name of Country"
                                                     type="text" name="country" class="form-control"
                                                     value="{{ $data ? $data->country : '' }}">

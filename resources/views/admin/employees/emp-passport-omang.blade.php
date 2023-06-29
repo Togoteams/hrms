@@ -28,7 +28,7 @@
 
                                         <div class="row pb-4 p-3 text-dark">
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="passport_no">Passport No:</label>
+                                                <label for="passport_no">Passport No</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="passport_no" placeholder="Enter Passport No." type="number"
@@ -37,7 +37,7 @@
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="passport_expiry">Passport Expiry:</label>
+                                                <label for="passport_expiry">Passport Expiry</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="passport_expiry" placeholder="Enter Date of Passport Expiry"
@@ -47,7 +47,7 @@
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="omang_no">OMANG No: </label>
+                                                <label for="omang_no">OMANG No</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="omang_no" placeholder="Enter omang No." type="number"
@@ -56,7 +56,7 @@
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="omang_expiry">OMANG Expiry: </label>
+                                                <label for="omang_expiry">OMANG Expiry</label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="omang_expiry" placeholder="Enter Date of OMANG Expiry"

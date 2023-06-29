@@ -18,7 +18,8 @@
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <form id="form_id" class="formsubmit" method="post" action="{{ route('admin.employee.medicalInsuaranceBomaid.post') }}">
+                                    <form id="form_id" class="formsubmit" method="post"
+                                        action="{{ route('admin.employee.medicalInsuaranceBomaid.post') }}">
                                         @csrf
                                         <input type="hidden" name="id"
                                             value="{{ $employee ? ($employee->medicalBomaid ? $employee->medicalBomaid->id : '') : '' }}">
@@ -27,23 +28,23 @@
 
                                         <div class="row pb-4 p-3 text-dark">
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="company_name">Insurance Company Name:</label>
+                                                <label for="company_name">Insurance Company Name<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input type="text" id="company_name" name="company_name"
                                                     value="{{ $employee ? ($employee->medicalBomaid ? $employee->medicalBomaid->company_name : '') : '' }}"
                                                     placeholder="Enter Insurance Company Name"
-                                                    class="form-control form-control-sm" required>
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="insurance_id">Insurance ID:</label>
+                                                <label for="insurance_id">Insurance ID<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input type="number" id="insurance_id" name="insurance_id"
                                                     value="{{ $employee ? ($employee->medicalBomaid ? $employee->medicalBomaid->insurance_id : '') : '' }}"
                                                     placeholder="Enter Insurance Company Name"
-                                                    class="form-control form-control-sm" required>
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             <div class="text-center pt-5">

@@ -42,12 +42,29 @@
                                                 <div class="pb-4">
                                                     <div class="card p-3">
                                                         <div class="row">
-                                                            <div class="col-9">
-                                                                <div class="row text-dark">
-                                                                    <div class="col-3 fw-semibold">Department Name:</div>
+                                                            <div class="col-9 text-dark">
+                                                                <div class="row">
+                                                                    <div class="col-3 fw-semibold">Department Name</div>
                                                                     <div class="col-3">{{ $department->department_name }}
                                                                     </div>
                                                                 </div>
+                                                                <div class="row">
+                                                                    <div class="col-3 fw-semibold">Start Date</div>
+                                                                    <div class="col-3">{{ $department->start_date }}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-3 fw-semibold">End date</div>
+                                                                    <div class="col-3">{{ $department->end_date }}
+                                                                    </div>
+                                                                </div>
+                                                                @if (!empty($department->description))
+                                                                    <div class="row">
+                                                                        <div class="col-3 fw-semibold">Description</div>
+                                                                        <div class="col-3">{{ $department->description }}
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
                                                             </div>
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
@@ -67,7 +84,10 @@
                                                                         title="Edit" id="editButton"
                                                                         data-id="{{ $department->id }}"
                                                                         data-user_id="{{ $employee->user_id }}"
-                                                                        data-department_name="{{ $department->department_name }}">
+                                                                        data-department_name="{{ $department->department_name }}"
+                                                                        data-start_date="{{ $department->start_date }}"
+                                                                        data-end_date="{{ $department->end_date }}"
+                                                                        data-description="{{ $department->description }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
                                                                 </div>
@@ -90,7 +110,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
+                    <div class="modal-dialog modal-lg">
                         <div class="modal-content ">
                             <div class="modal-header ">
                                 <h5 class="modal-title" id="modalTitle"></h5>
@@ -105,18 +125,40 @@
                                     <input type="hidden" name="user_id" id="user_id">
 
                                     <div class="row">
-                                        <div class="col-sm-12 mb-2">
+
+                                        <div class="col-md-6 mb-2">
                                             <div class="form-group">
-                                                <label for="department_name">Department Name</label>
-                                                <input required id="department_name" placeholder="Enter exam name"
-                                                    type="text" name="department_name" class="form-control form-control-"
+                                                <label for="department_name">Department Name<small
+                                                        class="required-field">*</small></label>
+                                                <input id="department_name" placeholder="Enter exam name" type="text"
+                                                    name="department_name" class="form-control form-control-"
                                                     value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-2">
+                                            <div class="form-group">
+                                                <label for="">Period of work<small
+                                                        class="required-field">*</small></label>
+                                                <input id="start_date" name="start_date" placeholder="Start Year"
+                                                    type="date" class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-2">
+                                            <label for=""></label>
+                                            <input id="end_date" name="end_date" placeholder="End Year" type="date"
+                                                class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea id="description" placeholder="Enter Description..." name="description" class="form-control"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="text-center ">
-                                        <button type="submit" class="btn btn-primary btn-sm" id="btnSave">SUBMIT</button>
+                                        <button type="submit" class="btn btn-primary btn-sm"
+                                            id="btnSave">SUBMIT</button>
                                     </div>
                                 </form>
 
@@ -147,10 +189,16 @@
                 let id = $(event.currentTarget).data("id");
                 let user_id = $(event.currentTarget).data("user_id");
                 let department_name = $(event.currentTarget).data("department_name");
+                let start_date = $(event.currentTarget).data("start_date");
+                let end_date = $(event.currentTarget).data("end_date");
+                let description = $(event.currentTarget).data("description");
 
                 $("#id").val(id);
                 $("#user_id").val(user_id);
                 $("#department_name").val(department_name);
+                $("#start_date").val(start_date);
+                $("#end_date").val(end_date);
+                $("#description").val(description);
 
                 $('#formModal').modal('show');
             });

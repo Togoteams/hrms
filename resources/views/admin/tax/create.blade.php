@@ -13,14 +13,14 @@
                         <div class="row">
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="name">name </label>
+                                    <label for="name">name</label>
                                     <input required id="name" placeholder="Enter Name of Tax " type="text"
                                         name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="type">type </label>
+                                    <label for="type">type</label>
                                     <select onchange="chagne_type(this.value)" required id="type"
                                         placeholder="Enter type of Tax " type="text" name="type"
                                         class="form-control form-control-sm ">
@@ -33,7 +33,7 @@
 
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label id="type_id" for="value">value </label>
+                                    <label id="type_id" for="value">value</label>
                                     <input required id="value" placeholder="Enter value " type="text"
                                         name="value" class="form-control form-control-sm ">
                                 </div>
@@ -41,7 +41,7 @@
 
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="description">description </label>
+                                    <label for="description">description</label>
                                     <textarea required id="description" placeholder="Enter Short Description of Tax   " type="text" name="description"
                                         class="form-control form-control-sm "></textarea>
                                 </div>

@@ -28,13 +28,13 @@
 
                                         <div class="row pb-4 p-3 text-dark">
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="place_of_domicile">Place of Domicile:</label>
+                                                <label for="place_of_domicile">Place of Domicile<small class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input type="text" id="place_of_domicile" name="place_of_domicile"
                                                     value="{{ $employee ? $employee->place_of_domicile : '' }}"
                                                     placeholder="Enter Place of Domicile"
-                                                    class="form-control form-control-sm" required>
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             <div class="text-center pt-5">

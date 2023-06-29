@@ -32,7 +32,7 @@
                                                             @if (!empty($data->place_of_domicile))
                                                                 <div class="row text-dark showData">
                                                                     <div class="col-3 fw-semibold pt-1">
-                                                                        Place Of Domicile:
+                                                                        Place Of Domicile
                                                                     </div>
                                                                     <div class="col-3 pt-1">
                                                                         {{ !empty($data) ? $data->place_of_domicile : '' }}
@@ -44,11 +44,11 @@
                                                             <div class="row text-dark addInputDiv d-none">
                                                                 <div class="col-3 fw-semibold pt-1">
                                                                     <label for="place_of_domicile">
-                                                                        Place of Domicile:
+                                                                        Place of Domicile<small class="required-field">*</small>
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-3 margin-style">
-                                                                    <input required
+                                                                    <input
                                                                         value="{{ !empty($data) ? $data->place_of_domicile : '' }}"
                                                                         id="place_of_domicile" name="place_of_domicile"
                                                                         placeholder="Enter Place of Domicile" type="text"
@@ -96,7 +96,6 @@
     </main>
 @endsection
 @push('custom-scripts')
-
     <script>
         function openForm() {
             $(".addInputDiv").removeClass("d-none");
@@ -121,5 +120,4 @@
             $("#addButton").removeClass("d-none");
         }
     </script>
-
 @endpush

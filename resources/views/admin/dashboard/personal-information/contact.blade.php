@@ -30,13 +30,13 @@
                                                 <div class="col-md-10 py-4">
                                                     <div class="left-div">
                                                         <div class="row text-dark">
-                                                            <div class="col-3 fw-semibold">Email:</div>
+                                                            <div class="col-3 fw-semibold">Email</div>
                                                             <div class="col-7">{{ $data->user->email }}</div>
 
-                                                            <div class="col-3 fw-semibold">Mobile:</div>
+                                                            <div class="col-3 fw-semibold">Mobile</div>
                                                             <div class="col-7">{{ $data->user->mobile }}</div>
 
-                                                            <div class="col-3 fw-semibold">Emergency Mobile:</div>
+                                                            <div class="col-3 fw-semibold">Emergency Mobile</div>
                                                             <div class="col-7">{{ $data->emergency_contact }}</div>
                                                         </div>
                                                     </div>
@@ -64,7 +64,7 @@
                                                     <div class="col-md-10 py-4">
                                                         <div class="left-div">
                                                             <div class="row">
-                                                                <div class="col-3 pt-2 fw-semibold">Email.:</div>
+                                                                <div class="col-3 pt-2 fw-semibold">Email</div>
                                                                 <div class="col-3">
                                                                     <input required id="email"
                                                                         placeholder="Enter correct email   "
@@ -76,7 +76,9 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row pt-2">
-                                                                <div class="col-3 pt-2 fw-semibold">Mobile No. :</div>
+                                                                <div class="col-3 pt-2 fw-semibold">Mobile No
+                                                                    <small class="required-field">*</small>
+                                                                    </div>
                                                                 <div class="col-3">
                                                                     <input required id="mobile"
                                                                         placeholder="Enter correct Mobile No   "
@@ -88,13 +90,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row pt-2">
-                                                                <div class="col-3 pt-2 fw-semibold">Emergerncy Mobile:</div>
+                                                                <div class="col-3 pt-2 fw-semibold">Emergerncy Mobile</div>
                                                                 <div class="col-3">
                                                                     <input required id="emergency_contact"
-                                                                            placeholder="Enter correct Emergency Contact No."
-                                                                            value="{{ $data->emergency_contact }}"
-                                                                            type="number" name="emergency_contact"
-                                                                            class="form-control form-control-sm ">
+                                                                        placeholder="Enter correct Emergency Contact No."
+                                                                        value="{{ $data->emergency_contact }}"
+                                                                        type="number" name="emergency_contact"
+                                                                        class="form-control form-control-sm ">
                                                                 </div>
                                                                 <div class="col-2">
                                                                     <button onclick="ajaxCall('form_edit','','POST')"

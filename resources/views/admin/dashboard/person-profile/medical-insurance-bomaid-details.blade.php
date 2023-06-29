@@ -45,14 +45,14 @@
                                                             @if (!empty($data))
                                                                 <div class="row showData">
                                                                     <div class="col-3 fw-semibold pt-1">
-                                                                        Insurance Company Name:
+                                                                        Insurance Company Name
                                                                     </div>
                                                                     <div class="col-3 pt-1">
                                                                         {{ $data->company_name }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row showData">
-                                                                    <div class="col-3 fw-semibold pt-3">Insurance ID:</div>
+                                                                    <div class="col-3 fw-semibold pt-3">Insurance ID</div>
                                                                     <div class="col-3 pt-3">
                                                                         {{ $data->insurance_id }}
                                                                     </div>
@@ -62,11 +62,12 @@
                                                             @endif
                                                             <div class="row addInputDiv d-none">
                                                                 <div class="col-3 fw-semibold pt-1">
-                                                                    Insurance Company Name:
+                                                                    Insurance Company Name<small
+                                                                        class="required-field">*</small>
                                                                 </div>
                                                                 <div class="col-3 margin-style">
                                                                     <input type="text" name="company_name"
-                                                                        id="company_name" required
+                                                                        id="company_name"
                                                                         placeholder="Enter Insurance Company Name"
                                                                         class="form-control form-control-sm"
                                                                         value="{{ !empty($data) ? $data->company_name : '' }}">
@@ -74,11 +75,11 @@
                                                             </div>
                                                             <div class="row addInputDiv d-none">
                                                                 <div class="col-3 fw-semibold pt-3">
-                                                                    Insurance ID:
+                                                                    Insurance ID<small class="required-field">*</small>
                                                                 </div>
                                                                 <div class="col-3 pt-2 margin-style">
                                                                     <input type="number" name="insurance_id"
-                                                                        id="insurance_id" required
+                                                                        id="insurance_id"
                                                                         placeholder="Enter Insurance Company Name"
                                                                         class="form-control form-control-sm"
                                                                         value="{{ !empty($data) ? $data->insurance_id : '' }}">

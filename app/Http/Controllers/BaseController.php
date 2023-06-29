@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Redirect;
 
 class BaseController extends Controller
 {
-	use FlashMessages;
+    use FlashMessages;
 
-	protected $data = null;
+    protected $data = null;
 
     /**
      * @param $title
      * @param $subTitle
      */
-    protected function setPageTitle($title, $subTitle='')
+    protected function setPageTitle($title, $subTitle = '')
     {
         view()->share(['pageTitle' => $title, 'subTitle' => $subTitle]);
     }
@@ -30,7 +30,7 @@ class BaseController extends Controller
     protected function showErrorPage($errorCode = 404, $message = null)
     {
         $data['message'] = $message;
-        return response()->view('errors.'.$errorCode, $data, $errorCode);
+        return response()->view('errors.' . $errorCode, $data, $errorCode);
     }
 
     /**
@@ -46,7 +46,7 @@ class BaseController extends Controller
             'status'        =>  $status,
             'response_code' =>  $responseCode,
             'message'       =>  $message,
-            'data'          =>  $data??[]
+            'data'          =>  $data ?? []
         ]);
     }
 
@@ -60,7 +60,7 @@ class BaseController extends Controller
      */
     protected function responseRedirect($route, $message, $type = 'info', $error = false, $withOldInputWhenError = false)
     {
-        if($type != 'noFlash'){
+        if ($type != 'noFlash') {
             $this->setFlashMessage($message, $type);
             $this->showFlashMessages();
         }
@@ -69,9 +69,9 @@ class BaseController extends Controller
             return redirect()->back()->withInput();
         }
 
-        if(!empty($urlparams)){
-            return redirect()->route($route,$urlparams);
-        }else{
+        if (!empty($urlparams)) {
+            return redirect()->route($route, $urlparams);
+        } else {
             return redirect()->route($route);
         }
     }
@@ -104,21 +104,22 @@ class BaseController extends Controller
      * @param bool $withOldInputWhenError
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function responseRedirectBack($message, $type = 'info', $error = false, $withOldInputWhenError = false, $anchor="")
+    protected function responseRedirectBack($message, $type = 'info', $error = false, $withOldInputWhenError = false, $anchor = "")
     {
         $this->setFlashMessage($message, $type);
         $this->showFlashMessages();
-        $anchor = !empty($anchor) ? $anchor:'';
+        $anchor = !empty($anchor) ? $anchor : '';
         return Redirect::to(URL::previous() . $anchor);
     }
 
-     /**
+    /**
      * setMetaDetails
      *
      * @param  mixed $meta
      * @return void
      */
-    protected function setMetaDetails($meta){
+    protected function setMetaDetails($meta)
+    {
         view()->share(['meta' => $meta]);
     }
 }

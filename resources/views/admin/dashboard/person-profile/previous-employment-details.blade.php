@@ -44,19 +44,28 @@
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
-                                                                    <div class="col-4 fw-semibold pt-1">Company Name:</div>
+                                                                    <div class="col-4 fw-semibold pt-1">Company Name</div>
                                                                     <div class="col-6 pt-1">
                                                                         {{ $data->company_name }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Period of
-                                                                        employment:
+                                                                    <div class="col-4 fw-semibold pt-3">
+                                                                        Period of employment:
                                                                     </div>
                                                                     <div class="col-6 pt-3">
                                                                         {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
                                                                         -
                                                                         {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
                                                                     </div>
+
+                                                                    @if (!empty($data->description))
+                                                                        <div class="col-4 fw-semibold pt-1">
+                                                                            Description
+                                                                        </div>
+                                                                        <div class="col-6 pt-1">
+                                                                            {{ $data->description }}
+                                                                        </div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 text-end">
@@ -78,7 +87,8 @@
                                                                         data-user_id="{{ Auth::user()->id }}"
                                                                         data-company_name="{{ $data->company_name }}"
                                                                         data-start_date="{{ $data->start_date }}"
-                                                                        data-end_date="{{ $data->end_date }}">
+                                                                        data-end_date="{{ $data->end_date }}"
+                                                                        data-description="{{ $data->description }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
                                                                 </div>
@@ -119,7 +129,8 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <div class="form-group">
-                                                <label for="passport_no">Company Name </label>
+                                                <label for="passport_no">Company Name<small
+                                                        class="required-field">*</small></label>
                                                 <input type="text" id="company_name" name="company_name"
                                                     placeholder="Enter Insurance Company Name"
                                                     class="form-control form-control-sm" required>
@@ -127,7 +138,8 @@
                                         </div>
                                         <div class="col-md-3 mb-2">
                                             <div class="form-group">
-                                                <label for="">Period of employment </label>
+                                                <label for="">Period of employment<small
+                                                        class="required-field">*</small></label>
                                                 <input required value="" id="start_date" name="start_date"
                                                     placeholder="Start Year" type="date"
                                                     class="form-control form-control-sm">
@@ -138,6 +150,12 @@
                                             <input required value="" id="end_date" name="end_date"
                                                 placeholder="End Year" type="date"
                                                 class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea id="description" placeholder="Enter Description..." name="description" class="form-control"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                     <hr>
@@ -193,12 +211,14 @@
                 let company_name = $(event.currentTarget).data("company_name");
                 let start_date = $(event.currentTarget).data("start_date");
                 let end_date = $(event.currentTarget).data("end_date");
+                let description = $(event.currentTarget).data("description");
 
                 $("#id").val(id);
                 $("#user_id").val(user_id);
                 $("#company_name").val(company_name);
                 $("#start_date").val(start_date);
                 $("#end_date").val(end_date);
+                $("#description").val(description);
             });
         });
     </script>

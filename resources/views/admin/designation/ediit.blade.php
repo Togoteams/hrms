@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-12 mb-2">
             <div class="form-group">
-                <label for="name">Name </label>
+                <label for="name">Name</label>
                 <input required id="name" placeholder="Enter Name of Designation " type="text"
                     value="{{ $data->name }}" name="name" class="form-control form-control-sm ">
             </div>
@@ -14,7 +14,7 @@
 
         <div class="col-sm-12 mb-2">
             <div class="form-group">
-                <label for="description">Designation </label>
+                <label for="description">Designation</label>
                 <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"
                     name="description" class="form-control form-control-sm "> {{ $data->description }} </textarea>
             </div>

@@ -3,7 +3,7 @@
 @endpush
 @section('content')
     <style>
-        .float-right{
+        .float-right {
             float: right;
         }
     </style>
@@ -37,17 +37,17 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                            <div class="pb-4">
-                                                <div class="card p-3">
-                                                    <div class="row">
-                                                        <div class="col-9">
-                                                            <div class="row text-dark">
-                                                                <div class="col-3 fw-semibold">Field Name:</div>
-                                                                <div class="col-3">Data</div>
-                                                            </div>
+                                        <div class="pb-4">
+                                            <div class="card p-3">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <div class="row text-dark">
+                                                            <div class="col-3 fw-semibold">Field Name</div>
+                                                            <div class="col-3">Data</div>
                                                         </div>
-                                                        <div class="col-3 text-end">
-                                                            {{-- <div class="right-div">
+                                                    </div>
+                                                    <div class="col-3 text-end">
+                                                        {{-- <div class="right-div">
                                                                 <form id="form_id" action="{{ route('admin.person.profile.qualification.delete') }}" class="float-right mx-1" method="post">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="">
@@ -68,10 +68,10 @@
                                                                     <i class="fas fa-edit"></i>
                                                                 </button>
                                                             </div> --}}
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -110,16 +110,16 @@
                                             <div class="form-group">
                                                 <label for="specialization">Specialization</label>
                                                 <input required id="specialization" placeholder="Enter specialization"
-                                                    type="text" name="specialization"
-                                                    class="form-control form-control-" value="">
+                                                    type="text" name="specialization" class="form-control form-control-"
+                                                    value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="institute_name">Institute Name</label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
-                                                    type="text" name="institute_name"
-                                                    class="form-control form-control-" value="">
+                                                    type="text" name="institute_name" class="form-control form-control-"
+                                                    value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
@@ -132,10 +132,10 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="year_of_passing">Year of Passing </label>
+                                                <label for="year_of_passing">Year of Passing</label>
                                                 <input required id="year_of_passing" placeholder="Enter year of passing"
-                                                    type="text" name="year_of_passing"
-                                                    class="form-control form-control-" value="">
+                                                    type="text" name="year_of_passing" class="form-control form-control-"
+                                                    value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">

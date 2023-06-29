@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Date;
 
 class PersonProfileController extends BaseController
 {
@@ -197,7 +198,7 @@ class PersonProfileController extends BaseController
         $validator = Validator::make($request->all(), [
             'company_name' => ['required', 'string'],
             'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         if ($validator->fails()) {

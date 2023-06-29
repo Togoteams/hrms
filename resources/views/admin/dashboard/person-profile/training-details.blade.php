@@ -37,10 +37,10 @@
                                                 <div class="row">
                                                     <div class="col-10">
                                                         <div class="row text-dark">
-                                                            <div class="col-3 fw-semibold">Field:</div>
+                                                            <div class="col-3 fw-semibold">Field</div>
                                                             <div class="col-7">Field Data</div>
 
-                                                            <div class="col-3 fw-semibold">Field:</div>
+                                                            <div class="col-3 fw-semibold">Field</div>
                                                             <div class="col-7">Field Data</div>
                                                         </div>
                                                     </div>

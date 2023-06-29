@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('department_name')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('description')->nullable();
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

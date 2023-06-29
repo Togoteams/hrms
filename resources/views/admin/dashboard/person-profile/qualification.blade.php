@@ -44,22 +44,22 @@
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
-                                                                    <div class="col-3 fw-semibold">Exam Name:</div>
+                                                                    <div class="col-3 fw-semibold">Exam Name</div>
                                                                     <div class="col-3">{{ $data->exam_name }}</div>
 
-                                                                    <div class="col-3 fw-semibold">Specialization:</div>
+                                                                    <div class="col-3 fw-semibold">Specialization</div>
                                                                     <div class="col-3">{{ $data->specialization }}</div>
 
-                                                                    <div class="col-3 fw-semibold">Institute Name:</div>
+                                                                    <div class="col-3 fw-semibold">Institute Name</div>
                                                                     <div class="col-3">{{ $data->institute_name }}</div>
 
-                                                                    <div class="col-3 fw-semibold">University:</div>
+                                                                    <div class="col-3 fw-semibold">University</div>
                                                                     <div class="col-3">{{ $data->university }}</div>
 
-                                                                    <div class="col-3 fw-semibold">Year of passing:</div>
+                                                                    <div class="col-3 fw-semibold">Year of passing</div>
                                                                     <div class="col-3">{{ $data->year_of_passing }}</div>
 
-                                                                    <div class="col-3 fw-semibold">Marks:</div>
+                                                                    <div class="col-3 fw-semibold">Marks</div>
                                                                     <div class="col-3">{{ $data->marks }}</div>
                                                                 </div>
                                                             </div>
@@ -127,14 +127,14 @@
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="exam_name">Exam Name</label>
+                                                <label for="exam_name">Exam Name<small class="required-field">*</small></label>
                                                 <input required id="exam_name" placeholder="Enter exam name" type="text"
                                                     name="exam_name" class="form-control form-control-" value="">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="specialization">Specialization</label>
+                                                <label for="specialization">Specialization<small class="required-field">*</small></label>
                                                 <input required id="specialization" placeholder="Enter specialization"
                                                     type="text" name="specialization"
                                                     class="form-control form-control-" value="">
@@ -142,7 +142,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="institute_name">Institute Name</label>
+                                                <label for="institute_name">Institute Name<small class="required-field">*</small></label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
                                                     type="text" name="institute_name"
                                                     class="form-control form-control-" value="">
@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="university">University</label>
+                                                <label for="university">University<small class="required-field">*</small></label>
                                                 <input required id="university" placeholder="Enter university"
                                                     type="text" name="university" class="form-control form-control-"
                                                     value="">
@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="year_of_passing">Year of Passing </label>
+                                                <label for="year_of_passing">Year of Passing<small class="required-field">*</small></label>
                                                 <input required id="year_of_passing" placeholder="Enter year of passing"
                                                     type="text" name="year_of_passing"
                                                     class="form-control form-control-" value="">
@@ -166,7 +166,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="marks">Marks(%)</label>
+                                                <label for="marks">Marks(%)<small class="required-field">*</small></label>
                                                 <input required id="marks" placeholder="Enter marks in percentage"
                                                     type="text" name="marks" class="form-control form-control-"
                                                     value="">

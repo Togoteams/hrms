@@ -19,7 +19,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Validation\Rule;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
@@ -72,7 +72,7 @@ class EmployeeController extends BaseController
                 'mobile' => ['required', 'numeric', 'min:10'],
                 'gender' => ['required'],
                 'marital_status' => ['required'],
-                'date_of_birth' => ['required', 'date'],
+                'date_of_birth' => ['required', 'date', 'before:today'],
                 'emergency_contact' => ['nullable', 'numeric', 'min:10'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'username' => ['required', 'string', 'min:5', 'unique:users'],
@@ -84,7 +84,7 @@ class EmployeeController extends BaseController
                 'mobile' => ['required', 'numeric', 'min:10'],
                 'gender' => ['required'],
                 'marital_status' => ['required'],
-                'date_of_birth' => ['required', 'date'],
+                'date_of_birth' => ['required', 'date', 'before:today'],
                 'emergency_contact' => ['nullable', 'numeric', 'min:10'],
             ]);
         }
@@ -162,15 +162,14 @@ class EmployeeController extends BaseController
             'date_of_current_basic' => ['required', 'date'],
             'employment_type'       => ['required', 'string'],
             'pension_opt'           => ['required', 'numeric'],
-            'union_membership_id'   => ['required', 'numeric'],
             'bank_account_number'   => ['required', 'numeric'],
-            'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
+            'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
 
         ]);
 
         if ($request->employment_type == 'local-contractual') {
             $request->validate([
-                'contract_duration' => ['required', 'numeric'],
+                'contract_duration' => ['required', 'numeric', 'gt:0'],
             ]);
         }
 
@@ -208,7 +207,7 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'string'],
+            'zip'       => ['required', 'string', 'max:10'],
             'city'      => ['required', 'string'],
             'state'     => ['required', 'string'],
             'country'   => ['required', 'string'],
@@ -245,9 +244,10 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'passport_no'       => ['nullable', 'numeric'],
-            'passport_expiry'   => ['nullable', 'date'],
+            'passport_expiry'   => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
+
             'omang_no'          => ['nullable', 'numeric'],
-            'omang_expiry'      => ['nullable', 'date'],
+            'omang_expiry'      => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         try {
@@ -283,8 +283,8 @@ class EmployeeController extends BaseController
             'specialization' => ['string', 'required'],
             'institute_name' => ['string', 'required'],
             'university' => ['string', 'required'],
-            'year_of_passing' => ['numeric', 'required'],
-            'marks' => ['numeric', 'required'],
+            'year_of_passing' => ['numeric', 'required', 'digits:4', 'gt:1950', 'max:' . Date::now()->year],
+            'marks' => ['numeric', 'required', 'gt:0'],
         ]);
 
         try {
@@ -406,6 +406,8 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'department_name' => ['string', 'required'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         try {

@@ -22,8 +22,7 @@
                     <form method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="col mb-2">
-                            <div
-                                class="col-span-full sm:col-span-6 xl:col-span-4 bg-white s rounded-sm b b-slate-200">
+                            <div class="col-span-full sm:col-span-6 xl:col-span-4 bg-white s rounded-sm b b-slate-200">
                                 <div class="flex flex-col h-full">
                                     <!-- Card top -->
                                     <div class="grow p-3">
@@ -47,8 +46,7 @@
                             <!-- Users cards -->
                             @forelse ($permissions as $chunk)
                                 <!-- Card 1 -->
-                                <div
-                                    class="col-span-full sm:col-span-6 xl:col-span-3 bg-white s rounded-sm b b-slate-200">
+                                <div class="col-span-full sm:col-span-6 xl:col-span-3 bg-white s rounded-sm b b-slate-200">
                                     <div class="flex flex-col h-full">
                                         <!-- Card top -->
                                         <div class="grow p-3">

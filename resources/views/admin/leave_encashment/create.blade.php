@@ -18,7 +18,7 @@
                             @if (!isemplooye())
                                 <div class="mb-2 col-sm-6">
                                     <div class="form-group">
-                                        <label for="user_id">Employee </label>
+                                        <label for="user_id">Employee</label>
                                         <select
                                             onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_encash_leave') }}', 'leave_type_id')"
                                             required id="user_id" placeholder="Enter correct user_id   "
@@ -35,7 +35,7 @@
 
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="leave_type_id">Leave Types </label>
+                                    <label for="leave_type_id">Leave Types</label>
                                     <select required id="leave_type_id"
                                         onchange=" selectDrop('form_data','{{ route('admin.leave_encashment.get_balance_encah_leave') }}', 'balance_leave1')"
                                         placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
@@ -54,16 +54,16 @@
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="balance_leave1">balance_leave </label>
-                                    <input   required id="balance_leave1"
-                                     {{ isemplooye()? "readonly" : ""}}   placeholder="Enter correct balance_leave" type="text" name="no_of_days"
+                                    <label for="balance_leave1">balance_leave</label>
+                                    <input required id="balance_leave1" {{ isemplooye() ? 'readonly' : '' }}
+                                        placeholder="Enter correct balance_leave" type="text" name="no_of_days"
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>
 
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
-                                    <label for="description">description </label>
+                                    <label for="description">description</label>
                                     <textarea rows="12" required id="description" placeholder="Enter correct description   " name="description"
                                         class="form-control form-control-sm "></textarea>
                                 </div>

@@ -44,7 +44,7 @@
                                                             @if (!empty($data))
                                                                 <div class="row text-dark showData">
                                                                     <div class="col-3 fw-semibold pt-1">
-                                                                        Driving License No:
+                                                                        Driving License No
                                                                     </div>
                                                                     <div class="col-3 pt-1">
                                                                         {{ !empty($data) ? $data->license_no : '' }}
@@ -55,10 +55,10 @@
                                                             @endif
                                                             <div class="row text-dark addInputDiv d-none">
                                                                 <div class="col-3 fw-semibold pt-1">
-                                                                    Driving License No:
+                                                                    Driving License No<small class="required-field">*</small>
                                                                 </div>
                                                                 <div class="col-3 margin-style">
-                                                                    <input required
+                                                                    <input
                                                                         value="{{ !empty($data) ? $data->license_no : '' }}"
                                                                         id="license_no" name="license_no"
                                                                         placeholder="Enter Driving License No"

@@ -32,10 +32,10 @@
                                                         @if (!empty($data->passport_no) || !empty($data->omang_no))
                                                             <div class="row text-dark">
                                                                 @if (!empty($data->passport_no))
-                                                                    <div class="col-3 fw-semibold">Passport No:</div>
+                                                                    <div class="col-3 fw-semibold">Passport No</div>
                                                                     <div class="col-3">{{ $data->passport_no ?? '' }}</div>
 
-                                                                    <div class="col-3 fw-semibold">Passport Expiry:</div>
+                                                                    <div class="col-3 fw-semibold">Passport Expiry</div>
                                                                     <div class="col-3">
                                                                         {{ !empty($data->passport_expiry) ? date_format(date_create_from_format('Y-m-d', $data->passport_expiry), 'd/m/Y') : '' }}
                                                                     </div>
@@ -43,10 +43,10 @@
                                                                 {{-- <br><br> --}}
 
                                                                 @if (!empty($data->omang_no))
-                                                                    <div class="col-3 fw-semibold">OMANG No:</div>
+                                                                    <div class="col-3 fw-semibold">OMANG No</div>
                                                                     <div class="col-3">{{ $data->omang_no ?? '' }}</div>
 
-                                                                    <div class="col-3 fw-semibold">OMANG Expiry:</div>
+                                                                    <div class="col-3 fw-semibold">OMANG Expiry</div>
                                                                     <div class="col-3">
                                                                         {{ !empty($data->omang_expiry) ? date_format(date_create_from_format('Y-m-d', $data->omang_expiry), 'd/m/Y') : '' }}
                                                                     </div>
@@ -103,7 +103,7 @@
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="passport_no">Passport No. </label>
+                                                <label for="passport_no">Passport No.</label>
                                                 <input id="passport_no" placeholder="Enter Passport No." type="number"
                                                     value="{{ $data->passport_no ?? '' }}" name="passport_no"
                                                     class="form-control form-control-sm ">
@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="passport_expiry">Passport Expiry </label>
+                                                <label for="passport_expiry">Passport Expiry</label>
                                                 <input id="passport_expiry" placeholder="Enter Date of Passport Expiry"
                                                     type="date" value="{{ $data->passport_expiry ?? '' }}"
                                                     name="passport_expiry" class="form-control form-control-sm ">
@@ -119,7 +119,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="omang_no">OMANG No. </label>
+                                                <label for="omang_no">OMANG No.</label>
                                                 <input id="omang_no" placeholder="Enter omang No." type="number"
                                                     value="{{ $data->omang_no ?? '' }}" name="omang_no"
                                                     class="form-control form-control-sm ">
@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="omang_expiry">OMANG Expiry </label>
+                                                <label for="omang_expiry">OMANG Expiry</label>
                                                 <input id="omang_expiry" placeholder="Enter Date of OMANG Expiry"
                                                     type="date" value="{{ $data->omang_expiry ?? '' }}"
                                                     name="omang_expiry" class="form-control form-control-sm ">

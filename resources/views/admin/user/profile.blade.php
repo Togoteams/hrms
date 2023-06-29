@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group mr-bot">
 
-                        <label for="file">Profile Pic : </label>
+                        <label for="file">Profile Pic </label>
                         <input type="file" name="file" id="file" accept="image/*" onchange="validateimg(this)">
                     </div>
 
