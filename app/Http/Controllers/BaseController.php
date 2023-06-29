@@ -46,7 +46,7 @@ class BaseController extends Controller
             'status'        =>  $status,
             'response_code' =>  $responseCode,
             'message'       =>  $message,
-            'data'          =>  $data
+            'data'          =>  $data??[]
         ]);
     }
 
