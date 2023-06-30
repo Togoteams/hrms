@@ -229,7 +229,10 @@ $(document).ready(function (e) {
                             timer: 1500,
                         });
                         setTimeout(function () {
-                            $(location).attr("href", response.data.redirect_url);
+                            $(location).attr(
+                                "href",
+                                response.data.redirect_url
+                            );
                         }, 1500);
                     } else {
                         Swal.fire({
@@ -511,6 +514,56 @@ $(document).ready(function (e) {
             }
         });
     });
+
+    $(".this-div").on("click", ".deleteRecord", function (e) {
+        let $this = $(this);
+        let token = $this.data("token");
+        let id = $this.data("id");
+        let actionUrl = $this.data("action");
+
+        Swal.fire({
+            title: "Are you sure you want to delete it?",
+            text: "You wont be able to revert this action!!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(function (value) {
+            if (value) {
+                $.ajax({
+                    url: actionUrl,
+                    method: "POST",
+                    dataType: "json",
+                    data: {
+                        _token: token,
+                        id: id,
+                    },
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire({
+                                icon: "success",
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                            setTimeout(function () {
+                                location.reload();
+                            }, 1500);
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: response.error,
+                                showConfirmButton: false,
+                                timer: 1500,
+                            });
+                        }
+                    },
+                });
+            }
+        });
+    });
+
     $(".card-table").on("click", ".editData", function (e) {
         var $this = $(this);
         var uuid = $this.data("uuid");

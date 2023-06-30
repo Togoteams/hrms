@@ -2,11 +2,6 @@
 @push('styles')
 @endpush
 @section('content')
-    <style>
-        .float-right {
-            float: right;
-        }
-    </style>
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -27,7 +22,7 @@
                             </div>
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
-                                <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-content this-div" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
                                             <button type="button" class="btn btn-primary btn-sm"
@@ -70,19 +65,8 @@
                                                             </div>
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
-                                                                    <form id="form_id" class="float-right mx-1"
-                                                                        action="{{ route('admin.person.profile.previous.employment.details.delete') }}"
-                                                                        method="post">
-                                                                        @csrf
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $data->id }}">
-                                                                        <button class="btn btn-danger btn-sm bt"
-                                                                            title="Delete">
-                                                                            <i class="fa-solid fa-trash fa-lg"></i>
-                                                                        </button>
-                                                                    </form>
                                                                     <button type="button"
-                                                                        class="btn btn-warning btn-sm bt editButton float-right"
+                                                                        class="btn btn-warning btn-sm bt editButton"
                                                                         title="Edit" data-id="{{ $data->id }}"
                                                                         data-user_id="{{ Auth::user()->id }}"
                                                                         data-company_name="{{ $data->company_name }}"
@@ -90,6 +74,13 @@
                                                                         data-end_date="{{ $data->end_date }}"
                                                                         data-description="{{ $data->description }}">
                                                                         <i class="fas fa-edit"></i>
+                                                                    </button>
+
+                                                                    <button class="btn btn-danger btn-sm bt deleteRecord"
+                                                                        title="Delete" data-id="{{ $data->id }}"
+                                                                        data-token="{{ csrf_token() }}"
+                                                                        data-action="{{ route('admin.person.profile.previous.employment.details.delete') }}">
+                                                                        <i class="fa-solid fa-trash fa-lg"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -176,21 +167,6 @@
     </main>
 @endsection
 @push('custom-scripts')
-
-    @if (!empty(Session::get('success')))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
-
     <script>
         function addForm(user_id) {
             $('#form_add').trigger("reset");

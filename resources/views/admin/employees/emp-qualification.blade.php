@@ -2,11 +2,6 @@
 @push('styles')
 @endpush
 @section('content')
-    <style>
-        .float-right {
-            float: right;
-        }
-    </style>
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -36,7 +31,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row this-div">
                                         @if (!empty($employee->qualification))
                                             @foreach ($employee->qualification as $qualification)
                                                 <div class="pb-4">
@@ -72,18 +67,7 @@
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
                                                                     <!-- Your content for right div goes here -->
-                                                                    <form id="form_id"
-                                                                        action="{{ route('admin.employee.qualification.delete') }}"
-                                                                        class="float-right mx-1" method="post">
-                                                                        @csrf
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $qualification->id }}">
-                                                                        <button class="btn btn-danger btn-sm bt"
-                                                                            title="Delete">
-                                                                            <i class="fa-solid fa-trash fa-lg"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                    <button class="btn btn-warning btn-sm bt float-right"
+                                                                    <button class="btn btn-warning btn-sm bt"
                                                                         title="Edit" id="editButton"
                                                                         data-id="{{ $qualification->id }}"
                                                                         data-user_id="{{ $employee->user_id }}"
@@ -95,6 +79,14 @@
                                                                         data-marks="{{ $qualification->marks }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
+
+                                                                    <button class="btn btn-danger btn-sm bt deleteRecord"
+                                                                        title="Delete" data-id="{{ $qualification->id }}"
+                                                                        data-token="{{ csrf_token() }}"
+                                                                        data-action="{{ route('admin.employee.qualification.delete') }}">
+                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                    </button>
+
                                                                 </div>
                                                             </div>
                                                         </div>

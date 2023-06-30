@@ -2,11 +2,6 @@
 @push('styles')
 @endpush
 @section('content')
-    <style>
-        .float-right {
-            float: right;
-        }
-    </style>
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -27,7 +22,7 @@
                             </div>
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
-                                <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-content this-div" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
                                             <button type="button" class="btn btn-primary btn-sm" title="Add Qualification"
@@ -66,20 +61,8 @@
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
                                                                     <!-- Your content for right div goes here -->
-                                                                    <form id="form_id"
-                                                                        action="{{ route('admin.person.profile.qualification.delete') }}"
-                                                                        class="float-right mx-1" method="post">
-                                                                        @csrf
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $data->id }}">
-                                                                        <button class="btn btn-danger btn-sm bt"
-                                                                            title="Delete">
-                                                                            <i class="fa-solid fa-trash fa-lg"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                    <button class="btn btn-warning btn-sm bt float-right"
-                                                                        title="Edit" id="editButton"
-                                                                        data-id="{{ $data->id }}"
+                                                                    <button class="btn btn-warning btn-sm bt" title="Edit"
+                                                                        id="editButton" data-id="{{ $data->id }}"
                                                                         data-user_id="{{ Auth::user()->id }}"
                                                                         data-exam_name="{{ $data->exam_name }}"
                                                                         data-specialization="{{ $data->specialization }}"
@@ -89,6 +72,14 @@
                                                                         data-marks="{{ $data->marks }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
+
+                                                                    <button class="btn btn-danger btn-sm bt deleteRecord"
+                                                                        title="Delete" data-id="{{ $data->id }}"
+                                                                        data-token="{{ csrf_token() }}"
+                                                                        data-action="{{ route('admin.person.profile.qualification.delete') }}">
+                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                    </button>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -127,49 +118,50 @@
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="exam_name">Exam Name<small class="required-field">*</small></label>
+                                                <label for="exam_name">Exam Name<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="exam_name" placeholder="Enter exam name" type="text"
-                                                    name="exam_name" class="form-control form-control-" value="">
+                                                    name="exam_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="specialization">Specialization<small class="required-field">*</small></label>
+                                                <label for="specialization">Specialization<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="specialization" placeholder="Enter specialization"
-                                                    type="text" name="specialization"
-                                                    class="form-control form-control-" value="">
+                                                    type="text" name="specialization" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="institute_name">Institute Name<small class="required-field">*</small></label>
+                                                <label for="institute_name">Institute Name<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
-                                                    type="text" name="institute_name"
-                                                    class="form-control form-control-" value="">
+                                                    type="text" name="institute_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="university">University<small class="required-field">*</small></label>
+                                                <label for="university">University<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="university" placeholder="Enter university"
-                                                    type="text" name="university" class="form-control form-control-"
-                                                    value="">
+                                                    type="text" name="university" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="year_of_passing">Year of Passing<small class="required-field">*</small></label>
+                                                <label for="year_of_passing">Year of Passing<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="year_of_passing" placeholder="Enter year of passing"
-                                                    type="text" name="year_of_passing"
-                                                    class="form-control form-control-" value="">
+                                                    type="number" name="year_of_passing" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="marks">Marks(%)<small class="required-field">*</small></label>
+                                                <label for="marks">Marks(%)<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="marks" placeholder="Enter marks in percentage"
-                                                    type="text" name="marks" class="form-control form-control-"
-                                                    value="">
+                                                    type="number" name="marks" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -190,20 +182,6 @@
     </main>
 @endsection
 @push('custom-scripts')
-    @if (!empty(Session::get('success')))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ Session::get('success') }}',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        </script>
-        @php
-            Session::forget('success');
-        @endphp
-    @endif
-
     <script>
         function addQualification(user_id) {
             $('#form_add').trigger("reset");

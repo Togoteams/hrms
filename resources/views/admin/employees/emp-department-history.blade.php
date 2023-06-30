@@ -2,11 +2,6 @@
 @push('styles')
 @endpush
 @section('content')
-    <style>
-        .float-right {
-            float: right;
-        }
-    </style>
     <main id="content" role="main" class="main">
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -36,7 +31,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row this-div">
                                         @if (!empty($employee->departmentHistory))
                                             @foreach ($employee->departmentHistory as $department)
                                                 <div class="pb-4">
@@ -69,20 +64,8 @@
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
                                                                     <!-- Your content for right div goes here -->
-                                                                    <form id="form_id"
-                                                                        action="{{ route('admin.employee.departmentHistory.delete') }}"
-                                                                        class="float-right mx-1" method="post">
-                                                                        @csrf
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $department->id }}">
-                                                                        <button class="btn btn-danger btn-sm bt"
-                                                                            title="Delete">
-                                                                            <i class="fa-solid fa-trash fa-lg"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                    <button class="btn btn-warning btn-sm bt float-right"
-                                                                        title="Edit" id="editButton"
-                                                                        data-id="{{ $department->id }}"
+                                                                    <button class="btn btn-warning btn-sm bt" title="Edit"
+                                                                        id="editButton" data-id="{{ $department->id }}"
                                                                         data-user_id="{{ $employee->user_id }}"
                                                                         data-department_name="{{ $department->department_name }}"
                                                                         data-start_date="{{ $department->start_date }}"
@@ -90,6 +73,14 @@
                                                                         data-description="{{ $department->description }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
+
+                                                                    <button class="btn btn-danger btn-sm bt deleteRecord"
+                                                                        title="Delete" data-id="{{ $department->id }}"
+                                                                        data-token="{{ csrf_token() }}"
+                                                                        data-action="{{ route('admin.employee.departmentHistory.delete') }}">
+                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                    </button>
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -130,8 +121,8 @@
                                             <div class="form-group">
                                                 <label for="department_name">Department Name<small
                                                         class="required-field">*</small></label>
-                                                <input id="department_name" placeholder="Enter exam name" type="text"
-                                                    name="department_name" class="form-control form-control-"
+                                                <input id="department_name" placeholder="Enter Department Name"
+                                                    type="text" name="department_name" class="form-control form-control-"
                                                     value="">
                                             </div>
                                         </div>
@@ -139,13 +130,13 @@
                                             <div class="form-group">
                                                 <label for="">Period of work<small
                                                         class="required-field">*</small></label>
-                                                <input id="start_date" name="start_date" placeholder="Start Year"
+                                                <input id="start_date" name="start_date" placeholder="Start Date"
                                                     type="date" class="form-control form-control-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-2">
                                             <label for=""></label>
-                                            <input id="end_date" name="end_date" placeholder="End Year" type="date"
+                                            <input id="end_date" name="end_date" placeholder="End Date" type="date"
                                                 class="form-control form-control-sm">
                                         </div>
                                         <div class="col-md-12 mb-2">

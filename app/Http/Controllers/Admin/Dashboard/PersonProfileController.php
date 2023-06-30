@@ -67,13 +67,12 @@ class PersonProfileController extends BaseController
                 if ($qualification) {
                     $qualification->delete();
                     $message = "Record deleted Successfully";
-                    Session::put('success', $message);
-                    return redirect()->back();
+                    return response()->json(['status' => true, 'message' => $message]);
                 } else {
-                    return response()->json(['error' => 'Qualification not found']);
+                    return response()->json(['status' => false, 'error' => 'Record not found']);
                 }
             } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+                return response()->json(['status' => false, 'error' => $e->getMessage()]);
             }
         }
     }
@@ -235,13 +234,12 @@ class PersonProfileController extends BaseController
                 if ($qualification) {
                     $qualification->delete();
                     $message = "Record deleted Successfully";
-                    Session::put('success', $message);
-                    return redirect()->back();
+                    return response()->json(['status' => true, 'message' => $message]);
                 } else {
-                    return response()->json(['error' => 'Qualification not found']);
+                    return response()->json(['status' => false, 'error' => 'Record not found']);
                 }
             } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+                return response()->json(['status' => false, 'error' => $e->getMessage()]);
             }
         }
     }
