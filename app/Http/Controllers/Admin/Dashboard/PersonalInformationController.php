@@ -54,18 +54,18 @@ class PersonalInformationController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
             'user_id' => ['required', 'numeric'],
-            'username' => ['required', 'string'],
             'gender' => ['required', 'string'],
-            'designation_id' => ['required', 'numeric'],
-            'basic_salary' => ['required', 'numeric'],
+            // 'username' => ['required', 'string'],
+            // 'designation_id' => ['required', 'numeric'],
+            // 'basic_salary' => ['required', 'numeric'],
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
-                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
+                // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
+                // User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);

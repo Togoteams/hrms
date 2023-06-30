@@ -116,7 +116,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        {{-- <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="username">User Name</label>
                                                 <input required id="username" placeholder="Enter User Name" type="text"
@@ -146,7 +146,7 @@
                                                     name="basic_salary" class="form-control form-control-"
                                                     value="{{ $data->basic_salary }}">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="date_of_birth">Date of Birth<small
