@@ -212,9 +212,9 @@ function formValidate(el, form_id) {
             }
         }
 
-        if (flag == true && el[f].type == "text") {
-            flag = validateText(el[f]);
-        }
+        // if (flag == true && el[f].type == "text") {
+        //     flag = validateText(el[f]);
+        // }
 
         if (flag == true && el[f].type == "email") {
             flag = validateEmail(el[f])

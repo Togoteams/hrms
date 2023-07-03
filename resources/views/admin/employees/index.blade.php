@@ -156,29 +156,47 @@
 @endsection
 @push('custom-scripts')
     <script>
-        $(document).ready(function() {
-            //For Creation Time
-            $("#contractDiv").hide();
+        // $(document).ready(function() {
+        //     //For Creation Time
+        //     $("#contractDiv").hide();
 
-            //For Edit Time
-            $("#employment_type_edit").val() == "local-contractual" ?
-                $("#contractDivEdit").show() && $("#contract_duration_edit").prop("required", true) :
-                $("#contractDivEdit").hide() && $("#contract_duration").val("");
-        });
+        //     //For Edit Time
+        //     $("#employment_type_edit").val() == "local-contractual" ?
+        //         $("#contractDivEdit").show() && $("#contract_duration_edit").prop("required", true) :
+        //         $("#contractDivEdit").hide() && $("#contract_duration").val("");
+        // });
 
-        //For Creation Time
-        $("#employment_type").change(() => {
-            $("#employment_type").val() == "local-contractual" ?
-                $("#contractDiv").show() && $("#contract_duration").prop("required", true) :
-                $("#contractDiv").hide() && $("#contract_duration").val("") &&
-                $("#contract_duration").removeAttr("required");
-        });
+        // //For Creation Time
+        // $("#employment_type").change(() => {
+        //     $("#employment_type").val() == "local-contractual" ?
+        //         $("#contractDiv").show() && $("#contract_duration").prop("required", true) :
+        //         $("#contractDiv").hide() && $("#contract_duration").val("") &&
+        //         $("#contract_duration").removeAttr("required");
+        // });
 
-        //For Edit Time
-        $("#employment_type_edit").change(() => {
-            $("#employment_type_edit").val() == "local-contractual" ?
-                $("#contractDivEdit").show() :
-                $("#contractDivEdit").hide() && $("#contract_duration").val("");
-        });
+        // //For Edit Time
+        // $("#employment_type_edit").change(() => {
+        //     $("#employment_type_edit").val() == "local-contractual" ?
+        //         $("#contractDivEdit").show() :
+        //         $("#contractDivEdit").hide() && $("#contract_duration").val("");
+        // });
+
+        function show_hide(input,data,id){
+          if(input.value==data){
+            document.getElementById(id).style.display="block";
+          }  else{
+            document.getElementById(id).style.display="none";
+          }
+          if(input.value=="yes"){
+            pention_contribution();
+
+          }
+        }
+
+        function pention_contribution(){
+            var basic= document.getElementById('basic_salary').value;
+            document.getElementById('pension_contribution').value=Number(basic)*0.01;
+        }
+
     </script>
 @endpush

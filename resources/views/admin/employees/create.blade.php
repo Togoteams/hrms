@@ -16,7 +16,7 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="name">Employee Name</label>
-                                    <input  id="name" required placeholder="Enter correct Emplooye  Name "
+                                    <input id="name" required placeholder="Enter correct Emplooye  Name "
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -93,25 +93,18 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="employment_type">employment_type </label>
-                                    <select required id="employment_type" placeholder="Enter correct employment_type   " name="employment_type"
-                                    class="form-control form-control-sm ">
-                                    <option selected disabled> - Select employment type- </option>
-                                    <option value="local">Local</option>
-                                    <option value="expatriate">Expatriate</option>
-                                    <option value="local-contractual">Local-Contractual </option>
+                                    <select onchange="show_hide(this,'local-contractual','contractDiv')" required
+                                        id="employment_type" placeholder="Enter correct employment_type   "
+                                        name="employment_type" class="form-control form-control-sm ">
+                                        <option selected disabled> - Select employment type- </option>
+                                        <option value="local">Local</option>
+                                        <option value="expatriate">Expatriate</option>
+                                        <option value="local-contractual">Local-Contractual </option>
 
-                                </select>
+                                    </select>
                                 </div>
                             </div>
-
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="id_number">id number </label>
-                                    <input required id="id_number" placeholder="Enter correct id number   "
-                                        type="text" name="id_number" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2" id="contractDiv">
+                            <div style="display: none" class="col-sm-4 mb-2" id="contractDiv">
                                 <div class="form-group">
                                     <label for="contract_duration">contract duration </label>
                                     <input id="contract_duration" value=""
@@ -119,6 +112,14 @@
                                         name="contract_duration" class="form-control form-control-sm ">
                                 </div>
                             </div>
+                            <div class="col-sm-4 mb-2">
+                                <div class="form-group">
+                                    <label for="id_number">id number </label>
+                                    <input required id="id_number" placeholder="Enter correct id number   "
+                                        type="text" name="id_number" class="form-control form-control-sm ">
+                                </div>
+                            </div>
+
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="basic_salary">basic salary </label>
@@ -163,6 +164,20 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="pension_contribution">pension contribution </label>
+                                    <select required id="pension_contribution"
+                                        onchange="show_hide(this,'yes','pension_div')"
+                                        placeholder="Enter correct pension contribution   " type="number"
+                                        name="pension_contribution" class="form-control form-control-sm ">
+                                        <option selected disabled> -Select Penstion Contribution Type- </option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4 mb-2 " style="display: none;" id="pension_div">
+                                <div class="form-group">
+                                    <label for="pension_contribution">pension contribution Amount </label>
                                     <input required id="pension_contribution"
                                         placeholder="Enter correct pension contribution   " type="number"
                                         name="pension_contribution" class="form-control form-control-sm ">
@@ -172,8 +187,8 @@
                                 <div class="form-group">
                                     <label for="unique_membership_id">union membership </label>
                                     <select required id="unique_membership_id"
-                                        placeholder="Enter correct union_membership_id   "
-                                        name="unique_membership_id" class="form-control form-control-sm ">
+                                        placeholder="Enter correct union_membership_id   " name="unique_membership_id"
+                                        class="form-control form-control-sm ">
                                         <option selected disabled> - Select unique_membership_id - </option>
                                         @foreach ($membership as $mem)
                                             <option value="{{ $mem->id }}">{{ $mem->name }}</option>

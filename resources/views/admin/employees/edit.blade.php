@@ -92,10 +92,10 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-4 mb-2">
+        <div class="col-sm-4 mb-2 ">
             <div class="form-group">
                 <label for="employment_type">employment_type </label>
-                <select required id="employment_type_edit" placeholder="Enter correct employment_type   "
+                <select required id="employment_type_edit" onchange="show_hide(this,'local-contractual','contractDivEdit')" placeholder="Enter correct employment_type   "
                     name="employment_type" class="form-control form-control-sm ">
                     <option  disabled> - Select employment type- </option>
                     <option {{ $data->employment_type == 'local' ? 'selected' : '' }} value="local">Local</option>
@@ -105,14 +105,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-sm-4 mb-2">
-            <div class="form-group">
-                <label for="id_number">id number </label>
-                <input required id="id_number" placeholder="Enter correct id number   " value="{{ $data->id_number }}"
-                    type="text" name="id_number" class="form-control form-control-sm ">
-            </div>
-        </div>
-        <div class="col-sm-4 mb-2" id="contractDivEdit">
+        <div class="col-sm-4 mb-2" id="contractDivEdit" style=" display:{{ $data->employment_type == 'local-contractual' ? 'block' : 'none' }}">
             <div class="form-group">
                 <label for="contract_duration">contract duration </label>
                 <input required id="contract_duration_edit" placeholder="Enter correct contract duration   " type="text"
@@ -122,8 +115,16 @@
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="basic_salary">basic salary </label>
-                <input required id="basic_salary" placeholder="Enter correct basic salary   " type="number"
+                <label for="id_number">id number </label>
+                <input required id="id_number" placeholder="Enter correct id number   " value="{{ $data->id_number }}"
+                    type="text" name="id_number" class="form-control form-control-sm ">
+            </div>
+        </div>
+    
+        <div class="col-sm-4 mb-2">
+            <div class="form-group">
+                <label for="basic_salaryedit">basic salary </label>
+                <input required id="basic_salaryedit" placeholder="Enter correct basic salary   " type="number"
                     value="{{ $data->basic_salary }}" name="basic_salary" class="form-control form-control-sm ">
             </div>
         </div>
@@ -163,7 +164,7 @@
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="pension_contribution">pension contribution </label>
+                <label for="pension_contribution">pension contribution Amount </label>
                 <input required id="pension_contribution" placeholder="Enter correct pension_contribution   "
                     value="{{ $data->pension_contribution }}" type="number" name="pension_contribution"
                     class="form-control form-control-sm ">
