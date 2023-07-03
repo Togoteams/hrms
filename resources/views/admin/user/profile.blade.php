@@ -32,6 +32,20 @@
                 <form action="{{ route('admin.profile.update') }}" method="post" enctype='multipart/form-data'>
                     {{ csrf_field() }}
 
+                    <div class="form-group" id="image_preview_section">
+                        @if (!empty(Auth::user()->media))
+                            <img class="img-profile rounded-circle" id="user_img" style="height: 70px;"
+                                src="{{ Auth::user()->media->getUrl() }}">
+                        @else
+                            <img class="img-profile rounded-circle" id="user_img" style="height: 70px;" src="">
+                        @endif
+                    </div>
+                    <div class="form-group mr-bot">
+
+                        <label for="file">Profile Pic </label>
+                        <input type="file" name="file" id="file" accept="image/*" onchange="validateimg(this)">
+                    </div>
+
                     <div class="form-group mr-bot">
                         <label for="name">Name<span style="color:red;">*</span></label>
                         <input type="text" name="name" value="{{ Auth::user()->name }}"

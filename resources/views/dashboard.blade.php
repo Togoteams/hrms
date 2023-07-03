@@ -15,7 +15,8 @@
                     <div class="mt-5 row">
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard" href="{{ url('admin/personal-info/employee-details') }}">
+                            <a class="card card-hover-shadow card-dashboard"
+                                href="{{ url('admin/personal-info/employee-details') }}">
                                 <div class="text-center card-body">
                                     <h2 class="text-white card-title">Personal Information</h2>
                                     <h6 class="pt-3 card-subtitle"><i class="fa-solid fa-blog"></i></h6>
@@ -35,7 +36,8 @@
 
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard" href="{{ url('admin/person-profile/place-of-domicile') }}">
+                            <a class="card card-hover-shadow card-dashboard"
+                                href="{{ url('admin/person-profile/qualifications') }}">
                                 <div class="text-center card-body">
                                     <h2 class="text-white card-title">Person Profile</h2>
                                     <h6 class="pt-3 card-subtitle"><i class="fa-sharp fa-solid fa-user-tie"></i></h6>
@@ -55,7 +57,8 @@
 
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard" href="#">
+                            <a class="card card-hover-shadow card-dashboard"
+                                href="{{ route('admin.userManualDownload', ['filename' => 'user_manual.pdf']) }}">
                                 <div class="text-center card-body">
                                     <div class="">
                                         <h2 class="text-white card-title">User Manual</h2>
@@ -75,7 +78,7 @@
 
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard " href="{{ url('/admin/leave_apply') }}">
                                 <div class="text-center card-body">
                                     <div class="">
                                         <h2 class="text-white card-title">Leave</h2>
@@ -94,7 +97,8 @@
                         </div>
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard "
+                                href="{{ route('admin.payroll.pay-scale.list') }}">
                                 <div class="text-center card-body">
                                     <div class="">
                                         <h2 class="text-white card-title">Payroll</h2>
@@ -114,7 +118,7 @@
 
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard " href="{{route('admin.profile')}}">
                                 <div class="text-center card-body">
                                     <div class="">
                                         <h2 class="text-white card-title">Upload Photo</h2>
@@ -132,7 +136,7 @@
                             <!-- End Card -->
                         </div>
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard " href="#">
                                 <div class="text-center card-body">
@@ -150,7 +154,7 @@
                                 </div>
                             </a>
                             <!-- End Card -->
-                        </div>
+                        </div> --}}
 
                         <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
                             <!-- Card -->

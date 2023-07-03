@@ -72,21 +72,21 @@
                     <table id="datatable"
                         class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
                         data-hs-datatables-options='{
-                   "columnDefs": [{
-                      "targets": [0, 7],
-                      "orderable": false
-                    }],
-                   "order": [],
-                   "info": {
-                     "totalQty": "#datatableWithPaginationInfoTotalQty"
-                   },
-                   "search": "#datatableSearch",
-                   "entries": "#datatableEntries",
-                   "pageLength": 15,
-                   "isResponsive": false,
-                   "isShowPaging": false,
-                   "pagination": "datatablePagination"
-                 }'>
+                            "columnDefs": [{
+                                "targets": [0, 7],
+                                "orderable": false
+                                }],
+                            "order": [],
+                            "info": {
+                                "totalQty": "#datatableWithPaginationInfoTotalQty"
+                            },
+                            "search": "#datatableSearch",
+                            "entries": "#datatableEntries",
+                            "pageLength": 15,
+                            "isResponsive": false,
+                            "isShowPaging": false,
+                            "pagination": "datatablePagination"
+                        }'>
                         <thead class="thead-light">
                             <tr>
                                 <th class="table-column-pe-0">
@@ -131,14 +131,15 @@
                                             <button type="button" data-table="holidays" data-form-modal="addEditHolidayModal"
                                                 data-message="inactive" data-uuid="{{ $holiday->uuid }}"
                                                 class="btn btn-warning btn-sm editData">
-                                               <i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                                <i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Edit"></i>
                                             </button>
                                         @endcan
                                         @can('delete-holidays')
                                             <button type="button" data-table="holidays" data-message="inactive"
-                                                data-uuid="{{ $holiday->uuid }}"
-                                                class="btn btn-danger btn-sm deleteData">
-                                                <i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
+                                                data-uuid="{{ $holiday->uuid }}" class="btn btn-danger btn-sm deleteData">
+                                                <i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    title="Delete"></i>
                                             </button>
                                         @endcan
                                     </td>

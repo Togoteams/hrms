@@ -12,15 +12,15 @@
                     <!-- End Page Header -->
 
                     <!-- Stats -->
+                    <span class="name-title">Personal Information</span>
                     <div class="mt-5">
-
                         <div class="row d-flex align-items-start">
                             <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
                                 @include('admin.dashboard.personal-information.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-6 border border-1 border-color rounded  mx-3">
+                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
@@ -29,18 +29,49 @@
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
                                                     <div class="left-div">
-                                                        <div class="row">
-                                                            <div class="col-3">Gender:</div>
-                                                            <div class="col-7">{{ $data->gender }}</div>
-                                                        </div>
+                                                        @if (!empty($data->passport_no) || !empty($data->omang_no))
+                                                            <div class="row text-dark">
+                                                                @if (!empty($data->passport_no))
+                                                                    <div class="col-3 fw-semibold">Passport No</div>
+                                                                    <div class="col-3">{{ $data->passport_no ?? '' }}</div>
+
+                                                                    <div class="col-3 fw-semibold">Passport Expiry</div>
+                                                                    <div class="col-3">
+                                                                        {{ !empty($data->passport_expiry) ? date_format(date_create_from_format('Y-m-d', $data->passport_expiry), 'd/m/Y') : '' }}
+                                                                    </div>
+                                                                @endif
+                                                                {{-- <br><br> --}}
+
+                                                                @if (!empty($data->omang_no))
+                                                                    <div class="col-3 fw-semibold">OMANG No</div>
+                                                                    <div class="col-3">{{ $data->omang_no ?? '' }}</div>
+
+                                                                    <div class="col-3 fw-semibold">OMANG Expiry</div>
+                                                                    <div class="col-3">
+                                                                        {{ !empty($data->omang_expiry) ? date_format(date_create_from_format('Y-m-d', $data->omang_expiry), 'd/m/Y') : '' }}
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        @else
+                                                            No data to show
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2 text-end">
                                                     <div class="pt-2">
                                                         <!-- Your content for right div goes here -->
-                                                        <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
-                                                            data-bs-target="#modaledit">
-                                                            <i class="fas fa-edit"></i></button>
+                                                        @if (!empty($data->id))
+                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
+                                                                data-bs-target="#modaledit">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                        @else
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                title="Add" data-bs-toggle="modal"
+                                                                data-bs-target="#modaledit">
+                                                                Add
+                                                            </button>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,26 +96,41 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="edit">
-                                <form id="form_edit" action="{{ route('admin.personal.info.passport.update', $data->id) }}">
+                                <form id="form_edit" action="{{ route('admin.personal.info.passport.update') }}">
                                     @csrf
-
+                                    <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
+                                    <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="gender">Gender </label>
-                                                <select required id="gender" placeholder="Enter correct gender"
-                                                    name="gender" class="form-control form-control-sm ">
-                                                    <option disabled> - Select Gender- </option>
-                                                    <option {{ $data->gender == 'male' ? 'selected' : '' }} value="male">
-                                                        Male
-                                                    </option>
-                                                    <option {{ $data->gender == 'female' ? 'selected' : '' }}
-                                                        value="female">
-                                                        Female</option>
-                                                    <option {{ $data->gender == 'others' ? 'selected' : '' }}
-                                                        value="others">
-                                                        others</option>
-                                                </select>
+                                                <label for="passport_no">Passport No.</label>
+                                                <input id="passport_no" placeholder="Enter Passport No." type="number"
+                                                    value="{{ $data->passport_no ?? '' }}" name="passport_no"
+                                                    class="form-control form-control-sm ">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="passport_expiry">Passport Expiry</label>
+                                                <input id="passport_expiry" placeholder="Enter Date of Passport Expiry"
+                                                    type="date" value="{{ $data->passport_expiry ?? '' }}"
+                                                    name="passport_expiry" class="form-control form-control-sm ">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="omang_no">OMANG No.</label>
+                                                <input id="omang_no" placeholder="Enter omang No." type="number"
+                                                    value="{{ $data->omang_no ?? '' }}" name="omang_no"
+                                                    class="form-control form-control-sm ">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="omang_expiry">OMANG Expiry</label>
+                                                <input id="omang_expiry" placeholder="Enter Date of OMANG Expiry"
+                                                    type="date" value="{{ $data->omang_expiry ?? '' }}"
+                                                    name="omang_expiry" class="form-control form-control-sm ">
                                             </div>
                                         </div>
                                     </div>

@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-12 mb-2">
             <div class="form-group">
-                <label for="status">Leave Status </label>
+                <label for="status">Leave Status</label>
                 <select required id="status" placeholder="Enter correct status   " type="text" name="status"
                     class="form-control form-control-sm ">
                     <option disabled> -Select Leave Types- </option>
@@ -19,7 +19,7 @@
         </div>
         <div class="col-sm-12 mb-2">
             <div class="form-group">
-                <label for="status_remarks"> Status remark </label>
+                <label for="status_remarks"> Status remark</label>
                 <textarea rows="12" required id="status_remarks" placeholder="Enter correct status_remarks   "
                     name="status_remarks" class="form-control form-control-sm ">{{ $data->status_remarks }}</textarea>
             </div>

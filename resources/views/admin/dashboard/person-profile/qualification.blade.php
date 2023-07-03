@@ -12,8 +12,8 @@
                     <!-- End Page Header -->
 
                     <!-- Stats -->
+                    <span class="name-title">Person Profile</span>
                     <div class="mt-5">
-
                         <div class="row d-flex align-items-start">
                             <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
                                 @include('admin.dashboard.person-profile.aside')
@@ -22,59 +22,74 @@
                             </div>
                             <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
 
-                                <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-content this-div" id="v-pills-tabContent">
                                     <div class="row py-3">
-                                        <div class="text-right">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#formModal" title="Add Qualification">
+                                        <div class="text-left">
+                                            <button type="button" class="btn btn-primary btn-sm" title="Add Qualification"
+                                                onclick="addQualification({{ Auth::user()->id }})">
                                                 Add Qualification
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    @if (count($datas) > 0)
                                         @foreach ($datas as $data)
-                                            <div class="col-xl-6 col-xxl-4 pb-4">
-                                                <div class="card p-3">
-                                                    <div class="row">
-                                                        <div class="col-10">
-                                                            <div class="row">
-                                                                <div class="col-6">Exam Name:</div>
-                                                                <div class="col-6">{{ $data->exam_name }}</div>
+                                            <div class="row">
+                                                <div class="pb-4">
+                                                    <div class="card p-3">
+                                                        <div class="row">
+                                                            <div class="col-9">
+                                                                <div class="row text-dark">
+                                                                    <div class="col-3 fw-semibold">Exam Name</div>
+                                                                    <div class="col-3">{{ $data->exam_name }}</div>
 
-                                                                <div class="col-6">Specialization:</div>
-                                                                <div class="col-6">{{ $data->specialization }}</div>
+                                                                    <div class="col-3 fw-semibold">Specialization</div>
+                                                                    <div class="col-3">{{ $data->specialization }}</div>
 
-                                                                <div class="col-6">Institute Name:</div>
-                                                                <div class="col-6">{{ $data->institute_name }}</div>
+                                                                    <div class="col-3 fw-semibold">Institute Name</div>
+                                                                    <div class="col-3">{{ $data->institute_name }}</div>
 
-                                                                <div class="col-6">University:</div>
-                                                                <div class="col-6">{{ $data->university }}</div>
+                                                                    <div class="col-3 fw-semibold">University</div>
+                                                                    <div class="col-3">{{ $data->university }}</div>
 
-                                                                <div class="col-6">Year of passing:</div>
-                                                                <div class="col-6">{{ $data->year_of_passing }}</div>
+                                                                    <div class="col-3 fw-semibold">Year of passing</div>
+                                                                    <div class="col-3">{{ $data->year_of_passing }}</div>
 
-                                                                <div class="col-6">marks Name:</div>
-                                                                <div class="col-6">{{ $data->marks }}</div>
+                                                                    <div class="col-3 fw-semibold">Marks</div>
+                                                                    <div class="col-3">{{ $data->marks }}</div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-1 text-end">
-                                                            <div class="right-div">
-                                                                <!-- Your content for right div goes here -->
+                                                            <div class="col-3 text-end">
+                                                                <div class="right-div">
+                                                                    <!-- Your content for right div goes here -->
+                                                                    <button class="btn btn-warning btn-sm bt" title="Edit"
+                                                                        id="editButton" data-id="{{ $data->id }}"
+                                                                        data-user_id="{{ Auth::user()->id }}"
+                                                                        data-exam_name="{{ $data->exam_name }}"
+                                                                        data-specialization="{{ $data->specialization }}"
+                                                                        data-institute_name="{{ $data->institute_name }}"
+                                                                        data-university="{{ $data->university }}"
+                                                                        data-year_of_passing="{{ $data->year_of_passing }}"
+                                                                        data-marks="{{ $data->marks }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
 
-                                                                <button class="btn btn-warning btn-sm bt"
-                                                                    data-bs-toggle="modal"
-                                                                    onclick="editQualification('{{ route('admin.person.profile.qualification.edit', $data->id) }}',
-                                                                                                    '{{ route('admin.person.profile.qualification.update') }}')"
-                                                                    title="Edit">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </button>
+                                                                    <button class="btn btn-danger btn-sm bt deleteRecord"
+                                                                        title="Delete" data-id="{{ $data->id }}"
+                                                                        data-token="{{ csrf_token() }}"
+                                                                        data-action="{{ route('admin.person.profile.qualification.delete') }}">
+                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                    </button>
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         @endforeach
-                                    </div>
+                                    @else
+                                        <div class="card p-3 mb-5">No data to show</div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -90,69 +105,70 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content ">
                             <div class="modal-header ">
-                                <h5 class="modal-title" id="staticBackdropLabel">Add Qualification</h5>
+                                <h5 class="modal-title" id="modalTitle"></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="add">
-                                <form id="form_id" action="{{ route('admin.person.profile.qualification.add') }}">
+                                <form id="form_add" action="{{ route('admin.person.profile.qualification.post') }}">
                                     @csrf
-                                    <input type="hidden" name="id" id="id" value="">
-                                    <input type="hidden" name="user_id" id="user_id" value="{{ count($datas) ? $datas[0]->user_id : '' }}">
+                                    <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="user_id" id="user_id">
 
                                     <div class="row">
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="exam_name">Exam Name</label>
+                                                <label for="exam_name">Exam Name<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="exam_name" placeholder="Enter exam name" type="text"
-                                                    name="exam_name" class="form-control form-control-" value="">
+                                                    name="exam_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="specialization">Specialization</label>
+                                                <label for="specialization">Specialization<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="specialization" placeholder="Enter specialization"
-                                                    type="text" name="specialization" class="form-control form-control-"
-                                                    value="">
+                                                    type="text" name="specialization" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="institute_name">Institute Name</label>
+                                                <label for="institute_name">Institute Name<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
-                                                    type="text" name="institute_name"
-                                                    class="form-control form-control-" value="">
+                                                    type="text" name="institute_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="university">University</label>
+                                                <label for="university">University<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="university" placeholder="Enter university"
-                                                    type="text" name="university" class="form-control form-control-"
-                                                    value="">
+                                                    type="text" name="university" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="year_of_passing">Year of Passing </label>
+                                                <label for="year_of_passing">Year of Passing<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="year_of_passing" placeholder="Enter year of passing"
-                                                    type="text" name="year_of_passing"
-                                                    class="form-control form-control-" value="">
+                                                    type="number" name="year_of_passing" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
-                                                <label for="marks">Marks(%)</label>
+                                                <label for="marks">Marks(%)<small
+                                                        class="required-field">*</small></label>
                                                 <input required id="marks" placeholder="Enter marks in percentage"
-                                                    type="text" name="marks" class="form-control form-control-"
-                                                    value="">
+                                                    type="number" name="marks" class="form-control">
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="text-center ">
-                                        <button onclick="ajaxCall('form_id','','POST')" type="button"
-                                            class="btn btn-primary" id="buttonName">Add Qualification
+                                        <button onclick="ajaxCall('form_add','','POST')" type="button"
+                                            class="btn btn-primary" id="btnSave">
                                         </button>
                                     </div>
                                 </form>
@@ -167,26 +183,40 @@
 @endsection
 @push('custom-scripts')
     <script>
-        function editQualification(editURL, updateURL) {
-            $('#formModal').trigger("reset");
-            $.ajax({
-                url: editURL,
-                method: "GET",
-                contentType: 'application/json',
-                dataType: "json",
-                success: function(data) {
-                    $('#id').val(data.data.id);
-                    $('#exam_name').val(data.data.exam_name);
-                    $('#specialization').val(data.data.specialization);
-                    $('#institute_name').val(data.data.institute_name);
-                    $('#university').val(data.data.university);
-                    $('#year_of_passing').val(data.data.year_of_passing);
-                    $('#marks').val(data.data.marks);
-                }
-            });
-            $("#buttonName").html("Edit Qualification");
+        function addQualification(user_id) {
+            $('#form_add').trigger("reset");
+            $("#id").val("");
             $('#formModal').modal('show');
-            $('#form_id').attr('action', updateURL);
+            $("#modalTitle").html("Add: Qualification");
+            $("#btnSave").html("CREATE");
+            $("#user_id").val(user_id);
         }
+        $(document).ready(() => {
+            $(document).on("click", "#editButton", (event) => {
+                $('#form_add').trigger("reset");
+                $("#modalTitle").html("Edit: Qualification");
+                $("#btnSave").html("UPDATE");
+
+                let id = $(event.currentTarget).data("id");
+                let user_id = $(event.currentTarget).data("user_id");
+                let exam_name = $(event.currentTarget).data("exam_name");
+                let specialization = $(event.currentTarget).data("specialization");
+                let institute_name = $(event.currentTarget).data("institute_name");
+                let university = $(event.currentTarget).data("university");
+                let year_of_passing = $(event.currentTarget).data("year_of_passing");
+                let marks = $(event.currentTarget).data("marks");
+
+                $("#id").val(id);
+                $("#user_id").val(user_id);
+                $("#exam_name").val(exam_name);
+                $("#specialization").val(specialization);
+                $("#institute_name").val(institute_name);
+                $("#university").val(university);
+                $("#year_of_passing").val(year_of_passing);
+                $("#marks").val(marks);
+
+                $('#formModal').modal('show');
+            });
+        });
     </script>
 @endpush

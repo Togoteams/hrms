@@ -14,6 +14,10 @@
     .btn-bg-color {
         background-color: #f85109d6 !important;
     }
+
+    .required-field{
+        color: red;
+    }
 </style>
 
 <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">

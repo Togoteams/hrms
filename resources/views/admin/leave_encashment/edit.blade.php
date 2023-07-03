@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-6 mb-2">
             <div class="form-group">
-                <label for="no_of_days">no_of_days.. </label>
+                <label for="no_of_days">no_of_days..</label>
                 <input required id="no_of_days" placeholder="Enter correct no_of_days..   " type="text"
                     value="{{ $data->no_of_days }}" name="no_of_days" class="form-control form-control-sm ">
             </div>
@@ -14,9 +14,9 @@
 
         <div class="col-sm-12 mb-2">
             <div class="form-group">
-                <label for="description">description </label>
+                <label for="description">description</label>
                 <textarea rows="12" required id="description" placeholder="Enter correct description   " name="description"
-                    class="form-control form-control-sm ">{{ $data->description}}</textarea>
+                    class="form-control form-control-sm ">{{ $data->description }}</textarea>
             </div>
         </div>
     </div>

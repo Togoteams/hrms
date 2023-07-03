@@ -20,6 +20,19 @@
                     <!-- End Col -->
                 </div>
                 <div class="row">
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-3 text-right auto mb-5 mt-2">
+                        {{-- @can('add-employees_salary') --}}
+                        <a href="{{ route('admin.payroll.pay-scale.add') }}">
+                            <button type="button" class="btn btn-primary">
+                                Add {{ $page }}
+                            </button>
+                        </a>
+                        {{-- @endcan --}}
+
+                    </div>
+                </div>
+                <div class="row">
                     <div class="table-responsive mt-4 pt-4">
                         <table
                             class="table data-table table-pay-scale  table-thead-bordered table-nowrap table-align-middle card-table">

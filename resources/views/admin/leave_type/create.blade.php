@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="leave_for">Leave For </label>
+                                    <label for="leave_for">Leave For</label>
                                     <select required id="leave_for" placeholder="Enter leave_for of leave_type "
                                         type="text" name="leave_for" class="form-control form-control-sm ">
                                         <option selected disabled> - Select - </option>
@@ -25,7 +25,7 @@
 
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="name">Name </label>
+                                    <label for="name">Name</label>
                                     <input required id="name" placeholder="Enter Name of leave_type "
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
@@ -33,10 +33,9 @@
 
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="nature_of_leave">nature_of_leave </label>
-                                    <select required id="nature_of_leave"
-                                      
-                                        name="nature_of_leave" class="form-control form-control-sm ">
+                                    <label for="nature_of_leave">nature_of_leave</label>
+                                    <select required id="nature_of_leave" name="nature_of_leave"
+                                        class="form-control form-control-sm ">
                                         <option selected disabled> - Select Nature of Leave - </option>
                                         <option value="paid"> Paid</option>
                                         <option value="unpaid">Unpaid</option>
@@ -45,7 +44,7 @@
                             </div>
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="no_of_days">no_of_days </label>
+                                    <label for="no_of_days">no_of_days</label>
                                     <input required id="no_of_days" placeholder="Enter no_of_days of leave_type "
                                         type="text" value="0" name="no_of_days"
                                         class="form-control form-control-sm ">
@@ -54,7 +53,7 @@
 
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="description">description </label>
+                                    <label for="description">description</label>
                                     <textarea required id="description" placeholder="Enter Short Description of leave_type   " type="text"
                                         name="description" class="form-control form-control-sm "></textarea>
                                 </div>

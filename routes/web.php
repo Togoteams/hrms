@@ -30,10 +30,6 @@ use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->group(function () {
 
-    // Route::get('/users', function () {
-    //     return view('admin.user.users');
-    // });
-
     Route::controller(DashboardController::class)->as('dashboard.')->prefix('dashboard/')->group(function () {
         Route::get('/', 'viewDashboard')->name('view');
     });
@@ -42,47 +38,44 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         ->prefix('personal-info')
         ->group(function () {
             Route::get('/employee-details', 'viewEmployeeDetails')->name('employee.details');
-            Route::post('/update-employee-details/{id}', 'updateEmployeeDetails')->name('employee.details.update');
+            Route::post('/update-employee-details', 'updateEmployeeDetails')->name('employee.details.update');
 
             Route::get('/contact-details', 'viewContact')->name('contact');
-            Route::post(
-                '/update-contact',
-                'updateContact'
-            )->name('contact.update');
+            Route::post('/update-contact', 'updateContact')->name('contact.update');
 
             Route::get('/address-details', 'viewAddress')->name('address');
-            Route::post('/update-address/{id}', 'updateAddress')->name('address.update');
-
-            Route::get('/dob-details', 'viewDobDetails')->name('dob.details');
-            Route::post('/update-dob-details/{id}', 'updateDobDetails')->name('dob.details.update');
+            Route::post('/post-address', 'postAddress')->name('address.post');
 
             Route::get('/passport-details', 'viewPassport')->name('passport');
-            Route::post('/update-passport/{id}', 'updatePassport')->name('passport.update');
-
-            Route::get('/emergency-contact-details', 'viewEmergencyContact')->name('emergency.contact');
-            Route::post('/update-emergency-contact/{id}', 'updateEmergencyContact')->name('emergency.contact.update');
+            Route::post('/update-passport', 'updatePassport')->name('passport.update');
         });
     Route::controller(PersonProfileController::class)
         ->as('person.profile.')
         ->prefix('person-profile')
         ->group(function () {
             Route::get('/qualifications', 'viewQualifications')->name('qualifications.view');
-            Route::post('/add-qualification', 'addQualification')->name('qualification.add');
-            Route::get('/edit-qualification/{id}', 'editQualification')->name('qualification.edit');
-            Route::post('/update-qualification', 'updateQualification')->name('qualification.update');
+            Route::post('/post-qualification', 'postQualification')->name('qualification.post');
+            Route::post('/delete-qualification', 'deleteQualification')->name('qualification.delete');
+
+            Route::get('/medical-insurance-bomaid-details', 'viewMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.view');
+            Route::post('/update-medical-insurance-bomaid-details', 'updateMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.update');
+
+            Route::get('/driving-license-details', 'viewDrivingLicenseDetails')->name('driving.license.details.view');
+            Route::post('/update-driving-license-details', 'updateDrivingLicenseDetails')->name('driving.license.details.update');
+
+            Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
+            Route::post('/post-previous-employment-details', 'postPreviousEmploymentDetails')->name('previous.employment.details.post');
+            Route::post('/delete-previous-employment-details', 'deletePreviousEmploymentDetails')->name('previous.employment.details.delete');
 
             Route::get('/place-of-domicile', 'viewPlaceOfDomicile')->name('place.of.domicile.view');
+            Route::post('/place-of-domicile', 'postPlaceOfDomicile')->name('place.of.domicile.post');
+
             Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');
             Route::get('/union-details', 'viewUnionDetails')->name('union.details.view');
             Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');
-            Route::get('/sports-cultural-details', 'viewSportsCulturalDetails')->name('sports.cultural.details.view');
-            Route::get('/awards-details', 'viewAwardsDetails')->name('awards.details.view');
-            Route::get('/medical-insurance-bomaid-details', 'viewMedicalInsuranceBomaidDetails')->name('medical.insurance.bomaid.details.view');
-            Route::get('/driving-license-details', 'viewDrivingLicenseDetails')->name('driving.license.details.view');
-            Route::get('/previous-employment-details', 'viewPreviousEmploymentDetails')->name('previous.employment.details.view');
-            Route::get('/language-known', 'viewLanguageKnown')->name('language.known.view');
-            Route::get('/functional-competancy-details', 'viewFunctionalCompetancyDetails')->name('functional.competancy.details.view');
         });
+    Route::get('/download/{filename}', [DashboardController::class, 'userManualDownload'])->name('userManualDownload');
+
     Route::controller(RoleController::class)->as('role.')->prefix('roles/')->group(function () {
         Route::get('/', 'viewRole')->name('list');
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
@@ -110,6 +103,32 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('employees', EmployeeController::class);
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
+
+    Route::get('employee/user-details/{eid?}', [EmployeeController::class, 'viewUserDetails'])->name('employee.userDetails.form');
+    Route::post('employee/user-details', [EmployeeController::class, 'postUserDetails'])->name('employee.userDetails.post');
+
+    Route::get('employee/employee-details/{eid?}', [EmployeeController::class, 'viewEmployeeDetails'])->name('employee.employeeDetails.form');
+    Route::post('employee/employee-details', [EmployeeController::class, 'postEmployeeDetails'])->name('employee.employeeDetails.post');
+
+    Route::get('employee/address/{eid?}', [EmployeeController::class, 'viewAddress'])->name('employee.address.form');
+    Route::post('employee/address', [EmployeeController::class, 'postAddress'])->name('employee.address.post');
+
+    Route::get('employee/passport-omang/{eid?}', [EmployeeController::class, 'viewPassportOmang'])->name('employee.passportOmang.form');
+    Route::post('employee/passport-omang', [EmployeeController::class, 'postPassportOmang'])->name('employee.passportOmang.post');
+
+    Route::get('employee/qualification/{eid?}', [EmployeeController::class, 'viewQualification'])->name('employee.qualification.form');
+    Route::post('employee/qualification', [EmployeeController::class, 'postQualification'])->name('employee.qualification.post');
+    Route::post('employee/delete-qualification', [EmployeeController::class, 'deleteQualification'])->name('employee.qualification.delete');
+
+    Route::get('employee/medical-insuarance-bomaid/{eid?}', [EmployeeController::class, 'viewMedicalInsuaranceBomaid'])->name('employee.medicalInsuaranceBomaid.form');
+    Route::post('employee/medical-insuarance-bomaid', [EmployeeController::class, 'postMedicalInsuaranceBomaid'])->name('employee.medicalInsuaranceBomaid.post');
+
+    Route::get('employee/domicile/{eid?}', [EmployeeController::class, 'viewDomicile'])->name('employee.domicile.form');
+    Route::post('employee/domicile', [EmployeeController::class, 'postDomicile'])->name('employee.domicile.post');
+
+    Route::get('employee/department-history/{eid?}', [EmployeeController::class, 'viewDepartmentHistory'])->name('employee.departmentHistory.form');
+    Route::post('employee/department-history', [EmployeeController::class, 'postDepartmentHistory'])->name('employee.departmentHistory.post');
+    Route::post('employee/delete-department-history', [EmployeeController::class, 'deleteDepartmentHistory'])->name('employee.departmentHistory.delete');
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);
