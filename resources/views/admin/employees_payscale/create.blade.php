@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_data" action="{{ route('admin.employees_salary.store') }}">
+                    <form id="form_data" action="{{ route('admin.employees-payscale.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
@@ -17,7 +17,7 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="user_id">User</label>
-                                    <select onchange="setData('form_data','{{ route('admin.employees_salary.getpayscale')}}')" required id="user_id" placeholder="Enter correct Emplooye   "
+                                    <select required id="user_id" placeholder="Enter correct Emplooye   "
                                         name="user_id" class="form-control form-control-sm ">
                                         <option selected disabled> -Select User- </option>
                                         @foreach ($users as $user)
@@ -108,7 +108,7 @@
                                         name="loans_deduction" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            {{-- <div class="col-sm-4 mb-2">
+                            <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="no_of_working_days">no_of_working_days</label>
                                     <input required id="no_of_working_days"
@@ -123,7 +123,7 @@
                                         placeholder="Enter correct no_of_paid_leaves   " type="text"
                                         name="no_of_paid_leaves" class="form-control form-control-sm ">
                                 </div>
-                            </div> --}}
+                            </div>
 
 
                             <div class="col-sm-4 mb-2">
@@ -133,7 +133,7 @@
                                         type="text" name="shift" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-2">
+                            {{-- <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="working_hours_start">working_hours_start</label>
                                     <input required id="working_hours_start"
@@ -148,7 +148,7 @@
                                         placeholder="Enter correct working_hours_end   " type="text"
                                         name="working_hours_end" class="form-control form-control-sm ">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="no_of_payable_days">no_of_payable_days</label>

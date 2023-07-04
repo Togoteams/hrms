@@ -25,7 +25,7 @@ use App\Http\Controllers\Admin\LeaveReportsController;
 use App\Http\Controllers\Admin\Payroll\PayscaleController;
 use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
-
+use App\Http\Controllers\Admin\EmployeePayScaleController;
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->group(function () {
@@ -174,6 +174,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employees_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('employees_loans.status');
 
     Route::resource('employees_salary', EmployeeSalaryController::class);
+    Route::post('payscale/get/employees_salary/',[EmployeeSalaryController::class,'getPayscale'])->name('employees_salary.getpayscale');
+    Route::resource('employees-payscale', EmployeePayScaleController::class);
+    Route::get('employees-payscale/status/{id}', [EmployeePayScaleController::class, 'status'])->name('employees-payscale.status');
 
     Route::get('employees_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('employees_salary.status');
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');

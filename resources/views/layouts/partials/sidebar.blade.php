@@ -186,13 +186,17 @@
                                  </a>
 
                                  <div id="empsalary"
-                                     class="nav-collapse collapse {{ show(['employees_salary.index']) }} "
+                                     class="nav-collapse collapse {{ show(['employees_salary.index','employees-payscale.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                      @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees_salary.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.employees_salary.index') }}"> Employee Salay</a>
                                      @endcanany
+                                     @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees-payscale.index' ? 'active' : '' }}  "
+                                         href="{{ route('admin.employees-payscale.index') }}"> Employee Pay Scale</a>
+                                 @endcanany
 
                                  </div>
                              </div>

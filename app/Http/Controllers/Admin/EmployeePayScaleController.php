@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\EmployeeSalary;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Yajra\DataTables\DataTables;
@@ -17,20 +15,21 @@ use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmployeePayScale;
 
-class EmployeeSalaryController extends Controller
+class EmployeePayScaleController extends Controller
 {
-    public $page_name = "Employees Salary";
     /**
      * Display a listing of the resource.
      */
+    public $page_name = "Employees PayScale";
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = EmployeeSalary::with('user')->select('*');
+            $data = EmployeePayScale::with(['user', 'employee'])->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.employees_salary.buttons', ['item' => $row, "route" => 'employees']);
+                    $actionBtn = view('admin.employees_payscale.buttons', ['item' => $row, "route" => 'employees-payscale']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -40,7 +39,7 @@ class EmployeeSalaryController extends Controller
         $membership = Membership::all();
         $users = User::all();
         $branch = Branch::where('status', 'active')->get();
-        return view('admin.employees_salary.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch, 'users' => $users]);
+        return view('admin.employees_payscale.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch, 'users' => $users]);
     }
     /**
      * Show the form for creating a new resource.
@@ -56,7 +55,7 @@ class EmployeeSalaryController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'user_id' => ['required', 'numeric'],
+            'user_id' => 'required|numeric|unique:employee_pay_scales,user_id',
             'basic' => ['required', 'numeric'],
             'hra' => ['required', 'numeric'],
             'overtime' => ['required', 'numeric'],
@@ -93,14 +92,14 @@ class EmployeeSalaryController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            // try {
-            $request->request->add(['employee_id' => Employee::where('user_id', $request->user_id)->first()->id ?? 0]);
-            EmployeeSalary::insertGetId($request->except(['_token', '_method']));
-            return response()->json(['success' => $this->page_name . " Added Successfully"]);
-            // } catch (Exception $e) {
-
-            //     return response()->json(['success' => $e->getMessage()]);
-            // }
+            try {
+                $request->request->add(['employee_id' => Employee::where('user_id', $request->user_id)->first()->id ?? 0]);
+                $request->request->add(['created_by' => auth()->user()->id]);
+                EmployeePayScale::insertGetId($request->except(['_token', '_method']));
+                return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
         }
     }
 
@@ -112,8 +111,10 @@ class EmployeeSalaryController extends Controller
         $designation = Designation::all();
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
-        $data = EmployeeSalary::find($id);
-        return view('admin.employees_salary.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        $data = EmployeePayScale::find($id);
+        $users = User::all();
+
+        return view('admin.employees_payscale.show', ['data' => $data,'users'=>$users, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -123,8 +124,10 @@ class EmployeeSalaryController extends Controller
         $designation = Designation::all();
         $membership = Membership::all();
         $branch = Branch::where('status', 'active')->get();
-        $data = EmployeeSalary::find($id);
-        return view('admin.employees_salary.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        $data = EmployeePayScale::find($id);
+        $users = User::all();
+
+        return view('admin.employees_payscale.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch, 'users' => $users]);
     }
     /**
      * Update the specified resource in storage.
@@ -132,7 +135,7 @@ class EmployeeSalaryController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => ['required', 'numeric'],
+            'user_id' => 'required|numeric|unique:employee_pay_scales,user_id,'.$id,
             'basic' => ['required', 'numeric'],
             'hra' => ['required', 'numeric'],
             'overtime' => ['required', 'numeric'],
@@ -165,35 +168,33 @@ class EmployeeSalaryController extends Controller
             'ctc' => ['required', 'numeric'],
             'total_employer_contribution' => ['required', 'numeric'],
             'total_deduction' => ['required', 'numeric']
+
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                EmployeeSalary::where('id', $id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
+                EmployeePayScale::where('id', $id)->update($request->except(['_token', '_method']));
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
-                return response()->json(['success' => $e->getMessage()]);
+                return response()->json(['error' => $e->getMessage()]);
             }
         }
     }
     public function status($id)
     {
-        if (EmployeeSalary::find($id)->status == "active") {
-            EmployeeSalary::where('id', $id)->update(['status' => 'inactive']);
+        if (EmployeePayScale::find($id)->status == "active") {
+            EmployeePayScale::where('id', $id)->update(['status' => 'inactive']);
             return "InActive";
         } else {
-            EmployeeSalary::where('id', $id)->update(['status' => 'active']);
+            EmployeePayScale::where('id', $id)->update(['status' => 'active']);
             return "Active";
         }
     }
 
-    public function getPayscale(Request $request)
-    {
-        $data =  EmployeePayScale::where('user_id', $request->user_id)->first();
-        return response()->json(['data' => $data]);
-    }
+
+  
 
     /**
      * Remove the specified resource from storage.
@@ -201,7 +202,7 @@ class EmployeeSalaryController extends Controller
     public function destroy(string $id)
     {
         try {
-            EmployeeSalary::destroy($id);
+            EmployeePayScale::destroy($id);
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];

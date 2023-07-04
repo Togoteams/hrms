@@ -125,10 +125,10 @@
             font-family: Constantia;
             font-weight: normal;
         }
+
         .payslip-15 {
             /* font-size: 9pt; */
             color: #057202;
-            /* font-family: Constantia; */
             /* font-weight: normal; */
         }
 
@@ -148,10 +148,10 @@
             border-top-width: 0;
             border-bottom-width: 0;
         }
-        .img1
-        {
-            width:10px;
-            height:10px;
+
+        .img1 {
+            width: 10px;
+            height: 10px;
             margin-top: 5px;
             padding-left: 4px;
         }
@@ -663,7 +663,7 @@
 
     <script src="../js/jquery.js"></script>
     <script src="../common.js"></script>
-     <script>
+    <script>
         // $(document).ready(function () {
         jsn = (JSON.parse(localStorage.payslipArray));
         console.log(jsn)
@@ -705,7 +705,7 @@
             $(".Basic_Section").css('visibility', "hidden");
         }
         if (jsn.Salary_Data[0].OT_Rate != 0 || jsn.Payscale_Data[0].Basic_Rate != 0) {
-            $("#OverTime_Pay").html(jsn.Payscale_Data[0].OT_Rate + "x" + (Number(jsn.Salary_Data[0].Basic_Rate)/8));
+            $("#OverTime_Pay").html(jsn.Payscale_Data[0].OT_Rate + "x" + (Number(jsn.Salary_Data[0].Basic_Rate) / 8));
             $("#OverTime_Earned").html(jsn.Salary_Data[0].Over_Time || 0);
             $(".OverTime_Section").css('visibility', "visible");
         } else {

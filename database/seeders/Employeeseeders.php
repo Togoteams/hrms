@@ -36,13 +36,13 @@ class Employeeseeders extends Seeder
             'start_date' =>   date('Y-m-d'),
             'branch_id' =>   1,
             'pension_contribution' => 1000,
-            'unique_membership_id' =>   1,
+            'union_membership_id' =>   1,
             'amount_payable_to_bomaind_each_year' =>  200,
             'currency' => 'INR',
-            'bank_name' =>   'AIRTEL PAYMENT BANK',
+         
             'bank_account_number' => '7250634942',
-            'bank_holder_name' => 'ROHIT KUMAR',
-            'ifsc' =>   'AIRP0000001',
+            
+            
 
         ],
         [
@@ -64,13 +64,13 @@ class Employeeseeders extends Seeder
             'start_date' =>   date('Y-m-d'),
             'branch_id' =>   1,
             'pension_contribution' => 1000,
-            'unique_membership_id' =>   1,
+            'union_membership_id' =>   1,
             'amount_payable_to_bomaind_each_year' =>  200,
             'currency' => 'INR',
-            'bank_name' =>   'AIRTEL PAYMENT BANK',
+         
             'bank_account_number' => '7250634942',
-            'bank_holder_name' => 'ROHIT KUMAR',
-            'ifsc' =>   'AIRP0000001',
+            
+            
 
         ],
         [
@@ -92,13 +92,13 @@ class Employeeseeders extends Seeder
             'start_date' =>   date('Y-m-d'),
             'branch_id' =>   1,
             'pension_contribution' => 1000,
-            'unique_membership_id' =>   1,
+            'union_membership_id' =>   1,
             'amount_payable_to_bomaind_each_year' =>  200,
             'currency' => 'INR',
-            'bank_name' =>   'AIRTEL PAYMENT BANK',
+         
             'bank_account_number' => '7250634942',
-            'bank_holder_name' => 'ROHIT KUMAR',
-            'ifsc' =>   'AIRP0000001',
+            
+            
 
         ]
     );

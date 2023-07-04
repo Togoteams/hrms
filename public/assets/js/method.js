@@ -93,6 +93,38 @@ function selectDrop(form_id, url_name, target_id, method = "POST") {
 }
 
 
+function setData(form_id, url_name = '', method = "POST") {
+    // getting the all from form
+    var form = document.getElementById(form_id);
+    if (url_name == '') {
+        var url_name = form.action;
+    }
+
+    // setting all input into the forData object
+    var formdata = new FormData(form);
+    var formElements_button = Array.from(form.elements).pop();
+    // getting the button of the form and passing into the preloader function
+    preloader(formElements_button);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            for (var key in data.data) {
+                try {
+                    document.getElementsByName(key)[0].value = data.data[key];
+                } catch (err) {
+                }
+            }
+
+            stopPreloader(formElements_button);
+        } method
+    };
+    xhttp.open(method, url_name, true);
+    xhttp.send(formdata);
+}
+
+
+
 
 function deleteRow(form_id, target_id = "", method = "POST") {
     if (confirm('Are sure to delete  !!!')) {
@@ -399,7 +431,7 @@ function validateText(text_input) {
     );
     console.log(text_input);
     if (data == null) {
-        setError(text_input, "Is Invalid Please Enter valid "+text_input.type+" You can't use "+text_input.value, "red")
+        setError(text_input, "Is Invalid Please Enter valid " + text_input.type + " You can't use " + text_input.value, "red")
         return false
     } else {
         setError(text_input, " ", "green")
