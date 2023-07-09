@@ -12,14 +12,16 @@
                     <!-- End Page Header -->
 
                     <!-- Stats -->
-                    <div class="mt-5 row">
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                    <div class="row">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard"
-                                href="{{ url('admin/personal-info/employee-details') }}">
+                            <a class="card card-hover-shadow card-dashboard card-bg card-bg"
+                                href="{{ url('admin/personal-info/employee-details')}}">
                                 <div class="text-center card-body">
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon1.png') }}" alt="">
+                                    </h6>
                                     <h2 class="text-white card-title">Personal Information</h2>
-                                    <h6 class="pt-3 card-subtitle"><i class="fa-solid fa-blog"></i></h6>
 
                                     <div class="row align-items-center gx-2">
                                         <div class="">
@@ -34,13 +36,17 @@
                             <!-- End Card -->
                         </div>
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard"
+                            <a class="card card-hover-shadow card-dashboard card-bg card-bg"
                                 href="{{ url('admin/person-profile/qualifications') }}">
                                 <div class="text-center card-body">
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon2.png') }}" alt="">
+
+                                    </h6>
                                     <h2 class="text-white card-title">Person Profile</h2>
-                                    <h6 class="pt-3 card-subtitle"><i class="fa-sharp fa-solid fa-user-tie"></i></h6>
+
 
                                     <div class="row align-items-center gx-2">
                                         <div class="">
@@ -55,15 +61,17 @@
                             <!-- End Card -->
                         </div>
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard"
+                            <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ route('admin.userManualDownload', ['filename' => 'user_manual.pdf']) }}">
                                 <div class="text-center card-body">
-                                    <div class="">
-                                        <h2 class="text-white card-title">User Manual</h2>
-                                    </div>
-                                    <h6 class="pt-4 card-subtitle"><i class="fa-solid fa-user-shield"></i></h6>
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon3.png') }}" alt="">
+
+                                    </h6>
+                                    <h2 class="text-white card-title">User Manual</h2>
+
 
                                     <div class="row align-items-center gx-2">
 
@@ -76,14 +84,16 @@
                             <!-- End Card -->
                         </div>
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="{{ url('/admin/leave_apply') }}">
+                            <a class="card card-hover-shadow card-dashboard card-bg " href="{{ url('/admin/leave_apply') }}">
                                 <div class="text-center card-body">
-                                    <div class="">
-                                        <h2 class="text-white card-title">Leave</h2>
-                                    </div>
-                                    <h6 class="pt-4 card-subtitle"><i class="fa-solid fa-user-clock"></i></h6>
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon4.png') }}" alt="">
+
+                                    </h6>
+                                    <h2 class="text-white card-title">Leave</h2>
+
 
                                     <div class="row align-items-center gx-2">
 
@@ -95,15 +105,17 @@
                             </a>
                             <!-- End Card -->
                         </div>
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard "
+                            <a class="card card-hover-shadow card-dashboard card-bg "
                                 href="{{ route('admin.payroll.pay-scale.list') }}">
                                 <div class="text-center card-body">
-                                    <div class="">
-                                        <h2 class="text-white card-title">Payroll</h2>
-                                    </div>
-                                    <h6 class="pt-4 card-subtitle"><i class="fa-solid fa-money-bill"></i></h6>
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon5.png') }}" alt="">
+
+                                    </h6>
+                                    <h2 class="text-white card-title">Payroll</h2>
+
 
                                     <div class="row align-items-center gx-2">
 
@@ -116,14 +128,16 @@
                             <!-- End Card -->
                         </div>
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="{{route('admin.profile')}}">
+                            <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.profile')}}">
                                 <div class="text-center card-body">
-                                    <div class="">
-                                        <h2 class="text-white card-title">Upload Photo</h2>
-                                    </div>
-                                    <h6 class="pt-4 card-subtitle"><i class="fa-solid fa-image"></i></h6>
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="">
+
+                                    </h6>
+                                    <h2 class="text-white card-title">Upload Photo</h2>
+
 
                                     <div class="row align-items-center gx-2">
 
@@ -136,14 +150,16 @@
                             <!-- End Card -->
                         </div>
 
-                        {{-- <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard card-bg">
                                 <div class="text-center card-body">
-                                    <div class="">
-                                        <h2 class="text-white card-title">Asset and Liability</h2>
-                                    </div>
-                                    <h6 class="pt-4 card-subtitle"><i class="fa-solid fa-scale-balanced"></i></h6>
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon7.png') }}" alt="">
+
+                                    </h6>
+                                    <h2 class="text-white card-title">Asset and Liability</h2>
+
 
                                     <div class="row align-items-center gx-2">
 
@@ -156,14 +172,16 @@
                             <!-- End Card -->
                         </div> --}}
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard card-bg " href="#">
                                 <div class="text-center card-body">
-                                    <div class="">
-                                        <h2 class="text-white card-title">Reports</h2>
-                                    </div>
-                                    <h6 class="pt-4 card-subtitle"><i class="fa-solid fa-file-invoice"></i></h6>
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon7.png') }}" alt="">
+
+                                    </h6>
+                                    <h2 class="text-white card-title">Reports</h2>
+
 
                                     <div class="row align-items-center gx-2">
 
@@ -176,14 +194,16 @@
                             <!-- End Card -->
                         </div>
 
-                        <div class="mb-3 col-sm-6 col-lg-2 mb-lg-5">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard " href="#">
+                            <a class="card card-hover-shadow card-dashboard card-bg " href="#">
                                 <div class="text-center card-body">
-                                    <div class="">
-                                        <h2 class="text-white card-title">Profile Approvel </h2>
-                                    </div>
-                                    <h6 class="pt-4 card-subtitle"><i class="fa-solid fa-user-check"></i></h6>
+                                    <h6 class="card-subtitle">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon8.png') }}" alt="">
+
+                                    </h6>
+                                    <h2 class="text-white card-title">Profile Approvel </h2>
+
 
                                     <div class="row align-items-center gx-2">
 
