@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('department_name')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
