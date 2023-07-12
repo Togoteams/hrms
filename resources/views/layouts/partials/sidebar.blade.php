@@ -203,6 +203,38 @@
                          </div>
                      @endcanany
 
+
+                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
+                     'delete-roles', 'view-roles'])
+                     <div id="navbarVerticalMenuPagesMenu">
+                         <!-- Collapse -->
+
+                         <div class="nav-item">
+                             <a class="nav-link dropdown-toggle " href="#kra" role="button"
+                                 data-bs-toggle="collapse" data-bs-target="#kra" aria-expanded="false"
+                                 aria-controls="kra">
+                                 <i class="fas fa-users-class nav-icon"></i>
+                                 <span class="nav-link-title">Kra</span>
+                             </a>
+
+                             <div id="kra"
+                                 class="nav-collapse collapse {{ show(['employee-kra.index','kra-attributes.index']) }} "
+                                 data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                                 @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.kra-attributes.index' ? 'active' : '' }}  "
+                                         href="{{ route('admin.kra-attributes.index') }}"> Attributes</a>
+                                 @endcanany
+                                 @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
+                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-kra.index' ? 'active' : '' }}  "
+                                     href="{{ route('admin.employee-kra.index') }}"> Employee Kra</a>
+                             @endcanany
+
+                             </div>
+                         </div>
+                     </div>
+                 @endcanany
+
                      <!-- End Collapse -->
 
                      <span class="mt-4 dropdown-header">Master</span>

@@ -14,7 +14,7 @@ class KraAttributesController extends Controller
     public function index()
     {
         $data =  KraAttributes::all();
-        return view('admin.branch.index', ['page' => $this->page_name, 'data' => $data]);
+        return view('admin.kra_attributes.index', ['page' => $this->page_name, 'data' => $data]);
     }
 
 
@@ -33,7 +33,8 @@ class KraAttributesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required',
-            'description' => 'string|required'
+            'description' => 'string|required',
+            'max_marks'=>'required|numeric'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -57,7 +58,7 @@ class KraAttributesController extends Controller
     public function edit(string $id)
     {
         $data = KraAttributes::find($id);
-        return view('admin.branch.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.kra_attributes.ediit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**
@@ -67,7 +68,8 @@ class KraAttributesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required',
-            'description' => 'string|required'
+            'description' => 'string|required',
+            'max_marks'=>'required|numeric'
         ]);
         if ($validator->fails()) {
             return $validator->errors();

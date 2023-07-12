@@ -25,7 +25,9 @@ use App\Http\Controllers\Admin\LeaveReportsController;
 use App\Http\Controllers\Admin\Payroll\PayscaleController;
 use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
+use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
+use App\Http\Controllers\Admin\KraAttributesController;
 use App\Models\KraAttributes;
 
 Route::get('/', [LoginController::class, 'authentication']);
@@ -137,8 +139,13 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('branch', BranchController::class);
     Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
 
-    Route::resource('kra-attributes', KraAttributes::class);
-    Route::get('kra-attributes/status/{id}', [KraAttributes::class, 'status'])->name('kra-attributes.status');
+    Route::resource('kra-attributes', KraAttributesController::class);
+    Route::get('kra-attributes/status/{id}', [KraAttributesController::class, 'status'])->name('kra-attributes.status');
+
+    Route::resource('employee-kra', EmployeeKraController::class);
+    Route::get('employee-kra/status/{id}', [EmployeeKraController::class, 'status'])->name('employee-kra.status');
+
+
 
     Route::resource('leave_type', LeaveTypeCobntroller::class);
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');

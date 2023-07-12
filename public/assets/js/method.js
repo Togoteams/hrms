@@ -182,7 +182,12 @@ function changeStatus(url_name, target_id, method = "GET", table_id = '') {
             if (this.readyState == 4 && this.status == 200) {
                 t_id = document.getElementById(target_id);
                 document.getElementById(target_id).innerHTML = this.responseText;
-                stopPreloader('', target_id);
+                try {
+                    stopPreloader('', target_id);
+                }
+                catch (err) {
+                    console.log(err);
+                }
                 refreshPage(500)
 
             }
