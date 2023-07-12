@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Payroll\PayscaleController;
 use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
+use App\Models\KraAttributes;
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->group(function () {
@@ -135,6 +136,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('membership', MembershipController::class);
     Route::resource('branch', BranchController::class);
     Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
+
+    Route::resource('kra-attributes', KraAttributes::class);
+    Route::get('kra-attributes/status/{id}', [KraAttributes::class, 'status'])->name('kra-attributes.status');
+
     Route::resource('leave_type', LeaveTypeCobntroller::class);
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');
     // leave route start
@@ -174,7 +179,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employees_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('employees_loans.status');
 
     Route::resource('employees_salary', EmployeeSalaryController::class);
-    Route::post('payscale/get/employees_salary/',[EmployeeSalaryController::class,'getPayscale'])->name('employees_salary.getpayscale');
+    Route::post('payscale/get/employees_salary/', [EmployeeSalaryController::class, 'getPayscale'])->name('employees_salary.getpayscale');
     Route::resource('employees-payscale', EmployeePayScaleController::class);
     Route::get('employees-payscale/status/{id}', [EmployeePayScaleController::class, 'status'])->name('employees-payscale.status');
 
