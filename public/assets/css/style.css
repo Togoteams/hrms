@@ -1,7 +1,13 @@
 label{
-    font-weight: 800;
-    font-size: 13px;
+    font-weight: 400;
+    font-size: 14px;
     text-transform: capitalize;
+    margin-bottom: 5px;
+    color: #6a6a6a;
+    letter-spacing: 0.3px;
+}
+.form-group{
+    margin-bottom: 10px;
 }
 .btn-sm{
     padding: 6px  10px!important;
@@ -24,14 +30,17 @@ td{
 }
 .card-dashboard {
     background-color:#fff !important;
-    border: 2px solid rgb(244, 74, 12) !important;
+    /* border: 2px solid rgb(244, 74, 12) !important; */
     color: #000 !important;
     padding-top: 5px !important;
     padding: 0 auto !important;
     border-radius: 7px !important;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    
 }
-
+.main {
+    background: #f9f9f9!important;
+    height: 100vh;
+}
 .card-leavtype {
     background-color:#fff !important;
     border: 2px solid rgb(244, 127, 10) !important;
@@ -75,11 +84,23 @@ td{
     color:rgb(244, 74, 12);
 }
 .card-dashboard h2{
-    font-size: 12px;
-    text-align: left !important;
-    color:#000 !important;
+    font-size: 16px;
+    color: #525252 !important;
+    font-weight: 300;
+    text-align: center;
 }
-
+.dashboard-icon{
+    height: auto;
+    width: 55px;
+    margin-bottom: 10px;
+    
+}
+.card-bg{
+    background-image: url('https://eduadmin-template.multipurposethemes.com/bs5/images/abstract-1.svg');
+    background-position: right top;
+    background-size: 30% auto;
+    background-repeat: no-repeat;
+}
 .active-class{
     background:  #f85109 !important;
     color: #fff !important;
@@ -95,7 +116,7 @@ aside{
 }
 .navbar-container{
     background-color: #f85109 !important;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px !important;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 3px -12px !important;
 
 }
 .navbar-container h1{
@@ -127,9 +148,6 @@ aside{
 a {
     color: #f85109 !important;
     text-decoration: none;
-}
-.btn{
-    color: #fff !important;
 }
 
 .text-left{
@@ -222,4 +240,17 @@ a {
 
 .text-bob{
     color: #f85109 ;
+}
+.title{
+    margin-left: -5px;
+    border-bottom: 1px solid #FF5722;
+    margin-bottom: 1.5em;
+    color: #FF5722!important;
+}
+.bg-orange-light{
+    padding: 10px;
+    background: #fff5f5;
+    border-radius: 8px;
+    margin-left: 0px;
+    margin-right: 0px;
 }

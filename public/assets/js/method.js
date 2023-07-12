@@ -1,5 +1,4 @@
 // crud start
-console.log(lol);
 function ajaxCall(form_id, target_id = "", method = "POST") {
     // getting the all from form
     var form = document.getElementById(form_id);
