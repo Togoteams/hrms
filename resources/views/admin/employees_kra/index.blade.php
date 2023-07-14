@@ -26,14 +26,13 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
+                        <a class="btn btn-primary"  href="{{ route('admin.employee-kra.create') }}"  >
                             Add {{ $page }}
-                        </button>
+                </a>
 
                 </div>
             </div>
-            @include('admin.employees_loans.create')
+         
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
@@ -44,8 +43,6 @@
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
-                                <th>From</th>
-                                <th>to </th>
                                 <th>principal amount </th>
                                 <th>maturity amount </th>
                                 <th>tenure </th>
@@ -64,7 +61,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.employees_loans.index') }}",
+                            ajax: "{{ route('admin.employee-kra.index') }}",
 
                             columns: [{
                                     "render": function() {

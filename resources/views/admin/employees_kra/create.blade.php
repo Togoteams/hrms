@@ -1,14 +1,27 @@
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content ">
-                <div class="modal-header ">
-                    <h5 class="modal-title" id="staticBackdropLabel">{{ $page }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+@extends('layouts.app')
+@push('styles')
+@endpush
+@section('content')
+    <main id="content" role="main" class="main card ">
+        <!-- Content -->
+        <div class="content container-fluid">
+            <!-- Page Header -->
+            <div class=" border-bottom mt-2 mb-2">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h1 class="page-header-title">{{ $page }}</h1>
+                    </div>
+                    <!-- End Col -->
+                    <div class="col-auto">
+                        <a class="text-link">
+                            Home
+                        </a>/ {{ $page }}
+                    </div>
+                    <!-- End Col -->
                 </div>
-                <div class="modal-body">
-                    <form id="form_data" action="{{ route('admin.employees_loans.store') }}">
+                <!-- Button trigger modal -->
+                <div class="p-5 card">
+                    <form id="form_data" action="{{ route('admin.employee-kra.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
@@ -26,78 +39,46 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="username"> Select Loans</label>
-                                    <select required id="loan_id" name="loan_id"
-                                        class="form-control form-control-sm ">
-                                        <option selected disabled> - Select Loans- </option>
-                                        @foreach ($loans as $loan)
-                                            <option value="{{ $loan->id }}">{{ $loan->name }} -
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+                            <table class="table data-table  table-bordered table-nowrap table-align-middle card-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>ATTRIBUTES </th>
+                                        <th>COMMENT OF REPORTING AUTHORITY</th>
+                                        <th>MAX. MARKS</th>
+                                        <th>MARKS AWARDED BY REPORTING AUTHORITY</th>
+                                        <th>MARKS AWARDED BY REVIEWING AUTHORITY </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($kra_attributes as $kra)
+                                        <tr>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td> <b>{{ $kra->name }} - </b> {{ $kra->description }}
+                                                <input required type="hidden" name="attribute_name[]"
+                                                    value="{{ $kra->name }}">
+                                                <input required type="hidden" name="attribute_description[]"
+                                                    value="{{ $kra->description }}">
+                                            </td>
+                                            <td>
+                                                <textarea required type="text" class="form-control form-control-sm" name="commects[]"></textarea>
+                                            </td>
+                                            <td>{{ $kra->max_marks }}
+                                                <input required type="hidden" name="max_marks"
+                                                    value="{{ $kra->max_marks }}">
+                                            </td>
+                                            <td><input required type="number" maxlength="2"
+                                                    class="form-control form-control-sm"
+                                                    name="marks_by_reporting_autheority[]"></td>
+                                            <td><input required type="number" maxlength="2"
+                                                    class="form-control form-control-sm"
+                                                    name="marks_by_review_autheority[]"> </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="start_date">start_date</label>
-                                    <input required id="start_date" placeholder="Enter correct start_date   "
-                                        type="date" name="start_date" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="end_date">end_date</label>
-                                    <input required id="end_date" placeholder="Enter correct end_date   "
-                                        type="date" name="end_date" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="principal_amount">principal_amount</label>
-                                    <input required id="principal_amount"
-                                        placeholder="Enter correct principal_amount   " type="number"
-                                        name="principal_amount" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="maturity_amount">maturity_amount</label>
-                                    <input required id="maturity_amount" placeholder="Enter correct maturity_amount   "
-                                        type="number" name="maturity_amount" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="tenure">tenure</label>
-                                    <input required id="tenure" placeholder="Enter correct tenure   " type="number"
-                                        name="tenure" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="sanctioned">sanctioned</label>
-                                    <input required id="sanctioned" placeholder="Enter correct sanctioned   "
-                                        type="number" name="sanctioned" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-4 mb-2">
-                                <div class="form-group">
-                                    <label for="sanctioned_amount">sanctioned_amount</label>
-                                    <input required id="sanctioned_amount"
-                                        placeholder="Enter correct sanctioned_amount   " type="number"
-                                        name="sanctioned_amount" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 mb-2">
-                                <div class="form-group">
-                                    <label for="description">Designation</label>
-                                    <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"
-                                        name="description" class="form-control form-control-sm "></textarea>
-                                </div>
-                            </div>
+
                         </div>
                         <hr>
                         <div class="text-center ">
@@ -106,7 +87,7 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
-    </div>
+    </main>
+@endsection

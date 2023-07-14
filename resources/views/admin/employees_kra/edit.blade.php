@@ -1,4 +1,4 @@
-<form id="form_edit" action="{{ route('admin.employees_loans.update', $data->id) }}">
+<form id="form_edit" action="{{ route('admin.employee-kra.update', $data->id) }}">
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">

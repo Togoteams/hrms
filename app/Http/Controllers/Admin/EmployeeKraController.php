@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\EmployeeKra;
+use App\Models\KraAttributes;
 use App\Models\Loans;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -31,8 +33,7 @@ class EmployeeKraController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $all_users = Employee::where('deleted_at',null)->get();
-        return view('admin.employees_kra.index', ['page' => $this->page_name, 'all_users' => $all_users]);
+        return view('admin.employees_kra.index', ['page' => $this->page_name]);
     }
 
 
@@ -41,7 +42,11 @@ class EmployeeKraController extends Controller
      */
     public function create()
     {
-        //
+        $page = $this->page_name;
+
+        $all_users = Employee::where('status', 'active')->get();
+        $kra_attributes = KraAttributes::where('deleted_at', null)->get();
+        return view('admin.employees_kra.create', compact('all_users', 'kra_attributes', 'page'));
     }
 
     /**
@@ -52,18 +57,10 @@ class EmployeeKraController extends Controller
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
-            'loan_id' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'principal_amount' => 'required|numeric',
-            'maturity_amount' => 'required|numeric',
-            'tenure' => 'required|numeric',
-            'sanctioned' => 'required|numeric',
-            'sanctioned_amount' => 'required|numeric',
-            'description' => 'required|numeric',
+
 
         ]);
-
+        dd($request);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
