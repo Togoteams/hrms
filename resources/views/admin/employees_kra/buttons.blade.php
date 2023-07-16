@@ -1,8 +1,9 @@
 <form id="edit{{ $item->id }}" action="{{ route('admin.' . $route . '.destroy', $item->id) }}">
 
+    <a  target="_blank" href="{{ route('admin.employee-kra.print',$item->user_id) }}" class="btn btn-success text-white btn-sm"><i class="fas fa-print"></i></a>
 
-    <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')"
-        href="#" data-bs-toggle="modal" data-bs-target="#modaledit" class="btn btn-warning btn-sm"><i
+    <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')" href="#"
+        data-bs-toggle="modal" data-bs-target="#modaledit" class="btn btn-warning btn-sm"><i
             class="fas fa-edit"></i></button>
     @csrf
     <input type="hidden" name="_method" value="DELETE">

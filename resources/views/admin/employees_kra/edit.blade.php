@@ -1,6 +1,6 @@
-<form id="form_edit" action="{{ route('admin.employee-kra.update', $data[0]->id) }}">
+<form id="form_edit" action="{{ route('admin.employee-kra.store') }}">
     @csrf
-    <input type="hidden" name="_method" value="PUT">
+    <input type="hidden" name="user_id" value="{{ $data[0]->user_id}}" ,>
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="table-responsive"  id="table_data">
@@ -32,9 +32,9 @@
                         <td>{{ $kra->max_marks }}
                             <input required type="hidden" name="max_marks[]" value="{{ $kra->max_marks }}">
                         </td>
-                        <td><input required type="number" maxlength="2" class="form-control form-control-sm"
+                        <td><input required type="number" maxlength="2" value="{{ $kra->marks_by_reporting_autheority}}" class="form-control form-control-sm"
                                 name="marks_by_reporting_autheority[]"></td>
-                        <td><input required type="number" maxlength="2" class="form-control form-control-sm"
+                        <td><input required type="number" maxlength="2" value="{{ $kra->marks_by_review_autheority}}" class="form-control form-control-sm"
                                 name="marks_by_review_autheority[]"> </td>
                     </tr>
                 @endforeach

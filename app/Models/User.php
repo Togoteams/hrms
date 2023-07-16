@@ -123,4 +123,6 @@ class User extends Authenticatable
     {
         return $this->morphOne('App\Models\Media', 'table')->where('deleted_at', null)->orderBy('id', 'DESC');
     }
+
+
 }

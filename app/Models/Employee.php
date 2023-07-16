@@ -59,4 +59,7 @@ class Employee extends Model
     {
         return $this->hasMany(EmpDepartmentHistory::class, 'user_id', 'user_id');
     }
+    public function branch(){
+        return $this->belongsTo(Branch::class);
+    }
 }

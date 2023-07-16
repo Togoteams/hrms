@@ -20,10 +20,15 @@ class EmployeeKraController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, $year = null)
     {
+
+        if ($year == null) {
+            $year = date('Y');
+        }
+
         if ($request->ajax()) {
-            $data = EmployeeKra::with('user')->groupBy('user_id')->get();
+            $data = EmployeeKra::with('user')->where('created_at', 'LIKE', '%' . $year . '%')->groupBy('user_id')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -74,6 +79,12 @@ class EmployeeKraController extends Controller
             try {
                 if (isset($request->marks_by_reporting_autheority) && count($request->marks_by_reporting_autheority) > 0) {
 
+                    $is_exits = EmployeeKra::where('user_id', $request->user_id)->where('created_at', date('Y'))->first();
+                    if (!$is_exits) {
+                        EmployeeKra::where('user_id', $request->user_id)->delete();
+                    }
+
+
                     for ($i = 0; $i < count($request->marks_by_reporting_autheority); $i++) {
 
                         $data = [
@@ -89,6 +100,7 @@ class EmployeeKraController extends Controller
                             'created_by' => Auth::user()->id
                         ];
                         // dd($request);
+
                         EmployeeKra::create($data);
                     }
                 }
@@ -118,7 +130,7 @@ class EmployeeKraController extends Controller
     {
         $data = EmployeeKra::where('user_id', EmployeeKra::find($id)->user_id)->get();
         $page = $this->page_name;
-        return view('admin.employees_kra.edit', compact('data','page'));
+        return view('admin.employees_kra.edit', compact('data', 'page'));
     }
 
     /**
@@ -176,4 +188,11 @@ class EmployeeKraController extends Controller
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
         }
     } //
+
+    public function print($user_id)
+    {
+
+        $data = EmployeeKra::with(['user','employee','employee.branch','employee.designation'])->where('user_id', $user_id)->get();
+        return view('admin.employees_kra.kra_print', compact('data'));
+    }
 }
