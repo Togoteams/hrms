@@ -23,11 +23,11 @@ class EmployeeKraController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = EmployeeKra::with('user')->select('*');
+            $data = EmployeeKra::with('user')->groupBy('user_id')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.employees_kra.buttons', ['item' => $row, "route" => 'employees-kra']);
+                    $actionBtn = view('admin.employees_kra.buttons', ['item' => $row, "route" => 'employee-kra']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -43,7 +43,6 @@ class EmployeeKraController extends Controller
     public function create()
     {
         $page = $this->page_name;
-
         $all_users = Employee::where('status', 'active')->get();
         $kra_attributes = KraAttributes::where('deleted_at', null)->get();
         return view('admin.employees_kra.create', compact('all_users', 'kra_attributes', 'page'));
@@ -57,21 +56,41 @@ class EmployeeKraController extends Controller
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
-
-
+            'attribute_name' => 'required|array|min:1',
+            'attribute_description' => 'required|array|min:1',
+            'commects' => 'required|array|min:1',
+            'max_marks' => 'required|array|min:1',
+            // 'min_marks' => 'required|array|min:1',
+            'marks_by_reporting_autheority' => 'required|array|min:1',
+            'marks_by_review_autheority' => 'required|array|min:1',
         ]);
-        dd($request);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                $request->request->add(['employee_id' => Employee::where('user_id', $request->user_id)->first()->id]);
-                $request->request->add(['created_by' => Auth::user()->id]);
-                $request->request->add(['uuid' => Auth::user()->uuid]);
-                EmployeeKra::insertGetId($request->except(['_token', '_method']));
+                if (isset($request->marks_by_reporting_autheority) && count($request->marks_by_reporting_autheority) > 0) {
+
+                    for ($i = 0; $i < count($request->marks_by_reporting_autheority); $i++) {
+
+                        $data = [
+                            'user_id' => $request->user_id,
+                            'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
+                            'attribute_name' => $request->attribute_name[$i],
+                            'attribute_description' => $request->attribute_description[$i],
+                            'commects' => $request->commects[$i],
+                            'max_marks' => $request->max_marks[$i],
+                            'min_marks' => $request->min_marks[$i] ?? 0,
+                            'marks_by_reporting_autheority' => $request->marks_by_reporting_autheority[$i],
+                            'marks_by_review_autheority' => $request->marks_by_review_autheority[$i],
+                            'created_by' => Auth::user()->id
+                        ];
+                        // dd($request);
+                        EmployeeKra::create($data);
+                    }
+
+                }
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
-
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
@@ -85,6 +104,7 @@ class EmployeeKraController extends Controller
         $all_users = Employee::get();
         $loans = Loans::where('status', 'active')->get();
         $data = EmployeeKra::find($id);
+        
         return view('admin.employees_kra.show', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
     }
 
@@ -93,10 +113,10 @@ class EmployeeKraController extends Controller
      */
     public function edit(string $id)
     {
-        $all_users = Employee::get();
-        $loans = Loans::where('status', 'active')->get();
-        $data = EmployeeKra::find($id);
-        return view('admin.employees_kra.edit', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
+        $data = EmployeeKra::where('user_id',EmployeeKra::find($id)->user_id)->get();
+        $kra_attributes = KraAttributes::where('deleted_at', null)->get();
+        $page=$this->page_name;
+        return view('admin.employees_kra.edit', compact('data','kra_attributes','page'));
     }
 
     /**

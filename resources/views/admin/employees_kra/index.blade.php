@@ -43,9 +43,6 @@
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
-                                <th>principal amount </th>
-                                <th>maturity amount </th>
-                                <th>tenure </th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -80,26 +77,8 @@
                                     data: 'user.mobile',
                                     name: 'user.mobile'
                                 },
-                                {
-                                    data: 'start_date',
-                                    name: 'start_date'
-                                },
-                                {
-                                    data: 'end_date',
-                                    name: 'end_date'
-                                },
-                                {
-                                    data: 'principal_amount',
-                                    name: 'principal_amount'
-                                },
-                                {
-                                    data: 'maturity_amount',
-                                    name: 'maturity_amount'
-                                },
-                                {
-                                    data: 'tenure',
-                                    name: 'tenure'
-                                },
+                             
+                            
 
                                 {
                                     data: 'action',

@@ -29,7 +29,8 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="name">Select Employees</label>
-                                    <select required id="gender" placeholder="Enter correct gender   " name="user_id"
+                                    <select required onchange="show_user()" id="gender"
+                                        placeholder="Enter correct gender   " name="user_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Employees- </option>
                                         @foreach ($all_users as $au)
@@ -39,49 +40,49 @@
                                     </select>
                                 </div>
                             </div>
-                            <table class="table data-table  table-bordered table-nowrap table-align-middle card-table">
-                                <thead>
-                                    <tr>
-                                        <th>S.No</th>
-                                        <th>ATTRIBUTES </th>
-                                        <th>COMMENT OF REPORTING AUTHORITY</th>
-                                        <th>MAX. MARKS</th>
-                                        <th>MARKS AWARDED BY REPORTING AUTHORITY</th>
-                                        <th>MARKS AWARDED BY REVIEWING AUTHORITY </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($kra_attributes as $kra)
+                            <div class="table-responsive-lg" style="display: none" id="table_data">
+                                <table class="table  table-bordered table-nowrap table-align-middle card-table">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $loop->index + 1 }}</td>
-                                            <td> <b>{{ $kra->name }} - </b> {{ $kra->description }}
-                                                <input required type="hidden" name="attribute_name[]"
-                                                    value="{{ $kra->name }}">
-                                                <input required type="hidden" name="attribute_description[]"
-                                                    value="{{ $kra->description }}">
-                                            </td>
-                                            <td>
-                                                <textarea required type="text" class="form-control form-control-sm" name="commects[]"></textarea>
-                                            </td>
-                                            <td>{{ $kra->max_marks }}
-                                                <input required type="hidden" name="max_marks"
-                                                    value="{{ $kra->max_marks }}">
-                                            </td>
-                                            <td><input required type="number" maxlength="2"
-                                                    class="form-control form-control-sm"
-                                                    name="marks_by_reporting_autheority[]"></td>
-                                            <td><input required type="number" maxlength="2"
-                                                    class="form-control form-control-sm"
-                                                    name="marks_by_review_autheority[]"> </td>
+                                            <th>S.No</th>
+                                            <th>ATTRIBUTES </th>
+                                            <th>COMMENT OF REPORTING AUTHORITY</th>
+                                            <th>MAX. MARKS</th>
+                                            <th>MARKS AWARDED BY REPORTING AUTHORITY</th>
+                                            <th>MARKS AWARDED BY REVIEWING AUTHORITY </th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($kra_attributes as $kra)
+                                            <tr>
+                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td> <b>{{ $kra->name }} - </b> {{ $kra->description }}
+                                                    <input required type="hidden" name="attribute_name[]"
+                                                        value="{{ $kra->name }}">
+                                                    <input required type="hidden" name="attribute_description[]"
+                                                        value="{{ $kra->description }}">
+                                                </td>
+                                                <td>
+                                                    <textarea required type="text" class="form-control form-control-sm" name="commects[]"></textarea>
+                                                </td>
+                                                <td>{{ $kra->max_marks }}
+                                                    <input required type="hidden" name="max_marks[]"
+                                                        value="{{ $kra->max_marks }}">
+                                                </td>
+                                                <td><input required type="number" maxlength="2"
+                                                        class="form-control form-control-sm"
+                                                        name="marks_by_reporting_autheority[]"></td>
+                                                <td><input required type="number" maxlength="2"
+                                                        class="form-control form-control-sm"
+                                                        name="marks_by_review_autheority[]"> </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <hr>
-                        <div class="text-center ">
+                        <div class="text-center " style="display: none" id="table_data_btn">
                             <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">Add
                                 {{ $page }}</button>
                         </div>
@@ -91,3 +92,10 @@
         </div>
     </main>
 @endsection
+
+<script>
+    function show_user() {
+        document.getElementById('table_data').style.display = "block";
+        document.getElementById('table_data_btn').style.display = "block";
+    }
+</script>
