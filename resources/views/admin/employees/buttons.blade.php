@@ -1,10 +1,20 @@
 <form id="edit{{ $item->id }}" action="{{ route('admin.' . $route . '.destroy', $item->id) }}">
-    <button type="button" onclick="editForm('{{ route('admin.' . $route . '.show', $item->id) }}', 'show')" href="#"
-        data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button>
+
+   
+    <a class="btn btn-primary btn-sm text-white " href="{{ route('admin.employee.employee-kra.create', $item->user_id) }}"
+        title="create Employee" target="_blank">
+        <i class="fas fa-plus"></i>
+    
+
+    </a>
+
+    <button type="button" onclick="editForm('{{ route('admin.' . $route . '.show', $item->id) }}', 'show')"
+        href="#" data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i
+            class="fas fa-eye"></i></button>
 
     {{-- EDIT BUTTON --}}
-    <a type="button" class="btn btn-warning btn-sm" href="{{ route('admin.employee.userDetails.form', $item->emp_id) }}"
-        title="Edit Employee" target="_blank">
+    <a type="button" class="btn btn-warning btn-sm"
+        href="{{ route('admin.employee.userDetails.form', $item->emp_id) }}" title="Edit Employee" target="_blank">
         <i class="fas fa-edit"></i>
     </a>
 
@@ -26,3 +36,4 @@
         @endif
     </button>
 </form>
+

@@ -144,6 +144,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
     Route::resource('employee-kra', EmployeeKraController::class);
     Route::get('employee-kra/status/{id}', [EmployeeKraController::class, 'status'])->name('employee-kra.status');
+    Route::get('employee/employee-kra/{user_id}', [EmployeeKraController::class, 'create'])->name('employee.employee-kra.create');
 
 
 

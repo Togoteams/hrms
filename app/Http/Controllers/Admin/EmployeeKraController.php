@@ -40,10 +40,14 @@ class EmployeeKraController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($user_id = null)
     {
+        if ($user_id != null) {
+            $all_users = Employee::where('status', 'active')->where('id', $user_id)->get();
+        } else {
+            $all_users = Employee::where('status', 'active')->get();
+        }
         $page = $this->page_name;
-        $all_users = Employee::where('status', 'active')->get();
         $kra_attributes = KraAttributes::where('deleted_at', null)->get();
         return view('admin.employees_kra.create', compact('all_users', 'kra_attributes', 'page'));
     }
@@ -87,7 +91,6 @@ class EmployeeKraController extends Controller
                         // dd($request);
                         EmployeeKra::create($data);
                     }
-
                 }
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
@@ -104,7 +107,7 @@ class EmployeeKraController extends Controller
         $all_users = Employee::get();
         $loans = Loans::where('status', 'active')->get();
         $data = EmployeeKra::find($id);
-        
+
         return view('admin.employees_kra.show', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
     }
 
@@ -113,10 +116,9 @@ class EmployeeKraController extends Controller
      */
     public function edit(string $id)
     {
-        $data = EmployeeKra::where('user_id',EmployeeKra::find($id)->user_id)->get();
-        $kra_attributes = KraAttributes::where('deleted_at', null)->get();
-        $page=$this->page_name;
-        return view('admin.employees_kra.edit', compact('data','kra_attributes','page'));
+        $data = EmployeeKra::where('user_id', EmployeeKra::find($id)->user_id)->get();
+        $page = $this->page_name;
+        return view('admin.employees_kra.edit', compact('data','page'));
     }
 
     /**

@@ -1,4 +1,4 @@
-<form id="form_edit" action="{{ route('admin.employee-kra.update', $data->id) }}">
+<form id="form_edit" action="{{ route('admin.employee-kra.update', $data[0]->id) }}">
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
@@ -17,19 +17,17 @@
             </thead>
 
             <tbody>
-                @foreach ($kra_attributes as $kra)
-                @php
-                    App\Models\EmployeeKra::where('user_id',$data->id)->where('name')
-                @endphp
+                @foreach ($data as $kra)
+         
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
                         <td> <b>{{ $kra->name }} - </b> {{ $kra->description }}
-                            <input required type="hidden" name="attribute_name[]" value="{{ $kra->name }}">
+                            <input required type="hidden" name="attribute_name[]" value="{{ $kra->attribute_name }}">
                             <input required type="hidden" name="attribute_description[]"
-                                value="{{ $kra->description }}">
+                                value="{{ $kra->attribute_description }}">
                         </td>
                         <td>
-                            <textarea required type="text" class="form-control form-control-sm" name="commects[]"></textarea>
+                            <textarea required type="text" class="form-control form-control-sm" name="commects[]">{{$kra->commects}}</textarea>
                         </td>
                         <td>{{ $kra->max_marks }}
                             <input required type="hidden" name="max_marks[]" value="{{ $kra->max_marks }}">
