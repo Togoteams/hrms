@@ -1,12 +1,17 @@
 @extends('layouts.app')
 @push('styles')
+<style>
+    .table-nowrap td, .table-nowrap th {
+        white-space: normal !important;
+    }
+</style>
 @endpush
 @section('content')
     <main id="content" role="main" class="main card ">
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -26,7 +31,7 @@
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                         <div class="row">
-                            <div class="col-sm-4 mb-2">
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="name">Select Employees</label>
                                     <select required onchange="show_user()" id="gender"
@@ -41,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive-lg" style="display: none" id="table_data">
-                                <table class="table  table-bordered table-nowrap table-align-middle card-table">
+                                <table class="table table-bordered table-nowrap table-align-middle card-table">
                                     <thead>
                                         <tr>
                                             <th>S.No</th>
@@ -56,7 +61,8 @@
                                         @foreach ($kra_attributes as $kra)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
-                                                <td> <b>{{ $kra->name }} - </b> {{ $kra->description }}
+                                                <td style="max-width:220px;"> <b>{{ $kra->name }} - </b> 
+                                                   
                                                     <input required type="hidden" name="attribute_name[]"
                                                         value="{{ $kra->name }}">
                                                     <input required type="hidden" name="attribute_description[]"

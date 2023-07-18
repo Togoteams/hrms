@@ -234,6 +234,27 @@
                          </div>
                      </div>
                  @endcanany
+              
+                 <div id="navbarVerticalMenuSettingMenu">
+                     <!-- Collapse -->
+
+                     <div class="nav-item">
+                         <a class="nav-link dropdown-toggle " href="#setting" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false"
+                             aria-controls="setting">
+                             <i class="fas fa-users-class nav-icon"></i>
+                             <span class="nav-link-title">Setting</span>
+                         </a>
+
+                         <div id="setting"
+                             class="nav-collapse collapse {{ show(['admin.setting.index']) }} "
+                             data-bs-parent="#navbarVerticalMenuSettingMenu">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.setting.index' ? 'active' : '' }}  "
+                                href="{{ route('admin.setting.index') }}"> Settings</a>
+                         </div>
+                     </div>
+                 </div>
+         
 
                      <!-- End Collapse -->
 
