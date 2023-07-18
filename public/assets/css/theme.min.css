@@ -117,8 +117,10 @@ h5,
 h6 {
     margin-top: 0;
     margin-bottom: .5rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.2;
+    font-family: 'Rubik', sans-serif!important;
+
 }
 
 .h1,
@@ -4532,7 +4534,8 @@ fieldset:disabled .btn {
     font-size: var(--bs-nav-link-font-size);
     font-weight: var(--bs-nav-link-font-weight);
     color: var(--bs-nav-link-color);
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    font-family: 'Rubik', sans-serif;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -6823,7 +6826,7 @@ fieldset:disabled .btn {
     display: block;
     padding: var(--bs-tooltip-arrow-height);
     margin: var(--bs-tooltip-margin);
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -6944,7 +6947,7 @@ fieldset:disabled .btn {
     z-index: var(--bs-popover-zindex);
     display: block;
     max-width: var(--bs-popover-max-width);
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-style: normal;
     font-weight: 400;
     line-height: 1.5;
@@ -10244,7 +10247,7 @@ fieldset:disabled .btn {
 }
 
 .fw-semibold {
-    font-weight: 600 !important
+    font-weight: 500 !important
 }
 
 .fw-bolder {
@@ -32642,7 +32645,7 @@ a:hover .text-inherit {
 
 .daterangepicker {
     border: none;
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     z-index: 98;
     background-color: #fff;
     box-shadow: 0 .6125rem 2.5rem .6125rem rgba(140, 152, 164, .175);
@@ -33710,14 +33713,14 @@ a:hover .text-inherit {
 
 .quill-custom .ql-editor p {
     font-size: .875rem;
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     color: #1e2022
 }
 
 .quill-custom .ql-editor.ql-blank::before {
     left: 1rem;
     color: #8c98a4;
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-style: normal
 }
 
@@ -33788,7 +33791,7 @@ a:hover .text-inherit {
 .quill-custom .ql-snow .ql-tooltip::before {
     display: block;
     text-align: center;
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-weight: 600;
     font-size: .875rem;
     border-bottom: .0625rem solid rgba(231, 234, 243, .7);
@@ -34170,7 +34173,7 @@ a:hover .text-inherit {
 .jvm-tooltip {
     color: #1e2022;
     background-color: #fff;
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-size: .875rem;
     z-index: 1000;
     padding: .6125rem 1rem;
@@ -34275,7 +34278,7 @@ a:hover .text-inherit {
 
 .leaflet-touch .leaflet-control-zoom-in,
 .leaflet-touch .leaflet-control-zoom-out {
-    font-family: Inter, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-size: .875rem
 }
 
