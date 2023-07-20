@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\LeaveEncashmentController;
 use App\Http\Controllers\Admin\LeaveTypeCobntroller;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LoansController;
 use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
@@ -139,6 +140,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('membership', MembershipController::class);
     Route::resource('branch', BranchController::class);
     Route::get('branch/status/{id}', [BranchController::class, 'status'])->name('branch.status');
+    Route::get('setting/list', [SettingController::class, 'index'])->name('setting.index');
 
     Route::resource('kra-attributes', KraAttributesController::class);
     Route::get('kra-attributes/status/{id}', [KraAttributesController::class, 'status'])->name('kra-attributes.status');

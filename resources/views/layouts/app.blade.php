@@ -19,8 +19,9 @@
         color: red;
     }
 </style>
+@stack('styles')
 
-<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl   footer-offset">
+<body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
 
     <script src="{{ asset('assets/js/hs.theme-appearance.js') }}"></script>
 
@@ -55,7 +56,7 @@
                 <!-- Body -->
                 <div class="modal-body p-sm-5">
                     <div class="text-center">
-                        <div class="w-75 w-sm-50 mx-auto mb-4">
+                        <div class="mx-auto mb-4 w-75 w-sm-50">
                             <img class="img-fluid" src="{{ asset('assets/svg/illustrations/oc-collaboration.svg') }}"
                                 alt="Image Description" data-hs-theme-appearance="default">
                             <img class="img-fluid"
@@ -71,10 +72,10 @@
                 <!-- End Body -->
 
                 <!-- Footer -->
-                <div class="modal-footer d-block text-center py-sm-5">
+                <div class="text-center modal-footer d-block py-sm-5">
                     <small class="text-cap text-muted">Trusted by the world's best teams</small>
 
-                    <div class="w-85 mx-auto">
+                    <div class="mx-auto w-85">
                         <div class="row justify-content-between">
                             <div class="col">
                                 <img class="img-fluid" src="{{ asset('assets/svg/brands/gitlab-gray.svg') }}"
@@ -116,7 +117,7 @@
                 <div class="modal-body">
                     <!-- Form -->
                     <div class="mb-4">
-                        <div class="input-group mb-2 mb-sm-0">
+                        <div class="mb-2 input-group mb-sm-0">
                             <input type="text" class="form-control" name="fullName"
                                 placeholder="Search name or emails" aria-label="Search name or emails">
 
@@ -159,7 +160,7 @@
 
                     <hr class="mt-2">
 
-                    <ul class="list-unstyled list-py-2 mb-0">
+                    <ul class="mb-0 list-unstyled list-py-2">
                         <!-- List Group Item -->
                         <li>
                             <div class="d-flex">
@@ -353,7 +354,7 @@
                 <!-- Footer -->
                 <div class="modal-footer">
                     <div class="row align-items-center flex-grow-1 mx-n2">
-                        <div class="col-sm-9 mb-2 mb-sm-0">
+                        <div class="mb-2 col-sm-9 mb-sm-0">
                             <input type="hidden" id="inviteUserPublicClipboard" value="/">
 
                             <p class="modal-footer-text">The public share <a href="#">link settings</a>

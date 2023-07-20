@@ -266,3 +266,6 @@ a {
   }
 
 /* tool tips end */
+.table>:not(caption)>*>*{
+    font-family: 'Rubik', sans-serif!important;
+}

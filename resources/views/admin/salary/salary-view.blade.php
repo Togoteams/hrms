@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-9"></div>
-                    <div class="col-sm-3 text-right auto mb-5 mt-2">
+                    <div class="mt-2 mb-5 text-right col-sm-3 auto">
                         {{-- @can('add-employees_salary') --}}
                         <a href="{{ route('admin.salary.add') }}">
                             <button type="button" class="btn btn-primary">
@@ -33,9 +33,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="table-responsive mt-4 pt-4">
+                    <div class="pt-4 mt-4 table-responsive">
                         <table
-                            class="table data-table table-pay-scale  table-thead-bordered table-nowrap table-align-middle card-table">
+                            class="table data-table table-pay-scale table-thead-bordered table-nowrap table-align-middle card-table">
                             <thead>
                                 <tr>
                                     <th>S.No</th>
