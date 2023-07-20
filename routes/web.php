@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
 use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\KraAttributesController;
+use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Models\KraAttributes;
 
 Route::get('/', [LoginController::class, 'authentication']);
@@ -205,6 +206,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('store', 'storePayscale')->name('store');
             Route::get('get-payscale/{id}', 'getPayscale')->name('get');
         });
+        /*--------------------------------------------- Pay Roll Head Crud Start---------------------------------------------------------------*/
+        Route::resource('payscal-head', PayrollHeadController::class);
+        Route::get('payscal-head/status/{id}', [PayrollHeadController::class, 'status'])->name('payscal-head.status');
+
+        /*--------------------------------------------- Pay Roll Head Crud End---------------------------------------------------------------*/
     });
 
     // Salary

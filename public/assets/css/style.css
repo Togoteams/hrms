@@ -256,6 +256,13 @@ a {
 }
 
 /* this css for tool tip */
+.optional::after {
+    content: " (optional)";
+  }
 
+  .required::after {
+    content: " *";
+    color: red;
+  }
 
 /* tool tips end */

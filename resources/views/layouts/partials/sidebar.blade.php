@@ -318,8 +318,12 @@
                          </a>
 
                          <div id="emppayroll"
-                             class="nav-collapse collapse {{ show(['admin.payroll.pay-scale.list', 'admin.payroll.pay-scale.add']) }} "
+                             class="nav-collapse collapse {{ show(['payroll.pay-scale.list', 'payroll.pay-scale.add','payroll.payscal-head.index']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscal-head.index' ? 'active' : '' }}  "
+                                href="{{ route('admin.payroll.payscal-head.index') }}"> Pay Scale Head</a>
 
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.list' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.pay-scale.list') }}"> Pay Scale</a>
