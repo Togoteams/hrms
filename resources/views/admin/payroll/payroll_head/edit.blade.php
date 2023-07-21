@@ -1,4 +1,4 @@
-<form id="form_edit" action="{{ route('admin.payroll.payscal-head.update', $data->id) }}">
+<form id="form_edit" action="{{ route('admin.payroll.head.update', $data->id) }}">
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <div class="row">

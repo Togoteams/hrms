@@ -10,7 +10,7 @@ use Exception;
 
 class PayrollHeadController extends Controller
 {
-    public $page_name = "Pay Scal Head";
+    public $page_name = "Pay Roll Head";
 
     public function index()
     {

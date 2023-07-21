@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee_payscales', function (Blueprint $table) {
+        Schema::create('pay_roll_payscales', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('payroll_head_id');
+            $table->string('value');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('user_id');
             $table->string('status')->default('active');
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_payscales');
+        Schema::dropIfExists('pay_roll_payscales');
     }
 };
