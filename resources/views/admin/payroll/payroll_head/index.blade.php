@@ -64,7 +64,7 @@
                                 <tr>
                                     <td class="table-column-pe-0">
                                         {{ $loop->index + 1 }}
-                                    </td>slug
+                                    </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->slug }}</td>
                                     <td>{{ $item->placeholder }}</td>
@@ -72,9 +72,9 @@
                                     <td>{{ $item->for }}</td>
                                     <td>
                                         <form id="edit{{ $item->id }}"
-                                            action="{{ route('admin.payroll.payscal-head.destroy', $item->id) }}">
+                                            action="{{ route('admin.payroll.head.destroy', $item->id) }}">
                                             <button type="button"
-                                                onclick="editForm('{{ route('admin.payroll.payscal-head.edit', $item->id) }}', 'edit')"
+                                                onclick="editForm('{{ route('admin.payroll.head.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
                                                 class="btn btn-warning btn-sm"><i class="fas fa-edit"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
@@ -87,7 +87,7 @@
                                                 data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
                                             </button>
                                             <button type="button"
-                                                onclick="changeStatus('{{ route('admin.payroll.payscal-head.status', $item->id) }}','status{{ $item->id }}')"
+                                                onclick="changeStatus('{{ route('admin.payroll.head.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"
                                                 class="btn {{ $item->status == 'active' ? 'btn-success' : 'btn-secondary' }}  btn-sm">
                                                 @if ($item->status == 'active')

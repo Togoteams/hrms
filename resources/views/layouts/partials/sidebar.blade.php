@@ -339,15 +339,15 @@
                          </a>
 
                          <div id="emppayroll"
-                             class="nav-collapse collapse {{ show(['payroll.pay-scale.list', 'payroll.pay-scale.add','payroll.payscal-head.index']) }} "
+                             class="nav-collapse collapse {{ show(['payroll.payscal.index', 'payroll.pay-scale.add','payroll.head.index']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
 
 
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscal-head.index' ? 'active' : '' }}  "
-                                href="{{ route('admin.payroll.payscal-head.index') }}"> Pay Roll Head</a>
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
+                                href="{{ route('admin.payroll.head.index') }}"> Pay Roll Head</a>
 
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.pay-scale.list' ? 'active' : '' }}  "
-                                 href="{{ route('admin.payroll.pay-scale.list') }}"> Pay Scale</a>
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscal.index' ? 'active' : '' }}  "
+                                 href="{{ route('admin.payroll.payscal.index') }}"> Pay Scale</a>
 
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.list' ? 'active' : '' }}  "
                                  href="{{ route('admin.salary.list') }}"> Salary</a>
