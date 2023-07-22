@@ -1,7 +1,7 @@
 <form id="edit{{ $item->id }}" action="{{ route('admin.' . $route . '.destroy', $item->id) }}">
 
    
-    <a class="btn btn-primary btn-sm text-white " href="{{ route('admin.employee.employee-kra.create', $item->user_id) }}"
+    <a class="btn btn-white btn-sm text-white " href="{{ route('admin.employee.employee-kra.create', $item->user_id) }}"
         title="create Employee" target="_blank">
         <i class="fas fa-plus"></i>
     

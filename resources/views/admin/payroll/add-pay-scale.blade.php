@@ -297,7 +297,7 @@
 
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-sm" title="Submit">
+                            <button type="submit" class="btn btn-white btn-sm" title="Submit">
                                 Submit
                             </button>
                         </div>

@@ -16,7 +16,7 @@
                     <!-- End Col -->
 
                     <div class="col-sm-auto">
-                        <a class="btn btn-primary" href="javascript:void(0)" data-bs-toggle="modal"
+                        <a class="btn btn-white" href="javascript:void(0)" data-bs-toggle="modal"
                             data-bs-target="#editUserModal">
                             <i class="bi-person-plus-fill me-1"></i> Add user
                         </a>
@@ -47,7 +47,7 @@
                                 <th>Department</th>
                                 <th>Roles</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th class="text-right">Action</th>
                             </tr>
                         </thead>
 
@@ -79,7 +79,7 @@
                                     </td>
                                     <td><span class="d-block fs-5">{{ $user->username }}</span></td>
                                     <td>
-                                        <span class="legend-indicator bg-success"></span>{{ $user->status ?? 'Active' }}
+                                        <div class="success-badges"><span class="legend-indicator bg-success"></span>{{ $user->status ?? 'Active' }}</div>
                                     </td>
 
 
@@ -248,7 +248,7 @@
                             <div class="d-flex gap-3">
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-white">Save changes</button>
                             </div>
                         </div>
                     </form>

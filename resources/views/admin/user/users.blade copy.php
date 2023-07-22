@@ -14,7 +14,7 @@
                 <!-- End Col -->
 
                 <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="users-add-user.html">
+                    <a class="btn btn-white" href="users-add-user.html">
                         <i class="bi-person-plus-fill me-1"></i> Add user
                     </a>
                 </div>
@@ -69,7 +69,7 @@
                             </td>
                             <td>United Kingdom</td>
                             <td>
-                                <span class="legend-indicator bg-success"></span>Active
+                                <div class="success-badges"><span class="legend-indicator bg-success"></span>Active</div>
                             </td>
 
 
@@ -260,7 +260,7 @@
                     <div class="d-flex justify-content-end">
                         <div class="d-flex gap-3">
                             <button type="button" class="btn btn-white" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-white">Save changes</button>
                         </div>
                     </div>
                 </form>

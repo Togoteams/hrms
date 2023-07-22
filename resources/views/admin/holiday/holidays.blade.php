@@ -16,7 +16,7 @@
 
                     <div class="col-sm-auto">
                         @can('add-holidays')
-                            <a class="btn btn-primary g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add"
+                            <a class="btn btn-white g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add"
                                 data-bs-target="#addEditHolidayModal">
                                 <i class="bi-person-plus-fill me-1"></i> Add Holiday
                             </a>
@@ -123,7 +123,7 @@
                                     </td>
                                     <td> {{ $holiday->description }}</td>
                                     <td>
-                                        <span class="legend-indicator bg-success"></span>{{ $holiday->status ?? 'Active' }}
+                                        <div class="success-badges"><span class="legend-indicator bg-success"></span>{{ $holiday->status ?? 'Active' }}</div>
                                     </td>
 
                                     <td>
@@ -261,7 +261,7 @@
                             <div class="d-flex gap-3">
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-white">Save changes</button>
                             </div>
                         </div>
                     </form>

@@ -101,7 +101,7 @@
                                                                 <div class="col-2">
                                                                     <button onclick="ajaxCall('form_edit','','POST')"
                                                                         type="button"
-                                                                        class="btn btn-primary btn-sm">Update</button>
+                                                                        class="btn btn-white btn-sm">Update</button>
                                                                 </div>
                                                                 <div class="col-2 text-end">
                                                                     <div class=" px-2">

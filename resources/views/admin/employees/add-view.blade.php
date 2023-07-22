@@ -30,7 +30,7 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
-                                            {{-- <button type="button" class="btn btn-primary btn-sm" title="Add Qualification"
+                                            {{-- <button type="button" class="btn btn-white btn-sm" title="Add Qualification"
                                                 onclick="addQualification({{ Auth::user()->id }})">
                                                 Add Qualification
                                             </button> --}}
@@ -150,7 +150,7 @@
                                     <hr>
                                     <div class="text-center ">
                                         <button onclick="ajaxCall('form_id','','POST')" type="button"
-                                            class="btn btn-primary" id="btnSave">
+                                            class="btn btn-white" id="btnSave">
                                         </button>
                                     </div>
                                 </form>

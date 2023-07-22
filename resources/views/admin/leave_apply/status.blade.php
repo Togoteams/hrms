@@ -83,7 +83,7 @@
     </div>
     <hr>
     <div class="text-center ">
-        <button type="button" onclick="ajaxCall('form_edit')" class="btn btn-primary">Change Status
+        <button type="button" onclick="ajaxCall('form_edit')" class="btn btn-white">Change Status
             {{ $page }}</button>
     </div>
 </form>

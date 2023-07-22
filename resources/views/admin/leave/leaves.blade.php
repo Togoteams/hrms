@@ -16,7 +16,7 @@
         <!-- End Col -->
 
         <div class="col-sm-auto">
-          <a class="btn btn-primary g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add" data-bs-target="#addEditLeaveModal">
+          <a class="btn btn-white g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add" data-bs-target="#addEditLeaveModal">
             <i class="bi-person-plus-fill me-1"></i> Add Leave
           </a>
         </div>
@@ -119,7 +119,7 @@
               </td>
               <td> {{$leave->leave_reason}}</td>
               <td>
-                <span class="legend-indicator bg-success"></span>{{$leave->is_approved ?? "Active"}}
+                <div class="success-badges"><span class="legend-indicator bg-success"></span>{{$leave->is_approved ?? "Active"}}</div>
               </td>
 
               <td>
@@ -241,7 +241,7 @@
           <div class="d-flex justify-content-end">
             <div class="d-flex gap-3">
               <button type="button" class="btn btn-white" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
+              <button type="submit" class="btn btn-white">Save changes</button>
             </div>
           </div>
         </form>

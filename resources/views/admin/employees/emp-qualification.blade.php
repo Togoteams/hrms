@@ -25,7 +25,7 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
-                                            <button type="button" class="btn btn-primary btn-sm" title="Add Qualification"
+                                            <button type="button" class="btn btn-white btn-sm" title="Add Qualification"
                                                 onclick="addQualification({{ !empty($employee) ? $employee->user_id : '' }})">
                                                 Add Qualification
                                             </button>
@@ -172,7 +172,7 @@
                                     </div>
                                     <hr>
                                     <div class="text-center ">
-                                        <button type="submit" class="btn btn-primary" id="btnSave">
+                                        <button type="submit" class="btn btn-white" id="btnSave">
                                         </button>
                                     </div>
                                 </form>

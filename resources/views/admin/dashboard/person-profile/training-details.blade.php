@@ -25,7 +25,7 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
                                             </button>

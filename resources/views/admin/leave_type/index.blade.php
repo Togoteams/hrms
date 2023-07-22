@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
@@ -54,7 +54,7 @@
                                 <th>Nature of Leave</th>
                                 <th>No Of Days</th>
                                 <th>Description</th>
-                                <th>Action</th>
+                                <th class="text-right">Action</th>
                             </tr>
                         </thead>
 

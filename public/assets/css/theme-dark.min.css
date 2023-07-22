@@ -2235,7 +2235,7 @@ progress {
 }
 
 .table>:not(caption)>*>* {
-    padding: .75rem .75rem;
+    padding: 4px 4px!important;
     background-color: var(--bs-table-bg);
     border-bottom-width: .0625rem;
     box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg)
@@ -20662,9 +20662,7 @@ input[type=number] {
     border-top: .0625rem solid #2f3235
 }
 
-.card .table-thead-bordered>:not(:last-child)>:last-child>* {
-    border-top-width: 0
-}
+
 
 .card-sm>.card-footer, .card-sm>.card-header {
     padding: 1rem 1rem
@@ -28947,9 +28945,9 @@ input[type=number] {
 }
 
 .page-header {
-    border-bottom: .0625rem solid #2f3235;
-    padding-bottom: 2rem;
-    margin-bottom: 2.25rem
+      border-bottom: 0.0625rem solid rgba(231, 234, 243, .7);
+    padding-bottom: 1rem;
+    margin-bottom: 0em;
 }
 
 .page-header .breadcrumb {
@@ -30548,9 +30546,6 @@ input[type=number] {
     margin-right: 0
 }
 
-.table tr {
-    color: #c5c8cc
-}
 
 .table thead th {
     color: #c5c8cc;
@@ -30595,9 +30590,6 @@ input[type=number] {
     background-color: #2f3235
 }
 
-.table-lg>:not(caption)>*>* {
-    padding: 1rem 1.5rem
-}
 
 .table-thead-bordered>:not(:last-child)>:last-child>* {
     border-top: .0625rem solid #2f3235;

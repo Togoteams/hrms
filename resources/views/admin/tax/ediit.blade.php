@@ -42,7 +42,7 @@
     </div>
     <hr>
     <div class="text-center ">
-        <button onclick="ajaxCall('form_edit','','POST')" type="button" class="btn btn-primary">Update
+        <button onclick="ajaxCall('form_edit','','POST')" type="button" class="btn btn-white">Update
             {{ $page }}</button>
     </div>
 </form>

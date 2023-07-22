@@ -25,7 +25,7 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
-                                            {{-- <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            {{-- <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
                                                 Add
                                             </button> --}}
@@ -65,7 +65,7 @@
                                                                         type="text" class="form-control form-control-sm">
                                                                 </div>
                                                                 <div class="col-2 margin-style" id="formButton">
-                                                                    <button class="btn btn-primary btn-sm">
+                                                                    <button class="btn btn-white btn-sm">
                                                                         {{ !empty($data) ? 'Update' : 'Save' }}
                                                                     </button>
                                                                 </div>
@@ -79,7 +79,7 @@
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
                                                                 @else
-                                                                    <button type="button" class="btn btn-primary btn-sm bt"
+                                                                    <button type="button" class="btn btn-white btn-sm bt"
                                                                         id="addButton" title="Add"
                                                                         onclick="openAddForm()">
                                                                         Add

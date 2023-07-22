@@ -24,7 +24,7 @@
                     <div class="mt-2 mb-5 text-right col-sm-3 auto">
                         {{-- @can('add-employees_salary') --}}
                         <a href="{{ route('admin.salary.add') }}">
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-white">
                                 Add {{ $page }}
                             </button>
                         </a>

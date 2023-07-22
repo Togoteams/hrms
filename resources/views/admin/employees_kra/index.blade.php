@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        <a class="btn btn-primary"  href="{{ route('admin.employee-kra.create') }}"  >
+                        <a class="btn btn-white"  href="{{ route('admin.employee-kra.create') }}"  >
                             Add {{ $page }}
                 </a>
 

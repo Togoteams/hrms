@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <button class="mt-4 btn btn-primary btn-sm">Go</button>
+                                <button class="mt-4 btn btn-white btn-sm">Go</button>
                             </div>
                         </div>
                     </form>

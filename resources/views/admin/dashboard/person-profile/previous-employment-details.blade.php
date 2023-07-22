@@ -25,7 +25,7 @@
                                 <div class="tab-content this-div" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
-                                            <button type="button" class="btn btn-primary btn-sm"
+                                            <button type="button" class="btn btn-white btn-sm"
                                                 onclick="addForm({{ Auth::user()->id }})">
                                                 Add Previous Employment
                                             </button>
@@ -152,7 +152,7 @@
                                     <hr>
                                     <div class="text-center ">
                                         <button onclick="ajaxCall('form_add','','POST')" type="button"
-                                            class="btn btn-primary" id="btnSave">
+                                            class="btn btn-white" id="btnSave">
                                             Add
                                         </button>
                                     </div>

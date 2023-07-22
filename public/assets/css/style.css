@@ -269,3 +269,16 @@ a {
 .table>:not(caption)>*>*{
     font-family: 'Rubik', sans-serif!important;
 }
+
+.dataTables_length{
+    float: left!important;
+}
+.dataTables_filter{
+    float: right!important;
+}
+.dataTables_info{
+    float: left;
+}
+.dataTables_paginate{
+    float: right;
+}

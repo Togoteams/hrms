@@ -25,7 +25,7 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="row py-3">
                                         <div class="text-left">
-                                            <button type="button" class="btn btn-primary btn-sm" title="Add Department"
+                                            <button type="button" class="btn btn-white btn-sm" title="Add Department"
                                                 onclick="addDepartment({{ !empty($employee) ? $employee->user_id : '' }})">
                                                 Add Department
                                             </button>
@@ -148,7 +148,7 @@
                                     </div>
                                     <hr>
                                     <div class="text-center ">
-                                        <button type="submit" class="btn btn-primary btn-sm"
+                                        <button type="submit" class="btn btn-white btn-sm"
                                             id="btnSave">SUBMIT</button>
                                     </div>
                                 </form>

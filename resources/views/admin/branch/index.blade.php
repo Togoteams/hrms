@@ -28,7 +28,7 @@
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
 
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
@@ -58,7 +58,7 @@
                                 <th>country</th>
                                 <th>landmark</th>
                                 <th>description</th>
-                                <th>Action</th>
+                                <th class="text-right">Action</th>
                             </tr>
                         </thead>
 
@@ -77,7 +77,7 @@
                                     <td>{{ $item->landmark }}</td>
                                     <td>{{ $item->description }}</td>
 
-                                    <td>
+                                    <td class="text-right">
 
 
                                         <form id="edit{{ $item->id }}"

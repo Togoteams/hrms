@@ -99,7 +99,7 @@
                         <div class="mt-8 space-y-8">
                             <div class="">
                                 <!-- Add Admin button -->
-                                <button class="btn btn-primary" type="submit">
+                                <button class="btn btn-white" type="submit">
                                     <span class="hidden ml-2 xs:block">Save Permission</span>
                                 </button>
                             </div>

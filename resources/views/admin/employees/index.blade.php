@@ -27,8 +27,8 @@
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
                     @can('add-employees')
-                        {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
-                        <a type="button" class="btn btn-primary" href="{{route('admin.employee.userDetails.form')}}" title="Add Employee" target="_blank">
+                        {{-- <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
+                        <a type="button" class="btn btn-white" href="{{route('admin.employee.userDetails.form')}}" title="Add Employee" target="_blank">
                             Add {{ $page }}
                         </a>
                         {{-- </button> --}}

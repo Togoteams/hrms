@@ -66,7 +66,7 @@
                                                                 <i class="fas fa-edit"></i>
                                                             </button>
                                                         @else
-                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                            <button type="button" class="btn btn-white btn-sm"
                                                                 title="Add" data-bs-toggle="modal"
                                                                 data-bs-target="#modaledit">
                                                                 Add
@@ -137,7 +137,7 @@
                                     <hr>
                                     <div class="text-center ">
                                         <button onclick="ajaxCall('form_edit','','POST')" type="button"
-                                            class="btn btn-primary">Update
+                                            class="btn btn-white">Update
                                             {{ $page }}</button>
                                     </div>
                                 </form>

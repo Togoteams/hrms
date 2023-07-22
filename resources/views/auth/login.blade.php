@@ -109,7 +109,7 @@
                                     </div>
 
                                     <div class="mt-3 d-grid">
-                                        <button class="btn btn-primary waves-effect waves-light"
+                                        <button class="btn btn-white waves-effect waves-light"
                                             type="submit">{{ __('Login') }}</button>
                                     </div>
                                 </form>

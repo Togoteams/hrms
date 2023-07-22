@@ -138,11 +138,11 @@
                                 </div>
                                 <!-- End Select -->
 
-                                <a class="btn btn-primary d-none d-sm-inline-block" href="javascript:;">Invite</a>
+                                <a class="btn btn-white d-none d-sm-inline-block" href="javascript:;">Invite</a>
                             </div>
                         </div>
 
-                        <a class="btn btn-primary w-100 d-sm-none" href="javascript:;">Invite</a>
+                        <a class="btn btn-white w-100 d-sm-none" href="javascript:;">Invite</a>
                     </div>
                     <!-- End Form -->
 

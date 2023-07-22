@@ -128,7 +128,7 @@
                             <!-- End Form -->
 
                             <div class="d-grid mb-3">
-                                <button type="submit" class="btn btn-primary btn-lg">Log in</button>
+                                <button type="submit" class="btn btn-white btn-lg">Log in</button>
                             </div>
 
 

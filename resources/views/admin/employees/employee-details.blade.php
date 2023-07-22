@@ -233,7 +233,7 @@
                                             </div>
 
                                             <div class="text-center pt-5">
-                                                <button type="submit" class="btn btn-primary btn-sm">SUBMIT</button>
+                                                <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
                                             </div>
                                         </div>
                                     </form>
