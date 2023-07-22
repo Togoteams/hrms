@@ -11,11 +11,13 @@ use Yajra\DataTables\DataTables;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Loans;
+use App\Models\PayrollHead;
+use App\Models\PayrollPayscaleHead;
 use App\Models\User;
 
 class PayRollPayscaleCotroller extends Controller
 {
-    public $page_name = "Pay Scal";
+    public  $page_name =   "Payroll PayScale";
     /**
      * Display a listing of the resource.
      */
@@ -27,11 +29,11 @@ class PayRollPayscaleCotroller extends Controller
         }
 
         if ($request->ajax()) {
-            $data = PayRollPayscale::with('user')->where('created_at', 'LIKE', '%' . $year . '%')->groupBy('user_id')->get();
+            $data = PayRollPayscale::with('user','employee','payroll_payscale_head','payroll_payscale_head.payroll_head')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.payroll.payscale.buttons', ['item' => $row, "route" => 'employee-kra']);
+                    $actionBtn = view('admin.payroll.payscale.buttons', ['item' => $row, "route" => 'payroll.payscale']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -52,6 +54,7 @@ class PayRollPayscaleCotroller extends Controller
             $all_users = Employee::where('status', 'active')->get();
         }
         $page = $this->page_name;
+        return view('admin.payroll.payscale.create', ['page' => $this->page_name, 'all_users' => $all_users]);
     }
 
     /**
@@ -60,52 +63,45 @@ class PayRollPayscaleCotroller extends Controller
     public function store(Request $request)
     {
 
+        // generating the validation
+        //         $validation = array();
+
+        //         // dd($request->all());
+        //         foreach ($request->all() as $key => $value) {
+        //             array_push($validation, [$value => "required"]);
+        //         }
+        // dd($validation);
+
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
-            'attribute_name' => 'required|array|min:1',
-            'attribute_description' => 'required|array|min:1',
-            'commects' => 'required|array|min:1',
-            'max_marks' => 'required|array|min:1',
-            // 'min_marks' => 'required|array|min:1',
-            'marks_by_reporting_autheority' => 'required|array|min:1',
-            'marks_by_review_autheority' => 'required|array|min:1',
+            'user_id'=> 'required|numeric|unique:payroll_payscales,user_id'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            try {
-                if (isset($request->marks_by_reporting_autheority) && count($request->marks_by_reporting_autheority) > 0) {
+        try {
+            $payroll = PayRollPayscale::create([
+                'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
+                'user_id' => $request->user_id,
+                'created_by' => auth()->user()->id
 
-                    $is_exits = PayRollPayscale::where('user_id', $request->user_id)->where('created_at', date('Y'))->first();
-                    if (!$is_exits) {
-                        PayRollPayscale::where('user_id', $request->user_id)->delete();
-                    }
-
-
-                    for ($i = 0; $i < count($request->marks_by_reporting_autheority); $i++) {
-
-                        $data = [
-                            'user_id' => $request->user_id,
-                            'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
-                            'attribute_name' => $request->attribute_name[$i],
-                            'attribute_description' => $request->attribute_description[$i],
-                            'commects' => $request->commects[$i],
-                            'max_marks' => $request->max_marks[$i],
-                            'min_marks' => $request->min_marks[$i] ?? 0,
-                            'marks_by_reporting_autheority' => $request->marks_by_reporting_autheority[$i],
-                            'marks_by_review_autheority' => $request->marks_by_review_autheority[$i],
-                            'created_by' => Auth::user()->id
-                        ];
-                        // dd($request);
-
-                        PayRollPayscale::create($data);
-                    }
+            ]);
+            foreach ($request->all() as $key => $value) {
+                $head =  PayrollHead::where('name', $key)->first();
+                if ($head) {
+                    PayrollPayscaleHead::create([
+                        'payroll_head_id' => $head->id,
+                        'payroll_payscale_id' => $payroll->id,
+                        'value' => $request->$key,
+                        'created_by' => auth()->user()->id
+                    ]);
                 }
-                return response()->json(['success' => $this->page_name . " Added Successfully"]);
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
             }
+
+            return response()->json(['success' => $this->page_name . " Added Successfully"]);
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
+    }
     }
 
     /**
@@ -189,7 +185,15 @@ class PayRollPayscaleCotroller extends Controller
     public function print($user_id)
     {
 
-        $data = PayRollPayscale::with(['user','employee','employee.branch','employee.designation'])->where('user_id', $user_id)->get();
+        $data = PayRollPayscale::with(['user', 'employee', 'employee.branch', 'employee.designation'])->where('user_id', $user_id)->get();
         return view('admin.payroll.payscale.kra_print', compact('data'));
+    }
+
+    public function get_employee_data($user_id = null)
+    {
+        $page = $this->page_name;
+        $data = Employee::where('user_id', $user_id)->first();
+        $emp_head = PayrollHead::where('employment_type', $data->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
+        return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page'));
     }
 }

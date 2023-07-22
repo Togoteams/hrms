@@ -214,12 +214,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::resource('head', PayrollHeadController::class);
         Route::get('head/status/{id}', [PayrollHeadController::class, 'status'])->name('head.status');
         /*--------------------------------------------- Pay Roll Head Crud End---------------------------------------------------------------*/
-    
-         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
-         Route::resource('payscal', PayRollPayscaleCotroller::class);
-         Route::get('payscal/status/{id}', [PayRollPayscaleCotroller::class, 'status'])->name('head.status');
-         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
-  
+
+        /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
+        Route::resource('payscale', PayRollPayscaleCotroller::class);
+        Route::get('payscale/status/{id}', [PayRollPayscaleCotroller::class, 'status'])->name('payscale.status');
+        Route::get('payscale/get-emp-head/{user_id?}', [PayRollPayscaleCotroller::class, 'get_employee_data'])->name('payscale.emp.head');
+        /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
     });
 
     // Salary

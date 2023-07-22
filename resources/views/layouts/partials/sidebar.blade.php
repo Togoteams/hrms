@@ -186,7 +186,7 @@
                                  </a>
 
                                  <div id="empsalary"
-                                     class="nav-collapse collapse {{ show(['employees_salary.index','employees-payscale.index']) }} "
+                                     class="nav-collapse collapse {{ show(['employees_salary.index', 'employees-payscale.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                      @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
@@ -194,9 +194,9 @@
                                              href="{{ route('admin.employees_salary.index') }}"> Employee Salay</a>
                                      @endcanany
                                      @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees-payscale.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.employees-payscale.index') }}"> Employee Pay Scale</a>
-                                 @endcanany
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees-payscale.index' ? 'active' : '' }}  "
+                                             href="{{ route('admin.employees-payscale.index') }}"> Employee Pay Scale</a>
+                                     @endcanany
 
                                  </div>
                              </div>
@@ -205,56 +205,55 @@
 
 
                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
-                     'delete-roles', 'view-roles'])
-                     <div id="navbarVerticalMenuPagesMenu">
+                         'delete-roles', 'view-roles'])
+                         <div id="navbarVerticalMenuPagesMenu">
+                             <!-- Collapse -->
+
+                             <div class="nav-item">
+                                 <a class="nav-link dropdown-toggle " href="#kra" role="button"
+                                     data-bs-toggle="collapse" data-bs-target="#kra" aria-expanded="false"
+                                     aria-controls="kra">
+                                     <i class="fas fa-users-class nav-icon"></i>
+                                     <span class="nav-link-title">Kra</span>
+                                 </a>
+
+                                 <div id="kra"
+                                     class="nav-collapse collapse {{ show(['employee-kra.index', 'kra-attributes.index']) }} "
+                                     data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                                     @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.kra-attributes.index' ? 'active' : '' }}  "
+                                             href="{{ route('admin.kra-attributes.index') }}"> Attributes</a>
+                                     @endcanany
+                                     @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-kra.index' ? 'active' : '' }}  "
+                                             href="{{ route('admin.employee-kra.index') }}"> Employee Kra</a>
+                                     @endcanany
+
+                                 </div>
+                             </div>
+                         </div>
+                     @endcanany
+
+                     <div id="navbarVerticalMenuSettingMenu">
                          <!-- Collapse -->
 
                          <div class="nav-item">
-                             <a class="nav-link dropdown-toggle " href="#kra" role="button"
-                                 data-bs-toggle="collapse" data-bs-target="#kra" aria-expanded="false"
-                                 aria-controls="kra">
+                             <a class="nav-link dropdown-toggle " href="#setting" role="button"
+                                 data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false"
+                                 aria-controls="setting">
                                  <i class="fas fa-users-class nav-icon"></i>
-                                 <span class="nav-link-title">Kra</span>
+                                 <span class="nav-link-title">Setting</span>
                              </a>
 
-                             <div id="kra"
-                                 class="nav-collapse collapse {{ show(['employee-kra.index','kra-attributes.index']) }} "
-                                 data-bs-parent="#navbarVerticalMenuPagesMenu">
-
-                                 @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.kra-attributes.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.kra-attributes.index') }}"> Attributes</a>
-                                 @endcanany
-                                 @canany(['add-roles', 'edit-roles', 'delete-roles', 'view-roles'])
-                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-kra.index' ? 'active' : '' }}  "
-                                     href="{{ route('admin.employee-kra.index') }}"> Employee Kra</a>
-                             @endcanany
-
+                             <div id="setting" class="nav-collapse collapse {{ show(['admin.setting.index']) }} "
+                                 data-bs-parent="#navbarVerticalMenuSettingMenu">
+                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.setting.index' ? 'active' : '' }}  "
+                                     href="{{ route('admin.setting.index') }}"> Settings</a>
                              </div>
                          </div>
                      </div>
-                 @endcanany
-              
-                 <div id="navbarVerticalMenuSettingMenu">
-                     <!-- Collapse -->
 
-                     <div class="nav-item">
-                         <a class="nav-link dropdown-toggle " href="#setting" role="button"
-                             data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false"
-                             aria-controls="setting">
-                             <i class="fas fa-users-class nav-icon"></i>
-                             <span class="nav-link-title">Setting</span>
-                         </a>
-
-                         <div id="setting"
-                             class="nav-collapse collapse {{ show(['admin.setting.index']) }} "
-                             data-bs-parent="#navbarVerticalMenuSettingMenu">
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.setting.index' ? 'active' : '' }}  "
-                                href="{{ route('admin.setting.index') }}"> Settings</a>
-                         </div>
-                     </div>
-                 </div>
-         
 
                      <!-- End Collapse -->
 
@@ -339,15 +338,15 @@
                          </a>
 
                          <div id="emppayroll"
-                             class="nav-collapse collapse {{ show(['payroll.payscal.index', 'payroll.pay-scale.add','payroll.head.index']) }} "
+                             class="nav-collapse collapse {{ show(['payroll.payscal.index', 'payroll.pay-scale.add', 'payroll.head.index']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
 
 
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
-                                href="{{ route('admin.payroll.head.index') }}"> Pay Roll Head</a>
+                                 href="{{ route('admin.payroll.head.index') }}"> Pay Roll Head</a>
 
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscal.index' ? 'active' : '' }}  "
-                                 href="{{ route('admin.payroll.payscal.index') }}"> Pay Scale</a>
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscale.index' ? 'active' : '' }}  "
+                                 href="{{ route('admin.payroll.payscale.index') }}"> Pay Scale</a>
 
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.list' ? 'active' : '' }}  "
                                  href="{{ route('admin.salary.list') }}"> Salary</a>

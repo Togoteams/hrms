@@ -26,7 +26,7 @@
                 </div>
                 <!-- Button trigger modal -->
                 <div class="p-5 card">
-                    <form id="form_data" action="{{ route('admin.employee-kra.store') }}">
+                    <form id="form_data" action="{{ route('admin.payroll.payscale.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
@@ -34,7 +34,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="name">Select Employees</label>
-                                    <select required onchange="show_user()" id="gender"
+                                    <select required onchange="editForm('{{ route('admin.payroll.payscale.emp.head',) }}/'+this.value, 'edit')" id="gender"
                                         placeholder="Enter correct gender   " name="user_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Employees- </option>
@@ -45,47 +45,9 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="table-responsive-lg" style="display: none" id="table_data">
-                                <table class="table table-bordered table-nowrap table-align-middle card-table">
-                                    <thead>
-                                        <tr>
-                                            <th>S.No</th>
-                                            <th>ATTRIBUTES </th>
-                                            <th>COMMENT OF REPORTING AUTHORITY</th>
-                                            <th>MAX. MARKS</th>
-                                            <th>MARKS AWARDED BY REPORTING AUTHORITY</th>
-                                            <th>MARKS AWARDED BY REVIEWING AUTHORITY </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($kra_attributes as $kra)
-                                            <tr>
-                                                <td>{{ $loop->index + 1 }}</td>
-                                                <td style="max-width:220px;"> <b>{{ $kra->name }} - </b> 
-                                                   
-                                                    <input required type="hidden" name="attribute_name[]"
-                                                        value="{{ $kra->name }}">
-                                                    <input required type="hidden" name="attribute_description[]"
-                                                        value="{{ $kra->description }}">
-                                                </td>
-                                                <td>
-                                                    <textarea required type="text" class="form-control form-control-sm" name="commects[]"></textarea>
-                                                </td>
-                                                <td>{{ $kra->max_marks }}
-                                                    <input required type="hidden" name="max_marks[]"
-                                                        value="{{ $kra->max_marks }}">
-                                                </td>
-                                                <td><input required type="number" maxlength="2"
-                                                        class="form-control form-control-sm"
-                                                        name="marks_by_reporting_autheority[]"></td>
-                                                <td><input required type="number" maxlength="2"
-                                                        class="form-control form-control-sm"
-                                                        name="marks_by_review_autheority[]"> </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                            <span id="edit">
+
+                            </span>
                         </div>
                         <hr>
                         <div class="text-center " style="display: none" id="table_data_btn">

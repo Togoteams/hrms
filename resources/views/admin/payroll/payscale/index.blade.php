@@ -26,13 +26,13 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        <a class="btn btn-primary text-white"  href="{{ route('admin.employee-kra.create') }}"  >
-                            Add {{ $page }}
-                </a>
+                    <a class="btn btn-primary text-white" href="{{ route('admin.payroll.payscale.create') }}">
+                        Add {{ $page }}
+                    </a>
 
                 </div>
             </div>
-         
+
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
@@ -43,6 +43,7 @@
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
+                                <th>Details</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -58,12 +59,13 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.employee-kra.index') }}",
+                            ajax: "{{ route('admin.payroll.payscale.index') }}",
 
                             columns: [{
-                                    "render": function() {
-                                        return i++;
-                                    }
+                                    data: 'DT_RowIndex',
+                                    name: 'DT_RowIndex',
+                                    orderable: false,
+                                    searchable: false
                                 },
 
                                 {
@@ -77,8 +79,16 @@
                                     data: 'user.mobile',
                                     name: 'user.mobile'
                                 },
-                             
-                            
+                                {
+                                    data: 'payroll_payscale_head',
+                                    name: 'payroll_payscale_head',
+                                    render: function(data) {
+                                        // Customize the display of posts data here
+                                      return data.map(payroll_payscale_head =>
+                                        payroll_payscale_head.payroll_head.name+":"+ payroll_payscale_head.value).join('<br> ');
+                                    }
+                                },
+
 
                                 {
                                     data: 'action',

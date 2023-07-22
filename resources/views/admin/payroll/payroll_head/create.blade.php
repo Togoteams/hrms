@@ -18,7 +18,7 @@
                                     <select required id="employment_type" name="employment_type" value="local"
                                         class="form-control form-control-sm">
                                         <option selected disabled=""> - Select employment type- </option>
-                                        <option  value="local">Local</option>
+                                        <option value="local">Local</option>
                                         <option value="expatriate">Expatriate</option>
                                         <option value="local-contractual">Local-Contractual </option>
                                     </select>
@@ -29,9 +29,9 @@
                                 <div class="form-group">
                                     <label class="required" for="for">For</label>
                                     <select required id="for" name="for" class="form-control form-control-sm">
-                                        <option selected disabled=""> - Select employment type- </option>
-                                        <option  value="payscale">Payscale</option>
-                                        <option value="salary">Salary</option>
+                                        <option selected  disabled=""> - Select for type- </option>
+                                        <option   value="payscale">Payscale</option>
+                                        <option   value="salary">Salary</option>
                                     </select>
                                 </div>
                             </div>
@@ -51,24 +51,54 @@
                                         name="placeholder" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                        
+
 
                             <div class="col-sm-8 mb-2">
                                 <div class="form-group">
                                     <label class="optional" for="slug">Slug</label>
-                                    <input  id="slug" placeholder="Enter slug of {{ $page }} "
-                                        type="text" slug="slug" class="form-control form-control-sm ">
+                                    <input id="slug" placeholder="Enter slug of {{ $page }} "
+                                        type="text" name="slug" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label class="required" for="for">Is DropDown</label>
-                                    <select required id="for" name="for" class="form-control form-control-sm">
+                                    <label class="required" for="is_dropdown">Is DropDown</label>
+                                    <select required id="is_dropdown" name="is_dropdown" class="form-control form-control-sm">
                                         <option value="no">no</option>
-                                        <option  value="yes">yes</option>
+                                        <option value="yes">yes</option>
                                     </select>
                                 </div>
                             </div>
+
+                            {{-- <hr>
+                            <h5>Validation</h5>
+                            <div class="col-sm-2 mb-2">
+                                <div class="form-group">
+                                    <input id="required" type="checkbox" name="valid[]" value="required">
+                                    <label for="required">Required</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 mb-2">
+                                <div class="form-group">
+                                    <input id="numeric" type="checkbox" name="valid[]" value="numeric">
+                                    <label for="numeric">Number</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 mb-2">
+                                <div class="form-group">
+                                    <input id="string" type="checkbox" name="valid[]" value="string">
+                                    <label for="string">String</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 mb-2">
+                                <div class="form-group">
+                                    <input id="double" type="checkbox" name="valid[]" value="double">
+                                    <label for="double">double</label>
+                                </div>
+                            </div> --}}
+
 
                         </div>
                         <hr>
