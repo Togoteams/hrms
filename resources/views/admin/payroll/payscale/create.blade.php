@@ -78,10 +78,14 @@
     // }
 </script>
 <script>
-document.getElementById("fname").onkeyup = function() {myFunction()};
+    window.addEventListener("DOMContentLoaded", (event) => {
+    const el = document.getElementById('fname');
+        if (el) {
+        el.addEventListener('keyup', myFunction, false);
+        }
+    });
 
 function myFunction() {
 console.log("testing");
 }
-
 </script>
