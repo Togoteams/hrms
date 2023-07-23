@@ -63,15 +63,6 @@ class PayRollPayscaleCotroller extends Controller
     public function store(Request $request)
     {
 
-        // generating the validation
-        //         $validation = array();
-
-        //         // dd($request->all());
-        //         foreach ($request->all() as $key => $value) {
-        //             array_push($validation, [$value => "required"]);
-        //         }
-        // dd($validation);
-
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric|unique:payroll_payscales,user_id',
             'basic' => 'required|numeric',
@@ -137,9 +128,13 @@ class PayRollPayscaleCotroller extends Controller
      */
     public function edit(string $id)
     {
-        $data = PayRollPayscale::where('user_id', PayRollPayscale::find($id)->user_id)->get();
+        $edit = true;
+        $payscale = PayRollPayscale::find($id);
         $page = $this->page_name;
-        return view('admin.payroll.payscale.edit', compact('data', 'page'));
+        $emp = Employee::where('user_id', $payscale->user_id)->first();
+        $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
+        $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
+        return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data', 'edit')), 'data' => $payscale]);
     }
 
     /**
@@ -148,26 +143,48 @@ class PayRollPayscaleCotroller extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
-            'loan_id' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'principal_amount' => 'required|numeric',
-            'maturity_amount' => 'required|numeric',
-            'tenure' => 'required|numeric',
-            'sanctioned' => 'required|numeric',
-            'sanctioned_amount' => 'required|numeric',
-            'description' => 'required|numeric',
+            'user_id' => 'required|numeric|unique:payroll_payscales,user_id,' . $id,
+            'basic' => 'required|numeric',
+            'fixed_deductions' => 'required|numeric',
+            'other_deductions' => 'required|numeric',
+            'net_take_home' => 'required|numeric',
+            'ctc' => 'required|numeric',
+            'total_employer_contribution' => 'required|numeric',
+            'total_deduction' => 'required|numeric',
+            'gross_earning' => 'required|numeric',
         ]);
-
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                PayRollPayscale::where('id', $id)->update($request->except(['_token',  '_method']));
-                return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+                $payroll = PayRollPayscale::where('id', $id)->update([
+                    'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
+                    'user_id' => $request->user_id,
+                    'basic' =>  $request->basic,
+                    'fixed_deductions' =>  $request->fixed_deductions,
+                    'other_deductions' =>  $request->other_deductions,
+                    'net_take_home' =>  $request->net_take_home,
+                    'ctc' =>  $request->ctc,
+                    'total_employer_contribution' =>  $request->total_employer_contribution,
+                    'total_deduction' =>  $request->total_deduction,
+                    'gross_earning' =>  $request->gross_earning,
+                    'updated_by' => auth()->user()->id
+
+                ]);
+                foreach ($request->all() as $key => $value) {
+                    $head =  PayrollHead::where('name', $key)->first();
+                    if ($head) {
+                        PayrollPayscaleHead::where('payroll_head_id', $head->id)->where('payroll_payscale_id', $id)->update([
+                            'payroll_head_id' => $head->id,
+                            'value' => $request->$key,
+                            'updated_by' => auth()->user()->id
+                        ]);
+                    }
+                }
+
+                return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
-                return response()->json(['success' => $e->getMessage()]);
+                return response()->json(['error' => $e->getMessage()]);
             }
         }
     }
@@ -209,8 +226,8 @@ class PayRollPayscaleCotroller extends Controller
     {
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
-        $data=PayRollPayscale::where('user_id',$user_id)->first();
+        $data = PayRollPayscale::where('user_id', $user_id)->first();
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
-        return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page','data'));
+        return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data',));
     }
 }

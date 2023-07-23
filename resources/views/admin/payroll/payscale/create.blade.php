@@ -51,7 +51,6 @@
 
                             </span>
 
-
                         </div>
                         <hr>
                         <div class="text-center " style="display: none" id="table_data_btn">
@@ -66,25 +65,40 @@
 @endsection
 
 <script>
-  
+    function setId(id, value) {
+        document.getElementById(id).value = value;
+    }
+
+    function getValue(id) {
+        return Number(document.getElementById(id).value);
+    }
 
 
-    // function calculation(data, operator) {
-    //     total_gross_amount = total_gross_amount + operator + Number(data.value);
-    //     console.log(total_gross_amount);
-    //     setId('gross_earning', total_gross_amount);
+    function amount_cal(data, operator = null) {
+        var total_gross_amount = 0;
+        var total_deduction = 0
 
-    // }
+        total_gross_amount = getValue('basic') + getValue('hra') + getValue('overtime') + getValue('arrear') - getValue(
+                'pf_amount') + getValue('pension_amount') - getValue('loans_deduction') + getValue(
+                'no_of_paid_leaves') + getValue('shift') + getValue('bonus') + getValue('transportation') + getValue(
+                'food') +
+            getValue('medical') + getValue('esi_amount') - getValue('income_tax_deductions') + getValue(
+                'penalty_deductions');
+
+        setId('gross_earning', total_gross_amount);
+        setId('total_deduction', total_deduction);
+
+    }
 </script>
 <script>
     window.addEventListener("DOMContentLoaded", (event) => {
-    const el = document.getElementById('fname');
+        const el = document.getElementById('gross_earning');
         if (el) {
-        el.addEventListener('keyup', myFunction, false);
+            el.addEventListener('keyup', myFunction, false);
         }
     });
 
-function myFunction() {
-console.log("testing");
-}
+    function myFunction() {
+        console.log("testing");
+    }
 </script>
