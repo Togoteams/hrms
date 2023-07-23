@@ -26,6 +26,7 @@
     <link rel="preload" href="{{ asset('assets/css/jquery.dataTables.min.csss') }}" data-hs-appearance="dark" as="style">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <style data-hs-appearance-onload-styles>
         * {
             transition: unset !important;

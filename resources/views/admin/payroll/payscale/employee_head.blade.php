@@ -18,13 +18,7 @@
             </div>
         </div>
     @endforeach
-    <div class="col-sm-4 mb-2">
-        <div class="form-group">
-            <label for="gross_earning">gross_earning</label>
-            <input required id="gross_earning" placeholder="Enter correct gross_earning   "
-                type="text" name="gross_earning" class="form-control form-control-sm ">
-        </div>
-    </div>
+
     <div class="col-sm-4 mb-2">
         <div class="form-group">
             <label for="fixed_deductions">fixed_deductions</label>
@@ -66,6 +60,13 @@
             <label for="total_deduction">total_deduction</label>
             <input required id="total_deduction" placeholder="Enter correct total_deduction   " type="text"
                 name="total_deduction" class="form-control form-control-sm ">
+        </div>
+    </div>
+    <div class="col-sm-4 mb-2">
+        <div class="form-group">
+            <label for="gross_earning">gross_earning</label>
+            <input required id="gross_earning" placeholder="Enter correct gross_earning   " type="text"
+                name="gross_earning" class="form-control form-control-sm ">
         </div>
     </div>
 </div>

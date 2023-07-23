@@ -1,10 +1,11 @@
 @extends('layouts.app')
 @push('styles')
-<style>
-    .table-nowrap td, .table-nowrap th {
-        white-space: normal !important;
-    }
-</style>
+    <style>
+        .table-nowrap td,
+        .table-nowrap th {
+            white-space: normal !important;
+        }
+    </style>
 @endpush
 @section('content')
     <main id="content" role="main" class="main card ">
@@ -33,9 +34,10 @@
                         <div class="row">
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
-                                    <label for="name">Select Employees</label>
-                                    <select required onchange="editForm('{{ route('admin.payroll.payscale.emp.head',) }}/'+this.value, 'edit')" id="gender"
-                                        placeholder="Enter correct gender   " name="user_id"
+                                    <label for="gender">Select Employees</label>
+                                    <select required
+                                        onchange="editForm('{{ route('admin.payroll.payscale.emp.head') }}/'+this.value, 'edit')"
+                                        id="gender" placeholder="Enter correct gender   " name="user_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Employees- </option>
                                         @foreach ($all_users as $au)
@@ -48,6 +50,9 @@
                             <span id="edit">
 
                             </span>
+                            <input type="text" id="fname">
+
+
                         </div>
                         <hr>
                         <div class="text-center " style="display: none" id="table_data_btn">
@@ -62,8 +67,21 @@
 @endsection
 
 <script>
-    function show_user() {
-        document.getElementById('table_data').style.display = "block";
-        document.getElementById('table_data_btn').style.display = "block";
-    }
+  
+
+
+    // function calculation(data, operator) {
+    //     total_gross_amount = total_gross_amount + operator + Number(data.value);
+    //     console.log(total_gross_amount);
+    //     setId('gross_earning', total_gross_amount);
+
+    // }
+</script>
+<script>
+document.getElementById("fname").onkeyup = function() {myFunction()};
+
+function myFunction() {
+console.log("testing");
+}
+
 </script>

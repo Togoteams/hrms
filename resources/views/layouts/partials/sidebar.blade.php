@@ -338,7 +338,7 @@
                          </a>
 
                          <div id="emppayroll"
-                             class="nav-collapse collapse {{ show(['payroll.payscal.index', 'payroll.pay-scale.add', 'payroll.head.index']) }} "
+                             class="nav-collapse collapse {{ show(['payroll.payscal.index', 'payroll.payscale.index', 'payroll.head.index']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
 
 
