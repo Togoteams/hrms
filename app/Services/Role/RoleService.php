@@ -59,7 +59,14 @@ class RoleService
         }
     }
     public function updateStatus(array $attributes,$id){
-        $attributes['value'] == '1' ? 1 : 0;
+        if( $attributes['value']=="active")
+        {
+            $attributes['status'] ="inactive";
+        }else
+        {
+            $attributes['status'] ="active";
+        }
+        // dd( $attributes['value']);
         return $this->roleRepository->updateRole($attributes, $id);
     }
 

@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-end">
-                    <div class="col-sm mb-2 mb-sm-0">
+                    <div class="mb-2 col-sm mb-sm-0">
                         <h1 class="page-header-title">Roles</h1>
                     </div>
                     <!-- End Col -->
@@ -60,15 +60,16 @@
                                         </div>
                                     </td>
                                     <td class="table-column-ps-0">
-                                        <span class="d-block h5 mb-0">{{ $role->name }}</span>
+                                        <span class="mb-0 d-block h5">{{ $role->name }}</span>
                                         <!-- <span class="d-block fs-5">Human resources</span> -->
                                     </td>
                                     <td>
-                                        <span class="d-block h5 mb-0">{{ $role->role_type }}</span>
+                                        <span class="mb-0 d-block h5">{{ $role->role_type }}</span>
                                     </td>
                                     <td> {{ $role->description }}</td>
                                     <td>
-                                        <div class="success-badges"><span class="legend-indicator bg-success"></span>{{ $role->status ?? 'Active' }}</div>
+                                        <div class="success-badges changeStatus" data-table="roles" data-uuid="{{$role->uuid}}"
+                                        data-message="inactive" @if($role->status=="active") data-value="active" @else data-value="inactive" @endif ><span class="legend-indicator bg-success"></span>{{ $role->status ?? 'Active' }}</div>
                                     </td>
 
                                     <td class="text-right">
@@ -97,14 +98,14 @@
                 <!-- Footer -->
                 <div class="card-footer">
                     <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
-                        <div class="col-sm mb-2 mb-sm-0">
+                        <div class="mb-2 col-sm mb-sm-0">
                             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
                                 <span class="me-2">Showing:</span>
 
                                 <!-- Select -->
                                 <div class="tom-select-custom">
                                     <select id="datatableEntries"
-                                        class="js-select form-select form-select-borderless w-auto" autocomplete="off"
+                                        class="w-auto js-select form-select form-select-borderless" autocomplete="off"
                                         data-hs-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true
@@ -157,7 +158,7 @@
                     <form method="post" action="{{ route('admin.role.add') }}" class="formsubmit">
                         @csrf
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="name" class="col-sm-3 col-form-label form-label">Name</label>
                             <div class="col-sm-9">
                                 <input type="hidden" class="form-control" name="role_id" id="role_id">
@@ -165,7 +166,7 @@
                                     placeholder="Name" aria-label="name">
                             </div>
                         </div>
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="name" class="col-sm-3 col-form-label form-label">Short Code</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" rows="4" cols="50"
@@ -173,7 +174,7 @@
                             </div>
                         </div>
                         <!-- End Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Role Type</label>
                             <div class="col-sm-9">
                                 <select class="js-select form-select" autocomplete="off" name="role_type" id="role_type"
@@ -188,7 +189,7 @@
                             </div>
                         </div>
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Description</label>
                             <div class="col-sm-9">
                                 <textarea type="text" class="form-control" rows="4" cols="50" name="description" id="description"
@@ -200,7 +201,7 @@
                         <!-- End Form -->
 
                         <div class="d-flex justify-content-end">
-                            <div class="d-flex gap-3">
+                            <div class="gap-3 d-flex">
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-white">Save changes</button>
