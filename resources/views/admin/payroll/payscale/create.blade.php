@@ -50,7 +50,6 @@
                             <span id="edit">
 
                             </span>
-                            <input type="text" id="fname">
 
 
                         </div>

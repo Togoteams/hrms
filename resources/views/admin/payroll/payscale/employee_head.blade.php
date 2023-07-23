@@ -9,12 +9,22 @@
     </div>
 
     @foreach ($emp_head as $head)
+        @php
+            if (isset($data->payroll_payscale_id)) {
+               $head_data= App\Models\PayrollPayscaleHead::where('payroll_payscale_id', $head->id)
+                    ->where('payroll_payscale_id', $data->payroll_payscale_id)
+                    ->first();
+                    dd($head_data);
+            }
+
+
+        @endphp
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label class="required" for="{{ $head->name }}">{{ $head->name }}</label>
                 <input required id="{{ $head->name }}"
                     placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text"
-                    name="{{ strtolower($head->name) }}" class="form-control form-control-sm ">
+                    name="{{ strtolower($head->name) }}" value="{{ $head_data->value ?? ''}}" class="form-control form-control-sm ">
             </div>
         </div>
     @endforeach
