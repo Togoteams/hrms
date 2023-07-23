@@ -7,10 +7,11 @@ use App\Models\PayrollHead;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Str;
 
 class PayrollHeadController extends Controller
 {
-    public $page_name = "Pay Roll Head";
+    public $page_name = "Payroll Head";
 
     public function index()
     {
@@ -41,7 +42,12 @@ class PayrollHeadController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            $request->request->add(['created_by' => auth()->user()->id]);
+            $request->merge([
+                'name' => strtolower($request->name),
+                'slug' => Str::slug($request->name, '_'),
+                'created_by' => auth()->user()->id
+            ]);
+        
             PayrollHead::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }

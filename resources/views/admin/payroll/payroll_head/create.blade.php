@@ -21,6 +21,7 @@
                                         <option value="local">Local</option>
                                         <option value="expatriate">Expatriate</option>
                                         <option value="local-contractual">Local-Contractual </option>
+                                        <option value="both">Local and Expatriate </option>
                                     </select>
                                 </div>
                             </div>
@@ -29,9 +30,10 @@
                                 <div class="form-group">
                                     <label class="required" for="for">For</label>
                                     <select required id="for" name="for" class="form-control form-control-sm">
-                                        <option selected  disabled=""> - Select for type- </option>
-                                        <option   value="payscale">Payscale</option>
-                                        <option   value="salary">Salary</option>
+                                        <option selected disabled=""> - Select for type- </option>
+                                        <option value="payscale">Payscale</option>
+                                        <option value="salary">Salary</option>
+                                        <option value="both">Payscal and Salary </option>
                                     </select>
                                 </div>
                             </div>
@@ -53,17 +55,18 @@
                             </div>
 
 
-                            <div class="col-sm-8 mb-2">
+                            {{-- <div class="col-sm-8 mb-2">
                                 <div class="form-group">
                                     <label class="optional" for="slug">Slug</label>
                                     <input id="slug" placeholder="Enter slug of {{ $page }} "
                                         type="text" name="slug" class="form-control form-control-sm ">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label class="required" for="is_dropdown">Is DropDown</label>
-                                    <select required id="is_dropdown" name="is_dropdown" class="form-control form-control-sm">
+                                    <select required id="is_dropdown" name="is_dropdown"
+                                        class="form-control form-control-sm">
                                         <option value="no">no</option>
                                         <option value="yes">yes</option>
                                     </select>

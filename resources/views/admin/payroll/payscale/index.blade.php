@@ -40,10 +40,16 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Employee name</th>
-                                <th>Employee Email</th>
-                                <th>Employee Phone</th>
-                                <th>Details</th>
+                                <th>Employee Id</th>
+                                <th>Employee Ec No</th>
+                                <th>Basic</th>
+                                <th>fixed_deductions</th>
+                                <th>other_deductions</th>
+                                <th>net_take_home</th>
+                                <th>ctc</th>
+                                <th>total_employer_contribution</th>
+                                <th>total_deduction</th>
+                                <th>gross_earning</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -68,25 +74,49 @@
                                     searchable: false
                                 },
 
+                             
                                 {
-                                    data: 'user.name',
-                                    name: 'user.name'
-                                }, {
-                                    data: 'user.email',
-                                    name: 'user.email'
+                                    data: 'employee.emp_id',
+                                    name: 'employee.emp_id'
+                                },
+
+                                {
+                                    data: 'employee.ec_number',
+                                    name: 'employee.ec_number'
                                 },
                                 {
-                                    data: 'user.mobile',
-                                    name: 'user.mobile'
+                                    data: 'basic',
+                                    name: 'basic'
+                                },
+
+                                {
+                                    data: 'fixed_deductions',
+                                    name: 'fixed_deductions'
                                 },
                                 {
-                                    data: 'payroll_payscale_head',
-                                    name: 'payroll_payscale_head',
-                                    render: function(data) {
-                                        // Customize the display of posts data here
-                                      return data.map(payroll_payscale_head =>
-                                        payroll_payscale_head.payroll_head.name+":"+ payroll_payscale_head.value).join('<br> ');
-                                    }
+                                    data: 'other_deductions',
+                                    name: 'other_deductions'
+                                },
+                                {
+                                    data: 'net_take_home',
+                                    name: 'net_take_home'
+                                },
+                                {
+                                    data: 'ctc',
+                                    name: 'ctc'
+                                },
+
+                                {
+                                    data: 'total_employer_contribution',
+                                    name: 'total_employer_contribution'
+                                },
+                                {
+                                    data: 'total_deduction',
+                                    name: 'total_deduction'
+                                },
+                                {
+                                    data: 'gross_earning',
+                                    name: 'gross_earning'
                                 },
 
 

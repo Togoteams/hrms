@@ -29,7 +29,7 @@ class PayRollPayscaleCotroller extends Controller
         }
 
         if ($request->ajax()) {
-            $data = PayRollPayscale::with('user','employee','payroll_payscale_head','payroll_payscale_head.payroll_head')->get();
+            $data = PayRollPayscale::with('user', 'employee')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -73,35 +73,51 @@ class PayRollPayscaleCotroller extends Controller
         // dd($validation);
 
         $validator = Validator::make($request->all(), [
-            'user_id'=> 'required|numeric|unique:payroll_payscales,user_id'
+            'user_id' => 'required|numeric|unique:payroll_payscales,user_id',
+            'basic' => 'required|numeric',
+            'fixed_deductions' => 'required|numeric',
+            'other_deductions' => 'required|numeric',
+            'net_take_home' => 'required|numeric',
+            'ctc' => 'required|numeric',
+            'total_employer_contribution' => 'required|numeric',
+            'total_deduction' => 'required|numeric',
+            'gross_earning' => 'required|numeric',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-        try {
-            $payroll = PayRollPayscale::create([
-                'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
-                'user_id' => $request->user_id,
-                'created_by' => auth()->user()->id
+            try {
+                $payroll = PayRollPayscale::create([
+                    'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
+                    'user_id' => $request->user_id,
+                    'basic' =>  $request->basic,
+                    'fixed_deductions' =>  $request->fixed_deductions,
+                    'other_deductions' =>  $request->other_deductions,
+                    'net_take_home' =>  $request->net_take_home,
+                    'ctc' =>  $request->ctc,
+                    'total_employer_contribution' =>  $request->total_employer_contribution,
+                    'total_deduction' =>  $request->total_deduction,
+                    'gross_earning' =>  $request->gross_earning,
+                    'created_by' => auth()->user()->id
 
-            ]);
-            foreach ($request->all() as $key => $value) {
-                $head =  PayrollHead::where('name', $key)->first();
-                if ($head) {
-                    PayrollPayscaleHead::create([
-                        'payroll_head_id' => $head->id,
-                        'payroll_payscale_id' => $payroll->id,
-                        'value' => $request->$key,
-                        'created_by' => auth()->user()->id
-                    ]);
+                ]);
+                foreach ($request->all() as $key => $value) {
+                    $head =  PayrollHead::where('name', $key)->first();
+                    if ($head) {
+                        PayrollPayscaleHead::create([
+                            'payroll_head_id' => $head->id,
+                            'payroll_payscale_id' => $payroll->id,
+                            'value' => $request->$key,
+                            'created_by' => auth()->user()->id
+                        ]);
+                    }
                 }
-            }
 
-            return response()->json(['success' => $this->page_name . " Added Successfully"]);
-        } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+                return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
         }
-    }
     }
 
     /**

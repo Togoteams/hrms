@@ -15,15 +15,21 @@ return new class extends Migration
             $table->id();
          
             $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('status')->default('active');
-            $table->unsignedBigInteger('created_by');
+            $table->double('basic');
+            $table->double('fixed_deductions');
+            $table->double('other_deductions');
+            $table->double('net_take_home');
+            $table->double('ctc');
+            $table->double('total_employer_contribution');
+            $table->double('total_deduction');
+            $table->double('gross_earning');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreignId('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('deleted_by')->references('id')->on('users');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });
