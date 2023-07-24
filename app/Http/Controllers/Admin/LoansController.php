@@ -32,10 +32,10 @@ class LoansController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required|unique:loans,name',
-            'start_amount' => 'required|numeric',
-            'end_amount' => 'required|numeric',
-            'late_fine_amount' => 'required|numeric',
-            'late_fine_amount_type' => 'required|string',
+            'start_amount' => 'required|numeric|gt:0',
+            'end_amount' => 'required|numeric|gt:0',
+            'late_fine_amount' => 'required|numeric|gt:0',
+            'late_fine_amount_type' => 'required|string|gt:0',
             'no_min_installment' => 'required|numeric',
             'no_max_installment' => 'required|numeric',
             'max_installment_amount' => 'required|numeric',
@@ -76,14 +76,14 @@ class LoansController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'string|required|unique:designations,name,' . $id,
-            'start_amount' => 'required|numeric',
-            'end_amount' => 'required|numeric',
-            'late_fine_amount' => 'required|numeric',
-            'late_fine_amount_type' => 'required|string',
-            'no_min_installment' => 'required|numeric',
-            'no_max_installment' => 'required|numeric',
-            'max_installment_amount' => 'required|numeric',
-            'min_installment_amount' => 'required|numeric',
+            'start_amount' => 'required|numeric|gt:0',
+            'end_amount' => 'required|numeric|gt:0',
+            'late_fine_amount' => 'required|numeric|gt:0',
+            'late_fine_amount_type' => 'required|string|gt:0',
+            'no_min_installment' => 'required|numeric|gt:0',
+            'no_max_installment' => 'required|numeric|gt:0|gte:no_min_installment',
+            'max_installment_amount' => 'required|numeric|gt:0|gte:min_installment_amount',
+            'min_installment_amount' => 'required|numeric|gt:0',
             'rate_of_interest' => 'required|numeric',
             'description' => 'string|required',
         ]);

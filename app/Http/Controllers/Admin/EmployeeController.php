@@ -121,7 +121,7 @@ class EmployeeController extends BaseController
                     $message,
                     [
                         "employee" => $employee,
-                        'redirect_url' => route('admin.employee.userDetails.form', $employee->emp_id)
+                        'redirect_url' => route('admin.employee.employeeDetails.form', $employee->emp_id)
                     ]
                 );
             }
@@ -156,8 +156,8 @@ class EmployeeController extends BaseController
             'designation_id'        => ['required', 'numeric'],
             'ec_number'             => ['required', 'numeric'],
             'id_number'             => ['required', 'numeric'],
-            'start_date'            => ['required', 'date'],
-            'currency'              => ['required', 'string'],
+            'start_date'            => ['required', 'date','before:today'],
+            'currency'              => ['required', 'string'], 
             'basic_salary'          => ['required', 'numeric'],
             'date_of_current_basic' => ['required', 'date'],
             'employment_type'       => ['required', 'string'],
@@ -190,7 +190,7 @@ class EmployeeController extends BaseController
                     200,
                     $message,
                     ["employee" => $employee],
-                    ['redirect_url' => route('admin.employee.employeeDetails.form', $employee->emp_id)]
+                    ['redirect_url' => route('admin.employee.address.form', $employee->emp_id)]
                 );
             }
         } catch (Exception $e) {
@@ -228,7 +228,7 @@ class EmployeeController extends BaseController
                 200,
                 $message,
                 ["employee" => $employee],
-                ['redirect_url' => route('admin.employee.address.form', $employee->emp_id)]
+                ['redirect_url' => route('admin.employee.domicile.form', $employee->emp_id)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -264,7 +264,7 @@ class EmployeeController extends BaseController
                 200,
                 $message,
                 ["employee" => $employee],
-                ['redirect_url' => route('admin.employee.passportOmang.form', $employee->emp_id)]
+                ['redirect_url' => route('admin.employee.qualification.form', $employee->emp_id)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -302,7 +302,7 @@ class EmployeeController extends BaseController
                 200,
                 $message,
                 ["employee" => $employee],
-                ['redirect_url' => route('admin.employee.qualification.form', $employee->emp_id)]
+                ['redirect_url' => route('admin.employee.medicalInsuaranceBomaid.form', $employee->emp_id)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -356,7 +356,7 @@ class EmployeeController extends BaseController
                 200,
                 $message,
                 ["employee" => $employee],
-                ['redirect_url' => route('admin.employee.medicalInsuaranceBomaid.form', $employee->emp_id)]
+                ['redirect_url' => route('admin.employee.departmentHistory.form', $employee->emp_id)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -388,7 +388,7 @@ class EmployeeController extends BaseController
                     200,
                     $message,
                     ["employee" => $employee],
-                    ['redirect_url' => route('admin.employee.domicile.form', $employee->emp_id)]
+                    ['redirect_url' => route('admin.employee.passportOmang.form', $employee->emp_id)]
                 );
             }
         } catch (Exception $e) {

@@ -94,7 +94,7 @@
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="description">Designation</label>
-                                    <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"
+                                    <textarea required id="description" placeholder="Enter Short Description of Designation " type="text"
                                         name="description" class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>
