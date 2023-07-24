@@ -64,7 +64,7 @@
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
                                                                     <!-- Your content for right div goes here -->
-                                                                    <button class="btn btn-warning btn-sm bt" title="Edit"
+                                                                    <button class="btn btn-edit btn-sm bt" title="Edit"
                                                                         id="editButton" data-id="{{ $department->id }}"
                                                                         data-user_id="{{ $employee->user_id }}"
                                                                         data-department_name="{{ $department->department_name }}"
@@ -74,7 +74,7 @@
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
 
-                                                                    <button class="btn btn-danger btn-sm bt deleteRecord"
+                                                                    <button class="btn btn-delete btn-sm bt deleteRecord"
                                                                         title="Delete" data-id="{{ $department->id }}"
                                                                         data-token="{{ csrf_token() }}"
                                                                         data-action="{{ route('admin.employee.departmentHistory.delete') }}">

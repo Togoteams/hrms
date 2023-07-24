@@ -57,7 +57,7 @@
                                                 <div class="col-md-2 text-end">
                                                     <div class="pt-2">
                                                         <!-- Your content for right div goes here -->
-                                                        <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
+                                                        <button class="btn btn-edit btn-sm bt" data-bs-toggle="modal"
                                                             data-bs-target="#modaledit">
                                                             <i class="fas fa-edit"></i></button>
                                                     </div>

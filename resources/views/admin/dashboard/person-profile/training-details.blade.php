@@ -48,7 +48,7 @@
                                                         <div class="right-div">
                                                             <!-- Your content for right div goes here -->
 
-                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
+                                                            <button class="btn btn-edit btn-sm bt" data-bs-toggle="modal"
                                                                 title="Edit">
                                                                 <i class="fas fa-edit"></i>
                                                             </button>

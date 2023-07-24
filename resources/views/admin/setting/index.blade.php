@@ -25,7 +25,7 @@
                         <h4 class="text-dark">Payroll Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                         <h4 class="text-dark">Payments & Compliance Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                         <h4 class="text-dark">TDS Filing Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                         <h4 class="text-dark">Employee Data</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                         <h4 class="text-dark">Holidays, Leaves & Attendance</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -226,7 +226,7 @@
                         <h4 class="text-dark">Tax Deductions Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -266,7 +266,7 @@
                         <h4 class="text-dark">Reimbursements Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -298,7 +298,7 @@
                         <h4 class="text-dark">Documents Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -322,7 +322,7 @@
                         <h4 class="text-dark">Contractor Payments Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -346,7 +346,7 @@
                         <h4 class="text-dark">API Access</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -370,7 +370,7 @@
                         <h4 class="text-dark">User Roles</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">CREATE/EDIT ROLES</button>
+                        <button type="button" class="btn btn-delete btn-sm">CREATE/EDIT ROLES</button>
 
                     </div>
                 </div>
@@ -401,7 +401,7 @@
                         <h4 class="text-dark">Document Templates</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -425,7 +425,7 @@
                         <h4 class="text-dark">Integrations</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>
@@ -455,7 +455,7 @@
                         <h4 class="text-dark">Employee Resignation Setup</h4>
                     </div>
                     <div class="mb-2 text-right border-b-2 col-md-4 col-sm-12">
-                        <button type="button" class="btn btn-danger btn-sm">Edit</button>
+                        <button type="button" class="btn btn-delete btn-sm">Edit</button>
 
                     </div>
                 </div>

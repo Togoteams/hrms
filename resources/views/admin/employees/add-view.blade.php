@@ -51,11 +51,11 @@
                                                                 <form id="form_id" action="{{ route('admin.person.profile.qualification.delete') }}" class="float-right mx-1" method="post">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="">
-                                                                    <button class="btn btn-danger btn-sm bt" title="Delete">
+                                                                    <button class="btn btn-delete btn-sm bt" title="Delete">
                                                                         <i class="fa-solid fa-trash fa-lg"></i>
                                                                     </button>
                                                                 </form>
-                                                                <button class="btn btn-warning btn-sm bt float-right" title="Edit"
+                                                                <button class="btn btn-edit btn-sm bt float-right" title="Edit"
                                                                     id="editButton"
                                                                     data-id="{{ $data->id }}"
                                                                     data-user_id="{{ Auth::user()->id }}"

@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-9"></div>
-                <div class="col-sm-3 text-right auto mb-5 mt-2">
+                <div class="col-sm-3 text-right auto mb-2 mt-2">
                     {{-- @can('add-leaves') --}}
                     <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         {{ $page }}
@@ -52,6 +52,8 @@
             </div>
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
+
+            
                 <div class="p-2 mt-3 table-responsive">
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>

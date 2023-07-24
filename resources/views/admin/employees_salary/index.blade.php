@@ -8,10 +8,7 @@
             <!-- Page Header -->
             <div class=" border-bottom mt-2 mb-2">
                 <div class="row align-items-center">
-                    <div class="col">
-                        <h1 class="page-header-title">{{ $page }}</h1>
-                    </div>
-                    <!-- End Col -->
+                  
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -23,21 +20,25 @@
 
                 <!-- End Row -->
             </div>
-            <div class="row">
-                <div class="col-sm-9"></div>
-                <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        {{-- @can('add-employees_salary') --}}
+            
+            @include('admin.employees_salary.create')
+            <!-- Card -->
+            <div class="card mb-3 mb-lg-5">
+            <div class="page-header">
+                <div class="row">
+                    <div class="mb-2 col-sm mb-sm-0">
+                        <h2 class="page-header-title">{{ $page }}</h2>
+                    </div>
+                    <div class="col-sm-auto">
+                    {{-- @can('add-employees_salary') --}}
                         <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
                         {{-- @endcan --}}
-                   
+                    </div>
                 </div>
             </div>
-            @include('admin.employees_salary.create')
-            <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
                     <table
                         class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">

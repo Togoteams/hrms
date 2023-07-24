@@ -65,7 +65,7 @@
 
       <!-- Table -->
       <div class="table-responsive datatable-custom position-relative">
-        <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+        <table id="datatable" class="table table-lg table-strippedtable-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
                    "columnDefs": [{
                       "targets": [0, 7],
                       "orderable": false

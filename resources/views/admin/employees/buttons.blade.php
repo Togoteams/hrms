@@ -13,7 +13,7 @@
             class="fas fa-eye"></i></button>
 
     {{-- EDIT BUTTON --}}
-    <a type="button" class="btn btn-warning btn-sm"
+    <a type="button" class="btn btn-edit btn-sm"
         href="{{ route('admin.employee.userDetails.form', $item->emp_id) }}" title="Edit Employee" target="_blank">
         <i class="fas fa-edit"></i>
     </a>
@@ -21,7 +21,7 @@
     @csrf
     <input type="hidden" name="_method" value="DELETE">
     <button type="button" id="delete{{ $item->id }}"
-        onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')" class="btn btn-danger btn-sm"><i
+        onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')" class="btn btn-delete btn-sm"><i
             class="fas fa-trash-alt"></i>
     </button>
 

@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-9"></div>
-                <div class="col-sm-3 text-right auto mb-5 mt-2">
+                <div class="col-sm-3 text-right auto mb-2 mt-2">
 
                     <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
@@ -45,7 +45,7 @@
                 <!-- Table -->
                 <div class="table-responsive datatable-custom">
                     <table id="datatable"
-                        class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                        class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
 
@@ -76,14 +76,14 @@
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.payroll.head.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                                class="btn btn-warning btn-sm"><i class="fas fa-edit"
+                                                class="btn btn-edit btn-sm"><i class="fas fa-edit"
                                                     data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Edit"></i></button>
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                             <button type="button" id="delete{{ $item->id }}"
                                                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
-                                                class="btn btn-danger btn-sm" data-bs-toggle="tooltip"
+                                                class="btn btn-delete btn-sm" data-bs-toggle="tooltip"
                                                 data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
                                             </button>
                                             <button type="button"

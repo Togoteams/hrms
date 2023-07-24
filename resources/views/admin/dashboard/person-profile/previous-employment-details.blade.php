@@ -66,7 +66,7 @@
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
                                                                     <button type="button"
-                                                                        class="btn btn-warning btn-sm bt editButton"
+                                                                        class="btn btn-edit btn-sm bt editButton"
                                                                         title="Edit" data-id="{{ $data->id }}"
                                                                         data-user_id="{{ Auth::user()->id }}"
                                                                         data-company_name="{{ $data->company_name }}"
@@ -76,7 +76,7 @@
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
 
-                                                                    <button class="btn btn-danger btn-sm bt deleteRecord"
+                                                                    <button class="btn btn-delete btn-sm bt deleteRecord"
                                                                         title="Delete" data-id="{{ $data->id }}"
                                                                         data-token="{{ csrf_token() }}"
                                                                         data-action="{{ route('admin.person.profile.previous.employment.details.delete') }}">

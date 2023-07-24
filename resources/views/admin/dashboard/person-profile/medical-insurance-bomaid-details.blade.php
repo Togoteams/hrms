@@ -94,7 +94,7 @@
                                                         <div class="col-2 text-end">
                                                             <div class="right-div">
                                                                 @if (!empty($data))
-                                                                    <button type="button" class="btn btn-warning btn-sm bt"
+                                                                    <button type="button" class="btn btn-edit btn-sm bt"
                                                                         id="openButton" title="Edit" onclick="openForm()">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>

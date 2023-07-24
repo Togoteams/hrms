@@ -5,37 +5,27 @@
     <main id="content" role="main" class="main">
         <!-- Content -->
         <div class="content container-fluid">
-            <!-- Page Header -->
+            <!-- Card -->
+            <div class="card">
             <div class="page-header">
-                <div class="row align-items-end">
-                    <div class="col-sm mb-2 mb-sm-0">
-
-                        <h1 class="page-header-title">Holidays</h1>
+                <div class="row">
+                    <div class="mb-2 col-sm mb-sm-0">
+                        <h2 class="page-header-title">Holidays</h2>
                     </div>
-                    <!-- End Col -->
-
                     <div class="col-sm-auto">
-                        @can('add-holidays')
+                    @can('add-holidays')
                             <a class="btn btn-white g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add"
                                 data-bs-target="#addEditHolidayModal">
                                 <i class="bi-person-plus-fill me-1"></i> Add Holiday
                             </a>
                         @endcan
-
                     </div>
-                    <!-- End Col -->
                 </div>
-                <!-- End Row -->
             </div>
-            <!-- End Page Header -->
-
-            <!-- Card -->
-            <div class="card">
                 <!-- Header -->
                 <div class="card-header card-header-content-md-between">
-                    <div class="mb-2 mb-md-0">
+                    <!-- <div class="mb-2 mb-md-0">
                         <form>
-                            <!-- Search -->
                             <div class="input-group input-group-merge input-group-flush">
                                 <div class="input-group-prepend input-group-text">
                                     <i class="bi-search"></i>
@@ -43,11 +33,10 @@
                                 <input id="datatableSearch" type="search" class="form-control"
                                     placeholder="Search Holidays" aria-label="Search Holidays">
                             </div>
-                            <!-- End Search -->
                         </form>
-                    </div>
+                    </div> -->
 
-                    <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
+                    <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center">
                         <!-- Datatable Info -->
                         <div id="datatableCounterInfo" style="display: none;">
                             <div class="d-flex align-items-center">
@@ -70,7 +59,7 @@
                 <!-- Table -->
                 <div class="table-responsive datatable-custom position-relative">
                     <table id="datatable"
-                        class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
+                        class="table table-lg table-strippedtable-thead-bordered table-nowrap table-align-middle card-table"
                         data-hs-datatables-options='{
                             "columnDefs": [{
                                 "targets": [0, 7],
@@ -130,14 +119,14 @@
                                         @can('edit-holidays')
                                             <button type="button" data-table="holidays" data-form-modal="addEditHolidayModal"
                                                 data-message="inactive" data-uuid="{{ $holiday->uuid }}"
-                                                class="btn btn-warning btn-sm editData">
+                                                class="btn btn-edit btn-sm editData">
                                                 <i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Edit"></i>
                                             </button>
                                         @endcan
                                         @can('delete-holidays')
                                             <button type="button" data-table="holidays" data-message="inactive"
-                                                data-uuid="{{ $holiday->uuid }}" class="btn btn-danger btn-sm deleteData">
+                                                data-uuid="{{ $holiday->uuid }}" class="btn btn-delete btn-sm deleteData">
                                                 <i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top"
                                                     title="Delete"></i>
                                             </button>
@@ -151,13 +140,12 @@
                 <!-- End Table -->
 
                 <!-- Footer -->
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                     <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
                         <div class="col-sm mb-2 mb-sm-0">
                             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
                                 <span class="me-2">Showing:</span>
 
-                                <!-- Select -->
                                 <div class="tom-select-custom">
                                     <select id="datatableEntries"
                                         class="js-select form-select form-select-borderless w-auto" autocomplete="off"
@@ -170,27 +158,20 @@
                                         <option value="20">20</option>
                                     </select>
                                 </div>
-                                <!-- End Select -->
 
                                 <span class="text-secondary me-2">of</span>
 
-                                <!-- Pagination Quantity -->
                                 <span id="datatableWithPaginationInfoTotalQty"></span>
                             </div>
                         </div>
-                        <!-- End Col -->
 
                         <div class="col-sm-auto">
                             <div class="d-flex justify-content-center justify-content-sm-end">
-                                <!-- Pagination -->
                                 <nav id="datatablePagination" aria-label="Activity pagination"></nav>
                             </div>
                         </div>
-                        <!-- End Col -->
                     </div>
-                    <!-- End Row -->
-                </div>
-                <!-- End Footer -->
+                </div> -->
             </div>
             <!-- End Card -->
         </div>
@@ -259,7 +240,7 @@
 
                         <div class="d-flex justify-content-end">
                             <div class="d-flex gap-3">
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-delete btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-white">Save changes</button>
                             </div>

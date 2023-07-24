@@ -8,9 +8,7 @@
             <!-- Page Header -->
             <div class=" border-bottom mt-2 mb-2">
                 <div class="row align-items-center">
-                    <div class="col">
-                        <h1 class="page-header-title">{{ $page }}</h1>
-                    </div>
+                  
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -23,19 +21,24 @@
 
                 <!-- End Row -->
             </div>
-            <div class="row">
-                <div class="col-sm-9"></div>
-                <div class="col-sm-3 text-right auto mb-5 mt-2">
-                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
+          
+            @include('admin.employees_loans.create')
+            <!-- Card -->
+            <div class="card mb-3 mb-lg-5">
+            <div class="page-header">
+                <div class="row">
+                    <div class="mb-2 col-sm mb-sm-0">
+                        <h2 class="page-header-title">{{ $page }}</h2>
+                    </div>
+                    <div class="col-sm-auto">
+                    <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
 
+                    </div>
                 </div>
             </div>
-            @include('admin.employees_loans.create')
-            <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
                 <div class="table-responsive mt-3 p-2">
                     <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>

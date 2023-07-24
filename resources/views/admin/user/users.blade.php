@@ -5,35 +5,27 @@
     <main id="content" role="main" class="main">
         <!-- Content -->
         <div class="content container-fluid">
-            <!-- Page Header -->
+           
+
+            <!-- Card -->
+            <div class="card">
             <div class="page-header">
-                <div class="row align-items-end">
-                    <div class="col-sm mb-2 mb-sm-0">
-
-
-                        <h1 class="page-header-title">Users</h1>
+                <div class="row">
+                    <div class="mb-2 col-sm mb-sm-0">
+                        <h2 class="page-header-title">Users</h2>
                     </div>
-                    <!-- End Col -->
-
                     <div class="col-sm-auto">
-                        <a class="btn btn-white" href="javascript:void(0)" data-bs-toggle="modal"
+                    <a class="btn btn-white" href="javascript:void(0)" data-bs-toggle="modal"
                             data-bs-target="#editUserModal">
                             <i class="bi-person-plus-fill me-1"></i> Add user
                         </a>
                     </div>
-                    <!-- End Col -->
                 </div>
-                <!-- End Row -->
             </div>
-            <!-- End Page Header -->
-
-            <!-- Card -->
-            <div class="card">
-
                 <!-- Table -->
                 <div class="table-responsive datatable-custom position-relative">
                     <table id="datatable"
-                        class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                        class="table table-lg table-stripped table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
                                 <th class="table-column-pe-0">
@@ -84,7 +76,7 @@
 
 
                                     <td>
-                                        <button type="button" class="btn btn-warning btn-sm editData"
+                                        <button type="button" class="btn btn-edit btn-sm editData"
                                             data-table="users" data-form-modal="editUserModal" data-message="inactive"
                                             data-uuid="{{ $user->uuid }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                            <i class="fas fa-edit"></i></button>
@@ -98,13 +90,12 @@
                 <!-- End Table -->
 
                 <!-- Footer -->
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                     <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
                         <div class="col-sm mb-2 mb-sm-0">
                             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
                                 <span class="me-2">Showing:</span>
 
-                                <!-- Select -->
                                 <div class="tom-select-custom">
                                     <select id="datatableEntries"
                                         class="js-select form-select form-select-borderless w-auto" autocomplete="off"
@@ -117,26 +108,20 @@
                                         <option value="20">20</option>
                                     </select>
                                 </div>
-                                <!-- End Select -->
 
                                 <span class="text-secondary me-2">of</span>
 
-                                <!-- Pagination Quantity -->
                                 <span id="datatableWithPaginationInfoTotalQty"></span>
                             </div>
                         </div>
-                        <!-- End Col -->
 
                         <div class="col-sm-auto">
                             <div class="d-flex justify-content-center justify-content-sm-end">
-                                <!-- Pagination -->
                                 <nav id="datatablePagination" aria-label="Activity pagination"></nav>
                             </div>
                         </div>
-                        <!-- End Col -->
                     </div>
-                    <!-- End Row -->
-                </div>
+                </div> -->
                 <!-- End Footer -->
             </div>
             <!-- End Card -->
@@ -246,7 +231,7 @@
 
                         <div class="d-flex justify-content-end">
                             <div class="d-flex gap-3">
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-delete btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-white">Save changes</button>
                             </div>

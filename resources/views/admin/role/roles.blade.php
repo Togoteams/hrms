@@ -6,32 +6,28 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class="page-header">
-                <div class="row align-items-end">
-                    <div class="mb-2 col-sm mb-sm-0">
-                        <h1 class="page-header-title">Roles</h1>
-                    </div>
-                    <!-- End Col -->
+           
 
+            <!-- Card -->
+            <div class="card">
+            <div class="page-header">
+                <div class="row">
+                    <div class="mb-2 col-sm mb-sm-0">
+                        <h2 class="page-header-title">Roles</h2>
+                    </div>
                     <div class="col-sm-auto">
                         <a class="btn btn-white g-popup" href="javascript:;" data-bs-toggle="modal" data-action="add"
                             data-bs-target="#addEditRoleModal">
                             <i class="bi-person-plus-fill me-1"></i> Add role
                         </a>
                     </div>
-                    <!-- End Col -->
                 </div>
-                <!-- End Row -->
             </div>
             <!-- End Page Header -->
-
-            <!-- Card -->
-            <div class="card">
-
                 <!-- Table -->
                 <div class="table-responsive datatable-custom position-relative">
                     <table id="datatable"
-                        class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
+                        class="table table-lg table-stripped table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
                                 <th class="table-column-pe-0">
@@ -45,7 +41,7 @@
                                 <th>Type</th>
                                 <th>Description</th>
                                 <th>Status</th>
-                                <th class="text-right">Action</th>
+                                <th style="text-align:right;">Action</th>
                             </tr>
                         </thead>
 
@@ -74,17 +70,17 @@
 
                                     <td class="text-right">
 
-                                        <a type="button" class="btn btn-success btn-sm"
+                                        <a type="button" class="btn btn-success-check btn-sm"
                                             href="{{ route('admin.role.attach.permission', $role->id) }}"><i
                                                 class="fa fa-check" data-bs-toggle="tooltip" data-bs-placement="top" title="Permission"></i> </a>
                                         <button type="button" data-table="roles" data-form-modal="addEditRoleModal"
                                             data-message="inactive" data-uuid="{{ $role->uuid }}"
-                                            class="btn btn-warning btn-sm editData" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                            <i class="fas fa-edit"></i>
+                                            class="btn btn-edit btn-sm editData" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                            <i class="fas fa-pencil"></i>
                                         </button>
                                         <button type="button" data-table="roles" data-message="inactive"
                                             data-uuid="{{ $role->uuid }}"
-                                            class="btn btn-danger btn-sm deleteData" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                            class="btn btn-delete btn-sm deleteData" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -96,13 +92,12 @@
                 <!-- End Table -->
 
                 <!-- Footer -->
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                     <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
                         <div class="mb-2 col-sm mb-sm-0">
                             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
                                 <span class="me-2">Showing:</span>
 
-                                <!-- Select -->
                                 <div class="tom-select-custom">
                                     <select id="datatableEntries"
                                         class="w-auto js-select form-select form-select-borderless" autocomplete="off"
@@ -115,26 +110,20 @@
                                         <option value="20">20</option>
                                     </select>
                                 </div>
-                                <!-- End Select -->
 
                                 <span class="text-secondary me-2">of</span>
 
-                                <!-- Pagination Quantity -->
                                 <span id="datatableWithPaginationInfoTotalQty"></span>
                             </div>
                         </div>
-                        <!-- End Col -->
 
                         <div class="col-sm-auto">
                             <div class="d-flex justify-content-center justify-content-sm-end">
-                                <!-- Pagination -->
                                 <nav id="datatablePagination" aria-label="Activity pagination"></nav>
                             </div>
                         </div>
-                        <!-- End Col -->
                     </div>
-                    <!-- End Row -->
-                </div>
+                </div> -->
                 <!-- End Footer -->
             </div>
             <!-- End Card -->
@@ -202,7 +191,7 @@
 
                         <div class="d-flex justify-content-end">
                             <div class="gap-3 d-flex">
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-delete btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-white">Save changes</button>
                             </div>

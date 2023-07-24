@@ -49,7 +49,7 @@
                                                     <div class="right-div">
                                                         <!-- Your content for right div goes here -->
                                                         @if (!empty($data->id))
-                                                            <button class="btn btn-warning btn-sm bt" data-bs-toggle="modal"
+                                                            <button class="btn btn-edit btn-sm bt" data-bs-toggle="modal"
                                                                 data-bs-target="#modaledit">
                                                                 <i class="fas fa-edit"></i>
                                                             </button>
