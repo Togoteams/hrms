@@ -66,11 +66,11 @@ class PayRollPayscaleCotroller extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric|unique:payroll_payscales,user_id',
             'basic' => 'required|numeric',
-            'fixed_deductions' => 'required|numeric',
-            'other_deductions' => 'required|numeric',
+            // 'fixed_deductions' => 'required|numeric',
+            // 'other_deductions' => 'required|numeric',
             'net_take_home' => 'required|numeric',
-            'ctc' => 'required|numeric',
-            'total_employer_contribution' => 'required|numeric',
+            // 'ctc' => 'required|numeric',
+            // 'total_employer_contribution' => 'required|numeric',
             'total_deduction' => 'required|numeric',
             'gross_earning' => 'required|numeric',
         ]);
@@ -228,6 +228,6 @@ class PayRollPayscaleCotroller extends Controller
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
-        return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data',));
+        return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data','emp'));
     }
 }

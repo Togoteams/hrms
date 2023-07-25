@@ -37,7 +37,7 @@
                                     <label for="gender">Select Employees</label>
                                     <select required
                                         onchange="editForm('{{ route('admin.payroll.payscale.emp.head') }}/'+this.value, 'edit')"
-                                        id="gender" placeholder="Enter correct gender   " name="user_id"
+                                        id="gender" placeholder="Enter correct gender  " name="user_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Employees- </option>
                                         @foreach ($all_users as $au)
@@ -50,10 +50,9 @@
                             <span id="edit">
 
                             </span>
-
                         </div>
                         <hr>
-                        <div class="text-center " style="display: none" id="table_data_btn">
+                        <div class="text-center" style="display: none" id="table_data_btn">
                             <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">Add
                                 {{ $page }}</button>
                         </div>
@@ -76,17 +75,36 @@
 
     function amount_cal(data, operator = null) {
         var total_gross_amount = 0;
-        var total_deduction = 0
+        var total_deduction = 0;
+        var totalEarning = 0;
+        var totalDeduction = 0;
+        
+        employmentType = document.getElementById('employment_type').value;
+        if(employmentType=="local")
+        {
+            console.log("local");
+            totalEarning = getValue('basic') + getValue('allowance') + getValue('others_arrears');
+            totalDeduction = getValue('tax')
+            + getValue('bomaid')
+             + getValue('pension')
+              + getValue('union_fee')  + getValue('other_deductions')
 
-        total_gross_amount = getValue('basic') + getValue('hra') + getValue('overtime') + getValue('arrear') - getValue(
-                'pf_amount') + getValue('pension_amount') - getValue('loans_deduction') + getValue(
-                'no_of_paid_leaves') + getValue('shift') + getValue('bonus') + getValue('transportation') + getValue(
-                'food') +
-            getValue('medical') + getValue('esi_amount') - getValue('income_tax_deductions') + getValue(
-                'penalty_deductions');
+        }else
+        {
+            console.log("exp");
+            totalEarning = getValue('basic')+
+         getValue('entertainment_expenses')+
+             getValue('house_up_keep_allow')+  getValue('education_allowance')+
+             getValue('allowance') + getValue('others_arrears');
+             totalDeduction = getValue('provident_fund')
+             + getValue('fixed_deductions')
+             + getValue('other_deductions')
+              + getValue('union_fee');
+        }
 
-        setId('gross_earning', total_gross_amount);
-        setId('total_deduction', total_deduction);
+        setId('gross_earning', totalEarning);
+        setId('total_deduction', totalDeduction);
+        setId('net_take_home', totalEarning-totalDeduction);
 
     }
 </script>

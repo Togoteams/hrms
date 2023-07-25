@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('payroll_payscales', function (Blueprint $table) {
             $table->id();
-         
             $table->unsignedBigInteger('employee_id');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('status')->default('active');
             $table->double('basic');
-            $table->double('fixed_deductions');
-            $table->double('other_deductions');
+            // $table->double('fixed_deductions');
+            // $table->double('other_deductions');
             $table->double('net_take_home');
-            $table->double('ctc');
-            $table->double('total_employer_contribution');
+            // $table->double('ctc');
+            // $table->double('total_employer_contribution');
             $table->double('total_deduction');
             $table->double('gross_earning');
             $table->unsignedBigInteger('updated_by')->nullable();

@@ -15,31 +15,17 @@ class PayrollHeadSeeder extends Seeder
     {
         $all_member = array(
             // for local all leaves
-            ['name' => 'hra', 'slug' => 'hra', 'placeholder' => 'hra', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'overtime', 'slug' => 'overtime', 'placeholder' => 'overtime', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'arrear', 'slug' => 'arrear', 'placeholder' => 'arrear', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'union_membership', 'slug' => 'union_membership', 'placeholder' => 'union_membership', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'pf_per', 'slug' => 'pf_per', 'placeholder' => 'pf_per', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'pf_amount', 'slug' => 'pf_amount', 'placeholder' => 'pf_amount', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'pension_per', 'slug' => 'pension_per', 'placeholder' => 'pension_per', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'pension_amount', 'slug' => 'pension_amount', 'placeholder' => 'pension_amount', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'loans_deduction', 'slug' => 'loans_deduction', 'placeholder' => 'loans_deduction', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'no_of_working_days', 'slug' => 'no_of_working_days', 'placeholder' => 'no_of_working_days', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'no_of_paid_leaves', 'slug' => 'no_of_paid_leaves', 'placeholder' => 'no_of_paid_leaves', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'shift', 'slug' => 'shift', 'placeholder' => 'shift', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'no_of_payable_days', 'slug' => 'no_of_payable_days', 'placeholder' => 'no_of_payable_days', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'conveyance', 'slug' => 'conveyance', 'placeholder' => 'conveyance', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'special', 'slug' => 'special', 'placeholder' => 'special', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'mobile', 'slug' => 'mobile', 'placeholder' => 'mobile', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'bonus', 'slug' => 'bonus', 'placeholder' => 'bonus', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'transportation', 'slug' => 'transportation', 'placeholder' => 'transportation', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'food', 'slug' => 'food', 'placeholder' => 'food', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'medical', 'slug' => 'medical', 'placeholder' => 'medical', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'esi_per', 'slug' => 'esi_per', 'placeholder' => 'esi_per', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'esi_amount', 'slug' => 'esi_amount', 'placeholder' => 'esi_amount', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'income_tax_deductions', 'slug' => 'income_tax_deductions', 'placeholder' => 'income_tax_deductions', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-            ['name' => 'penalty_deductions', 'slug' => 'penalty_deductions', 'placeholder' => 'penalty_deductions', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no', 'created_by' => 1,],
-          
+            ['name' => 'BoMaid', 'slug' => 'bomaid', 'placeholder' => 'BoMaid', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
+            ['name' => 'Pension', 'slug' => 'pension', 'placeholder' => 'Pension', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
+            ['name' => 'Union Fee', 'slug' => 'union_fee', 'placeholder' => 'Union Fee', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
+            // ['name' => 'Other deductions', 'slug' => 'other_deductions', 'placeholder' => 'Other deductions', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
+            ['name' => 'Tax', 'slug' => 'tax', 'placeholder' => 'Tax', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
+            ['name' => 'Allowance', 'slug' => 'allowance', 'placeholder' => 'Allowance', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
+            ['name' => 'Others/Arrears', 'slug' => 'others_arrears', 'placeholder' => 'Others/Arrears', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
+            ['name' => 'Entertainment Expenses', 'slug' => 'entertainment_expenses', 'placeholder' => 'Entertainment Expenses', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
+            ['name' => 'House Up Keep Allow', 'slug' => 'house_up_keep_allow', 'placeholder' => 'House Up Keep Allow', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
+            ['name' => 'Provident Fund', 'slug' => 'provident_fund', 'placeholder' => 'Provident Fund', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
+            ['name' => 'Education Allowance', 'slug' => 'education_allowance', 'placeholder' => 'Education Allowance', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
         );
         foreach ($all_member as $am) {
             PayrollHead::insert($am);

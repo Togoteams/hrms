@@ -3,7 +3,7 @@
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content ">
-                <div class="modal-header ">
+                <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">{{ $page }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -12,7 +12,7 @@
                         @csrf
                         <div class="row">
 
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label class="required" for="employment_type">employment type</label>
                                     <select required id="employment_type" name="employment_type" value="local"
@@ -26,7 +26,17 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label class="required" for="for">Type</label>
+                                    <select required id="head_type" name="head_type" class="form-control form-control-sm">
+                                        <option value="both"> - All- </option>
+                                        <option  value="deduction">Deduction</option>
+                                        <option  value="income">Income</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label class="required" for="for">For</label>
                                     <select required id="for" name="for" class="form-control form-control-sm">
@@ -38,14 +48,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label class="required" for="name">Name</label>
                                     <input required id="name" placeholder="Enter Name of {{ $page }} "
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label class="required" for="placeholder">Placeholder</label>
                                     <input required id="placeholder"
@@ -55,14 +65,14 @@
                             </div>
 
 
-                            {{-- <div class="col-sm-8 mb-2">
+                            {{-- <div class="mb-2 col-sm-8">
                                 <div class="form-group">
                                     <label class="optional" for="slug">Slug</label>
                                     <input id="slug" placeholder="Enter slug of {{ $page }} "
                                         type="text" name="slug" class="form-control form-control-sm ">
                                 </div>
                             </div> --}}
-                            <div class="col-sm-4 mb-2">
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label class="required" for="is_dropdown">Is DropDown</label>
                                     <select required id="is_dropdown" name="is_dropdown"
@@ -75,27 +85,27 @@
 
                             {{-- <hr>
                             <h5>Validation</h5>
-                            <div class="col-sm-2 mb-2">
+                            <div class="mb-2 col-sm-2">
                                 <div class="form-group">
                                     <input id="required" type="checkbox" name="valid[]" value="required">
                                     <label for="required">Required</label>
                                 </div>
                             </div>
-                            <div class="col-sm-2 mb-2">
+                            <div class="mb-2 col-sm-2">
                                 <div class="form-group">
                                     <input id="numeric" type="checkbox" name="valid[]" value="numeric">
                                     <label for="numeric">Number</label>
                                 </div>
                             </div>
 
-                            <div class="col-sm-2 mb-2">
+                            <div class="mb-2 col-sm-2">
                                 <div class="form-group">
                                     <input id="string" type="checkbox" name="valid[]" value="string">
                                     <label for="string">String</label>
                                 </div>
                             </div>
 
-                            <div class="col-sm-2 mb-2">
+                            <div class="mb-2 col-sm-2">
                                 <div class="form-group">
                                     <input id="double" type="checkbox" name="valid[]" value="double">
                                     <label for="double">double</label>

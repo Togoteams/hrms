@@ -16,6 +16,7 @@ class PayrollHead extends Model
         'employment_type',
         'for',
         'is_dropdown',
+        'head_type',
         'status',
         'created_by',
         'updated_by',

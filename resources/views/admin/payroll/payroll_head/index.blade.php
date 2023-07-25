@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -26,7 +26,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-9"></div>
-                <div class="col-sm-3 text-right auto mb-2 mt-2">
+                <div class="mt-2 mb-2 text-right col-sm-3 auto">
 
                     <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
@@ -39,7 +39,7 @@
 
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
 
 
                 <!-- Table -->
@@ -51,9 +51,10 @@
 
                                 <th>S.no</th>
                                 <th>Name</th>
-                                <th>Slug</th>
+                                {{-- <th>Slug</th> --}}
                                 <th>Placeholder</th>
-                                <th>employment type</th>
+                                <th>Employment type</th>
+                                <th>Type</th>
                                 <th>for</th>
                                 <th class="text-right">Action</th>
                             </tr>
@@ -66,9 +67,10 @@
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->slug }}</td>
+                                    {{-- <td>{{ $item->slug }}</td> --}}
                                     <td>{{ $item->placeholder }}</td>
                                     <td>{{ $item->employment_type }}</td>
+                                    <td>{{ $item->head_type }}</td>
                                     <td>{{ $item->for }}</td>
                                     <td>
                                         <form id="edit{{ $item->id }}"

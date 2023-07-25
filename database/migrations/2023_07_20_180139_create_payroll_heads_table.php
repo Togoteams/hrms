@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->string('placeholder');
             $table->string('employment_type');
+            $table->string('head_type')->comment('deduction,income');
             $table->enum('for', ['payscale', 'salary','both']);
             $table->enum('is_dropdown',['yes','no'])->nullable();
             $table->string('status')->default('active');

@@ -3,7 +3,7 @@
     <input type="hidden" name="_method" value="PUT">
     <div class="row">
 
-        <div class="col-sm-6 mb-2">
+        <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label class="required" for="employment_type">employment type</label>
                 <select required id="employment_type" name="employment_type" value="local"
@@ -16,7 +16,17 @@
             </div>
         </div>
 
-        <div class="col-sm-6 mb-2">
+        <div class="mb-2 col-sm-6">
+            <div class="form-group">
+                <label class="required" for="for">Type</label>
+                <select required id="head_type" name="head_type" class="form-control form-control-sm">
+                    <option value="both"> - All- </option>
+                    <option {{ $data->head_type=="deduction"? "selected" :""}}  value="deduction">Deduction</option>
+                    <option {{ $data->head_type=="income"? "selected" :""}}  value="income">Income</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label class="required" for="for">For</label>
                 <select required id="for" name="for" class="form-control form-control-sm">
@@ -27,14 +37,14 @@
             </div>
         </div>
 
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label class="required" for="name">Name</label>
                 <input required id="name" placeholder="Enter Name of {{ $page }} " type="text"
                   value="{{ $data->name}}"  name="name" class="form-control form-control-sm ">
             </div>
         </div>
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label class="required" for="placeholder">Placeholder</label>
                 <input required id="placeholder" placeholder="Enter placeholder of {{ $page }} " type="text"
@@ -43,14 +53,14 @@
         </div>
 
 
-        <div class="col-sm-8 mb-2">
+        <div class="mb-2 col-sm-8">
             <div class="form-group">
                 <label class="optional" for="slug">Slug</label>
                 <input id="slug" placeholder="Enter slug of {{ $page }} " type="text" name="slug"
                 value="{{ $data->slug}}"  class="form-control form-control-sm ">
             </div>
         </div>
-        <div class="col-sm-4 mb-2">
+        <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label class="required" for="is_dropdown">Is DropDown</label>
                 <select required id="is_dropdown" name="is_dropdown" class="form-control form-control-sm">
