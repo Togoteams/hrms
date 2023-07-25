@@ -38,7 +38,7 @@
         </div>
     </div> --}}
 
-    <div class="mb-2 col-sm-4">
+    {{-- <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="other_deductions">other_deductions</label>
             <input onkeyup="amount_cal(this)" required id="other_deductions" placeholder="Enter correct other_deductions   " type="text"
@@ -46,7 +46,7 @@
                 class="form-control form-control-sm ">
         </div>
     </div>
-    
+     --}}
     {{-- <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="ctc">ctc</label>

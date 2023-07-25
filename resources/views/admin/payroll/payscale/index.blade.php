@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                   
                     <!-- End Col -->
@@ -24,34 +24,30 @@
            
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
             <div class="page-header">
                 <div class="row">
                     <div class="mb-2 col-sm mb-sm-0">
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    <a class="btn btn-white text-white" href="{{ route('admin.payroll.payscale.create') }}">
+                    <a class="text-white btn btn-white" href="{{ route('admin.payroll.payscale.create') }}">
                         Add {{ $page }}
                     </a>
 
                     </div>
                 </div>
             </div>
-                <div class="table-responsive mt-3 p-2">
-                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Employee Id</th>
-                                <th>Employee Ec No</th>
+                                <th>Employee Code</th>
                                 <th>Basic</th>
-                                <th>fixed_deductions</th>
-                                <th>other_deductions</th>
-                                <th>net_take_home</th>
-                                <th>ctc</th>
-                                <th>total_employer_contribution</th>
-                                <th>total_deduction</th>
+                                <th>Net Take Home</th>
+                                <th>Total Deduction</th>
                                 <th>gross_earning</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -92,27 +88,13 @@
                                     name: 'basic'
                                 },
 
-                                {
-                                    data: 'fixed_deductions',
-                                    name: 'fixed_deductions'
-                                },
-                                {
-                                    data: 'other_deductions',
-                                    name: 'other_deductions'
-                                },
+                               
                                 {
                                     data: 'net_take_home',
                                     name: 'net_take_home'
                                 },
-                                {
-                                    data: 'ctc',
-                                    name: 'ctc'
-                                },
-
-                                {
-                                    data: 'total_employer_contribution',
-                                    name: 'total_employer_contribution'
-                                },
+                               
+                              
                                 {
                                     data: 'total_deduction',
                                     name: 'total_deduction'
