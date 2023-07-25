@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\KraAttributesController;
 use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Http\Controllers\Admin\Payroll\PayRollPayscaleCotroller;
+use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
 use App\Models\KraAttributes;
 
 Route::get('/', [LoginController::class, 'authentication']);
@@ -195,8 +196,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('payscale/get/employees_salary/', [EmployeeSalaryController::class, 'getPayscale'])->name('employees_salary.getpayscale');
     Route::resource('employees-payscale', EmployeePayScaleController::class);
     Route::get('employees-payscale/status/{id}', [EmployeePayScaleController::class, 'status'])->name('employees-payscale.status');
-
     Route::get('employees_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('employees_salary.status');
+
+
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
@@ -219,6 +221,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::resource('payscale', PayRollPayscaleCotroller::class);
         Route::get('payscale/status/{id}', [PayRollPayscaleCotroller::class, 'status'])->name('payscale.status');
         Route::get('payscale/get-emp-head/{user_id?}', [PayRollPayscaleCotroller::class, 'get_employee_data'])->name('payscale.emp.head');
+        /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
+
+        /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
+        Route::resource('salary', PayrollSalaryController::class);
+        Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');
+        Route::get('salary/get-emp-head/{user_id?}', [PayrollSalaryController::class, 'get_employee_data'])->name('salary.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
     });
 

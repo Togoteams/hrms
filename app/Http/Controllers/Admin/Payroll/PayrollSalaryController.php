@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Payroll;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PayRollPayscale;
@@ -13,11 +14,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Loans;
 use App\Models\PayrollHead;
 use App\Models\PayrollPayscaleHead;
+use App\Models\PayrollSalary;
+use App\Models\PayrollSalaryHead;
 use App\Models\User;
 
-class PayRollPayscaleCotroller extends Controller
+class PayrollSalaryController extends Controller
 {
-    public  $page_name =   "Payroll PayScale";
+    public  $page_name =   "Payroll Salary";
     /**
      * Display a listing of the resource.
      */
@@ -29,17 +32,17 @@ class PayRollPayscaleCotroller extends Controller
         }
 
         if ($request->ajax()) {
-            $data = PayRollPayscale::with('user', 'employee')->get();
+            $data = PayrollSalary::with('user', 'employee')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.payroll.payscale.buttons', ['item' => $row, "route" => 'payroll.payscale']);
+                    $actionBtn = view('admin.payroll.salary.buttons', ['item' => $row, "route" => 'payroll.salary']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.payroll.payscale.index', ['page' => $this->page_name]);
+        return view('admin.payroll.salary.index', ['page' => $this->page_name]);
     }
 
 
@@ -54,7 +57,7 @@ class PayRollPayscaleCotroller extends Controller
             $all_users = Employee::where('status', 'active')->get();
         }
         $page = $this->page_name;
-        return view('admin.payroll.payscale.create', ['page' => $this->page_name, 'all_users' => $all_users]);
+        return view('admin.payroll.salary.create', ['page' => $this->page_name, 'all_users' => $all_users]);
     }
 
     /**
@@ -64,7 +67,7 @@ class PayRollPayscaleCotroller extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric|unique:payroll_payscales,user_id',
+            'user_id' => 'required|numeric',
             'basic' => 'required|numeric',
             // 'fixed_deductions' => 'required|numeric',
             // 'other_deductions' => 'required|numeric',
@@ -78,7 +81,7 @@ class PayRollPayscaleCotroller extends Controller
             return $validator->errors();
         } else {
             try {
-                $payroll = PayRollPayscale::create([
+                $payroll = PayrollSalary::create([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
                     'basic' =>  $request->basic,
@@ -92,12 +95,13 @@ class PayRollPayscaleCotroller extends Controller
                     'created_by' => auth()->user()->id
 
                 ]);
+                // dd($payroll);
                 foreach ($request->all() as $key => $value) {
                     $head =  PayrollHead::where('name', $key)->first();
                     if ($head) {
-                        PayrollPayscaleHead::create([
+                        PayrollSalaryHead::create([
                             'payroll_head_id' => $head->id,
-                            'payroll_payscale_id' => $payroll->id,
+                            'payroll_salary_id' => $payroll->id,
                             'value' => $request->$key,
                             'created_by' => auth()->user()->id
                         ]);
@@ -118,9 +122,9 @@ class PayRollPayscaleCotroller extends Controller
     {
         $all_users = Employee::get();
         $loans = Loans::where('status', 'active')->get();
-        $data = PayRollPayscale::find($id);
+        $data = PayrollSalary::find($id);
 
-        return view('admin.payroll.payscale.show', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
+        return view('admin.payroll.salary.show', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
     }
 
     /**
@@ -129,12 +133,12 @@ class PayRollPayscaleCotroller extends Controller
     public function edit(string $id)
     {
         $edit = true;
-        $payscale = PayRollPayscale::find($id);
+        $payscale = PayrollSalary::find($id);
         $page = $this->page_name;
         $emp = Employee::where('user_id', $payscale->user_id)->first();
-        $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
+        $data = PayrollSalary::where('user_id', $payscale->user_id)->first();
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
-        return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data', 'edit')), 'data' => $payscale]);
+        return view('admin.payroll.salary.edit', ['html' => view('admin.payroll.salary.employee_head', compact('emp_head', 'page', 'data', 'edit')), 'data' => $payscale]);
     }
 
     /**
@@ -143,7 +147,7 @@ class PayRollPayscaleCotroller extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric|unique:payroll_payscales,user_id,' . $id,
+            'user_id' => 'required|numeric',
             'basic' => 'required|numeric',
             // 'fixed_deductions' => 'required|numeric',
             // 'other_deductions' => 'required|numeric',
@@ -157,7 +161,7 @@ class PayRollPayscaleCotroller extends Controller
             return $validator->errors();
         } else {
             try {
-                $payroll = PayRollPayscale::where('id', $id)->update([
+                $payroll = PayrollSalary::where('id', $id)->update([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
                     'basic' =>  $request->basic,
@@ -174,7 +178,7 @@ class PayRollPayscaleCotroller extends Controller
                 foreach ($request->all() as $key => $value) {
                     $head =  PayrollHead::where('name', $key)->first();
                     if ($head) {
-                        PayrollPayscaleHead::where('payroll_head_id', $head->id)->where('payroll_payscale_id', $id)->update([
+                        PayrollSalaryHead::where('payroll_head_id', $head->id)->where('payroll_salary_id', $id)->update([
                             'payroll_head_id' => $head->id,
                             'value' => $request->$key,
                             'updated_by' => auth()->user()->id
@@ -191,11 +195,11 @@ class PayRollPayscaleCotroller extends Controller
 
     public function status($id)
     {
-        if (PayRollPayscale::find($id)->status == "active") {
-            PayRollPayscale::where('id', $id)->update(['status' => 'inactive']);
+        if (PayrollSalary::find($id)->status == "active") {
+            PayrollSalary::where('id', $id)->update(['status' => 'inactive']);
             return "InActive";
         } else {
-            PayRollPayscale::where('id', $id)->update(['status' => 'active']);
+            PayrollSalary::where('id', $id)->update(['status' => 'active']);
             return "Active";
         }
     }
@@ -206,8 +210,8 @@ class PayRollPayscaleCotroller extends Controller
     public function destroy(string $id)
     {
         try {
-            $user =  PayRollPayscale::find($id);
-            PayRollPayscale::destroy($id);
+            $user =  PayrollSalary::find($id);
+            PayrollSalary::destroy($id);
             User::destroy($user->user_id);
             return "Delete";
         } catch (Exception $e) {
@@ -218,16 +222,16 @@ class PayRollPayscaleCotroller extends Controller
     public function print($user_id)
     {
 
-        $data = PayRollPayscale::with(['user', 'employee', 'employee.branch', 'employee.designation'])->where('user_id', $user_id)->get();
-        return view('admin.payroll.payscale.kra_print', compact('data'));
+        $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation'])->where('user_id', $user_id)->get();
+        return view('admin.payroll.salary.kra_print', compact('data'));
     }
 
     public function get_employee_data($user_id = null)
     {
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
-        $data = PayRollPayscale::where('user_id', $user_id)->first();
+        $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
-        return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data','emp'));
+        return view('admin.payroll.salary.employee_head', compact('emp_head', 'page', 'data','emp'));
     }
 }

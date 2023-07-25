@@ -338,7 +338,7 @@
                          </a>
 
                          <div id="emppayroll"
-                             class="nav-collapse collapse {{ show(['payroll.payscal.index', 'payroll.payscale.index', 'payroll.head.index']) }} "
+                             class="nav-collapse collapse {{ show(['payroll.salary.index', 'payroll.payscale.index', 'payroll.head.index']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
 
 
@@ -348,8 +348,8 @@
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscale.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.payscale.index') }}"> Pay Scale</a>
 
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.salary.list' ? 'active' : '' }}  "
-                                 href="{{ route('admin.salary.list') }}"> Salary</a>
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary.index' ? 'active' : '' }}  "
+                                 href="{{ route('admin.payroll.salary.index') }}"> Salary</a>
                          </div>
                      </div>
 
