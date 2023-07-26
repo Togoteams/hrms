@@ -117,13 +117,13 @@ class EmplooyeLoansController extends Controller
             'user_id' => 'required|numeric',
             'loan_id' => 'required|numeric',
             'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
             'principal_amount' => 'required|numeric',
             'maturity_amount' => 'required|numeric',
             'tenure' => 'required|numeric',
             'sanctioned' => 'required|numeric',
             'sanctioned_amount' => 'required|numeric',
-            'description' => 'required|numeric',
+            'description' => 'required|string',
         ]);
 
         if ($validator->fails()) {
