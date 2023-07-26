@@ -111,9 +111,6 @@ class SalaryController extends Controller
             'transportation' => $empSal->transportation,
             'food' => $empSal->food,
             'medical' => $empSal->medical,
-
-
-
             'pf_amount' => $empSal->pf_amount,
             'esi_amount' => $empSal->esi_amount,
             'pension_amount' => $empSal->pension_amount,

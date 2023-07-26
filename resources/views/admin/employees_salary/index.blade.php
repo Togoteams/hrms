@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                   
                     <div class="col-auto">
@@ -23,7 +23,7 @@
             
             @include('admin.employees_salary.create')
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
             <div class="page-header">
                 <div class="row">
                     <div class="mb-2 col-sm mb-sm-0">
@@ -39,9 +39,9 @@
                     </div>
                 </div>
             </div>
-                <div class="table-responsive mt-3 p-2">
+                <div class="p-2 mt-3 table-responsive">
                     <table
-                        class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                        class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>

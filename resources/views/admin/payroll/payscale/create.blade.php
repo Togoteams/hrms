@@ -62,13 +62,14 @@
         </div>
     </main>
 @endsection
-
+@push('custom-scripts')
 <script>
     function setId(id, value) {
         document.getElementById(id).value = value;
     }
 
     function getValue(id) {
+        console.log(id);
         return Number(document.getElementById(id).value);
     }
 
@@ -80,6 +81,7 @@
         var totalDeduction = 0;
         
         employmentType = document.getElementById('employment_type').value;
+        console.log(employmentType);
         if(employmentType=="local")
         {
             console.log("local");
@@ -94,12 +96,10 @@
             console.log("exp");
             totalEarning = getValue('basic')+
          getValue('entertainment_expenses')+
-             getValue('house_up_keep_allow')+  getValue('education_allowance')+
-             getValue('allowance') + getValue('others_arrears');
+             getValue('house_up_keep_allow')+  getValue('education_allowance');
+             
              totalDeduction = getValue('provident_fund')
-             + getValue('fixed_deductions')
-             + getValue('other_deductions')
-              + getValue('union_fee');
+             + getValue('other_deductions');
         }
 
         setId('gross_earning', totalEarning);
@@ -108,15 +108,17 @@
 
     }
 </script>
-<script>
-    window.addEventListener("DOMContentLoaded", (event) => {
-        const el = document.getElementById('gross_earning');
-        if (el) {
-            el.addEventListener('keyup', myFunction, false);
-        }
-    });
+@endpush
 
-    function myFunction() {
-        console.log("testing");
-    }
+<script>
+    // window.addEventListener("DOMContentLoaded", (event) => {
+    //     const el = document.getElementById('gross_earning');
+    //     if (el) {
+    //         el.addEventListener('keyup', myFunction, false);
+    //     }
+    // });
+
+    // function myFunction() {
+    //     console.log("testing");
+    // }
 </script>

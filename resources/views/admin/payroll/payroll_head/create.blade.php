@@ -18,6 +18,7 @@
                                     <select required id="employment_type" name="employment_type" value="local"
                                         class="form-control form-control-sm">
                                         <option selected disabled=""> - Select employment type- </option>
+                                        <option value="both">All</option>
                                         <option value="local">Local</option>
                                         <option value="expatriate">Expatriate</option>
                                         <option value="local-contractual">Local-Contractual </option>

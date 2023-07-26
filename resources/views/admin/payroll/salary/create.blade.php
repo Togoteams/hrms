@@ -94,29 +94,14 @@
             console.log("exp");
             totalEarning = getValue('basic')+
          getValue('entertainment_expenses')+
-             getValue('house_up_keep_allow')+  getValue('education_allowance')+
-             getValue('allowance') + getValue('others_arrears');
+             getValue('house_up_keep_allow')+  getValue('education_allowance');
              totalDeduction = getValue('provident_fund')
-             + getValue('fixed_deductions')
-             + getValue('other_deductions')
-              + getValue('union_fee');
+             + getValue('other_deductions');
         }
 
         setId('gross_earning', totalEarning);
         setId('total_deduction', totalDeduction);
         setId('net_take_home', totalEarning-totalDeduction);
 
-    }
-</script>
-<script>
-    window.addEventListener("DOMContentLoaded", (event) => {
-        const el = document.getElementById('gross_earning');
-        if (el) {
-            el.addEventListener('keyup', myFunction, false);
-        }
-    });
-
-    function myFunction() {
-        console.log("testing");
     }
 </script>

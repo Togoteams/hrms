@@ -222,8 +222,15 @@ class PayrollSalaryController extends Controller
     public function print($user_id)
     {
 
-        $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation'])->where('user_id', $user_id)->get();
-        return view('admin.payroll.salary.kra_print', compact('data'));
+        $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation'])->where('user_id', $user_id)->first();
+        // return $data;
+        if($data->employee->employment_type=="local")
+        {
+            return view('admin.payroll.salary.salary-slip-local', compact('data'));
+        }else
+        {
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data'));
+        }
     }
 
     public function get_employee_data($user_id = null)

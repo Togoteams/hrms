@@ -227,7 +227,7 @@ class PayRollPayscaleCotroller extends Controller
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
-        $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
+        $emp_head = PayrollHead::whereIn('employment_type', [$emp->employment_type,'both'])->where('status', 'active')->whereIn('for', ['payscale','both'])->where('deleted_at', null)->get();
         return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data','emp'));
     }
 }

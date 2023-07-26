@@ -9,6 +9,7 @@
                 <select required id="employment_type" name="employment_type" value="local"
                     class="form-control form-control-sm">
                     <option  disabled=""> - Select employment type- </option>
+                    <option {{ $data->employment_type=="both"? "selected" :""}} value="both">All</option>
                     <option {{ $data->employment_type=="local"? "selected" :""}} value="local">Local</option>
                     <option {{ $data->employment_type=="expatriate"? "selected" :""}} value="expatriate">Expatriate</option>
                     <option {{ $data->employment_type=="local-contractual"? "selected" :""}} value="local-contractual">Local-Contractual </option>
