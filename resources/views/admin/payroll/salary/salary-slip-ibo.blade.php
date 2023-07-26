@@ -116,7 +116,7 @@
                             <tr>
                                 <td colspan="6"
                                     style="padding:8px; border:1px solid #fff9f9; text-align:left; vertical-align: middle; font-weight: 700;">
-                                    <p>SALARY - FOR JUNE 2023</p>
+                                    <p>SALARY - FOR {{strtoupper(date("M-Y",strtotime($data->created_at)))}}</p>
                                 </td>
                             </tr>
                             <tr style="height: 19pt; line-height: 24px">
@@ -153,7 +153,21 @@
                                 </td>
 
                             </tr>
+                            @foreach ($data['payrollSalaryHead'] as $key => $value)
                             <tr style="height: 19pt; line-height: 24px">
+                                <td
+                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
+                                   {{$value->payroll_head->name}}
+
+
+                                </td>
+                                <td
+                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
+                                    {{$value->value}}
+                                </td>
+                            </tr>
+                            @endforeach
+                            {{-- <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
                                     Entertainment Expenses
@@ -174,7 +188,7 @@
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
                                     0.00
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
@@ -182,10 +196,10 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    0.00
+                                    {{$data->net_take_home}}
                                 </td>
                             </tr>
-                            <tr style="height: 19pt; line-height: 24px">
+                            {{-- <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align: left;">
                                     Provident Fund
@@ -199,7 +213,7 @@
 
 
                                 </td>
-                            </tr>
+                            </tr> --}}
 
 
                             <tr style="height: 19pt; line-height: 24px">
@@ -228,7 +242,7 @@
                                     {{$data->net_take_home}}
                                 </td>
                             </tr>
-                            <tr style="height: 19pt; line-height: 24px">
+                            {{-- <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
                                     Education Allowance
@@ -239,8 +253,8 @@
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
                                     00.00
                                 </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
+                            </tr> --}}
+                            {{-- <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
                                     Other Deduction
@@ -251,7 +265,7 @@
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
                                     300.00
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
@@ -261,7 +275,7 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    00.00
+                                    {{$data->net_take_home}}
                                 </td>
                             </tr>
                             <tr style="height: 19pt; line-height: 24px">
@@ -277,7 +291,7 @@
                                 </td>
                             </tr>
 
-                            <tr style="height: 19pt; line-height: 24px">
+                            {{-- <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
                                     Leave balance:
@@ -288,7 +302,7 @@
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
                                     1,700.00
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr style="height: 19pt; line-height: 24px">
                                 <td style="background-color:#fff9f9; padding:6px; font-size:14px;  text-align: left;">
                                     I Pula/USD
@@ -296,7 +310,7 @@
 
                                 </td>
                                 <td style="background-color:#fff9f9; padding:6px; font-size:14px; text-align:center;">
-                                    0.0753
+                                    0.077
 
 
                                 </td>
@@ -308,7 +322,7 @@
 
                                 </td>
                                 <td style="background-color:#fff9f9; padding:6px; font-size:14px; text-align:center;">
-                                    6.1700
+                                    6.28
 
 
                                 </td>
@@ -321,7 +335,7 @@
 
                                 </td>
                                 <td style="background-color:#fff9f9; padding:6px; font-size:14px; text-align:center;">
-                                    82.0000
+                                    82.04
 
 
                                 </td>
@@ -340,7 +354,7 @@
 
                     <div style="width:100%; text-align: left; font-weight: 600;">
                         <p>Senior Manager<br>
-                            Date: 20.06.2023</p>
+                            Date: {{date("d-m-Y",strtotime($data->created_at))}}</p>
                     </div>
 
                 </div>
@@ -350,5 +364,7 @@
     </page>
 
 </body>
-
+<script>
+    window.print();
+</script>
 </html>

@@ -174,7 +174,7 @@
                      </div>
                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
                          'delete-roles', 'view-roles'])
-                         <div id="navbarVerticalMenuPagesMenu">
+                         {{-- <div id="navbarVerticalMenuPagesMenu">
                              <!-- Collapse -->
 
                              <div class="nav-item">
@@ -200,7 +200,7 @@
 
                                  </div>
                              </div>
-                         </div>
+                         </div> --}}
                      @endcanany
 
 

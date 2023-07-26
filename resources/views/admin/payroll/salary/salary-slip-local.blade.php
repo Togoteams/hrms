@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Salary Slip</title>
     <style>
         page {
             display: block;
@@ -116,7 +116,7 @@
                             <tr>
                                 <td colspan="6"
                                     style="padding:8px; border:1px solid #fff9f9; text-align:left; vertical-align: middle; font-weight: 700;">
-                                    <p>SALARY - FOR JUNE 2023</p>
+                                    <p>SALARY - FOR {{strtoupper(date("M-Y",strtotime($data->created_at)))}}</p>
                                 </td>
                             </tr>
                             <tr style="height: 19pt; line-height: 24px">
@@ -125,7 +125,7 @@
                                     Name of the staff:</td>
                                 <td
                                     style="background-color:rgb(255, 236, 222); padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:left; font-weight: 700;">
-                                    LORATO BOSUPENG
+                                    {{$data['user']->name}}
 
                                 </td>
 
@@ -137,7 +137,7 @@
                                     Account no:</td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    95210100012033
+                                    {{$data['employee']->bank_account_number}}
                                 </td>
                             </tr>
                             <tr style="height: 19pt; line-height: 24px">
@@ -147,7 +147,7 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    502709
+                                    {{$data['employee']->ec_number}}
                                 </td>
                             </tr>
                             <tr style="height: 19pt; line-height: 24px">
@@ -157,7 +157,7 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    2,000.00
+                                    {{$data->basic}}
                                 </td>
 
                             </tr>
@@ -168,29 +168,25 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    2,000.00
+                                    {{$data->basic}}
                                 </td>
                             </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Allowance:
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    0.00
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Others/Arrears:
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    0.00
-                                </td>
-                            </tr>
+                            @foreach ($data['payrollSalaryHead'] as $key => $value)
+                                @if ($value->payroll_head->head_type=="income")
+                                <tr style="height: 19pt; line-height: 24px">
+                                    <td
+                                        style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
+                                    {{$value->payroll_head->name}}
+                                    </td>
+                                    <td
+                                        style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
+                                        {{$value->value}}
+                                    </td>
+                                </tr>
+                                @endif
+                            
+                            @endforeach
+                           
                             <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align: left;">
@@ -200,7 +196,7 @@
                                 </td>
                                 <td
                                     style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align:center;">
-                                    2,000.00
+                                    {{$data->net_take_home}}
 
 
                                 </td>
@@ -212,8 +208,22 @@
                                 </td>
 
                             </tr>
-
+                            @foreach ($data['payrollSalaryHead'] as $key => $value)
+                            @if ($value->payroll_head->head_type=="deduction")
                             <tr style="height: 19pt; line-height: 24px">
+                                <td
+                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
+                                {{$value->payroll_head->name}}
+                                </td>
+                                <td
+                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
+                                    {{$value->value}}
+                                </td>
+                            </tr>
+                            @endif
+                        
+                        @endforeach
+                            {{-- <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
                                     - BoMaid
@@ -264,7 +274,7 @@
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
                                     00.00
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; font-weight: 700; border:1px solid #fff9f9; text-align: left;">
@@ -272,7 +282,7 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; font-weight: 700; border:1px solid #fff9f9; text-align:center;">
-                                    300.00
+                                    {{$data->total_deduction}}
                                 </td>
                             </tr>
                             <tr style="height: 19pt; line-height: 24px">
@@ -290,7 +300,7 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    1,700.00
+                                    {{$data->net_take_home}}
                                 </td>
                             </tr>
                             <tr style="height: 19pt; line-height: 24px">
@@ -326,7 +336,7 @@
 
                     <div style="width:100%; text-align: left; font-weight: 600; padding-top: 6em;">
                         <p>Senior Manager<br>
-                            Date: 20.06.2023</p>
+                            Date: {{date("d-m-Y",strtotime($data->created_at))}}</p>
                     </div>
 
                 </div>
@@ -336,5 +346,7 @@
     </page>
 
 </body>
-
+<script>
+    window.print();
+</script>
 </html>

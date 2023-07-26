@@ -48,7 +48,7 @@
                                 <th>Basic</th>
                                 <th>Net Take Home</th>
                                 <th>Total Deduction</th>
-                                <th>gross_earning</th>
+                                <th>Gross Earning</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>

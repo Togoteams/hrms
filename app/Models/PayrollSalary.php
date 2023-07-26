@@ -33,6 +33,9 @@ class PayrollSalary extends Model
     public function employee(){
         return $this->belongsTo(Employee::class);
     }
+    public function payrollSalaryHead(){
+        return $this->hasMany(PayrollSalaryHead::class,'payroll_salary_id');
+    }
 
     public function payroll_payscale_head(){
         return $this->hasMany(PayrollPayscaleHead::class,'payroll_payscale_id');

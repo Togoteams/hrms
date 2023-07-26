@@ -48,6 +48,25 @@ if (!function_exists('isMobileDevice')) {
     }
 }
 
+if (!function_exists('pulaToUsd')) {
+    function pulaToUsd($amount)
+    {
+        $pula = 13.06;
+        $usd = $amount * $pula;
+        return $usd;
+       
+    }
+}
+if (!function_exists('inrToUsd')) {
+    function inrToUsd($amount)
+    {
+        $inr = 82.04;
+        $usd = $amount * $inr;
+        return $usd;
+       
+    }
+}
+
 if (!function_exists('sidebar_open')) {
     function sidebar_open($routes = [])
     {
