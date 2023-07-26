@@ -35,7 +35,7 @@ class LeaveTypeCobntroller extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'string|required|unique:leave_types,name',
             'nature_of_leave' => 'required|string',
-            'no_of_days' => 'required|numeric',
+            'no_of_days' => 'required|numeric|gt:0',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {

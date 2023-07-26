@@ -84,7 +84,7 @@
                                                                         title="Delete" data-id="{{ $qualification->id }}"
                                                                         data-token="{{ csrf_token() }}"
                                                                         data-action="{{ route('admin.employee.qualification.delete') }}">
-                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                        <i class="fas fa-trash-alt"></i>
                                                                     </button>
 
                                                                 </div>

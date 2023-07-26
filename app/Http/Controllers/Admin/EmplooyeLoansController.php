@@ -36,7 +36,7 @@ class EmplooyeLoansController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $all_users = Employee::get();
+        $all_users = Employee::where('status','active')->get();
         $loans = Loans::where('status', 'active')->get();
         return view('admin.employees_loans.index', ['page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
     }
@@ -60,13 +60,13 @@ class EmplooyeLoansController extends Controller
             'user_id' => 'required|numeric',
             'loan_id' => 'required|numeric',
             'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
             'principal_amount' => 'required|numeric',
             'maturity_amount' => 'required|numeric',
             'tenure' => 'required|numeric',
             'sanctioned' => 'required|numeric',
             'sanctioned_amount' => 'required|numeric',
-            'description' => 'required|numeric',
+            'description' => 'required|string',
 
         ]);
 

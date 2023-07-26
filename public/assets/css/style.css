@@ -231,7 +231,7 @@ a {
 }
 
 .text-right{
-    text-align: right;
+    text-align: left;
 }
 .add-btn
 {
@@ -264,3 +264,4 @@ a {
     content: " *";
     color: red;
   }
+  
