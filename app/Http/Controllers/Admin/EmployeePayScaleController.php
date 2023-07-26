@@ -37,7 +37,7 @@ class EmployeePayScaleController extends Controller
         }
         $designation = Designation::all();
         $membership = Membership::all();
-        $users = User::all();
+        $users = User::where('status', 'active')->get();
         $branch = Branch::where('status', 'active')->get();
         return view('admin.employees_payscale.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch, 'users' => $users]);
     }

@@ -91,7 +91,7 @@ class EmplooyeLoansController extends Controller
      */
     public function show(string $id)
     {
-        $all_users = Employee::get();
+        $all_users = Employee::where('status', 'active')->get();
         $loans = Loans::where('status', 'active')->get();
         $data = EmplooyeLoans::find($id);
         return view('admin.employees_loans.show', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
@@ -102,7 +102,7 @@ class EmplooyeLoansController extends Controller
      */
     public function edit(string $id)
     {
-        $all_users = Employee::get();
+        $all_users = Employee::where('status', 'active')->get();
         $loans = Loans::where('status', 'active')->get();
         $data = EmplooyeLoans::find($id);
         return view('admin.employees_loans.edit', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
