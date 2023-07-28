@@ -62,7 +62,7 @@ class PayRollPayscaleCotroller extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric|unique:payroll_payscales,user_id',
             'basic' => 'required|numeric',
@@ -93,7 +93,7 @@ class PayRollPayscaleCotroller extends Controller
 
                 ]);
                 foreach ($request->all() as $key => $value) {
-                    $head =  PayrollHead::where('name', $key)->first();
+                    $head =  PayrollHead::where('slug', $key)->first();
                     if ($head) {
                         PayrollPayscaleHead::create([
                             'payroll_head_id' => $head->id,
@@ -172,7 +172,7 @@ class PayRollPayscaleCotroller extends Controller
 
                 ]);
                 foreach ($request->all() as $key => $value) {
-                    $head =  PayrollHead::where('name', $key)->first();
+                    $head =  PayrollHead::where('slug', $key)->first();
                     if ($head) {
                         PayrollPayscaleHead::where('payroll_head_id', $head->id)->where('payroll_payscale_id', $id)->update([
                             'payroll_head_id' => $head->id,

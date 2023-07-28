@@ -52,7 +52,7 @@ if (!function_exists('pulaToUsd')) {
     function pulaToUsd($amount)
     {
         $pula = 13.06;
-        $usd = $amount * $pula;
+        $usd = $amount / $pula;
         return $usd;
        
     }
@@ -61,7 +61,7 @@ if (!function_exists('inrToUsd')) {
     function inrToUsd($amount)
     {
         $inr = 82.04;
-        $usd = $amount * $inr;
+        $usd = $amount / $inr;
         return $usd;
        
     }

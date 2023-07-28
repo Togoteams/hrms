@@ -123,14 +123,7 @@
                     <tr>
                         <td style="height:80px;">&nbsp;</td>
                     </tr>
-                    <!-- <tr>
-                        <td style="text-align:center;">
-                            <a href="https://rakeshmandal.com" title="logo" target="_blank">
-                                <img width="200" src="https://togoteams.com/assets/images/logo-dark.png" title="logo"
-                                    alt="logo">
-                            </a>
-                        </td>
-                    </tr> -->
+                   
                     <tr>
                         <td style="height:20px;">&nbsp;</td>
                     </tr>

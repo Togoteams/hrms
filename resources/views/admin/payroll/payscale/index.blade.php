@@ -42,13 +42,14 @@
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th>SI.</th>
                                 <th>Employee Id</th>
                                 <th>Employee Code</th>
+                                <th>Employee Name</th>
                                 <th>Basic</th>
                                 <th>Net Take Home</th>
                                 <th>Total Deduction</th>
-                                <th>gross_earning</th>
+                                <th>Gross Earning</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -82,6 +83,10 @@
                                 {
                                     data: 'employee.ec_number',
                                     name: 'employee.ec_number'
+                                },
+                                {
+                                    data: 'user.name',
+                                    name: 'user.name'
                                 },
                                 {
                                     data: 'basic',

@@ -196,7 +196,7 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data->net_take_home}}
+                                    {{pulaToUsd($data->net_take_home)}}
                                 </td>
                             </tr>
                             {{-- <tr style="height: 19pt; line-height: 24px">
@@ -225,7 +225,7 @@
                                 </td>
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data->net_take_home}}
+                                    {{pulaToUsd($data->net_take_home)}}
 
 
                                 </td>

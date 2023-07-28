@@ -235,7 +235,7 @@
                          </div>
                      @endcanany
 
-                     <div id="navbarVerticalMenuSettingMenu">
+                     {{-- <div id="navbarVerticalMenuSettingMenu">
                          <!-- Collapse -->
 
                          <div class="nav-item">
@@ -252,7 +252,7 @@
                                      href="{{ route('admin.setting.index') }}"> Settings</a>
                              </div>
                          </div>
-                     </div>
+                     </div> --}}
 
 
                      <!-- End Collapse -->

@@ -25,8 +25,8 @@ class UserTableSeeder extends Seeder
         $user->uuid = $faker->uuid;
         $user->name = 'Admin';
         $user->password_is_changed=1;
-        $user->username = 'admin-togoteams';
-        $user->email = 'admin@togoteams.com';
+        $user->username = 'admin-bobhrms';
+        $user->email = 'admin@bobhrms.com';
         $user->mobile = 9999988888;
         $user->email_verified_at = $faker->dateTime();
         $user->password = Hash::make('User@123');

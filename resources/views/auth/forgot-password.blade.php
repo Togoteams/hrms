@@ -4,8 +4,8 @@
 
 <div class="row " style="    background-color: #f2f3f8;">
     <div class="col-4"></div>
-    <div class="col-4 bg-white p-4 mt-5">
-        <div class="text-center mt-2 mb-3">
+    <div class="p-4 mt-5 bg-white col-4">
+        <div class="mt-2 mb-3 text-center">
             <h1
                 style="color:#1e1e2d; font-weight:500; margin:0;font-size:22px;font-family:'Work Sans', sans-serif!important;">
                 Password Reset</h1>

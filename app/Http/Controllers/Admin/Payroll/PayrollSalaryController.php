@@ -97,7 +97,7 @@ class PayrollSalaryController extends Controller
                 ]);
                 // dd($payroll);
                 foreach ($request->all() as $key => $value) {
-                    $head =  PayrollHead::where('name', $key)->first();
+                    $head =  PayrollHead::where('slug', $key)->first();
                     if ($head) {
                         PayrollSalaryHead::create([
                             'payroll_head_id' => $head->id,
@@ -176,7 +176,7 @@ class PayrollSalaryController extends Controller
 
                 ]);
                 foreach ($request->all() as $key => $value) {
-                    $head =  PayrollHead::where('name', $key)->first();
+                    $head =  PayrollHead::where('slug', $key)->first();
                     if ($head) {
                         PayrollSalaryHead::where('payroll_head_id', $head->id)->where('payroll_salary_id', $id)->update([
                             'payroll_head_id' => $head->id,
