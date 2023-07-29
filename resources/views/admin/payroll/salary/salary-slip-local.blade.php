@@ -164,6 +164,17 @@
                             <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
+                                    
+                                </td>
+                                <td
+                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
+                                    
+                                </td>
+
+                            </tr>
+                            <tr style="height: 19pt; line-height: 24px">
+                                <td
+                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
                                     Salary:
                                 </td>
                                 <td
@@ -196,7 +207,7 @@
                                 </td>
                                 <td
                                     style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align:center;">
-                                    {{$data->net_take_home}}
+                                    {{$data->gross_earning}}
 
 
                                 </td>

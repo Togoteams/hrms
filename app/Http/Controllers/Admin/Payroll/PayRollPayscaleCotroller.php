@@ -174,10 +174,11 @@ class PayRollPayscaleCotroller extends Controller
                 foreach ($request->all() as $key => $value) {
                     $head =  PayrollHead::where('slug', $key)->first();
                     if ($head) {
-                        PayrollPayscaleHead::where('payroll_head_id', $head->id)->where('payroll_payscale_id', $id)->update([
+                        PayrollPayscaleHead::updateOrCreate(['payroll_payscale_id'=>$id,'payroll_head_id'=> $head->id],[
                             'payroll_head_id' => $head->id,
                             'value' => $request->$key,
-                            'updated_by' => auth()->user()->id
+                            'updated_by' => auth()->user()->id,
+                            'created_by' => auth()->user()->id
                         ]);
                     }
                 }

@@ -45,6 +45,7 @@
                                 <th>No</th>
                                 <th>Employee Id</th>
                                 <th>Employee Code</th>
+                                <th>Employee Name</th>
                                 <th>Basic</th>
                                 <th>Net Take Home</th>
                                 <th>Total Deduction</th>
@@ -82,6 +83,10 @@
                                 {
                                     data: 'employee.ec_number',
                                     name: 'employee.ec_number'
+                                },
+                                {
+                                    data: 'user.name',
+                                    name: 'user.name'
                                 },
                                 {
                                     data: 'basic',
