@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\KraAttributesController;
 use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Http\Controllers\Admin\Payroll\PayRollPayscaleCotroller;
 use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
+use App\Http\Controllers\Admin\Payroll\TaxSlabSettingController;
 use App\Models\KraAttributes;
 
 Route::get('/', [LoginController::class, 'authentication']);
@@ -212,6 +213,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('get-payscale/{id}', 'getPayscale')->name('get');
         });
 
+        /*--------------------------------------------- Pay Roll Tax slab Settting Crud Start---------------------------------------------------------------*/
+        Route::resource('tax-slab-setting', TaxSlabSettingController::class);
+        Route::get('tax-slab-setting/status/{id}', [TaxSlabSettingController::class, 'status'])->name('tax-slab-setting.status');
+        /*--------------------------------------------- Pay Roll Tax slab Settting Crud End---------------------------------------------------------------*/
+
         /*--------------------------------------------- Pay Roll Head Crud Start---------------------------------------------------------------*/
         Route::resource('head', PayrollHeadController::class);
         Route::get('head/status/{id}', [PayrollHeadController::class, 'status'])->name('head.status');
@@ -226,7 +232,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
         Route::resource('salary', PayrollSalaryController::class);
         Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');
-        Route::get('print-salary-slip/{id}',[PayrollSalaryController::class, 'print'])->name('salary.print');
+        Route::get('print-salary-slip/{id}', [PayrollSalaryController::class, 'print'])->name('salary.print');
 
         Route::get('salary/get-emp-head/{user_id?}', [PayrollSalaryController::class, 'get_employee_data'])->name('salary.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/

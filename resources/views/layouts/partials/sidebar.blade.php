@@ -338,9 +338,11 @@
                          </a>
 
                          <div id="emppayroll"
-                             class="nav-collapse collapse {{ show(['payroll.salary.index', 'payroll.payscale.index', 'payroll.head.index']) }} "
+                             class="nav-collapse collapse {{ show(['payroll.salary.index', 'payroll.payscale.index', 'payroll.head.index','payroll.tax-slab-setting.index']) }} "
                              data-bs-parent="#navbarVerticalMenuPagesMenu">
 
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-slab-setting.index' ? 'active' : '' }}  "
+                                href="{{ route('admin.payroll.tax-slab-setting.index') }}"> Tax Slab Settings</a>
 
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.head.index') }}"> Payroll Head</a>
