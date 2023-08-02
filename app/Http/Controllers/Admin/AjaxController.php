@@ -13,6 +13,7 @@ use App\Services\Holiday\HolidayService;
 use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
+use App\Models\PayrollSalaryIncrement;
 class AjaxController extends BaseController
 {
     /**
@@ -114,6 +115,13 @@ class AjaxController extends BaseController
                     $id = uuidtoid($request->uuid, $table);
                     $data= $this->leaveService->updateStatus($request->except('find'),$id);
                     $message='Leave Status updated';
+                    break;
+                case 'payroll_salary_increments':
+                    $id = $request->uuid;
+                    $data= PayrollSalaryIncrement::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Payroll Salary increment updated';
                     break;
                
                 default:

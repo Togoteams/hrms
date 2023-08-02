@@ -11,15 +11,15 @@
                     <form id="form_data" action="{{ route('admin.payroll.salary-increment-setting.store') }}">
                         @csrf
                         <div class="row">
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="increment_percentage">Increment Percentage</label>
-                                    <input required id="increment_percentage" placeholder="Enter Increment Percentage of Salary " type="text"
+                                    <label for="increment_percentage">Salary Increment %</label>
+                                    <input required id="increment_percentage" placeholder="Enter Increment Percentage of Salary" min="1" max="100" type="number"
                                         name="increment_percentage" class="form-control form-control-sm ">
                                 </div>
                             </div>
                          
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label class="required" for="employment_type">Employment Type</label>
                                     <select required id="employment_type" name="employment_type" value="local"
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                            
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="effective_from">Effective From</label>
                                     <input required id="effective_from" placeholder="Enter Effective From  of salary " type="date"
@@ -42,24 +42,27 @@
                                 </div>
                             </div>
                            
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="effective_to">Effective To</label>
                                     <input required id="effective_to" placeholder="Enter Effective To of salary " type="date"
                                         name="effective_to" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="financial_year">Financial year</label>
-                                    <select required id="financial_year" name="financial_year" value="local"
+                                    <select required id="financial_year" name="financial_year"
                                         class="form-control form-control-sm">
                                         <option selected disabled=""> - Select financial year- </option>
-                                        <option value="2021">2021</option>
-                                        <option value="2022">2022</option>
-                                        <option value="2023">2023</option>
-                                        <option value="2024">2024</option>
-                                        <option value="2025">2025</option>
+                                        @php
+                                            $currentYear = date('Y');
+                                        @endphp 
+                                        <option value="{{$currentYear-2}}">{{$currentYear-2}}</option>
+                                        <option value="{{$currentYear-1}}">{{$currentYear-1}}</option>
+                                        <option value="{{$currentYear}}">{{$currentYear}}</option>
+                                        <option value="{{$currentYear+1}}">{{$currentYear+1}}</option>
+                                        <option value="{{$currentYear+2}}">{{$currentYear+2}}</option>
                                     </select>
                                 </div>
                             </div>

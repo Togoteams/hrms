@@ -81,7 +81,7 @@ class SalaryIncrementController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            $request->request->add(['updated_by'=>Auth::user()->id]);
+            // $request->request->add(['updated_by'=>Auth::user()->id]);
             PayrollSalaryIncrement::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }

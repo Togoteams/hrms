@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                    
                     <div class="col-auto">
@@ -25,7 +25,7 @@
 
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
 
             <div class="page-header">
                 <div class="row">
@@ -48,7 +48,7 @@
                             <tr>
 
                                 <th>S.no</th>
-                                <th>Increment Percentage</th>
+                                <th>Increment %</th>
                                 <th>Employment Type</th>
                                 <th>Effective From</th>
                                 <th>Effective to</th>
@@ -63,14 +63,14 @@
                                 <td class="table-column-pe-0">
                                     {{ $loop->index + 1 }}
                                 </td>
-                                <td>{{$item->increment_percentage}}</td>
+                                <td>{{$item->increment_percentage}} %</td>
                                 <td>{{$item->employment_type}}</td>
                                 <td>{{$item->effective_from}}</td>
                                 <td>{{$item->effective_to}}</td>
                                 <td>{{$item->financial_year}}</td>
                                 <td>
                                     <div class="success-badges changeStatus" data-table="payroll_salary_increments" data-uuid="{{$item->id}}"
-                                    data-message="inactive" @if($item->status=="active") data-value="active" @else data-value="inactive" @endif ><span class="legend-indicator bg-success">
+                                    data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
                                     </span>{{ $item->status ?? 'Active' }}</div>
                                 </td>
                                 <td style="text-align:right;">
