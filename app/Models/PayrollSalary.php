@@ -33,6 +33,12 @@ class PayrollSalary extends Model
     public function employee(){
         return $this->belongsTo(Employee::class);
     }
+    public function department()
+    {
+    return $this->hasOne(EmpDepartmentHistory::class,'user_id','user_id');
+
+    }
+
     public function payrollSalaryHead(){
         return $this->hasMany(PayrollSalaryHead::class,'payroll_salary_id');
     }

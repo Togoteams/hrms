@@ -352,6 +352,13 @@
 
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.salary.index') }}"> Salary</a>
+		
+                            <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement_type.index' ? 'active' : '' }}  "
+                                href="{{ route('admin.payroll.reimbursement_type.index') }}">Reimbursement Type</a>
+                            
+                            <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement.index' ? 'active' : '' }}  "
+                                href="{{ route('admin.payroll.reimbursement.index') }}">Reimbursement</a>
+
                          </div>
                      </div>
 

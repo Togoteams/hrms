@@ -33,6 +33,8 @@ use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Http\Controllers\Admin\Payroll\PayRollPayscaleCotroller;
 use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
 use App\Http\Controllers\Admin\Payroll\TaxSlabSettingController;
+use App\Http\Controllers\Admin\payroll\ReimbursementController;
+use App\Http\Controllers\Admin\payroll\ReimbursementTypeController;
 use App\Models\KraAttributes;
 
 Route::get('/', [LoginController::class, 'authentication']);
@@ -229,6 +231,14 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('payscale/get-emp-head/{user_id?}', [PayRollPayscaleCotroller::class, 'get_employee_data'])->name('payscale.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
 
+          // Pay Roll ReimbursementTypeController start
+          Route::resource('reimbursement_type',ReimbursementTypeController::class);
+          // Pay Roll ReimbursementTypeController end
+  
+          // Pay Roll ReimbursementController start
+          Route::resource('reimbursement',ReimbursementController::class);
+          Route::post('/admin/payroll/reimbursement',[ReimbursementController::class,'status'])->name('status');
+          // Pay Roll ReimbursementController end
         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
         Route::resource('salary', PayrollSalaryController::class);
         Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');

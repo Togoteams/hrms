@@ -55,6 +55,7 @@
                                 <th>S.no</th>
                                 <th>Name</th>
                                 <th>Description</th>
+                                <th>Status</th>
                                 <th style="text-align:right;">Action</th>
                             </tr>
                         </thead>
@@ -67,6 +68,11 @@
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->description }}</td>
+                                    <td>
+                                        <div class="success-badges changeStatus" data-table="designations" data-uuid="{{$item->id}}"
+                                        data-message="inactive" @if($item->status=="active") data-value="active" @else data-value="inactive" @endif ><span class="legend-indicator bg-success">
+                                        </span>{{ $item->status ?? 'Active' }}</div>
+                                    </td>
                                     <td style="text-align:right;">
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.designation.destroy', $item->id) }}">

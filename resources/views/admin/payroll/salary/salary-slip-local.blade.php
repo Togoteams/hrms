@@ -1,363 +1,428 @@
+
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Slip</title>
-    <style>
-        page {
-            display: block;
-            margin: 0 auto;
-        }
-
-        page[size="A4"] {
-            width: 21cm;
-            height: 29.7cm;
-        }
-
-        .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        [class*="col-"] {
-            float: left;
-            padding: 15px;
-        }
-
-
-        body {
-            font-family: 'Rubik', sans-serif !important;
-        }
-
-        .logo {
-            margin: auto;
-
-        }
-
-        .fa {
-            padding: 9px;
-            font-size: 15px;
-            width: 34px;
-            text-align: center;
-            text-decoration: none;
-            margin: 5px 2px;
-        }
-
-        .fa:hover {
-            opacity: 0.7;
-        }
-
-        .fa-facebook {
-            background: #3B5998;
-            color: white;
-        }
-
-        .fa-linkedin {
-            background: #007bb5;
-            color: white;
-        }
-
-        .fa-instagram {
-            background: #bb0000;
-            color: white;
-        }
-
-        @media print {
-
-            .no-print,
-            .no-print * {
-                display: none !important;
-            }
-
-            div.page-break-after {
-                display: block !important;
-                page-break-after: always;
-            }
-
-            .centers {
-                padding: 30px !important;
-            }
-
-            .table td {
-                padding: 0.75rem !important;
-                vertical-align: top !important;
-                border-top: 1px solid #363636 !important;
-            }
-        }
-    </style>
-</head>
 
 <body>
-    <page size="A4">
+    <html lang="et">
 
-        <div class='page-break-after'>
-            <div style="padding: 10px; border: 1px solid #ffe3d8;">
-                <div style="width: 100%;">
-                    <div class="col-12"
-                        style="width: 100%;
-                    padding: 0px;
-                    padding-top: 1em;
-                    padding-bottom: 1em;
-                    background: #ffecde;">
+    <head>
+        <title>Payslip</title>
+        <meta name="viewport" content="width=device-width" />
+        <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-                        <center> <img
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYlll95BBQ4rlb16xmoOeCF8IeO36pq8MA4Bt00AZ7MI3B6TMevwRQVcbXHL6V40vbuQ&usqp=CAU"
-                                alt="" class="img-fluid" style="height: auto; width: 30%;"></center>
-                    </div>
-                </div>
-                <div style="width: 100%;">
-                    <table style="border-collapse: collapse; width: 100%; margin-top: 4em;" cellspacing="0">
+        <style>
+            body {
+                background: #eceff1;
+                font-family: 'Public Sans';
+                color: #3f3f3f;
+                font-size: 14px;
+            }
 
-                        <tbody>
 
-                            <tr>
-                                <td colspan="6"
-                                    style="padding:8px; border:1px solid #fff9f9; text-align:left; vertical-align: middle; font-weight: 700;">
-                                    <p>SALARY - FOR {{strtoupper(date("M-Y",strtotime($data->created_at)))}}</p>
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:rgb(255, 236, 222); padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left; font-weight: 700;">
-                                    Name of the staff:</td>
-                                <td
-                                    style="background-color:rgb(255, 236, 222); padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:left; font-weight: 700;">
-                                    {{$data['user']->name}}
+            page {
+                background: #fff;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 5mm;
+                margin-top: 5mm;
+            }
 
-                                </td>
+            page[size="A4"] {
+                width: 21cm;
+                height: 45.7cm;
+            }
 
-                            </tr>
+            @page {
+                size: 210mm 297mm;
+                margin: 0;
+            }
 
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Account no:</td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data['employee']->bank_account_number}}
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    E C No.
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data['employee']->ec_number}}
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Basic Salary
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data->basic}}
-                                </td>
+            @media print {
 
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    
-                                </td>
+                /* Print settings */
+                html,
+                body,
+                page {
+                    width: 210mm;
+                    height: 100%;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    overflow: hidden;
+                }
 
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Salary:
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data->basic}}
-                                </td>
-                            </tr>
-                            @foreach ($data['payrollSalaryHead'] as $key => $value)
-                                @if ($value->payroll_head->head_type=="income")
-                                <tr style="height: 19pt; line-height: 24px">
-                                    <td
-                                        style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    {{$value->payroll_head->name}}
-                                    </td>
-                                    <td
-                                        style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                        {{$value->value}}
-                                    </td>
-                                </tr>
-                                @endif
-                            
-                            @endforeach
+                .no-overflow {
+                    overflow: hidden;
+                }
+            }
+
+            thead,
+            tbody,
+            tfoot,
+            tr,
+            td,
+            th {
+                border-color: inherit;
+                border-style: solid;
+                font-size: 12px;
+            }
+
+            .payslipcard th {
+                font-weight: 800;
+                color: #000;
+                background: #f2f0f8;
+                text-align: left;
+            }
+
+            .payslipcard td {
+                text-align: left;
+                padding-left: 2px;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                font-weight: 300;
+            }
+
+            .marksheetAlign {
+                padding: 8px;
+            }
+
+            .payslip {
+                padding: 1px 3px 4px 9px;
+            }
+
+            .payslipcard {
+                border: 1px solid #fff;
+                padding: 6px;
+                color: #000;
+                font-size: 12px;
+                width: 100%;
+                text-align: left;
+            }
+
+            .report-table th td {
+                border: none !important;
+            }
+
+            .clear {
+                clear: both;
+            }
+
+            p {
+                text-align: center;
+            }
+
+            .page-layout {
+                width: 210mm;
+                height: 297mm;
+                background: #fff;
+                padding: 25px;
+            }
+
+            button {
+                background-color: black;
+                width: 245px;
+                border: none;
+                outline: 0;
+                color: #fff;
+                font-family: 'Public Sans';
+                font-size: 16px;
+                font-weight: bold;
+                padding: 8px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                margin: 0px 550px;
+                cursor: pointer;
+            }
+
+            @media print {
+
+                .no-print,
+                .no-print * {
+                    display: none !important;
+                }
+            }
+
+            #button {
+                width: 210mm;
+                height: 40px;
+                position: fixed;
+                z-index: 10;
+                background: #bae2ff;
+                top: 0px;
+            }
+        </style>
+    </head>
+
+    <body id="top">
+        <!--Page 1-->
+        <page size="A4">
+
+            <div class="page-layout">
+
+
+                <table class="mt-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                    <tbody>
+                        <tr>
+                          
+                            <td>
+                                <h2 class="mb-2 text-dark text-left" style="font-weight: 800;
+                                color: #f94f00!important;
+                            }">Bank of Baroda
+                                </h2>
+                                <p class="mb-0 text-left" style="text-align: left;">
+                                    PAYSLIP For the month of - October</p>
+                            </td>
+                            <td style="text-align: right;">
+                               <img src="https://cdn.moneytransfers.com/tr:orig-true,fo-auto/uploads/2023/01/1674731299-Bank%20of%20Baroda%20TR.svg" class="img-fluid"
+                                        style="height: auto; width: 200px;">
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <hr>
+
+                <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                    <thead>
+                        <tr>
+                            <td class="payslip" colspan="3"><strong><u>EMPLOYEE DETAILS</u></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="payslip">Employee Name :</td>
+                            <td class="payslip">{{$data['user']->name}}</td>
+
+
+                            <td class="payslip">Employee Id. :</td>
+                            <td class="payslip">{{$data['employee']->emp_id}}</td>
+
+                            <td class="payslip"> Designation :</td>
+                            <td class="payslip">{{$data['employee']->designation->name}}</td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="payslip"> Department :</td>
+                            <td class="payslip">{{$data['department']->department_name}}</td>
+
+                            <td class="payslip">P.F. No :</td>
+                            <td class="payslip"></td>
+
+                            <td class="payslip">ESIC No : </td>
+                            <td class="payslip"></td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="payslip"> UAN No. :</td>
+                            <td class="payslip"></td>
+
+                            <td class="payslip">PAN No. :</td>
+                            <td class="payslip"></td>
+
+                            <td class="payslip">Aadhar Card No. :</td>
+                            <td class="payslip"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="payslip">Bank Details :</td>
+                            <td>{{$data['employee']->bank_account_number}}</td>
+                        </tr>
+
+                    </thead>
+                </table>
+
+                <hr>
+
+                <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                    <thead>
+                        <tr>
+                            <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="payslip">Salary Date :</td>
+                            <td class="payslip"></td>
+
+
+                            <td class="payslip">No. of Days in Month :</td>
+                            <td class="payslip"></td>
+
+                            <td class="payslip">No. of Working Days :</td>
+                            <td class="payslip"></td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="payslip">No. of Payable Leaves :</td>
+                            <td class="payslip"></td>
+
+                            <td class="payslip">Total Attendance :</td>
+                            <td class="payslip"></td>
+
+                            <td class="payslip">Total Absent : </td>
+                            <td class="payslip"></td>
+
+
+                        </tr>
+                        <tr>
+                            <td class="payslip"> No. of Over Time (Hours) :</td>
+                            <td class="payslip"></td>
+
+
+                        </tr>
+
+                    </thead>
+                </table>
+
+
+
+
+                <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                    <tbody>
+                        <tr>
+                            <th class="marksheetAlign">EARNINGS </th>
+                            <th style="text-align: right;">PAY SCALE</th>
+                            <th style="text-align: right;">EARNED</th>
+                            <th style="padding-left: 10%;">DEDUCTIONS</th>
+                            <th></th>
+
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Basic </strong></td>
+                            <td style="text-align: right;">{{$data->basic}}</td>
+                            <td style="text-align: right;">600</td>
+                            <td  style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
+                            <td style="text-align: right;">72</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>HRA                </strong></td>
+                            <td style="text-align: right;">4000</td>
+                            <td style="text-align: right;">154</td>
+                            <td  style="font-weight: 600; padding-left: 10%;"><strong>ESI @1.75%
+                            </strong></td>
+                            <td style="text-align: right;">72</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Conveyance     </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td  style="font-weight: 600;padding-left: 10%;"><strong>ESI @1.75%
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Special               
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Loan Deduction (if any)
+
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Mobile                              
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Income Tax Deductions (if any)
+
+
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Bonus                                             
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Penalty Deductions (if any)
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Transportation               
+                                             
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Fixed Deductions (if any)
+
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Food               
+               
+                                             
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Other Deductions (if any)
+
+
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Medical                           
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
                            
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align: left;">
-                                    Total: Pula
-
-
-                                </td>
-                                <td
-                                    style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align:center;">
-                                    {{$data->gross_earning}}
-
-
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td colspan="2"
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align: left;">
-                                    Deductions:
-                                </td>
-
-                            </tr>
-                            @foreach ($data['payrollSalaryHead'] as $key => $value)
-                            @if ($value->payroll_head->head_type=="deduction")
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                {{$value->payroll_head->name}}
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$value->value}}
-                                </td>
-                            </tr>
-                            @endif
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Over Time                           
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><strong>Earnings                        
+                            </strong></td>
+                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">0</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight: 600;"><strong>Gross Earning 
                         
-                        @endforeach
-                            {{-- <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    - BoMaid
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    00.00
-
-
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    - Pension
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    00.00
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    - Union Fee
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    00.00
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    - Other deductions
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    300.00
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    - Tax
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    00.00
-                                </td>
-                            </tr> --}}
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; font-weight: 700; border:1px solid #fff9f9; text-align: left;">
-                                    Total deductions:
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; font-weight: 700; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data->total_deduction}}
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td colspan="2"
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-
-                                </td>
-
-                            </tr>
-
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Net Salary
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    {{$data->net_take_home}}
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    LEAVE BALANCE
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Sick Leave Balance
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                </td>
-                            </tr>
-                            <tr style="height: 19pt; line-height: 24px">
-                                <td colspan="2"
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    For Bank of Baroda (Botswana) Ltd
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div style="padding: 0px; display: flex; position:relative; bottom: 0; width: 98%;">
-
-                    <div style="width:100%; text-align: left; font-weight: 600; padding-top: 6em;">
-                        <p>Senior Manager<br>
-                            Date: {{date("d-m-Y",strtotime($data->created_at))}}</p>
-                    </div>
-
-                </div>
+                            </strong></th>
+                            <th>19600
+                            </th>
+                            <th>754
+                            </th>
+                            <th>Total Deduction 
+                            </th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td colspan="5"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="5" style="font-weight: 600; padding: 10px;"><strong>Net Take Home (Gross Earning - Total Deduction)  : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></strong></th>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-dark mb-0 mt-3" style="font-weight: 600; text-align: left;">Note:</p>
+                <ul style="padding-left: 12px;">
+                    <li>1. The student are expected to keep this cardneat and clean</li>
+                    <li>2. In case the card is lost the duplicate card will be issued on payment of extra report card
+                        free.</li>
+                    <li>3. Promotion will be granted on the weight of both examination. To pass the monthly test is also
+                        compulsary.</li>
+                </ul>
             </div>
-        </div>
-
-    </page>
-
-</body>
-<script>
-    window.print();
-</script>
-</html>
+        </page>
+    </body>
+    <html>
