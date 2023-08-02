@@ -35,6 +35,7 @@ use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
 use App\Http\Controllers\Admin\Payroll\TaxSlabSettingController;
 use App\Http\Controllers\Admin\payroll\ReimbursementController;
 use App\Http\Controllers\Admin\payroll\ReimbursementTypeController;
+use App\Http\Controllers\SalaryIncrementController;
 use App\Models\KraAttributes;
 
 Route::get('/', [LoginController::class, 'authentication']);
@@ -220,6 +221,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('tax-slab-setting/status/{id}', [TaxSlabSettingController::class, 'status'])->name('tax-slab-setting.status');
         /*--------------------------------------------- Pay Roll Tax slab Settting Crud End---------------------------------------------------------------*/
 
+         /*--------------------------------------------- Pay Roll Salary Increment Settting Crud Start---------------------------------------------------------------*/
+         Route::resource('salary-increment-setting', SalaryIncrementController::class);
+        //  Route::get('salary-increment-setting/status/{id}', [SalaryIncrementController::class, 'status'])->name('salary-increment-setting.status');
+         /*--------------------------------------------- Pay Roll Salary Increment Settting Crud End---------------------------------------------------------------*/
+ 
         /*--------------------------------------------- Pay Roll Head Crud Start---------------------------------------------------------------*/
         Route::resource('head', PayrollHeadController::class);
         Route::get('head/status/{id}', [PayrollHeadController::class, 'status'])->name('head.status');
