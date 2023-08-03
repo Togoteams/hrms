@@ -6,19 +6,24 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Reimbursement;
 use App\Models\ReimbursementType;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ReimbursementController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
+    public $page_name = "Salary Increment Settings";
     public function index()
     {
         $page = "Reimbursement";
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
+        $reimbursementType = ReimbursementType::where('status','0')->get();
         // dd($reimbursement)->all();
-        return view('admin.payroll.reimbursement.index', compact('page','reimbursement'));
+        return view('admin.payroll.reimbursement.index', compact('page','reimbursement','reimbursementType'));
     }
 
     /**
@@ -26,9 +31,9 @@ class ReimbursementController extends BaseController
      */
     public function create()
     {
-        $page = "Reimbursement";
-        $reimbursementType = ReimbursementType::where('status','0')->get();
-        return view('admin.payroll.reimbursement.create',compact('page','reimbursementType'));
+        // $page = "Reimbursement";
+        // $reimbursementType = ReimbursementType::where('status','0')->get();
+        // return view('admin.payroll.reimbursement.create',compact('page','reimbursementType'));
     }
 
     /**
@@ -36,24 +41,44 @@ class ReimbursementController extends BaseController
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'type_id' => ['required','numeric'],
-            'bill_amount' => ['required','numeric','gt:0'],
-            'expenses_date' => ['required', 'date', 'before_or_equal:today'],
-            'reimbursement_amount' => ['required','numeric','gt:0'],           
-            'reimbursement_notes' => ['required','string'],                      
-            // 'status' => ['required','numeric'],
+        $validator = Validator::make($request->all(), [
+            'type_id' => 'required|numeric',
+            'bill_amount' => 'required|numeric|gt:0',
+            'expenses_date' => 'required|date|before_or_equal:today',
+            'reimbursement_amount' => 'required|numeric|gt:0',
+            'reimbursement_notes' => 'required|string',
+
         ]);
-        // dd($request->all());
-        $reimbursement = new Reimbursement();
-        $reimbursement->type_id = $request['type_id'];
-        $reimbursement->bill_amount = $request['bill_amount'];
-        $reimbursement->expenses_date = $request['expenses_date'];
-        $reimbursement->reimbursement_amount = $request['reimbursement_amount'];
-        $reimbursement->reimbursement_notes = $request['reimbursement_notes'];
-        // $reimbursement->status = $request['status'];
-        $reimbursement->save();
-        return redirect("admin/payroll/reimbursement")->with('status','Add Reimbursement  successfully');
+        // $request->validate([
+        //     'type_id' => ['required','numeric'],
+        //     'bill_amount' => ['required','numeric','gt:0'],
+        //     'expenses_date' => ['required', 'date', 'before_or_equal:today'],
+        //     'reimbursement_amount' => ['required','numeric','gt:0'],           
+        //     'reimbursement_notes' => ['required','string'],                      
+        // ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $request->request->add(['created_at' => Auth::user()->id]);
+                Reimbursement::insertGetId($request->except(['_token', '_method']));
+                return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            } catch (Exception $e) {
+
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+
+        // $reimbursement = new Reimbursement();
+        // $reimbursement->type_id = $request['type_id'];
+        // $reimbursement->bill_amount = $request['bill_amount'];
+        // $reimbursement->expenses_date = $request['expenses_date'];
+        // $reimbursement->reimbursement_amount = $request['reimbursement_amount'];
+        // $reimbursement->reimbursement_notes = $request['reimbursement_notes'];
+        // $reimbursement->save();
+        // return redirect("admin/payroll/reimbursement")->with('status','Add Reimbursement  successfully');
+
 
     }
 

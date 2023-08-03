@@ -21,7 +21,8 @@
 
                 <!-- End Row -->
             </div>
-           
+            @include('admin.payroll.reimbursement.create')
+
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -31,9 +32,13 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement.create') }}">
+                    {{-- <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement.create') }}">
                         Add {{ $page }}
-                    </a>
+                    </a> --}}
+                    <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                            Add {{ $page }}
+                        </button>
 
                     </div>
                 </div>

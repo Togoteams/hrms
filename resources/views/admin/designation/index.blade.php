@@ -70,7 +70,7 @@
                                     <td>{{ $item->description }}</td>
                                     <td>
                                         <div class="success-badges changeStatus" data-table="designations" data-uuid="{{$item->id}}"
-                                        data-message="inactive" @if($item->status=="active") data-value="active" @else data-value="inactive" @endif ><span class="legend-indicator bg-success">
+                                        data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
                                         </span>{{ $item->status ?? 'Active' }}</div>
                                     </td>
                                     <td style="text-align:right;">
