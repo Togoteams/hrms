@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type',75)->nullable();
             $table->text('slug',)->nullable();
-            $table->enum('status',["0","1"])->nullable();
+            $table->enum('status',["active","inactive"])->default('active');            
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

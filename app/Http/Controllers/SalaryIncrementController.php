@@ -63,7 +63,8 @@ class SalaryIncrementController extends Controller
     public function edit(string $id)
     {
         $data = PayrollSalaryIncrement::find($id);
-        return view('admin.payroll.salary_increment_setting.edit', ['data' => $data, 'page' => $this->page_name]);    }
+        return view('admin.payroll.salary_increment_setting.edit', ['data' => $data, 'page' => $this->page_name]);   
+     }
 
     /**
      * Update the specified resource in storage.

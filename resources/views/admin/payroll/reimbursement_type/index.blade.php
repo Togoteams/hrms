@@ -22,6 +22,7 @@
                 <!-- End Row -->
             </div>
            
+            @include('admin.payroll.reimbursement_type.create')
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -30,20 +31,26 @@
                     <div class="mb-2 col-sm mb-sm-0">
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
-                    <div class="col-sm-auto">
+                    {{-- <div class="col-sm-auto">
                     <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement_type.create') }}">
                         Add {{ $page }}
                     </a>
 
-                    </div>
+                    </div> --}}
+                    <div class="col-sm-auto">
+                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Add {{ $page }}
+                            </button>
+                        </div>
+
                 </div>
              </div>
-                    @if(session('status'))
-                       <div class="alert alert-success" id="status-message">{{ session('status') }}</div>
-                   @endif
-                <div class="p-2 mt-3 table-responsive">
-                    <table id="example" class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead>
+                  
+             <div class="table-responsive datatable-custom">
+                <table id="datatable"
+                    class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead class="thead-light">
                             <tr>
                                 <th>SI.</th>
                                 <th>Type Name</th>
@@ -52,40 +59,52 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($reimbursement) > 0)
                             @foreach ($reimbursement as $key =>$item) 
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$item->type}}</td>
                                 <td>
-                                    @if ($item->status=="0")
+                                    {{-- @if ($item->status=="0")
                                     <span class = "btn btn-primary btn-sm"><b>Active</b></span>
                                     @elseif ($item->status=="1")
                                     <span class = "btn btn-danger btn-sm"><b>Inactive</b></span>
-                                    @endif
+                                    @endif --}}
+                                    <div class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
+                                        data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
+                                        </span>{{ $item->status ?? 'Active' }}</div>
                                 </td>
-                                <td class="d-flex">
+                                {{-- <td class="d-flex">
                                     <a href="{{ route('admin.payroll.reimbursement_type.edit',$item->id) }}" class = "btn btn-edit btn-sm" style="margin-right: 6px;"><i class="fas fa-edit"></i></a>
                                     <form action="{{ route('admin.payroll.reimbursement_type.destroy',$item->id) }}" method="POST">
                                         @csrf
                                         @method('Delete')
                                         <button type="submit" class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                                     </form>
+                                </td> --}}
+                                <td style="text-align:right;">
+                                    <form id="edit{{ $item->id }}"
+                                        action="{{ route('admin.payroll.reimbursement_type.destroy', $item->id) }}">
+                                        <button type="button"
+                                            onclick="editForm('{{ route('admin.payroll.reimbursement_type.edit', $item->id) }}', 'edit')"
+                                            href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                            class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="button" id="delete{{ $item->id }}"
+                                            onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
+                                            class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                              @endforeach  
-                             @else
-                             <tr>
-                                 <td class="text-center">No Data Available In Table</td>
-                             </tr>
-                            @endif
                         </tbody>
                     </table>
                   
                 </div>
                 {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-                <script type="text/javascript">
+                  <script type="text/javascript">
                     $(function() {
                         var i = 1;
                         var table = $('.data-table').DataTable({

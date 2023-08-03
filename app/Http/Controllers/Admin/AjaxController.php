@@ -13,7 +13,10 @@ use App\Services\Holiday\HolidayService;
 use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
+use App\Models\Designation;
 use App\Models\PayrollSalaryIncrement;
+use App\Models\ReimbursementType;
+
 class AjaxController extends BaseController
 {
     /**
@@ -95,10 +98,10 @@ class AjaxController extends BaseController
             $data = $request->value;
             switch($table){
                 case 'users':
-                    $request->merge($data);
+                    // $request->merge($data);
                     // dd($request->all());
                     $id = uuidtoid($request->uuid, $table);
-                    $data= $this->userService->updateStatus($request->except(['uuid','find','value']),$id);
+                    $data= $this->userService->updateStatus($request->except('find'),$id);
                     $message='User Status updated';
                     break;
                 case 'roles':
@@ -123,7 +126,21 @@ class AjaxController extends BaseController
                     ]);
                     $message='Payroll Salary increment updated';
                     break;
+                case 'designations':
+                        $id = $request->uuid;
+                        $data= Designation::where('id',$id)->update([
+                            "status"=>$request->value
+                        ]);
+                        $message='Designation Status updated';
+                        break;
                
+                case 'reimbursement_types':
+                    $id = $request->uuid;
+                    $data= ReimbursementType::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Reimbursement Status updated';
+                    break;
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
             }

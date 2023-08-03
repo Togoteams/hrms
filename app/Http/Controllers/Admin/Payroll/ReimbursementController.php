@@ -16,12 +16,12 @@ class ReimbursementController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Salary Increment Settings";
+    public $page_name = "Reimbursement";
     public function index()
     {
         $page = "Reimbursement";
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
-        $reimbursementType = ReimbursementType::where('status','0')->get();
+        $reimbursementType = ReimbursementType::where('status','active')->get();
         // dd($reimbursement)->all();
         return view('admin.payroll.reimbursement.index', compact('page','reimbursement','reimbursementType'));
     }
@@ -49,13 +49,6 @@ class ReimbursementController extends BaseController
             'reimbursement_notes' => 'required|string',
 
         ]);
-        // $request->validate([
-        //     'type_id' => ['required','numeric'],
-        //     'bill_amount' => ['required','numeric','gt:0'],
-        //     'expenses_date' => ['required', 'date', 'before_or_equal:today'],
-        //     'reimbursement_amount' => ['required','numeric','gt:0'],           
-        //     'reimbursement_notes' => ['required','string'],                      
-        // ]);
 
         if ($validator->fails()) {
             return $validator->errors();
@@ -69,16 +62,6 @@ class ReimbursementController extends BaseController
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
-
-        // $reimbursement = new Reimbursement();
-        // $reimbursement->type_id = $request['type_id'];
-        // $reimbursement->bill_amount = $request['bill_amount'];
-        // $reimbursement->expenses_date = $request['expenses_date'];
-        // $reimbursement->reimbursement_amount = $request['reimbursement_amount'];
-        // $reimbursement->reimbursement_notes = $request['reimbursement_notes'];
-        // $reimbursement->save();
-        // return redirect("admin/payroll/reimbursement")->with('status','Add Reimbursement  successfully');
-
 
     }
 
@@ -95,35 +78,36 @@ class ReimbursementController extends BaseController
      */
     public function edit(string $id)
     {
-        $page = "Reimbursement";
-        $reimbursementType = ReimbursementType::where('status','0')->get();
+        // $reimbursementType = ReimbursementType::where('status','0')->get();
+        // $reimbursement = Reimbursement::find($id);
+        // return view('admin.payroll.reimbursement.edit', compact('page','reimbursement','reimbursementType'));
+        
+        $reimbursementType = ReimbursementType::where('status','active')->get();
         $reimbursement = Reimbursement::find($id);
-        return view('admin.payroll.reimbursement.edit', compact('page','reimbursement','reimbursementType'));
+        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType, 'page' => $this->page_name]);    
     }
+
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'type_id' => ['required','numeric'],
-            'bill_amount' => ['required','numeric'],
-            'expenses_date' => ['required','date'],           
-            'reimbursement_amount' => ['required','numeric'],           
-            'reimbursement_notes' => ['required','string'],                      
-            // 'status' => ['required','numeric'],
+        $validator = Validator::make($request->all(), [
+            'type_id' => 'required|numeric',
+            'bill_amount' => 'required|numeric|gt:0',
+            'expenses_date' => 'required|date|before_or_equal:today',
+            'reimbursement_amount' => 'required|numeric|gt:0',
+            'reimbursement_notes' => 'required|string',
         ]);
-        // dd($request->all());
-        $reimbursement = Reimbursement::find($id);
-        $reimbursement->type_id = $request['type_id'];
-        $reimbursement->bill_amount = $request['bill_amount'];
-        $reimbursement->expenses_date = $request['expenses_date'];
-        $reimbursement->reimbursement_amount = $request['reimbursement_amount'];
-        $reimbursement->reimbursement_notes = $request['reimbursement_notes'];
-        // $reimbursement->status = $request['status'];
-        $reimbursement->update();
-        return redirect("admin/payroll/reimbursement")->with('status','Update Reimbursement  successfully');
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            // $request->request->add(['updated_by'=>Auth::user()->id]);
+            Reimbursement::where('id', $id)->update($request->except('_token', '_method'));
+            return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+        }
 
     }
 
@@ -132,9 +116,12 @@ class ReimbursementController extends BaseController
      */
     public function destroy(string $id)
     {
-        $reimbursement = Reimbursement::find($id);
-        $reimbursement->delete();
-        return redirect()->back()->with('status','Delete successfully');
+        try {
+            Reimbursement::destroy($id);
+            return "Delete";
+        } catch (Exception $e) {
+            return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
+        }
     }
 
     public function status(Request $request)

@@ -43,12 +43,11 @@
                     </div>
                 </div>
              </div>
-                    @if(session('status'))
-                       <div class="alert alert-success" id="status-message">{{ session('status') }}</div>
-                   @endif
-                <div class="p-2 mt-3 table-responsive">
-                    <table id="example" class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead>
+                   {{-- Table --}}
+                   <div class="table-responsive datatable-custom">
+                    <table id="datatable"
+                        class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
+                        <thead class="thead-light">
                             <tr>
                                 <th>SI.</th>
                                 <th>Type</th>
@@ -61,7 +60,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($reimbursement) > 0)
                             @foreach ($reimbursement as $key =>$item) 
                             <tr>
                                 <td>{{++$key}}</td>
@@ -79,7 +77,7 @@
                                     <span class = "btn btn-danger btn-sm"><b>Reject</b></span>
                                     @endif --}}{{$item['status']}}
                                 </td>
-                                <td class="d-flex">
+                                {{-- <td class="d-flex">
                                     <a href="{{ route('admin.payroll.reimbursement.edit',$item['id']) }}" class = "btn btn-primary btn-sm" style="margin-right: 6px;"><i class="fas fa-edit"></i></a>
                                     <form action="{{ route('admin.payroll.reimbursement.destroy',$item['id']) }}" method="POST">
                                         @csrf
@@ -87,14 +85,25 @@
                                         <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     </form>
                                     <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-danger btn-sm">{{ucfirst($item['status'])}}</button>
+                                </td> --}}
+                                <td style="text-align:right;">
+                                    <form id="edit{{ $item['id'] }}"
+                                        action="{{ route('admin.payroll.reimbursement.destroy', $item['id']) }}">
+                                        <button type="button"
+                                            onclick="editForm('{{ route('admin.payroll.reimbursement.edit',$item['id']) }}', 'edit')"
+                                            href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                            class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="button" id="delete{{ $item['id'] }}"
+                                            onclick="deleteRow('edit{{ $item['id'] }}','delete{{ $item['id'] }}')"
+                                            class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
+                                    </form>
                                 </td>
                             </tr>
                              @endforeach  
-                             @else
-                             <tr>
-                                 <td class="text-center">No Data Available In Table</td>
-                             </tr>
-                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -171,7 +180,7 @@
             <!-- Modal -->
             <div class="modal fade" id="modaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
+                <div class="modal-dialog modal-md">
                     <div class="modal-content ">
                         <div class="modal-header ">
                             <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
@@ -183,8 +192,7 @@
 
                     </div>
                 </div>
-            </div>
-
+           </div>
             {{-- edit form model end  --}}
 
             {{-- edit form model start --}}
@@ -263,7 +271,7 @@
     </main>
 @endsection
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script>
+{{-- <script>
     setTimeout(() => {
                  $('#status-message').text('').removeClass('alert alert-success');
                
@@ -271,8 +279,8 @@
 
                $(document).ready(function () {
     $('#example').DataTable();
-});
-</script>
+   });
+</script> --}}
 <script>
      $(document).on('click','.status_change',function(e){
         // $(".alert").show();
@@ -283,63 +291,6 @@
         $('#status_id').val(stat_id);
         $('#statusModal').modal('show');
       });
-
-
-    //   $(".status_add").click(function(e){
-    //     e.preventDefault();
-    //     var data = $('#form-data').serialize();
-    //     alert('save');
-    //     $.ajax({
-    //         type: 'post',
-    //         url: "{{ route('admin.payroll.status') }}",
-    //         data: data,
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         beforeSend: function(){
-    //             $('#create_new').html('....Please wait');
-    //         },
-    //         success: function(response){
-    //             alert(response.success);
-    //         },
-    //         complete: function(response){
-    //             $('#create_new').html('Create New');
-    //         }
-    //     });
-	// });
-    //   $(document).on('click','.status_add',function(e){
-    //     $(".alert").show();
-    //     e.preventDefault();
-    //     // var stat_id = $('#status_id').val();
-    //     var text = $(".status_change").attr('value');
-    //     alert(text);
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-       
-    //     // $(".status_change").val(text);
-       
-    //     $.ajax({
-    //       type:"post",
-    //       url:"/admin/payroll/reimbursement/"+stat_id,
-    //       success: function(response){
-    //         // console.log(response);
-    //         $('#success_message').addClass('alert alert-success');
-    //         $('#success_message').text(response.message);
-    //         $('#statusModal').modal('hide');
-    //         console.log(response.data.id);
-    //         $(`#data-${response.data.id}`).add();
-
-    //         setTimeout(() => {
-    //             $(".alert").hide();
-
-    //           }, 2000);
-    //       }
-    //     });
-
-    //   });
 
 
 </script>

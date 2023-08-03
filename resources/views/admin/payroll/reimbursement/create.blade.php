@@ -1,3 +1,5 @@
+{{-- Model --}}
+
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
@@ -11,7 +13,7 @@
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
                         <div class="row">
-                            <div class="mb-2 col-sm-4">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="type">Type <sup class="text-danger">*</sup></label>
                                     <select name="type_id" class="form-control" id="type_id" placeholder="Reimbursement type">
@@ -22,55 +24,30 @@
                                         </option>                                         
                                         @endforeach
                                     </select>
-                                    {{-- <span class="text-danger">
-                                        @error('type_id')
-                                        {{$message}}
-                                        @enderror
-                                    </span> --}}
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="bill_amount">Bill Amount</label>
-                                    <input type="number" name="bill_amount" id="bill_amount" class="form-control" placeholder="bill_amount" value="{{ old('bill_amount') }}">
-                                    {{-- <span class="text-danger">
-                                        @error('bill_amount')
-                                        {{$message}}
-                                        @enderror
-                                    </span> --}}
+                                    <label for="bill_amount">Bill Amount<sup class="text-danger">*</sup></label>
+                                    <input type="number" name="bill_amount" id="bill_amount" class="form-control" placeholder="bill_amount">
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="expenses_date">Expenses Date</label>
+                                    <label for="expenses_date">Expenses Date<sup class="text-danger">*</sup></label>
                                     <input type="date" name="expenses_date" id="expenses_date" class="form-control" placeholder="expenses_date" value="{{ old('expenses_date') }}">
-                                    {{-- <span class="text-danger">
-                                        @error('expenses_date')
-                                        {{$message}}
-                                        @enderror
-                                    </span> --}}
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="reimbursement_amount">Reimbursement Amount</label>
+                                    <label for="reimbursement_amount">Reimbursement Amount<sup class="text-danger">*</sup></label>
                                     <input type="number" name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{ old('reimbursement_amount') }}">
-                                    {{-- <span class="text-danger">
-                                        @error('reimbursement_amount')
-                                        {{$message}}
-                                        @enderror
-                                    </span> --}}
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
+                            <div class="mb-4 col-sm-12">
                                 <div class="form-group">
-                                    <label for="reimbursement_notes">Reimbursement notes</label>
-                                    <input type="text" name="reimbursement_notes" id="reimbursement_notes" class="form-control" placeholder="reimbursement_notes" value="{{ old('reimbursement_notes') }}">
-                                    {{-- <span class="text-danger">
-                                        @error('reimbursement_notes')
-                                        {{$message}}
-                                        @enderror
-                                    </span> --}}
+                                    <label for="reimbursement_notes">Reimbursement notes<sup class="text-danger">*</sup></label>
+                                    <textarea name="reimbursement_notes" id="reimbursement_notes" cols="30" rows="10" class="form-control" placeholder="reimbursement_notes"></textarea>
                                 </div>
                             </div>
                             {{-- <div class="mb-2 col-sm-3">
@@ -98,10 +75,6 @@
                             </div>
                         </div>
                         <hr>
-                        {{-- <div class="text-center" style="display: none" id="table_data_btn">
-                            <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">Add
-                                {{ $page }}</button>
-                        </div> --}}
                     </form>
                 </div>
 
