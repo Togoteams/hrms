@@ -40,13 +40,11 @@
                     </div>
                 </div>
             </div>
-                <!-- Table -->
-                <div class="table-responsive datatable-custom">
-                    <table id="datatable"
-                        class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead class="thead-light">
+                {{-- Table --}}
+              <div class="p-2 mt-3 table-responsive">
+                <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead>
                             <tr>
-
                                 <th>S.no</th>
                                 <th>From </th>
                                 <th>To</th>
@@ -57,7 +55,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach ($data as $item)
+                            {{-- @foreach ($data as $item)
                                 <tr>
                                     <td class="table-column-pe-0">
                                         {{ $loop->index + 1 }}
@@ -75,32 +73,60 @@
                                                 class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            {{-- <button type="button" id="delete{{ $item->id }}"
-                                                onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
-                                                class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
-                                            </button> --}}
-                                        </form>
-                                        {{-- <button target="_blank" href="{{ route('admin.payroll.tax-slab-setting.edit', $item->id) }}"
-                                            class="btn btn-edit btn-sm"><i class="far fa-show"></i></button> --}}
-
-                                        {{-- <button href="{{ route('admin.payroll.tax-slab-setting.status', $item->id) }}"
-                                            class="btn @if ($item->status == 1) btn-success @endif btn-secondary  btn-sm">
-                                            @if ($item->status == 1)
-                                                Active
-                                            @else
-                                                Deactive
-                                            @endif
-                                        </button> --}}
+                                        </form>                                     
                                     </td>
-
-
                                 </tr>
-                            @endforeach
-
-
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+                <script type="text/javascript">
+                  $(function() {
+                      var i = 1;
+                      var table = $('.data-table').DataTable({
+                          processing: true,
+                          serverSide: true,
+                          ajax: "{{ route('admin.payroll.tax-slab-setting.index') }}",
+
+                          columns: [{
+                                  data: 'DT_RowIndex',
+                                  name: 'DT_RowIndex',
+                                  orderable: false,
+                                  searchable: false
+                              },
+
+                           
+                              {
+                                  data: 'from',
+                                  name: 'from'
+                              },
+                              {
+                                  data: 'to',
+                                  name: 'to'
+                              },
+                              {
+                                  data: 'tax',
+                                  name: 'tax'
+                              },
+                              {
+                                  data: 'description',
+                                  name: 'description'
+                              },
+
+
+                              {
+                                  data: 'action',
+                                  name: 'action',
+                                  orderable: true,
+                                  searchable: true
+                              },
+                          ]
+                      });
+
+                  });
+              </script>
                 <!-- End Table -->
 
 

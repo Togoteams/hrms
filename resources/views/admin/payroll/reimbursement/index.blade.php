@@ -44,10 +44,9 @@
                 </div>
              </div>
                    {{-- Table --}}
-                   <div class="table-responsive datatable-custom">
-                    <table id="datatable"
-                        class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead class="thead-light">
+                   <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                        <thead>
                             <tr>
                                 <th>SI.</th>
                                 <th>Type</th>
@@ -59,61 +58,11 @@
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($reimbursement as $key =>$item) 
-                            <tr>
-                                <td>{{++$key}}</td>
-                                <td>{{ $item['reimbursementype']['type'] ?? 'N/A' }}</td>
-                                <td>{{$item['bill_amount']}}</td>
-                                <td>{{date("d-m-Y",strtotime($item['expenses_date']))}}</td>
-                                <td>{{$item['reimbursement_amount']}}</td>
-                                <td>{{$item['reimbursement_notes']}}</td>
-                                <td>
-                                    {{-- @if ($item['status']=="0")
-                                    <span class = "btn btn-primary btn-sm"><b>Pending</b></span>
-                                    @elseif ($item['status']=="1")
-                                    <span class = "btn btn-danger btn-sm"><b>Approved</b></span>
-                                    @elseif ($item['status']=="2")
-                                    <span class = "btn btn-danger btn-sm"><b>Reject</b></span>
-                                    @endif --}}{{$item['status']}}
-                                </td>
-                                {{-- <td class="d-flex">
-                                    <a href="{{ route('admin.payroll.reimbursement.edit',$item['id']) }}" class = "btn btn-primary btn-sm" style="margin-right: 6px;"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ route('admin.payroll.reimbursement.destroy',$item['id']) }}" method="POST">
-                                        @csrf
-                                        @method('Delete')
-                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </form>
-                                    <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-danger btn-sm">{{ucfirst($item['status'])}}</button>
-                                </td> --}}
-                                <td style="text-align:right;">
-                                    <form id="edit{{ $item['id'] }}"
-                                        action="{{ route('admin.payroll.reimbursement.destroy', $item['id']) }}">
-                                        
-                                        <button type="button"
-                                            onclick="editForm('{{ route('admin.payroll.reimbursement.edit', $item['id']) }}', 'edit')"
-                                            href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                            class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
-                                            
-                                        {{-- <button type="button"
-                                            onclick="editForm('{{ route('admin.payroll.reimbursement.edit',$item['id']) }}', 'edit')"
-                                            href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                            class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button> --}}
-                                        @csrf
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="button" id="delete{{ $item['id'] }}"
-                                            onclick="deleteRow('edit{{ $item['id'] }}','delete{{ $item['id'] }}')"
-                                            class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
-                                        </button>
-                                        <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
-                                    </form>
-                                </td>
-                            </tr>
-                             @endforeach  
+                        <tbody> 
                         </tbody>
                     </table>
                 </div>
-                {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
                 <script type="text/javascript">
                     $(function() {
@@ -121,7 +70,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.payroll.payscale.index') }}",
+                            ajax: "{{ route('admin.payroll.reimbursement.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
@@ -132,37 +81,33 @@
 
                              
                                 {
-                                    data: 'employee.emp_id',
-                                    name: 'employee.emp_id'
+                                    data: 'reimbursementype.type',
+                                    name: 'reimbursementype.type'
                                 },
 
                                 {
-                                    data: 'employee.ec_number',
-                                    name: 'employee.ec_number'
+                                    data: 'bill_amount',
+                                    name: 'bill_amount'
                                 },
                                 {
-                                    data: 'user.name',
-                                    name: 'user.name'
+                                    data: 'expenses_date',
+                                    name: 'expenses_date'
                                 },
                                 {
-                                    data: 'basic',
-                                    name: 'basic'
+                                    data: 'reimbursement_amount',
+                                    name: 'reimbursement_amount'
                                 },
 
                                
                                 {
-                                    data: 'net_take_home',
-                                    name: 'net_take_home'
+                                    data: 'reimbursement_notes',
+                                    name: 'reimbursement_notes'
                                 },
                                
                               
                                 {
-                                    data: 'total_deduction',
-                                    name: 'total_deduction'
-                                },
-                                {
-                                    data: 'gross_earning',
-                                    name: 'gross_earning'
+                                    data: 'status',
+                                    name: 'status'
                                 },
 
 
@@ -176,7 +121,7 @@
                         });
 
                     });
-                </script> --}}
+                </script>
                 <!-- End Table -->
 
 
@@ -277,16 +222,6 @@
     </main>
 @endsection
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-{{-- <script>
-    setTimeout(() => {
-                 $('#status-message').text('').removeClass('alert alert-success');
-               
-               }, 2000);
-
-               $(document).ready(function () {
-    $('#example').DataTable();
-   });
-</script> --}}
 <script>
      $(document).on('click','.status_change',function(e){
         // $(".alert").show();

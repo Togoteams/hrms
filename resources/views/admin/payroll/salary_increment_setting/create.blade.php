@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="increment_percentage">Salary Increment %</label>
+                                    <label for="increment_percentage" class="required">Salary Increment %</label>
                                     <input required id="increment_percentage" placeholder="Enter Increment Percentage of Salary" min="1" max="100" type="number"
                                         name="increment_percentage" class="form-control form-control-sm ">
                                 </div>
@@ -36,7 +36,7 @@
                            
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="effective_from">Effective From</label>
+                                    <label class="required" for="effective_from">Effective From</label>
                                     <input required id="effective_from" placeholder="Enter Effective From  of salary " type="date"
                                         name="effective_from" class="form-control form-control-sm ">
                                 </div>
@@ -44,14 +44,14 @@
                            
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="effective_to">Effective To</label>
+                                    <label class="required" for="effective_to">Effective To</label>
                                     <input required id="effective_to" placeholder="Enter Effective To of salary " type="date"
                                         name="effective_to" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="financial_year">Financial year</label>
+                                    <label class="required" for="financial_year">Financial year</label>
                                     <select required id="financial_year" name="financial_year"
                                         class="form-control form-control-sm">
                                         <option selected disabled=""> - Select financial year- </option>

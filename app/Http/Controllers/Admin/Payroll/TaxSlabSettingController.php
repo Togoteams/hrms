@@ -8,15 +8,27 @@ use App\Models\TaxSlabSetting;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class TaxSlabSettingController extends Controller
 {
     public $page_name = "Tax Slab Setting";
 
-    public function index()
+    public function index(Request $request)
     {
-        $data =  TaxSlabSetting::all();
-        return view('admin.payroll.taxs_slab_setting.index', ['page' => $this->page_name, 'data' => $data]);
+        if ($request->ajax()) {
+            $data = TaxSlabSetting::all();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = view('admin.payroll.taxs_slab_setting.buttons', ['item' => $row, "route" => 'payroll.taxs_slab_setting']);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
+        // $data =  TaxSlabSetting::all();
+        return view('admin.payroll.taxs_slab_setting.index', ['page' => $this->page_name]);
     }
 
 

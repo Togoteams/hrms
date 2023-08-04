@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
+use Yajra\DataTables\Contracts\DataTable;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReimbursementTypeController extends Controller
 {
@@ -20,11 +21,24 @@ class ReimbursementTypeController extends Controller
      */
     public $page_name = "Reimbursement Type";
 
-    public function index()
+    public function index(Request $request)
     {
-        $page = "Reimbursement Type";
-        $reimbursement = ReimbursementType::all();
-        return view('admin.payroll.reimbursement_type.index', compact('page','reimbursement'));
+        if ($request->ajax()) {
+            $data = ReimbursementType::all();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = view('admin.payroll.reimbursement_type.buttons', ['item' => $row, "route" => 'payroll.reimbursement_type']);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
+        // $page = "Reimbursement Type";
+        // $reimbursement = ReimbursementType::all();
+        // return view('admin.payroll.reimbursement_type.index', compact('page','reimbursement'));
+        return view('admin.payroll.reimbursement_type.index', ['page' => $this->page_name]);
+
     }
 
     /**

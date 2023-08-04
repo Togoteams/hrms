@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
-                                    <label for="from">from</label>
+                                    <label class="required" for="from">from</label>
                                     <input required id="from" placeholder="Enter from of Tax " type="text"
                                         name="from" class="form-control form-control-sm ">
                                 </div>
@@ -21,7 +21,7 @@
                          
                             <div class="col-sm-6 mb-2">
                                 <div class="form-group">
-                                    <label for="to">to</label>
+                                    <label class="required" for="to">to</label>
                                     <input required id="to" placeholder="Enter to of Tax " type="text"
                                         name="to" class="form-control form-control-sm ">
                                 </div>
@@ -29,7 +29,7 @@
                            
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="tax">tax</label>
+                                    <label class="required" for="tax">tax</label>
                                     <input required id="tax" placeholder="Enter tax of Tax " type="text"
                                         name="tax" class="form-control form-control-sm ">
                                 </div>
@@ -37,7 +37,7 @@
                            
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label for="description">description</label>
+                                    <label  class="required"for="description">description</label>
                                     <textarea required id="description" placeholder="Enter Short Description of Tax   " type="text" name="description"
                                         class="form-control form-control-sm "></textarea>
                                 </div>

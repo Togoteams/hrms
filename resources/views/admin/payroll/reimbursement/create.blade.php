@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="type">Type <sup class="text-danger">*</sup></label>
+                                    <label for="type" class="required">Type</label>
                                     <select name="type_id" class="form-control" id="type_id" placeholder="Reimbursement type">
                                         <option value="">Select Option</option>
                                          @foreach($reimbursementType as $data)
@@ -28,25 +28,25 @@
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="bill_amount">Bill Amount<sup class="text-danger">*</sup></label>
+                                    <label for="bill_amount" class="required">Bill Amount</label>
                                     <input type="number" name="bill_amount" id="bill_amount" class="form-control" placeholder="bill_amount">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="expenses_date">Expenses Date<sup class="text-danger">*</sup></label>
+                                    <label for="expenses_date" class="required">Expenses Date</label>
                                     <input type="date" name="expenses_date" id="expenses_date" class="form-control" placeholder="expenses_date" value="{{ old('expenses_date') }}">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="reimbursement_amount">Reimbursement Amount<sup class="text-danger">*</sup></label>
+                                    <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
                                     <input type="number" name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{ old('reimbursement_amount') }}">
                                 </div>
                             </div>
                             <div class="mb-4 col-sm-12">
                                 <div class="form-group">
-                                    <label for="reimbursement_notes">Reimbursement notes<sup class="text-danger">*</sup></label>
+                                    <label for="reimbursement_notes" class="required">Reimbursement notes</label>
                                     <textarea name="reimbursement_notes" id="reimbursement_notes" cols="30" rows="10" class="form-control" placeholder="reimbursement_notes"></textarea>
                                 </div>
                             </div>

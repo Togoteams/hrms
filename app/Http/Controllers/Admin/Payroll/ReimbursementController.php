@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReimbursementController extends BaseController
 {
@@ -17,13 +18,24 @@ class ReimbursementController extends BaseController
      * Display a listing of the resource.
      */
     public $page_name = "Reimbursement";
-    public function index()
+    public function index(Request $request)
     {
-        $page = "Reimbursement";
+            if ($request->ajax()) {
+            $data = Reimbursement::with('reimbursementype')->select('*');
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::where('status','active')->get();
-        // dd($reimbursement)->all();
-        return view('admin.payroll.reimbursement.index', compact('page','reimbursement','reimbursementType'));
+        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 'reimbursementType' => $reimbursementType, 'reimbursement' => $reimbursement]);
+
+
     }
 
     /**
@@ -55,7 +67,7 @@ class ReimbursementController extends BaseController
         } else {
             try {
                 $request->request->add(['created_at' => Auth::user()->id]);
-                $request->request->add(['status' =>"active"]);
+                $request->request->add(['status' =>"pending"]);
                 Reimbursement::insertGetId($request->except(['_token', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {

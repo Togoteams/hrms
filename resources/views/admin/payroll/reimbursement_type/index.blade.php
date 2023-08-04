@@ -46,11 +46,10 @@
 
                 </div>
              </div>
-                  
-             <div class="table-responsive datatable-custom">
-                <table id="datatable"
-                    class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
-                    <thead class="thead-light">
+              {{-- Table --}}
+              <div class="p-2 mt-3 table-responsive">
+                <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead>
                             <tr>
                                 <th>SI.</th>
                                 <th>Type Name</th>
@@ -59,28 +58,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($reimbursement as $key =>$item) 
+                            {{-- @foreach ($reimbursement as $key =>$item) 
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$item->type}}</td>
                                 <td>
-                                    {{-- @if ($item->status=="0")
-                                    <span class = "btn btn-primary btn-sm"><b>Active</b></span>
-                                    @elseif ($item->status=="1")
-                                    <span class = "btn btn-danger btn-sm"><b>Inactive</b></span>
-                                    @endif --}}
                                     <div class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
                                         data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
                                         </span>{{ $item->status ?? 'Active' }}</div>
                                 </td>
-                                {{-- <td class="d-flex">
-                                    <a href="{{ route('admin.payroll.reimbursement_type.edit',$item->id) }}" class = "btn btn-edit btn-sm" style="margin-right: 6px;"><i class="fas fa-edit"></i></a>
-                                    <form action="{{ route('admin.payroll.reimbursement_type.destroy',$item->id) }}" method="POST">
-                                        @csrf
-                                        @method('Delete')
-                                        <button type="submit" class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
-                                    </form>
-                                </td> --}}
                                 <td style="text-align:right;">
                                     <form id="edit{{ $item->id }}"
                                         action="{{ route('admin.payroll.reimbursement_type.destroy', $item->id) }}">
@@ -97,12 +83,12 @@
                                     </form>
                                 </td>
                             </tr>
-                             @endforeach  
+                             @endforeach   --}}
                         </tbody>
                     </table>
                   
                 </div>
-                {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
                   <script type="text/javascript">
                     $(function() {
@@ -110,7 +96,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.payroll.payscale.index') }}",
+                            ajax: "{{ route('admin.payroll.reimbursement_type.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
@@ -121,37 +107,13 @@
 
                              
                                 {
-                                    data: 'employee.emp_id',
-                                    name: 'employee.emp_id'
+                                    data: 'type',
+                                    name: 'type'
                                 },
 
                                 {
-                                    data: 'employee.ec_number',
-                                    name: 'employee.ec_number'
-                                },
-                                {
-                                    data: 'user.name',
-                                    name: 'user.name'
-                                },
-                                {
-                                    data: 'basic',
-                                    name: 'basic'
-                                },
-
-                               
-                                {
-                                    data: 'net_take_home',
-                                    name: 'net_take_home'
-                                },
-                               
-                              
-                                {
-                                    data: 'total_deduction',
-                                    name: 'total_deduction'
-                                },
-                                {
-                                    data: 'gross_earning',
-                                    name: 'gross_earning'
+                                    data: 'status',
+                                    name: 'status'
                                 },
 
 
@@ -165,7 +127,7 @@
                         });
 
                     });
-                </script> --}}
+                </script>
                 <!-- End Table -->
 
 
@@ -215,14 +177,3 @@
 
     </main>
 @endsection
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script>
-    setTimeout(() => {
-                 $('#status-message').text('').removeClass('alert alert-success');
-               
-               }, 2000);
-
-               $(document).ready(function () {
-    $('#example').DataTable();
-});
-</script>
