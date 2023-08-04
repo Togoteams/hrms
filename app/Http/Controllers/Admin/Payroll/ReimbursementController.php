@@ -55,6 +55,7 @@ class ReimbursementController extends BaseController
         } else {
             try {
                 $request->request->add(['created_at' => Auth::user()->id]);
+                $request->request->add(['status' =>"active"]);
                 Reimbursement::insertGetId($request->except(['_token', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {

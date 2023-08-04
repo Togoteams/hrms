@@ -65,7 +65,7 @@
                                 <td>{{++$key}}</td>
                                 <td>{{ $item['reimbursementype']['type'] ?? 'N/A' }}</td>
                                 <td>{{$item['bill_amount']}}</td>
-                                <td>{{$item['expenses_date']}}</td>
+                                <td>{{date("d-m-Y",strtotime($item['expenses_date']))}}</td>
                                 <td>{{$item['reimbursement_amount']}}</td>
                                 <td>{{$item['reimbursement_notes']}}</td>
                                 <td>
@@ -89,10 +89,16 @@
                                 <td style="text-align:right;">
                                     <form id="edit{{ $item['id'] }}"
                                         action="{{ route('admin.payroll.reimbursement.destroy', $item['id']) }}">
+                                        
                                         <button type="button"
-                                            onclick="editForm('{{ route('admin.payroll.reimbursement.edit',$item['id']) }}', 'edit')"
+                                            onclick="editForm('{{ route('admin.payroll.reimbursement.edit', $item['id']) }}', 'edit')"
                                             href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
                                             class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                            
+                                        {{-- <button type="button"
+                                            onclick="editForm('{{ route('admin.payroll.reimbursement.edit',$item['id']) }}', 'edit')"
+                                            href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                            class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button> --}}
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
                                         <button type="button" id="delete{{ $item['id'] }}"

@@ -1,6 +1,7 @@
 {{-- Model --}}
-                        <form id="form_data" action="{{ route('admin.payroll.reimbursement_type.update',$reimbursement->id) }}">
+                        <form id="form_edit" action="{{ route('admin.payroll.reimbursement_type.update',$reimbursement->id) }}">
                         @csrf
+                        <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                         <div class="row">

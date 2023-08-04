@@ -49,6 +49,8 @@ class ReimbursementTypeController extends Controller
             return $validator->errors();
         } else {
             $request->request->add(['created_by'=>Auth::user()->id]);
+            $request->request->add(['status' =>"active"]);
+            $request->request->add(['slug' =>Str::slug($request->type,"_")]);
             ReimbursementType::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
@@ -83,13 +85,14 @@ class ReimbursementTypeController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'type' => 'required|string|unique:reimbursement_types,type',
+            'type' => 'required|string|unique:reimbursement_types,type,'.$id,
            
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            $request->request->add(['updated_by'=>Auth::user()->id]);
+            $request->request->add(['slug' =>Str::slug($request->type,"_")]);
+            // $request->request->add(['updated_by'=>Auth::user()->id]);
             ReimbursementType::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
