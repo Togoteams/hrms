@@ -1,4 +1,13 @@
 
+{{-- <div class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
+    data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
+    </span>{{ $item->status ?? 'Active' }}</div> --}}
+
+    {{-- <button class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
+        data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif>
+        <span class="legend-indicator bg-success"></span>{{ $item->status ?? 'Active' }}
+    </button> --}}
+
 
 <form id="edit{{ $item->id }}"
     action="{{ route('admin.payroll.reimbursement_type.destroy', $item->id) }}">

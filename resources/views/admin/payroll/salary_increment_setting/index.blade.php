@@ -40,13 +40,11 @@
                     </div>
                 </div>
             </div>
-                <!-- Table -->
-                <div class="table-responsive datatable-custom">
-                    <table id="datatable"
-                        class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead class="thead-light">
+                 {{-- Table --}}
+              <div class="p-2 mt-3 table-responsive">
+                <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead>
                             <tr>
-
                                 <th>S.no</th>
                                 <th>Increment %</th>
                                 <th>Employment Type</th>
@@ -58,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                              @foreach ($data as $item)
+                              {{-- @foreach ($data as $item)
                               <tr>
                                 <td class="table-column-pe-0">
                                     {{ $loop->index + 1 }}
@@ -89,10 +87,66 @@
                                     </form>
                                 </td>
                               </tr>   
-                              @endforeach
+                              @endforeach --}}
                         </tbody>
                     </table>
                 </div>
+                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+                <script type="text/javascript">
+                  $(function() {
+                      var i = 1;
+                      var table = $('.data-table').DataTable({
+                          processing: true,
+                          serverSide: true,
+                          ajax: "{{ route('admin.payroll.salary-increment-setting.index') }}",
+
+                          columns: [{
+                                  data: 'DT_RowIndex',
+                                  name: 'DT_RowIndex',
+                                  orderable: false,
+                                  searchable: false
+                              },
+
+                           
+                              {
+                                  data: 'increment_percentage',
+                                  name: 'increment_percentage'
+                              },
+                              {
+                                  data: 'employment_type',
+                                  name: 'employment_type'
+                              },
+                              {
+                                  data: 'effective_from',
+                                  name: 'effective_from'
+                              },
+                              {
+                                  data: 'effective_to',
+                                  name: 'effective_to'
+                              },
+                              {
+                                  data: 'financial_year',
+                                  name: 'financial_year'
+                              },
+
+                              {
+                                  data: 'status',
+                                  name: 'status'
+                              },
+
+
+                              {
+                                  data: 'action',
+                                  name: 'action',
+                                  orderable: true,
+                                  searchable: true
+                              },
+                          ]
+                      });
+
+                  });
+              </script>
                 <!-- End Table -->
 
 

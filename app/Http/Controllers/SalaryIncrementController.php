@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class SalaryIncrementController extends Controller
 {
@@ -14,10 +15,21 @@ class SalaryIncrementController extends Controller
      * Display a listing of the resource.
      */
     public $page_name = "Salary Increment Settings";
-    public function index()
+    public function index(Request $request)
     {
-        $data =  PayrollSalaryIncrement::all();
-        return view('admin.payroll.salary_increment_setting.index', ['page' => $this->page_name, 'data' => $data]);
+        if ($request->ajax()) {
+            $data = PayrollSalaryIncrement::all();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = view('admin.payroll.salary_increment_setting.buttons', ['item' => $row, "route" => 'payroll.salary_increment_setting']);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
+        // $data =  PayrollSalaryIncrement::all();
+        return view('admin.payroll.salary_increment_setting.index', ['page' => $this->page_name]);
     }
 
     /**

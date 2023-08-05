@@ -4,7 +4,7 @@
     <div class="row">
         <div class="mb-2 col-sm-6">
             <div class="form-group">
-                <label for="increment_percentage">Salary Increment %</label>
+                <label class="required" for="increment_percentage">Salary Increment %</label>
                 <input required id="increment_percentage" placeholder="Enter Increment Percentage of Salary " type="text"
                     name="increment_percentage" class="form-control form-control-sm" value="{{$data->increment_percentage}}">
             </div>

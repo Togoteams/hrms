@@ -91,12 +91,9 @@ class ReimbursementController extends BaseController
      */
     public function edit(string $id)
     {
-        // $reimbursementType = ReimbursementType::where('status','0')->get();
-        // $reimbursement = Reimbursement::find($id);
-        // return view('admin.payroll.reimbursement.edit', compact('page','reimbursement','reimbursementType'));
-        
-        $reimbursementType = ReimbursementType::where('status','active')->get();
+       
         $reimbursement = Reimbursement::find($id);
+        $reimbursementType = ReimbursementType::where('status','active')->get();
         return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType, 'page' => $this->page_name]);    
     }
 

@@ -16,7 +16,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="type" class="required">Reimbursement Type</label>
-                                    <input type="text" name="type" id="type" class="form-control" placeholder="Reimbursement type">
+                                    <input type="text" required name="type" id="type" class="form-control" placeholder="Reimbursement type">
                                 </div>
                             </div>
                            
