@@ -178,7 +178,7 @@
                             <span>(Botswana)</span>
                                 </h3>
                                 <p class="mb-0 text-left" style="text-align: left;">
-                                    PAYSLIP For the month of - {{ \Carbon\Carbon::now()->format('F') }}</p>
+                                    PAYSLIP For the month of - {{strtoupper(date("M-Y",strtotime($data->created_at)))}}</p>
                             </td>
                             <td style="text-align: right;">
                                <img src="https://cdn.moneytransfers.com/tr:orig-true,fo-auto/uploads/2023/01/1674731299-Bank%20of%20Baroda%20TR.svg" class="img-fluid"
@@ -198,36 +198,36 @@
                             </td>
                         </tr>
                         <tr>
-                            @if (!empty($data['user']->name))
+                            @if (!empty($data['user']))
                                 <td class="payslip">Employee Name :</td>
-                                <td class="payslip">{{$data['user']->name}}</td>
+                                <td class="payslip">{{$data['user']->name ?? ''}}</td>
                             @endif
 
-                            @if (!empty($data['employee']->ec_number))
+                            @if (!empty($data['employee']))
                                 <td class="payslip">Employee Id. :</td>
-                                <td class="payslip">{{$data['employee']->ec_number}}</td>
+                                <td class="payslip">{{$data['employee']->ec_number ??''}}</td>
                             @endif
 
-                            @if (!empty($data['employee']->designation->name))
+                            @if (!empty($data['employee']->designation))
                                 <td class="payslip"> Designation :</td>
-                                <td class="payslip">{{$data['employee']->designation->name}}</td>
+                                <td class="payslip">{{$data['employee']->designation->name ?? ''}}</td>
                             @endif
 
 
                         </tr>
                         <tr>
-                            <td class="payslip"> Department :</td>
-                            <td class="payslip"></td>
+                            @if (!empty($data['department']))
+                                <td class="payslip"> Department :</td>
+                                <td class="payslip">{{$data['department']->department_name ?? ''}}</td>
+                            @endif
 
-                            <td class="payslip">P.F. No :</td>
+                            {{-- <td class="payslip">P.F. No :</td>
                             <td class="payslip"></td>
 
                             <td class="payslip">ESIC No : </td>
-                            <td class="payslip"></td>
-
-
+                            <td class="payslip"></td> --}}
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td class="payslip"> UAN No. :</td>
                             <td class="payslip"></td>
 
@@ -237,7 +237,7 @@
                             <td class="payslip">Aadhar Card No. :</td>
                             <td class="payslip"></td>
 
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td class="payslip">Bank Details :</td>
                             <td>{{$data['employee']->bank_account_number}}</td>
@@ -292,7 +292,7 @@
 
 
 
-                <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                {{-- <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                     <tbody>
                         <tr>
                             <th class="marksheetAlign">EARNINGS </th>
@@ -302,13 +302,15 @@
                             <th></th>
 
                         </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Basic </strong></td>
-                            <td style="text-align: right;">{{$salary->basic ?? 0}}</td>
-                            <td style="text-align: right;">600</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
-                            <td style="text-align: right;">72</td>
-                        </tr>
+                        @foreach ($data['payrollSalaryHead'] as $key => $value)
+                            <tr>
+                                <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}} </strong></td>
+                                <td style="text-align: right;">{{$salary->basic ?? 0}}</td>
+                                <td style="text-align: right;">{{$value->value}}</td>
+                                <td  style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
+                                <td style="text-align: right;">72</td>
+                            </tr>
+                        @endforeach
                         <tr>
                             <td style="font-weight: 600;"><strong>HRA                </strong></td>
                             <td style="text-align: right;">{{$salary->hra ?? 0}}</td>
@@ -407,7 +409,7 @@
                             </strong></th>
                             <th style="text-align: right;">19600
                             </th>
-                            <th style="text-align: right;">754
+                            <th style="text-align: right;">${{number_format(round($data->net_take_home),2)}}
                             </th>
                             <th style="font-weight: 600; padding-left: 10%;">Total Deduction 
                             </th>
@@ -420,6 +422,100 @@
                             <th colspan="5" style="font-weight: 600; padding: 10px;"><strong>Net Take Home (Gross Earning - Total Deduction)  : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></strong></th>
                         </tr>
                     </tbody>
+                </table> --}}
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                            <tbody>
+                                <tr>
+                                    <th class="marksheetAlign">EARNINGS </th>
+                                    {{-- <th style="text-align: right;">PAY SCALE</th> --}}
+                                    <th style="text-align: right;">EARNED</th>
+        
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 600;"><strong>Basic </strong></td>
+                                    {{-- <td style="text-align: right;">{{$salary->basic ?? 0}}</td> --}}
+                                    <td style="text-align: right;">{{$data->basic}}</td>
+                                </tr>
+                                {{-- @foreach ($data['payrollSalaryHead'] as $key => $value)
+                                    <tr>
+                                        <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}} </strong></td>
+                                        <td style="text-align: right;">{{$salary->basic ?? 0}}</td>
+                                        <td style="text-align: right;">{{$value->value}}</td>
+                                    </tr>
+                                @endforeach --}}
+                                {{-- <tr>
+                                    <th style="font-weight: 600;"><strong>Gross Earning 
+                                
+                                    </strong></th>
+                                    <th style="text-align: right;">19600
+                                    </th>
+                                    <th style="text-align: right;">${{number_format(round($data->net_take_home),2)}}
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="5"></td>
+                                </tr> --}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                            <tbody>
+                                <tr>
+                                    <th class="marksheetAlign" style="padding-left: 10%;">DEDUCTIONS</th>
+                                    <th></th>
+        
+                                </tr>
+                                @foreach ($data['payrollSalaryHead'] as $key => $value)
+                                    <tr>
+                                        <td  style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                        <td style="text-align: right;">{{$value->value}}</td>
+                                    </tr>
+                                @endforeach
+                                
+                                {{-- <tr>
+                                    <th style="font-weight: 600;"><strong>Gross Earning 
+                                
+                                    </strong></th>
+                                    <th style="text-align: right;">19600
+                                    </th>
+                                    <th style="text-align: right;">${{number_format(round($data->net_take_home),2)}}
+                                    </th>
+                                    <th style="font-weight: 600; padding-left: 10%;">Total Deduction 
+                                    </th>
+                                    <th></th>
+                                </tr> --}}
+                                {{-- <tr>
+                                    <td colspan="5"></td>
+                                </tr> --}}
+                                {{-- <tr>
+                                    <th colspan="5" style="font-weight: 600; padding: 10px;"><strong>Net Take Home (Gross Earning - Total Deduction)  : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></strong></th>
+                                </tr> --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                    <tr>
+                        <th class="marksheetAlign" style="font-weight: 600;"><strong>Gross Earning 
+                    
+                        </strong></th>
+                        {{-- <th style="text-align: center;">19600
+                        </th> --}}
+                        <th style="text-align: center;">{{$data->gross_earning}}
+                        </th>
+                        <th style="font-weight: 600; padding-left: 5%;">Total Deduction 
+                        </th>
+                        <th style="font-weight: 600; text-align: right;">{{$data->total_deduction}}</th>
+                    </tr>
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <th colspan="5" style="font-weight: 600; padding: 10px;"><strong>Net Take Home (Gross Earning - Total Deduction)  : {{$data->net_take_home}} <span style="font-weight: 100;"><br>{{ '(Two hundred thirty only)'}}</span></strong></th>
+                    </tr>
                 </table>
                 <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>
                 <ul style="padding-left: 12px;">

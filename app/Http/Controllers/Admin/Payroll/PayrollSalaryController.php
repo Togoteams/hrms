@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Admin\Payroll;
 
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\PayRollPayscale;
-use Illuminate\Support\Facades\Validator;
 use Exception;
-use Yajra\DataTables\DataTables;
+use Roberyhr\Num2Words\Num2Words;
+use App\Models\User;
+use App\Models\Loans;
 use App\Models\Employee;
 use App\Models\EmpSalary;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Loans;
 use App\Models\PayrollHead;
-use App\Models\PayrollPayscaleHead;
+use Illuminate\Http\Request;
 use App\Models\PayrollSalary;
+use App\Models\PayRollPayscale;
+use Yajra\DataTables\DataTables;
 use App\Models\PayrollSalaryHead;
-use App\Models\User;
+use App\Models\PayrollPayscaleHead;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PayrollSalaryController extends Controller
 {
@@ -226,7 +227,9 @@ class PayrollSalaryController extends Controller
         $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('user_id', $user_id)->first();
         $salary = EmpSalary::where('user_id', $user_id)->first();
         //  return $data;
-        // dd($salary);
+        // $num2words = new Num2Words();
+        // $words = $num2words->convert($data->net_take_home);
+        // dd($data);
         if($data->employee->employment_type=="local")
         {
             return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary'));
