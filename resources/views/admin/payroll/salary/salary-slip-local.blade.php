@@ -171,7 +171,7 @@
                         <tr>
                           
                             <td>
-                                <h3 class="mb-2 text-dark text-left" style="font-weight: 800;
+                                <h3 class="mb-2 text-left text-dark" style="font-weight: 800;
                                 color: #f94f00!important;
                             }">Bank of Baroda Ltd.
                             <br>
@@ -216,10 +216,8 @@
 
                         </tr>
                         <tr>
-                            @if (!empty($data['department']->department_name))
-                                <td class="payslip"> Department :</td>
-                                <td class="payslip">{{$data['department']->department_name}}</td>
-                            @endif
+                            <td class="payslip"> Department :</td>
+                            <td class="payslip"></td>
 
                             <td class="payslip">P.F. No :</td>
                             <td class="payslip"></td>
@@ -423,7 +421,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <p class="text-dark mb-0 mt-3" style="font-weight: 600; text-align: left;">Note:</p>
+                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>
                 <ul style="padding-left: 12px;">
                     <li>1. The student are expected to keep this cardneat and clean</li>
                     <li>2. In case the card is lost the duplicate card will be issued on payment of extra report card
