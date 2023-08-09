@@ -171,12 +171,14 @@
                         <tr>
                           
                             <td>
-                                <h2 class="mb-2 text-dark text-left" style="font-weight: 800;
+                                <h3 class="mb-2 text-dark text-left" style="font-weight: 800;
                                 color: #f94f00!important;
-                            }">Bank of Baroda
-                                </h2>
+                            }">Bank of Baroda Ltd.
+                            <br>
+                            <span>(Botswana)</span>
+                                </h3>
                                 <p class="mb-0 text-left" style="text-align: left;">
-                                    PAYSLIP For the month of - October</p>
+                                    PAYSLIP For the month of - {{ \Carbon\Carbon::now()->format('F') }}</p>
                             </td>
                             <td style="text-align: right;">
                                <img src="https://cdn.moneytransfers.com/tr:orig-true,fo-auto/uploads/2023/01/1674731299-Bank%20of%20Baroda%20TR.svg" class="img-fluid"
@@ -196,21 +198,28 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="payslip">Employee Name :</td>
-                            <td class="payslip">{{$data['user']->name}}</td>
+                            @if (!empty($data['user']->name))
+                                <td class="payslip">Employee Name :</td>
+                                <td class="payslip">{{$data['user']->name}}</td>
+                            @endif
 
+                            @if (!empty($data['employee']->ec_number))
+                                <td class="payslip">Employee Id. :</td>
+                                <td class="payslip">{{$data['employee']->ec_number}}</td>
+                            @endif
 
-                            <td class="payslip">Employee Id. :</td>
-                            <td class="payslip">{{$data['employee']->emp_id}}</td>
-
-                            <td class="payslip"> Designation :</td>
-                            <td class="payslip">{{$data['employee']->designation->name}}</td>
+                            @if (!empty($data['employee']->designation->name))
+                                <td class="payslip"> Designation :</td>
+                                <td class="payslip">{{$data['employee']->designation->name}}</td>
+                            @endif
 
 
                         </tr>
                         <tr>
-                            <td class="payslip"> Department :</td>
-                            <td class="payslip">{{$data['department']->department_name}}</td>
+                            @if (!empty($data['department']->department_name))
+                                <td class="payslip"> Department :</td>
+                                <td class="payslip">{{$data['department']->department_name}}</td>
+                            @endif
 
                             <td class="payslip">P.F. No :</td>
                             <td class="payslip"></td>
@@ -256,7 +265,7 @@
                             <td class="payslip"></td>
 
                             <td class="payslip">No. of Working Days :</td>
-                            <td class="payslip"></td>
+                            <td class="payslip">28</td>
 
 
                         </tr>
@@ -268,7 +277,7 @@
                             <td class="payslip"></td>
 
                             <td class="payslip">Total Absent : </td>
-                            <td class="payslip"></td>
+                            <td class="payslip">0</td>
 
 
                         </tr>
@@ -297,14 +306,14 @@
                         </tr>
                         <tr>
                             <td style="font-weight: 600;"><strong>Basic </strong></td>
-                            <td style="text-align: right;">{{$data->basic}}</td>
+                            <td style="text-align: right;">{{$salary->basic ?? 0}}</td>
                             <td style="text-align: right;">600</td>
                             <td  style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
                             <td style="text-align: right;">72</td>
                         </tr>
                         <tr>
                             <td style="font-weight: 600;"><strong>HRA                </strong></td>
-                            <td style="text-align: right;">4000</td>
+                            <td style="text-align: right;">{{$salary->hra ?? 0}}</td>
                             <td style="text-align: right;">154</td>
                             <td  style="font-weight: 600; padding-left: 10%;"><strong>ESI @1.75%
                             </strong></td>
@@ -312,7 +321,7 @@
                         </tr>
                         <tr>
                             <td style="font-weight: 600;"><strong>Conveyance     </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->conveyance ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td  style="font-weight: 600;padding-left: 10%;"><strong>ESI @1.75%
                             </strong></td>
@@ -321,7 +330,7 @@
                         <tr>
                             <td style="font-weight: 600;"><strong>Special               
                             </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->special ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td  style="font-weight: 600; padding-left: 10%;"><strong>Loan Deduction (if any)
 
@@ -331,7 +340,7 @@
                         <tr>
                             <td style="font-weight: 600;"><strong>Mobile                              
                             </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->mobile ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td  style="font-weight: 600; padding-left: 10%;"><strong>Income Tax Deductions (if any)
 
@@ -342,7 +351,7 @@
                         <tr>
                             <td style="font-weight: 600;"><strong>Bonus                                             
                             </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->bonus ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td  style="font-weight: 600; padding-left: 10%;"><strong>Penalty Deductions (if any)
                             </strong></td>
@@ -352,7 +361,7 @@
                             <td style="font-weight: 600;"><strong>Transportation               
                                              
                             </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->transportation ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td  style="font-weight: 600; padding-left: 10%;"><strong>Fixed Deductions (if any)
 
@@ -364,7 +373,7 @@
                
                                              
                             </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->food ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td  style="font-weight: 600; padding-left: 10%;"><strong>Other Deductions (if any)
 
@@ -375,7 +384,7 @@
                         <tr>
                             <td style="font-weight: 600;"><strong>Medical                           
                             </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->medical ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                            
                             <td colspan="2"></td>
@@ -383,7 +392,7 @@
                         <tr>
                             <td style="font-weight: 600;"><strong>Over Time                           
                             </strong></td>
-                            <td style="text-align: right;">0</td>
+                            <td style="text-align: right;">{{$salary->overtime ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td colspan="2"></td>
                         </tr>
@@ -398,11 +407,11 @@
                             <th style="font-weight: 600;"><strong>Gross Earning 
                         
                             </strong></th>
-                            <th>19600
+                            <th style="text-align: right;">19600
                             </th>
-                            <th>754
+                            <th style="text-align: right;">754
                             </th>
-                            <th>Total Deduction 
+                            <th style="font-weight: 600; padding-left: 10%;">Total Deduction 
                             </th>
                             <th></th>
                         </tr>
@@ -421,6 +430,7 @@
                         free.</li>
                     <li>3. Promotion will be granted on the weight of both examination. To pass the monthly test is also
                         compulsary.</li>
+                    <li>4. This is computer generated pay slip.</li>
                 </ul>
             </div>
         </page>

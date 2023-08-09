@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Yajra\DataTables\DataTables;
 use App\Models\Employee;
+use App\Models\EmpSalary;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Loans;
 use App\Models\PayrollHead;
@@ -223,13 +224,15 @@ class PayrollSalaryController extends Controller
     {
 
         $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('user_id', $user_id)->first();
+        $salary = EmpSalary::where('user_id', $user_id)->first();
         //  return $data;
+        // dd($salary);
         if($data->employee->employment_type=="local")
         {
-            return view('admin.payroll.salary.salary-slip-local', compact('data'));
+            return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary'));
         }else
         {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data'));
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'salary'));
         }
     }
 
