@@ -14,6 +14,7 @@ use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
 use App\Models\Designation;
+use App\Models\Document;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\ReimbursementType;
 
@@ -133,6 +134,13 @@ class AjaxController extends BaseController
                         ]);
                         $message='Designation Status updated';
                         break;
+                case 'documents':
+                    $id = $request->uuid;
+                    $data= Document::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Designation Status updated';
+                    break;
                
                 case 'reimbursement_types':
                     $id = $request->uuid;
