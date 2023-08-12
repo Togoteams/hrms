@@ -357,6 +357,9 @@
 
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-setting.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.salary-increment-setting.index') }}"> Salary Increment Settings</a>
+
+                            <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-reporting.index' ? 'active' : '' }}  "
+                                    href="{{ route('admin.payroll.salary-increment-reporting.index') }}"> Salary Increment Reporting</a>
     
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.head.index') }}"> Payroll Head</a>

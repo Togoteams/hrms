@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
 use App\Http\Controllers\Admin\Payroll\TaxSlabSettingController;
 use App\Http\Controllers\Admin\payroll\ReimbursementController;
 use App\Http\Controllers\Admin\payroll\ReimbursementTypeController;
+use App\Http\Controllers\Admin\SalaryReportingController;
 use App\Http\Controllers\SalaryIncrementController;
 use App\Models\KraAttributes;
 
@@ -229,6 +230,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         //  Route::get('salary-increment-setting/status/{id}', [SalaryIncrementController::class, 'status'])->name('salary-increment-setting.status');
          /*--------------------------------------------- Pay Roll Salary Increment Settting Crud End---------------------------------------------------------------*/
  
+        /*--------------------------------------------- Pay Roll Salary Increment Reporting Crud Start---------------------------------------------------------------*/
+        Route::resource('salary-increment-reporting', SalaryReportingController::class);
+        /*--------------------------------------------- Pay Roll Salary Increment Reporting Crud End---------------------------------------------------------------*/
+
         /*--------------------------------------------- Pay Roll Head Crud Start---------------------------------------------------------------*/
         Route::resource('head', PayrollHeadController::class);
         Route::get('head/status/{id}', [PayrollHeadController::class, 'status'])->name('head.status');
