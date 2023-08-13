@@ -66,8 +66,8 @@
                                     </span>
                                 </div>
                             </div> --}}
-                            <span id="edit">
-                            </span>
+                            {{-- <span id="edit">
+                            </span> --}}
 
                             <div class="text-center ">
                                 <button onclick="ajaxCall('form_data')" type="button" class="btn btn-white">Add

@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
+use App\Http\Controllers\Admin\EmployeeTransferControler;
 use App\Http\Controllers\Admin\KraAttributesController;
 use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Http\Controllers\Admin\Payroll\PayRollPayscaleCotroller;
@@ -142,6 +143,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/department-history/{eid?}', [EmployeeController::class, 'viewDepartmentHistory'])->name('employee.departmentHistory.form');
     Route::post('employee/department-history', [EmployeeController::class, 'postDepartmentHistory'])->name('employee.departmentHistory.post');
     Route::post('employee/delete-department-history', [EmployeeController::class, 'deleteDepartmentHistory'])->name('employee.departmentHistory.delete');
+    Route::resource('employee-transfer',EmployeeTransferControler::class);
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);

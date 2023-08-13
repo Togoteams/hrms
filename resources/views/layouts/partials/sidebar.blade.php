@@ -140,6 +140,10 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
                                              href="{{ route('admin.employees.index') }}">Employees</a>
                                      @endcanany
+                                     @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
+                                             href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
+                                     @endcanany
                                  </div>
                              </div>
                              <!-- End Collapse -->

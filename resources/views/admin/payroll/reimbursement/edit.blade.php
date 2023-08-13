@@ -5,7 +5,7 @@
     <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
         <div class="row">
-            <div class="mb-2 col-sm-3">
+            <div class="mb-2 col-sm-4">
                 <div class="form-group">
                     <label class="required" for="type_id">Type <sup class="text-danger">*</sup></label>
                     <select name="type_id" class="form-control" id="type_id" placeholder="Reimbursement type">
@@ -18,7 +18,7 @@
                     </select>
                 </div>
             </div>
-            <div class="mb-2 col-sm-3">
+            <div class="mb-2 col-sm-4">
                 <div class="form-group">
                     <label class="required" for="bill_amount">Bill Amount</label>
                     <input type="text" name="bill_amount" id="bill_amount" class="form-control" placeholder="bill_amount" value="{{$reimbursement->bill_amount}}">
@@ -29,7 +29,7 @@
                     </span>
                 </div>
             </div>
-            <div class="mb-2 col-sm-3">
+            <div class="mb-2 col-sm-4">
                 <div class="form-group">
                     <label class="required" for="expenses_date">Expenses Date</label>
                     <input type="date" name="expenses_date" id="expenses_date" class="form-control" placeholder="expenses_date" value="{{$reimbursement->expenses_date}}">
@@ -40,7 +40,7 @@
                     </span>
                 </div>
             </div>
-            <div class="mb-2 col-sm-3">
+            <div class="mb-2 col-sm-4">
                 <div class="form-group">
                     <label class="required" for="reimbursement_amount">Reimbursement Amount</label>
                     <input type="text" name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{$reimbursement->reimbursement_amount}}">
@@ -51,10 +51,11 @@
                     </span>
                 </div>
             </div>
-            <div class="mb-2 col-sm-3">
+            <br>
+            <div class="mb-2 col-sm-12">
                 <div class="form-group">
                     <label class="required" for="reimbursement_notes">Reimbursement notes</label>
-                    <input type="text" name="reimbursement_notes" id="reimbursement_notes" class="form-control" placeholder="reimbursement_notes" value="{{$reimbursement->reimbursement_notes}}">
+                    <textarea name="reimbursement_notes" id="reimbursement_notes" cols="30" rows="10" class="form-control" placeholder="reimbursement_notes">{{$reimbursement->reimbursement_notes}}</textarea>
                     <span class="text-danger">
                         @error('reimbursement_notes')
                         {{$message}}
