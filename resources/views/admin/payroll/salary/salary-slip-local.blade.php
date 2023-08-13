@@ -438,6 +438,14 @@
                                     {{-- <td style="text-align: right;">{{$salary->basic ?? 0}}</td> --}}
                                     <td style="text-align: right;">{{$data->basic}}</td>
                                 </tr>
+                                @foreach ($data['payrollSalaryHead'] as $key => $value)
+                                    @if ($value->payroll_head->head_type=="income")
+                                        <tr>
+                                            <td  style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                            <td style="text-align: right;">{{$value->value}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
                                 {{-- @foreach ($data['payrollSalaryHead'] as $key => $value)
                                     <tr>
                                         <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}} </strong></td>
@@ -469,10 +477,12 @@
         
                                 </tr>
                                 @foreach ($data['payrollSalaryHead'] as $key => $value)
+                                    @if ($value->payroll_head->head_type=="deduction")
                                     <tr>
                                         <td  style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
                                         <td style="text-align: right;">{{$value->value}}</td>
                                     </tr>
+                                    @endif
                                 @endforeach
                                 
                                 {{-- <tr>
