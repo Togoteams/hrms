@@ -5,7 +5,7 @@
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                         <div class="row">
-                            <div class="mb-2 col-sm-6">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label class="required" for="type">Reimbursement Type</label>
                                     <input type="text" name="type" id="type" class="form-control" placeholder="Reimbursement type" value="{{$reimbursement->type}}">

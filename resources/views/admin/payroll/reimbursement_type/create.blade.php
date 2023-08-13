@@ -13,7 +13,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         {{-- <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}"> --}}
 
                         <div class="row">
-                            <div class="mb-2 col-sm-6">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="type" class="required">Reimbursement Type</label>
                                     <input type="text" required name="type" id="type" class="form-control" placeholder="Reimbursement type">
