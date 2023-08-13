@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\LeaveReportsController;
 use App\Http\Controllers\Admin\Payroll\PayscaleController;
 use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
+use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\KraAttributesController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
 use App\Http\Controllers\Admin\Payroll\TaxSlabSettingController;
 use App\Http\Controllers\Admin\payroll\ReimbursementController;
 use App\Http\Controllers\Admin\payroll\ReimbursementTypeController;
+use App\Http\Controllers\Admin\SalaryReportingController;
 use App\Http\Controllers\SalaryIncrementController;
 use App\Models\KraAttributes;
 
@@ -156,6 +158,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/employee-kra/{user_id}', [EmployeeKraController::class, 'create'])->name('employee.employee-kra.create');
     Route::get('employee/print/employee-kra/print/{user_id}', [EmployeeKraController::class, 'print'])->name('employee-kra.print');
 
+    Route::resource('document',DocumentController::class);
+
 
 
     Route::resource('leave_type', LeaveTypeCobntroller::class);
@@ -226,6 +230,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         //  Route::get('salary-increment-setting/status/{id}', [SalaryIncrementController::class, 'status'])->name('salary-increment-setting.status');
          /*--------------------------------------------- Pay Roll Salary Increment Settting Crud End---------------------------------------------------------------*/
  
+        /*--------------------------------------------- Pay Roll Salary Increment Reporting Crud Start---------------------------------------------------------------*/
+        Route::resource('salary-increment-reporting', SalaryReportingController::class);
+        /*--------------------------------------------- Pay Roll Salary Increment Reporting Crud End---------------------------------------------------------------*/
+
         /*--------------------------------------------- Pay Roll Head Crud Start---------------------------------------------------------------*/
         Route::resource('head', PayrollHeadController::class);
         Route::get('head/status/{id}', [PayrollHeadController::class, 'status'])->name('head.status');
