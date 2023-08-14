@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Payroll;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Models\PayRollPayscale;
 use Illuminate\Support\Facades\Validator;
@@ -12,10 +12,11 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Loans;
 use App\Models\PayrollHead;
+use App\Models\TaxSlabSetting;
 use App\Models\PayrollPayscaleHead;
 use App\Models\User;
 
-class PayRollPayscaleCotroller extends Controller
+class PayRollPayscaleCotroller extends BaseController
 {
     public  $page_name =   "Payroll PayScale";
     /**
@@ -54,7 +55,26 @@ class PayRollPayscaleCotroller extends Controller
             $all_users = Employee::where('status', 'active')->get();
         }
         $page = $this->page_name;
-        return view('admin.payroll.payscale.create', ['page' => $this->page_name, 'all_users' => $all_users]);
+        $taxSlabs = TaxSlabSetting::where('status', 'active')->get();
+        return view('admin.payroll.payscale.create', ['page' => $this->page_name,'tax_slabs'=>$taxSlabs, 'all_users' => $all_users]);
+    }
+
+    public function payscaleTaxCal(Request $request){
+
+        $taxSlab = TaxSlabSetting::where('from','<=',$request->basic_amount)->where('to','>=',$request->basic_amount)->where('status', 'active')->first();
+
+        $empType = $request->employment_type;
+
+        if($empType=="expatriate")
+        {
+            $extraAmount = (($request->basic_amount - $taxSlab->from)/100)*$taxSlab->ibo_tax_per;
+            $taxAmount = $taxSlab->additional_ibo_amount + $extraAmount ;
+
+        }else{
+            $extraAmount = (($request->basic_amount - $taxSlab->from)/100)*$taxSlab->local_tax_per;
+            $taxAmount = $taxSlab->additional_local_amount + $extraAmount;
+        }
+        return $this->responseJson(true,200,"",["tax_amount"=>round($taxAmount),'basic_amount'=>$request->basic_amount]);
     }
 
     /**

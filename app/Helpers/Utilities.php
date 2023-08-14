@@ -48,6 +48,14 @@ if (!function_exists('isMobileDevice')) {
     }
 }
 
+if (!function_exists('formateDate')) {
+    function formateDate($date,$format='d-m-Y')
+    {
+
+        $formatData = date($format,strtotime($date));
+        return  $formatData;
+    }
+}
 if (!function_exists('pulaToUsd')) {
     function pulaToUsd($amount)
     {

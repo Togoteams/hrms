@@ -1175,6 +1175,18 @@ function showToast(type, title, message) {
         position: "bottom-right",
     });
 }
+function getAjaxData(data,url){
+
+        $.ajax({
+            url: url,
+            type: "get",
+            data:data,
+            dataType: "json",
+            success: function (result) {
+               return  result;
+            },
+        });
+}
 
 function makeArray(params) {
     var dataArray = {}; // note this

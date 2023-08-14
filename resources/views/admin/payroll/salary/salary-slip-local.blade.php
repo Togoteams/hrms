@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <body>
@@ -10,11 +9,8 @@
         <meta charset="UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet" />
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <style>
             body {
@@ -169,20 +165,19 @@
                 <table class="mt-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                     <tbody>
                         <tr>
-                          
+
                             <td>
                                 <h3 class="mb-2 text-left text-dark" style="font-weight: 800;
                                 color: #f94f00!important;
                             }">Bank of Baroda Ltd.
-                            <br>
-                            <span>(Botswana)</span>
+                                    <br>
+                                    <span>(Botswana)</span>
                                 </h3>
                                 <p class="mb-0 text-left" style="text-align: left;">
                                     PAYSLIP For the month of - {{ \Carbon\Carbon::now()->format('F') }}</p>
                             </td>
                             <td style="text-align: right;">
-                               <img src="https://cdn.moneytransfers.com/tr:orig-true,fo-auto/uploads/2023/01/1674731299-Bank%20of%20Baroda%20TR.svg" class="img-fluid"
-                                        style="height: auto; width: 200px;">
+                                <img src="https://cdn.moneytransfers.com/tr:orig-true,fo-auto/uploads/2023/01/1674731299-Bank%20of%20Baroda%20TR.svg" class="img-fluid" style="height: auto; width: 200px;">
 
                             </td>
                         </tr>
@@ -199,18 +194,18 @@
                         </tr>
                         <tr>
                             @if (!empty($data['user']->name))
-                                <td class="payslip">Employee Name :</td>
-                                <td class="payslip">{{$data['user']->name}}</td>
+                            <td class="payslip">Employee Name :</td>
+                            <td class="payslip">{{$data['user']->name}}</td>
                             @endif
 
                             @if (!empty($data['employee']->ec_number))
-                                <td class="payslip">Employee Id. :</td>
-                                <td class="payslip">{{$data['employee']->ec_number}}</td>
+                            <td class="payslip">Employee Id. :</td>
+                            <td class="payslip">{{$data['employee']->ec_number}}</td>
                             @endif
 
                             @if (!empty($data['employee']->designation->name))
-                                <td class="payslip"> Designation :</td>
-                                <td class="payslip">{{$data['employee']->designation->name}}</td>
+                            <td class="payslip"> Designation :</td>
+                            <td class="payslip">{{$data['employee']->designation->name}}</td>
                             @endif
 
 
@@ -306,110 +301,110 @@
                             <td style="font-weight: 600;"><strong>Basic </strong></td>
                             <td style="text-align: right;">{{$salary->basic ?? 0}}</td>
                             <td style="text-align: right;">600</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
+                            <td style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
                             <td style="text-align: right;">72</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>HRA                </strong></td>
+                            <td style="font-weight: 600;"><strong>HRA </strong></td>
                             <td style="text-align: right;">{{$salary->hra ?? 0}}</td>
                             <td style="text-align: right;">154</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>ESI @1.75%
-                            </strong></td>
+                            <td style="font-weight: 600; padding-left: 10%;"><strong>ESI @1.75%
+                                </strong></td>
                             <td style="text-align: right;">72</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Conveyance     </strong></td>
+                            <td style="font-weight: 600;"><strong>Conveyance </strong></td>
                             <td style="text-align: right;">{{$salary->conveyance ?? 0}}</td>
                             <td style="text-align: right;">0</td>
-                            <td  style="font-weight: 600;padding-left: 10%;"><strong>ESI @1.75%
-                            </strong></td>
+                            <td style="font-weight: 600;padding-left: 10%;"><strong>ESI @1.75%
+                                </strong></td>
                             <td style="text-align: right;">0</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Special               
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Special
+                                </strong></td>
                             <td style="text-align: right;">{{$salary->special ?? 0}}</td>
                             <td style="text-align: right;">0</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Loan Deduction (if any)
+                            <td style="font-weight: 600; padding-left: 10%;"><strong>Loan Deduction (if any)
 
-                            </strong></td>
+                                </strong></td>
                             <td style="text-align: right;">0</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Mobile                              
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Mobile
+                                </strong></td>
                             <td style="text-align: right;">{{$salary->mobile ?? 0}}</td>
                             <td style="text-align: right;">0</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Income Tax Deductions (if any)
+                            <td style="font-weight: 600; padding-left: 10%;"><strong>Income Tax Deductions (if any)
 
 
-                            </strong></td>
+                                </strong></td>
                             <td style="text-align: right;">0</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Bonus                                             
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Bonus
+                                </strong></td>
                             <td style="text-align: right;">{{$salary->bonus ?? 0}}</td>
                             <td style="text-align: right;">0</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Penalty Deductions (if any)
-                            </strong></td>
+                            <td style="font-weight: 600; padding-left: 10%;"><strong>Penalty Deductions (if any)
+                                </strong></td>
                             <td style="text-align: right;">0</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Transportation               
-                                             
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Transportation
+
+                                </strong></td>
                             <td style="text-align: right;">{{$salary->transportation ?? 0}}</td>
                             <td style="text-align: right;">0</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Fixed Deductions (if any)
+                            <td style="font-weight: 600; padding-left: 10%;"><strong>Fixed Deductions (if any)
 
-                            </strong></td>
+                                </strong></td>
                             <td style="text-align: right;">0</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Food               
-               
-                                             
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Food
+
+
+                                </strong></td>
                             <td style="text-align: right;">{{$salary->food ?? 0}}</td>
                             <td style="text-align: right;">0</td>
-                            <td  style="font-weight: 600; padding-left: 10%;"><strong>Other Deductions (if any)
+                            <td style="font-weight: 600; padding-left: 10%;"><strong>Other Deductions (if any)
 
 
-                            </strong></td>
+                                </strong></td>
                             <td style="text-align: right;">0</td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Medical                           
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Medical
+                                </strong></td>
                             <td style="text-align: right;">{{$salary->medical ?? 0}}</td>
                             <td style="text-align: right;">0</td>
-                           
+
                             <td colspan="2"></td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Over Time                           
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Over Time
+                                </strong></td>
                             <td style="text-align: right;">{{$salary->overtime ?? 0}}</td>
                             <td style="text-align: right;">0</td>
                             <td colspan="2"></td>
                         </tr>
                         <tr>
-                            <td style="font-weight: 600;"><strong>Earnings                        
-                            </strong></td>
+                            <td style="font-weight: 600;"><strong>Earnings
+                                </strong></td>
                             <td style="text-align: right;">0</td>
                             <td style="text-align: right;">0</td>
                             <td colspan="2"></td>
                         </tr>
                         <tr>
-                            <th style="font-weight: 600;"><strong>Gross Earning 
-                        
-                            </strong></th>
+                            <th style="font-weight: 600;"><strong>Gross Earning
+
+                                </strong></th>
                             <th style="text-align: right;">19600
                             </th>
                             <th style="text-align: right;">754
                             </th>
-                            <th style="font-weight: 600; padding-left: 10%;">Total Deduction 
+                            <th style="font-weight: 600; padding-left: 10%;">Total Deduction
                             </th>
                             <th></th>
                         </tr>
@@ -417,7 +412,7 @@
                             <td colspan="5"></td>
                         </tr>
                         <tr>
-                            <th colspan="5" style="font-weight: 600; padding: 10px;"><strong>Net Take Home (Gross Earning - Total Deduction)  : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></strong></th>
+                            <th colspan="5" style="font-weight: 600; padding: 10px;"><strong>Net Take Home (Gross Earning - Total Deduction) : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></strong></th>
                         </tr>
                     </tbody>
                 </table>
