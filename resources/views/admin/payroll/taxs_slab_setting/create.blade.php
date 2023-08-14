@@ -29,9 +29,31 @@
                            
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
-                                    <label class="required" for="tax">tax</label>
-                                    <input required id="tax" placeholder="Enter tax of Tax " type="text"
-                                        name="tax" class="form-control form-control-sm ">
+                                    <label class="required" for="local_tax_per">Local Tax %</label>
+                                    <input required id="local_tax_per" placeholder="Enter Local tax of Tax " type="number"
+                                        name="local_tax_per" class="form-control form-control-sm ">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="required" for="additional_local_amount">Additional Local Amount</label>
+                                    <input required id="additional_local_amount" placeholder="Enter Local tax of Tax " type="number"
+                                        name="additional_local_amount" class="form-control form-control-sm ">
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="required" for="ibo_tax_per">IBO Tax %</label>
+                                    <input required id="ibo_tax_per" placeholder="Enter IBO tax of Tax " type="number"
+                                        name="ibo_tax_per" class="form-control form-control-sm ">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="required" for="additional_ibo_amount">Additional IBO Amount</label>
+                                    <input required id="additional_ibo_amount" placeholder="Enter Additional IBO Amount " type="number"
+                                        name="additional_ibo_amount" class="form-control form-control-sm ">
                                 </div>
                             </div>
                            

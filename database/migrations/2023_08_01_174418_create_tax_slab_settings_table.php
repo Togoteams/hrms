@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('tax_slab_settings', function (Blueprint $table) {
             $table->id();
-            $table->integer('from');
-            $table->integer('to');
-            $table->integer('tax');
+            $table->double('from');
+            $table->double('to');
+            $table->double('ibo_tax_per');
+            $table->double('local_tax_per');
+            $table->double('additional_ibo_amount');
+            $table->double('additional_local_amount');
             $table->text('description');
             $table->string('status')->default('active');
             $table->foreignId('created_by')->references('id')->on('users');
