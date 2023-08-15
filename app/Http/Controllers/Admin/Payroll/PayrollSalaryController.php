@@ -227,13 +227,13 @@ class PayrollSalaryController extends Controller
         $salary = EmpSalary::where('user_id', $user_id)->first();
         //  return $data;
         // dd($salary);
-        if($data->employee->employment_type=="local")
-        {
+        // if($data->employee->employment_type=="local")
+        // {
             return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary'));
-        }else
-        {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'salary'));
-        }
+        // }else
+        // {
+        //     return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'salary'));
+        // }
     }
 
     public function get_employee_data($user_id = null)

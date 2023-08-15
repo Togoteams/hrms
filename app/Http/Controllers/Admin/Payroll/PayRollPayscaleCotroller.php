@@ -61,20 +61,22 @@ class PayRollPayscaleCotroller extends BaseController
 
     public function payscaleTaxCal(Request $request){
 
-        $taxSlab = TaxSlabSetting::where('from','<=',$request->basic_amount)->where('to','>=',$request->basic_amount)->where('status', 'active')->first();
-
+        $taxableAmount = $request->taxable_amount * 12;
+        // echo $taxableAmount;
+        $taxSlab = TaxSlabSetting::where('from','<=',$taxableAmount)->where('to','>=',$taxableAmount)->where('status', 'active')->first();
+        // echo $taxSlab;
         $empType = $request->employment_type;
 
         if($empType=="expatriate")
         {
-            $extraAmount = (($request->basic_amount - $taxSlab->from)/100)*$taxSlab->ibo_tax_per;
-            $taxAmount = $taxSlab->additional_ibo_amount + $extraAmount ;
+            $extraAmount = ((($taxableAmount - $taxSlab->from)/100)*$taxSlab->ibo_tax_per);
+            $taxAmount = ($taxSlab->additional_ibo_amount + $extraAmount)/12 ;
 
         }else{
-            $extraAmount = (($request->basic_amount - $taxSlab->from)/100)*$taxSlab->local_tax_per;
-            $taxAmount = $taxSlab->additional_local_amount + $extraAmount;
+            $extraAmount = ((($taxableAmount - $taxSlab->from)/100)*$taxSlab->local_tax_per);
+            $taxAmount = ($taxSlab->additional_local_amount + $extraAmount)/12;
         }
-        return $this->responseJson(true,200,"",["tax_amount"=>round($taxAmount),'basic_amount'=>$request->basic_amount]);
+        return $this->responseJson(true,200,"",["tax_amount"=>round($taxAmount),'taxable_amount'=>$taxableAmount]);
     }
 
     /**
@@ -154,7 +156,7 @@ class PayRollPayscaleCotroller extends BaseController
         $emp = Employee::where('user_id', $payscale->user_id)->first();
         $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
-        return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data', 'edit')), 'data' => $payscale]);
+        return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head', compact('emp_head','emp', 'page', 'data', 'edit')), 'data' => $payscale]);
     }
 
     /**
