@@ -16,19 +16,19 @@ class TaxSlabSettingController extends Controller
 
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data = TaxSlabSetting::all();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.payroll.taxs_slab_setting.buttons', ['item' => $row, "route" => 'payroll.taxs_slab_setting']);
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-            }
-        // $data =  TaxSlabSetting::all();
-        return view('admin.payroll.taxs_slab_setting.index', ['page' => $this->page_name]);
+        // if ($request->ajax()) {
+        //     $data = TaxSlabSetting::all();
+        //     return DataTables::of($data)
+        //         ->addIndexColumn()
+        //         ->addColumn('action', function ($row) {
+        //             $actionBtn = view('admin.payroll.taxs_slab_setting.buttons', ['item' => $row, "route" => 'payroll.taxs_slab_setting']);
+        //             return $actionBtn;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+        //     }
+         $data =  TaxSlabSetting::all();
+        return view('admin.payroll.taxs_slab_setting.index', ['page' => $this->page_name,'data' => $data]);
     }
 
 
@@ -48,7 +48,10 @@ class TaxSlabSettingController extends Controller
         $validator = Validator::make($request->all(), [
             'from' => 'numeric|required|unique:taxes,name',
             'to' => 'required|numeric',
-            'tax' => 'required|numeric',
+            'additional_local_amount' => 'required|numeric',
+            'local_tax_per' => 'required|numeric',
+            'ibo_tax_per' => 'required|numeric',
+            'additional_ibo_amount' => 'required|numeric',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {
@@ -85,7 +88,10 @@ class TaxSlabSettingController extends Controller
         $validator = Validator::make($request->all(), [
             'from' => 'numeric|required|unique:taxes,name',
             'to' => 'required|numeric',
-            'tax' => 'required|numeric',
+            'additional_local_amount' => 'required|numeric',
+            'local_tax_per' => 'required|numeric',
+            'ibo_tax_per' => 'required|numeric',
+            'additional_ibo_amount' => 'required|numeric',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {

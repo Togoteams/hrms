@@ -199,21 +199,7 @@
                                     ${{number_format(pulaToUsd($data->net_take_home),2)}}
                                 </td>
                             </tr>
-                            {{-- <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align: left;">
-                                    Provident Fund
-
-
-
-                                </td>
-                                <td
-                                    style="background-color:rgb(255, 236, 222);padding:6px; font-size:14px; border:1px solid #fff9f9; font-weight: 700; text-align:center;">
-                                    2,000.00
-
-
-                                </td>
-                            </tr> --}}
+                          
 
 
                             <tr style="height: 19pt; line-height: 24px">
@@ -242,30 +228,8 @@
                                     {{$data->net_take_home}}
                                 </td>
                             </tr>
-                            {{-- <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Education Allowance
-
-
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    00.00
-                                </td>
-                            </tr> --}}
-                            {{-- <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Other Deduction
-
-
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    300.00
-                                </td>
-                            </tr> --}}
+                            
+                           
                             <tr style="height: 19pt; line-height: 24px">
                                 <td
                                     style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
@@ -291,18 +255,7 @@
                                 </td>
                             </tr>
 
-                            {{-- <tr style="height: 19pt; line-height: 24px">
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align: left;">
-                                    Leave balance:
-
-
-                                </td>
-                                <td
-                                    style="background-color:#fff9f9; padding:6px; font-size:14px; border:1px solid #fff9f9; text-align:center;">
-                                    1,700.00
-                                </td>
-                            </tr> --}}
+                            
                             <tr style="height: 19pt; line-height: 24px">
                                 <td style="background-color:#fff9f9; padding:6px; font-size:14px;  text-align: left;">
                                     I Pula/USD

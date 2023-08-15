@@ -11,7 +11,10 @@ class TaxSlabSetting extends Model
     protected $fillable = [
         'from',
         'to',
-        'tax',
+        'additional_local_amount',
+        'local_tax_per',
+        'additional_ibo_amount',
+        'ibo_tax_per',
         'description',
         'status',
         'created_by',

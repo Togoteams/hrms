@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             LeaveTypes::class,
             Designationseeders::class,
             Brachseeders::class,
-            Taxseeders::class,
+            TaxSlabSeeder::class,
             Membershipseeders::class,
             Employeeseeders::class,
             PayrollHeadSeeder::class

@@ -48,21 +48,23 @@
                                 <th>S.no</th>
                                 <th>From </th>
                                 <th>To</th>
-                                <th>Tax</th>
+                                <th>For Local Emp Tax</th>
+                                <th>For IBO Emp Tax</th>
                                 <th>Description</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {{-- @foreach ($data as $item)
+                           @foreach ($data as $item)
                                 <tr>
                                     <td class="table-column-pe-0">
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->from }}</td>
                                     <td>{{ $item->to }}</td>
-                                    <td>{{ $item->tax }}</td>
+                                    <td>{{$item->additional_local_amount}}+{{ $item->local_tax_per }}%</td>
+                                    <td>{{$item->additional_ibo_amount}}+{{ $item->ibo_tax_per }}%</td>
                                     <td>{{ $item->description }}</td>
                                     <td>
                                         <form id="edit{{ $item->id }}"
@@ -76,57 +78,11 @@
                                         </form>                                     
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach 
                         </tbody>
                     </table>
                 </div>
-                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-                <script type="text/javascript">
-                  $(function() {
-                      var i = 1;
-                      var table = $('.data-table').DataTable({
-                          processing: true,
-                          serverSide: true,
-                          ajax: "{{ route('admin.payroll.tax-slab-setting.index') }}",
-
-                          columns: [{
-                                  data: 'DT_RowIndex',
-                                  name: 'DT_RowIndex',
-                                  orderable: false,
-                                  searchable: false
-                              },
-
-                           
-                              {
-                                  data: 'from',
-                                  name: 'from'
-                              },
-                              {
-                                  data: 'to',
-                                  name: 'to'
-                              },
-                              {
-                                  data: 'tax',
-                                  name: 'tax'
-                              },
-                              {
-                                  data: 'description',
-                                  name: 'description'
-                              },
-
-
-                              {
-                                  data: 'action',
-                                  name: 'action',
-                                  orderable: true,
-                                  searchable: true
-                              },
-                          ]
-                      });
-
-                  });
-              </script>
+                
                 <!-- End Table -->
 
 

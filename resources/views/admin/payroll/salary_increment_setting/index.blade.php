@@ -63,8 +63,8 @@
                                 </td>
                                 <td>{{$item->increment_percentage}} %</td>
                                 <td>{{$item->employment_type}}</td>
-                                <td>{{$item->effective_from}}</td>
-                                <td>{{$item->effective_to}}</td>
+                                <td>{{formateDate($item->effective_from)}}</td>
+                                <td>{{formateDate($item->effective_to)}}</td>
                                 <td>{{$item->financial_year}}</td>
                                 <td>
                                     <div class="success-badges changeStatus" data-table="payroll_salary_increments" data-uuid="{{$item->id}}"
@@ -107,8 +107,6 @@
                                   orderable: false,
                                   searchable: false
                               },
-
-                           
                               {
                                   data: 'increment_percentage',
                                   name: 'increment_percentage'

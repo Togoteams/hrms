@@ -8,7 +8,7 @@
     </style>
 @endpush
 @section('content')
-    <main id="content" role="main" class="main card ">
+    <main id="content" role="main" class="main card">
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
@@ -53,8 +53,9 @@
                         </div>
                         <hr>
                         <div class="text-center" style="display: none" id="table_data_btn">
-                            <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">Add
-                                {{ $page }}</button>
+                        <button type="button"  class="btn btn-primary ">Calculate</button>
+                        <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">Add
+                            {{ $page }}</button>
                         </div>
                     </form>
                 </div>
@@ -69,8 +70,13 @@
     }
 
     function getValue(id) {
-        console.log(id);
         return Number(document.getElementById(id).value);
+    }
+
+    function taxCalCalculation(){
+        var basicAmount = getValue('basic');
+        employmentType = document.getElementById('employment_type').value;
+        var taxCaldata = getAjaxData({"basic_amount":basicAmount,'employment_type':employmentType},taxCalcUrl);
     }
 
 
@@ -80,26 +86,26 @@
         var totalEarning = 0;
         var totalDeduction = 0;
         
-        employmentType = document.getElementById('employment_type').value;
-        console.log(employmentType);
+        var employmentType = document.getElementById('employment_type').value;
+        var unionFee = 0;
+        
+        var taxCalcUrl ="{{route('admin.payroll.payscale.tax.cal')}}";
+        var basicAmount = getValue('basic');
         if(employmentType=="local")
         {
-            console.log("local");
-            totalEarning = getValue('basic') + getValue('allowance') + getValue('others_arrears');
-            totalDeduction = getValue('tax')
-            + getValue('bomaid')
-             + getValue('pension')
-              + getValue('union_fee')  + getValue('other_deductions')
+            var taxAmount = getValue('tax');
+            if(basicAmount){
+                unionFee = basicAmount/100;
+            }
+            totalEarning = basicAmount + getValue('allowance') + getValue('others_arrears');
+                    totalDeduction = taxAmount + getValue('bomaid') + getValue('pension') + unionFee  + getValue('other_deductions');
+            setId('union_fee', unionFee);
 
         }else
         {
-            console.log("exp");
-            totalEarning = getValue('basic')+
-         getValue('entertainment_expenses')+
+            totalEarning = basicAmount + getValue('entertainment_expenses')+
              getValue('house_up_keep_allow')+  getValue('education_allowance');
-             
-             totalDeduction = getValue('provident_fund')
-             + getValue('other_deductions');
+             totalDeduction = getValue('provident_fund') + getValue('other_deductions');
         }
 
         setId('gross_earning', totalEarning);
@@ -107,6 +113,12 @@
         setId('net_take_home', totalEarning-totalDeduction);
 
     }
+    $(document).ready(function () {
+        // $("#basic").keyup(function () {
+        //     taxCalCalculation();
+        // });
+
+    });
 </script>
 @endpush
 
