@@ -36,6 +36,36 @@ if (!function_exists('splitName')) {
     }
 }
 
+/**
+ * Calculate the difference in months between two dates (v1 / 18.11.2013)
+ *
+ * @param \DateTime $date1
+ * @param \DateTime $date2
+ * @return int
+ */
+if (!function_exists('diffInMonths')) {
+    function diffInMonths($startDate, $endDate) {
+
+    // function diffInMonths(\DateTime $date1, \DateTime $date2)
+    // {
+        $retval = "";
+
+        // Assume YYYY-mm-dd - as is common MYSQL format
+        $splitStart = explode('-', date('Y-m-d',strtotime($startDate)));
+        $splitEnd = explode('-', date('Y-m-d',strtotime($endDate)));
+
+        if (is_array($splitStart) && is_array($splitEnd)) {
+            $difYears = $splitEnd[0] - $splitStart[0];
+            $difMonths = $splitEnd[1] - $splitStart[1];
+            $difDays = $splitEnd[2] - $splitStart[2];
+    
+            $retval = ($difDays > 0) ? $difMonths : $difMonths - 1;
+            $retval += $difYears * 12;
+        }
+        return $retval;
+        // return (int) round($months);
+    }
+}
 
 if (!function_exists('isMobileDevice')) {
     function isMobileDevice()
@@ -49,10 +79,10 @@ if (!function_exists('isMobileDevice')) {
 }
 
 if (!function_exists('formateDate')) {
-    function formateDate($date,$format='d-m-Y')
+    function formateDate($date, $format = 'd-m-Y')
     {
 
-        $formatData = date($format,strtotime($date));
+        $formatData = date($format, strtotime($date));
         return  $formatData;
     }
 }
@@ -62,7 +92,6 @@ if (!function_exists('pulaToUsd')) {
         $pula = 13.06;
         $usd = $amount / $pula;
         return $usd;
-       
     }
 }
 if (!function_exists('inrToUsd')) {
@@ -71,7 +100,6 @@ if (!function_exists('inrToUsd')) {
         $inr = 82.04;
         $usd = $amount / $inr;
         return $usd;
-       
     }
 }
 

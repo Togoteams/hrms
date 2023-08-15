@@ -64,7 +64,7 @@
     </main>
 @endsection
 @push('custom-scripts')
-@include('admin.payroll.payscale.payroll-js')
+@include('admin.payroll.payscale.payroll-payscale-js')
 @endpush
 
 <script>
