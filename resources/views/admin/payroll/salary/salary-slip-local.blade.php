@@ -174,7 +174,7 @@
                                     <span>(Botswana)</span>
                                 </h3>
                                 <p class="mb-0 text-left" style="text-align: left;">
-                                    PAYSLIP For the month of - {{ \Carbon\Carbon::now()->format('F') }}</p>
+                                    PAYSLIP For the month of - {{strtoupper(date("M-Y",strtotime($data->created_at)))}}</p>
                             </td>
                             <td style="text-align: right;">
                                 <img src="https://cdn.moneytransfers.com/tr:orig-true,fo-auto/uploads/2023/01/1674731299-Bank%20of%20Baroda%20TR.svg" class="img-fluid" style="height: auto; width: 200px;">
@@ -203,7 +203,7 @@
                             <td class="payslip">{{$data['employee']->ec_number}}</td>
                             @endif
 
-                            @if (!empty($data['employee']->designation->name))
+                            @if (!empty($data['employee']->designation))
                             <td class="payslip"> Designation :</td>
                             <td class="payslip">{{$data['employee']->designation->name}}</td>
                             @endif
@@ -211,28 +211,15 @@
 
                         </tr>
                         <tr>
+                            @if (!empty($data['department']))
                             <td class="payslip"> Department :</td>
-                            <td class="payslip"></td>
+                            <td class="payslip">{{$data['department']->department_name ?? ''}}</td>
+                            @endif
 
-                            <td class="payslip">P.F. No :</td>
-                            <td class="payslip"></td>
-
-                            <td class="payslip">ESIC No : </td>
-                            <td class="payslip"></td>
 
 
                         </tr>
-                        <tr>
-                            <td class="payslip"> UAN No. :</td>
-                            <td class="payslip"></td>
 
-                            <td class="payslip">PAN No. :</td>
-                            <td class="payslip"></td>
-
-                            <td class="payslip">Aadhar Card No. :</td>
-                            <td class="payslip"></td>
-
-                        </tr>
                         <tr>
                             <td class="payslip">Bank Details :</td>
                             <td>{{$data['employee']->bank_account_number}}</td>
@@ -251,14 +238,14 @@
                         </tr>
                         <tr>
                             <td class="payslip">Salary Date :</td>
-                            <td class="payslip"></td>
+                            <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td>
 
-
+                            <!-- 
                             <td class="payslip">No. of Days in Month :</td>
                             <td class="payslip"></td>
 
                             <td class="payslip">No. of Working Days :</td>
-                            <td class="payslip">28</td>
+                            <td class="payslip">28</td> -->
 
 
                         </tr>
@@ -274,148 +261,168 @@
 
 
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td class="payslip"> No. of Over Time (Hours) :</td>
                             <td class="payslip"></td>
 
 
-                        </tr>
+                        </tr> -->
 
                     </thead>
                 </table>
 
 
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                            <tbody>
+                                <tr>
+                                    <th class="marksheetAlign">EARNINGS </th>
+                                    <th style="text-align: right;">PAY SCALE</th>
+                                    <th style="text-align: right;">EARNED</th>
+                                    
 
-                <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
-                    <tbody>
-                        <tr>
-                            <th class="marksheetAlign">EARNINGS </th>
-                            <th style="text-align: right;">PAY SCALE</th>
-                            <th style="text-align: right;">EARNED</th>
-                            <th style="padding-left: 10%;">DEDUCTIONS</th>
-                            <th></th>
+                                </tr>
+                                @foreach ($data['payrollSalaryHead'] as $key => $value)
+                                    @if ($value->payroll_head->head_type=="income")
+                                        <tr>
+                                            <td  style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                            <td style="text-align: right;">{{$value->value}}</td>
+                                            <td style="text-align: right;">{{$value->value}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                               
+                                <tr>
+                                    <td style="font-weight: 600;"><strong>Earnings
+                                        </strong></td>
+                                    <td style="text-align: right;">0</td>
+                                    <td style="text-align: right;">0</td>
+                                   
+                                </tr>
+                               
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                            <tbody>
+                                <tr>
+                                    
+                                    <th class="marksheetAlign" style="padding-left: 10%;">DEDUCTIONS</th>
+                                    <th></th>
 
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Basic </strong></td>
-                            <td style="text-align: right;">{{$salary->basic ?? 0}}</td>
-                            <td style="text-align: right;">600</td>
-                            <td style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
-                            <td style="text-align: right;">72</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>HRA </strong></td>
-                            <td style="text-align: right;">{{$salary->hra ?? 0}}</td>
-                            <td style="text-align: right;">154</td>
-                            <td style="font-weight: 600; padding-left: 10%;"><strong>ESI @1.75%
-                                </strong></td>
-                            <td style="text-align: right;">72</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Conveyance </strong></td>
-                            <td style="text-align: right;">{{$salary->conveyance ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
-                            <td style="font-weight: 600;padding-left: 10%;"><strong>ESI @1.75%
-                                </strong></td>
-                            <td style="text-align: right;">0</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Special
-                                </strong></td>
-                            <td style="text-align: right;">{{$salary->special ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
-                            <td style="font-weight: 600; padding-left: 10%;"><strong>Loan Deduction (if any)
+                                </tr>
+                                @foreach ($data['payrollSalaryHead'] as $key => $value)
+                                    @if ($value->payroll_head->head_type=="deduction")
+                                    <tr>
+                                        <td  style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                        <td style="text-align: right;">{{$value->value}}</td>
+                                    </tr>
+                                    @endif
+                                @endforeach
+                                <!-- <tr>
+                                   
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
+                                    <td style="text-align: right;">72</td>
+                                </tr>
+                                <tr>
+                                  
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>ESI @1.75%
+                                        </strong></td>
+                                    <td style="text-align: right;">72</td>
+                                </tr>
+                                <tr>
+                                   
+                                    <td style="font-weight: 600;padding-left: 10%;"><strong>ESI @1.75%
+                                        </strong></td>
+                                    <td style="text-align: right;">0</td>
+                                </tr>
+                                <tr>
+                                   
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Loan Deduction (if any)
 
-                                </strong></td>
-                            <td style="text-align: right;">0</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Mobile
-                                </strong></td>
-                            <td style="text-align: right;">{{$salary->mobile ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
-                            <td style="font-weight: 600; padding-left: 10%;"><strong>Income Tax Deductions (if any)
-
-
-                                </strong></td>
-                            <td style="text-align: right;">0</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Bonus
-                                </strong></td>
-                            <td style="text-align: right;">{{$salary->bonus ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
-                            <td style="font-weight: 600; padding-left: 10%;"><strong>Penalty Deductions (if any)
-                                </strong></td>
-                            <td style="text-align: right;">0</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Transportation
-
-                                </strong></td>
-                            <td style="text-align: right;">{{$salary->transportation ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
-                            <td style="font-weight: 600; padding-left: 10%;"><strong>Fixed Deductions (if any)
-
-                                </strong></td>
-                            <td style="text-align: right;">0</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Food
-
-
-                                </strong></td>
-                            <td style="text-align: right;">{{$salary->food ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
-                            <td style="font-weight: 600; padding-left: 10%;"><strong>Other Deductions (if any)
+                                        </strong></td>
+                                    <td style="text-align: right;">0</td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Income Tax Deductions (if any)
 
 
-                                </strong></td>
-                            <td style="text-align: right;">0</td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Medical
-                                </strong></td>
-                            <td style="text-align: right;">{{$salary->medical ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
+                                        </strong></td>
+                                    <td style="text-align: right;">0</td>
+                                </tr>
+                                <tr>
+                                   
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Penalty Deductions (if any)
+                                        </strong></td>
+                                    <td style="text-align: right;">0</td>
+                                </tr>
+                                <tr>
+                                   
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Fixed Deductions (if any)
 
-                            <td colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Over Time
-                                </strong></td>
-                            <td style="text-align: right;">{{$salary->overtime ?? 0}}</td>
-                            <td style="text-align: right;">0</td>
-                            <td colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <td style="font-weight: 600;"><strong>Earnings
-                                </strong></td>
-                            <td style="text-align: right;">0</td>
-                            <td style="text-align: right;">0</td>
-                            <td colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <th style="font-weight: 600;"><strong>Gross Earning
+                                        </strong></td>
+                                    <td style="text-align: right;">0</td>
+                                </tr>
+                                <tr>
+                                  
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Other Deductions (if any)
 
-                                </strong></th>
-                            <th style="text-align: right;">19600
-                            </th>
-                            <th style="text-align: right;">754
-                            </th>
-                            <th style="font-weight: 600; padding-left: 10%;">Total Deduction
-                            </th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td colspan="5"></td>
-                        </tr>
-                        <tr>
-                            <th colspan="5" style="font-weight: 600; padding: 10px;"><strong>Net Take Home (Gross Earning - Total Deduction) : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></strong></th>
-                        </tr>
-                    </tbody>
-                </table>
+
+                                        </strong></td>
+                                    <td style="text-align: right;">0</td>
+                                </tr>
+                                <tr>
+                                    
+
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                   
+                                    <td colspan="2"></td>
+                                </tr> -->
+                               
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                            <tbody>
+                            <tr>
+                                    <th style="font-weight: 600;"><strong>Gross Earning
+
+                                        </strong></th>
+                                    <th style="text-align: right;">19600
+                                    </th>
+                                    <th style="text-align: right;">754
+                                    </th>
+                                    <th style="font-weight: 600; padding-left: 10%;">Total Deduction
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
+                            <tbody>
+                                <tr>
+                                    
+                                    <th style="padding-left: 10%;">Net Take Home (Gross Earning - Total Deduction) : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></th>
+                                </tr>
+                            </tbody>
+                        </table>`
+                    </div>
+                </div>
                 <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>
                 <ul style="padding-left: 12px;">
                     <li>1. The student are expected to keep this cardneat and clean</li>
