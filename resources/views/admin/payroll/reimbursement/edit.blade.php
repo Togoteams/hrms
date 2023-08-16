@@ -7,7 +7,7 @@
         <div class="row">
             <div class="mb-2 col-sm-4">
                 <div class="form-group">
-                    <label class="required" for="type_id">Type <sup class="text-danger">*</sup></label>
+                    <label class="required" for="type_id">Type </label>
                     <select name="type_id" class="form-control" id="type_id" placeholder="Reimbursement type">
                         <option value="">Select Option</option>
                             @foreach($reimbursementType as $data)

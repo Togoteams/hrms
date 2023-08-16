@@ -144,6 +144,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('employee/department-history', [EmployeeController::class, 'postDepartmentHistory'])->name('employee.departmentHistory.post');
     Route::post('employee/delete-department-history', [EmployeeController::class, 'deleteDepartmentHistory'])->name('employee.departmentHistory.delete');
     Route::resource('employee-transfer',EmployeeTransferControler::class);
+    Route::post('/admin/employee-transfer',[EmployeeTransferControler::class,'status'])->name('emp.status');
+
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);

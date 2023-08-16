@@ -68,7 +68,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.payroll.reimbursement.index') }}",
+                            ajax: "{{ route('admin.employee-transfer.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
@@ -79,30 +79,18 @@
 
                              
                                 {
-                                    data: 'reimbursementype.type',
-                                    name: 'reimbursementype.type'
-                                },
-
-                                {
-                                    data: 'bill_amount',
-                                    name: 'bill_amount'
+                                    data: 'user.name',
+                                    name: 'user.name'
                                 },
                                 {
-                                    data: 'expenses_date',
-                                    name: 'expenses_date'
+                                    data: 'transfer_type',
+                                    name: 'transfer_type'
                                 },
                                 {
-                                    data: 'reimbursement_amount',
-                                    name: 'reimbursement_amount'
-                                },
-
-                               
-                                {
-                                    data: 'reimbursement_notes',
-                                    name: 'reimbursement_notes'
+                                    data: 'transfer_reason',
+                                    name: 'transfer_reason'
                                 },
                                
-                              
                                 {
                                     data: 'status',
                                     name: 'status'
@@ -172,10 +160,10 @@
                         <h5 class="modal-title" id="exampleModalLabel">Status change of {{ $page }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    <form class="formSubmit" action="{{route('admin.payroll.status')}}" method="POST">
+                    <form class="formSubmit" action="{{url('admin/employee-transfer.status')}}" method="POST">
                        @csrf
                         <div class="modal-body">
-                        <input type="hidden" value="" id="status_id" name="payroll_id">
+                        <input type="hidden" value="" id="status_id" name="emp_id">
                         <div class="mb-2 col-md-6">
                             <div class="form-group">
                                     <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
@@ -191,17 +179,6 @@
                                         @enderror
                                     </span>
                             </div>
-                        </div>
-                        <div class="mb-2 col-md-12">
-                            <div class="form-group">
-                                <label for="expenses">Reimbursement Reason</label>
-                                <textarea name="reimbursement_reason" id="reimbursement_reason" cols="30" rows="10" class="form-control" placeholder="reimbursement_reason"></textarea>
-                            </div>
-                            <span class="text-danger">
-                                @error('reimbursement_reason')
-                                {{$message}}
-                                @enderror
-                            </span>
                         </div>
                         </div>  
                         <div class="modal-footer">
