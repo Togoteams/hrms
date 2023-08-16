@@ -56,15 +56,6 @@
                                 </div>
                             </div>
 
-                            <div class="mb-2 col-sm-6">
-                                <div class="form-group">
-                                    <label for="leave_applies_for">leave_applies_for</label>
-                                    <input required id="leave_applies_for"
-                                        placeholder="Enter correct leave_applies_for   " type="text"
-                                        name="leave_applies_for" class="form-control form-control-sm ">
-                                </div>
-                            </div>
-
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="start_date">start_date</label>

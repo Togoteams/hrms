@@ -84,7 +84,6 @@ class LeaveApplyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"],
@@ -161,7 +160,6 @@ class LeaveApplyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric'],
-            'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"]

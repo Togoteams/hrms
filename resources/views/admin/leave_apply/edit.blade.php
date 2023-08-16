@@ -19,15 +19,6 @@
             </div>
         </div>
 
-        <div class="col-sm-6 mb-2">
-            <div class="form-group">
-                <label for="leave_applies_for">leave_applies_for</label>
-                <input required id="leave_applies_for" placeholder="Enter correct leave_applies_for   "
-                    value="{{ $data->leave_applies_for }}" type="text" name="leave_applies_for"
-                    class="form-control form-control-sm ">
-            </div>
-        </div>
-
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="start_date1">start_date</label>
