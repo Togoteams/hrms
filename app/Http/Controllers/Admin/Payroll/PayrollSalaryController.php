@@ -232,7 +232,16 @@ class PayrollSalaryController extends Controller
         // dd($salary);
         // if($data->employee->employment_type=="local")
         // {
-            return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary'));
+            $totalMonthDays = 30;
+
+            $noOfHoliday = Holiday::where('date','<=',date('Y-m-d'))->where('date','>',date('Y-m-d'))->where('status','active')->count();
+            $noOfempLeave = LeaveApply::where('user_id',$user_id)
+            ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+            ->where('is_approved',0)
+            ->count();
+            // return $noOfempLeave;
+            $presentDay = $totalMonthDays - $noOfHoliday - $noOfempLeave;
+            return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary','presentDay','totalMonthDays','noOfHoliday','noOfempLeave'));
         // }else
         // {
         //     return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'salary'));

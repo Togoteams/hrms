@@ -106,8 +106,8 @@
          
     window.onload = function() { //from ww  w . j  a  va2s. c  o  m
         var today = new Date().toISOString().split('T')[0];
-        document.getElementsByName("start_date1")[0].setAttribute('min', today);
-        document.getElementsByName("end_date1")[0].setAttribute('min', today);
+        document.getElementsByName("start_date")[0].setAttribute('min', today);
+        document.getElementsByName("end_date")[0].setAttribute('min', today);
     }
         function change_leave(e) {
             var text = e.options[e.selectedIndex].text;

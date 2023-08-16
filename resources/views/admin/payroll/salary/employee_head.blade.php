@@ -6,7 +6,14 @@
             @php
             $basic = round(($data->basic / $totalMonthDays) * $presentDay);
             @endphp
-            <input onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic  " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
+            <input onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
+        </div>
+    </div>
+    <div class="mb-2 col-sm-4">
+        <div class="form-group">
+            <label for="basic">No. Of Persent Days</label>
+            
+            <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required max="2"   type="text"  value="{{ $presentDay ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
 </div>
