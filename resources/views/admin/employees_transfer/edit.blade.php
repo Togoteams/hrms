@@ -70,7 +70,7 @@
     <hr>
        
 </form>
-
+@push('custom-scripts')
 <script>
  $(document).ready(function(){
    $('.transfer_type').change(function(){
@@ -86,4 +86,5 @@
       });
             });
 </script>
+@endpush
 
