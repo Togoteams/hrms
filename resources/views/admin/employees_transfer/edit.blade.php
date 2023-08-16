@@ -11,7 +11,7 @@
                 <select name="emp_id" class="form-control" id="emp_id" placeholder="Employee Name">
                     <option value="">Select Option</option>
                     @foreach ($all_users as $user)
-                    <option value="{{ $user->user->id }}" {{ $user->id == $item->emp_id ? 'selected' : '' }}>{{ $item->user->name }}
+                    <option value="{{ $user->user->id }}" {{ $user->id == $item->emp_id ? 'selected' : '' }}>{{ $user->user->name }}
                     </option>
                 @endforeach
                 </select>

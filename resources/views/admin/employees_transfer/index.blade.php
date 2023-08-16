@@ -160,8 +160,8 @@
                         <h5 class="modal-title" id="exampleModalLabel">Status change of {{ $page }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    <form class="formSubmit" action="{{url('admin/employee-transfer.status')}}" method="POST">
-                       @csrf
+                        <form class="formSubmit" action="{{ route('admin.status') }}" method="POST">
+                            @csrf  
                         <div class="modal-body">
                         <input type="hidden" value="" id="status_id" name="emp_id">
                         <div class="mb-2 col-md-6">
