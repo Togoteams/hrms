@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('emp_id')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->unsignedBigInteger('branch_id')->nullable();
-            $table->enum('transfer_type',["department","branch"])->nullable();
+            $table->string('transfer_type')->nullable();
             $table->string('transfer_reason', 255)->nullable();
-            $table->string('status')->default('pending');
+            $table->string('status')->nullable()->default('pending');
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
             $table->timestamp('transfer_request_at')->nullable();
