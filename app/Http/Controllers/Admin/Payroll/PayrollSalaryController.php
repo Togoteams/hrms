@@ -249,6 +249,7 @@ class PayrollSalaryController extends Controller
         $arrears = PayrollSalaryIncrement::where('financial_year',date('Y'))->where('employment_type',$emp->employment_type)->where('effective_from','<=',date('Y-m-d h:i:s'))->where('effective_to','>=',date('Y-m-d h:i:s'))->first();
         $currentData = date('Y-m-d H:i:s');
         // return $currentData;
+        $arrearsNoOfMonth=0;
         if($arrears){
             $effectiveFromData = $arrears->effective_from;
             $arrearsNoOfMonth = diffInMonths($effectiveFromData,today());
