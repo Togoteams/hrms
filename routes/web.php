@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\LeaveReportsController;
 use App\Http\Controllers\Admin\Payroll\PayscaleController;
 use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
@@ -145,8 +146,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('employee/delete-department-history', [EmployeeController::class, 'deleteDepartmentHistory'])->name('employee.departmentHistory.delete');
     Route::resource('employee-transfer',EmployeeTransferControler::class);
     Route::post('/admin/employee-transfer',[EmployeeTransferControler::class, 'status'])->name('status');
-    // Route::post('/admin/payroll/reimbursement',[ReimbursementController::class,'status'])->name('status');
 
+     // Department start
+     Route::resource('department',DepartmentController::class);
+     // Department  end
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);
