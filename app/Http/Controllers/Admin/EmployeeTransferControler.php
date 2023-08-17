@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmployeeTransfer;
@@ -35,7 +36,7 @@ class EmployeeTransferControler extends Controller
                 ->make(true);
             }
         $all_users = Employee::get();
-        $department = Designation::get();
+        $department = Department::get();
         $branch = Branch::get();
         // dd($all_users);
         return view('admin.employees_transfer.index', ['page' => $this->page_name, 'all_users'=>$all_users,'department'=>$department,'branch'=>$branch]);
@@ -108,7 +109,7 @@ class EmployeeTransferControler extends Controller
     {
         $item = EmployeeTransfer::find($id);
         $all_users = Employee::get();
-        $department = Designation::get();
+        $department = Department::get();
         $branch = Branch::get();       
         return view('admin.employees_transfer.edit', ['item'=>$item,'all_users'=>$all_users,'department'=>$department,'branch'=>$branch, 'page' => $this->page_name]);    
     }

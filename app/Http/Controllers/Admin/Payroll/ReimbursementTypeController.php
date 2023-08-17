@@ -34,9 +34,6 @@ class ReimbursementTypeController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        // $page = "Reimbursement Type";
-        // $reimbursement = ReimbursementType::all();
-        // return view('admin.payroll.reimbursement_type.index', compact('page','reimbursement'));
         return view('admin.payroll.reimbursement_type.index', ['page' => $this->page_name]);
 
     }
