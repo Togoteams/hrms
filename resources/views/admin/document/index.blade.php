@@ -22,7 +22,6 @@
             </div>
             
              @include('admin.document.create')
-             @include('admin.document.asign_emp')
 
 
             <!-- Card -->
@@ -79,7 +78,7 @@
                                     
                                     <form id="edit{{ $item->id }}"
                                         action="{{ route('admin.document.destroy', $item->id) }}">
-                                            <button type="button" class="btn btn-white assign_doc" doc_id="{{$item->id}}">
+                                            <button type="button" class="btn btn-white assign_doc" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" onclick="editForm('{{ route('admin.document.get.asign', $item->id) }}', 'assign_doc')" doc_id="{{$item->id}}">
                                                     Asign Employee Document
                                                 </button>
                                         <button type="button"
@@ -180,18 +179,37 @@
             </div>
 
             {{-- edit form model end  --}}
+            {{-- assign form model start --}}
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+                            <h5 class="modal-title" id="staticBackdropLabels1">Asign {{ $page }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="assign_doc">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            {{-- edit form model end  --}}
         </div>
 
     </main>
 
     <script>
-        $('.assign_doc').on('click', function(){
+        // $('.assign_doc').on('click', function(){
 
-            var doc_d = $(this).attr('doc_id');
-            if(doc_d !=''){
-                $('.document_id').val(doc_d);
-                $('#staticBackdrop1').modal('show');
-            }
-        });
+        //     var doc_d = $(this).attr('doc_id');
+        //     if(doc_d !=''){
+        //         $('.document_id').val(doc_d);
+        //         $('#staticBackdrop1').modal('show');
+        //     }
+        // });
     </script>
 @endsection

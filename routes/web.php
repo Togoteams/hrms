@@ -168,6 +168,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
     Route::resource('document',DocumentController::class);
     Route::post('document/asign', [DocumentController::class, 'asign'])->name('document.asign');
+    Route::get('document-get/asign/{id}', [DocumentController::class, 'documentAssignedit'])->name('document.get.asign');
 
 
 

@@ -80,6 +80,14 @@ class DocumentController extends Controller
         $data = Document::find($id);
         return view('admin.document.edit', ['data' => $data, 'page' => $this->page_name]);   
     }
+    public function documentAssignedit(string $id)
+    {
+        $data = Document::find($id);
+        // return $data;
+        $all_users = Employee::with('user')->get();
+        return view('admin.document.asign_emp', ['data' => $data, 'page' => $this->page_name,'all_users'=>$all_users]);   
+    }
+
 
     /**
      * Update the specified resource in storage.
