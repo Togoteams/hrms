@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\DocumentEmp;
+use App\Models\Employee;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,8 @@ class DocumentController extends Controller
     public function index()
     {
         $data =  Document::all();
-        return view('admin.document.index', ['page' => $this->page_name,'data' => $data]);
+        $all_users = Employee::with('user')->get();
+        return view('admin.document.index', ['page' => $this->page_name,'data' => $data,'all_users'=>$all_users]);
 
     }
 
@@ -50,7 +53,7 @@ class DocumentController extends Controller
             if ($request->hasFile('document')) {
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
+                $filename = $file->getClientOriginalName();
                 $file->move('asset/img', $filename);
                 $documentData['document'] = $filename;
             }
@@ -97,7 +100,7 @@ class DocumentController extends Controller
             if ($request->hasFile('document')) {
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
+                $filename = $file->getClientOriginalName();
                 $file->move('asset/img', $filename);
                 $documentData['document'] = $filename;
             }
@@ -119,5 +122,36 @@ class DocumentController extends Controller
         } catch (Exception $e) {
             return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
         }
+    }
+
+    public function asign(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'document_id' =>'required|numeric',
+            'emp_id' => 'required|array',
+        ]);
+        //  dd($request->all());
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $documentId = $request->input('document_id');
+                $empIds = $request->input('emp_id');
+    
+                // Insert each assignment separately
+                foreach ($empIds as $empId) {
+                    DocumentEmp::create([
+                        'document_id' => $documentId,
+                        'emp_id' => $empId,
+                        'created_at' => now(),
+                    ]);
+                }
+    
+                return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+
     }
 }

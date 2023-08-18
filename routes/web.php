@@ -167,6 +167,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/print/employee-kra/print/{user_id}', [EmployeeKraController::class, 'print'])->name('employee-kra.print');
 
     Route::resource('document',DocumentController::class);
+    Route::post('document/asign', [DocumentController::class, 'asign'])->name('document.asign');
 
 
 

@@ -22,6 +22,7 @@
             </div>
             
              @include('admin.document.create')
+             @include('admin.document.asign_emp')
 
 
             <!-- Card -->
@@ -75,8 +76,12 @@
                                     </span>{{ $item->status ?? 'Active' }}</div>
                                 </td>
                                 <td style="text-align:right;">
+                                    
                                     <form id="edit{{ $item->id }}"
                                         action="{{ route('admin.document.destroy', $item->id) }}">
+                                            <button type="button" class="btn btn-white assign_doc" doc_id="{{$item->id}}">
+                                                    Asign Employee Document
+                                                </button>
                                         <button type="button"
                                             onclick="editForm('{{ route('admin.document.edit', $item->id) }}', 'edit')"
                                             href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
@@ -178,4 +183,15 @@
         </div>
 
     </main>
+
+    <script>
+        $('.assign_doc').on('click', function(){
+
+            var doc_d = $(this).attr('doc_id');
+            if(doc_d !=''){
+                $('.document_id').val(doc_d);
+                $('#staticBackdrop1').modal('show');
+            }
+        });
+    </script>
 @endsection

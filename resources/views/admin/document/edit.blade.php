@@ -34,7 +34,7 @@
                     <img src="{{ asset('asset/img/'.$data->document) }}" alt="image" width="70px" height="70px">
                 @elseif (in_array(pathinfo(asset('asset/img/'.$data->document), PATHINFO_EXTENSION), ['pdf']))
                     <a href="{{ asset('asset/img/'.$data->document) }}" target="_blank">
-                        <img src="{{ asset('asset/img/') }}" alt="pdf-icon" width="70px" height="70px">
+                        <img src="{{ asset('asset/img/') }}" alt="{{$data->document}}" width="70px" height="70px">
                     </a>
                 @endif
             </div>
