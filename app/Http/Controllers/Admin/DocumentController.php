@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\DocumentEmp;
+use App\Models\Employee;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +21,8 @@ class DocumentController extends Controller
     public function index()
     {
         $data =  Document::all();
-        return view('admin.document.index', ['page' => $this->page_name,'data' => $data]);
+        $all_users = Employee::with('user')->get();
+        return view('admin.document.index', ['page' => $this->page_name,'data' => $data,'all_users'=>$all_users]);
 
     }
 
@@ -50,7 +53,7 @@ class DocumentController extends Controller
             if ($request->hasFile('document')) {
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
+                $filename = $file->getClientOriginalName();
                 $file->move('asset/img', $filename);
                 $documentData['document'] = $filename;
             }
@@ -78,6 +81,15 @@ class DocumentController extends Controller
         return view('admin.document.edit', ['data' => $data, 'page' => $this->page_name]);   
     }
 
+    public function documentAssignedit(string $id)
+    {
+        $data = Document::find($id);
+        // return $data;
+        $all_users = Employee::with('user')->get();
+        return view('admin.document.asign_emp', ['data' => $data, 'page' => $this->page_name,'all_users'=>$all_users]);   
+    }
+
+
     /**
      * Update the specified resource in storage.
      */
@@ -97,7 +109,7 @@ class DocumentController extends Controller
             if ($request->hasFile('document')) {
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
-                $filename = time() . '.' . $extension;
+                $filename = $file->getClientOriginalName();
                 $file->move('asset/img', $filename);
                 $documentData['document'] = $filename;
             }
@@ -118,6 +130,51 @@ class DocumentController extends Controller
             return "Delete";
         } catch (Exception $e) {
             return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
+        }
+    }
+
+    public function asign(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'document_id' => 'required|numeric',
+            'emp_id' => 'required|array',
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $documentId = $request->input('document_id');
+                $empIds = $request->input('emp_id');
+
+                // Fetch existing assignments for the document
+                $existingAssignments = DocumentEmp::where('document_id', $documentId)
+                    ->get();
+
+                // Delete assignments that are unchecked
+                foreach ($existingAssignments as $assignment) {
+                    if (!in_array($assignment->emp_id, $empIds)) {
+                        $assignment->delete();
+                    }
+                }
+
+                // Create new assignments for checked employees
+                foreach ($empIds as $empId) {
+                    $isAssigned = $existingAssignments->contains('emp_id', $empId);
+
+                    if (!$isAssigned) {
+                        DocumentEmp::create([
+                            'document_id' => $documentId,
+                            'emp_id' => $empId,
+                            'created_at' => now(),
+                        ]);
+                    }
+                }
+
+                return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
         }
     }
 }

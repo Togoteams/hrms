@@ -170,3 +170,6 @@
 
     </main>
 @endsection
+@push('custom-scripts')
+@include('admin.payroll.payscale.payroll-payscale-js')
+@endpush

@@ -26,12 +26,14 @@ use App\Http\Controllers\Admin\LeaveReportsController;
 use App\Http\Controllers\Admin\Payroll\PayscaleController;
 use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\EmployeeTransferControler;
 use App\Http\Controllers\Admin\KraAttributesController;
 use App\Http\Controllers\Admin\LeaveSettingController;
+use App\Http\Controllers\Admin\OvertimeController;
 use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Http\Controllers\Admin\Payroll\PayRollPayscaleCotroller;
 use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
@@ -146,6 +148,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('employee/department-history', [EmployeeController::class, 'postDepartmentHistory'])->name('employee.departmentHistory.post');
     Route::post('employee/delete-department-history', [EmployeeController::class, 'deleteDepartmentHistory'])->name('employee.departmentHistory.delete');
     Route::resource('employee-transfer',EmployeeTransferControler::class);
+    Route::post('/admin/employee-transfer',[EmployeeTransferControler::class, 'status'])->name('status');
+
+     // Department start
+     Route::resource('department',DepartmentController::class);
+     // Department  end
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);
@@ -163,8 +170,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/print/employee-kra/print/{user_id}', [EmployeeKraController::class, 'print'])->name('employee-kra.print');
 
     Route::resource('document',DocumentController::class);
+    Route::post('document/asign', [DocumentController::class, 'asign'])->name('document.asign');
+    Route::get('document-get/asign/{id}', [DocumentController::class, 'documentAssignedit'])->name('document.get.asign');
 
-
+    Route::resource('overtime-settings', OvertimeController::class);
 
     Route::resource('leave_type', LeaveTypeCobntroller::class);
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');

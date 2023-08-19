@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
             TaxSlabSeeder::class,
             Membershipseeders::class,
             Employeeseeders::class,
-            PayrollHeadSeeder::class
+            PayrollHeadSeeder::class,
+            DepartmentSeeder::class
+
         ]);
     }
 }

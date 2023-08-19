@@ -21,8 +21,8 @@
 
                 <!-- End Row -->
             </div>
-            @include('admin.employees_transfer.create')
-
+           
+            @include('admin.department.create')
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -31,44 +31,46 @@
                     <div class="mb-2 col-sm mb-sm-0">
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
-                    <div class="col-sm-auto">
-                    {{-- <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement.create') }}">
+                    {{-- <div class="col-sm-auto">
+                    <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement_type.create') }}">
                         Add {{ $page }}
-                    </a> --}}
-                    <button type="button" class="btn btn-white" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            Add {{ $page }}
-                        </button>
+                    </a>
 
-                    </div>
+                    </div> --}}
+                    <div class="col-sm-auto">
+                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Add {{ $page }}
+                            </button>
+                        </div>
+
                 </div>
              </div>
-                   {{-- Table --}}
-                   <div class="p-2 mt-3 table-responsive">
-                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
-                        <thead>
+              {{-- Table --}}
+              <div class="p-2 mt-3 table-responsive">
+                <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                    <thead>
                             <tr>
                                 <th>SI.</th>
-                                <th>Employee Name</th>
-                                <th>Transfer Type</th>
-                                <th>Transfer Reason</th>
+                                <th>Name</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
-                        <tbody> 
+                        <tbody>
                         </tbody>
                     </table>
+                  
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-                <script type="text/javascript">
+                  <script type="text/javascript">
                     $(function() {
                         var i = 1;
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.employee-transfer.index') }}",
+                            ajax: "{{ route('admin.department.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
@@ -79,18 +81,10 @@
 
                              
                                 {
-                                    data: 'user.name',
-                                    name: 'user.name'
+                                    data: 'name',
+                                    name: 'name'
                                 },
-                                {
-                                    data: 'transfer_type',
-                                    name: 'transfer_type'
-                                },
-                                {
-                                    data: 'transfer_reason',
-                                    name: 'transfer_reason'
-                                },
-                               
+
                                 {
                                     data: 'status',
                                     name: 'status'
@@ -129,7 +123,8 @@
 
                     </div>
                 </div>
-           </div>
+            </div>
+
             {{-- edit form model end  --}}
 
             {{-- edit form model start --}}
@@ -152,61 +147,7 @@
 
             {{-- edit form model end  --}}
 
-             {{--start status Modal  --}}
-                <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Status change of {{ $page }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form class="formSubmit" action="{{ route('admin.status') }}" method="POST">
-                            @csrf  
-                        <div class="modal-body">
-                        <input type="hidden" value="" id="status_id" name="emp_id">
-                        <div class="mb-2 col-md-6">
-                            <div class="form-group">
-                                    <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
-                                    <select name="status" class="form-control" id="status">
-                                        <option value="">Selected Option</option>
-                                        <option value="pending">Pending</option>
-                                        <option value="approved">Approved</option>
-                                        <option value="rejected">Rejected</option>
-                                    </select>
-                                    <span class="text-danger">
-                                        @error('status')
-                                        {{$message}}
-                                        @enderror
-                                    </span>
-                            </div>
-                        </div>
-                        </div>  
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-                        <button type="submit" class="btn btn-primary status_add " id="">Add</button>
-                        </div>
-                    </form>
-                    </div>
-                    </div>
-                </div>
-             {{-- End Status Modal --}}
-
         </div>
 
     </main>
 @endsection
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-<script>
-     $(document).on('click','.status_change',function(e){
-        // $(".alert").show();
-        // e.preventDefault();
-        var stat_id = $(this).val();
-        // alert(stat_id);
-        // $("#input").val(text); 
-        $('#status_id').val(stat_id);
-        $('#statusModal').modal('show');
-      });
-
-
-</script>

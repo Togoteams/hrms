@@ -1,41 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\Admin\payroll;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ReimbursementType;
+use App\Models\Department;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Yajra\DataTables\Contracts\DataTable;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
-class ReimbursementTypeController extends Controller
+class DepartmentController extends Controller
 {
-    // public  $page_name =   "Reimbursement Type";
-
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Reimbursement Type";
+    public $page_name = "Department";
 
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = ReimbursementType::all();
+            $data = Department::all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.payroll.reimbursement_type.buttons', ['item' => $row, "route" => 'payroll.reimbursement_type']);
+                    $actionBtn = view('admin.department.buttons', ['item' => $row, "route" => 'department']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        return view('admin.payroll.reimbursement_type.index', ['page' => $this->page_name]);
-
+        return view('admin.department.index', ['page' => $this->page_name]);
     }
 
     /**
@@ -43,8 +39,7 @@ class ReimbursementTypeController extends Controller
      */
     public function create()
     {
-        $page = "Reimbursement Type";
-        return view('admin.payroll.reimbursement_type.create',compact('page'));
+        //
     }
 
     /**
@@ -53,20 +48,18 @@ class ReimbursementTypeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'type' => 'required|string|unique:reimbursement_types,type',
+            'name' => 'required|string|unique:departments,name',
            
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            $request->request->add(['created_by'=>Auth::user()->id]);
+            // $request->request->add(['created_by'=>Auth::user()->id]);
             $request->request->add(['status' =>"active"]);
-            $request->request->add(['slug' =>Str::slug($request->type,"_")]);
-            ReimbursementType::create($request->except('_token'));
+            $request->request->add(['slug' =>Str::slug($request->name,"_")]);
+            Department::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
-
-
     }
 
     /**
@@ -82,12 +75,8 @@ class ReimbursementTypeController extends Controller
      */
     public function edit(string $id)
     {
-        // $page = "Reimbursement Type";
-        // $reimbursement = ReimbursementType::find($id);
-        // return view('admin.payroll.reimbursement_type.edit', compact('page','reimbursement'));
-
-        $reimbursement = ReimbursementType::find($id);
-        return view('admin.payroll.reimbursement_type.edit', ['reimbursement' => $reimbursement, 'page' => $this->page_name]);   
+        $department = Department::find($id);
+        return view('admin.department.edit', ['department' => $department, 'page' => $this->page_name]);   
     }
 
     /**
@@ -96,7 +85,7 @@ class ReimbursementTypeController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'type' => 'required|string|unique:reimbursement_types,type,'.$id,
+            'name' => 'required|string|unique:departments,name,'.$id,
            
         ]);
         if ($validator->fails()) {
@@ -104,10 +93,9 @@ class ReimbursementTypeController extends Controller
         } else {
             $request->request->add(['slug' =>Str::slug($request->type,"_")]);
             // $request->request->add(['updated_by'=>Auth::user()->id]);
-            ReimbursementType::where('id', $id)->update($request->except('_token', '_method'));
+            Department::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
-       
     }
 
     /**
@@ -116,11 +104,10 @@ class ReimbursementTypeController extends Controller
     public function destroy(string $id)
     {
         try {
-            ReimbursementType::destroy($id);
+            Department::destroy($id);
             return "Delete";
         } catch (Exception $e) {
             return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
         }
     }
-
 }

@@ -22,8 +22,13 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="document_type" class="required">Document Type</label>
-                                    <input required id="document_type" placeholder="Enter Document type of Document" min="1" max="100" type="text"
-                                        name="document_type" class="form-control form-control-sm ">
+                                    <select required id="document_type"  name="document_type" class="form-control form-control-sm " >
+                                        <option value="">Select Document Type</option>
+                                        <option value="onbording">Onbording</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <!-- <input required id="document_type" placeholder="Enter Document type of Document" min="1" max="100" type="text"
+                                        name="document_type" class="form-control form-control-sm "> -->
                                 </div>
                             </div>
                            

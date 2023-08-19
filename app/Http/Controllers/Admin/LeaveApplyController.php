@@ -31,7 +31,6 @@ class LeaveApplyController extends Controller
             if (isemplooye()) {
                 $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
             } else {
-
                 $data = LeaveApply::with('user', 'leave_type')->select('*');
             }
             return Datatables::of($data)
@@ -84,7 +83,6 @@ class LeaveApplyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"],
@@ -140,7 +138,7 @@ class LeaveApplyController extends Controller
 
         $data = LeaveApply::find($id);
         $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->get();
-
+        // ret
         return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
@@ -152,6 +150,9 @@ class LeaveApplyController extends Controller
         $leave_emp_data=LeaveApply::where('start_date','>=',$data->start_date)->Where('end_date','<=',$data->end_date)->where('status','approved')->get();
        
         $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id);
+        // echo $data->leave_type_id."echo ";
+        // echo $data->user_id."echo ";
+        // return $remaining_leave;
         return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'remaining_leave' => $remaining_leave,'leave_emp_data'=>$leave_emp_data]);
     }
     /**
@@ -161,7 +162,6 @@ class LeaveApplyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric'],
-            'leave_applies_for' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"]

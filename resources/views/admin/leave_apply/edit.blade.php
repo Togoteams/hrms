@@ -4,6 +4,7 @@
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="row">
+
         <div class="col-sm-6 mb-2">
             <div class="form-group">
                 <label for="leave_type_id">Leave Types</label>
@@ -16,15 +17,6 @@
                     @endforeach
                 </select>
 
-            </div>
-        </div>
-
-        <div class="col-sm-6 mb-2">
-            <div class="form-group">
-                <label for="leave_applies_for">leave_applies_for</label>
-                <input required id="leave_applies_for" placeholder="Enter correct leave_applies_for   "
-                    value="{{ $data->leave_applies_for }}" type="text" name="leave_applies_for"
-                    class="form-control form-control-sm ">
             </div>
         </div>
 
@@ -42,13 +34,22 @@
                     value="{{ $data->end_date }}" name="end_date" class="form-control form-control-sm ">
             </div>
         </div>
+        <div class="mb-2 col-sm-4">
+            <div class="form-group">
+                <label for="leave_applies_for">leave_applies_for</label>
+                <input required readonly id="leave_applies_for"
+                    placeholder="Enter correct leave_applies_for" onchange="change_leave(this)" value="{{ $data->leave_applies_for }}" type="text"
+                    name="leave_applies_for" class="form-control form-control-sm ">
+            </div>
+        </div>
 
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="doc">Required Document</label>
                 <div class="row">
-                    <div class="col-6"> <input accept="application/pdf" id="doc"
-                            placeholder="Enter correct Document   " type="file" name="doc1"
+                    <div class="col-6"> 
+                        <input accept="application/pdf" id="doc"
+                            placeholder="Enter correct Document" type="file" name="doc1"
                             class="form-control form-control-sm ">
                     </div>
 
@@ -84,11 +85,40 @@
             {{ $page }}</button>
     </div>
 </form>
+@push('custom-scripts')
 <script type="text/javascript">
+    
     window.onload = function() { //from ww  w . j  a  va2s. c  o  m
         var today = new Date().toISOString().split('T')[0];
-
         document.getElementsByName("start_date1")[0].setAttribute('min', today);
         document.getElementsByName("end_date1")[0].setAttribute('min', today);
     }
+    function change_leave(e) {
+        var text = e.options[e.selectedIndex].text;
+        if (text == "SICK LEAVE") {
+            document.getElementById('doc').setAttribute("required", "");
+
+        } else {
+            document.getElementById('doc').removeAttribute("required", "");
+
+        }
+        selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
+    }
+    $("#start_date").on('change',function(){
+        getDays();
+    });
+    $("#end_date").on('change',function(){
+        getDays();
+    });
+    function getDays() {
+        date1 = new Date( $("#start_date").val());
+        date2 = new Date($("#end_date").val());
+        var milli_secs = date1.getTime() - date2.getTime();
+            
+        // Convert the milli seconds to Days 
+        var days = milli_secs / (1000 * 3600 * 24);
+        // document.getElementById("ans").innerHTML =
+        $("#leave_applies_for").val(Math.round(Math.abs(days))+1);
+    }
 </script>
+@endpush

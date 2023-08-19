@@ -11,12 +11,15 @@ use Exception;
 use Yajra\DataTables\DataTables;
 use App\Models\Employee;
 use App\Models\EmpSalary;
+use App\Models\Holiday;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Loans;
 use App\Models\PayrollHead;
 use App\Models\PayrollPayscaleHead;
+use App\Models\LeaveApply;
 use App\Models\PayrollSalary;
 use App\Models\PayrollSalaryHead;
+use App\Models\PayrollSalaryIncrement;
 use App\Models\User;
 
 class PayrollSalaryController extends Controller
@@ -227,13 +230,22 @@ class PayrollSalaryController extends Controller
         $salary = EmpSalary::where('user_id', $user_id)->first();
         //  return $data;
         // dd($salary);
-        if($data->employee->employment_type=="local")
-        {
-            return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary'));
-        }else
-        {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'salary'));
-        }
+        // if($data->employee->employment_type=="local")
+        // {
+            $totalMonthDays = 30;
+
+            $noOfHoliday = Holiday::where('date','<=',date('Y-m-d'))->where('date','>',date('Y-m-d'))->where('status','active')->count();
+            $noOfempLeave = LeaveApply::where('user_id',$user_id)
+            ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+            ->where('is_approved',0)
+            ->count();
+            // return $noOfempLeave;
+            $presentDay = $totalMonthDays - $noOfHoliday - $noOfempLeave;
+            return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary','presentDay','totalMonthDays','noOfHoliday','noOfempLeave'));
+        // }else
+        // {
+        //     return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'salary'));
+        // }
     }
 
     public function get_employee_data($user_id = null)
@@ -242,6 +254,25 @@ class PayrollSalaryController extends Controller
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
-        return view('admin.payroll.salary.employee_head', compact('emp_head', 'page', 'data','emp'));
+        
+        $arrears = PayrollSalaryIncrement::where('financial_year',date('Y'))->where('employment_type',$emp->employment_type)->where('effective_from','<=',date('Y-m-d h:i:s'))->where('effective_to','>=',date('Y-m-d h:i:s'))->first();
+        $currentData = date('Y-m-d H:i:s');
+        // return $currentData;
+        $arrearsNoOfMonth=0;
+        if($arrears){
+            $effectiveFromData = $arrears->effective_from;
+            $arrearsNoOfMonth = diffInMonths($effectiveFromData,today());
+        }
+        $totalMonthDays = 30;
+
+        $noOfHoliday = Holiday::where('date','<=',date('Y-m-d'))->where('date','>',date('Y-m-d'))->where('status','active')->count();
+        $noOfempLeave = LeaveApply::where('user_id',$user_id)
+        ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+        ->where('is_approved',0)
+        ->count();
+        // return $noOfempLeave;
+        $presentDay = $totalMonthDays - $noOfHoliday - $noOfempLeave;
+
+        return view('admin.payroll.salary.employee_head', compact('emp_head', 'page', 'arrearsNoOfMonth','presentDay','noOfHoliday','noOfempLeave','totalMonthDays','data','emp'));
     }
 }

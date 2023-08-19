@@ -28,7 +28,37 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="transfer_type" class="required">Transfer Type</label>
-                                    <input type="number" name="bill_amount" id="bill_amount" class="form-control" placeholder="bill_amount">
+                                    <select name="transfer_type" class="transfer_type form-control" id="transfer_type" placeholder="Employee transfer_type">
+                                        <option value="">Select Option</option>
+                                        <option value="department">Department</option>
+                                        <option value="branch">Branch</option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-6 both_data department_data" style="display: none;">
+                                <div class="form-group">
+                                    <label for="department_id" class="required">Department</label>
+                                    <select name="department_id" class="form-control" id="department_id" placeholder="Employee department">
+                                        <option value="">Select Option</option>
+                                        @foreach($department as $data)
+                                        <option value="{{ $data->id }}" {{ old('department_id') == $data->id ? 'selected' : '' }}>
+                                           {{ $data->name }}
+                                       </option>
+                                       @endforeach 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-6 branch" style="display: none;">
+                                <div class="form-group">
+                                    <label for="branch_id" class="required">Branch</label>
+                                    <select name="branch_id" class="form-control" id="branch_id" placeholder="Employee branch" >
+                                        <option value="">Select Option</option>
+                                        @foreach($branch as $data)
+                                        <option value="{{ $data->id }}" {{ old('branch_id') == $data->id ? 'selected' : '' }}>
+                                           {{ $data->name }}
+                                       </option> 
+                                       @endforeach 
+                                    </select>
                                 </div>
                             </div>
                             <div class="mb-4 col-sm-12">
@@ -37,8 +67,8 @@
                                     <textarea name="transfer_reason" id="transfer_reason" cols="30" rows="10" class="form-control" placeholder=" Enter Transfer Reason"></textarea>
                                 </div>
                             </div>
-                            <span id="edit">
-                            </span>
+                            {{-- <span id="edit">
+                            </span> --}}
 
                             <div class="text-center ">
                                 <button onclick="ajaxCall('form_data')" type="button" class="btn btn-white">Add
@@ -53,12 +83,28 @@
         </div>
     </div>
     <script>
-        function chagne_type(data) {
-            if (data == "flat") {
-                document.getElementById('type_id').innerText = data + " amount"
+        function change_type(data) {
+            if (data === "flat") {
+                document.getElementById('type_id').innerText = data + " amount";
             } else {
-                document.getElementById('type_id').innerText = data
-
+                document.getElementById('type_id').innerText = data;
             }
         }
+     $(document).ready(function(){
+       $('.transfer_type').change(function(){
+               var transfer_type = $(this).val();
+               if(transfer_type == "branch"){
+                    $('.both_data').hide();
+                    $('.branch').show();
+                    $('.department_data').show();
+
+               }else if (transfer_type === "department"){
+                    $('.both_data').show();
+                    $('.branch').hide();
+               }
+          });
+                });
     </script>
+    
+
+        

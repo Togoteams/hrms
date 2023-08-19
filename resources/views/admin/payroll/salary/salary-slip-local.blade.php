@@ -203,33 +203,20 @@
                             <td class="payslip">{{$data['employee']->ec_number}}</td>
                             @endif
 
+
+                        </tr>
+                        <tr>
                             @if (!empty($data['employee']->designation))
                             <td class="payslip"> Designation :</td>
                             <td class="payslip">{{$data['employee']->designation->name}}</td>
                             @endif
-
-
-                        </tr>
-                        <tr>
-                            @if (!empty($data['department']))
-                            <td class="payslip"> Department :</td>
-                            <td class="payslip">{{$data['department']->department_name ?? ''}}</td>
-                            @endif
-
-
-
-                        </tr>
-
-                        <tr>
                             <td class="payslip">Bank Details :</td>
                             <td>{{$data['employee']->bank_account_number}}</td>
                         </tr>
 
                     </thead>
                 </table>
-
                 <hr>
-
                 <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                     <thead>
                         <tr>
@@ -239,70 +226,56 @@
                         <tr>
                             <td class="payslip">Salary Date :</td>
                             <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td>
-
-                            <!-- 
-                            <td class="payslip">No. of Days in Month :</td>
-                            <td class="payslip"></td>
-
-                            <td class="payslip">No. of Working Days :</td>
-                            <td class="payslip">28</td> -->
-
-
+                            <td class="payslip">No. of Payable days :</td>
+                            <td class="payslip">{{$presentDay}}</td>
                         </tr>
                         <tr>
-                            <td class="payslip">No. of Payable Leaves :</td>
-                            <td class="payslip"></td>
 
-                            <td class="payslip">Total Attendance :</td>
-                            <td class="payslip"></td>
+
+                            <td class="payslip">Total Workingdays :</td>
+                            <td class="payslip">{{$totalMonthDays}}</td>
 
                             <td class="payslip">Total Absent : </td>
-                            <td class="payslip">0</td>
-
-
+                            <td class="payslip">{{$noOfempLeave}}</td>
                         </tr>
-                        <!-- <tr>
-                            <td class="payslip"> No. of Over Time (Hours) :</td>
-                            <td class="payslip"></td>
-
-
-                        </tr> -->
-
                     </thead>
                 </table>
-
-
-
                 <div class="row">
                     <div class="col-md-6">
                         <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                             <tbody>
                                 <tr>
                                     <th class="marksheetAlign">EARNINGS </th>
-                                    <th style="text-align: right;">PAY SCALE</th>
+                                    <!-- <th style="text-align: right;">PAY SCALE</th> -->
                                     <th style="text-align: right;">EARNED</th>
-                                    
-
+                                </tr>
+                                @php
+                                $noOfIncome =0;
+                                $totalIncomeAmount =$data->basic;
+                                @endphp
+                                <tr>
+                                    <td style="font-weight: 600;"><strong>Basic</strong></td>
+                                    <td style="text-align: right;">{{$data->basic}}</td>
                                 </tr>
                                 @foreach ($data['payrollSalaryHead'] as $key => $value)
-                                    @if ($value->payroll_head->head_type=="income")
-                                        <tr>
-                                            <td  style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
-                                            <td style="text-align: right;">{{$value->value}}</td>
-                                            <td style="text-align: right;">{{$value->value}}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                               
+                                @if ($value->payroll_head->head_type=="income")
+
+                                @php
+                                $noOfIncome = $noOfIncome +1;
+                                $totalIncomeAmount = $totalIncomeAmount + $value->value
+                                @endphp
                                 <tr>
-                                    <td style="font-weight: 600;"><strong>Earnings
-                                        </strong></td>
-                                    <td style="text-align: right;">0</td>
-                                    <td style="text-align: right;">0</td>
-                                   
+                                    <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                    <!-- <td style="text-align: right;">{{$value->value}}</td> -->
+                                    <td style="text-align: right;">{{$value->value}}</td>
                                 </tr>
-                               
-                                
+                                @endif
+                                @endforeach
+                                <tr>
+                                    <th style="font-weight: 600;"><strong>Gross Earning</strong></th>
+                                    <!-- <th style="text-align: right;">{{$totalIncomeAmount}}</th> -->
+                                    <th style="text-align: right;">{{$totalIncomeAmount}}</th>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -310,114 +283,50 @@
                         <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                             <tbody>
                                 <tr>
-                                    
                                     <th class="marksheetAlign" style="padding-left: 10%;">DEDUCTIONS</th>
                                     <th></th>
-
                                 </tr>
+                                @php
+                                $noOfDescription =0;
+                                $totalDeductionAmount =0;
+                                @endphp
+
                                 @foreach ($data['payrollSalaryHead'] as $key => $value)
-                                    @if ($value->payroll_head->head_type=="deduction")
-                                    <tr>
-                                        <td  style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
-                                        <td style="text-align: right;">{{$value->value}}</td>
-                                    </tr>
-                                    @endif
+                                @if ($value->payroll_head->head_type=="deduction")
+                                @php
+                                $noOfDescription = $noOfDescription +1;
+                                $totalDeductionAmount = $totalDeductionAmount + $value->value;
+                                @endphp
+                                <tr>
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                    <td style="text-align: right;">{{$value->value}}</td>
+                                </tr>
+                                @endif
                                 @endforeach
-                                <!-- <tr>
-                                   
-                                    <td style="font-weight: 600; padding-left: 10%;"><strong>EPF @ 12.00%</strong></td>
-                                    <td style="text-align: right;">72</td>
-                                </tr>
-                                <tr>
-                                  
-                                    <td style="font-weight: 600; padding-left: 10%;"><strong>ESI @1.75%
-                                        </strong></td>
-                                    <td style="text-align: right;">72</td>
-                                </tr>
-                                <tr>
-                                   
-                                    <td style="font-weight: 600;padding-left: 10%;"><strong>ESI @1.75%
-                                        </strong></td>
-                                    <td style="text-align: right;">0</td>
-                                </tr>
-                                <tr>
-                                   
-                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Loan Deduction (if any)
 
-                                        </strong></td>
-                                    <td style="text-align: right;">0</td>
-                                </tr>
                                 <tr>
-                                    
-                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Income Tax Deductions (if any)
-
-
-                                        </strong></td>
-                                    <td style="text-align: right;">0</td>
-                                </tr>
-                                <tr>
-                                   
-                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Penalty Deductions (if any)
-                                        </strong></td>
-                                    <td style="text-align: right;">0</td>
-                                </tr>
-                                <tr>
-                                   
-                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Fixed Deductions (if any)
-
-                                        </strong></td>
-                                    <td style="text-align: right;">0</td>
-                                </tr>
-                                <tr>
-                                  
-                                    <td style="font-weight: 600; padding-left: 10%;"><strong>Other Deductions (if any)
-
-
-                                        </strong></td>
-                                    <td style="text-align: right;">0</td>
-                                </tr>
-                                <tr>
-                                    
-
-                                    <td colspan="2"></td>
-                                </tr>
-                                <tr>
-                                    
-                                    <td colspan="2"></td>
-                                </tr>
-                                <tr>
-                                   
-                                    <td colspan="2"></td>
-                                </tr> -->
-                               
-                            
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-md-12">
-                        <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
-                            <tbody>
-                            <tr>
-                                    <th style="font-weight: 600;"><strong>Gross Earning
-
-                                        </strong></th>
-                                    <th style="text-align: right;">19600
-                                    </th>
-                                    <th style="text-align: right;">754
-                                    </th>
                                     <th style="font-weight: 600; padding-left: 10%;">Total Deduction
                                     </th>
+                                    <th>{{$totalDeductionAmount}}</th>
                                     <th></th>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
+
+                </div>
+                <div class="row">
+
                     <div class="col-md-12">
                         <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                             <tbody>
+                            <tr><th></th></tr>
+                            <tr><th></th></tr>
+                            <tr><th></th></tr>
                                 <tr>
-                                    
-                                    <th style="padding-left: 10%;">Net Take Home (Gross Earning - Total Deduction) : 1735 <span style="font-weight: 100;"><br>(Rupees One Thousand Seven Hundreds Thirty )</span></th>
+
+                                    <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total Deduction) : {{$data->net_take_home}} <span style="font-weight: 100;">(Rupees {{convertNumberToWords($data->net_take_home)}} )</span></th>
                                 </tr>
                             </tbody>
                         </table>`

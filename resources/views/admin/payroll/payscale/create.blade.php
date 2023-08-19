@@ -64,62 +64,7 @@
     </main>
 @endsection
 @push('custom-scripts')
-<script>
-    function setId(id, value) {
-        document.getElementById(id).value = value;
-    }
-
-    function getValue(id) {
-        return Number(document.getElementById(id).value);
-    }
-
-    function taxCalCalculation(){
-        var basicAmount = getValue('basic');
-        employmentType = document.getElementById('employment_type').value;
-        var taxCaldata = getAjaxData({"basic_amount":basicAmount,'employment_type':employmentType},taxCalcUrl);
-    }
-
-
-    function amount_cal(data, operator = null) {
-        var total_gross_amount = 0;
-        var total_deduction = 0;
-        var totalEarning = 0;
-        var totalDeduction = 0;
-        
-        var employmentType = document.getElementById('employment_type').value;
-        var unionFee = 0;
-        
-        var taxCalcUrl ="{{route('admin.payroll.payscale.tax.cal')}}";
-        var basicAmount = getValue('basic');
-        if(employmentType=="local")
-        {
-            var taxAmount = getValue('tax');
-            if(basicAmount){
-                unionFee = basicAmount/100;
-            }
-            totalEarning = basicAmount + getValue('allowance') + getValue('others_arrears');
-                    totalDeduction = taxAmount + getValue('bomaid') + getValue('pension') + unionFee  + getValue('other_deductions');
-            setId('union_fee', unionFee);
-
-        }else
-        {
-            totalEarning = basicAmount + getValue('entertainment_expenses')+
-             getValue('house_up_keep_allow')+  getValue('education_allowance');
-             totalDeduction = getValue('provident_fund') + getValue('other_deductions');
-        }
-
-        setId('gross_earning', totalEarning);
-        setId('total_deduction', totalDeduction);
-        setId('net_take_home', totalEarning-totalDeduction);
-
-    }
-    $(document).ready(function () {
-        // $("#basic").keyup(function () {
-        //     taxCalCalculation();
-        // });
-
-    });
-</script>
+@include('admin.payroll.payscale.payroll-payscale-js')
 @endpush
 
 <script>

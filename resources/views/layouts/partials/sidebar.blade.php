@@ -141,8 +141,12 @@
                                              href="{{ route('admin.employees.index') }}">Employees</a>
                                      @endcanany
                                      @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees'])
-                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
-                                             href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
+                                         href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
+                                     @endcanany
+                                     @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees'])
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.department.index' ? 'active' : '' }} "
+                                             href="{{ route('admin.department.index') }}">Department </a>
                                      @endcanany
                                  </div>
                              </div>
@@ -246,6 +250,17 @@
                                  href="{{ route('admin.document.index') }}" data-placement="left">
                                  <i class="fa fa-file nav-icon"></i>
                                  <span class="nav-link-title">Document Management</span>
+                             </a>
+                         </div>
+                     @endcanany
+
+                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
+                     'delete-roles', 'view-roles'])
+                         <div class="nav-item">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
+                                 href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
+                                 <i class="fa fa-clock nav-icon"></i>
+                                 <span class="nav-link-title">Overtime Setting</span>
                              </a>
                          </div>
                      @endcanany

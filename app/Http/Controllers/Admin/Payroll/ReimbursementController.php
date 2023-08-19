@@ -44,7 +44,7 @@ class ReimbursementController extends BaseController
     public function create()
     {
         // $page = "Reimbursement";
-        // $reimbursementType = ReimbursementType::where('status','0')->get();
+        // $reimbursementType = ReimbursementType::where('status','active')->get();
         // return view('admin.payroll.reimbursement.create',compact('page','reimbursementType'));
     }
 
