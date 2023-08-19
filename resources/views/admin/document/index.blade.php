@@ -78,7 +78,8 @@
                                     
                                     <form id="edit{{ $item->id }}"
                                         action="{{ route('admin.document.destroy', $item->id) }}">
-                                            <button type="button" class="btn btn-white assign_doc" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" onclick="editForm('{{ route('admin.document.get.asign', $item->id) }}', 'assign_doc')" doc_id="{{$item->id}}">
+                                            <button type="button" class="btn btn-white assign_doc" href="#" data-bs-toggle="modal" 
+                                            data-bs-target="#staticBackdrop1" onclick="editForm('{{ route('admin.document.get.asign', $item->id) }}', 'assign_doc')" doc_id="{{$item->id}}">
                                                     Asign Employee Document
                                                 </button>
                                         <button type="button"

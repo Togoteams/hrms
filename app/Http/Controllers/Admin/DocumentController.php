@@ -80,6 +80,7 @@ class DocumentController extends Controller
         $data = Document::find($id);
         return view('admin.document.edit', ['data' => $data, 'page' => $this->page_name]);   
     }
+
     public function documentAssignedit(string $id)
     {
         $data = Document::find($id);
@@ -135,31 +136,45 @@ class DocumentController extends Controller
     public function asign(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'document_id' =>'required|numeric',
+            'document_id' => 'required|numeric',
             'emp_id' => 'required|array',
         ]);
-        //  dd($request->all());
+
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
                 $documentId = $request->input('document_id');
                 $empIds = $request->input('emp_id');
-    
-                // Insert each assignment separately
-                foreach ($empIds as $empId) {
-                    DocumentEmp::create([
-                        'document_id' => $documentId,
-                        'emp_id' => $empId,
-                        'created_at' => now(),
-                    ]);
+
+                // Fetch existing assignments for the document
+                $existingAssignments = DocumentEmp::where('document_id', $documentId)
+                    ->get();
+
+                // Delete assignments that are unchecked
+                foreach ($existingAssignments as $assignment) {
+                    if (!in_array($assignment->emp_id, $empIds)) {
+                        $assignment->delete();
+                    }
                 }
-    
-                return response()->json(['success' => $this->page_name . " Added Successfully"]);
+
+                // Create new assignments for checked employees
+                foreach ($empIds as $empId) {
+                    $isAssigned = $existingAssignments->contains('emp_id', $empId);
+
+                    if (!$isAssigned) {
+                        DocumentEmp::create([
+                            'document_id' => $documentId,
+                            'emp_id' => $empId,
+                            'created_at' => now(),
+                        ]);
+                    }
+                }
+
+                return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
-
     }
 }
