@@ -22,7 +22,7 @@
                 <!-- End Row -->
             </div>
            
-            @include('admin.department.create')
+            @include('admin.overtime_settings.create')
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -52,12 +52,46 @@
                     <thead>
                             <tr>
                                 <th>SI.</th>
-                                <th>Name</th>
-                                <th>status</th>
+                                <th>Employee Name</th>
+                                <th>Date</th>
+                                <th>working Hours</th>
+                                <th>working Min</th>
+                                <th>Overtime Type</th>
+                                {{-- <th>status</th> --}}
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {{-- @foreach ($data as $key =>$item) 
+                            <tr>
+                                <td>{{++$key}}</td>
+                                <td>{{$item->type}}</td>
+                                <td>{{$item->date}}</td>
+                                <td>{{$item->working_hours}}</td>
+                                <td>{{$item->working_min}}</td>
+                                <td>{{$item->overtime_type}}</td>
+                                <td>
+                                    <div class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
+                                        data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
+                                        </span>{{ $item->status ?? 'Active' }}</div>
+                                </td>
+                                <td style="text-align:right;">
+                                    <form id="edit{{ $item->id }}"
+                                        action="{{ route('admin.payroll.reimbursement_type.destroy', $item->id) }}">
+                                        <button type="button"
+                                            onclick="editForm('{{ route('admin.payroll.reimbursement_type.edit', $item->id) }}', 'edit')"
+                                            href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                            class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                        @csrf
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="button" id="delete{{ $item->id }}"
+                                            onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
+                                            class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                             @endforeach   --}}
                         </tbody>
                     </table>
                   
@@ -70,7 +104,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.department.index') }}",
+                            ajax: "{{ route('admin.overtime-settings.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
@@ -81,14 +115,32 @@
 
                              
                                 {
-                                    data: 'name',
-                                    name: 'name'
+                                    data: 'user.name',
+                                    name: 'user.name'
                                 },
 
                                 {
-                                    data: 'status',
-                                    name: 'status'
+                                    data: 'date',
+                                    name: 'date'
                                 },
+                                {
+                                    data: 'working_hours',
+                                    name: 'working_hours'
+                                },
+                                {
+                                    data: 'working_min',
+                                    name: 'working_min'
+                                },
+                                {
+                                    data: 'overtime_type',
+                                    name: 'overtime_type'
+                                },
+                              
+
+                                // {
+                                //     data: 'status',
+                                //     name: 'status'
+                                // },
 
 
                                 {

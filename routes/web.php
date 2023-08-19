@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\EmployeeTransferControler;
 use App\Http\Controllers\Admin\KraAttributesController;
+use App\Http\Controllers\Admin\OvertimeController;
 use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Http\Controllers\Admin\Payroll\PayRollPayscaleCotroller;
 use App\Http\Controllers\Admin\Payroll\PayrollSalaryController;
@@ -170,7 +171,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('document/asign', [DocumentController::class, 'asign'])->name('document.asign');
     Route::get('document-get/asign/{id}', [DocumentController::class, 'documentAssignedit'])->name('document.get.asign');
 
-
+    Route::resource('overtime-settings', OvertimeController::class);
 
     Route::resource('leave_type', LeaveTypeCobntroller::class);
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');

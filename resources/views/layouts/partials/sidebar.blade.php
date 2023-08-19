@@ -254,6 +254,17 @@
                          </div>
                      @endcanany
 
+                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
+                     'delete-roles', 'view-roles'])
+                         <div class="nav-item">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
+                                 href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
+                                 <i class="fa fa-clock nav-icon"></i>
+                                 <span class="nav-link-title">Overtime Setting</span>
+                             </a>
+                         </div>
+                     @endcanany
+
                      {{-- <div id="navbarVerticalMenuSettingMenu">
                          <!-- Collapse -->
 
