@@ -345,6 +345,26 @@
                          </div>
                      </div>
                      <div class="nav-item">
+                        <a class="nav-link dropdown-toggle " href="#leavesetting" role="button"
+                            data-bs-toggle="collapse" data-bs-target="#leavesetting" aria-expanded="false"
+                            aria-controls="leavesetting">
+                            <i class="bi-person nav-icon"></i>
+                            <span class="nav-link-title">Leave Settings</span>
+                        </a>
+
+                        <div id="leavesetting"
+                            class="nav-collapse collapse {{ show(['leave_setting.index']) }} "
+                            data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                            <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_setting.index' ? 'active' : '' }}"
+                                href="{{ route('admin.leave_setting.index') }}" data-placement="left">
+                                <span class="nav-link-title">Leave Type</span>
+                            </a>
+
+
+                        </div>
+                    </div>
+                     <div class="nav-item">
                          <a class="nav-link dropdown-toggle " href="#emppayroll" role="button"
                              data-bs-toggle="collapse" data-bs-target="#emppayroll" aria-expanded="false"
                              aria-controls="emppayroll">
