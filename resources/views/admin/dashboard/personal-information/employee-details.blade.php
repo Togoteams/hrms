@@ -29,10 +29,22 @@
                                             <div class="row">
                                                 <div class="col-md-10 py-4">
                                                     @if (!empty($data))
+
+                                                    @php
+                                                    $fullName = $data->user->name;
+                                                    $nameParts = explode(' ', $fullName);
+                                                    $firstName = $nameParts[0];
+                                                    $lastName = count($nameParts) > 1 ? $nameParts[count($nameParts) - 1] : '';
+                                                    @endphp
                                                         <div class="left-div">
                                                             <div class="row text-dark">
-                                                                <div class="col-3 fw-semibold">Name</div>
-                                                                <div class="col-3">{{ $data->user->name }}</div>
+                                                                {{-- <div class="col-3 fw-semibold">Name</div>
+                                                                <div class="col-3">{{ $data->user->name }}</div> --}}
+                                                                <div class="col-3 fw-semibold">First Name</div>
+                                                                <div class="col-3"> {{ $firstName }}</div>
+
+                                                                <div class="col-3 fw-semibold">Last Name</div>
+                                                                <div class="col-3">{{ $lastName }}</div>
 
                                                                 <div class="col-3 fw-semibold">Gender</div>
                                                                 <div class="col-3">{{ $data->gender }}</div>
@@ -43,11 +55,14 @@
                                                                 <div class="col-3 fw-semibold">Designation</div>
                                                                 <div class="col-3">{{ $data->designation->name }}</div>
 
-                                                                <div class="col-3 fw-semibold">Basic Salary</div>
-                                                                <div class="col-3">{{ $data->basic_salary }}</div>
+                                                                {{-- <div class="col-3 fw-semibold">Basic Salary</div>
+                                                                <div class="col-3">{{ $data->basic_salary }}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Date of Birth</div>
                                                                 <div class="col-3">{{ $data->date_of_birth }}</div>
+
+                                                                <div class="col-3 fw-semibold">Age</div>
+                                                                <div class="col-3">{{ $data->user->age }}18</div>
                                                             </div>
                                                         </div>
                                                     @else
