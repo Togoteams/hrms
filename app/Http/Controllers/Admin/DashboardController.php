@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -11,7 +13,9 @@ class DashboardController extends Controller
 
     public function viewDashboard()
     {
-        return view('dashboard');
+        $data = User::findOrFail(Auth::user()->id);
+        // dd($data);
+        return view('dashboard', compact('data'));
     }
 
     public function userManualDownload($filename)

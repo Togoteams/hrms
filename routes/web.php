@@ -304,7 +304,11 @@ Route::controller(LoginController::class)->as('login.')->prefix('login/')->group
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
 
-Route::get('admin/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'changed.password'])->name('admin.dashboard');
-require __DIR__ . '/auth.php';
+// Route::get('admin/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified', 'changed.password'])->name('admin.dashboard');
+// require __DIR__ . '/auth.php';
+Route::get('admin/dashboard', [DashboardController::class, 'viewDashboard'])
+    ->middleware(['auth', 'verified', 'changed.password'])
+    ->name('admin.dashboard');
+    require __DIR__ . '/auth.php';

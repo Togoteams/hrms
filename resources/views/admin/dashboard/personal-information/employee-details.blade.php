@@ -62,7 +62,14 @@
                                                                 <div class="col-3">{{ $data->date_of_birth }}</div>
 
                                                                 <div class="col-3 fw-semibold">Age</div>
-                                                                <div class="col-3">{{ $data->user->age }}18</div>
+                                                                <div class="col-3"> 
+                                                                    <?php
+                                                                    $dob = new DateTime($data->date_of_birth);
+                                                                    $now = new DateTime();
+                                                                    $age = $now->diff($dob)->y;
+                                                                    echo $age;
+                                                                    ?>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     @else

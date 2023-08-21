@@ -133,8 +133,12 @@
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.profile')}}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
-                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="">
-
+                                    {{-- <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt=""> --}}
+                                    @if ($data->file)
+                                    <img class="dashboard-icon" src="{{ asset('asset/image/' . $data->file) }}" alt="Profile Image">
+                                    @else
+                                        <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="Default Icon">
+                                    @endif
                                     </h6>
                                     <h2 class="text-white card-title">Upload Photo</h2>
 

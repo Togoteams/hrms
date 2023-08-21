@@ -88,14 +88,24 @@ class UserAccountController extends Controller
 
     public function profileUpdate(Request $request)
     {
-
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
+            'file' => 'required|file|mimes:jpeg,jpg,png',
+
         ]);
         $profile = User::where('id', Auth::user()->id)->first();
         $profile->name = $request->name;
         $profile->email = strtolower($request->email);
+        if($request->hasFile('file'))
+        {
+            $file = $request->file('file');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() .'.' . $extension;
+            $file->move('asset/image',$filename);
+            $profile->file = $filename;
+        }
         $profile->save();
         $message = "Profile Updated";
         Session::put('success', $message);
