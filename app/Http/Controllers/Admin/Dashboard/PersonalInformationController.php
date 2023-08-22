@@ -51,21 +51,27 @@ class PersonalInformationController extends Controller
     public function updateEmployeeDetails(Request $request)
     {
         $page_name = "Employee";
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string'],
-            'user_id' => ['required', 'numeric'],
-            'gender' => ['required', 'string'],
-            // 'username' => ['required', 'string'],
-            // 'designation_id' => ['required', 'numeric'],
-            // 'basic_salary' => ['required', 'numeric'],
-        ]);
+             'name' => ['required', 'string'],
+             'user_id' => ['required', 'numeric'],
+             'gender' => ['required', 'string'],
+             'salutation' => ['required', 'string'],
+             'first_name' => ['required', 'string'],
+             'last_name' => ['required', 'string'],
+             'birth_country' => ['required', 'string'],
+             'date_of_birth' => ['required', 'date'],
 
+        ]);
         if ($validator->fails()) {
             return $validator->errors();
+            
         } else {
             try {
                 // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
+                Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'salutation', 'first_name','last_name','name']));
                 // User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
+                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id','birth_country', 'gender','date_of_birth']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);

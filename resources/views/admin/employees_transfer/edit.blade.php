@@ -84,7 +84,7 @@
                 $('.branch').hide();
            }
       });
-            });
+});
 </script>
 @endpush
 

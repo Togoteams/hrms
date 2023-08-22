@@ -91,7 +91,7 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content ">
                             <div class="modal-header ">
-                                <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}/ OMANG</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -101,7 +101,17 @@
                                     <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
                                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                     <div class="row">
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="type" class="required">Type</label>
+                                                <select name="type" class="type form-control" id="type" placeholder="Employee type">
+                                                    <option value="">Select Option</option>
+                                                    <option value="passport" @if(old('type', $data->type) === 'passport') selected @endif>Passport</option>
+                                                    <option value="omang" @if(old('type', $data->type) === 'omang') selected @endif>OMANG</option> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 mb-2 passport_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="passport_no">Passport No.</label>
                                                 <input id="passport_no" placeholder="Enter Passport No." type="number"
@@ -109,7 +119,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="col-sm-6 mb-2 passport_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="passport_expiry">Passport Expiry</label>
                                                 <input id="passport_expiry" placeholder="Enter Date of Passport Expiry"
@@ -117,7 +127,7 @@
                                                     name="passport_expiry" class="form-control form-control-sm ">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="col-sm-6 mb-2 omang_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="omang_no">OMANG No.</label>
                                                 <input id="omang_no" placeholder="Enter omang No." type="number"
@@ -125,7 +135,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="col-sm-6 mb-2 omang_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="omang_expiry">OMANG Expiry</label>
                                                 <input id="omang_expiry" placeholder="Enter Date of OMANG Expiry"
@@ -149,3 +159,20 @@
                 </div>
     </main>
 @endsection
+@push('custom-scripts')
+<script>
+    $(document).ready(function(){
+      $('.type').change(function(){
+              var type = $(this).val();
+              if(type == "omang"){
+                   $('.passport_data').hide();
+                   $('.omang_data').show();
+              }else if (type === "passport"){
+                   $('.passport_data').show();
+                   $('.omang_data').hide();
+              }
+         });
+   });
+   </script>
+@endpush
+

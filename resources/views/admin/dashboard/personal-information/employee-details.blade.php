@@ -30,21 +30,16 @@
                                                 <div class="col-md-10 py-4">
                                                     @if (!empty($data))
 
-                                                    @php
-                                                    $fullName = $data->user->name;
-                                                    $nameParts = explode(' ', $fullName);
-                                                    $firstName = $nameParts[0];
-                                                    $lastName = count($nameParts) > 1 ? $nameParts[count($nameParts) - 1] : '';
-                                                    @endphp
+                                                    
                                                         <div class="left-div">
                                                             <div class="row text-dark">
                                                                 {{-- <div class="col-3 fw-semibold">Name</div>
                                                                 <div class="col-3">{{ $data->user->name }}</div> --}}
                                                                 <div class="col-3 fw-semibold">First Name</div>
-                                                                <div class="col-3"> {{ $firstName }}</div>
+                                                                {{-- <div class="col-3"> {{ $firstName }}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Last Name</div>
-                                                                <div class="col-3">{{ $lastName }}</div>
+                                                                {{-- <div class="col-3">{{ $lastName }}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Gender</div>
                                                                 <div class="col-3">{{ $data->gender }}</div>
@@ -112,14 +107,50 @@
                                     <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
 
                                     <div class="row">
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="salutation" class="required">Salutation</label>
+                                                <select name="salutation" class="form-control" id="salutation" placeholder="Employee salutation">
+                                                    <option value="">Select Option</option>
+                                                    <option value="mr" @if(old('salutation', $data->user->salutation) === 'mr') selected @endif>Mr</option>
+                                                    <option value="mrs" @if(old('salutation', $data->user->salutation) === 'mrs') selected @endif>Mrs</option> 
+                                                    <option value="miss" @if(old('salutation', $data->user->salutation) === 'miss') selected @endif>Miss</option> 
+                                                    <option value="dr" @if(old('salutation', $data->user->salutation) === 'dr') selected @endif>Dr</option> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="first_name">First Name<small class="required-field">*</small></label>
+                                                <input required id="first_name" placeholder="Enter First Name of Employee "
+                                                    type="text" name="first_name" class="form-control form-control-"
+                                                    value="{{ $data->user->first_name }}">
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="last_name">Last Name<small class="required-field">*</small></label>
+                                                <input required id="last_name" placeholder="Enter Last Name of Employee "
+                                                    type="text" name="last_name" class="form-control form-control-"
+                                                    value="{{ $data->user->last_name }}">
+                                            </div>
+                                        </div>
                                         <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="birth_country">Birth Country<small class="required-field">*</small></label>
+                                                <input required id="birth_country" placeholder="Enter Birth Country of Employee "
+                                                    type="text" name="birth_country" class="form-control form-control-"
+                                                    value="{{ $data->birth_country }}">
+                                            </div>
+                                        </div>
+                                        {{-- <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="name">Name<small class="required-field">*</small></label>
                                                 <input required id="name" placeholder="Enter Name of Employee "
                                                     type="text" name="name" class="form-control form-control-"
                                                     value="{{ $data->user->name }}">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-sm-6 mb-2">
                                             <div class="form-group">
                                                 <label for="gender">Gender<small class="required-field">*</small></label>
