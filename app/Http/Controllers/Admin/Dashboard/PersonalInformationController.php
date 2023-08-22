@@ -71,7 +71,7 @@ class PersonalInformationController extends Controller
                 // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
                 Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'salutation', 'first_name','last_name','name']));
                 // User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
-                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id','birth_country', 'gender','date_of_birth']));
+                User::where('id', $request->user_id)->update(['name'=>$request->first_name." ".$request->last_name,'first_name'=>$request->first_name,'last_name'=>$request->last_name]);
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
