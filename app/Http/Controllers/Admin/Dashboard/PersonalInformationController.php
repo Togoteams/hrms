@@ -132,12 +132,26 @@ class PersonalInformationController extends Controller
     public function updatePassport(Request $request)
     {
         $page_name = "Passport";
-        $validator = Validator::make($request->all(), [
-            'passport_no'       => ['nullable', 'numeric'],
-            'passport_expiry'   => ['nullable', 'date'],
-            'omang_no'          => ['nullable', 'numeric'],
-            'omang_expiry'      => ['nullable', 'date'],
-        ]);
+        $type = $request->type;
+        if($type == 'passport'){
+            $validator = Validator::make($request->all(), [
+                'type' => ['required', 'string'],
+                'passport_no'       => ['required', 'numeric'],
+                'passport_expiry'   => ['required', 'date'],
+                'omang_no'          => ['nullable', 'numeric'],
+                'omang_expiry'      => ['nullable', 'date'],
+
+            ]);
+      
+        }else{
+            $validator = Validator::make($request->all(), [
+                'type' => ['required', 'string'],
+                'passport_no'       => ['nullable', 'numeric'],
+                'passport_expiry'   => ['nullable', 'date'],
+                'omang_no'          => ['required', 'numeric'],
+                'omang_expiry'      => ['required', 'date'],
+            ]);
+        }
 
         if ($validator->fails()) {
             return $validator->errors();
