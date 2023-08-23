@@ -42,8 +42,8 @@
                     </div>
                     <div class="form-group mr-bot">
 
-                        <label for="image">Profile Pic </label>
-                        <input type="file" name="image" id="image" accept="image/*" onchange="validateimg(this)">
+                        <label for="image" class="required">Profile Pic </label>
+                        <input type="file" name="image" id="image" accept="image/*" onchange="validateimg(this)" required>
                     </div>
 
                     <div class="form-group mr-bot">

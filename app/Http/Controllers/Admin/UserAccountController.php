@@ -110,6 +110,7 @@ class UserAccountController extends Controller
         $message = "Profile Updated";
         Session::put('success', $message);
         return redirect()->back();
+        
     }
 
     public function viewPasswordReset()
