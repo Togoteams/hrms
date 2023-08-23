@@ -134,8 +134,8 @@
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
                                     {{-- <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt=""> --}}
-                                    @if ($data->file)
-                                    <img class="dashboard-icon" src="{{ asset('asset/image/' . $data->file) }}" alt="Profile Image" style="height: 56px; width: 70px;">
+                                    @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
+                                        <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 56px; width: 70px;">
                                     @else
                                         <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="Default Icon" style="height: 56px; width: 70px;">
                                     @endif
