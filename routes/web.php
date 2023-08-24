@@ -58,6 +58,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/employee-details', 'viewEmployeeDetails')->name('employee.details');
             Route::post('/update-employee-details', 'updateEmployeeDetails')->name('employee.details.update');
 
+            Route::get('/family-details', 'viewFamilyDetails')->name('family.details.view');
+            Route::post('/add-family-details', 'addFamilyDetails')->name('family.details.save');
+            Route::post('/delete-family-details', 'deleteFamilyDetails')->name('family.details.delete');
+
+
             Route::get('/contact-details', 'viewContact')->name('contact');
             Route::post('/update-contact', 'updateContact')->name('contact.update');
 

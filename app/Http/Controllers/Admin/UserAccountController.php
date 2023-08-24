@@ -92,9 +92,12 @@ class UserAccountController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
-            'image' => 'required|file|mimes:jpeg,jpg,png',
+            'image' => 'required|image|mimes:jpeg,jpg,png',
 
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $profile = User::where('id', Auth::user()->id)->first();
         $profile->name = $request->name;
         $profile->email = strtolower($request->email);
@@ -110,7 +113,6 @@ class UserAccountController extends Controller
         $message = "Profile Updated";
         Session::put('success', $message);
         return redirect()->back();
-        
     }
 
     public function viewPasswordReset()

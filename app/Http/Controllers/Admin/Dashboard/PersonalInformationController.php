@@ -7,6 +7,7 @@ use App\Models\Designation;
 use App\Models\EmpAddress;
 use App\Models\Employee;
 use App\Models\EmpPassportOmang;
+use App\Models\FamilyDetail;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -24,6 +25,15 @@ class PersonalInformationController extends Controller
         $designation = Designation::all();
         // $data = Employee::where('user_id', Auth::user()->id)->get();
         return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation, 'page' => $page_name]);
+    }
+
+    public function viewFamilyDetails()
+    {
+        $page_name = "Family Details";
+        // $data = Employee::where('user_id', Auth::user()->id)->first();
+        // $designation = Designation::all();
+        $datas = FamilyDetail::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.personal-information.family-details', ['page' => $page_name, 'datas'=>$datas]);
     }
 
     public function viewContact()
@@ -53,14 +63,23 @@ class PersonalInformationController extends Controller
         $page_name = "Employee";
         // dd($request->all());
         $validator = Validator::make($request->all(), [
-             'name' => ['required', 'string'],
+            //  'name' => ['required', 'string'],
              'user_id' => ['required', 'numeric'],
              'gender' => ['required', 'string'],
              'salutation' => ['required', 'string'],
              'first_name' => ['required', 'string'],
              'last_name' => ['required', 'string'],
              'birth_country' => ['required', 'string'],
-             'date_of_birth' => ['required', 'date'],
+             'date_of_birth' => [
+                'required',
+                'date',
+                function ($attribute, $value, $fail) {
+                    $eighteenYearsAgo = now()->subYears(18);
+                    if ($value > $eighteenYearsAgo) {
+                        $fail("The $attribute must be at least 18 years ago.");
+                    }
+                }
+            ],
 
         ]);
         if ($validator->fails()) {
@@ -75,6 +94,72 @@ class PersonalInformationController extends Controller
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function addFamilyDetails(Request $request)
+    {
+        $page_name = "Family Details";
+     $validator = Validator::make($request->all(), [
+            'user_id' => 'required|numeric',
+            'relation' => 'required|string',
+            'date_of_birth'=> 'required|string',
+            'name' => 'required|string',
+            'depended' => 'required|string',
+            'marital_status' => 'required|string',
+            'gender' => 'required|string',
+            'occupations' => 'required|string',
+            'monthly_income' => 'required|string',
+            'bank_of_baroda_employee' => 'required|string',
+            'address_line1' =>'required|string',
+            'address_line2'=>'nullable|string',
+            'state' => 'required|string',
+            'country' => 'required|string',
+            'email' => 'nullable|email',
+            'number' => 'required | numeric | digits:10',
+            'nationality' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            // FamilyDetail::create($request->except('_token'));
+            // return response()->json(['success' => $page_name . " Added Successfully"]);
+            try {
+                if (empty($request->id)) {
+                    FamilyDetail::insertGetId($request->except(['_token', 'id']));
+                    $message = "Record Created Successfully";
+                } else {
+                    FamilyDetail::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    $message = "Record Updated Successfully";
+                }
+                return response()->json(['success' => $message]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function deleteFamilyDetails(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $family = FamilyDetail::find($request->id);
+                if ($family) {
+                    $family->delete();
+                    $message = "Record deleted Successfully";
+                    return response()->json(['status' => true, 'message' => $message]);
+                } else {
+                    return response()->json(['status' => false, 'error' => 'Record not found']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['status' => false, 'error' => $e->getMessage()]);
             }
         }
     }
