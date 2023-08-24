@@ -264,4 +264,12 @@ a {
     content: " *";
     color: red;
   }
+/* <!-- Ashif --> */
+button.add_leave_setting_save_btn {
+    border: 1px solid #f85109;
+    border-radius: 7px;
+    padding: 9px 13px;
+    background-color: #f85109;
+    color: #fff;
+}
   

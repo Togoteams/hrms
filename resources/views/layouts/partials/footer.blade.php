@@ -22,6 +22,8 @@
 <script src="{{ asset('assets/js/hs.theme-appearance-charts.js') }}"></script>
 <!-- JS Plugins Init. -->
 
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+@stack('script')
 
 <script>
     $('#datatable').DataTable();

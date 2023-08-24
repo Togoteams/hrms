@@ -118,6 +118,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('/update-status', 'setStatus')->name('update.status');
         Route::get('/delete', 'deleteData')->name('delete');
     });
+    Route::controller(LeaveSettingController::class)->as('leavesettings.')->prefix('leavesettings/')->group(function () {
+        Route::get('/list', 'index')->name('list');
+        Route::post('/add', 'store')->name('add'); 
+        Route::post('/edit', 'edit')->name('edit');
+    });
     Route::resource('employees', EmployeeController::class);
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
@@ -190,7 +195,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('get_balance_leave/', [LeaveApplyController::class, 'get_balance_leave'])->name('leave_apply.get_balance_leave');
     Route::get('rejected_leave/', [LeaveApplyController::class, 'get_rejected_leave'])->name('leave_apply.get_rejected_leave');
     //Leave Settings start 
-    Route::resource('leave_setting', LeaveSettingController::class);
+    // Route::resource('leave_setting', LeaveSettingController::class);
     //   encashemnt start
     Route::resource('leave_encashment', LeaveEncashmentController::class);
     Route::put('leave_encashment/status/{id}', [LeaveEncashmentController::class, 'status'])->name('leave_encashment.status');

@@ -368,11 +368,11 @@
                         </a>
 
                         <div id="leavesetting"
-                            class="nav-collapse collapse {{ show(['leave_setting.index']) }} "
+                            class="nav-collapse collapse {{ show(['leavesettings.list']) }} "
                             data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                            <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_setting.index' ? 'active' : '' }}"
-                                href="{{ route('admin.leave_setting.index') }}" data-placement="left">
+                            <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
+                                href="{{ route('admin.leavesettings.list') }}" data-placement="left">
                                 <span class="nav-link-title">Leave Type</span>
                             </a>
 
