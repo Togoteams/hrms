@@ -1,6 +1,6 @@
    
    
-<form id="form_edit" action="{{ route('admin.employee-transfer.update',$item->id) }}">
+<form id="form_edit" action="{{ route('admin.overtime-settings.update',$item->id) }}">
     @csrf
    <input type="hidden" name="_method" value="PUT">
        <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">

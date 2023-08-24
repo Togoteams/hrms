@@ -30,11 +30,11 @@
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="current_document" class="required">Current Document</label> <br>
-                @if (in_array(pathinfo(asset('asset/img/'.$data->document), PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
-                    <img src="{{ asset('asset/img/'.$data->document) }}" alt="image" width="70px" height="70px">
-                @elseif (in_array(pathinfo(asset('asset/img/'.$data->document), PATHINFO_EXTENSION), ['pdf']))
-                    <a href="{{ asset('asset/img/'.$data->document) }}" target="_blank">
-                        <img src="{{ asset('asset/img/') }}" alt="{{$data->document}}" width="70px" height="70px">
+                @if (in_array(pathinfo(asset('assets/document/'.$data->document), PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
+                    <img src="{{ asset('assets/document/'.$data->document) }}" alt="image" width="70px" height="70px">
+                @elseif (in_array(pathinfo(asset('assets/document/'.$data->document), PATHINFO_EXTENSION), ['pdf']))
+                    <a href="{{ asset('assets/document/'.$data->document) }}" target="_blank">
+                        <img src="{{ asset('assets/document/') }}" alt="{{$data->document}}" width="70px" height="70px">
                     </a>
                 @endif
             </div>

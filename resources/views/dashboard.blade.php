@@ -133,8 +133,12 @@
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.profile')}}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
-                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="">
-
+                                    {{-- <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt=""> --}}
+                                    @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
+                                        <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 56px; width: 70px;">
+                                    @else
+                                        <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="Default Icon" style="height: 56px; width: 70px;">
+                                    @endif
                                     </h6>
                                     <h2 class="text-white card-title">Upload Photo</h2>
 
@@ -172,8 +176,7 @@
                             <!-- End Card -->
                         </div> --}}
 
-                        <div class="mb-3 col-sm-6 col-lg-2">
-                            <!-- Card -->
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <a class="card card-hover-shadow card-dashboard card-bg " href="#">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
@@ -185,17 +188,15 @@
 
                                     <div class="row align-items-center gx-2">
 
-                                        <!-- End Col -->
-                                        <!-- End Col -->
+                                       
                                     </div>
-                                    <!-- End Row -->
+                                   
                                 </div>
                             </a>
-                            <!-- End Card -->
-                        </div>
+                          
+                        </div> --}}
 
-                        <div class="mb-3 col-sm-6 col-lg-2">
-                            <!-- Card -->
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <a class="card card-hover-shadow card-dashboard card-bg " href="#">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
@@ -207,14 +208,10 @@
 
                                     <div class="row align-items-center gx-2">
 
-                                        <!-- End Col -->
-                                        <!-- End Col -->
                                     </div>
-                                    <!-- End Row -->
                                 </div>
                             </a>
-                            <!-- End Card -->
-                        </div>
+                        </div> --}}
 
 
                     </div>

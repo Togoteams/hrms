@@ -58,6 +58,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/employee-details', 'viewEmployeeDetails')->name('employee.details');
             Route::post('/update-employee-details', 'updateEmployeeDetails')->name('employee.details.update');
 
+            Route::get('/family-details', 'viewFamilyDetails')->name('family.details.view');
+            Route::post('/add-family-details', 'addFamilyDetails')->name('family.details.save');
+            Route::post('/delete-family-details', 'deleteFamilyDetails')->name('family.details.delete');
+
+
             Route::get('/contact-details', 'viewContact')->name('contact');
             Route::post('/update-contact', 'updateContact')->name('contact.update');
 
@@ -309,7 +314,11 @@ Route::controller(LoginController::class)->as('login.')->prefix('login/')->group
     Route::match(['get', 'post'], '/', 'authentication')->name('authentication');
 });
 
-Route::get('admin/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'changed.password'])->name('admin.dashboard');
-require __DIR__ . '/auth.php';
+// Route::get('admin/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified', 'changed.password'])->name('admin.dashboard');
+// require __DIR__ . '/auth.php';
+Route::get('admin/dashboard', [DashboardController::class, 'viewDashboard'])
+    ->middleware(['auth', 'verified', 'changed.password'])
+    ->name('admin.dashboard');
+    require __DIR__ . '/auth.php';

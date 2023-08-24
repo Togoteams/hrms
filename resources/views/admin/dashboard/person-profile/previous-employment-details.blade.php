@@ -61,6 +61,11 @@
                                                                             {{ $data->description }}
                                                                         </div>
                                                                     @endif
+
+                                                                    <div class="col-4 fw-semibold pt-1">Designation</div>
+                                                                    <div class="col-6 pt-1">
+                                                                        {{ $data->designation_id }}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 text-end">
@@ -72,6 +77,7 @@
                                                                         data-company_name="{{ $data->company_name }}"
                                                                         data-start_date="{{ $data->start_date }}"
                                                                         data-end_date="{{ $data->end_date }}"
+                                                                        data-designation_id="{{ $data->designation_id }}"
                                                                         data-description="{{ $data->description }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
@@ -142,12 +148,26 @@
                                                 placeholder="End Year" type="date"
                                                 class="form-control form-control-sm">
                                         </div>
+                                        <div class="col-md-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="designation">Designation</label>
+                                                <select name="designation_id" class="form-control" id="designation" placeholder="Employee designation">
+                                                    <option value="">Select Option</option>
+                                                    @foreach($designation as $data)
+                                                    <option value="{{ $data->id }}" {{ old('designation_id') == $data->id ? 'selected' : '' }}>
+                                                       {{ $data->name }}
+                                                   </option>
+                                                   @endforeach 
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12 mb-2">
                                             <div class="form-group">
                                                 <label for="description">Description</label>
                                                 <textarea id="description" placeholder="Enter Description..." name="description" class="form-control"></textarea>
                                             </div>
                                         </div>
+                                       
                                     </div>
                                     <hr>
                                     <div class="text-center ">
@@ -187,6 +207,7 @@
                 let company_name = $(event.currentTarget).data("company_name");
                 let start_date = $(event.currentTarget).data("start_date");
                 let end_date = $(event.currentTarget).data("end_date");
+                let designation_id = $(event.currentTarget).data("designation_id");
                 let description = $(event.currentTarget).data("description");
 
                 $("#id").val(id);
@@ -194,6 +215,7 @@
                 $("#company_name").val(company_name);
                 $("#start_date").val(start_date);
                 $("#end_date").val(end_date);
+                $("#designation_id").val(designation_id);
                 $("#description").val(description);
             });
         });

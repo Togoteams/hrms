@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\OvertimeSetting;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use OCILob;
 use Yajra\DataTables\Facades\DataTables;
 
 class OvertimeController extends Controller
@@ -90,7 +92,20 @@ class OvertimeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'emp_id' => 'required|numeric',
+            'date' => 'required|date',
+            'working_hours' => 'required|numeric|gt:0',
+            'working_min' => 'required|numeric|gt:0|max:59',
+            'overtime_type' => 'required|string',           
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            OvertimeSetting::where('id', $id)->update($request->except('_token', '_method'));
+            return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+        }
     }
 
     /**
@@ -98,6 +113,11 @@ class OvertimeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            OvertimeSetting::destroy($id);
+            return "Delete";
+        } catch (Exception $e) {
+            return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
+        }
     }
 }

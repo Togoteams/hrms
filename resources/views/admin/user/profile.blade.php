@@ -42,8 +42,11 @@
                     </div>
                     <div class="form-group mr-bot">
 
-                        <label for="file">Profile Pic </label>
-                        <input type="file" name="file" id="file" accept="image/*" onchange="validateimg(this)">
+                        <label for="image" class="required">Profile Pic </label>
+                        <input type="file" name="image" id="image" accept="image/*" onchange="validateimg(this)" required>
+                        @error('image')
+                            <div class=" text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group mr-bot">

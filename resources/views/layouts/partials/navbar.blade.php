@@ -56,8 +56,13 @@
                              data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside"
                              data-bs-dropdown-animation>
                              <div class="avatar avatar-sm avatar-circle">
-                                 <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}"
-                                     alt="Image Description">
+                                 {{-- <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}"
+                                     alt="Image Description"> --}}
+                                     @if (auth()->user()->image && file_exists(public_path('assets/profile/' . auth()->user()->image)))
+                                     <img class="avatar-img" src="{{ asset('assets/profile/' . auth()->user()->image) }}" alt="Profile Image">
+                                    @else
+                                        <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}" alt="Default Icon">
+                                    @endif    
                                  <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                              </div>
                          </a>
@@ -67,8 +72,11 @@
                              <div class="dropdown-item-text">
                                  <div class="d-flex align-items-center">
                                      <div class="avatar avatar-sm avatar-circle">
-                                         <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}"
-                                             alt="Image Description">
+                                        @if (auth()->user()->image && file_exists(public_path('assets/profile/' . auth()->user()->image)))
+                                     <img class="avatar-img" src="{{ asset('assets/profile/' . auth()->user()->image) }}" alt="Profile Image">
+                                    @else
+                                        <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}" alt="Default Icon">
+                                    @endif  
                                      </div>
                                      <div class="flex-grow-1 ms-3">
                                          <h5 class="mb-0">{{ auth()->user()->name }}</h5>

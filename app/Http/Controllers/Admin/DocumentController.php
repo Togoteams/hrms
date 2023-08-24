@@ -54,7 +54,7 @@ class DocumentController extends Controller
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
                 $filename = $file->getClientOriginalName();
-                $file->move('asset/img', $filename);
+                $file->move('assets/document', $filename);
                 $documentData['document'] = $filename;
             }
         
@@ -110,7 +110,7 @@ class DocumentController extends Controller
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
                 $filename = $file->getClientOriginalName();
-                $file->move('asset/img', $filename);
+                $file->move('assets/document', $filename);
                 $documentData['document'] = $filename;
             }
         
