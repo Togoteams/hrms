@@ -4,6 +4,11 @@
         Employee
     </button>
 
+    <button class="nav-link text-left mb-2 {{ Request::is('admin/personal-info/family-details') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ url('admin/personal-info/family-details') }}';">
+        Family Details
+    </button>
+
     <button class="nav-link text-left mb-2 {{ Request::is('admin/personal-info/contact-details') ? 'active-class' : '' }}"
         data-bs-toggle="pill" onclick="window.location.href='{{ url('admin/personal-info/contact-details') }}';">
         Contact
