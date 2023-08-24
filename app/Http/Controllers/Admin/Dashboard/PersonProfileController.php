@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Designation;
 use App\Models\EmpDrivingLicense;
 use App\Models\Employee;
 use App\Models\EmploymentHistory;
@@ -188,8 +189,9 @@ class PersonProfileController extends BaseController
 
     public function viewPreviousEmploymentDetails()
     {
+        $designation = Designation::get();
         $datas = EmploymentHistory::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.previous-employment-details', ['datas' => $datas]);
+        return view('admin.dashboard.person-profile.previous-employment-details', ['datas' => $datas, 'designation' =>$designation]);
     }
 
     public function postPreviousEmploymentDetails(Request $request)
@@ -197,6 +199,7 @@ class PersonProfileController extends BaseController
         $validator = Validator::make($request->all(), [
             'company_name' => ['required', 'string'],
             'start_date' => ['required', 'date'],
+            'designation_id' => ['required','numeric'],
             'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 

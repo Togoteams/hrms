@@ -39,83 +39,83 @@
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
-                                                                    <div class="col-4 fw-semibold pt-1">Relation:</div>
-                                                                    <div class="col-6 pt-1">
+                                                                    <div class="col-3 fw-semibold pt-1">Relation:</div>
+                                                                    <div class="col-3 pt-1">
                                                                         {{ $data->relation }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Date of Birth:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Date of Birth:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->date_of_birth }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Name:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Name:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->name }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Depended:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Depended:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->depended }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Marital status:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Marital status:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->marital_status }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Gender:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Gender:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->gender }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Occupations:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Occupations:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->occupations }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Monthly Income:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Monthly Income:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->monthly_income }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Is Back of Baroda Employee:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Is Back of Baroda Employee:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->bank_of_baroda_employee }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Address Line 1:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Address Line 1:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->address_line1 }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Address Line 2:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Address Line 2:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->address_line2 }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">State:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">State:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->state }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Country:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Country:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->country }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Email Id:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Email Id:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->email }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Phone number:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Phone number:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->number }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">Nationality:</div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-3 fw-semibold pt-3">Nationality:</div>
+                                                                    <div class="col-3 pt-3">
                                                                         {{ $data->nationality }}
                                                                     </div>
 

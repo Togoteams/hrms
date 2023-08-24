@@ -70,6 +70,7 @@ class PersonalInformationController extends Controller
              'first_name' => ['required', 'string'],
              'last_name' => ['required', 'string'],
              'birth_country' => ['required', 'string'],
+             'blood_group' => ['required','string'],
              'date_of_birth' => [
                 'required',
                 'date',
@@ -90,7 +91,7 @@ class PersonalInformationController extends Controller
                 // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
                 Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'salutation', 'first_name','last_name','name']));
                 // User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
-                User::where('id', $request->user_id)->update(['name'=>$request->first_name." ".$request->last_name,'first_name'=>$request->first_name,'last_name'=>$request->last_name]);
+                User::where('id', $request->user_id)->update(['name'=>$request->first_name." ".$request->last_name,'first_name'=>$request->first_name,'last_name'=>$request->last_name,'salutation'=>$request->salutation]);
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);

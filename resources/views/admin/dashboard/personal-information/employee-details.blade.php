@@ -40,6 +40,9 @@
                                                             <div class="row text-dark">
                                                                 {{-- <div class="col-3 fw-semibold">Name</div>
                                                                 <div class="col-3">{{ $data->user->name }}</div> --}}
+                                                                <div class="col-3 fw-semibold">Salutation</div>
+                                                                <div class="col-3"> Miss</div>
+
                                                                 <div class="col-3 fw-semibold">First Name</div>
                                                                 <div class="col-3"> {{ $firstName }}</div>
 
@@ -70,6 +73,10 @@
                                                                     echo $age;
                                                                     ?>
                                                                 </div>
+
+                                                                <div class="col-3 fw-semibold">Blood Group</div>
+                                                                <div class="col-3">{{ $data->blood_group }}</div>
+
                                                             </div>
                                                         </div>
                                                     @else
@@ -215,6 +222,18 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
+
+                                        <div class="col-sm-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="blood_group">Blood Group<small
+                                                        class="required-field">*</small></label>
+                                                <input required id="blood_group"
+                                                    placeholder="Enter blood_group" type="text"
+                                                    value="{{ $data->blood_group }}" name="blood_group"
+                                                    class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <hr>
                                     <div class="text-center ">
