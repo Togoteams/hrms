@@ -55,6 +55,9 @@
                                                                 <div class="col-3 fw-semibold">User Name</div>
                                                                 <div class="col-3">{{ $data->user->username }}</div>
 
+                                                                <div class="col-3 fw-semibold">Ec Number</div>
+                                                                <div class="col-3">{{ $data->ec_number }}</div>
+
                                                                 <div class="col-3 fw-semibold">Designation</div>
                                                                 <div class="col-3">{{ $data->designation->name }}</div>
 
