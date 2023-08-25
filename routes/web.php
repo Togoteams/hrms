@@ -62,6 +62,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/add-family-details', 'addFamilyDetails')->name('family.details.save');
             Route::post('/delete-family-details', 'deleteFamilyDetails')->name('family.details.delete');
 
+            Route::get('/document-details', 'viewDocumentDetails')->name('document.details.view');
 
             Route::get('/contact-details', 'viewContact')->name('contact');
             Route::post('/update-contact', 'updateContact')->name('contact.update');
@@ -94,6 +95,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/place-of-domicile', 'postPlaceOfDomicile')->name('place.of.domicile.post');
 
             Route::get('/training-details', 'viewTrainingDetails')->name('training.details.view');
+            Route::post('/post-training-details-details', 'postTrainingDetails')->name('training.details.post');
+            Route::post('/delete-training-details-details', 'deleteTrainingDetails')->name('training.details.delete');
+
             Route::get('/union-details', 'viewUnionDetails')->name('union.details.view');
             Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');
         });

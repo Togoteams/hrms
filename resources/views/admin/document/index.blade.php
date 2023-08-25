@@ -64,7 +64,7 @@
                                 {{-- <td>{{$item->document}}</td> --}}
                                 <td>
                                     @if($item->document)
-                                        <a href="{{ asset('asset/img/' . $item->document) }}" download>Download</a>
+                                        <a href="{{ asset('assets/document/' . $item->document) }}" download>Download</a>
                                     @else
                                         No Document Available
                                     @endif
