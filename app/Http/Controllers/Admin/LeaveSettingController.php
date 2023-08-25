@@ -110,9 +110,8 @@ class LeaveSettingController extends Controller
 
     public function delete(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
-            'id'                        => 'required'
+            'id' => 'required'
         ]);
         if($validator->fails()){ 
             $error = ['error'=>$validator->errors()->all()];

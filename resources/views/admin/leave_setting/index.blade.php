@@ -526,7 +526,7 @@
 
             $(document).on('click', '.delete_leave_setting_btn', function() {
                 var leave_id = $(this).attr('data-value');
-                alert('Are you sure, want to delete this setting')
+                alert('Are you sure, want to delete this leave setting?')
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
@@ -613,6 +613,7 @@
             var editLeaveSettigs = $('#edit_leave_seeting_form')
             $(document).on('submit', '#edit_leave_seeting_form', function(e) {
                 e.preventDefault()
+                alert('Are you sure you want to edit this leave setting?')
             })
 
             $(document).ready(function() {
