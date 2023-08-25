@@ -127,6 +127,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('/list', 'index')->name('list');
         Route::post('/add', 'store')->name('add'); 
         Route::post('/edit', 'edit')->name('edit');
+        Route::post('/delete', 'delete')->name('delete');
     });
     Route::resource('employees', EmployeeController::class);
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');

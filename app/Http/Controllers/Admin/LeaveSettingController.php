@@ -107,4 +107,28 @@ class LeaveSettingController extends Controller
             ]);
         }
     }
+
+    public function delete(Request $request)
+    {
+        dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'id'                        => 'required'
+        ]);
+        if($validator->fails()){ 
+            $error = ['error'=>$validator->errors()->all()];
+            return response()->json(['status'=>false, 'message'=>$validator->errors()->first()], 422);
+        }
+        try {
+            $delete = LeaveSetting::where('id', $request->id)->delete();
+            if($delete){
+                return response()->json(['status'=>true, 'message'=>'leave setting deleted successfully'], 200);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Something went wrong',
+                'data' => []
+            ]);
+        }
+    }
 }
