@@ -15,19 +15,19 @@
                     <span class="name-title">Personal Information</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.personal-information.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
+                            <div class="mx-3 border rounded col-xxl-9 col-xl-8 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
-                                    <div class=" ">
+                                    <div class="">
                                         <div class="container mt-2 mb-2 ms-1">
                                             <div class="row">
-                                                <div class="col-md-10 py-4">
+                                                <div class="py-4 col-md-10">
                                                     @if (!empty($data))
                                                     @php
                                                         $fullName = $data->user->name;
@@ -55,6 +55,9 @@
                                                                 <div class="col-3 fw-semibold">User Name</div>
                                                                 <div class="col-3">{{ $data->user->username }}</div>
 
+                                                                <div class="col-3 fw-semibold">Ec Number</div>
+                                                                <div class="col-3">{{ $data->ec_number }}</div>
+
                                                                 <div class="col-3 fw-semibold">Designation</div>
                                                                 <div class="col-3">{{ $data->designation->name }}</div>
 
@@ -76,6 +79,8 @@
 
                                                                 <div class="col-3 fw-semibold">Blood Group</div>
                                                                 <div class="col-3">{{ $data->blood_group }}</div>
+                                                                <div class="col-3 fw-semibold">Basic Salary</div>
+                                                                <div class="col-3">{{ $data->user?->payrollPayscale?->net_take_home }}</div>
 
                                                             </div>
                                                         </div>
@@ -131,7 +136,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                         <div class="col-sm-6 mb-2">
+                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="first_name">First Name<small class="required-field">*</small></label>
                                                 <input required id="first_name" placeholder="Enter First Name of Employee "
@@ -139,7 +144,7 @@
                                                     value="{{ $data->user->first_name }}">
                                             </div>
                                         </div>
-                                         <div class="col-sm-6 mb-2">
+                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="last_name">Last Name<small class="required-field">*</small></label>
                                                 <input required id="last_name" placeholder="Enter Last Name of Employee "
@@ -147,7 +152,7 @@
                                                     value="{{ $data->user->last_name }}">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="birth_country">Birth Country<small class="required-field">*</small></label>
                                                 <input required id="birth_country" placeholder="Enter Birth Country of Employee "
@@ -155,7 +160,7 @@
                                                     value="{{ $data->birth_country }}">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-sm-6 mb-2">
+                                        {{-- <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="name">Name<small class="required-field">*</small></label>
                                                 <input required id="name" placeholder="Enter Name of Employee "
@@ -163,7 +168,7 @@
                                                     value="{{ $data->user->name }}">
                                             </div>
                                         </div> --}}
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="gender">Gender<small class="required-field">*</small></label>
                                                 <select required id="gender" placeholder="Enter correct gender   "
@@ -181,7 +186,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        {{-- <div class="col-sm-6 mb-2">
+                                        {{-- <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="username">User Name</label>
                                                 <input required id="username" placeholder="Enter User Name" type="text"
@@ -189,7 +194,7 @@
                                                     value="{{ $data->user->username }}">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="designation_id">Designation</label>
                                                 <select required id="designation_id" placeholder="Enter correct Emplooye   "
@@ -203,7 +208,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="basic_salary">Basic Salary</label>
                                                 <input required id="basic_salary"
@@ -212,7 +217,7 @@
                                                     value="{{ $data->basic_salary }}">
                                             </div>
                                         </div> --}}
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="date_of_birth">Date of Birth<small
                                                         class="required-field">*</small></label>
@@ -223,7 +228,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="blood_group">Blood Group<small
                                                         class="required-field">*</small></label>

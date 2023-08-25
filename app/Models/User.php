@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasRolesAndPermissions;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webpatser\Uuid\Uuid;
 
 class User extends Authenticatable
@@ -121,6 +122,10 @@ class User extends Authenticatable
     {
         return $this->roles ? $this->roles?->first()?->name : "";
         // return Role::find($this->role_id)->name;
+    }
+    public function payrollPayscale()
+    {
+        return $this->HasOne(PayRollPayscale::class,'user_id');
     }
 
   

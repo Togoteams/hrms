@@ -13,8 +13,7 @@
 
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/training-details') ? 'active-class' : '' }}"
-        {{-- type="button" onclick="window.location.href='{{ url('admin/person-profile/training-details') }}';"> --}}
-        type="button" href="#">
+        type="button" onclick="window.location.href='{{ url('admin/person-profile/training-details') }}';">
         Training
     </button>
 

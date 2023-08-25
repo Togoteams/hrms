@@ -10,6 +10,7 @@ use App\Models\Employee;
 use App\Models\EmploymentHistory;
 use App\Models\EmpMedicalInsurance;
 use App\Models\Qualification;
+use App\Models\TrainingDetails;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -110,8 +111,62 @@ class PersonProfileController extends BaseController
 
     public function viewTrainingDetails()
     {
-        // $datas = Qualification::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.training-details');
+        $datas = TrainingDetails::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.training-details',['datas' => $datas]);
+    }
+
+    public function postTrainingDetails(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'numeric'],
+            'name' => ['required', 'string'],
+            'start_date' => ['required', 'date'],
+            'grade' => ['required','string'],
+            'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                if (empty($request->id)) {
+                    TrainingDetails::insertGetId($request->except(['_token', 'id']));
+                    $message = "Record Created Successfully";
+                } else {
+                    TrainingDetails::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    $message = "Record Updated Successfully";
+                }
+                return response()->json(['success' => $message]);
+                // Session::put('success', $message);
+                // return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function deleteTrainingDetails(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $training = TrainingDetails::find($request->id);
+                if ($training) {
+                    $training->delete();
+                    $message = "Record deleted Successfully";
+                    return response()->json(['status' => true, 'message' => $message]);
+                } else {
+                    return response()->json(['status' => false, 'error' => 'Record not found']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['status' => false, 'error' => $e->getMessage()]);
+            }
+        }
     }
 
     public function viewUnionDetails()

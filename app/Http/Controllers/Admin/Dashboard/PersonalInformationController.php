@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Designation;
+use App\Models\Document;
 use App\Models\EmpAddress;
 use App\Models\Employee;
 use App\Models\EmpPassportOmang;
@@ -12,6 +13,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -34,6 +36,18 @@ class PersonalInformationController extends Controller
         // $designation = Designation::all();
         $datas = FamilyDetail::where('user_id', Auth::user()->id)->get();
         return view('admin.dashboard.personal-information.family-details', ['page' => $page_name, 'datas'=>$datas]);
+    }
+
+    public function viewDocumentDetails()
+    {
+        $user = Auth::user(); 
+        $datas = DB::table('document_emps')
+            ->join('documents', 'document_emps.document_id', '=', 'documents.id') 
+            ->where('document_emps.emp_id', $user->id)
+            ->select('documents.*')
+            ->get();
+        //  dd($datas);   
+        return view('admin.dashboard.personal-information.document-details', ['datas' => $datas]);
     }
 
     public function viewContact()
