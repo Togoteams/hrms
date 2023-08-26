@@ -257,6 +257,17 @@
                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
                      'delete-roles', 'view-roles'])
                          <div class="nav-item">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-cart.list' ? 'active' : '' }}"
+                                 href="{{ route('admin.medical-cart.index') }}" data-placement="left">
+                                 <i class="fa fa-truck-medical nav-icon"></i>
+                                 <span class="nav-link-title">Medical card Type</span>
+                             </a>
+                         </div>
+                     @endcanany
+
+                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
+                     'delete-roles', 'view-roles'])
+                         <div class="nav-item">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
                                  href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
                                  <i class="fa fa-clock nav-icon"></i>

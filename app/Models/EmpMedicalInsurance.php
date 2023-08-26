@@ -10,4 +10,9 @@ class EmpMedicalInsurance extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    public function medicalCart()
+    {
+        return $this->belongsTo(MedicalCart::class, 'card_id', 'id');
+    }
 }

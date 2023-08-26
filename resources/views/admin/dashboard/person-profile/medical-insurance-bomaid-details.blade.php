@@ -57,6 +57,11 @@
                                                                         {{ $data->insurance_id }}
                                                                     </div>
                                                                 </div>
+                                                                <div class="row showData">
+                                                                    <div class="col-3 fw-semibold pt-3">Insurance card Type</div>
+                                                                    <div class="col-3 pt-3">
+                                                                        {{ $data->medicalCart->name }}                                                                    </div>
+                                                                </div>
                                                             @else
                                                                 <span id="noDataMsg">No data to show</span>
                                                             @endif
@@ -84,6 +89,33 @@
                                                                         class="form-control form-control-sm"
                                                                         value="{{ !empty($data) ? $data->insurance_id : '' }}">
                                                                 </div>
+                                                                {{-- <div class="col-2 margin-style pt-2">
+                                                                    <button class="btn btn-white btn-sm">
+                                                                        {{ !empty($data) ? 'Update' : 'Save' }}
+                                                                    </button>
+                                                                </div> --}}
+                                                            </div>
+
+                                                            <div class="row addInputDiv d-none">
+                                                                <div class="col-3 fw-semibold pt-3">
+                                                                    Insurance card Type<small class="required-field">*</small>
+                                                                </div>
+                                                                <div class="col-3 pt-2 margin-style">
+                                                                    {{-- <input type="number" name="insurance_id"
+                                                                        id="insurance_id"
+                                                                        placeholder="Enter Insurance Company Name"
+                                                                        class="form-control form-control-sm"
+                                                                        value="{{ !empty($data) ? $data->insurance_id : '' }}"> --}}
+                                                                        <select name="card_id" class="form-control" id="card_id" placeholder="Employee department">
+                                                                            <option value="">Select Option</option>
+                                                                            @foreach($card as $cardData)
+                                                                                <option value="{{ $cardData->id }}" {{ !empty($data) && $data->card_id == $cardData->id ? 'selected' : '' }}>
+                                                                                    {{ $cardData->name }}
+                                                                                </option>
+                                                                            @endforeach 
+                                                                        </select>
+                                                                </div>
+
                                                                 <div class="col-2 margin-style pt-2">
                                                                     <button class="btn btn-white btn-sm">
                                                                         {{ !empty($data) ? 'Update' : 'Save' }}
