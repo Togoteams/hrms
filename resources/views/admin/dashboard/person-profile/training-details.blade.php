@@ -60,6 +60,25 @@
                                                                             {{ $data->grade}}
                                                                         </div>
 
+                                                                        <div class="col-3 fw-semibold pt-1">
+                                                                            Skills
+                                                                        </div>
+                                                                        <div class="col-3 pt-1">
+                                                                            @php
+                                                                                $skills = explode(',', $data->skill); // Convert the string to an array
+                                                                            @endphp
+                                                                            @foreach ($skills as $skill)
+                                                                                <span class="badge rounded-pill bg-danger" style="font-size: 13px;">{{ $skill }}</span>
+                                                                            @endforeach
+                                                                        </div>
+
+                                                                        <div class="col-3 fw-semibold pt-1">
+                                                                            Description
+                                                                        </div>
+                                                                        <div class="col-3 pt-1">
+                                                                            {{ $data->description}}
+                                                                        </div>
+
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 text-end">
@@ -71,7 +90,10 @@
                                                                         data-name="{{ $data->name }}"
                                                                         data-start_date="{{ $data->start_date }}"
                                                                         data-end_date="{{ $data->end_date }}"
-                                                                        data-grade="{{ $data->grade }}">
+                                                                        data-grade="{{ $data->grade }}"
+                                                                        data-skill="{{ $data->skill }}"
+                                                                        data-description="{{ $data->description }}">
+
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
 
@@ -126,7 +148,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <div class="form-group">
                                                 <label for="start_date" class="required">Start date</label>
                                                 <input required value="" id="start_date" name="start_date"
@@ -134,7 +156,7 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <div class="form-group">
                                                 <label for="end_date" class="required">End date</label>
                                                 <input required value="" id="end_date" name="end_date"
@@ -142,12 +164,27 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-2">
+                                        <div class="col-md-6 mb-2">
                                             <div class="form-group">
                                                 <label for="grade" class="required">Traning Grade</label>
                                                 <input required value="" id="grade" name="grade"
                                                     placeholder="Enter Traning Grade" type="text"
                                                     class="form-control form-control-sm">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-2">
+                                            <div class="form-group">
+                                                <label for="skill" class="required">Skills</label>
+                                                <select class="form-control js-tags" multiple="multiple" name="skill[]" >
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb-2">
+                                            <div class="form-group">
+                                                <label for="description" class="required">Description</label>
+                                                <textarea name="description" id="description" cols="30" rows="10" 
+                                                placeholder="Enter Traning Description...." class="form-control form-control-sm"></textarea>
                                             </div>
                                         </div>
                                        
@@ -170,6 +207,7 @@
     </main>
 @endsection
 @push('custom-scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         function addForm(user_id) {
             $('#form_add').trigger("reset");
@@ -191,6 +229,9 @@
                 let start_date = $(event.currentTarget).data("start_date");
                 let end_date = $(event.currentTarget).data("end_date");
                 let grade = $(event.currentTarget).data("grade");
+                let skill = $(event.currentTarget).data("skill");
+                let description = $(event.currentTarget).data("description");
+
 
                 $("#id").val(id);
                 $("#user_id").val(user_id);
@@ -198,8 +239,18 @@
                 $("#start_date").val(start_date);
                 $("#end_date").val(end_date);
                 $("#grade").val(grade);
+                $("#skill").val(skill);
+                $("#description").val(description);
+
             });
         });
+
+        $(document).ready(function() {
+            $(".js-tags").select2({
+                tags: true
+            });
+        });
+
     </script>
 
 @endpush

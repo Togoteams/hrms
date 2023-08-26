@@ -17,11 +17,11 @@
         Training
     </button>
 
-    <button
+    {{-- <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/union-details') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ url('admin/person-profile/union-details') }}';">
         Union
-    </button>
+    </button> --}}
 
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/permanent-contractual') ? 'active-class' : '' }}"

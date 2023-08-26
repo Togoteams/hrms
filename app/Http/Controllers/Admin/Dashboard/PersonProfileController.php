@@ -8,6 +8,7 @@ use App\Models\Designation;
 use App\Models\EmpDrivingLicense;
 use App\Models\Employee;
 use App\Models\EmploymentHistory;
+use App\Models\EmpMedicalCart;
 use App\Models\EmpMedicalInsurance;
 use App\Models\Qualification;
 use App\Models\TrainingDetails;
@@ -122,7 +123,10 @@ class PersonProfileController extends BaseController
             'name' => ['required', 'string'],
             'start_date' => ['required', 'date'],
             'grade' => ['required','string'],
-            'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+            'end_date' => ['required', 'date', 'after:start_date'],
+            'skill' => ['required'],
+            'description' => ['required','string'],
+
         ]);
 
         if ($validator->fails()) {
@@ -130,7 +134,8 @@ class PersonProfileController extends BaseController
         } else {
             try {
                 if (empty($request->id)) {
-                    TrainingDetails::insertGetId($request->except(['_token', 'id']));
+                    $skills = implode(',', $request->input('skill'));
+                    TrainingDetails::insertGetId(array_merge($request->except(['_token', 'id', 'skill']), ['skill' => $skills]));
                     $message = "Record Created Successfully";
                 } else {
                     TrainingDetails::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));

@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TrainingDetails extends Model
+class MedicalCart extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id',
         'name',
-        'start_date',
-        'grade',
-        'end_date',
-        'skill',
-        'description',
-    ];
+         'description',
+         'status'];
 }
