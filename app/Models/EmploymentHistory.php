@@ -10,4 +10,8 @@ class EmploymentHistory extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+    public function designation()
+    {
+        return $this->belongsTo(Designation::class, 'designation_id', 'id');
+    }
 }

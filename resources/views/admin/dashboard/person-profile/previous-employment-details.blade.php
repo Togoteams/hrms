@@ -62,9 +62,14 @@
                                                                         </div>
                                                                     @endif
 
+                                                                    <div class="col-4 fw-semibold pt-1">Reasons of Leaving</div>
+                                                                    <div class="col-6 pt-1">
+                                                                        {{ $data->reason }}
+                                                                    </div>
+
                                                                     <div class="col-4 fw-semibold pt-1">Designation</div>
                                                                     <div class="col-6 pt-1">
-                                                                        {{ $data->designation_id }}
+                                                                        {{ $data->designation->name }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -77,6 +82,7 @@
                                                                         data-company_name="{{ $data->company_name }}"
                                                                         data-start_date="{{ $data->start_date }}"
                                                                         data-end_date="{{ $data->end_date }}"
+                                                                        data-reason="{{ $data->reason }}"
                                                                         data-designation_id="{{ $data->designation_id }}"
                                                                         data-description="{{ $data->description }}">
                                                                         <i class="fas fa-edit"></i>
@@ -149,13 +155,19 @@
                                                 class="form-control form-control-sm">
                                         </div>
                                         <div class="col-md-6 mb-2">
+                                            <label for="reason_of_leaving">Reasons of Leaving</label>
+                                            <input required value="" id="reason" name="reason"
+                                                placeholder="Enter Reasons of leaving" type="text"
+                                                class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
                                             <div class="form-group">
                                                 <label for="designation">Designation</label>
                                                 <select name="designation_id" class="form-control" id="designation" placeholder="Employee designation">
                                                     <option value="">Select Option</option>
-                                                    @foreach($designation as $data)
-                                                    <option value="{{ $data->id }}" {{ old('designation_id') == $data->id ? 'selected' : '' }}>
-                                                       {{ $data->name }}
+                                                    @foreach($designation as $designationdata)
+                                                    <option value="{{ $designationdata->id }}" {{ !empty($data) && $data->designation_id == $designationdata->id ? 'selected' : '' }}>
+                                                       {{ $designationdata->name }}
                                                    </option>
                                                    @endforeach 
                                                 </select>
@@ -207,6 +219,7 @@
                 let company_name = $(event.currentTarget).data("company_name");
                 let start_date = $(event.currentTarget).data("start_date");
                 let end_date = $(event.currentTarget).data("end_date");
+                let reason = $(event.currentTarget).data("reason");
                 let designation_id = $(event.currentTarget).data("designation_id");
                 let description = $(event.currentTarget).data("description");
 
@@ -215,6 +228,7 @@
                 $("#company_name").val(company_name);
                 $("#start_date").val(start_date);
                 $("#end_date").val(end_date);
+                $("#reason").val(reason);
                 $("#designation_id").val(designation_id);
                 $("#description").val(description);
             });

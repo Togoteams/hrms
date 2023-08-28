@@ -241,11 +241,17 @@ class EmployeeController extends BaseController
     public function postPassportOmang(Request $request)
     {
         $request->validate([
-            'passport_no'       => ['nullable', 'numeric'],
-            'passport_expiry'   => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
+            // 'passport_no'       => ['nullable', 'numeric'],
+            // 'passport_expiry'   => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
 
-            'omang_no'          => ['nullable', 'numeric'],
-            'omang_expiry'      => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
+            // 'omang_no'          => ['nullable', 'numeric'],
+            // 'omang_expiry'      => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
+            'type'       => ['required', 'string'],
+            'certificate_no'       => ['required', 'numeric'],
+            'certificate_issue_date'       => ['required', 'date'],
+            'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date'],
+            'country'       => ['required', 'string'],
+
         ]);
 
         try {

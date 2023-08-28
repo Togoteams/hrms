@@ -254,6 +254,7 @@ class PersonProfileController extends BaseController
     {
         $designation = Designation::get();
         $datas = EmploymentHistory::where('user_id', Auth::user()->id)->get();
+        // dd($designation);
         return view('admin.dashboard.person-profile.previous-employment-details', ['datas' => $datas, 'designation' =>$designation]);
     }
 
@@ -262,6 +263,7 @@ class PersonProfileController extends BaseController
         $validator = Validator::make($request->all(), [
             'company_name' => ['required', 'string'],
             'start_date' => ['required', 'date'],
+            'reason' => ['required', 'string'],
             'designation_id' => ['required','numeric'],
             'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
