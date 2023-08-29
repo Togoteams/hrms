@@ -17,6 +17,12 @@
         Training
     </button>
 
+    <button
+        class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/award-details') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ url('admin/person-profile/award-details') }}';">
+        Award Details
+    </button>
+
     {{-- <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/union-details') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ url('admin/person-profile/union-details') }}';">
@@ -46,5 +52,11 @@
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/previous-employment-details') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ url('admin/person-profile/previous-employment-details') }}';">
         Previous Employment
+    </button>
+
+    <button
+        class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/payscale-details') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ url('admin/person-profile/payscale-details') }}';">
+        Payscale
     </button>
 </div>

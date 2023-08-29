@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\AwardDetail;
 use App\Models\Designation;
 use App\Models\EmpDrivingLicense;
 use App\Models\Employee;
 use App\Models\EmploymentHistory;
 use App\Models\EmpMedicalCard;
 use App\Models\EmpMedicalInsurance;
+use App\Models\EmpPayscale;
 use App\Models\MedicalCard;
+use App\Models\PayRollPayscale;
+use App\Models\PayrollSalaryHead;
 use App\Models\Qualification;
 use App\Models\TrainingDetails;
 use Exception;
@@ -19,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Date;
+use DB;
 
 class PersonProfileController extends BaseController
 {
@@ -175,6 +180,68 @@ class PersonProfileController extends BaseController
         }
     }
 
+    public function viewAwardDetails()
+    {
+        $datas = AwardDetail::where('user_id', Auth::user()->id)->get();
+        return view('admin.dashboard.person-profile.award-details',['datas' => $datas]);
+    }
+
+    public function postAwardDetails(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'numeric'],
+            'name' => ['required', 'string'],
+            'event_date' => ['required', 'date'],
+            'purpose' => ['required','string'],
+            'description' => ['required','string'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                if (empty($request->id)) {
+                    AwardDetail::insertGetId($request->except(['_token', 'id']));
+                    $message = "Record Created Successfully";
+                } else {
+                    AwardDetail::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                    $message = "Record Updated Successfully";
+                }
+                return response()->json(['success' => $message]);
+                // Session::put('success', $message);
+                // return redirect()->back();
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        }
+    }
+
+    public function deleteAwardDetails(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id' => ['required', 'numeric'],
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        } else {
+            try {
+                $award = AwardDetail::find($request->id);
+                if ($award) {
+                    $award->delete();
+                    $message = "Record deleted Successfully";
+                    return response()->json(['status' => true, 'message' => $message]);
+                } else {
+                    return response()->json(['status' => false, 'error' => 'Record not found']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['status' => false, 'error' => $e->getMessage()]);
+            }
+        }
+    }
+
+
+
     public function viewUnionDetails()
     {
         $data = Employee::firstWhere('user_id', Auth::user()->id);
@@ -314,5 +381,20 @@ class PersonProfileController extends BaseController
                 return response()->json(['status' => false, 'error' => $e->getMessage()]);
             }
         }
+    }
+
+    public function viewPayscaleDetails()
+    {
+        $datas = PayRollPayscale::where('user_id', Auth::user()->id)->get();
+        // $payroll = PayrollSalaryHead::where('user_id', Auth::user()->id)->get();
+
+        $data = DB::table('payroll_payscales as PP')
+        ->leftJoin('payroll_payscale_heads AS PPH','PPH.payroll_payscale_id','=','PP.id')
+        ->leftJoin('payroll_heads AS PH','PH.id','=','PPH.payroll_head_id')
+        ->select('PP.*','PH.name','PPH.value')
+        ->where('user_id',Auth::user()->id)
+        ->first();
+        // dd($data);
+        return view('admin.dashboard.person-profile.payscale-details',['datas' => $datas,'data'=>$data]);
     }
 }

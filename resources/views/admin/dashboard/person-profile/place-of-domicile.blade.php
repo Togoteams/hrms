@@ -7,7 +7,7 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
-                    <span class="name-title">Person Profile</span>
+                    <span class="name-title">Personal Profile</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
                             <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">

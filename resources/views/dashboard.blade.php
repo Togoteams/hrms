@@ -47,7 +47,7 @@
                                     <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon2.png') }}" alt="">
 
                                     </h6>
-                                    <h2 class="text-white card-title">Person Profile</h2>
+                                    <h2 class="text-white card-title">Personal Profile</h2>
 
 
                                     <div class="row align-items-center gx-2">
@@ -202,7 +202,8 @@
                         </div>
                         @endif
 
-                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
+                        @if(!isemplooye())
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <a class="card card-hover-shadow card-dashboard card-bg " href="#">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
@@ -217,7 +218,9 @@
                                     </div>
                                 </div>
                             </a>
-                        </div> --}}
+                        </div>
+                        @endif
+
 
 
                     </div>

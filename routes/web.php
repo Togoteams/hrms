@@ -99,8 +99,15 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::post('/post-training-details-details', 'postTrainingDetails')->name('training.details.post');
             Route::post('/delete-training-details-details', 'deleteTrainingDetails')->name('training.details.delete');
 
+            Route::get('/award-details', 'viewAwardDetails')->name('award.details.view');
+            Route::post('/post-award-details-details', 'postAwardDetails')->name('award.details.post');
+            Route::post('/delete-award-details-details', 'deleteAwardDetails')->name('award.details.delete');
+
             Route::get('/union-details', 'viewUnionDetails')->name('union.details.view');
             Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');
+
+            Route::get('/payscale-details', 'viewPayscaleDetails')->name('payscale.details.view');
+
         });
     Route::get('/download/{filename}', [DashboardController::class, 'userManualDownload'])->name('userManualDownload');
 

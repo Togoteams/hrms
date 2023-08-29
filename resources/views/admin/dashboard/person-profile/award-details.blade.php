@@ -27,7 +27,7 @@
                                         <div class="text-left">
                                             <button type="button" class="btn btn-white btn-sm"
                                                 onclick="addForm({{ Auth::user()->id }})">
-                                                Add Training Details
+                                                Add Award Details
                                             </button>
                                         </div>
                                     </div>
@@ -39,46 +39,27 @@
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
-                                                                    <div class="col-3 fw-semibold pt-1">Training Name</div>
-                                                                    <div class="col-3 pt-1">
+                                                                    <div class="col-4 fw-semibold pt-1"> Name:</div>
+                                                                    <div class="col-6 pt-1">
                                                                         {{ $data->name }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-1">
-                                                                        Training Duration:
+                                                                    <div class="col-4 fw-semibold pt-3">
+                                                                        Event date:
                                                                     </div>
-                                                                    <div class="col-3 pt-1">
-                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
-                                                                        -
-                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
+                                                                    <div class="col-6 pt-3">
+                                                                        {{ date_format(date_create_from_format('Y-m-d', $data->event_date), 'd/m/Y') }}
                                                                     </div>
 
-                                                                        <div class="col-3 fw-semibold pt-1">
-                                                                            Traning Grade
-                                                                        </div>
-                                                                        <div class="col-3 pt-1">
-                                                                            {{ $data->grade}}
-                                                                        </div>
+                                                                    <div class="col-4 fw-semibold pt-1">Purpose</div>
+                                                                    <div class="col-6 pt-1">
+                                                                        {{ $data->purpose }}
+                                                                    </div>
 
-                                                                        <div class="col-3 fw-semibold pt-1">
-                                                                            Skills
-                                                                        </div>
-                                                                        <div class="col-3 pt-1">
-                                                                            @php
-                                                                                $skills = explode(',', $data->skill); // Convert the string to an array
-                                                                            @endphp
-                                                                            @foreach ($skills as $skill)
-                                                                                <span class="badge rounded-pill bg-danger" style="font-size: 13px;">{{ $skill }}</span>
-                                                                            @endforeach
-                                                                        </div>
-
-                                                                        <div class="col-3 fw-semibold pt-1">
-                                                                            Description
-                                                                        </div>
-                                                                        <div class="col-3 pt-1">
-                                                                            {{ $data->description}}
-                                                                        </div>
-
+                                                                    <div class="col-4 fw-semibold pt-1">Description</div>
+                                                                    <div class="col-6 pt-1">
+                                                                        {{ $data->description }}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 text-end">
@@ -88,19 +69,16 @@
                                                                         title="Edit" data-id="{{ $data->id }}"
                                                                         data-user_id="{{ Auth::user()->id }}"
                                                                         data-name="{{ $data->name }}"
-                                                                        data-start_date="{{ $data->start_date }}"
-                                                                        data-end_date="{{ $data->end_date }}"
-                                                                        data-grade="{{ $data->grade }}"
-                                                                        data-skill="{{ $data->skill }}"
+                                                                        data-event_date="{{ $data->event_date }}"
+                                                                        data-purpose="{{ $data->purpose }}"
                                                                         data-description="{{ $data->description }}">
-
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
 
                                                                     <button class="btn btn-delete btn-sm bt deleteRecord"
                                                                         title="Delete" data-id="{{ $data->id }}"
                                                                         data-token="{{ csrf_token() }}"
-                                                                        data-action="{{ route('admin.person.profile.training.details.delete') }}">
+                                                                        data-action="{{ route('admin.person.profile.award.details.delete') }}">
                                                                         <i class="fa-solid fa-trash fa-lg"></i>
                                                                     </button>
                                                                 </div>
@@ -134,7 +112,7 @@
                             </div>
                             <div class="modal-body" id="edit">
                                 <form id="form_add"
-                                    action="{{ route('admin.person.profile.training.details.post') }}">
+                                    action="{{ route('admin.person.profile.award.details.post') }}">
                                     @csrf
                                     <input type="hidden" id="id" name="id" value="">
                                     <input type="hidden" id="user_id" name="user_id">
@@ -142,49 +120,31 @@
                                     <div class="row">
                                         <div class="col-md-6 mb-2">
                                             <div class="form-group">
-                                                <label for="name" class="required">Training Name</label>
+                                                <label for="name" class="required"> Name</label>
                                                 <input type="text" id="name" name="name"
-                                                    placeholder="Enter Traning Name"
+                                                    placeholder="Enter Award Name"
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="col-md-3 mb-2">
                                             <div class="form-group">
-                                                <label for="start_date" class="required">Start date</label>
-                                                <input required value="" id="start_date" name="start_date"
-                                                    placeholder="Start date" type="date"
+                                                <label for="event_date" class="required">Event date<small
+                                                        class="required-field">*</small></label>
+                                                <input required value="" id="event_date" name="event_date"
+                                                    placeholder="Event Date" type="date"
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-2">
-                                            <div class="form-group">
-                                                <label for="end_date" class="required">End date</label>
-                                                <input required value="" id="end_date" name="end_date"
-                                                    placeholder="End Date" type="date"
-                                                    class="form-control form-control-sm">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-2">
-                                            <div class="form-group">
-                                                <label for="grade" class="required">Traning Grade</label>
-                                                <input required value="" id="grade" name="grade"
-                                                    placeholder="Enter Traning Grade" type="text"
-                                                    class="form-control form-control-sm">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6 mb-2">
-                                            <div class="form-group">
-                                                <label for="skill" class="required">Skills</label>
-                                                <select class="form-control js-tags" multiple="multiple" name="skill[]" >
-                                                </select>
-                                            </div>
+                                            <label for="purpose" class="required">Purpose</label>
+                                            <input required value="" id="purpose" name="purpose"
+                                                placeholder="Enter purpose of Award" type="text"
+                                                class="form-control form-control-sm">
                                         </div>
                                         <div class="col-md-12 mb-2">
                                             <div class="form-group">
                                                 <label for="description" class="required">Description</label>
-                                                <textarea name="description" id="description" cols="30" rows="10" 
-                                                placeholder="Enter Traning Description...." class="form-control form-control-sm" required></textarea>
+                                                <textarea id="description" placeholder="Enter Description..." name="description" class="form-control" required></textarea>
                                             </div>
                                         </div>
                                        
@@ -207,50 +167,36 @@
     </main>
 @endsection
 @push('custom-scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script>
         function addForm(user_id) {
             $('#form_add').trigger("reset");
             $("#id").val("");
             $('#formModal').modal('show');
-            $("#modalTitle").html("Add: Training Details");
+            $("#modalTitle").html("Add: Award Details");
             $("#btnSave").html("CREATE");
             $("#user_id").val(user_id);
         }
         $(document).ready(() => {
             $(document).on("click", ".editButton", (event) => {
                 $('#formModal').modal('show');
-                $("#modalTitle").html("Edit: Training Details");
+                $("#modalTitle").html("Edit: Award Details");
                 $("#btnSave").html("Update");
 
                 let id = $(event.currentTarget).data("id");
                 let user_id = $(event.currentTarget).data("user_id");
                 let name = $(event.currentTarget).data("name");
-                let start_date = $(event.currentTarget).data("start_date");
-                let end_date = $(event.currentTarget).data("end_date");
-                let grade = $(event.currentTarget).data("grade");
-                let skill = $(event.currentTarget).data("skill");
+                let event_date = $(event.currentTarget).data("event_date");
+                let purpose = $(event.currentTarget).data("purpose");
                 let description = $(event.currentTarget).data("description");
-
 
                 $("#id").val(id);
                 $("#user_id").val(user_id);
                 $("#name").val(name);
-                $("#start_date").val(start_date);
-                $("#end_date").val(end_date);
-                $("#grade").val(grade);
-                $("#skill").val(skill);
+                $("#event_date").val(event_date);
+                $("#purpose").val(purpose);
                 $("#description").val(description);
-
             });
         });
-
-        $(document).ready(function() {
-            $(".js-tags").select2({
-                tags: true
-            });
-        });
-
     </script>
 
 @endpush
