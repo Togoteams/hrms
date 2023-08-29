@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\LeaveEncashmentController;
 use App\Http\Controllers\Admin\LeaveTypeCobntroller;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LoansController;
-use App\Http\Controllers\Admin\TaxController;
+use App\Http\Controllers\Admin\TaxController;   
 use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;

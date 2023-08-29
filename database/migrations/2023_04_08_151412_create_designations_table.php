@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',75)->unique();
             $table->text('description');
+            $table->string('status', 30)->default('active')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

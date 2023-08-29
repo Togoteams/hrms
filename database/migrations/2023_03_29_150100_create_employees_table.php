@@ -27,6 +27,8 @@ return new class extends Migration
             $table->decimal('basic_salary')->nullable();
             $table->dateTime('date_of_current_basic')->nullable();
             $table->date('date_of_birth')->nullable();
+            $table->string('birth_country',100)->nullable();
+            $table->string('blood_group',100)->nullable();
             $table->string('place_of_domicile')->nullable();
             $table->date('start_date')->nullable();
             $table->unsignedBigInteger('branch_id')->nullable();

@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('unique_key')->nullable();
             $table->timestamp('unique_key_generated_at')->nullable();
             $table->boolean('password_is_changed')->default(0);
+            $table->string('image')->nullable();
+            $table->string('salutation',100)->nullable();
+            $table->string('first_name',100)->nullable();
+            $table->string('last_name',100)->nullable();
             // $table->bigInteger('department_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

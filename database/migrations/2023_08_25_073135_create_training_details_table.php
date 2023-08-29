@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->string('skill')->nullable();
+            $table->text('description')->nullable();
             $table->string('grade')->nullable();
            
             $table->timestamps();

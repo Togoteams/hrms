@@ -14,12 +14,17 @@ return new class extends Migration
         Schema::create('employment_histories', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->string('company_name');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->unsignedBigInteger('designation_id')->nullable();
+            $table->string('company_name')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->string('reason')->nullable();
             $table->longText('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('designation_id')->references('id')->on('designations');
+
         });
     }
 

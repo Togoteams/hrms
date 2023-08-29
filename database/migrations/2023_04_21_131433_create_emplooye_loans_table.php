@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('tenure');
             $table->integer('sanctioned');
             $table->integer('sanctioned_amount');
+            $table->string('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->string('status')->default('active');
             $table->unsignedBigInteger('created_by');

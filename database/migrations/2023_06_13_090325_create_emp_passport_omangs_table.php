@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('emp_passport_omangs', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->string('passport_no')->nullable();
-            $table->date('passport_expiry')->nullable();
-            $table->string('omang_no')->nullable();
-            $table->date('omang_expiry')->nullable();
+            $table->string('type')->nullable();
+            $table->string('certificate_no')->nullable();
+            $table->date('certificate_issue_date')->nullable();
+            $table->date('certificate_expiry_date')->nullable();
+            $table->string('country')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
