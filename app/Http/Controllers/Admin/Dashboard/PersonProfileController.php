@@ -183,8 +183,12 @@ class PersonProfileController extends BaseController
 
     public function viewPermanentContractual()
     {
-        $data = Employee::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.person-profile.permanent-contractual', ['data' => $data[0]]);
+        $data = Employee::where('user_id', Auth::user()->id)->first();
+        if(empty($data))
+        {
+            return redirect('/');
+        }
+        return view('admin.dashboard.person-profile.permanent-contractual', ['data' => $data]);
     }
 
 

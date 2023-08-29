@@ -13,9 +13,10 @@
 
                     <!-- Stats -->
                     <div class="row">
+                        @if(isemplooye())
                         <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard card-bg card-bg"
+                            <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ url('admin/personal-info/employee-details')}}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
@@ -35,10 +36,11 @@
                             </a>
                             <!-- End Card -->
                         </div>
-
+                        @endif
+                        @if(isemplooye())
                         <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
-                            <a class="card card-hover-shadow card-dashboard card-bg card-bg"
+                            <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ url('admin/person-profile/qualifications') }}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
@@ -60,7 +62,8 @@
                             </a>
                             <!-- End Card -->
                         </div>
-
+                        @endif
+                        @if(isemplooye())
                         <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg"
@@ -83,6 +86,7 @@
                             </a>
                             <!-- End Card -->
                         </div>
+                        @endif
 
                         <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
@@ -176,7 +180,8 @@
                             <!-- End Card -->
                         </div> --}}
 
-                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
+                        @if(!isemplooye())
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <a class="card card-hover-shadow card-dashboard card-bg " href="#">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
@@ -194,7 +199,8 @@
                                 </div>
                             </a>
                           
-                        </div> --}}
+                        </div>
+                        @endif
 
                         {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <a class="card card-hover-shadow card-dashboard card-bg " href="#">

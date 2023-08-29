@@ -105,7 +105,11 @@ td{
     background:  #f85109 !important;
     color: #fff !important;
 }
-
+.select2-container {
+   
+    width: 100% !important;
+ 
+}
 .active-class i
 {
     color: #fff !important;

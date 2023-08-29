@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             Brachseeders::class,
             TaxSlabSeeder::class,
             Membershipseeders::class,
-            Employeeseeders::class,
+            //Employeeseeders::class,
             PayrollHeadSeeder::class,
             DepartmentSeeder::class
 
