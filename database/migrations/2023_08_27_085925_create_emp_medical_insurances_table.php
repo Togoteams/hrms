@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('medical_card_id')->references('id')->on('medical_card');
+            $table->foreign('medical_card_id')->references('id')->on('medical_cards');
 
         });
     }

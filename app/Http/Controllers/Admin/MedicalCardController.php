@@ -48,7 +48,7 @@ class MedicalCardController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:medical_card,name',
+            'name' => 'required|string|unique:medical_cards,name',
             'description' => 'required|string',
 
            
