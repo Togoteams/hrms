@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MedicalCart extends Model
+class MedicalCard extends Model
 {
     use HasFactory;
     protected $fillable = [

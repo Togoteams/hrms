@@ -11,8 +11,8 @@ class EmpMedicalInsurance extends Model
     use HasFactory, SoftDeletes;
     protected $guarded = [];
 
-    public function medicalCart()
+    public function medicalCard()
     {
-        return $this->belongsTo(MedicalCart::class, 'card_id', 'id');
+        return $this->belongsTo(MedicalCard::class, 'medical_card_id', 'id');
     }
 }

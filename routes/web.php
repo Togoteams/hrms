@@ -33,7 +33,7 @@ use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\EmployeeTransferControler;
 use App\Http\Controllers\Admin\KraAttributesController;
 use App\Http\Controllers\Admin\LeaveSettingController;
-use App\Http\Controllers\Admin\MedicalCartController;
+use App\Http\Controllers\Admin\MedicalCardController;
 use App\Http\Controllers\Admin\OvertimeController;
 use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
 use App\Http\Controllers\Admin\Payroll\PayRollPayscaleCotroller;
@@ -190,7 +190,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('document-get/asign/{id}', [DocumentController::class, 'documentAssignedit'])->name('document.get.asign');
 
     // Medical Cart start
-    Route::resource('medical-cart',MedicalCartController::class);
+    Route::resource('medical-cart',MedicalCardController::class);
     // Medical Cart end
 
     Route::resource('overtime-settings', OvertimeController::class);

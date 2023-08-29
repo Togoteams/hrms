@@ -8,9 +8,9 @@ use App\Models\Designation;
 use App\Models\EmpDrivingLicense;
 use App\Models\Employee;
 use App\Models\EmploymentHistory;
-use App\Models\EmpMedicalCart;
+use App\Models\EmpMedicalCard;
 use App\Models\EmpMedicalInsurance;
-use App\Models\MedicalCart;
+use App\Models\MedicalCard;
 use App\Models\Qualification;
 use App\Models\TrainingDetails;
 use Exception;
@@ -195,7 +195,7 @@ class PersonProfileController extends BaseController
     public function viewMedicalInsuranceBomaidDetails()
     {
         $data = EmpMedicalInsurance::where('user_id', Auth::user()->id)->first();
-        $card = MedicalCart::get();
+        $card = MedicalCard::get();
         // return $data;
         return view('admin.dashboard.person-profile.medical-insurance-bomaid-details', ['data' => $data,'card'=>$card]);
     }

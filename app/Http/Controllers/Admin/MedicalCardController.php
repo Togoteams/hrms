@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\MedicalCart;
+use App\Models\MedicalCard;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 
-class MedicalCartController extends Controller
+class MedicalCardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class MedicalCartController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = MedicalCart::all();
+            $data = MedicalCard::all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -48,7 +48,7 @@ class MedicalCartController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:medical_carts,name',
+            'name' => 'required|string|unique:medical_card,name',
             'description' => 'required|string',
 
            
@@ -58,7 +58,7 @@ class MedicalCartController extends Controller
         } else {
             // $request->request->add(['created_by'=>Auth::user()->id]);
             $request->request->add(['status' =>"active"]);
-            MedicalCart::create($request->except('_token'));
+            MedicalCard::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
     }
@@ -76,7 +76,7 @@ class MedicalCartController extends Controller
      */
     public function edit(string $id)
     {
-        $medical = MedicalCart::find($id);
+        $medical = MedicalCard::find($id);
         return view('admin.medical_cart.edit', ['medical' => $medical, 'page' => $this->page_name]);   
     }
 
@@ -93,7 +93,7 @@ class MedicalCartController extends Controller
             return $validator->errors();
         } else {
             // $request->request->add(['updated_by'=>Auth::user()->id]);
-            MedicalCart::where('id', $id)->update($request->except('_token', '_method'));
+            MedicalCard::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
     }
@@ -104,7 +104,7 @@ class MedicalCartController extends Controller
     public function destroy(string $id)
     {
         try {
-            MedicalCart::destroy($id);
+            MedicalCard::destroy($id);
             return "Delete";
         } catch (Exception $e) {
             return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);

@@ -15,15 +15,15 @@
                     <span class="name-title">Person Profile</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.person-profile.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <div class="row py-3">
+                                    <div class="py-3 row">
                                         <div class="text-left">
                                             {{-- <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
@@ -31,9 +31,9 @@
                                             </button> --}}
                                         </div>
                                     </div>
-                                    <div class="row pb-4">
+                                    <div class="pb-4 row">
                                         <div class="">
-                                            <div class="card p-3">
+                                            <div class="p-3 card">
                                                 <form class="formsubmit" id="form_id" method="post"
                                                     action="{{ route('admin.person.profile.medical.insurance.bomaid.details.update') }}">
                                                     @csrf
@@ -44,29 +44,29 @@
                                                         <div class="col-10 text-dark">
                                                             @if (!empty($data))
                                                                 <div class="row showData">
-                                                                    <div class="col-3 fw-semibold pt-1">
+                                                                    <div class="pt-1 col-3 fw-semibold">
                                                                         Insurance Company Name
                                                                     </div>
-                                                                    <div class="col-3 pt-1">
+                                                                    <div class="pt-1 col-3">
                                                                         {{ $data->company_name }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row showData">
-                                                                    <div class="col-3 fw-semibold pt-3">Insurance ID</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Insurance ID</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->insurance_id }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row showData">
-                                                                    <div class="col-3 fw-semibold pt-3">Insurance card Type</div>
-                                                                    <div class="col-3 pt-3">
-                                                                        {{ $data->medicalCart->name }}                                                                    </div>
+                                                                    <div class="pt-3 col-3 fw-semibold">Insurance card Type</div>
+                                                                    <div class="pt-3 col-3">
+                                                                        {{ $data->medicalCard->name }}                                                                    </div>
                                                                 </div>
                                                             @else
                                                                 <span id="noDataMsg">No data to show</span>
                                                             @endif
                                                             <div class="row addInputDiv d-none">
-                                                                <div class="col-3 fw-semibold pt-1">
+                                                                <div class="pt-1 col-3 fw-semibold">
                                                                     Insurance Company Name<small
                                                                         class="required-field">*</small>
                                                                 </div>
@@ -79,17 +79,17 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row addInputDiv d-none">
-                                                                <div class="col-3 fw-semibold pt-3">
+                                                                <div class="pt-3 col-3 fw-semibold">
                                                                     Insurance ID<small class="required-field">*</small>
                                                                 </div>
-                                                                <div class="col-3 pt-2 margin-style">
+                                                                <div class="pt-2 col-3 margin-style">
                                                                     <input type="number" name="insurance_id"
                                                                         id="insurance_id"
                                                                         placeholder="Enter Insurance Company Name"
                                                                         class="form-control form-control-sm"
                                                                         value="{{ !empty($data) ? $data->insurance_id : '' }}">
                                                                 </div>
-                                                                {{-- <div class="col-2 margin-style pt-2">
+                                                                {{-- <div class="pt-2 col-2 margin-style">
                                                                     <button class="btn btn-white btn-sm">
                                                                         {{ !empty($data) ? 'Update' : 'Save' }}
                                                                     </button>
@@ -97,26 +97,26 @@
                                                             </div>
 
                                                             <div class="row addInputDiv d-none">
-                                                                <div class="col-3 fw-semibold pt-3">
+                                                                <div class="pt-3 col-3 fw-semibold">
                                                                     Insurance card Type<small class="required-field">*</small>
                                                                 </div>
-                                                                <div class="col-3 pt-2 margin-style">
+                                                                <div class="pt-2 col-3 margin-style">
                                                                     {{-- <input type="number" name="insurance_id"
                                                                         id="insurance_id"
                                                                         placeholder="Enter Insurance Company Name"
                                                                         class="form-control form-control-sm"
                                                                         value="{{ !empty($data) ? $data->insurance_id : '' }}"> --}}
-                                                                        <select name="card_id" class="form-control" id="card_id" placeholder="Employee department">
+                                                                        <select name="medical_card_id" class="form-control" id="medical_card_id" placeholder="Employee department">
                                                                             <option value="">Select Option</option>
                                                                             @foreach($card as $cardData)
-                                                                                <option value="{{ $cardData->id }}" {{ !empty($data) && $data->card_id == $cardData->id ? 'selected' : '' }}>
+                                                                                <option value="{{ $cardData->id }}" {{ !empty($data) && $data->medical_card_id == $cardData->id ? 'selected' : '' }}>
                                                                                     {{ $cardData->name }}
                                                                                 </option>
                                                                             @endforeach 
                                                                         </select>
                                                                 </div>
 
-                                                                <div class="col-2 margin-style pt-2">
+                                                                <div class="pt-2 col-2 margin-style">
                                                                     <button class="btn btn-white btn-sm">
                                                                         {{ !empty($data) ? 'Update' : 'Save' }}
                                                                     </button>
@@ -137,7 +137,7 @@
                                                                         Add
                                                                     </button>
                                                                 @endif
-                                                                <div class="pt-2 px-2 d-none" id="closeButton">
+                                                                <div class="px-2 pt-2 d-none" id="closeButton">
                                                                     <i class="bi bi-x-square-fill fs-2 text-danger pointer"
                                                                         title="Cancel" onclick="closeForm()"></i>
                                                                 </div>

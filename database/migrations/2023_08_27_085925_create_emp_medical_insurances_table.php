@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('emp_medical_insurances', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('card_id')->nullable();
+            $table->unsignedBigInteger('medical_card_id')->nullable();
             $table->string('company_name');
             $table->string('insurance_id');
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('card_id')->references('id')->on('medical_carts');
+            $table->foreign('medical_card_id')->references('id')->on('medical_card');
 
         });
     }
