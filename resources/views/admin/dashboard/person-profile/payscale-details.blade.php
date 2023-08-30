@@ -55,41 +55,7 @@
                                                                                             {{ $head->value }}
                                                                                         </div>
                                                                                         @endforeach
-                                                                                        {{-- <div class="col-4 fw-semibold pt-1">Allowance</div>
-                                                                                        <div class="col-6 pt-1">
-                                                                                            {{ $data-> }}
-                                                                                        </div>
-
-                                                                                        <div class="col-4 fw-semibold pt-1">Others/Arrears</div>
-                                                                                        <div class="col-6 pt-1">
-                                                                                            {{ $data-> }}
-                                                                                        </div>
-
-                                                                                        <div class="col-4 fw-semibold pt-1">BoMaid</div>
-                                                                                        <div class="col-6 pt-1">
-                                                                                            {{ $data->}}
-                                                                                        </div>
-
-                                                                                        <div class="col-4 fw-semibold pt-1">Pension</div>
-                                                                                        <div class="col-6 pt-1">
-                                                                                            {{ $data-> }}
-                                                                                        </div>
-
-                                                                                        <div class="col-4 fw-semibold pt-1">Union Fee</div>
-                                                                                        <div class="col-6 pt-1">
-                                                                                            {{ $data-> }}
-                                                                                        </div>
-
-                                                                                        <div class="col-4 fw-semibold pt-1">Other Deductions</div>
-                                                                                        <div class="col-6 pt-1">
-                                                                                            {{ $data-> }}
-                                                                                        </div>
-
-                                                                                        <div class="col-4 fw-semibold pt-1">Tax</div>
-                                                                                        <div class="col-6 pt-1">
-                                                                                            {{ $data-> }}
-                                                                                        </div> --}}
-
+                                                                                       
                                                                                         <div class="col-4 fw-semibold pt-1">Gross Earning</div>
                                                                                         <div class="col-6 pt-1">
                                                                                             {{ $data->gross_earning }}

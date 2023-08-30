@@ -105,6 +105,42 @@
         },
         {
             "name": "Delete Leaves"
+        },
+        {
+            "name": "Add Department"
+        },
+        {
+            "name": "Edit Department"
+        },
+        {
+            "name": "View Department"
+        },
+        {
+            "name": "Delete Department"
+        },
+        {
+            "name": "Add Employee Transfer"
+        },
+        {
+            "name": "Edit Employee Transfer"
+        },
+        {
+            "name": "View Employee Transfer"
+        },
+        {
+            "name": "Delete Employee Transfer"
+        },
+        {
+            "name": "Add Document Management"
+        },
+        {
+            "name": "Edit Document Management"
+        },
+        {
+            "name": "View Document Management"
+        },
+        {
+            "name": "Delete Document Management"
         }
     ]
 }
