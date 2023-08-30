@@ -388,13 +388,13 @@ class PersonProfileController extends BaseController
         $datas = PayRollPayscale::where('user_id', Auth::user()->id)->get();
         // $payroll = PayrollSalaryHead::where('user_id', Auth::user()->id)->get();
 
-        $data = DB::table('payroll_payscales as PP')
-        ->leftJoin('payroll_payscale_heads AS PPH','PPH.payroll_payscale_id','=','PP.id')
-        ->leftJoin('payroll_heads AS PH','PH.id','=','PPH.payroll_head_id')
-        ->select('PP.*','PH.name','PPH.value')
-        ->where('user_id',Auth::user()->id)
-        ->first();
-        // dd($data);
-        return view('admin.dashboard.person-profile.payscale-details',['datas' => $datas,'data'=>$data]);
+        // $data = DB::table('payroll_payscales as PP')
+        // ->leftJoin('payroll_payscale_heads AS PPH','PPH.payroll_payscale_id','=','PP.id')
+        // ->leftJoin('payroll_heads AS PH','PH.id','=','PPH.payroll_head_id')
+        // ->select('PP.*','PH.name','PPH.value')
+        // ->where('user_id',Auth::user()->id)
+        // ->first();
+        // dd($datas);
+        return view('admin.dashboard.person-profile.payscale-details',['datas' => $datas]);
     }
 }
