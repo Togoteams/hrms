@@ -24,7 +24,7 @@ class MedicalCardController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.medical_cart.buttons', ['item' => $row, "route" => 'medical-cart']);
+                    $actionBtn = view('admin.medical_cart.buttons', ['item' => $row, "route" => 'medical-card']);
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

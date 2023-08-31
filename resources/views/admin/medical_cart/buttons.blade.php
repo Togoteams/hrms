@@ -10,9 +10,9 @@
 
 
 <form id="edit{{ $item->id }}"
-    action="{{ route('admin.medical-cart.destroy', $item->id) }}">
+    action="{{ route('admin.medical-card.destroy', $item->id) }}">
     <button type="button"
-        onclick="editForm('{{ route('admin.medical-cart.edit', $item->id) }}', 'edit')"
+        onclick="editForm('{{ route('admin.medical-card.edit', $item->id) }}', 'edit')"
         href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
         class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
     @csrf

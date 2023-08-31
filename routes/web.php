@@ -197,7 +197,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('document-get/asign/{id}', [DocumentController::class, 'documentAssignedit'])->name('document.get.asign');
 
     // Medical Cart start
-    Route::resource('medical-cart',MedicalCardController::class);
+    Route::resource('medical-card',MedicalCardController::class);
     // Medical Cart end
 
     Route::resource('overtime-settings', OvertimeController::class);

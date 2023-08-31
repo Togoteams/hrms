@@ -8,7 +8,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">  
-             <form id="form_data" action="{{ route('admin.medical-cart.store') }}">
+             <form id="form_data" action="{{ route('admin.medical-card.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 

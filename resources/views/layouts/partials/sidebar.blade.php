@@ -257,8 +257,8 @@
                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
                      'delete-roles', 'view-roles'])
                          <div class="nav-item">
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-cart.list' ? 'active' : '' }}"
-                                 href="{{ route('admin.medical-cart.index') }}" data-placement="left">
+                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
+                                 href="{{ route('admin.medical-card.index') }}" data-placement="left">
                                  <i class="fa fa-truck-medical nav-icon"></i>
                                  <span class="nav-link-title">Medical card Type</span>
                              </a>
@@ -384,7 +384,7 @@
 
                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
                                 href="{{ route('admin.leavesettings.list') }}" data-placement="left">
-                                <span class="nav-link-title">Leave Type</span>
+                                <span class="nav-link-title">Leave Settings</span>
                             </a>
 
 

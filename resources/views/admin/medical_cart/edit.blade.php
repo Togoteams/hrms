@@ -1,7 +1,7 @@
 {{-- Model --}}
                        
 
-<form id="form_edit" action="{{ route('admin.medical-cart.update',$medical->id) }}">
+<form id="form_edit" action="{{ route('admin.medical-card.update',$medical->id) }}">
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">

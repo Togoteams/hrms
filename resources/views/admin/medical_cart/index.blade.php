@@ -71,7 +71,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.medical-cart.index') }}",
+                            ajax: "{{ route('admin.medical-card.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
