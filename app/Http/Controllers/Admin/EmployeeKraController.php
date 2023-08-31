@@ -28,7 +28,17 @@ class EmployeeKraController extends Controller
         }
 
         if ($request->ajax()) {
-            $data = EmployeeKra::with('user')->where('created_at', 'LIKE', '%' . $year . '%')->groupBy('user_id')->get();
+            if(isemplooye())
+            {
+                $data = EmployeeKra::with('user')->where('user_id',auth()->user()->id)
+                ->get();
+            }else
+            {
+                $data = EmployeeKra::with('user')
+                ->where('created_at', 'LIKE', '%' . $year . '%')->groupBy('user_id')
+                ->get();
+            }
+            
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
