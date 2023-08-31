@@ -209,6 +209,14 @@ if (!function_exists('pulaToUsd')) {
         return $usd;
     }
 }
+if (!function_exists('usdToPula')) {
+    function usdToPula($amount)
+    {
+        $usd = 13.06;
+        $pula = $amount * $usd;
+        return $pula;
+    }
+}
 if (!function_exists('inrToUsd')) {
     function inrToUsd($amount)
     {

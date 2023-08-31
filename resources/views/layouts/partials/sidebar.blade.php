@@ -140,7 +140,7 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
                                              href="{{ route('admin.employees.index') }}">Employees</a>
                                      @endcanany
-                                     @canany(['add-employees', 'edit-employees', 'view-employees', 'delete-employees'])
+                                     @canany(['add-employees-transfer', 'edit-employees-transfer', 'view-employees-transfer', 'delete-employees-transfer'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
                                          href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
                                      @endcanany
@@ -224,7 +224,7 @@
                                      <i class="fas fa-users-class nav-icon"></i>
                                      <span class="nav-link-title">Kra</span>
                                  </a>
-
+                                 @if(isemplooye())
                                  <div id="kra"
                                      class="nav-collapse collapse {{ show(['employee-kra.index', 'kra-attributes.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
@@ -239,12 +239,12 @@
                                      @endcanany
 
                                  </div>
+                                 @endif
                              </div>
                          </div>
                      @endcanany
 
-                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
-                     'delete-roles', 'view-roles'])
+                     @canany(['add-document-management', 'edit-document-management', 'view-document-management', 'delete-document-management'])
                          <div class="nav-item">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document.list' ? 'active' : '' }}"
                                  href="{{ route('admin.document.index') }}" data-placement="left">
@@ -254,19 +254,17 @@
                          </div>
                      @endcanany
 
-                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
-                     'delete-roles', 'view-roles'])
-                         <div class="nav-item">
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
-                                 href="{{ route('admin.medical-card.index') }}" data-placement="left">
-                                 <i class="fa fa-truck-medical nav-icon"></i>
-                                 <span class="nav-link-title">Medical card Type</span>
-                             </a>
-                         </div>
+                     @canany(['add-medical-card-type', 'edit-medical-card-type', 'view-medical-card-type', 'delete-medical-card-type'])
+                        <div class="nav-item">
+                            <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
+                                href="{{ route('admin.medical-card.index') }}" data-placement="left">
+                                <i class="fa fa-truck-medical nav-icon"></i>
+                                <span class="nav-link-title">Medical card Type</span>
+                            </a>
+                        </div>
                      @endcanany
 
-                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
-                     'delete-roles', 'view-roles'])
+                     @canany(['add-overtime-setting', 'edit-overtime-setting', 'view-overtime-setting', 'delete-overtime-setting'])
                          <div class="nav-item">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
                                  href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
@@ -384,7 +382,7 @@
 
                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
                                 href="{{ route('admin.leavesettings.list') }}" data-placement="left">
-                                <span class="nav-link-title">Leave Settings</span>
+                                <span class="nav-link-title">Leave Type</span>
                             </a>
 
 

@@ -141,6 +141,30 @@
         },
         {
             "name": "Delete Document Management"
+        },
+        {
+            "name": "Add Medical card Type"
+        },
+        {
+            "name": "Edit Medical card Type"
+        },
+        {
+            "name": "View Medical card Type"
+        },
+        {
+            "name": "Delete Medical card Type"
+        },
+        {
+            "name": "Add Overtime Setting"
+        },
+        {
+            "name": "Edit Overtime Setting"
+        },
+        {
+            "name": "View Overtime Setting"
+        },
+        {
+            "name": "Delete Overtime Setting"
         }
     ]
 }
