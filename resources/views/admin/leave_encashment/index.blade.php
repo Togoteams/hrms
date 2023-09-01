@@ -26,10 +26,12 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="col-sm-3 text-right auto mb-2 mt-2">
-                    {{-- @can('add-leaves') --}}
+                    @can('add-leave-encashment')
                     <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         {{ $page }}
                     </button>
+                    @endcan
+
 
                     @if (isemplooye())
                         @php

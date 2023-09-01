@@ -33,10 +33,12 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    <button type="button" class="btn btn-white" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            Add {{ $page }}
-                        </button>
+                        @can('add-manage-tax')
+                            <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    Add {{ $page }}
+                            </button>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -69,12 +71,16 @@
                                     <td>
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.tax.destroy', $item->id) }}">
+                                            @can('edit-manage-tax')
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.tax.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                                class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                            </button>
+                                            @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
+                                            
                                             <button type="button" id="delete{{ $item->id }}"
                                                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                                                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>

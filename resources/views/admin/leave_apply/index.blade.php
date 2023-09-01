@@ -26,11 +26,11 @@
         <div class="row">
             <div class="col-sm-9"></div>
             <div class="col-sm-3 text-right auto mt-2" style="text-align: right;">
-                {{-- @can('add-leaves') --}}
+                @can('add-leave-apply')
                 <button type="button" class="btn btn-white text-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     {{ $page }}
                 </button>
-                {{-- @endcan --}}
+                @endcan
 
             </div>
         </div>

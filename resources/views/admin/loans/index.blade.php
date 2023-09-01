@@ -33,10 +33,12 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    <button type="button" class="btn btn-white" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            Add {{ $page }}
+                        @can('add-loans-types')
+                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Add {{ $page }}
                         </button>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -66,16 +68,22 @@
                                     <td>
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.loans.destroy', $item->id) }}">
+                                            @can('edit-loans-types')
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.loans.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                                class="btn btn-edit btn-sm"><i class="fas fa-edit"></i></button>
+                                                class="btn btn-edit btn-sm"><i class="fas fa-edit"></i>
+                                            </button>
+                                            @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
+                                            @can('delete-loans-types')
                                             <button type="button" id="delete{{ $item->id }}"
                                                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                                                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
                                             </button>
+                                            @endcan
+                                            @can('status-loans-types')
                                             <button type="button"
                                                 onclick="changeStatus('{{ route('admin.loans.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"
@@ -86,6 +94,7 @@
                                                     <i class="fas fa-times-circle"></i>
                                                 @endif
                                             </button>
+                                            @endcan
                                         </form>
 
                                     </td>

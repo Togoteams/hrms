@@ -91,7 +91,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Employee name</th>
+                                <th>Employee5665 name</th>
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
                                 <th>leave type</th>

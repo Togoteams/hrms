@@ -33,10 +33,12 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
+                    @can('add-document-management')
                     <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
+                    @endcan
                     </div>
                 </div>
             </div>
@@ -82,16 +84,21 @@
                                             data-bs-target="#staticBackdrop1" onclick="editForm('{{ route('admin.document.get.asign', $item->id) }}', 'assign_doc')" doc_id="{{$item->id}}">
                                                     Asign Employee Document
                                                 </button>
-                                        <button type="button"
-                                            onclick="editForm('{{ route('admin.document.edit', $item->id) }}', 'edit')"
-                                            href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                            class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
-                                        @csrf
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="button" id="delete{{ $item->id }}"
-                                            onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
-                                            class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
-                                        </button>
+                                            @can('edit-document-management')
+                                            <button type="button"
+                                                onclick="editForm('{{ route('admin.document.edit', $item->id) }}', 'edit')"
+                                                href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                                class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                            </button>
+                                            @endcan
+                                            @csrf
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            @can('delete-document-management')
+                                            <button type="button" id="delete{{ $item->id }}"
+                                                onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
+                                                class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
+                                            </button>
+                                            @endcan
                                     </form>
                                 </td>
                               </tr>   

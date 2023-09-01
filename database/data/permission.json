@@ -52,6 +52,9 @@
             "name": "Delete Employees"
         },
         {
+            "name": "Status Employees"
+        },
+        {
             "name": "Add Branch"
         },
         {
@@ -63,7 +66,9 @@
         {
             "name": "Delete Branch"
         },
-
+        {
+            "name": "Status Branch"
+        },
         {
             "name": "Add Designations"
         },
@@ -95,16 +100,16 @@
             "name": "Change Password"
         },
         {
-            "name": "Add Leaves"
+            "name": "Add Leave"
         },
         {
-            "name": "Edit Leaves"
+            "name": "Edit Leave"
         },
         {
-            "name": "View Leaves"
+            "name": "View Leave"
         },
         {
-            "name": "Delete Leaves"
+            "name": "Delete Leave"
         },
         {
             "name": "Add Department"
@@ -165,6 +170,327 @@
         },
         {
             "name": "Delete Overtime Setting"
+        },
+        {
+            "name": "Add Loans Types"
+        },
+        {
+            "name": "Edit Loans Types"
+        },
+        {
+            "name": "View Loans Types"
+        },
+        {
+            "name": "Delete Loans Types"
+        },
+        {
+            "name": "Status Loans Types"
+        },
+        {
+            "name": "Add Apply Loans"
+        },
+        {
+            "name": "Edit Apply Loans"
+        },
+        {
+            "name": "View Apply Loans"
+        },
+        {
+            "name": "Delete Apply Loans"
+        },
+        {
+            "name": "Status Apply Loans"
+        },
+        {
+            "name": "Add Loans"
+        },
+        {
+            "name": "Edit Loans"
+        },
+        {
+            "name": "View Loans"
+        },
+        {
+            "name": "Delete Loans"
+        },
+        {
+            "name": "Add Kra"
+        },
+        {
+            "name": "Edit Kra"
+        },
+        {
+            "name": "View Kra"
+        },
+        {
+            "name": "Delete Kra"
+        },
+        {
+            "name": "Add Attributes"
+        },
+        {
+            "name": "Edit Attributes"
+        },
+        {
+            "name": "View Attributes"
+        },
+        {
+            "name": "Delete Attributes"
+        },
+        {
+            "name": "Status Attributes"
+        },
+        {
+            "name": "Add Employee Kra"
+        },
+        {
+            "name": "Edit Employee Kra"
+        },
+        {
+            "name": "View Employee Kra"
+        },
+        {
+            "name": "Delete Employee Kra"
+        },
+        {
+            "name": "Status Employee Kra"
+        },
+        {
+            "name": "Print Employee Kra"
+        },
+        {
+            "name": "Add Leave Types"
+        },
+        {
+            "name": "Edit Leave Types"
+        },
+        {
+            "name": "View Leave Types"
+        },
+        {
+            "name": "Delete Leave Types"
+        },
+        {
+            "name": "Status Leave Types"
+        },
+        {
+            "name": "Add LEAVE Apply"
+        },
+        {
+            "name": "Edit LEAVE Apply"
+        },
+        {
+            "name": "View LEAVE Apply"
+        },
+        {
+            "name": "Delete LEAVE Apply"
+        },
+        {
+            "name": "Status LEAVE Apply"
+        },
+        {
+            "name": "Add LEAVE ENCASHMENT"
+        },
+        {
+            "name": "Edit LEAVE ENCASHMENT"
+        },
+        {
+            "name": "View LEAVE ENCASHMENT"
+        },
+        {
+            "name": "Delete LEAVE ENCASHMENT"
+        },
+        {
+            "name": "Add LEAVE BALANCE REPORT"
+        },
+        {
+            "name": "Edit LEAVE BALANCE REPORT"
+        },
+        {
+            "name": "View LEAVE BALANCE REPORT"
+        },
+        {
+            "name": "Delete LEAVE BALANCE REPORT"
+        },
+        {
+            "name": "Add LEAVE REQUEST HISTORY"
+        },
+        {
+            "name": "Edit LEAVE REQUEST HISTORY"
+        },
+        {
+            "name": "View LEAVE REQUEST HISTORY"
+        },
+        {
+            "name": "Delete LEAVE REQUEST HISTORY"
+        },
+        {
+            "name": "Add LEAVE REQUEST REJECTED"
+        },
+        {
+            "name": "Edit LEAVE REQUEST REJECTED"
+        },
+        {
+            "name": "View LEAVE REQUEST REJECTED"
+        },
+        {
+            "name": "Delete LEAVE REQUEST REJECTED"
+        },
+        {
+            "name": "Add LEAVE REPORTS"
+        },
+        {
+            "name": "Edit LEAVE REPORTS"
+        },
+        {
+            "name": "View LEAVE REPORTS"
+        },
+        {
+            "name": "Delete LEAVE REPORTS"
+        },
+        {
+            "name": "Add Leave Settings"
+        },
+        {
+            "name": "Edit Leave Settings"
+        },
+        {
+            "name": "View Leave Settings"
+        },
+        {
+            "name": "Delete Leave Settings"
+        },
+        {
+            "name": "Add Leave Type"
+        },
+        {
+            "name": "Edit Leave Type"
+        },
+        {
+            "name": "View Leave Type"
+        },
+        {
+            "name": "Delete Leave Type"
+        },
+        {
+            "name": "Add Payroll"
+        },
+        {
+            "name": "Edit Payroll"
+        },
+        {
+            "name": "View Payroll"
+        },
+        {
+            "name": "Delete Payroll"
+        },
+        {
+            "name": "Add Tax Slab Settings"
+        },
+        {
+            "name": "Edit Tax Slab Settings"
+        },
+        {
+            "name": "View Tax Slab Settings"
+        },
+        {
+            "name": "Delete Tax Slab Settings"
+        },
+        {
+            "name": "Add Salary Increment Settings"
+        },
+        {
+            "name": "Edit Salary Increment Settings"
+        },
+        {
+            "name": "View Salary Increment Settings"
+        },
+        {
+            "name": "Delete Salary Increment Settings"
+        },
+        {
+            "name": "Add Salary Increment Reporting"
+        },
+        {
+            "name": "Edit Salary Increment Reporting"
+        },
+        {
+            "name": "View Salary Increment Reporting"
+        },
+        {
+            "name": "Delete Salary Increment Reporting"
+        },
+        {
+            "name": "Add Payroll Head"
+        },
+        {
+            "name": "Edit Payroll Head"
+        },
+        {
+            "name": "View Payroll Head"
+        },
+        {
+            "name": "Delete Payroll Head"
+        },
+        {
+            "name": "Add Pay Scale"
+        },
+        {
+            "name": "Edit Pay Scale"
+        },
+        {
+            "name": "View Pay Scale"
+        },
+        {
+            "name": "Delete Pay Scale"
+        },
+        {
+            "name": "Add Salary"
+        },
+        {
+            "name": "Edit Salary"
+        },
+        {
+            "name": "View Salary"
+        },
+        {
+            "name": "Delete Salary"
+        },
+        {
+            "name": "Add Reimbursement Type"
+        },
+        {
+            "name": "Edit Reimbursement Type"
+        },
+        {
+            "name": "View Reimbursement Type"
+        },
+        {
+            "name": "Delete Reimbursement Type"
+        },
+        {
+            "name": "Add Reimbursement"
+        },
+        {
+            "name": "Edit Reimbursement"
+        },
+        {
+            "name": "View Reimbursement"
+        },
+        {
+            "name": "Delete Reimbursement"
+        },
+        {
+            "name": "Add Manage Tax"
+        },
+        {
+            "name": "Edit Manage Tax"
+        },
+        {
+            "name": "View Manage Tax"
+        },
+        {
+            "name": "Delete Manage Tax"
         }
     ]
 }

@@ -11,14 +11,19 @@
 
 <form id="edit{{ $item->id }}"
     action="{{ route('admin.medical-card.destroy', $item->id) }}">
+    @can('edit-medical-card-type')
     <button type="button"
         onclick="editForm('{{ route('admin.medical-card.edit', $item->id) }}', 'edit')"
         href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-        class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+        class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+    </button>
+    @endcan
     @csrf
     <input type="hidden" name="_method" value="DELETE">
+    @can('delete-medical-card-type')
     <button type="button" id="delete{{ $item->id }}"
         onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
         class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
     </button>
+    @endcan
 </form>

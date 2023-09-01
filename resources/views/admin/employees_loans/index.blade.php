@@ -31,10 +31,12 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                        @can('add-apply-loans')
+                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
+                        @endcan
 
                     </div>
                 </div>

@@ -33,10 +33,12 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    <button type="button" class="btn btn-white" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            Add {{ $page }}
-                        </button>
+                        @can('add-memberships')
+                           <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Add {{ $page }}
+                            </button>
+                        @endcan
                     </div>
                 </div>
             </div>
@@ -75,16 +77,21 @@
 
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.membership.destroy', $item->id) }}">
+                                            @can('edit-memberships')
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.membership.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                                class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                            </button>
+                                            @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button type="button" id="delete{{ $item->id }}"
-                                                onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
-                                                class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
-                                            </button>
+                                            @can('delete-memberships')
+                                                <button type="button" id="delete{{ $item->id }}"
+                                                    onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
+                                                    class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
+                                                </button>
+                                            @endcan
                                         </form>
                                         {{-- <button target="_blank" href="{{ route('admin.membership.edit', $item->id) }}"
                                             class="btn btn-edit btn-sm"><i class="far fa-show"></i></button> --}}
