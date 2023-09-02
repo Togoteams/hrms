@@ -41,7 +41,7 @@
             class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
         </button>
         @endcan
-        @can('status-reimbursement')
+        @can('change-status-reimbursement')
         <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
         @endcan
 </form>

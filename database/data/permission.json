@@ -52,7 +52,7 @@
             "name": "Delete Employees"
         },
         {
-            "name": "Status Employees"
+            "name": "Change Employees Status "
         },
         {
             "name": "Add Branch"
@@ -67,7 +67,7 @@
             "name": "Delete Branch"
         },
         {
-            "name": "Status Branch"
+            "name": "Change Branch Status"
         },
         {
             "name": "Add Designations"
@@ -184,7 +184,7 @@
             "name": "Delete Loans Types"
         },
         {
-            "name": "Status Loans Types"
+            "name": "Change Status Loans Types"
         },
         {
             "name": "Add Apply Loans"
@@ -199,7 +199,7 @@
             "name": "Delete Apply Loans"
         },
         {
-            "name": "Status Apply Loans"
+            "name": "Change Status Apply Loans"
         },
         {
             "name": "Add Loans"
@@ -238,7 +238,7 @@
             "name": "Delete Attributes"
         },
         {
-            "name": "Status Attributes"
+            "name": "Change Status Attributes"
         },
         {
             "name": "Add Employee Kra"
@@ -253,7 +253,7 @@
             "name": "Delete Employee Kra"
         },
         {
-            "name": "Status Employee Kra"
+            "name": "Change Status Employee Kra"
         },
         {
             "name": "Print Employee Kra"
@@ -271,7 +271,7 @@
             "name": "Delete Leave Types"
         },
         {
-            "name": "Status Leave Types"
+            "name": "Change Status Leave Types"
         },
         {
             "name": "Add LEAVE Apply"
@@ -286,7 +286,7 @@
             "name": "Delete LEAVE Apply"
         },
         {
-            "name": "Status LEAVE Apply"
+            "name": "Change Status LEAVE Apply"
         },
         {
             "name": "Add LEAVE ENCASHMENT"
@@ -433,7 +433,7 @@
             "name": "Delete Payroll Head"
         },
         {
-            "name": "Status Payroll Head"
+            "name": "Change Status Payroll Head"
         },
         {
             "name": "Add Pay Scale"
@@ -487,7 +487,7 @@
             "name": "Delete Reimbursement"
         },
         {
-            "name": "Status Reimbursement"
+            "name": "Change Status Reimbursement"
         },
         {
             "name": "Add Manage Tax"

@@ -24,7 +24,7 @@
                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
             </button> --}}
         @endif
-        @can('status-leave-apply')
+        @can('change-status-leave-apply')
         <button type="button"
             onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"
             href="#" data-bs-toggle="modal" data-bs-target="#modalstatus"

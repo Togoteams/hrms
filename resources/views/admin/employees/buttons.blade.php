@@ -28,7 +28,7 @@
     </button>
     @endcan
 
-    @can('status-employees')
+    @can('Change-employees-status')
     <button type="button"
         onclick="changeStatus('{{ route('admin.' . $route . '.status', $item->id) }}','status{{ $item->id }}')"
         id="status{{ $item->id }}"

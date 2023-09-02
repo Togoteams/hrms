@@ -83,7 +83,7 @@
                                                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
                                             </button>
                                             @endcan
-                                            @can('status-loans-types')
+                                            @can('change-status-loans-types')
                                             <button type="button"
                                                 onclick="changeStatus('{{ route('admin.loans.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"

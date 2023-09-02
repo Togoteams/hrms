@@ -91,7 +91,7 @@
                                             </button>
                                             @endcan
 
-                                            @can('status-leave-types')
+                                            @can('change-status-leave-types')
                                             <button type="button"
                                                 onclick="changeStatus('{{ route('admin.leave_type.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"

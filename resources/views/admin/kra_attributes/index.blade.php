@@ -92,7 +92,7 @@
                                             </button>
                                             @endcan
 
-                                            @can('status-attributes')
+                                            @can('change-status-attributes')
                                             <button type="button"
                                                 onclick="changeStatus('{{ route('admin.kra-attributes.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"

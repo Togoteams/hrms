@@ -18,7 +18,7 @@
     </button>
     @endcan
     
-    @can('status-apply-loans')
+    @can('change-status-apply-loans')
     <button type="button"
         onclick="changeStatus('{{ route('admin.' . $route . '.status', $item->id) }}','status{{ $item->id }}')"
         id="status{{ $item->id }}"
