@@ -99,7 +99,7 @@
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
                                     </button>
                                     @endcan
-                                    @can('Change-branch-status')
+                                    @can('change-branch-status')
                                     <button type="button"
                                         onclick="changeStatus('{{ route('admin.branch.status', $item->id) }}','status{{ $item->id }}')"
                                         id="status{{ $item->id }}"
