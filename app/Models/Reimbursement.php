@@ -12,6 +12,7 @@ class Reimbursement extends Model
     'bill_amount',
     'expenses_date',
     'reimbursement_amount',
+    'currency',
     'reimbursement_notes',
     'reimbursement_reason',
     'status',

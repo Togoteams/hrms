@@ -58,6 +58,7 @@ class ReimbursementController extends BaseController
             'bill_amount' => 'required|numeric|gt:0',
             'expenses_date' => 'required|date|before_or_equal:today',
             'reimbursement_amount' => 'required|numeric|gt:0',
+            'currency' => 'required',
             'reimbursement_notes' => 'required|string',
 
         ]);
@@ -109,6 +110,7 @@ class ReimbursementController extends BaseController
             'bill_amount' => 'required|numeric|gt:0',
             'expenses_date' => 'required|date|before_or_equal:today',
             'reimbursement_amount' => 'required|numeric|gt:0',
+            'currency' => 'required',
             'reimbursement_notes' => 'required|string',
         ]);
         if ($validator->fails()) {

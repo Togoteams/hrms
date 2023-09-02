@@ -53,6 +53,7 @@
                             <th>Type</th>
                             <th>Bill Amount</th>
                             <th>Expenses Date</th>
+                            <th>Currency</th>
                             <th>Reimbursement Amount</th>
                             <th>Reimbursement Notes</th>
                             <th>status</th>
@@ -93,6 +94,10 @@
                             {
                                 data: 'expenses_date',
                                 name: 'expenses_date'
+                            },
+                            {
+                                data: 'currency',
+                                name: 'currency'
                             },
                             {
                                 data: 'reimbursement_amount',

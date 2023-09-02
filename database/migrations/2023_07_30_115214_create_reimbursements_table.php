@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('bill_amount', 10, 2)->nullable();
             $table->date('expenses_date')->nullable();
             $table->decimal('reimbursement_amount', 10, 2)->nullable();
+            $table->string('currency')->nullable();
             $table->string('reimbursement_notes', 200)->nullable();
             $table->string('reimbursement_reason')->nullable();
             $table->string('status')->default('pending');

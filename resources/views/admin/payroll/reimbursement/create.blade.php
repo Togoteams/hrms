@@ -39,6 +39,24 @@
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">
+                                <label for="currency">Currency<small
+                                        class="required-field">*</small></label>
+                            
+                                <select id="currency" placeholder="Select Currency"
+                                    name="currency" class="form-control form-control-sm">
+                                    <option selected disabled> - Select Currency - </option>
+                                    <option
+                                        {{ !empty($employee) ? ($employee->currency == 'pula' ? 'selected' : '') : '' }}
+                                        value="pula">Pula( P )</option>
+                                    <option
+                                        {{ !empty($employee) ? ($employee->currency == 'inr' ? 'selected' : '') : '' }}
+                                        value="inr">INR( ₹ )</option>
+                                    <option
+                                        {{ !empty($employee) ? ($employee->currency == 'dollar' ? 'selected' : '') : '' }}
+                                        value="dollar">Dollar( $ )</option>
+                                </select>
+                            </div>
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
                                     <input type="number" name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{ old('reimbursement_amount') }}">

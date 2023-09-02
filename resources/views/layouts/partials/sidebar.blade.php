@@ -455,9 +455,6 @@
                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-reporting.index' ? 'active' : '' }}  "
                                     href="{{ route('admin.payroll.salary-increment-reporting.index') }}"> Salary Increment Reporting</a>
                              @endcanany
-
-            "name": " Change Status Payroll Head"
-            "name": " Change Status Payroll Head"
                              @canany(['add-payroll-head', 'edit-payroll-head', 'delete-payroll-head', 'view-payroll-head','change-status-payroll-head'])
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.head.index') }}"> Payroll Head</a>
