@@ -31,9 +31,11 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
+                    @can('add-salary')
                     <a class="text-white btn btn-white" href="{{ route('admin.payroll.salary.create') }}">
                         Add {{ $page }}
                     </a>
+                    @endcan
 
                     </div>
                 </div>

@@ -33,11 +33,12 @@
                             <h2 class="page-header-title">{{ $page }}</h2>
                         </div>
                         <div class="col-sm-auto">
+                            @can('add-leave-type')
                             <button type="button" class="btn btn-white" data-bs-toggle="modal"
                                 data-bs-target="#leave_setting_add_modal">
                                 Add {{ $page }}
                             </button>
-
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -72,17 +73,23 @@
                                     <td>{{ $item->starting_date == '1' ? 'DOJ' : 'Other Date' }}</td>
                                     <td>{{ $item->is_certificate == '1' ? 'Yes' : 'No' }}</td>
                                     <td>
+                                        @can('edit-leave-type')
                                         <a href="javascript:void(0)" data-value="{{ json_encode($item) }}"
                                             class="btn btn-edit btn-sm edit_leave_setting_btn">
                                             <i class="fas fa-edit" title="Edit"></i>
                                         </a>
+                                        @endcan
+                                        @can('delete-leave-type')
                                         <a class="btn btn-delete btn-sm delete_leave_setting_btn"
                                             data-value="{{ $item->id }}">
                                             <i class="fas fa-trash-alt" title="Delete"></i>
                                         </a>
+                                        @endcan
+                                        @can('view-leave-type')
                                         <a class="btn btn-sm btn-info view_leave_setting_btn" data-value="{{ json_encode($item) }}">
                                             <i class="fas fa-eye" style="color:#fff;"></i>
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -1,7 +1,9 @@
 <form id="edit{{ $item->id }}" action="{{ route('admin.' . $route . '.destroy', $item->id) }}">
 
+    @can('print-salary')
     <a target="_blank" href="{{ route('admin.payroll.salary.print', $item->user_id) }}"
         class="text-white btn btn-success btn-sm"><i class="fas fa-print"></i></a>
+    @endcan
 
     {{-- <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')" href="#"
         data-bs-toggle="modal" data-bs-target="#modaledit" class="btn btn-edit btn-sm"><i

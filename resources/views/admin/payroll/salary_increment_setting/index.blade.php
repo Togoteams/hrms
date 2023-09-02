@@ -33,10 +33,12 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
+                    @can('add-salary-increment-settings')
                     <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
+                    @endcan
                     </div>
                 </div>
             </div>

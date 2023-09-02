@@ -421,9 +421,14 @@
                     @endcanany
 
                     @canany(['add-payroll', 'edit-payroll', 'view-payroll', 'delete-payroll',
-                            'add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type',
-                            'add-salary-increment-settings', 'edit-salary-increment-settings', 
-                            'delete-salary-increment-settings', 'view-salary-increment-settings'])
+                            'add-tax-slab-settings', 'edit-tax-slab-settings', 'delete-tax-slab-settings', 'view-tax-slab-settings',
+                            'add-salary-increment-settings', 'edit-salary-increment-settings', 'delete-salary-increment-settings', 'view-salary-increment-settings', 
+                            'add-salary-increment-reporting', 'edit-salary-increment-reporting', 'delete-salary-increment-reporting', 'view-salary-increment-reporting',
+                            'add-payroll-head', 'edit-payroll-head', 'delete-payroll-head', 'view-payroll-head','status-payroll-head',
+                            'add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale',
+                            'add-salary', 'edit-salary', 'delete-salary', 'view-salary','print-salary',
+                            'add-reimbursement-type', 'edit-reimbursement-type', 'delete-reimbursement-type', 'view-reimbursement-type',
+                            'add-reimbursement', 'edit-reimbursement', 'delete-reimbursement', 'view-reimbursement','status-reimbursement'])
                      <div class="nav-item">
                          <a class="nav-link dropdown-toggle " href="#emppayroll" role="button"
                              data-bs-toggle="collapse" data-bs-target="#emppayroll" aria-expanded="false"
@@ -451,7 +456,7 @@
                                     href="{{ route('admin.payroll.salary-increment-reporting.index') }}"> Salary Increment Reporting</a>
                              @endcanany
 
-                             @canany(['add-payroll-head', 'edit-payroll-head', 'delete-payroll-head', 'view-payroll-head'])
+                             @canany(['add-payroll-head', 'edit-payroll-head', 'delete-payroll-head', 'view-payroll-head','status-payroll-head'])
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.head.index') }}"> Payroll Head</a>
                              @endcanany
@@ -461,7 +466,7 @@
                                  href="{{ route('admin.payroll.payscale.index') }}"> Pay Scale</a>
                              @endcanany
 
-                             @canany(['add-salary', 'edit-salary', 'delete-salary', 'view-salary'])
+                             @canany(['add-salary', 'edit-salary', 'delete-salary', 'view-salary','print-salary'])
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary.index' ? 'active' : '' }}  "
                                  href="{{ route('admin.payroll.salary.index') }}"> Salary</a>
 		                     @endcanany
@@ -471,7 +476,7 @@
                                 href="{{ route('admin.payroll.reimbursement_type.index') }}">Reimbursement Type</a>
                             @endcanany
 
-                            @canany(['add-reimbursement', 'edit-reimbursement', 'delete-reimbursement', 'view-reimbursement'])
+                            @canany(['add-reimbursement', 'edit-reimbursement', 'delete-reimbursement', 'view-reimbursement','status-reimbursement'])
                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement.index' ? 'active' : '' }}  "
                                 href="{{ route('admin.payroll.reimbursement.index') }}">Reimbursement</a>
                             @endcanany

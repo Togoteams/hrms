@@ -433,6 +433,9 @@
             "name": "Delete Payroll Head"
         },
         {
+            "name": "Status Payroll Head"
+        },
+        {
             "name": "Add Pay Scale"
         },
         {
@@ -457,6 +460,9 @@
             "name": "Delete Salary"
         },
         {
+            "name": "Print Salary"
+        },
+        {
             "name": "Add Reimbursement Type"
         },
         {
@@ -479,6 +485,9 @@
         },
         {
             "name": "Delete Reimbursement"
+        },
+        {
+            "name": "Status Reimbursement"
         },
         {
             "name": "Add Manage Tax"

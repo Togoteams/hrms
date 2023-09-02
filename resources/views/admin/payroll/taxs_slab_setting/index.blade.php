@@ -33,10 +33,12 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
+                    @can('add-tax-slab-settings')
                     <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
+                    @endcan
                     </div>
                 </div>
             </div>
@@ -69,10 +71,13 @@
                                     <td>
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.payroll.tax-slab-setting.destroy', $item->id) }}">
+                                            @can('edit-tax-slab-settings')
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.payroll.tax-slab-setting.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                                class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></button>
+                                                class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                                            </button>
+                                            @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                         </form>                                     

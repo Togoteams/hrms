@@ -35,9 +35,11 @@
                         {{-- <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement.create') }}">
                         Add {{ $page }}
                         </a> --}}
+                        @can('add-reimbursement')
                         <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Add {{ $page }}
                         </button>
+                        @endcan
 
                     </div>
                 </div>
