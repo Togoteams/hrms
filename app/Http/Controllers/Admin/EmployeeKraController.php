@@ -128,7 +128,8 @@ class EmployeeKraController extends Controller
     {
         $all_users = Employee::get();
         $loans = Loans::where('status', 'active')->get();
-        $data = EmployeeKra::find($id);
+        // $data = EmployeeKra::find($id);
+        $data = EmployeeKra::with(['user','employee','employee.branch','employee.designation'])->where('id', $id)->get();
 
         return view('admin.employees_kra.show', ['data' => $data, 'page' => $this->page_name, 'all_users' => $all_users, 'loans' => $loans]);
     }
