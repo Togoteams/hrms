@@ -1,34 +1,34 @@
 {
     "roles":[
         {
-            "name" : "Admin",
-            "short_code" : "AD",
+            "name" : "Managing director-Super",
+            "short_code" : "MD",
             "role_type" : "admin"
         },
         {
-            "name" : "Branch Manager",
-            "short_code" : "branch_manager",
-            "role_type" : "branch_manager"
+            "name" :"Chief Manager HO",
+            "short_code" :"CM",
+            "role_type" :"chief manager"
         },
         {
-            "name" : "Employees",
-            "short_code" : "employee",
-            "role_type" : "employee"
+            "name" : "HR HEAD",
+            "short_code" :"HH",
+            "role_type" :"hr head"
         },
         {
-            "name" : "Superviser",
-            "short_code" : "superviser",
-            "role_type" : "superviser"
+            "name" : "BRANCH HEAD",
+            "short_code" :"BH",
+            "role_type" :"branch head"
         },
         {
-            "name" : "HR",
-            "short_code" : "hr",
-            "role_type" : "hr"
+            "name" : "BRANCH SUPERVISOR ",
+            "short_code" :"BS",
+            "role_type" :"branch supervisor"
         },
         {
-            "name" : "Team Lead",
-            "short_code" : "TL",
-            "role_type" : "employee"
+            "name" : "EMPLOYEE",
+            "short_code" :"E",
+            "role_type" :"employee"
         }
        
     ]

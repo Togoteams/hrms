@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             Membershipseeders::class,
             //Employeeseeders::class,
             PayrollHeadSeeder::class,
-            DepartmentSeeder::class
+            DepartmentSeeder::class,
+            LeaveSettingSeeder::class,
 
         ]);
     }
