@@ -23,21 +23,21 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="start_date1">start_date</label>
-                <input required id="start_date1" placeholder="Enter correct start_date   " type="date"
+                <input required id="start_date_edit" placeholder="Enter correct start_date   " type="date"
                     value="{{ $data->start_date }}" name="start_date" class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="end_date1">end_date</label>
-                <input required id="end_date1" placeholder="Enter correct end_date   " type="date"
+                <input required id="end_date_edit" placeholder="Enter correct end_date   " type="date"
                     value="{{ $data->end_date }}" name="end_date" class="form-control form-control-sm ">
             </div>
         </div>
         <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label for="leave_applies_for">leave_applies_for</label>
-                <input required readonly id="leave_applies_for"
+                <input required readonly id="leave_applies_for_edit"
                     placeholder="Enter correct leave_applies_for" onchange="change_leave(this)" value="{{ $data->leave_applies_for }}" type="text"
                     name="leave_applies_for" class="form-control form-control-sm ">
             </div>
@@ -90,8 +90,8 @@
     
     window.onload = function() { //from ww  w . j  a  va2s. c  o  m
         var today = new Date().toISOString().split('T')[0];
-        document.getElementsByName("start_date1")[0].setAttribute('min', today);
-        document.getElementsByName("end_date1")[0].setAttribute('min', today);
+        document.getElementsByName("start_date_edit")[0].setAttribute('min', today);
+        document.getElementsByName("end_date_edit")[0].setAttribute('min', today);
     }
     function change_leave(e) {
         var text = e.options[e.selectedIndex].text;
@@ -104,21 +104,26 @@
         }
         selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
     }
-    $("#start_date").on('change',function(){
+
+    $(document).ready(function(){
+        $("#start_date_edit").on('change',function(){
         getDays();
     });
-    $("#end_date").on('change',function(){
+    $("#end_date_edit").on('change',function(){
         getDays();
     });
+
+    });
+    
     function getDays() {
-        date1 = new Date( $("#start_date").val());
-        date2 = new Date($("#end_date").val());
+        date1 = new Date( $("#start_date_edit").val());
+        date2 = new Date($("#end_date_edit").val());
         var milli_secs = date1.getTime() - date2.getTime();
             
         // Convert the milli seconds to Days 
         var days = milli_secs / (1000 * 3600 * 24);
         // document.getElementById("ans").innerHTML =
-        $("#leave_applies_for").val(Math.round(Math.abs(days))+1);
+        $("#leave_applies_for_edit").val(Math.round(Math.abs(days))+1);
     }
 </script>
 @endpush
