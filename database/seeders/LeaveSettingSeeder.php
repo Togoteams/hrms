@@ -15,11 +15,23 @@ class LeaveSettingSeeder extends Seeder
     {
         $all_taxes = array(
             // for local all leaves
-            [ 'name' => 'SICK LEAVE','slug'=>'sick_leave','emp_type'=>1,'total_leave_year'=>20,'max_leave_at_time'=>0,'is_accumulated'=>0,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>0, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>1],
-            [ 'name' => 'EARNED LEAVE','slug'=>'earned_leave','emp_type'=>1,'total_leave_year'=>18,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
-            [ 'name' => 'MATERNITY LEAVE','slug'=>'maternity_leave','emp_type'=>1,'total_leave_year'=>98,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>1],
-            [ 'name' => 'BEREAVEMENT LEAVE','slug'=>'bereavement_leave','emp_type'=>1,'total_leave_year'=>0,'max_leave_at_time'=>3,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
-            [ 'name' => 'LEAVE WITHOUT PAY','slug'=>'leave_without_pay','emp_type'=>1,'total_leave_year'=>0,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>1,'is_leave_encash'=>0,'is_certificate'=>0]
+            [ 'name' => 'SICK LEAVE','slug'=>'sick-leave','emp_type'=>1,'total_leave_year'=>20,'max_leave_at_time'=>0,'is_accumulated'=>0,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>0, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>1],
+            [ 'name' => 'EARNED LEAVE','slug'=>'earned-leave','emp_type'=>1,'total_leave_year'=>18,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
+            [ 'name' => 'MATERNITY LEAVE','slug'=>'maternity-leave','emp_type'=>1,'total_leave_year'=>98,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>1],
+            [ 'name' => 'BEREAVEMENT LEAVE','slug'=>'bereavement-leave','emp_type'=>1,'total_leave_year'=>0,'max_leave_at_time'=>3,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
+            [ 'name' => 'LEAVE WITHOUT PAY','slug'=>'leave-without-pay','emp_type'=>1,'total_leave_year'=>0,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>1,'is_leave_encash'=>0,'is_certificate'=>0],
+             // for Ibo all leaves
+             [ 'name' => 'SICK LEAVE','slug'=>'sick-leave','emp_type'=>0,'total_leave_year'=>15,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>1,'is_leave_encash'=>0,'is_certificate'=>1],
+             [ 'name' => 'MATERNITY LEAVE','slug'=>'maternity-leave','emp_type'=>0,'total_leave_year'=>98,'max_leave_at_time'=>0,'is_accumulated'=>0,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>0, 'is_count_holyday'=>1,'is_leave_encash'=>0,'is_certificate'=>1],
+             [ 'name' => 'LEAVE WITHOUT PAY','slug'=>'leave-without-pay','emp_type'=>0,'total_leave_year'=>0,'max_leave_at_time'=>0,'is_accumulated'=>0,'is_accumulated_max_value'=>0, 'is_pro_data' => 0, 'starting_date'=>0, 'is_count_holyday'=>1,'is_leave_encash'=>0,'is_certificate'=>0],
+             [ 'name' => 'CASUAL LEAVE','slug'=>'casual-leave','emp_type'=>0,'total_leave_year'=>12,'max_leave_at_time'=>4,'is_accumulated'=>0,'is_accumulated_max_value'=>0, 'is_pro_data' => 1, 'starting_date'=>0, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
+             [ 'name' => 'PRIVILEGED LEAVE','slug'=>'privileged-leave','emp_type'=>0,'total_leave_year'=>30,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'is_pro_data' => 1, 'starting_date'=>1, 'is_count_holyday'=>1,'is_leave_encash'=>1,'is_certificate'=>0],
+
+
+
+           
+
+
 
         
         );
