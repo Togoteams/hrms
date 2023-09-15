@@ -33,7 +33,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->decimal('pension_contribution')->nullable();
-            $table->string('union_membership_id')->nullable();
+            $table->enum('union_membership_id',["yes","no"])->nullable();            
             $table->string('amount_payable_to_bomaind_each_year')->nullable();
             $table->string('currency')->nullable();
             $table->string('bank_account_number')->nullable();

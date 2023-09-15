@@ -128,7 +128,7 @@
                                             </div>
                                             <div class="col-3 pt-2">
                                                 <input id="date_of_current_basic"
-                                                    placeholder="Enter date of current_basic" type="datetime-local"
+                                                    placeholder="Enter date of current_basic" type="date"
                                                     name="date_of_current_basic"
                                                     value="{{ !empty($employee) ? $employee->date_of_current_basic : '' }}"
                                                     class="form-control form-control-sm ">
@@ -201,11 +201,13 @@
                                                     <option <option
                                                         {{ !empty($employee) ? ($employee->union_membership_id == '' ? 'selected' : '') : '' }}
                                                         value=""> - Select Union Membership - </option>
-                                                    @foreach ($membership as $mem)
+                                                        <option value="yes">Yes</option>
+                                                        <option value="no">No</option>
+                                                    {{-- @foreach ($membership as $mem)
                                                         <option
                                                             {{ !empty($employee) ? ($mem->id == $employee->union_membership_id ? 'selected' : '') : '' }}
                                                             value="{{ $mem->id }}">{{ $mem->name }}</option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>
 
@@ -215,11 +217,25 @@
                                                 </label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input id="amount_payable_to_bomaind_each_year"
+                                                {{-- <input id="amount_payable_to_bomaind_each_year"
                                                     placeholder="Enter amount_payable to bomaind each year" type="text"
                                                     name="amount payable to bomaind each year"
                                                     value="{{ !empty($employee) ? $employee->amount_payable_to_bomaind_each_year : 0 }}"
-                                                    class="form-control form-control-sm ">
+                                                    class="form-control form-control-sm "> --}}
+
+                                                    <select id="amount_payable_to_bomaind_each_year" name="amount_payable_to_bomaind_each_year"
+                                                    class="form-control form-control-sm"
+                                                    placeholder="Select amount payable to bomaind each year"
+                                                    value="{{ !empty($employee) ? $employee->amount_payable_to_bomaind_each_year : '' }}">
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->amount_payable_to_bomaind_each_year == '' ? 'selected' : '') : '' }}
+                                                        value=""> - Select Amount payable to bomaind each year - </option>
+                                                    @foreach ($bomaind as $item)
+                                                        <option
+                                                            {{ !empty($employee) ? ($item->id == $employee->amount_payable_to_bomaind_each_year ? 'selected' : '') : '' }}
+                                                            value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">

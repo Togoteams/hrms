@@ -14,6 +14,7 @@ use App\Models\EmpAddress;
 use App\Models\EmpDepartmentHistory;
 use App\Models\EmpMedicalInsurance;
 use App\Models\EmpPassportOmang;
+use App\Models\MedicalCard;
 use App\Models\Qualification;
 use App\Models\Role;
 use App\Models\User;
@@ -134,6 +135,7 @@ class EmployeeController extends BaseController
     {
         $designation = Designation::all();
         $membership = Membership::all();
+        $bomaind = MedicalCard::all();
         $branch = Branch::where('status', 'active')->get();
         return view(
             'admin.employees.employee-details',
@@ -142,6 +144,7 @@ class EmployeeController extends BaseController
                 'designation'   => $designation,
                 'membership'    => $membership,
                 'branch'        => $branch,
+                'bomaind'       => $bomaind,
                 'employee'      => $this->getEmployee($eid)
             ]
         );
@@ -406,7 +409,7 @@ class EmployeeController extends BaseController
         $request->validate([
             'department_name' => ['string', 'required'],
             'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+            'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         try {

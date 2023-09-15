@@ -15,7 +15,7 @@ class MedicalCardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Medical Card";
+    public $page_name = "Bomaid Type";
 
     public function index(Request $request)
     {

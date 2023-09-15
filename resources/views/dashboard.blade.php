@@ -112,7 +112,7 @@
                         <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg "
-                                href="{{ route('admin.payroll.pay-scale.list') }}">
+                                href="{{ route('admin.payroll.salary.index') }}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
                                     <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon5.png') }}" alt="">
