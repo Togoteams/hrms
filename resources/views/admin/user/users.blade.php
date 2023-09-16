@@ -45,7 +45,8 @@
 
                         <tbody>
                             @foreach ($users as $user)
-                                <tr>
+                            @if (!$user->hasRole('admin'))
+                            <tr>
                                     <td class="table-column-pe-0">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value=""
@@ -55,16 +56,25 @@
                                     </td>
                                     <td class="table-column-ps-0">
                                         <a class="d-flex align-items-center" href="user-profile.html">
-                                            {{-- <div class="avatar avatar-circle">
-                    <img class="avatar-img" src="{{asset('assets/img/160x160/img10.jpg')}}" alt="Image Description">
-                  </div> --}}
                                             <div class="ms-3">
                                                 <span class="d-block h5 text-inherit mb-0">{{ $user->name }} <i
                                                         class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" title="Top endorsed"></i></span>
-                                                <span class="d-block fs-5 text-body">{{ $user->email }} </span>
+                                                {{-- <span class="d-block fs-5 text-body">{{ $user->email }} </span> --}}
+                                                <span class="d-block fs-5 text-body">
+                                                    @foreach ($employees as $employee)
+                                                    @if ($employee->user_id == $user->id)
+                                                        {{ $employee->emp_id}}
+                                                    @endif
+                                                @endforeach
+                                            </span>
                                             </div>
                                         </a>
+                                    </td>
+                                    <td>
+                                        @foreach ($user->departmentHistory as $departmentHistory)
+                                        {{ $departmentHistory->department_name }}
+                                        @endforeach
                                     </td>
                                     <td>
                                         <span class="d-block h5 mb-0">{{ $user->roles?->first()?->name }}</span>
@@ -83,7 +93,8 @@
                                            <i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
-                            @endforeach
+                                @endif
+                             @endforeach
 
                         </tbody>
                     </table>

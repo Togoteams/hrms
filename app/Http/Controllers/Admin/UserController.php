@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\BaseController;
+use App\Models\Department;
+use App\Models\EmpDepartmentHistory;
+use App\Models\Employee;
 use App\Models\Role;
 use App\Models\User;
 use Hash;
@@ -18,8 +21,10 @@ class UserController extends BaseController
     public function viewUser()
     {   
         $users = $this->model::get();
+        // $users = $this->model::with('roles')->get(); 
+        $employees = Employee::get(); 
         $roles = Role::where('role_type','!=','admin')->get();
-        return view('admin.user.users', compact('users','roles'));
+        return view('admin.user.users', compact('users','roles','employees'));
     }
 
     public function addUser(Request $request)

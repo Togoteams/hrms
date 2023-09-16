@@ -128,7 +128,16 @@ class User extends Authenticatable
         return $this->HasOne(PayRollPayscale::class,'user_id');
     }
 
-  
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(Role::class);
+    // }
+
+    public function departmentHistory()
+        {
+            return $this->hasMany(EmpDepartmentHistory::class, 'user_id');
+        }
+
     
     public function media()
     {

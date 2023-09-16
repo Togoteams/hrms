@@ -69,19 +69,19 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            {{-- <div class="col-3 pt-3 fw-semibold">
                                                 <label for="id_number">ID Number<small
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
-                                                <input id="id_number" placeholder="Enter id number" type="text"
+                                                <input type="number" id="id_number" placeholder="Enter id number" 
                                                     name="id_number"
                                                     value="{{ !empty($employee) ? $employee->id_number : '' }}"
                                                     class="form-control form-control-sm ">
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-3 pt-3 fw-semibold">
-                                                <label for="start_date">Start Date<small
+                                                <label for="start_date">Date of joining<small
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="col-3 pt-2">
@@ -91,7 +91,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            {{-- <div class="col-3 pt-3 fw-semibold">
                                                 <label for="currency">Currency<small
                                                         class="required-field">*</small></label>
                                             </div>
@@ -109,9 +109,9 @@
                                                         {{ !empty($employee) ? ($employee->currency == 'dollar' ? 'selected' : '') : '' }}
                                                         value="dollar">Dollar( $ )</option>
                                                 </select>
-                                            </div>
+                                            </div> --}}
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            {{-- <div class="col-3 pt-3 fw-semibold">
                                                 <label for="basic_salary">Basic Salary<small
                                                         class="required-field">*</small></label>
                                             </div>
@@ -120,9 +120,9 @@
                                                     type="number" name="basic_salary"
                                                     value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
                                                     class="form-control form-control-sm ">
-                                            </div>
+                                            </div> --}}
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            {{-- <div class="col-3 pt-3 fw-semibold">
                                                 <label for="date_of_current_basic">Date of Current Basic<small
                                                         class="required-field">*</small></label>
                                             </div>
@@ -132,7 +132,7 @@
                                                     name="date_of_current_basic"
                                                     value="{{ !empty($employee) ? $employee->date_of_current_basic : '' }}"
                                                     class="form-control form-control-sm ">
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-3 pt-3 fw-semibold">
                                                 <label for="employment_type">Employment Type<small
@@ -193,7 +193,7 @@
                                             <div class="col-3 pt-3 fw-semibold">
                                                 <label for="union_membership_id">Union Membership</label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            {{-- <div class="col-3 pt-2">
                                                 <select id="union_membership_id" name="union_membership_id"
                                                     class="form-control form-control-sm"
                                                     placeholder="Select union membership"
@@ -203,12 +203,20 @@
                                                         value=""> - Select Union Membership - </option>
                                                         <option value="yes">Yes</option>
                                                         <option value="no">No</option>
-                                                    {{-- @foreach ($membership as $mem)
-                                                        <option
-                                                            {{ !empty($employee) ? ($mem->id == $employee->union_membership_id ? 'selected' : '') : '' }}
-                                                            value="{{ $mem->id }}">{{ $mem->name }}</option>
-                                                    @endforeach --}}
                                                 </select>
+                                            </div> --}}
+                                            <div class="col-3 pt-2">
+                                                <input type="radio" id="radio1" name="union_membership_id" value="no"
+                                                    class="form-check-input" title="Select NO"
+                                                    {{ !empty($employee) && $employee->union_membership_id == 'no' ? 'checked' : '' }} />
+                                                    <label class="form-check-label" title="Select NO"
+                                                    for="radio1">No</label>
+
+                                                <input type="radio" id="radio2" name="union_membership_id" value="yes"
+                                                    class="form-check-input" title="Select YES" style="margin-left: 20px"
+                                                    {{ !empty($employee) && $employee->union_membership_id == 'yes' ? 'checked' : '' }} />
+                                                <label class="form-check-label" title="Select YES"
+                                                    for="radio2">Yes</label>
                                             </div>
 
                                             <div class="col-3 pt-3 fw-semibold">
