@@ -45,7 +45,7 @@
 
                         <tbody>
                             @foreach ($users as $user)
-                            @if (!$user->hasRole('admin'))
+                            {{-- @if (!$user->hasRole('admin')) --}}
                             <tr>
                                     <td class="table-column-pe-0">
                                         <div class="form-check">
@@ -60,7 +60,6 @@
                                                 <span class="d-block h5 text-inherit mb-0">{{ $user->name }} <i
                                                         class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" title="Top endorsed"></i></span>
-                                                {{-- <span class="d-block fs-5 text-body">{{ $user->email }} </span> --}}
                                                 <span class="d-block fs-5 text-body">
                                                     @foreach ($employees as $employee)
                                                     @if ($employee->user_id == $user->id)
@@ -72,9 +71,9 @@
                                         </a>
                                     </td>
                                     <td>
-                                        @foreach ($user->departmentHistory as $departmentHistory)
-                                        {{ $departmentHistory->department_name }}
-                                        @endforeach
+                                        @foreach ($user->latestDepartmentHistory as $departmentHistory)
+                                              {{ $departmentHistory->department_name }}
+                                         @endforeach
                                     </td>
                                     <td>
                                         <span class="d-block h5 mb-0">{{ $user->roles?->first()?->name }}</span>
@@ -93,7 +92,7 @@
                                            <i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
-                                @endif
+                                {{-- @endif --}}
                              @endforeach
 
                         </tbody>

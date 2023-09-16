@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasRolesAndPermissions;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
 
 class User extends Authenticatable
@@ -134,9 +135,20 @@ class User extends Authenticatable
     // }
 
     public function departmentHistory()
-        {
-            return $this->hasMany(EmpDepartmentHistory::class, 'user_id');
-        }
+    {
+        return $this->hasMany(EmpDepartmentHistory::class, 'user_id')
+            ->latest('created_at'); // Retrieve the latest department history entry
+    }
+
+    public function latestDepartmentHistory(): HasMany
+    {
+        return $this->hasMany(EmpDepartmentHistory::class, 'user_id')
+            ->selectRaw('emp_department_histories.*')
+            ->join(DB::raw('(SELECT user_id, MAX(created_at) AS max_created_at FROM emp_department_histories GROUP BY user_id) latest_history'), function ($join) {
+                $join->on('emp_department_histories.user_id', '=', 'latest_history.user_id')
+                     ->on('emp_department_histories.created_at', '=', 'latest_history.max_created_at');
+            });
+    }
 
     
     public function media()
