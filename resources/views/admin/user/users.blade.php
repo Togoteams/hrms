@@ -78,7 +78,6 @@
                                     <td>
                                         <span class="d-block h5 mb-0">{{ $user->roles?->first()?->name }}</span>
                                     </td>
-                                    <td><span class="d-block fs-5">{{ $user->username }}</span></td>
                                     <td>
                                             <div class="success-badges changeStatus" data-table="users" data-uuid="{{$user->uuid}}"
                                                 data-message="inactive" @if($user->status=="active") data-value="active" @else data-value="inactive" @endif><span class="legend-indicator bg-success"></span>{{ $user->status ?? 'Active' }}</div>
