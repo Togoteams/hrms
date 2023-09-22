@@ -13,7 +13,8 @@ class Holiday extends Model
         'name',
         'is_optional',
         'date',
-        'description'
+        'description',
+        'status'
     ];
     public static function boot()
     {
@@ -22,4 +23,10 @@ class Holiday extends Model
             $model->uuid = (string) Uuid::generate(4);
         });
     }
+
+    public function getStatusAttribute($showStatus)
+    {
+        return ucfirst($showStatus); 
+    }
+
 }

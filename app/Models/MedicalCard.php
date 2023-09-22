@@ -14,4 +14,10 @@ class MedicalCard extends Model
         'name',
          'description',
          'status'];
+
+         public function getStatusAttribute($showStatus)
+         {
+             return ucfirst($showStatus); 
+         }
+     
 }

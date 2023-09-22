@@ -2,7 +2,7 @@
     <div class="row">
        <div class="d-flex">
             <button class="success-badges changeStatus" data-table="medical-card" data-uuid="{{$item->id}}"
-                data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif>
+                data-message="Inactive" @if($item->status=="Active") data-value="Inactive" @else data-value="Active" @endif>
                 <span class="legend-indicator bg-success"></span>{{ $item->status ?? 'Active' }}
             </button>
             <form id="edit{{ $item->id }}"

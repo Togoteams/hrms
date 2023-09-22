@@ -9,4 +9,9 @@ class ReimbursementType extends Model
 {
     use HasFactory;
     protected $fillable = ['type', 'slug','status'];
+
+    public function getStatusAttribute($showStatus)
+    {
+        return ucfirst($showStatus); 
+    }
 }

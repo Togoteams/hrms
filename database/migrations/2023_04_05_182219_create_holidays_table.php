@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('is_optional')->default(0);
             $table->string('description')->nullable();
-            $table->string('status')->default('active');
+            $table->enum('status',["active","inactive"])->default('active');            
             $table->date('date');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
