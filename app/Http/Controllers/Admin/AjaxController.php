@@ -13,8 +13,11 @@ use App\Services\Holiday\HolidayService;
 use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
+use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Document;
+use App\Models\Holiday;
+use App\Models\MedicalCard;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\ReimbursementType;
 
@@ -148,6 +151,28 @@ class AjaxController extends BaseController
                         "status"=>$request->value
                     ]);
                     $message='Reimbursement Status updated';
+                    break;
+                
+                case 'department':
+                    $id = $request->uuid;
+                    $data= Department::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Department Status updated';
+                    break;
+                case 'medical-card':
+                    $id = $request->uuid;
+                    $data= MedicalCard::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='MedicalCard Status updated';
+                    break;
+                case 'holidays':
+                    $id = $request->uuid;
+                    $data= Holiday::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Holiday Status updated';
                     break;
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
