@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\DesignationContoller;
@@ -116,6 +117,14 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::match(['get', 'post'], 'add', 'addRole')->name('add');
         Route::match(['get', 'post'], '/{id}/attach-permission', 'attachPermission')->name('attach.permission');
     });
+
+    // Route::controller(AccountController::class)->as('account.')->prefix('account/')->group(function () {
+    //     Route::get('/', 'index')->name('list');
+    //     Route::match(['get', 'post'], 'add', 'store')->name('add');
+    // });
+    Route::resource('account',AccountController::class);
+
+
     Route::controller(HolidayController::class)->as('holiday.')->prefix('holidays/')->group(function () {
         Route::get('/', 'viewHoliday')->name('list');
         Route::match(['get', 'post'], 'add', 'addHoliday')->name('add');

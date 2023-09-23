@@ -308,6 +308,13 @@
                      <span class="mt-4 dropdown-header">Master</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
+                     <div class="nav-item">
+                        <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.account.list' ? 'active' : '' }}"
+                            href="{{ route('admin.account.index') }}" data-placement="left">
+                            <i class="bi-folder2-open nav-icon"></i>
+                            <span class="nav-link-title">Account</span>
+                        </a>
+                    </div>
 
                      @canany(['add-holidays', 'edit-holidays', 'view-holidays', 'delete-holidays'])
                          <div class="nav-item">
