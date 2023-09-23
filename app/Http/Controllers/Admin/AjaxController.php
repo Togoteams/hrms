@@ -13,6 +13,7 @@ use App\Services\Holiday\HolidayService;
 use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
+use App\Models\Account;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Document;
@@ -173,6 +174,13 @@ class AjaxController extends BaseController
                         "status"=>$request->value
                     ]);
                     $message='Holiday Status updated';
+                    break;
+                case 'account':
+                    $id = $request->uuid;
+                    $data= Account::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Account Status updated';
                     break;
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
