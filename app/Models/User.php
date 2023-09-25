@@ -126,7 +126,7 @@ class User extends Authenticatable
     }
     public function payrollPayscale()
     {
-        return $this->HasOne(PayRollPayscale::class,'user_id');
+        return $this->hasOne(PayRollPayscale::class,'user_id');
     }
 
     // public function roles()
@@ -138,6 +138,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(EmpDepartmentHistory::class, 'user_id')
             ->latest('created_at'); // Retrieve the latest department history entry
+    }
+    public function employee()
+    {
+        return $this->hasOne(Employee::class,'user_id');
     }
 
     public function latestDepartmentHistory(): HasMany

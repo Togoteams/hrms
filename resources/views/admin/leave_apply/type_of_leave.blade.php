@@ -21,6 +21,8 @@
         $total_upaid_leave = App\Models\LeaveApply::where('is_paid', 'unpaid')
             ->where('status', 'approved')
             ->count('*');
+            $total_applied_leave = App\Models\LeaveApply::whereIn('status', ['pending'])
+            ->count('*');
         $total_pedding = App\Models\LeaveApply::where('status', 'pending')->count('*');
         $total_approved = App\Models\LeaveApply::where('status', 'reject')->count('*');
         $total_reject = App\Models\LeaveApply::where('status', 'approved')->count('*');
@@ -40,7 +42,7 @@
 
         <a href="{{ route('admin.leave_apply.index') }}" class="">
             <div class="py-5 card card-hover-shadow card-leavtype">Total Leave Applied -
-                {{ $data->count('*') }} </div>
+                {{ $total_applied_leave }} </div>
         </a>
 
     </div>

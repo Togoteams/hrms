@@ -25,9 +25,9 @@
         </div>
         <div class="row">
             <div class="col-sm-9"></div>
-            <div class="col-sm-3 text-right auto mt-2" style="text-align: right;">
+            <div class="mt-2 text-right col-sm-3 auto" style="text-align: right;">
                 @can('add-leave-apply')
-                <button type="button" class="btn btn-white text-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <button type="button" class="text-right btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     {{ $page }}
                 </button>
                 @endcan
@@ -39,7 +39,7 @@
         @include('admin.leave_apply.type_of_leave')
 
         <div class="mb-3 card mb-lg-5">
-            <div class="accordion" id="accordionExample">
+            {{-- <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="flex accordion-header col-lg-3 filters">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -81,14 +81,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="p-2 mt-3 table-responsive">
                 <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Employee name</th>
-                            <th>Employee Email</th>
+                            <th>Employee Code Number</th>
                             <th>Employee Phone</th>
                             <th>leave type</th>
                             <th>Balance Leave</th>
@@ -122,8 +122,8 @@
                                 data: 'user.name',
                                 name: 'user.name'
                             }, {
-                                data: 'user.email',
-                                name: 'user.email'
+                                data: 'user.employee.ec_number',
+                                name: 'user.employee.ec_number'
                             },
                             {
                                 data: 'user.mobile',
@@ -216,7 +216,7 @@
         {{-- status form model start --}}
         <!-- Modal -->
         <div class="modal fade" id="modalstatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content ">
                     <div class="modal-header ">
                         <h5 class="modal-title" id="staticBackdropLabel"> Status change of {{ $page }}</h5>
@@ -236,3 +236,35 @@
 
 </main>
 @endsection
+@push('custom-scripts')
+    <script>
+         window.onload = function() { //from ww  w . j  a  va2s. c  o  m
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementsByName("start_date_edit")[0].setAttribute('min', today);
+            document.getElementsByName("end_date_edit")[0].setAttribute('min', today);
+        }
+          $(document).ready(function() {
+            $(document).on('change',"#start_date_edit",function() {
+                console.log("sdsd");
+                getDays();
+            });
+            $(document).on('change',"#end_date_edit",function() {
+                console.log("sdsdsdsdsd");
+            // $("#end_date_edit").on('change', function() {
+                getDays();
+            });
+
+        });
+
+        function getDays() {
+            date1 = new Date($("#start_date_edit").val());
+            date2 = new Date($("#end_date_edit").val());
+            var milli_secs = date1.getTime() - date2.getTime();
+
+            // Convert the milli seconds to Days 
+            var days = milli_secs / (1000 * 3600 * 24);
+            // document.getElementById("ans").innerHTML =
+            $("#leave_applies_for_edit").val(Math.round(Math.abs(days)) + 1);
+        }
+    </script>
+@endpush

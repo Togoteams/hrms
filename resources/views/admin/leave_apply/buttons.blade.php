@@ -29,7 +29,7 @@
             onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"
             href="#" data-bs-toggle="modal" data-bs-target="#modalstatus"
             class="btn @if ($item->status == 'pending') btn-warning @elseif ($item->status == 'reject') btn-danger @elseif($item->status == 'approved') btn-success @else btn-secondary @endif btn-sm">
-            {{ $item->status }}</button>
+            {{ ucfirst($item->status) }}</button>
         @endcan
     @endif
   

@@ -15,10 +15,10 @@
                     <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Name </th>
-                            <th>email</th>
-                            <th>from</th>
-                            <th>to</th>
+                            <th>Employee </th>
+                            <th>EC Number</th>
+                            <th>From</th>
+                            <th>To</th>
                             <th>Days</th>
                         </tr>
                     </thead>
@@ -26,8 +26,8 @@
                         @foreach ($leave_emp_data as $leave_data)
                             <tr>
                                 <th scope="row">{{ $loop->index + 1 }}</th>
-                                <td>{{ $leave_data->user->name }}</td>
-                                <td>{{ $leave_data->user->email }}</td>
+                                <td>{{ $leave_data->user->name }}<br>{{ $leave_data->user->email }}</td>
+                                <td>{{ $leave_data->user?->employee?->ec_number }}</td>
                                 <td>{{ date('d-M-Y', strtotime($leave_data->start_date)) }}</td>
                                 <td>{{ date('d-M-Y', strtotime($leave_data->end_date)) }}</td>
                                 <td>{{ get_day($leave_data->start_date, $leave_data->end_date) + 1 }}</td>
@@ -40,7 +40,7 @@
         </div>
 
 
-        <div class="col-sm-6 mb-2">
+        <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="remaining_leave"> Balance Leave</label>
                 <input rows="12" required id="remaining_leave" placeholder="Enter correct remaining_leave   "
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="col-sm-6 mb-2">
+        <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="remaining_leave"> Applied Leave</label>
                 <input rows="12" required id="applied_leave" placeholder="Enter correct remaining_leave   "
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="status">Leave Status</label>
                 <input type="hidden" name="leave_type_id" value="{{ $data->leave_type_id }}">
@@ -73,7 +73,7 @@
 
             </div>
         </div>
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="status_remarks"> Status remark</label>
                 <textarea rows="12" required id="status_remarks" placeholder="Enter correct status_remarks"

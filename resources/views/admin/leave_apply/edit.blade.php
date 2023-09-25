@@ -5,7 +5,7 @@
 
     <div class="row">
 
-        <div class="col-sm-6 mb-2">
+        <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="leave_type_id">Leave Types</label>
                 <select required id="leave_type_id" placeholder="Enter correct leave_type_id   " type="text"
@@ -20,14 +20,14 @@
             </div>
         </div>
 
-        <div class="col-sm-4 mb-2">
+        <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label for="start_date1">start_date</label>
                 <input required id="start_date_edit" placeholder="Enter correct start_date   " type="date"
                     value="{{ $data->start_date }}" name="start_date" class="form-control form-control-sm ">
             </div>
         </div>
-        <div class="col-sm-4 mb-2">
+        <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label for="end_date1">end_date</label>
                 <input required id="end_date_edit" placeholder="Enter correct end_date   " type="date"
@@ -37,20 +37,19 @@
         <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label for="leave_applies_for">leave_applies_for</label>
-                <input required readonly id="leave_applies_for_edit"
-                    placeholder="Enter correct leave_applies_for" onchange="change_leave(this)" value="{{ $data->leave_applies_for }}" type="text"
+                <input required readonly id="leave_applies_for_edit" placeholder="Enter correct leave_applies_for"
+                    onchange="change_leave(this)" value="{{ $data->leave_applies_for }}" type="text"
                     name="leave_applies_for" class="form-control form-control-sm ">
             </div>
         </div>
 
-        <div class="col-sm-4 mb-2">
+        <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label for="doc">Required Document</label>
                 <div class="row">
-                    <div class="col-6"> 
-                        <input accept="application/pdf" id="doc"
-                            placeholder="Enter correct Document" type="file" name="doc1"
-                            class="form-control form-control-sm ">
+                    <div class="col-6">
+                        <input accept="application/pdf" id="doc" placeholder="Enter correct Document"
+                            type="file" name="doc1" class="form-control form-control-sm ">
                     </div>
 
                     @if ($data->doc != '')
@@ -62,7 +61,7 @@
             </div>
         </div>
 
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="Reason">leave_reason</label>
                 <input required id="leave_reason" placeholder="Enter correct leave_reason   "
@@ -71,7 +70,7 @@
             </div>
         </div>
 
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="remark">remark</label>
                 <textarea rows="12" required id="remark" placeholder="Enter correct remark   " name="remark"
@@ -86,44 +85,21 @@
     </div>
 </form>
 @push('custom-scripts')
-<script type="text/javascript">
-    
-    window.onload = function() { //from ww  w . j  a  va2s. c  o  m
-        var today = new Date().toISOString().split('T')[0];
-        document.getElementsByName("start_date_edit")[0].setAttribute('min', today);
-        document.getElementsByName("end_date_edit")[0].setAttribute('min', today);
-    }
-    function change_leave(e) {
-        var text = e.options[e.selectedIndex].text;
-        if (text == "SICK LEAVE") {
-            document.getElementById('doc').setAttribute("required", "");
+    <script type="text/javascript">
+       
 
-        } else {
-            document.getElementById('doc').removeAttribute("required", "");
+        function change_leave(e) {
+            var text = e.options[e.selectedIndex].text;
+            if (text == "SICK LEAVE") {
+                document.getElementById('doc').setAttribute("required", "");
 
+            } else {
+                document.getElementById('doc').removeAttribute("required", "");
+
+            }
+            selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
         }
-        selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
-    }
 
-    $(document).ready(function(){
-        $("#start_date_edit").on('change',function(){
-        getDays();
-    });
-    $("#end_date_edit").on('change',function(){
-        getDays();
-    });
-
-    });
-    
-    function getDays() {
-        date1 = new Date( $("#start_date_edit").val());
-        date2 = new Date($("#end_date_edit").val());
-        var milli_secs = date1.getTime() - date2.getTime();
-            
-        // Convert the milli seconds to Days 
-        var days = milli_secs / (1000 * 3600 * 24);
-        // document.getElementById("ans").innerHTML =
-        $("#leave_applies_for_edit").val(Math.round(Math.abs(days))+1);
-    }
-</script>
+      
+    </script>
 @endpush

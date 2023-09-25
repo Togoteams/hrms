@@ -19,7 +19,7 @@ use App\Traits\LeaveTraits;
 class LeaveEncashmentController extends Controller
 {
     use LeaveTraits;
-    public $page_name = " Leave Encashment";
+    public $page_name = "Leave Encashment";
     /**
      * Display a listing of the resource.
      */

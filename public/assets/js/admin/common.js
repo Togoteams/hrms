@@ -65,21 +65,7 @@ $(document).ready(function (e) {
         });
     })();
 
-    if ($.isFunction($.fn.select2)) {
-        $(".js-example-basic-single").select2();
-    }
-
-    if ($.isFunction($.fn.select2)) {
-        $(".js-example-basic-single-multiple").select2({
-            closeOnSelect: false,
-            placeholder: "Please choose",
-            allowHtml: true,
-            allowClear: true,
-            tags: true,
-            containerCssClass: "multi-selector",
-            dropdownCssClass: "multi-dropdown-checker",
-        });
-    }
+   
     function iformat(icon, badge) {
         var originalOption = icon.element;
         var originalOptionBadge = $(originalOption).data("badge");

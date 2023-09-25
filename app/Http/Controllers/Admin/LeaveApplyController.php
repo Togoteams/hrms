@@ -29,9 +29,9 @@ class LeaveApplyController extends Controller
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+                $data = LeaveApply::with('user','user.employee' ,'leave_type')->where('user_id', Auth::user()->id)->select('*');
             } else {
-                $data = LeaveApply::with('user', 'leave_type')->select('*');
+                $data = LeaveApply::with('user','user.employee', 'leave_type')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()

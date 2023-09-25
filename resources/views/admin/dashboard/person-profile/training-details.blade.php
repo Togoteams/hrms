@@ -15,15 +15,15 @@
                     <span class="name-title">Personal Profile</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.person-profile.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content this-div" id="v-pills-tabContent">
-                                    <div class="row py-3">
+                                    <div class="py-3 row">
                                         <div class="text-left">
                                             <button type="button" class="btn btn-white btn-sm"
                                                 onclick="addForm({{ Auth::user()->id }})">
@@ -35,35 +35,35 @@
                                         @foreach ($datas as $key => $data)
                                             <div class="row">
                                                 <div class="pb-4">
-                                                    <div class="card p-3">
+                                                    <div class="p-3 card">
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
-                                                                    <div class="col-3 fw-semibold pt-1">Training Name</div>
-                                                                    <div class="col-3 pt-1">
+                                                                    <div class="pt-1 col-3 fw-semibold">Training Name</div>
+                                                                    <div class="pt-1 col-3">
                                                                         {{ $data->name }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-1">
+                                                                    <div class="pt-1 col-3 fw-semibold">
                                                                         Training Duration:
                                                                     </div>
-                                                                    <div class="col-3 pt-1">
+                                                                    <div class="pt-1 col-3">
                                                                         {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
                                                                         -
                                                                         {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}
                                                                     </div>
 
-                                                                        <div class="col-3 fw-semibold pt-1">
+                                                                        <div class="pt-1 col-3 fw-semibold">
                                                                             Traning Grade
                                                                         </div>
-                                                                        <div class="col-3 pt-1">
+                                                                        <div class="pt-1 col-3">
                                                                             {{ $data->grade}}
                                                                         </div>
 
-                                                                        <div class="col-3 fw-semibold pt-1">
+                                                                        <div class="pt-1 col-3 fw-semibold">
                                                                             Skills
                                                                         </div>
-                                                                        <div class="col-3 pt-1">
+                                                                        <div class="pt-1 col-3">
                                                                             @php
                                                                                 $skills = explode(',', $data->skill); // Convert the string to an array
                                                                             @endphp
@@ -72,10 +72,10 @@
                                                                             @endforeach
                                                                         </div>
 
-                                                                        <div class="col-3 fw-semibold pt-1">
+                                                                        <div class="pt-1 col-3 fw-semibold">
                                                                             Description
                                                                         </div>
-                                                                        <div class="col-3 pt-1">
+                                                                        <div class="pt-1 col-3">
                                                                             {{ $data->description}}
                                                                         </div>
 
@@ -111,7 +111,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="card p-3 mb-5">No data to show</div>
+                                        <div class="p-3 mb-5 card">No data to show</div>
                                     @endif
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                     <input type="hidden" id="user_id" name="user_id">
                                     <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
                                     <div class="row">
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="name" class="required">Training Name</label>
                                                 <input type="text" id="name" name="name"
@@ -148,7 +148,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="start_date" class="required">Start date</label>
                                                 <input required value="" id="start_date" name="start_date"
@@ -156,7 +156,7 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="end_date" class="required">End date</label>
                                                 <input required value="" id="end_date" name="end_date"
@@ -164,7 +164,7 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="grade" class="required">Traning Grade</label>
                                                 <input required value="" id="grade" name="grade"
@@ -173,14 +173,14 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="skill" class="required">Skills</label>
                                                 <select class="form-control js-tags" multiple="multiple" name="skill[]" >
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 mb-2">
+                                        <div class="mb-2 col-md-12">
                                             <div class="form-group">
                                                 <label for="description" class="required">Description</label>
                                                 <textarea name="description" id="description" cols="30" rows="10" 
