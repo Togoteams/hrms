@@ -15,10 +15,10 @@
                         <h2 class="page-header-title">Users</h2>
                     </div>
                     <div class="col-sm-auto">
-                    <a class="btn btn-white" href="javascript:void(0)" data-bs-toggle="modal"
+                        {{-- <a class="btn btn-white" href="javascript:void(0)" data-bs-toggle="modal"
                             data-bs-target="#editUserModal">
                             <i class="bi-person-plus-fill me-1"></i> Add user
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                                     <td class="table-column-ps-0">
                                         <a class="d-flex align-items-center" href="user-profile.html">
                                             <div class="ms-3">
-                                                <span class="d-block h5 text-inherit mb-0">{{ $user->name }} <i
+                                                <span class="mb-0 d-block h5 text-inherit">{{ $user->name }} <i
                                                         class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip"
                                                         data-bs-placement="top" title="Top endorsed"></i></span>
                                                 <span class="d-block fs-5 text-body">
@@ -76,7 +76,7 @@
                                          @endforeach
                                     </td>
                                     <td>
-                                        <span class="d-block h5 mb-0">{{ $user->roles?->first()?->name }}</span>
+                                        <span class="mb-0 d-block h5">{{ $user->roles?->first()?->name }}</span>
                                     </td>
                                     <td>
                                             <div class="success-badges changeStatus" data-table="users" data-uuid="{{$user->uuid}}"
@@ -102,13 +102,13 @@
                 <!-- Footer -->
                 <!-- <div class="card-footer">
                     <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
-                        <div class="col-sm mb-2 mb-sm-0">
+                        <div class="mb-2 col-sm mb-sm-0">
                             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
                                 <span class="me-2">Showing:</span>
 
                                 <div class="tom-select-custom">
                                     <select id="datatableEntries"
-                                        class="js-select form-select form-select-borderless w-auto" autocomplete="off"
+                                        class="w-auto js-select form-select form-select-borderless" autocomplete="off"
                                         data-hs-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true
@@ -157,7 +157,7 @@
                     <form method="post" action="{{ route('admin.user.add') }}" class="formsubmit">
                         @csrf
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="first_name" class="col-sm-3 col-form-label form-label">Full name <i
                                     class="tio-help-outlined text-body ms-1" data-bs-toggle="tooltip"
                                     data-bs-placement="top" title="Displayed on public forums, such as Front."></i></label>
@@ -175,7 +175,7 @@
                         <!-- End Form -->
 
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="email" class="col-sm-3 col-form-label form-label">Email</label>
 
                             <div class="col-sm-9">
@@ -186,7 +186,7 @@
                         <!-- End Form -->
 
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="mobile" class="col-sm-3 col-form-label form-label">Mobile</label>
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
@@ -199,7 +199,7 @@
                         <!-- End Form -->
 
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="editOrganizationModalLabel"
                                 class="col-sm-3 col-form-label form-label">Role</label>
 
@@ -215,7 +215,7 @@
                         <!-- End Form -->
 
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="username" class="col-sm-3 col-form-label form-label">Username</label>
 
                             <div class="col-sm-9">
@@ -223,7 +223,7 @@
                                     placeholder="username" aria-label="username">
                             </div>
                         </div>
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="password" class="col-sm-3 col-form-label form-label">Password <i
                                     class="tio-help-outlined text-body ms-1"></i></label>
 
@@ -240,7 +240,7 @@
                         <!-- End Form -->
 
                         <div class="d-flex justify-content-end">
-                            <div class="d-flex gap-3">
+                            <div class="gap-3 d-flex">
                                 <button type="button" class="btn btn-delete btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-white">Save changes</button>

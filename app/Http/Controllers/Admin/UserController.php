@@ -20,9 +20,10 @@ class UserController extends BaseController
     
     public function viewUser()
     {  
-        $users = User::with('latestDepartmentHistory')->get();
+        $users = User::with('latestDepartmentHistory')->whereHas('usersRoles',function($q){
+            return $q->whereNotIn('role_id',[1]);
+        })->get();
 
-        // $users = $this->model::get();
         $employees = Employee::get(); 
         $roles = Role::where('role_type','!=','admin')->get();
         return view('admin.user.users', compact('users','roles','employees'));

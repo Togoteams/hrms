@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Payroll;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Models\PayRollPayscale;
 use Illuminate\Support\Facades\Validator;
@@ -21,10 +22,11 @@ use App\Models\PayrollSalary;
 use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\User;
-
+use App\Traits\PayrollTraits;
 class PayrollSalaryController extends Controller
 {
     public  $page_name =   "Payroll Salary";
+    use PayrollTraits;
     /**
      * Display a listing of the resource.
      */
@@ -94,6 +96,7 @@ class PayrollSalaryController extends Controller
             return $validator->errors();
         } else {
             try {
+                $emp = Employee::where('user_id', $request->user_id)->first();
                 $payroll = PayrollSalary::create([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
@@ -106,8 +109,39 @@ class PayrollSalaryController extends Controller
                     'total_deduction' =>  $request->total_deduction,
                     'gross_earning' =>  $request->gross_earning,
                     'created_by' => auth()->user()->id
-
                 ]);
+                // echo $payroll;
+                if($accountId = Account::where('name','Salaries')->value('id'))
+                {
+                    $data['account_id'] = $accountId;
+                    $data['transaction_number'] =rand(1111111,9999999);
+                    $data['transaction_type'] = "debit";
+                    $data['transaction_amount'] = $payroll->total_deduction+$payroll->gross_earning;
+                    $data['transaction_currency'] ="BWP";
+                    $data['transaction_at'] = date('Y-m-d H:i:s');
+                    $data['refrence_id'] =$payroll->id;
+                    $data['refrence_table_type'] =get_class($payroll);
+                    $this->saveTtumData($data);
+                }
+                $empAccounts = Account::where('name',$emp->user->name)->first();
+                if(empty($empAccounts))
+                {   
+                    $empAccounts = Account::create(['name'=>$emp->user->name,'opening_amount'=>0,'closing_amount'=>0]);
+                }
+                if($empAccounts)
+                {
+                    $data['account_id'] = $empAccounts->id;
+                    $data['transaction_number'] =rand(1111111,9999999);
+                    $data['transaction_type'] = "credit";
+                    $data['transaction_amount'] = $payroll->total_deduction+$payroll->gross_earning;
+                    $data['transaction_currency'] ="BWP";
+                    $data['user_id'] =$payroll->user_id;
+                    $data['transaction_at'] = date('Y-m-d H:i:s');
+                    $data['refrence_id'] =$payroll->id;
+                    $data['refrence_table_type'] =get_class($payroll);
+                    $this->saveTtumData($data);
+                }
+
                 // dd($payroll);
                 foreach ($request->all() as $key => $value) {
                     $head =  PayrollHead::where('slug', $key)->first();
@@ -120,6 +154,7 @@ class PayrollSalaryController extends Controller
                         ]);
                     }
                 }
+
 
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
@@ -262,6 +297,10 @@ class PayrollSalaryController extends Controller
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
+        if(empty($data))
+        {
+             return response()->json("Pay Scale not defined");
+        }
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
         
         $arrears = PayrollSalaryIncrement::where('financial_year',date('Y'))->where('employment_type',$emp->employment_type)->where('effective_from','<=',date('Y-m-d h:i:s'))->where('effective_to','>=',date('Y-m-d h:i:s'))->first();
