@@ -58,7 +58,7 @@ class EmployeeKraController extends Controller
     public function create($user_id = null)
     {
         if ($user_id != null) {
-            $all_users = Employee::where('status', 'active')->where('id', $user_id)->get();
+            $all_users = Employee::where('status', 'active')->where('user_id', $user_id)->get();
         } else {
             $all_users = Employee::where('status', 'active')->get();
         }

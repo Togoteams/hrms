@@ -117,16 +117,12 @@
                                              href="{{ route('admin.designation.index') }}">Designation</a>
                                      @endcanany
 
-                                     @canany(['add-manage-tax', 'edit-manage-tax', 'view-manage-tax', 'delete-manage-tax'])
-                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.tax.index' ? 'active' : '' }} "
-                                             href="{{ route('admin.tax.index') }}"> Manage Tax </a>
-                                     @endcanany
-
-                                     @canany(['add-memberships', 'edit-memberships', 'view-memberships',
+                                    
+                                     {{-- @canany(['add-memberships', 'edit-memberships', 'view-memberships',
                                          'delete-memberships'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
                                              href="{{ route('admin.membership.index') }}">Union Membership</a>
-                                     @endcanany
+                                     @endcanany --}}
                                      @canany(['add-branch', 'edit-branch', 'view-branch', 'delete-branch',
                                          'change-branch-status'])
                                          <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.branch.index' ? 'active' : '' }}"
@@ -276,16 +272,7 @@
                          </div>
                      @endcanany
 
-                     @canany(['add-overtime-setting', 'edit-overtime-setting', 'view-overtime-setting',
-                         'delete-overtime-setting'])
-                         <div class="nav-item">
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
-                                 href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
-                                 <i class="fa fa-clock nav-icon"></i>
-                                 <span class="nav-link-title">Overtime Setting</span>
-                             </a>
-                         </div>
-                     @endcanany
+                 
 
                      {{-- <div id="navbarVerticalMenuSettingMenu">
                          <!-- Collapse -->
@@ -483,6 +470,15 @@
                                          href="{{ route('admin.payroll.salary-increment-setting.index') }}"> Salary Increment
                                          Settings</a>
                                  @endcanany
+                                 @canany(['add-overtime-setting', 'edit-overtime-setting', 'view-overtime-setting',
+                                 'delete-overtime-setting'])
+                                    <div class="nav-item">
+                                        <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
+                                            href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
+                                            <span class="nav-link-title">Overtime Setting</span>
+                                        </a>
+                                    </div>
+                                @endcanany
 
                                  @canany(['add-salary-increment-reporting', 'edit-salary-increment-reporting',
                                      'delete-salary-increment-reporting', 'view-salary-increment-reporting'])

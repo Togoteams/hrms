@@ -39,7 +39,7 @@ class Role extends Model
     }
     public function scopeGetRoles($query)
     {
-        return $query->where('status', 'active');
+        return $query->where('status', 'active')->whereNotIn('role_type',['superadmin']);
     }
  
 

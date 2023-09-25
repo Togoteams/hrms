@@ -43,7 +43,7 @@ class RoleRepository extends BaseRepository implements RoleContract
      * @return mixed
      */
     public function listRoles($filterConditions,string $order = 'id', string $sort = 'desc',$limit= null,$inRandomOrder= false){
-        $roles = $this->model->where($filterConditions);
+        $roles = $this->model->getRoles()->where($filterConditions);
         if (!is_null($limit)) {
             return $roles->paginate($limit);
         }

@@ -20,12 +20,12 @@
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" class="formsubmit" method="post"
@@ -35,70 +35,89 @@
                                             value="{{ !empty($employee) ? $employee->id : '' }}">
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
-                                        <div class="row pb-4 p-3 text-dark">
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="name">Employee Name<small class="required-field">*</small></label>
+                                        <div class="p-3 pb-4 row text-dark">
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="name">Employee Name<small
+                                                        class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="name" placeholder="Enter Name" type="text"
-                                                    name="name"
+                                            <div class="pt-2 col-3">
+                                                <input id="name" placeholder="Enter Name" type="text" name="name"
                                                     value="{{ !empty($employee) ? $employee->user->name : '' }}"
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="username">User-Name<small class="required-field {{isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="username">User-Name<small
+                                                        class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input id="username" placeholder="Enter User Name" type="text"
                                                     name="username"
                                                     value="{{ !empty($employee) ? $employee->user->username : '' }}"
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
-
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="email">Email<small class="required-field {{isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="role">Select Role<small
+                                                        class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
+                                                <select id="role_id" placeholder="Select role" name="role_id"
+                                                    class="form-control form-control-sm">
+                                                    <option selected disabled> - Select role - </option>
+
+                                                    @foreach ($roles as $key => $value)
+                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="email">Email<small
+                                                        class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-3">
                                                 <input type="email" name="email" id="email"
                                                     placeholder="Enter email"
                                                     value="{{ !empty($employee) ? $employee->user->email : '' }}"
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="mobile">Mobile No<small class="required-field">*</small></label>
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="mobile">Mobile No<small
+                                                        class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input id="mobile" placeholder="Enter Mobile No" type="tel"
                                                     value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
                                                     name="mobile" class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="emergency_contact">Emergency Contact No</label>
                                             </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="emergency_contact"
-                                                    placeholder="Enter Emergency Contact No." type="tel"
+                                            <div class="pt-2 col-3">
+                                                <input id="emergency_contact" placeholder="Enter Emergency Contact No."
+                                                    type="tel"
                                                     value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
                                                     name="emergency_contact" class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="date_of_birth">Date of Birth<small class="required-field">*</small></label>
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="date_of_birth">Date of Birth<small
+                                                        class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="date_of_birth" placeholder="Enter date of birth"
-                                                    type="date" name="date_of_birth"
+                                            <div class="pt-2 col-3">
+                                                <input id="date_of_birth" placeholder="Enter date of birth" type="date"
+                                                    name="date_of_birth"
                                                     value="{{ !empty($employee) ? $employee->date_of_birth : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="gender">Gender<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <select id="gender" placeholder="Select gender" name="gender"
                                                     class="form-control form-control-sm">
                                                     <option selected disabled> - Select Gender - </option>
@@ -114,10 +133,11 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="marital_status">Marital Status<small class="required-field">*</small></label>
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="marital_status">Marital Status<small
+                                                        class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <select id="marital_status" placeholder="Select Marital Status"
                                                     name="marital_status" class="form-control form-control-sm">
                                                     <option selected disabled value=""> - Select Marital Status -
@@ -151,26 +171,27 @@
                                             </div>
 
                                             @if (!isHideCheck($employee))
-                                                <div class="col-3 pt-3 fw-semibold">
-                                                    <label for="password">Password<small class="required-field">*</small></label>
+                                                <div class="pt-3 col-3 fw-semibold">
+                                                    <label for="password">Password<small
+                                                            class="required-field">*</small></label>
                                                 </div>
-                                                <div class="col-3 pt-2">
-                                                    <input id="password" placeholder="Enter password"
-                                                        type="password" name="password"
-                                                        class="form-control form-control-sm ">
+                                                <div class="pt-2 col-3">
+                                                    <input id="password" placeholder="Enter password" type="password"
+                                                        name="password" class="form-control form-control-sm ">
                                                 </div>
 
-                                                <div class="col-3 pt-3 fw-semibold">
-                                                    <label for="password_confirmation">Confirm Password<small class="required-field">*</small></label>
+                                                <div class="pt-3 col-3 fw-semibold">
+                                                    <label for="password_confirmation">Confirm Password<small
+                                                            class="required-field">*</small></label>
                                                 </div>
-                                                <div class="col-3 pt-2">
+                                                <div class="pt-2 col-3">
                                                     <input id="password_confirmation"
                                                         placeholder="Enter password confirmation" type="password"
                                                         name="password_confirmation"
                                                         class="form-control form-control-sm ">
                                                 </div>
                                             @endif
-                                            <div class="text-center pt-5">
+                                            <div class="pt-5 text-center">
                                                 <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
                                             </div>
                                         </div>

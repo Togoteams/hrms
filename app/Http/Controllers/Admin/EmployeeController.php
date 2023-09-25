@@ -62,7 +62,8 @@ class EmployeeController extends BaseController
 
     public function viewUserDetails($eid = null)
     {
-        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid)]);
+        $roles = Role::getRoles()->get();
+        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid),'roles'=>$roles]);
     }
 
     public function postUserDetails(Request $request)
@@ -71,6 +72,7 @@ class EmployeeController extends BaseController
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'mobile' => ['required', 'numeric', 'min:10'],
+                'role_id' => ['required', 'numeric'],
                 'gender' => ['required'],
                 'marital_status' => ['required'],
                 'date_of_birth' => ['required', 'date', 'before:today'],
@@ -105,8 +107,8 @@ class EmployeeController extends BaseController
             if (empty($request->id)) {
                 $request->request->add(['user_id' => $user->id]);
                 $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
-                $employee = Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id']));
-                $role_id = Role::where('short_code', 'employee')->value('id');
+                $employee = Employee::insertGetId($request->except(['_token', 'name', 'role_id','email', 'mobile', 'username', 'password', 'password_confirmation', 'id']));
+                $role_id =$request->role_id;
                 $user->roles()->sync($role_id);
             } else {
                 $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));

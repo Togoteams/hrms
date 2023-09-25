@@ -1,15 +1,15 @@
 <form id="edit{{ $item->id }}" action="{{ route('admin.' . $route . '.destroy', $item->id) }}">
 
    
-    <a class="btn btn-white btn-sm text-white " href="{{ route('admin.employee.employee-kra.create', $item->user_id) }}"
+    <a class="text-white btn btn-white btn-sm " href="{{ route('admin.employee.employee-kra.create', $item->user_id) }}"
         title="create Employee" target="_blank">
         <i class="fas fa-plus"></i>
     </a>
     @can('view-employees')
-    <button type="button" onclick="editForm('{{ route('admin.' . $route . '.show', $item->id) }}', 'show')"
+    {{-- <button type="button" onclick="editForm('{{ route('admin.' . $route . '.show', $item->id) }}', 'show')"
         href="#" data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i
             class="fas fa-eye"></i>
-    </button>
+    </button> --}}
     @endcan
 
     {{-- EDIT BUTTON --}}

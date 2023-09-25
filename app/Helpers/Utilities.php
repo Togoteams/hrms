@@ -590,7 +590,7 @@ function isemplooye()
 {
     try {
         $id = Auth::user()->id;
-        $check = Role::where('id', UsersRoles::where('user_id', $id)->first()->role_id)->where('short_code', 'employee')->first();
+        $check = Role::where('id', UsersRoles::where('user_id', $id)->first()->role_id)->whereNotIn('short_code',['SA'])->first();
         if ($check != '') {
             return true;
         } else {
