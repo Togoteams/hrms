@@ -44,6 +44,7 @@ use App\Http\Controllers\Admin\payroll\ReimbursementController;
 use App\Http\Controllers\Admin\payroll\ReimbursementTypeController;
 use App\Http\Controllers\Admin\SalaryReportingController;
 use App\Http\Controllers\SalaryIncrementController;
+use App\Http\Controllers\PayrollReportController;
 use App\Models\KraAttributes;
 use App\Models\LeaveSetting;
 
@@ -261,6 +262,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
 
+    
     // Payroll
     Route::prefix('payroll')->as('payroll.')->group(function () {
         Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
@@ -268,6 +270,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('add', 'addPayscalePage')->name('add');
             Route::post('store', 'storePayscale')->name('store');
             Route::get('get-payscale/{id}', 'getPayscale')->name('get');
+        });
+        Route::controller(PayrollReportController::class)->as('reports.')->prefix('reports')->group(function () {
+            Route::get('/ttum-view', 'ttumReport')->name('ttum.list');
+            Route::post('/ttum-export', 'ttumReportExport')->name('ttum.exports');
+            
         });
 
         /*--------------------------------------------- Pay Roll Tax slab Settting Crud Start---------------------------------------------------------------*/

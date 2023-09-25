@@ -21,16 +21,16 @@ class SalaryReportingController extends Controller
         $increment_percentage = @$request['increment_percentage'];
         $employment_type = @$request['employment_type'];
         $financial_year = @$request['financial_year'];
-       if ($request->ajax()) {
+        if ($request->ajax()) {
 
-        // $url = URL::previous();
-        // dd($url);
-           
-        //die();
-            $data = PayrollSalaryIncrement::orderBy('id','ASC');
+            // $url = URL::previous();
+            // dd($url);
+
+            //die();
+            $data = PayrollSalaryIncrement::orderBy('id', 'ASC');
 
             if ($increment_percentage) {
-               $data = $data->where('increment_percentage', $increment_percentage);
+                $data = $data->where('increment_percentage', $increment_percentage);
             }
             if ($employment_type) {
                 $data = $data->where('employment_type', $employment_type);
@@ -49,9 +49,8 @@ class SalaryReportingController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-            }
+        }
         return view('admin.payroll.salary_increment_reporting.index', ['page' => $this->page_name]);
-        
     }
 
     /**
