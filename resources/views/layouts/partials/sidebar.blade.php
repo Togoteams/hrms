@@ -266,7 +266,7 @@
                          <div class="nav-item">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
                                  href="{{ route('admin.medical-card.index') }}" data-placement="left">
-                                 <i class="fa fa-truck-medical nav-icon"></i>
+                                 <i class="fa fa-truck nav-icon"></i>
                                  <span class="nav-link-title">Bomaid Type</span>
                              </a>
                          </div>
@@ -302,7 +302,7 @@
                      <div class="nav-item">
                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.account.list' ? 'active' : '' }}"
                              href="{{ route('admin.account.index') }}" data-placement="left">
-                             <i class="bi-folder2-open nav-icon"></i>
+                             <i class="bi bi-bank2 nav-icon"></i>
                              <span class="nav-link-title">Account</span>
                          </a>
                      </div>
@@ -310,7 +310,7 @@
                      <div class="nav-item">
                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.currency_settings.list' ? 'active' : '' }}"
                             href="{{ route('admin.currency_settings.index') }}" data-placement="left">
-                            <i class="bi-folder2-open nav-icon"></i>
+                            <i class="bi bi-currency-dollar nav-icon"></i>
                             <span class="nav-link-title">Currency Settings</span>
                         </a>
                     </div>
@@ -319,7 +319,7 @@
                          <div class="nav-item">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.holiday.list' ? 'active' : '' }}"
                                  href="{{ route('admin.holiday.list') }}" data-placement="left">
-                                 <i class="bi-folder2-open nav-icon"></i>
+                                 <i class="bi bi-house nav-icon"></i>
                                  <span class="nav-link-title">Holidays</span>
                              </a>
                          </div>
@@ -327,7 +327,7 @@
                      <div class="nav-item">
                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reports.ttum.list' ? 'active' : '' }}"
                             href="{{ route('admin.payroll.reports.ttum.list') }}" data-placement="left">
-                            <i class="bi-folder2-open nav-icon"></i>
+                            <i class="bi bi-receipt nav-icon"></i>
                             <span class="nav-link-title">TTUM report</span>
                         </a>
                     </div>
@@ -424,7 +424,7 @@
                              <a class="nav-link dropdown-toggle " href="#leavesetting" role="button"
                                  data-bs-toggle="collapse" data-bs-target="#leavesetting" aria-expanded="false"
                                  aria-controls="leavesetting">
-                                 <i class="bi-person nav-icon"></i>
+                                 <i class="bi bi-stickies-fill nav-icon"></i>
                                  <span class="nav-link-title">Leave Settings</span>
                              </a>
 
