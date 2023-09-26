@@ -29,7 +29,7 @@ class PayrollHeadSeeder extends Seeder
             ['name' => 'Education Allowance', 'slug' => 'education_allowance', 'placeholder' => 'Education Allowance', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
         );
         foreach ($all_member as $am) {
-            PayrollHead::updateOrCreate(['slug'=>$am['slug']],[$am]);
+            PayrollHead::updateOrCreate(['slug'=>$am['slug']],$am);
         }
 
     }
