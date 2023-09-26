@@ -166,7 +166,8 @@ class EmployeeController extends BaseController
             'basic_salary'          => ['nullable', 'numeric'],
             'date_of_current_basic' => ['nullable', 'date'],
             'employment_type'       => ['required', 'string'],
-            'pension_opt'           => ['required', 'numeric'],
+            'pension_opt'           => ['nullable', 'string'],
+            'pension_contribution'  => ['nullable', 'string'],
             'bank_account_number'   => ['required', 'numeric'],
             'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
 
@@ -179,12 +180,12 @@ class EmployeeController extends BaseController
         }
 
         try {
-            if ($request->pension_opt == 1) {
-                $request->request->add(['pension_contribution' => ($request->basic_salary) / 100]);
-            } else {
-                $request->request->add(['pension_contribution' => 0]);
-            }
-            Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id', 'pension_opt']));
+            // if ($request->pension_opt == 1) {
+            //     $request->request->add(['pension_contribution' => ($request->basic_salary) / 100]);
+            // } else {
+            //     $request->request->add(['pension_contribution' => 0]);
+            // }
+            Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
             $employee = Employee::find($request->id);
 
             if (!empty($employee)) {
@@ -410,8 +411,8 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'department_name' => ['string', 'required'],
-            'start_date' => ['required', 'date', 'before_or_equal:'],
-            'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+            'start_date' => ['required', 'date', 'not_future_date'],
+            'end_date' => ['nullable', 'date', 'after:start_date', 'not_future_date'],
             // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
