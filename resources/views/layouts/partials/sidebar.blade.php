@@ -156,7 +156,7 @@
                                  <a class="nav-link dropdown-toggle " href="#loans" role="button"
                                      data-bs-toggle="collapse" data-bs-target="#loans" aria-expanded="false"
                                      aria-controls="loans">
-                                     <i class="bi-person nav-icon"></i>
+                                     <i class="bi bi-credit-card-2-front nav-icon"></i>
                                      <span class="nav-link-title">Loans</span>
                                  </a>
 

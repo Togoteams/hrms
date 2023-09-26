@@ -410,8 +410,9 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'department_name' => ['string', 'required'],
-            'start_date' => ['required', 'date'],
+            'start_date' => ['required', 'date', 'before_or_equal:'],
             'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         try {

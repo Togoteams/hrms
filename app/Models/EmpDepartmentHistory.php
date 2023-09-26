@@ -10,4 +10,14 @@ class EmpDepartmentHistory extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    public function getStartDateAttribute($value)
+    {
+        return date("d-M-y", strtotime($value));
+    }
+
+    public function getEndDateAttribute($value)
+    {
+        return date("d-M-y", strtotime($value));
+    }
 }
