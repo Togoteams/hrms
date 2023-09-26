@@ -16,14 +16,12 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="currency_name_from" class="required">Currency Name From</label>
-                                    <input type="text" required name="currency_name_from" id="currency_name_from" class="form-control" placeholder="Enter Currency Name From">
-                                </div>
-                            </div>
-
-                            <div class="mb-2 col-sm-6">
-                                <div class="form-group">
-                                    <label for="currency_name_to" class="required">Currency Name To</label>
-                                    <input type="text" required name="currency_name_to" id="currency_name_to" class="form-control" placeholder="Enter Currency Name To">
+                                    <select name="currency_name_from" id="currency_name_from" class="form-control">
+                                        <option value="">Select Currency Name From</option>
+                                        <option value="INR">INR</option>
+                                        <option value="USD">USD</option>
+                                        <option value="PULA">PULA</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -31,6 +29,18 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="form-group">
                                     <label for="currency_amount_from" class="required">Currency Amount From</label>
                                     <input type="number" required name="currency_amount_from" id="currency_amount_from" class="form-control" placeholder="Enter Currency Amount From">
+                                </div>
+                            </div>
+
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label for="currency_name_to" class="required">Currency Name To</label>
+                                    <select name="currency_name_to" id="currency_name_to" class="form-control">
+                                        <option value="">Select Currency Name To</option>
+                                        <option value="INR">INR</option>
+                                        <option value="USD">USD</option>
+                                        <option value="PULA">PULA</option>
+                                    </select>
                                 </div>
                             </div>
 

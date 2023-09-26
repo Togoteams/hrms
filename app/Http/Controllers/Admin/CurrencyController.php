@@ -48,8 +48,8 @@ class CurrencyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'currency_name_from' => 'required|string',
-            'currency_name_to' => 'required|string',
             'currency_amount_from' => 'required|numeric',
+            'currency_name_to' => 'required|string',
             'currency_amount_to' => 'required|numeric',
            
         ]);
@@ -85,8 +85,8 @@ class CurrencyController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'currency_name_from' => 'required|string',
-            'currency_name_to' => 'required|string',
             'currency_amount_from' => 'required|numeric',
+            'currency_name_to' => 'required|string',
             'currency_amount_to' => 'required|numeric',      
         ]);
         if ($validator->fails()) {

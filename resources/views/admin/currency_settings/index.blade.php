@@ -55,8 +55,8 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Currency Name From</th>
-                                <th>Currency Name To</th>
                                 <th>Currency Amount From</th>
+                                <th>Currency Name To</th>
                                 <th>Currency Amount To</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
@@ -90,12 +90,12 @@
                                     name: 'currency_name_from'
                                 },
                                 {
-                                    data: 'currency_name_to',
-                                    name: 'currency_name_to'
-                                },
-                                {
                                     data: 'currency_amount_from',
                                     name: 'currency_amount_from'
+                                },
+                                {
+                                    data: 'currency_name_to',
+                                    name: 'currency_name_to'
                                 },
                                 {
                                     data: 'currency_amount_to',
