@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DesignationContoller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RoleController;
@@ -119,12 +120,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::match(['get', 'post'], '/{id}/attach-permission', 'attachPermission')->name('attach.permission');
     });
 
-    // Route::controller(AccountController::class)->as('account.')->prefix('account/')->group(function () {
-    //     Route::get('/', 'index')->name('list');
-    //     Route::match(['get', 'post'], 'add', 'store')->name('add');
-    // });
+   
     Route::resource('account',AccountController::class);
 
+    Route::resource('currency_settings', CurrencyController::class);
 
     Route::controller(HolidayController::class)->as('holiday.')->prefix('holidays/')->group(function () {
         Route::get('/', 'viewHoliday')->name('list');

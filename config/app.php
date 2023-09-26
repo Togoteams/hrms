@@ -198,7 +198,6 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
 
-        Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
     ],
@@ -216,7 +215,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ])->toArray(),
 

@@ -307,6 +307,14 @@
                          </a>
                      </div>
 
+                     <div class="nav-item">
+                        <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.currency_settings.list' ? 'active' : '' }}"
+                            href="{{ route('admin.currency_settings.index') }}" data-placement="left">
+                            <i class="bi-folder2-open nav-icon"></i>
+                            <span class="nav-link-title">Currency Settings</span>
+                        </a>
+                    </div>
+
                      @canany(['add-holidays', 'edit-holidays', 'view-holidays', 'delete-holidays'])
                          <div class="nav-item">
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.holiday.list' ? 'active' : '' }}"

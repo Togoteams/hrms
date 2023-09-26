@@ -14,6 +14,7 @@ use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
 use App\Models\Account;
+use App\Models\CurrencySetting;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Document;
@@ -181,6 +182,13 @@ class AjaxController extends BaseController
                         "status"=>$request->value
                     ]);
                     $message='Account Status updated';
+                    break;
+                case 'currency_settings':
+                    $id = $request->uuid;
+                    $data= CurrencySetting::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Currency Setting Status updated';
                     break;
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
