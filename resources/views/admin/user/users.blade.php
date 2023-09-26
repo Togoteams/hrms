@@ -55,7 +55,7 @@
                                         </div>
                                     </td>
                                     <td class="table-column-ps-0">
-                                        <a class="d-flex align-items-center" href="user-profile.html">
+                                        <a class="d-flex align-items-center" href="#">
                                             <div class="ms-3">
                                                 <span class="mb-0 d-block h5 text-inherit">{{ $user->name }} <i
                                                         class="bi-patch-check-fill text-primary" data-bs-toggle="tooltip"
