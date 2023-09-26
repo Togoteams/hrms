@@ -434,7 +434,7 @@
                                  @canany(['add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
                                          href="{{ route('admin.leavesettings.list') }}" data-placement="left">
-                                         <span class="nav-link-title">Leave Type</span>
+                                         <span class="nav-link-title">Leave Setting</span>
                                      </a>
                                  @endcanany
 
