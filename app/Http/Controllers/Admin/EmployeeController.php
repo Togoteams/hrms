@@ -25,6 +25,7 @@ use Illuminate\Validation\Rule;
 use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends BaseController
 {
@@ -166,7 +167,7 @@ class EmployeeController extends BaseController
             'basic_salary'          => ['nullable', 'numeric'],
             'date_of_current_basic' => ['nullable', 'date'],
             'employment_type'       => ['required', 'string'],
-            'pension_opt'           => ['nullable', 'string'],
+            'pension_opt'           => ['nullable', 'numeric'],
             'pension_contribution'  => ['nullable', 'string'],
             'bank_account_number'   => ['required', 'numeric'],
             'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
@@ -185,7 +186,7 @@ class EmployeeController extends BaseController
             // } else {
             //     $request->request->add(['pension_contribution' => 0]);
             // }
-            Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
+            Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id', 'pension_opt']));
             $employee = Employee::find($request->id);
 
             if (!empty($employee)) {
@@ -409,11 +410,26 @@ class EmployeeController extends BaseController
 
     public function postDepartmentHistory(Request $request)
     {
+        Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
+            $start_date = $validator->getData()['start_date'];
+            $end_date = $validator->getData()['end_date'];
+
+            $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date) {
+                $query->where('start_date', '<=', $end_date)
+                    ->where('end_date', '>=', $start_date);
+            })->first();
+
+            return !$overlappingRecord;
+        });
+
+        Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
+            return "The $attribute date range overlaps with an existing record.";
+        });
+
         $request->validate([
             'department_name' => ['string', 'required'],
-            'start_date' => ['required', 'date', 'not_future_date'],
-            'end_date' => ['nullable', 'date', 'after:start_date', 'not_future_date'],
-            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+            'start_date' => ['required', 'date', 'before_or_equal:','no_date_overlap'],
+            'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         try {
