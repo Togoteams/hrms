@@ -35,8 +35,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="gender">Select Employees</label>
-                                    <select required
-                                        onchange="editForm('{{ route('admin.payroll.payscale.emp.head') }}/'+this.value, 'edit')"
+                                    <select required  onchange="editForm('{{ route('admin.payroll.payscale.emp.head') }}/'+this.value, 'edit')"
                                         id="gender" placeholder="Enter correct gender  " name="user_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Employees- </option>

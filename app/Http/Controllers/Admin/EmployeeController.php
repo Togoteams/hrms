@@ -181,12 +181,10 @@ class EmployeeController extends BaseController
         }
 
         try {
-            // if ($request->pension_opt == 1) {
-            //     $request->request->add(['pension_contribution' => ($request->basic_salary) / 100]);
-            // } else {
-            //     $request->request->add(['pension_contribution' => 0]);
-            // }
-            Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id', 'pension_opt']));
+            if ($request->pension_contribution == "no") {
+                $request->merge(['pension_opt' => NULL]);
+            } 
+            Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
             $employee = Employee::find($request->id);
 
             if (!empty($employee)) {

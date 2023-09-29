@@ -15,10 +15,11 @@ use App\Models\PayrollHead;
 use App\Models\TaxSlabSetting;
 use App\Models\PayrollPayscaleHead;
 use App\Models\User;
-
+use App\Traits\PayrollTraits;
 class PayRollPayscaleCotroller extends BaseController
 {
     public  $page_name =   "Payroll PayScale";
+    use PayrollTraits;
     /**
      * Display a listing of the resource.
      */

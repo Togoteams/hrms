@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\MedicalCard;
 use App\Models\PayrollTtumSalaryReport;
 
 trait PayrollTraits
@@ -18,4 +19,5 @@ trait PayrollTraits
         $refrenceTableType = $data['refrence_table_type'];
        return PayrollTtumSalaryReport::create($data);
     }
+   
 }

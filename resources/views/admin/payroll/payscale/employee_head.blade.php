@@ -4,7 +4,7 @@
         <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
         <div class="form-group">
             <label for="basic">basic</label>
-            <input onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic  " type="text" name="basic" value="{{ $data->basic ?? '' }}" class="form-control form-control-sm ">
+            <input onkeyup="amount_cal(this)" value="{{$emp->basic_salary}}" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic  " type="text" name="basic" value="{{ $data->basic ?? '' }}" class="form-control form-control-sm ">
         </div>
     </div>
 </div>
@@ -49,7 +49,7 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
-            <input onkeyup="amount_cal(this)"  required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"      value="{{ $head_data->value ?? '' }}" class="form-control form-control-sm {{$head->head_type}}">
+            <input onkeyup="amount_cal(this)" value="{{getHeadValue($emp,$head->slug)}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"      value="{{ $head_data->value ?? '' }}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif

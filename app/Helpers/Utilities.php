@@ -13,7 +13,7 @@ use App\Models\LeaveApply;
 use App\Models\LeaveType;
 use App\Models\Employee;
 use App\Models\LeaveEncashment;
-
+use App\Models\MedicalCard;
 if (!function_exists('isSluggable')) {
     function isSluggable($value)
     {
@@ -512,7 +512,41 @@ if (!function_exists('safe_b64decode')) {
         return $data;
     }
 }
-
+if (!function_exists('getHeadValue')) {
+function getHeadValue($emp,$headSlug)
+{
+        $basicAmout = $emp->basic_salary;
+        if($headSlug=="bomaid")
+        {
+            $bomaidAmount = 0;
+            $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
+            $amount = MedicalCard::find($bomaidTypeId)->value('amount');
+            if(!empty($amount))
+            {
+                $bomaidAmount = $amount/2;
+            }
+            return $bomaidAmount;
+        }elseif($headSlug=="pension")
+        {
+            $isPensionApplied = $emp->pension_contribution;
+            if($isPensionApplied=="yes")
+            {
+                $pensionAmount = ($basicAmout/100) * $emp->pension_opt;
+                return $pensionAmount;
+            }
+        }elseif($headSlug=="union_fee")
+        { 
+            $isUnionFee = $emp->union_membership_id;
+            $unionFee =0;
+            if($isUnionFee=="yes")
+            {
+                $unionFee = ($basicAmout/100);
+            }
+            return $unionFee;
+        }
+    return 0;
+}
+}
 if (!function_exists('customEcho')) {
     function customEcho($str, $length)
     {
