@@ -14,6 +14,9 @@ use App\Models\LeaveType;
 use App\Models\Employee;
 use App\Models\LeaveEncashment;
 use App\Models\MedicalCard;
+use App\Models\OvertimeSetting;
+use App\Models\PayrollSalaryIncrement;
+
 if (!function_exists('isSluggable')) {
     function isSluggable($value)
     {
@@ -513,39 +516,53 @@ if (!function_exists('safe_b64decode')) {
     }
 }
 if (!function_exists('getHeadValue')) {
-function getHeadValue($emp,$headSlug)
-{
+    function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0)
+    {
         $basicAmout = $emp->basic_salary;
-        if($headSlug=="bomaid")
-        {
+        if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
             $amount = MedicalCard::find($bomaidTypeId)->value('amount');
-            if(!empty($amount))
-            {
-                $bomaidAmount = $amount/2;
+            if (!empty($amount)) {
+                $bomaidAmount = $amount / 2;
             }
             return $bomaidAmount;
-        }elseif($headSlug=="pension")
-        {
+        } elseif ($headSlug == "pension") {
             $isPensionApplied = $emp->pension_contribution;
-            if($isPensionApplied=="yes")
-            {
-                $pensionAmount = ($basicAmout/100) * $emp->pension_opt;
+            if ($isPensionApplied == "yes") {
+                $pensionAmount = ($basicAmout / 100) * $emp->pension_opt;
                 return $pensionAmount;
             }
-        }elseif($headSlug=="union_fee")
-        { 
+        } elseif ($headSlug == "union_fee") {
             $isUnionFee = $emp->union_membership_id;
-            $unionFee =0;
-            if($isUnionFee=="yes")
-            {
-                $unionFee = ($basicAmout/100);
+            $unionFee = 0;
+            if ($isUnionFee == "yes") {
+                $unionFee = ($basicAmout / 100);
             }
             return $unionFee;
+        } elseif ($headSlug == "over_time") {
+            $hoursInMonth = 192;
+            $perHoursRate = $basicAmout/$hoursInMonth;
+            $totalOverTimeHours = OvertimeSetting::where('date',">=",date("Y-m-"."01"))->where('date','<=',date("Y-m-".'31'))->sum('working_hours');
+            return number_format($totalOverTimeHours*$perHoursRate,2);
+        
+        } elseif ($headSlug == "others_arrears") {
+           $currentYear = date('Y');
+           $currentMonth = date('m');
+           $arrearsAmount = 0;
+           $salaryIncrement = PayrollSalaryIncrement::where('financial_year',$currentYear)
+        //    ->where('effective_from','>=',date('Y-m-d'))->where('effective_to','<=',date('Y-m-d'))
+           ->where('employment_type',$emp->employment_type)->first();
+            if(!empty($salaryIncrement))
+            {
+                $noOfPendingMonth = $currentMonth;
+                $arrearsAmount = (($basicAmout / 100) * $salaryIncrement->increment_percentage) * $currentMonth;
+            
+            }
+            return $arrearsAmount;
         }
-    return 0;
-}
+        return $orginalValue;
+    }
 }
 if (!function_exists('customEcho')) {
     function customEcho($str, $length)
@@ -624,7 +641,7 @@ function isemplooye()
 {
     try {
         $id = Auth::user()->id;
-        $check = Role::where('id', UsersRoles::where('user_id', $id)->first()->role_id)->whereNotIn('short_code',['SA'])->first();
+        $check = Role::where('id', UsersRoles::where('user_id', $id)->first()->role_id)->whereNotIn('short_code', ['SA'])->first();
         if ($check != '') {
             return true;
         } else {

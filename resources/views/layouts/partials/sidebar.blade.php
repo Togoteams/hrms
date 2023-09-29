@@ -490,9 +490,9 @@
 
                                  @canany(['add-salary-increment-reporting', 'edit-salary-increment-reporting',
                                      'delete-salary-increment-reporting', 'view-salary-increment-reporting'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-reporting.index' ? 'active' : '' }}  "
+                                     {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-reporting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary-increment-reporting.index') }}"> Salary
-                                         Increment Reporting</a>
+                                         Increment Reporting</a> --}}
                                  @endcanany
                                  @canany(['add-payroll-head', 'edit-payroll-head', 'delete-payroll-head',
                                      'view-payroll-head', 'change-status-payroll-head'])

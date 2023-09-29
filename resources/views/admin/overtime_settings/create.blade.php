@@ -39,7 +39,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="working_min" class="required">Working Min</label>
+                                    <label for="working_min" class="required">Working Minute</label>
                                     <input type="number"   name="working_min" id="working_min" class="form-control" placeholder="Enter working min of overtime"  min="0" max="59">
                                 </div>
                             </div>
