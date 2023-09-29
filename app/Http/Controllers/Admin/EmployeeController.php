@@ -171,6 +171,8 @@ class EmployeeController extends BaseController
             'pension_contribution'  => ['nullable', 'string'],
             'bank_account_number'   => ['required', 'numeric'],
             'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
+            'currency_salary'       => ['required', 'string'], 
+
 
         ]);
 

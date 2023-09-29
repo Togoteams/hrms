@@ -38,6 +38,7 @@ return new class extends Migration
             $table->string('amount_payable_to_bomaind_each_year')->nullable();
             $table->string('currency')->nullable();
             $table->string('bank_account_number')->nullable();
+            $table->string('currency_salary')->nullable();
             // $table->string('bank_name');
             // $table->string('bank_holder_name');
             // $table->string('ifsc');

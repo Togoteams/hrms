@@ -335,8 +335,6 @@
     });
 </script>
     <!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
 $(document).ready(function() {
     var employmentTypeSelect = $("#employment_type");
@@ -344,7 +342,6 @@ $(document).ready(function() {
 
     employmentTypeSelect.change(function() {
         var selectedEmploymentType = employmentTypeSelect.val();
-
         if (selectedEmploymentType === "local" || selectedEmploymentType === "local-contractual") {
             currencySelect.val("PULA");
             currencySelect.prop("disabled", false); 
