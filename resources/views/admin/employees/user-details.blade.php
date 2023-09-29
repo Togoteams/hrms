@@ -47,8 +47,7 @@
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
-                                                <label for="username">User-Name<small
-                                                        class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
+                                                <label for="username">User-Name <small  class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <input id="username" placeholder="Enter User Name" type="text"
@@ -57,16 +56,15 @@
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
                                             <div class="pt-3 col-3 fw-semibold">
-                                                <label for="role">Select Role<small
-                                                        class="required-field">*</small></label>
+                                                <label for="role">Select Role<small class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <select id="role_id" placeholder="Select role" name="role_id"
                                                     class="form-control form-control-sm">
                                                     <option selected disabled> - Select role - </option>
-
+                                                    
                                                     @foreach ($roles as $key => $value)
-                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                        <option value="{{ $value->id }}"  >{{ $value->name }}</option>
                                                     @endforeach
 
                                                 </select>

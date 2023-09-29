@@ -18,6 +18,12 @@ class EmpDepartmentHistory extends Model
 
     public function getEndDateAttribute($value)
     {
-        return date("d-M-y", strtotime($value));
+        if($value)
+        {
+            return date("d-M-y", strtotime($value)); 
+        }else{
+            return "Till Now"; 
+
+        }
     }
 }
