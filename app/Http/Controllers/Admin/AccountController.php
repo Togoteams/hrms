@@ -46,6 +46,7 @@ class AccountController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'account_number' => 'required|string',
             'name' => 'required|string',
             'opening_amount' => 'required|numeric',
             'closing_amount' => 'required|numeric',
@@ -84,6 +85,7 @@ class AccountController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
+            'account_number' => 'required|string',
             'name' => 'required|string',
             'opening_amount' => 'required|numeric',
             'closing_amount' => 'required|numeric',

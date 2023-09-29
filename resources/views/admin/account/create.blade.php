@@ -13,6 +13,14 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                         <div class="row">
+
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label for="account_number" class="required">Account Number</label>
+                                    <input type="text" required name="account_number" id="account_number" class="form-control" placeholder="Enter Account Number">
+                                </div>
+                            </div>
+
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="name" class="required">Account Name</label>

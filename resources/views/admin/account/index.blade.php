@@ -54,6 +54,7 @@
                     <thead>
                             <tr>
                                 <th>SI.</th>
+                                <th>Account Number</th>
                                 <th>Account Name</th>
                                 <th>Opening Amount</th>
                                 <th>Closing Amount</th>
@@ -85,7 +86,10 @@
                                     searchable: false
                                 },
 
-                             
+                                {
+                                    data: 'account_number',
+                                    name: 'account_number'
+                                },
                                 {
                                     data: 'name',
                                     name: 'name'
