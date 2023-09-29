@@ -111,17 +111,6 @@
                                                 </select>
                                             </div> --}}
 
-                                            <div class="col-3 pt-3 fw-semibold">
-                                                <label for="basic_salary">Basic Salary<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="basic_salary" placeholder="Enter basic salary"
-                                                    type="number" name="basic_salary"
-                                                    value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
-                                                    class="form-control form-control-sm ">
-                                            </div>
-
                                             {{-- <div class="col-3 pt-3 fw-semibold">
                                                 <label for="date_of_current_basic">Date of Current Basic<small
                                                         class="required-field">*</small></label>
@@ -157,6 +146,25 @@
 
                                                 </select>
                                             </div>
+
+                                            <div class="col-3 pt-3 fw-semibold">
+                                                <label for="basic_salary">Basic Salary<small
+                                                        class="required-field">*</small></label>
+                                            </div>
+                                            <div class="col-3 pt-2">
+                                                <select name="currency_salary" id="currency_salary" class="form-control">
+                                                    <option value=""> Select Currency</option>
+                                                    <option value="PULA	">PULLA</option>
+                                                    <option value="$">$</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-3 pt-2">
+                                                <input id="basic_salary" placeholder="Enter basic salary"
+                                                    type="number" name="basic_salary"
+                                                    value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
+                                                    class="form-control form-control-sm ">
+                                            </div>
+                                           
 
                                             <div class="col-3 pt-3 fw-semibold contractDiv">
                                                 <label for="contract_duration">Contract Duration<small
@@ -326,4 +334,31 @@
         }
     });
 </script>
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    var employmentTypeSelect = $("#employment_type");
+    var currencySelect = $("#currency_salary");
+
+    employmentTypeSelect.change(function() {
+        var selectedEmploymentType = employmentTypeSelect.val();
+
+        if (selectedEmploymentType === "local" || selectedEmploymentType === "local-contractual") {
+            currencySelect.val("PULA");
+            currencySelect.prop("disabled", false); 
+        } else if (selectedEmploymentType === "expatriate") {
+            currencySelect.val("$");
+            currencySelect.prop("disabled", true);
+        } else {
+            currencySelect.val(""); 
+            currencySelect.prop("disabled", false);
+        }
+    });
+    employmentTypeSelect.trigger("change");
+});
+</script>
+
+
 @endpush

@@ -47,9 +47,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Employee name</th>
-                                <th>Employee Email</th>
-                                <th>Employee Phone</th>
-                                <th>Employee Id</th>
+                                <th>Ec Number</th>
                                 <th>Type Of Loan</th>
                                 <th>Loan Amount</th>
                                 <th>Emi Amount</th>
@@ -83,17 +81,10 @@
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
-                                }, {
-                                    data: 'user.email',
-                                    name: 'user.email'
-                                },
+                                }, 
                                 {
-                                    data: 'user.mobile',
-                                    name: 'user.mobile'
-                                },
-                                {
-                                    data: 'employee.emp_id',
-                                    name: 'employee.emp_id'
+                                    data: 'employee.ec_number',
+                                    name: 'employee.ec_number'
                                 },
                                 {
                                     data: 'loan.name',
