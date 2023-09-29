@@ -26,7 +26,7 @@ class EmplooyeLoansController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = EmplooyeLoans::with('user')->select('*');
+            $data = EmplooyeLoans::with('user','loan')->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -59,14 +59,13 @@ class EmplooyeLoansController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'loan_id' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'principal_amount' => 'required|numeric',
-            'maturity_amount' => 'required|numeric',
+            'loan_amount' => 'required|numeric',
+            'emi_amount' => 'required|numeric',
+            'emi_start_date' => 'required|date',
+            'emi_end_date' => 'required|date|after_or_equal:emi_start_date',
             'tenure' => 'required|numeric',
-            'sanctioned' => 'required|numeric',
-            'sanctioned_amount' => 'required|numeric',
-            'description' => 'required|string',
+            'last_emi_amount' => 'required|numeric',
+            'description' => 'nullable|string',
 
         ]);
 
@@ -116,14 +115,13 @@ class EmplooyeLoansController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'loan_id' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'principal_amount' => 'required|numeric',
-            'maturity_amount' => 'required|numeric',
+            'loan_amount' => 'required|numeric',
+            'emi_amount' => 'required|numeric',
+            'emi_start_date' => 'required|date',
+            'emi_end_date' => 'required|date|after_or_equal:emi_start_date',
             'tenure' => 'required|numeric',
-            'sanctioned' => 'required|numeric',
-            'sanctioned_amount' => 'required|numeric',
-            'description' => 'required|string',
+            'last_emi_amount' => 'required|numeric',
+            'description' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {

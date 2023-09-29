@@ -49,11 +49,13 @@
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
                                 <th>Employee Phone</th>
-                                <th>From</th>
-                                <th>to </th>
-                                <th>principal amount </th>
-                                <th>maturity amount </th>
+                                <th>Type Of Loan</th>
+                                <th>Loan Amount</th>
+                                <th>Emi Amount</th>
+                                <th>Emi Start Date</th>
+                                <th>Emi End Date </th>
                                 <th>tenure </th>
+                                <th>Last Emi Amount</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -89,26 +91,34 @@
                                     name: 'user.mobile'
                                 },
                                 {
-                                    data: 'start_date',
-                                    name: 'start_date'
+                                    data: 'loan.name',
+                                    name: 'loan.name'
                                 },
                                 {
-                                    data: 'end_date',
-                                    name: 'end_date'
+                                    data: 'loan_amount',
+                                    name: 'loan_amount'
                                 },
                                 {
-                                    data: 'principal_amount',
-                                    name: 'principal_amount'
+                                    data: 'emi_amount',
+                                    name: 'emi_amount'
                                 },
                                 {
-                                    data: 'maturity_amount',
-                                    name: 'maturity_amount'
+                                    data: 'emi_start_date',
+                                    name: 'emi_start_date'
+                                },
+                                {
+                                    data: 'emi_end_date',
+                                    name: 'emi_end_date'
                                 },
                                 {
                                     data: 'tenure',
                                     name: 'tenure'
                                 },
-
+                                {
+                                    data: 'last_emi_amount',
+                                    name: 'last_emi_amount'
+                                },
+                            
                                 {
                                     data: 'action',
                                     name: 'action',

@@ -17,13 +17,12 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('loan_id');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->decimal('principal_amount');
-            $table->decimal('maturity_amount');
+            $table->string('loan_amount');
+            $table->string('emi_amount');
+            $table->date('emi_start_date');
+            $table->date('emi_end_date');
             $table->integer('tenure');
-            $table->integer('sanctioned');
-            $table->integer('sanctioned_amount');
+            $table->string('last_emi_amount');
             $table->string('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->string('status')->default('active');
