@@ -10,7 +10,7 @@
                     value="{{ $data->name }}" name="name" class="form-control form-control-sm ">
             </div>
         </div>
-        <div class="col-sm-6 mb-2">
+        {{-- <div class="col-sm-6 mb-2">
             <div class="form-group">
                 <label for="start_amount ">start_amount</label>
                 <input required id="start_amount " placeholder="Enter start_amount  of Loans  " type="text"
@@ -23,8 +23,8 @@
                 <input required id="end_amount " placeholder="Enter end_amount  of Loans  " type="text"
                     value="{{ $data->end_amount }}" name="end_amount" class="form-control form-control-sm ">
             </div>
-        </div>
-        <div class="col-sm-6 mb-2">
+        </div> --}}
+        {{-- <div class="col-sm-6 mb-2">
             <div class="form-group">
                 <label for="late_fine_amount ">late_fine_amount</label>
                 <input required id="late_fine_amount " placeholder="Enter late_fine_amount  of Loans  " type="text"
@@ -38,8 +38,8 @@
                     type="text" value="{{ $data->late_fine_amount_type }}" name="late_fine_amount_type"
                     class="form-control form-control-sm ">
             </div>
-        </div>
-        <div class="col-sm-6 mb-2">
+        </div> --}}
+        {{-- <div class="col-sm-6 mb-2">
             <div class="form-group">
                 <label for="no_min_installment ">no_min_installment</label>
                 <input required id="no_min_installment " placeholder="Enter no_min_installment  of Loans  "
@@ -54,8 +54,8 @@
                     type="text" value="{{ $data->no_max_installment }}" name="no_max_installment"
                     class="form-control form-control-sm ">
             </div>
-        </div>
-        <div class="col-sm-6 mb-2">
+        </div> --}}
+        {{-- <div class="col-sm-6 mb-2">
             <div class="form-group">
                 <label for="max_installment_amount ">max_installment_amount</label>
                 <input required id="max_installment_amount " placeholder="Enter max_installment_amount  of Loans  "
@@ -78,7 +78,7 @@
                     value="{{ $data->rate_of_interest }}" name="rate_of_interest"
                     class="form-control form-control-sm ">
             </div>
-        </div>
+        </div> --}}
 
         <div class="col-sm-12 mb-2">
             <div class="form-group">
