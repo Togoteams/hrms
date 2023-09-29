@@ -18,5 +18,10 @@ class EmplooyeLoans extends Model
     {
         return $this->belongsTo(Loans::class);
     }
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
 
 }
