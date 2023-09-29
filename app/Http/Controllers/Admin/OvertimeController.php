@@ -55,7 +55,7 @@ class OvertimeController extends Controller
             'emp_id' => 'required|numeric',
             'date' => 'required|date',
             'working_hours' => 'required|numeric|gt:0',
-            'working_min' => 'required|numeric|gt:0|max:59',
+            'working_min' => 'nullable|numeric|gt:0|max:59',
             'overtime_type' => 'required|string',           
         ]);
         // dd($request->all());
@@ -96,7 +96,7 @@ class OvertimeController extends Controller
             'emp_id' => 'required|numeric',
             'date' => 'required|date',
             'working_hours' => 'required|numeric|gt:0',
-            'working_min' => 'required|numeric|gt:0|max:59',
+            'working_min' => 'nullable|numeric|gt:0|max:59',
             'overtime_type' => 'required|string',           
         ]);
 

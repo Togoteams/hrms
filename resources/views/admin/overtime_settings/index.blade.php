@@ -57,7 +57,6 @@
                                 <th>Employee Name</th>
                                 <th>Date</th>
                                 <th>working Hours</th>
-                                <th>working Min</th>
                                 <th>Overtime Type</th>
                                 {{-- <th>status</th> --}}
                                 <th width="100px">Action</th>
@@ -128,10 +127,6 @@
                                 {
                                     data: 'working_hours',
                                     name: 'working_hours'
-                                },
-                                {
-                                    data: 'working_min',
-                                    name: 'working_min'
                                 },
                                 {
                                     data: 'overtime_type',
