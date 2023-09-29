@@ -10,12 +10,12 @@
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" class="formsubmit" method="post"
@@ -26,11 +26,11 @@
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 
-                                        <div class="row pb-4 p-3 text-dark">
-                                            <div class="col-3 pt-3 fw-semibold">
+                                        <div class="p-3 pb-4 row text-dark">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="branch_id">Branch<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <select id="branch_id" name="branch_id"
                                                     class="form-control form-control-sm">
                                                     <option selected disabled> - Select Branch - </option>
@@ -42,11 +42,11 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="designation_id">Designation<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <select id="designation_id" placeholder="Enter Employee"
                                                     name="designation_id" class="form-control form-control-sm">
                                                     <option selected disabled> -Select Designation- </option>
@@ -58,44 +58,44 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="ec_number">EC Number<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input id="ec_number" placeholder="Enter ec number" type="text"
                                                     name="ec_number"
                                                     value="{{ !empty($employee) ? $employee->ec_number : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            {{-- <div class="col-3 pt-3 fw-semibold">
+                                            {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="id_number">ID Number<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input type="number" id="id_number" placeholder="Enter id number" 
                                                     name="id_number"
                                                     value="{{ !empty($employee) ? $employee->id_number : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div> --}}
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="start_date">Date of joining<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input id="start_date" placeholder="Enter start date"
                                                     type="date" name="start_date"
                                                     value="{{ !empty($employee) ? $employee->start_date : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            {{-- <div class="col-3 pt-3 fw-semibold">
+                                            {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="currency">Currency<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <select id="currency" placeholder="Select Currency"
                                                     name="currency" class="form-control form-control-sm">
                                                     <option selected disabled> - Select Currency - </option>
@@ -111,11 +111,11 @@
                                                 </select>
                                             </div> --}}
 
-                                            {{-- <div class="col-3 pt-3 fw-semibold">
+                                            {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="date_of_current_basic">Date of Current Basic<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input id="date_of_current_basic"
                                                     placeholder="Enter date of current_basic" type="date"
                                                     name="date_of_current_basic"
@@ -123,11 +123,11 @@
                                                     class="form-control form-control-sm ">
                                             </div> --}}
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="employment_type">Employment Type<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <select id="employment_type" placeholder="Enter Employment Type"
                                                     name="employment_type"
                                                     value="{{ !empty($employee) ? $employee->employment_type : '' }}"
@@ -147,18 +147,18 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="basic_salary">Basic Salary<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <select name="currency_salary" id="currency_salary" class="form-control">
                                                     <option value=""> Select Currency</option>
-                                                    <option value="PULA	">PULLA</option>
+                                                    <option value="PULA">PULLA</option>
                                                     <option value="$">$</option>
                                                 </select>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input id="basic_salary" placeholder="Enter basic salary"
                                                     type="number" name="basic_salary"
                                                     value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
@@ -166,25 +166,25 @@
                                             </div>
                                            
 
-                                            <div class="col-3 pt-3 fw-semibold contractDiv">
+                                            <div class="pt-3 col-3 fw-semibold contractDiv">
                                                 <label for="contract_duration">Contract Duration<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-2 pt-2 contractDiv">
+                                            <div class="pt-2 col-2 contractDiv">
                                                 <input id="contract_duration" name="contract_duration"
                                                     placeholder="Enter Months" type="number"
                                                     value="{{ !empty($employee) ? $employee->contract_duration : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
-                                            <div class="col-1 pt-3 contractDiv">
+                                            <div class="pt-3 col-1 contractDiv">
                                                 Month(s)
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="pension_opt">Pension Contribution Opt. <small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input type="radio" id="radio1" name="pension_contribution" value="no"
                                                     class="form-check-input" title="Select NO"
                                                     {{ !empty($employee) && $employee->pension_contribution == 'no' ? 'checked' : '' }} />
@@ -198,7 +198,7 @@
                                                     for="radio2">Yes</label>
                                             </div>
 
-                                            <div id="pensionDropdown" style="display: none;" class="col-3 pt-3 fw-semibold">
+                                            <div id="pensionDropdown" style="display: none;" class="pt-3 col-3 fw-semibold">
                                                 <select name="pension_opt" id="pension_opt" class="form-control">
                                                     <option value="">Select Pension Contribution Opt.</option>
                                                     <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
@@ -206,10 +206,10 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="union_membership_id">Union Membership</label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input type="radio" id="radio1" name="union_membership_id" value="no"
                                                     class="form-check-input" title="Select NO"
                                                     {{ !empty($employee) && $employee->union_membership_id == 'no' ? 'checked' : '' }} />
@@ -223,12 +223,12 @@
                                                     for="radio2">Yes</label>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="amount_payable_to_bomaind_each_year">
                                                     Amount Payable to Bomaid Each Year
                                                 </label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 {{-- <input id="amount_payable_to_bomaind_each_year"
                                                     placeholder="Enter amount_payable to bomaind each year" type="text"
                                                     name="amount payable to bomaind each year"
@@ -250,17 +250,17 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="bank_account_number">Bank Account No<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input id="bank_account_number"
                                                     placeholder="Enter bank account number" type="text"
                                                     value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
                                                     name="bank_account_number" class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="text-center pt-5">
+                                            <div class="pt-5 text-center">
                                                 <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
                                             </div>
                                         </div>
