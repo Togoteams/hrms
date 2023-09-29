@@ -49,6 +49,7 @@ class MedicalCardController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:medical_cards,name',
+            'amount'=>'required|numeric|gt:0',
             'description' => 'required|string',
 
            
@@ -87,6 +88,7 @@ class MedicalCardController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            'amount'=>'required|numeric|gt:0',
             'description' => 'required|string',           
         ]);
         if ($validator->fails()) {

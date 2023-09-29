@@ -12,6 +12,7 @@ class MedicalCard extends Model
 
     protected $fillable = [
         'name',
+        'amount',
          'description',
          'status'];
 

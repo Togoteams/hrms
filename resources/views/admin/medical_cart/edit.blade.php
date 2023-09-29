@@ -14,6 +14,14 @@
                                 </div>
                             </div>
 
+                            <div class="mb-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="amount" class="required">Amount</label>
+                                    <input type="number" required name="amount" id="amount" class="form-control" placeholder="Enter amount of medical cart" value="{{$medical->amount}}">
+                                </div>
+                            </div>
+
+
                             <div class="mb-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="description" class="required">Description</label>

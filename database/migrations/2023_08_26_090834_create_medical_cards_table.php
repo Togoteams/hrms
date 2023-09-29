@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('medical_cards', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('amount')->nullable();
             $table->text('description',)->nullable();
             $table->enum('status',["active","inactive"])->default('active');           
             $table->timestamps();
