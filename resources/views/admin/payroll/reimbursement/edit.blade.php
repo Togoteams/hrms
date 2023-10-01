@@ -7,8 +7,8 @@
         <div class="row">
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
-                    <label class="required" for="type_id">Type </label>
-                    <select name="type_id" class="form-control" id="type_id" placeholder="Reimbursement type">
+                    <label class="required" for="type_id">Reimbursement Type</label>
+                    <select name="type_id" class="form-control" id="type_id" placeholder="Reimbursement type" required>
                         <option value="">Select Option</option>
                             @foreach($reimbursementType as $data)
                             <option value="{{ $data->id }}" {{ $data->id == $reimbursement->type_id ? 'selected' : '' }}>
@@ -19,58 +19,91 @@
                 </div>
             </div>
             <div class="mb-2 col-sm-6">
-                <div class="form-group">
-                    <label class="required" for="bill_amount">Bill Amount</label>
-                    <input type="text" name="bill_amount" id="bill_amount" class="form-control" placeholder="bill_amount" value="{{$reimbursement->bill_amount}}">
-                    <span class="text-danger">
-                        @error('bill_amount')
-                        {{$message}}
-                        @enderror
-                    </span>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <div class="form-group">
-                    <label class="required" for="expenses_date">Expenses Date</label>
-                    <input type="date" name="expenses_date" id="expenses_date" class="form-control" placeholder="expenses_date" value="{{$reimbursement->expenses_date}}">
-                    <span class="text-danger">
-                        @error('expenses_date')
-                        {{$message}}
-                        @enderror
-                    </span>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <label for="currency">Currency<small
+                <label for="expenses_currency">Expenses Currency  <small
                         class="required-field">*</small></label>
-                        <select id="currency" name="currency" class="form-control form-control-sm">
-                            <option selected disabled> - Select Currency - </option>
-                            <option value="pula" {{ !empty($employee) && $employee->currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
-                            <option value="inr" {{ !empty($employee) && $employee->currency == 'inr' ? 'selected' : '' }}>INR( ₹ )</option>
-                            <option value="dollar" {{ !empty($employee) && $employee->currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option>
-                        </select>
+                <select id="expenses_currency" placeholder="Select Currency"
+                    name="expenses_currency" class="form-control form-control-sm" required>
+                    <option selected disabled> - Select expenses_currency - </option>
+                    <option value="pula" {{ !empty($employee) && $employee->expenses_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
+                    <option value="inr" {{ !empty($employee) && $employee->expenses_currency == 'inr' ? 'selected' : '' }}>INR( ₹ )</option>
+                    <option value="dollar" {{ !empty($employee) && $employee->expenses_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option>
+                </select>
+            </div>
+            <div class="mb-2 col-sm-6">
+                <div class="form-group">
+                    <label for="expenses_amount" class="required">Expenses Amount</label>
+                    <input type="number" required name="expenses_amount" id="expenses_amount" class="form-control" placeholder="expenses_amount" value="{{$reimbursement->expenses_amount}}">
+                </div>
+            </div>
+            <div class="mb-2 col-sm-6">
+                <div class="form-group">
+                    <label for="claim_date" class="required">Claim date</label>
+                    <input type="date" name="claim_date" required id="claim_date" class="form-control" placeholder="claim_date" value="{{$reimbursement->claim_date}}">
+                </div>
+            </div>
+            <div class="mb-2 col-sm-6">
+                <div class="form-group">
+                    <label for="claim_from_month" class="required">Claim for the period from month</label>
+                    <select name="claim_from_month" id="claim_from_month" class="form-control"  required>
+                        <option value="">Select From Month</option>
+                        <option value="1" {{$reimbursement->claim_from_month == 1 ? 'selected' : ''}}>January</option>
+                        <option value="2" {{$reimbursement->claim_from_month == 2 ? 'selected' : ''}}>February</option>
+                        <option value="3" {{$reimbursement->claim_from_month == 3 ? 'selected' : ''}}>March</option>
+                        <option value="4" {{$reimbursement->claim_from_month == 4 ? 'selected' : ''}}>April</option>
+                        <option value="5" {{$reimbursement->claim_from_month == 5 ? 'selected' : ''}}>May</option>
+                        <option value="6" {{$reimbursement->claim_from_month == 6 ? 'selected' : ''}}>June</option>
+                        <option value="7" {{$reimbursement->claim_from_month == 7 ? 'selected' : ''}}>July</option>
+                        <option value="8" {{$reimbursement->claim_from_month == 8 ? 'selected' : ''}}>August</option>
+                        <option value="9" {{$reimbursement->claim_from_month == 9 ? 'selected' : ''}}>September</option>
+                        <option value="10" {{$reimbursement->claim_from_month == 10 ? 'selected' : ''}}>October</option>
+                        <option value="11" {{$reimbursement->claim_from_month == 11 ? 'selected' : ''}}>November</option>
+                        <option value="12" {{$reimbursement->claim_from_month == 12 ? 'selected' : ''}}>December</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-2 col-sm-6">
+                <div class="form-group">
+                    <label for="claim_to_month" class="required">Claim for the period to month</label>
+                    <select name="claim_to_month" id="claim_to_month" class="form-control" required >
+                        <option value="">Select From Month</option>
+                        <option value="1" {{$reimbursement->claim_to_month == 1 ? 'selected' : ''}}>January</option>
+                        <option value="2" {{$reimbursement->claim_to_month == 2 ? 'selected' : ''}}>February</option>
+                        <option value="3" {{$reimbursement->claim_to_month == 3 ? 'selected' : ''}}>March</option>
+                        <option value="4" {{$reimbursement->claim_to_month == 4 ? 'selected' : ''}}>April</option>
+                        <option value="5" {{$reimbursement->claim_to_month == 5 ? 'selected' : ''}}>May</option>
+                        <option value="6" {{$reimbursement->claim_to_month == 6 ? 'selected' : ''}}>June</option>
+                        <option value="7" {{$reimbursement->claim_to_month == 7 ? 'selected' : ''}}>July</option>
+                        <option value="8" {{$reimbursement->claim_to_month == 8 ? 'selected' : ''}}>August</option>
+                        <option value="9" {{$reimbursement->claim_to_month == 9 ? 'selected' : ''}}>September</option>
+                        <option value="10" {{$reimbursement->claim_to_month == 10 ? 'selected' : ''}}>October</option>
+                        <option value="11" {{$reimbursement->claim_to_month == 11 ? 'selected' : ''}}>November</option>
+                        <option value="12" {{$reimbursement->claim_to_month == 12 ? 'selected' : ''}}>December</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-2 col-sm-6">
+                <label for="reimbursement_currency">Reimbursement Currency <small
+                        class="required-field">*</small></label>
+            
+                <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
+                    name="reimbursement_currency" class="form-control form-control-sm" required>
+                    <option selected disabled> - Select Currency - </option>
+                    <option value="pula" {{ !empty($employee) && $employee->reimbursement_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
+                    <option value="inr" {{ !empty($employee) && $employee->reimbursement_currency == 'inr' ? 'selected' : '' }}>INR( ₹ )</option>
+                    <option value="dollar" {{ !empty($employee) && $employee->reimbursement_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option>
+                </select>
             </div>
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
                     <label class="required" for="reimbursement_amount">Reimbursement Amount</label>
-                    <input type="text" name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{$reimbursement->reimbursement_amount}}">
-                    <span class="text-danger">
-                        @error('reimbursement_amount')
-                        {{$message}}
-                        @enderror
-                    </span>
+                    <input type="text" name="reimbursement_amount" required id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{$reimbursement->reimbursement_amount}}">
                 </div>
             </div>
             <br>
             <div class="mb-2 col-sm-12">
                 <div class="form-group">
                     <label class="required" for="reimbursement_notes">Reimbursement notes</label>
-                    <textarea name="reimbursement_notes" id="reimbursement_notes" cols="30" rows="10" class="form-control" placeholder="reimbursement_notes">{{$reimbursement->reimbursement_notes}}</textarea>
-                    <span class="text-danger">
-                        @error('reimbursement_notes')
-                        {{$message}}
-                        @enderror
-                    </span>
+                    <textarea name="reimbursement_notes" id="reimbursement_notes" required cols="10" rows="5" class="form-control" placeholder="reimbursement_notes">{{$reimbursement->reimbursement_notes}}</textarea>
                 </div>
             </div>
             <div class="text-center ">

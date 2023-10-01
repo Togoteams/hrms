@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\payroll;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\CurrencySetting;
 use App\Models\Reimbursement;
 use App\Models\ReimbursementType;
 use Exception;
@@ -33,7 +34,8 @@ class ReimbursementController extends BaseController
             }
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::where('status','active')->get();
-        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 'reimbursementType' => $reimbursementType, 'reimbursement' => $reimbursement]);
+        $currency = CurrencySetting::where('status','active')->get();
+        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 'reimbursementType' => $reimbursementType, 'currency' => $currency, 'reimbursement' => $reimbursement]);
 
 
     }
@@ -55,12 +57,14 @@ class ReimbursementController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'type_id' => 'required|numeric',
-            'bill_amount' => 'required|numeric|gt:0',
-            'expenses_date' => 'required|date|before_or_equal:today',
+            'expenses_currency' => 'required|string',
+            'expenses_amount' => 'required|numeric|gt:0',
+            'claim_date' => 'required|date',
+            'claim_from_month' => 'required|numeric',
+            'claim_to_month' => 'required|numeric',
+            'reimbursement_currency' => 'required|string',
             'reimbursement_amount' => 'required|numeric|gt:0',
-            'currency' => 'required',
             'reimbursement_notes' => 'required|string',
-
         ]);
 
         if ($validator->fails()) {
@@ -107,10 +111,13 @@ class ReimbursementController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'type_id' => 'required|numeric',
-            'bill_amount' => 'required|numeric|gt:0',
-            'expenses_date' => 'required|date|before_or_equal:today',
+            'expenses_currency' => 'required|string',
+            'expenses_amount' => 'required|numeric|gt:0',
+            'claim_date' => 'required|date',
+            'claim_from_month' => 'required|numeric',
+            'claim_to_month' => 'required|numeric',
+            'reimbursement_currency' => 'required|string',
             'reimbursement_amount' => 'required|numeric|gt:0',
-            'currency' => 'required',
             'reimbursement_notes' => 'required|string',
         ]);
         if ($validator->fails()) {

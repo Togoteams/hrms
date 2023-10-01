@@ -9,10 +9,13 @@ class Reimbursement extends Model
 {
     use HasFactory;
     protected $fillable = ['type_id', 
-    'bill_amount',
-    'expenses_date',
+    'expenses_currency',
+    'expenses_amount',
+    'claim_date',
+    'claim_from_month',
+    'claim_to_month',
+    'reimbursement_currency',
     'reimbursement_amount',
-    'currency',
     'reimbursement_notes',
     'reimbursement_reason',
     'status',

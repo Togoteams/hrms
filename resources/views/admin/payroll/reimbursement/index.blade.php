@@ -50,10 +50,13 @@
                     <thead>
                         <tr>
                             <th>SI.</th>
-                            <th>Type</th>
-                            <th>Bill Amount</th>
-                            <th>Expenses Date</th>
-                            <th>Currency</th>
+                            <th>Reimbursement Type</th>
+                            <th>Expenses Currency</th>
+                            <th>Expenses Amount</th>
+                            <th>Claim date</th>
+                            <th>Claim for the period from month</th>
+                            <th>Claim for the period to month</th>
+                            <th>Reimbursement Currency</th>
                             <th>Reimbursement Amount</th>
                             <th>Reimbursement Notes</th>
                             <th>status</th>
@@ -86,25 +89,50 @@
                                 data: 'reimbursementype.type',
                                 name: 'reimbursementype.type'
                             },
-
                             {
-                                data: 'bill_amount',
-                                name: 'bill_amount'
+                                data: 'expenses_currency',
+                                name: 'expenses_currency'
                             },
                             {
-                                data: 'expenses_date',
-                                name: 'expenses_date'
+                                data: 'expenses_amount',
+                                name: 'expenses_amount'
                             },
                             {
-                                data: 'currency',
-                                name: 'currency'
+                                data: 'claim_date',
+                                name: 'claim_date'
+                            },
+                            {
+                                data: 'claim_from_month',
+                                name: 'claim_from_month',
+                                render: function(data, type, full, meta) {
+                                    var months = [
+                                        'January', 'February', 'March', 'April',
+                                        'May', 'June', 'July', 'August',
+                                        'September', 'October', 'November', 'December'
+                                    ];
+                                    return months[data - 1];
+                                }
+                            },
+                            {
+                                data: 'claim_to_month',
+                                name: 'claim_to_month',
+                                render: function(data, type, full, meta) {
+                                    var months = [
+                                        'January', 'February', 'March', 'April',
+                                        'May', 'June', 'July', 'August',
+                                        'September', 'October', 'November', 'December'
+                                    ];
+                                    return months[data - 1];
+                                }
+                            },
+                            {
+                                data: 'reimbursement_currency',
+                                name: 'reimbursement_currency'
                             },
                             {
                                 data: 'reimbursement_amount',
                                 name: 'reimbursement_amount'
                             },
-
-
                             {
                                 data: 'reimbursement_notes',
                                 name: 'reimbursement_notes'
