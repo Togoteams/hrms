@@ -544,7 +544,7 @@ if (!function_exists('getHeadValue')) {
             $hoursInMonth = 192;
             $perHoursRate = $basicAmout/$hoursInMonth;
             $totalOverTimeHours = OvertimeSetting::where('date',">=",date("Y-m-"."01"))->where('date','<=',date("Y-m-".'31'))->sum('working_hours');
-            return number_format($totalOverTimeHours*$perHoursRate,2);
+            return number_format($totalOverTimeHours*$perHoursRate,2) *2;
         
         } elseif ($headSlug == "others_arrears") {
            $currentYear = date('Y');
