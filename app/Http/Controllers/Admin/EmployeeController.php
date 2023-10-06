@@ -139,10 +139,10 @@ class EmployeeController extends BaseController
         $designation = Designation::all();
         $membership = Membership::all();
         $bomaind = MedicalCard::all();
+        
         $branch = Branch::where('status', 'active')->get();
-        return view(
-            'admin.employees.employee-details',
-            [
+
+        return view('admin.employees.employee-details',[
                 'page'          => $this->page_name,
                 'designation'   => $designation,
                 'membership'    => $membership,

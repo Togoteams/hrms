@@ -151,14 +151,14 @@
                                                 <label for="basic_salary">Basic Salary<small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="pt-2 col-3">
+                                            <div class="pt-2 col-1">
                                                 <select name="currency_salary" id="currency_salary" class="form-control">
                                                     <option value=""> Select Currency</option>
-                                                    <option value="PULA">PULLA</option>
+                                                    <option value="PULA">P</option>
                                                     <option value="$">$</option>
                                                 </select>
                                             </div>
-                                            <div class="pt-2 col-3">
+                                            <div class="pt-2 col-2">
                                                 <input id="basic_salary" placeholder="Enter basic salary"
                                                     type="number" name="basic_salary"
                                                     value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
@@ -184,7 +184,7 @@
                                                 <label for="pension_opt">Pension Contribution Opt. <small
                                                         class="required-field">*</small></label>
                                             </div>
-                                            <div class="pt-2 col-3">
+                                            <div class="pt-2 col-2">
                                                 <input type="radio" id="radio1" name="pension_contribution" value="no"
                                                     class="form-check-input" title="Select NO"
                                                     {{ !empty($employee) && $employee->pension_contribution == 'no' ? 'checked' : '' }} />
@@ -198,8 +198,8 @@
                                                     for="radio2">Yes</label>
                                             </div>
 
-                                            <div id="pensionDropdown" style="display: none;" class="pt-3 col-3 fw-semibold">
-                                                <select name="pension_opt" id="pension_opt" class="form-control">
+                                            <div id="pensionDropdown" class="pt-3 col-2 fw-semibold">
+                                                <select name="pension_opt"  style="display: none;"  id="pension_opt" class="form-control">
                                                     <option value="">Select Pension Contribution Opt.</option>
                                                     <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
                                                     <option value="5" {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>5%</option>
@@ -209,7 +209,7 @@
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="union_membership_id">Union Membership</label>
                                             </div>
-                                            <div class="pt-2 col-3">
+                                            <div class="pt-2 col-2">
                                                 <input type="radio" id="radio1" name="union_membership_id" value="no"
                                                     class="form-check-input" title="Select NO"
                                                     {{ !empty($employee) && $employee->union_membership_id == 'no' ? 'checked' : '' }} />
@@ -318,7 +318,7 @@
     $(document).ready(function () {
         var radioNo = $("#radio1");
         var radioYes = $("#radio2");
-        var pensionDropdown = $("#pensionDropdown");
+        var pensionDropdown = $("#pension_opt");
 
         radioNo.change(function () {
             pensionDropdown.hide();
