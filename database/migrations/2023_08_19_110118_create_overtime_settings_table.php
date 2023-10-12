@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('overtime_settings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('emp_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->date('date')->nullable();
             $table->string('working_hours')->nullable();
             $table->string('working_min')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('status')->nullable()->default('Active');
             $table->timestamps();
 
-            $table->foreign('emp_id')->references('id')->on('employees');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

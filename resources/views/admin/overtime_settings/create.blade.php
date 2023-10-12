@@ -15,11 +15,11 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="row">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="emp_id" class="required">Employee Name</label>
-                                    <select name="emp_id" class="form-control" id="emp_id" placeholder="Employee Name">
+                                    <label for="user_id" class="required">Employee Name</label>
+                                    <select name="user_id" class="form-control" id="user_id" placeholder="Employee Name">
                                         <option value="">Select Option</option>
                                         @foreach ($all_users as $user)
-                                        <option value="{{ $user->user->id }}">{{ $user->user->name }}
+                                        <option value="{{ $user->user_id }}">{{ $user->user->name }}
                                         </option>
                                     @endforeach
                                     </select>

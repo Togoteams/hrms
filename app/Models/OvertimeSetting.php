@@ -9,7 +9,7 @@ class OvertimeSetting extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'emp_id',
+        'user_id',
         'date',
         'working_hours',
         'working_min',
@@ -18,6 +18,6 @@ class OvertimeSetting extends Model
         
         public function user()
         {
-            return $this->belongsTo(User::class, 'emp_id');
+            return $this->belongsTo(User::class, 'user_id');
         }
 }

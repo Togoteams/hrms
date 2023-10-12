@@ -7,11 +7,11 @@
        <div class="row">
         <div class="mb-2 col-sm-6">
             <div class="form-group">
-                <label for="emp_id" class="required">Employee Name</label>
-                <select name="emp_id" class="form-control" id="emp_id" placeholder="Employee Name">
+                <label for="user_id" class="required">Employee Name</label>
+                <select name="user_id" class="form-control" id="user_id" placeholder="Employee Name">
                     <option value="">Select Option</option>
                     @foreach ($all_users as $user)
-                    <option value="{{ $user->user->id }}" @if ($item->emp_id == $user->user->id) selected @endif>
+                    <option value="{{ $user->user_id }}" @if ($item->user_id == $user->user_id) selected @endif>
                         {{ $user->user->name }}
                     </option>
                 @endforeach

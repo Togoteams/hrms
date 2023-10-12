@@ -34,6 +34,7 @@ class OvertimeController extends Controller
             
         // $data = OvertimeSetting::all();
         $all_users = Employee::with('user')->get();
+        // dd($all_users);
         return view('admin.overtime_settings.index', ['page' => $this->page_name,'all_users' => $all_users]);
 
     }
@@ -50,9 +51,10 @@ class OvertimeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {        
+    {       
+        // dd($request);
         $validator = Validator::make($request->all(), [
-            'emp_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
             'date' => 'required|date',
             'working_hours' => 'required|numeric|gt:0',
             'working_min' => 'nullable|numeric|gt:0|max:59',
@@ -93,7 +95,7 @@ class OvertimeController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'emp_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
             'date' => 'required|date',
             'working_hours' => 'required|numeric|gt:0',
             'working_min' => 'nullable|numeric|gt:0|max:59',
