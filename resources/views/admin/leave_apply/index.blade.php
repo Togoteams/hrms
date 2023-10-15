@@ -246,17 +246,17 @@
           $(document).ready(function() {
             $(document).on('change',"#start_date_edit",function() {
                 console.log("sdsd");
-                getDays();
+                getEditDays();
             });
             $(document).on('change',"#end_date_edit",function() {
                 console.log("sdsdsdsdsd");
             // $("#end_date_edit").on('change', function() {
-                getDays();
+                getEditDays();
             });
 
         });
 
-        function getDays() {
+        function getEditDays() {
             date1 = new Date($("#start_date_edit").val());
             date2 = new Date($("#end_date_edit").val());
             var milli_secs = date1.getTime() - date2.getTime();

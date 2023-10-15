@@ -363,6 +363,12 @@
                                              href="{{ route('admin.leave_type.index') }}">Leave Types</a>
                                      @endif
                                  @endcanany
+                                 @canany(['add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])
+                                    <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
+                                        href="{{ route('admin.leavesettings.list') }}" data-placement="left">
+                                        <span class="nav-link-title">Leave Setting</span>
+                                    </a>
+                                @endcanany
 
                                  @canany(['add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
                                      'change-status-leave-apply'])
@@ -417,7 +423,7 @@
                          </div>
                      @endcanany
 
-                     @canany(['add-leave-settings', 'edit-leave-settings', 'view-leave-settings',
+                     {{-- @canany(['add-leave-settings', 'edit-leave-settings', 'view-leave-settings',
                          'delete-leave-settings', 'add-leave-type', 'edit-leave-type', 'delete-leave-type',
                          'view-leave-type'])
                          <div class="nav-item">
@@ -431,16 +437,11 @@
                              <div id="leavesetting" class="nav-collapse collapse {{ show(['leavesettings.list']) }} "
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                                 @canany(['add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
-                                         href="{{ route('admin.leavesettings.list') }}" data-placement="left">
-                                         <span class="nav-link-title">Leave Setting</span>
-                                     </a>
-                                 @endcanany
+                               
 
                              </div>
                          </div>
-                     @endcanany
+                     @endcanany --}}
 
                      @canany(['add-payroll', 'edit-payroll', 'view-payroll', 'delete-payroll', 'add-tax-slab-settings',
                          'edit-tax-slab-settings', 'delete-tax-slab-settings', 'view-tax-slab-settings',
