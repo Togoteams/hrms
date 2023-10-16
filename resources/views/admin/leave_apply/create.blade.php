@@ -111,8 +111,10 @@
     }
         function change_leave(e) {
             var text = e.options[e.selectedIndex].text;
-            if (text == "SICK LEAVE") {
+            console.log(text);
+            if (text == "SICK LEAVE" || text=="MATERNITY LEAVE") {
                 document.getElementById('doc').setAttribute("required", "");
+                // document.getElementById('doc').;
 
             } else {
                 document.getElementById('doc').removeAttribute("required", "");
@@ -122,6 +124,14 @@
         }
          
         $("#start_date").on('change',function(){
+            dt = new Date($(this).val());
+            dt.setDate(dt.getDate() + 1);
+            console.log(dt.getFullYear+"/"+(dt.getMonth+1)+"/"+dt.getDate);
+            if($("#end_date").val()=="")
+            {
+                $("#end_date").val(dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate());
+            }
+            console.log("ddsdsd");
             getDays();
         });
         $("#end_date").on('change',function(){

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @push('styles')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 @endpush
 @section('content')
 <main id="content" role="main" class="main">
@@ -237,6 +238,25 @@
 </main>
 @endsection
 @push('custom-scripts')
+
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    // date picker
+    $( document ).ready(function() {
+        // $("#start_date").datepicker({ minDate: '0',dateFormat: 'dd-mm-yy' });
+        // $("#end_date").datepicker({ dateFormat: 'dd-mm-yy' });
+    
+        // $("#start_date").on("change", function () {
+        //     var fromdate = $(this).val();
+        //     console.log("fromdate",fromdate.replace(/-/g,"/"));
+        //     // var end = new Date(fromdate.replace(/-/g,"/"));
+        //     // console.log(end);
+        //     // $("#end_date").datepicker({ minDate: end });
+
+        // });
+    }); 
+    // date picker
+    </script>
     <script>
          window.onload = function() { //from ww  w . j  a  va2s. c  o  m
             var today = new Date().toISOString().split('T')[0];

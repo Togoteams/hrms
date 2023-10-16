@@ -13,7 +13,10 @@ class LeaveApply extends Model
         return $this->belongsTo(User::class);
     }
     function leave_type(){
-        return $this->belongsTo(LeaveType::class);
+        return $this->belongsTo(LeaveSetting::class);
+    }
+    function leaveSetting(){
+        return $this->belongsTo(LeaveSetting::class);
     }
     public function employee(){
         return $this->belongsTo(Employee::class);

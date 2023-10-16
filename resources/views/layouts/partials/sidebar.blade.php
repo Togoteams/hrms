@@ -356,13 +356,13 @@
                                  class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave']) }} "
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                                 @canany(['add-leave-types', 'edit-leave-types', 'delete-leave-types', 'view-leave-types',
+                                 {{-- @canany(['add-leave-types', 'edit-leave-types', 'delete-leave-types', 'view-leave-types',
                                      'change-status-leave-types'])
                                      @if (!isemplooye())
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.leave_type.index') }}">Leave Types</a>
                                      @endif
-                                 @endcanany
+                                 @endcanany --}}
                                  @canany(['add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])
                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
                                         href="{{ route('admin.leavesettings.list') }}" data-placement="left">
@@ -378,13 +378,13 @@
                                      </a>
                                  @endcanany
 
-                                 @canany(['add-leave-encashment', 'edit-leave-encashment', 'delete-leave-encashment',
+                                 {{-- @canany(['add-leave-encashment', 'edit-leave-encashment', 'delete-leave-encashment',
                                      'view-leave-encashment'])
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_encashment.index' ? 'active' : '' }}"
                                          href="{{ route('admin.leave_encashment.index') }}" data-placement="left">
                                          <span class="nav-link-title">LEAVE ENCASHMENT</span>
                                      </a>
-                                 @endcanany
+                                 @endcanany --}}
 
                                  @canany(['add-leave-balance-report', 'edit-leave-balance-report',
                                      'delete-leave-balance-report', 'view-leave-balance-report'])

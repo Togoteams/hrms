@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Employee;
 use App\Models\LeaveApply;
+use App\Models\LeaveSetting;
 use App\Models\LeaveType;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LeaveTraits;
-
+use Illuminate\Validation\Rule;
 class LeaveApplyController extends Controller
 {
     use LeaveTraits;
@@ -81,20 +82,39 @@ class LeaveApplyController extends Controller
      */
     public function store(Request $request)
     {
+        $leavSlug = LeaveSetting::find($request->leave_type_id)->slug;
+
+        Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
+            $start_date = $validator->getData()['start_date'];
+            $end_date = $validator->getData()['end_date'] ?? "";
+            $userId = $validator->getData()['user_id'] ?? "";
+            $overlappingRecord =true;
+            
+            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date,$userId) {
+                $query->where('start_date', '<=', $start_date)->where('end_date', '>=', $end_date)->where('user_id',$userId);
+            })->first();
+            return !$overlappingRecord;
+        });
+
+        Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
+            return "The $attribute date range overlaps with an existing record.";
+        });
+
+
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date'],
+            'start_date' => ['required', 'date','after_or_equal:','no_date_overlap'],
+            'end_date' => ['required', 'date','after:start_date', 'after_or_equal:' . now()->format('Y-m-d')],
             "doc1" => ["mimetypes:application/pdf", "max:10000"],
-            'remaining_leave' => 'required|min:1|numeric'
+            'remaining_leave' =>['required','numeric', Rule::when($leavSlug != 'leave-without-pay', 'min:1')]
         ]);
         if (isset($request->user_id) && $request->user_id != '') {
             $user = User::find($request->user_id);
         } else {
             $user = Auth::user();
         }
-
-        if ($this->balance_leave_by_type($request->leave_type_id, $user->id) > 0) {
+        // return $leavSlug=="leave-without-pay";
+        if (($this->balance_leave_by_type($request->leave_type_id, $user->id) > 0) || $leavSlug=="leave-without-pay" ) {
             if ($validator->fails()) {
                 return $validator->errors();
             } else {
@@ -253,7 +273,7 @@ class LeaveApplyController extends Controller
     public function get_leave(Request $request)
     {
         $user_id = $request->user_id;
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', $user_id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveSetting::where('emp_type', Employee::where('user_id', $user_id)->first()->employment_type ?? '')->get();
         echo '<option> -Select Leave Type - </option>';
         foreach ($leave_type as $l_type) {
             echo '  <option value="' . $l_type->id . '">' . $l_type->name . '</option>';

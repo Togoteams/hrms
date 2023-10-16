@@ -36,7 +36,7 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
-            $table->foreign('leave_type_id')->references('id')->on('leave_types');
+            $table->foreign('leave_type_id')->references('id')->on('leave_settings');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }
