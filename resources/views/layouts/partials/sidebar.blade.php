@@ -267,7 +267,7 @@
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
                                  href="{{ route('admin.medical-card.index') }}" data-placement="left">
                                  <i class="fa fa-truck nav-icon"></i>
-                                 <span class="nav-link-title">Bomaid Type</span>
+                                 <span class="nav-link-title">Bomaid Medical card Type</span>
                              </a>
                          </div>
                      @endcanany
@@ -386,13 +386,13 @@
                                      </a>
                                  @endcanany --}}
 
-                                 @canany(['add-leave-balance-report', 'edit-leave-balance-report',
+                                 {{-- @canany(['add-leave-balance-report', 'edit-leave-balance-report',
                                      'delete-leave-balance-report', 'view-leave-balance-report'])
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.balance_history' ? 'active' : '' }}"
                                          href="{{ route('admin.leave_apply.balance_history') }}" data-placement="left">
                                          <span class="nav-link-title">LEAVE BALANCE REPORT</span>
                                      </a>
-                                 @endcanany
+                                 @endcanany --}}
 
                                  @canany(['add-leave-request-history', 'edit-leave-request-history',
                                      'delete-leave-request-history', 'view-leave-request-history'])

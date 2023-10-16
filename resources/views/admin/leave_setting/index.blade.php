@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
 
 
@@ -26,19 +26,19 @@
 
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
                 <div class="page-header">
                     <div class="row">
                         <div class="mb-2 col-sm mb-sm-0">
                             <h2 class="page-header-title">{{ $page }}</h2>
                         </div>
                         <div class="col-sm-auto">
-                            @can('add-leave-type')
+                            {{-- @can('add-leave-type')
                             <button type="button" class="btn btn-white" data-bs-toggle="modal"
                                 data-bs-target="#leave_setting_add_modal">
                                 Add {{ $page }}
                             </button>
-                            @endcan
+                            @endcan --}}
                         </div>
                     </div>
                 </div>

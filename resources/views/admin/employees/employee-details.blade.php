@@ -102,9 +102,7 @@
                                                     <option
                                                         {{ !empty($employee) ? ($employee->currency == 'pula' ? 'selected' : '') : '' }}
                                                         value="pula">Pula( P )</option>
-                                                    <option
-                                                        {{ !empty($employee) ? ($employee->currency == 'inr' ? 'selected' : '') : '' }}
-                                                        value="inr">INR( ₹ )</option>
+                                                    
                                                     <option
                                                         {{ !empty($employee) ? ($employee->currency == 'dollar' ? 'selected' : '') : '' }}
                                                         value="dollar">Dollar( $ )</option>
@@ -225,7 +223,7 @@
 
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="amount_payable_to_bomaind_each_year">
-                                                    Amount Payable to Bomaid Each Year
+                                                   Bomaid Medical Card
                                                 </label>
                                             </div>
                                             <div class="pt-2 col-3">
@@ -237,11 +235,11 @@
 
                                                     <select id="amount_payable_to_bomaind_each_year" name="amount_payable_to_bomaind_each_year"
                                                     class="form-control form-control-sm"
-                                                    placeholder="Select amount payable to bomaind each year"
+                                                    placeholder="Select Bomaid Medical Card"
                                                     value="{{ !empty($employee) ? $employee->amount_payable_to_bomaind_each_year : '' }}">
                                                     <option
                                                         {{ !empty($employee) ? ($employee->amount_payable_to_bomaind_each_year == '' ? 'selected' : '') : '' }}
-                                                        value=""> - Select Amount payable to bomaind each year - </option>
+                                                        value=""> - Select  Bomaid Medical Card - </option>
                                                     @foreach ($bomaind as $item)
                                                         <option
                                                             {{ !empty($employee) ? ($item->id == $employee->amount_payable_to_bomaind_each_year ? 'selected' : '') : '' }}

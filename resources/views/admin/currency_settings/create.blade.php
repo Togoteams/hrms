@@ -18,7 +18,6 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <label for="currency_name_from" class="required">Currency Name From</label>
                                     <select name="currency_name_from" id="currency_name_from" class="form-control">
                                         <option value="">Select Currency Name From</option>
-                                        <option value="INR">INR</option>
                                         <option value="USD">USD</option>
                                         <option value="PULA">PULA</option>
                                     </select>
@@ -37,7 +36,6 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <label for="currency_name_to" class="required">Currency Name To</label>
                                     <select name="currency_name_to" id="currency_name_to" class="form-control">
                                         <option value="">Select Currency Name To</option>
-                                        <option value="INR">INR</option>
                                         <option value="USD">USD</option>
                                         <option value="PULA">PULA</option>
                                     </select>

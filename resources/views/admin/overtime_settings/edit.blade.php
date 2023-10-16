@@ -42,7 +42,7 @@
                     <select name="overtime_type" class=" form-control" id="overtime_type" placeholder="Employee overtime type">
                         <option value="">Select Option</option>
                         <option value="holiday" @if(old('overtime_type', $item->overtime_type) === 'holiday') selected @endif>Holiday</option>
-                        <option value="extra time" @if(old('overtime_type', $item->overtime_type) === 'extra time') selected @endif>Extra time</option>
+                        <option value="over time" @if(old('overtime_type', $item->overtime_type) === 'over time') selected @endif>Over time</option>
 
 
                     </select>

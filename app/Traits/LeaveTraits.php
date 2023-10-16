@@ -15,7 +15,7 @@ trait LeaveTraits
             $user_id = auth()->user()->id;
         }
         $total_apply_leave = 0;
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->where('status', 'approved')->get();
+        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
         if (count($total_apply_leaves) > 0) {
             foreach ($total_apply_leaves as  $value) {
              
@@ -27,7 +27,7 @@ trait LeaveTraits
         }
 
         $total_leave = LeaveSetting::find($leave_type_id)->total_leave_year;
-        $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->where('status', 'approved')->sum('no_of_days');
+        $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
         $total = $total_leave - $total_apply_leave -  $encash_leave;
         return $total;
     }

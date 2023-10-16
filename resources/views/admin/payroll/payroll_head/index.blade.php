@@ -27,12 +27,12 @@
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="mt-2 mb-2 text-right col-sm-3 auto">
-                     @can('add-payroll-head')
+                     {{-- @can('add-payroll-head')
                     <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                         Add {{ $page }}
                     </button>
-                    @endcan
+                    @endcan --}}
 
                 </div>
             </div>

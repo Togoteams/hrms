@@ -10,7 +10,6 @@
                 <label for="currency_name_from" class="required">Currency Name From</label>
                 <select name="currency_name_from" id="currency_name_from" class="form-control">
                     <option value="">Select Currency Name From</option>
-                    <option value="INR" @if($currency->currency_name_from == 'INR') selected @endif>INR</option>
                     <option value="USD" @if($currency->currency_name_from == 'USD') selected @endif>USD</option>
                     <option value="PULA" @if($currency->currency_name_from == 'PULA') selected @endif>PULA</option>
                 </select>
@@ -29,7 +28,6 @@
                 <label for="currency_name_to" class="required">Currency Name To</label>
                 <select name="currency_name_to" id="currency_name_to" class="form-control">
                     <option value="">Select Currency Name To</option>
-                    <option value="INR" @if($currency->currency_name_to == 'INR') selected @endif>INR</option>
                     <option value="USD" @if($currency->currency_name_to == 'USD') selected @endif>USD</option>
                     <option value="PULA" @if($currency->currency_name_to == 'PULA') selected @endif>PULA</option>
                 </select>

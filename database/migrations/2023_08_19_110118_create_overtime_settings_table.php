@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->string('working_hours')->nullable();
             $table->string('working_min')->nullable();
-            $table->enum('overtime_type',["holiday","extra time"])->nullable();            
+            $table->enum('overtime_type',["holiday","over time"])->nullable();            
             $table->string('status')->nullable()->default('Active');
             $table->timestamps();
 

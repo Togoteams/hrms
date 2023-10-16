@@ -522,9 +522,9 @@ if (!function_exists('getHeadValue')) {
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
-            $amount = MedicalCard::find($bomaidTypeId)->value('amount');
-            if (!empty($amount)) {
-                $bomaidAmount = $amount / 2;
+            $bomaid = MedicalCard::find($bomaidTypeId);
+            if (!empty($bomaid)) {
+                $bomaidAmount = $bomaid->amount / 2;
             }
             return $bomaidAmount;
         } elseif ($headSlug == "pension") {

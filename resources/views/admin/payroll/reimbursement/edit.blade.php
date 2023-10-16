@@ -25,7 +25,6 @@
                     name="expenses_currency" class="form-control form-control-sm" required>
                     <option selected disabled> - Select expenses_currency - </option>
                     <option value="pula" {{ !empty($employee) && $employee->expenses_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
-                    <option value="inr" {{ !empty($employee) && $employee->expenses_currency == 'inr' ? 'selected' : '' }}>INR( ₹ )</option>
                     <option value="dollar" {{ !empty($employee) && $employee->expenses_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option>
                 </select>
             </div>
@@ -89,7 +88,6 @@
                     name="reimbursement_currency" class="form-control form-control-sm" required>
                     <option selected disabled> - Select Currency - </option>
                     <option value="pula" {{ !empty($employee) && $employee->reimbursement_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
-                    <option value="inr" {{ !empty($employee) && $employee->reimbursement_currency == 'inr' ? 'selected' : '' }}>INR( ₹ )</option>
                     <option value="dollar" {{ !empty($employee) && $employee->reimbursement_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option>
                 </select>
             </div>

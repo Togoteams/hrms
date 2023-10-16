@@ -36,9 +36,7 @@
                                     <option
                                         {{ !empty($employee) ? ($employee->expenses_currency == 'pula' ? 'selected' : '') : '' }}
                                         value="pula">Pula( P )</option>
-                                    <option
-                                        {{ !empty($employee) ? ($employee->expenses_currency == 'inr' ? 'selected' : '') : '' }}
-                                        value="inr">INR( ₹ )</option>
+                                
                                     <option
                                         {{ !empty($employee) ? ($employee->expenses_currency == 'dollar' ? 'selected' : '') : '' }}
                                         value="dollar">Dollar( $ )</option>
@@ -106,9 +104,7 @@
                                     <option
                                         {{ !empty($employee) ? ($employee->reimbursement_currency == 'pula' ? 'selected' : '') : '' }}
                                         value="pula">Pula( P )</option>
-                                    <option
-                                        {{ !empty($employee) ? ($employee->reimbursement_currency == 'inr' ? 'selected' : '') : '' }}
-                                        value="inr">INR( ₹ )</option>
+                                   
                                     <option
                                         {{ !empty($employee) ? ($employee->reimbursement_currency == 'dollar' ? 'selected' : '') : '' }}
                                         value="dollar">Dollar( $ )</option>

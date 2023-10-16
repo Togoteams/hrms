@@ -49,7 +49,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <select name="overtime_type" class=" form-control" id="overtime_type" placeholder="Employee overtime type">
                                         <option value="">Select Option</option>
                                         <option value="holiday">Holiday</option>
-                                        <option value="extra time">Extra Time</option> 
+                                        <option value="over time">Over Time</option> 
                                     </select>
                                 </div>
                             </div>
