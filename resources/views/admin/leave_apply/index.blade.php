@@ -89,9 +89,9 @@
                         <tr>
                             <th>No</th>
                             <th>Employee name</th>
-                            <th>Employee Code Number</th>
-                            <th>Employee Phone</th>
+                            <th>EC Number</th>
                             <th>leave type</th>
+                            <th>Apply for</th>
                             <th>Balance Leave</th>
                             <th>From </th>
                             <th>To</th>
@@ -127,12 +127,12 @@
                                 name: 'user.employee.ec_number'
                             },
                             {
-                                data: 'user.mobile',
-                                name: 'user.mobile'
-                            },
-                            {
                                 data: 'leave_type.name',
                                 name: 'leave_type.name'
+                            },
+                            {
+                                data: 'leave_applies_for',
+                                name: 'leave_applies_for'
                             },
                             {
                                 data: 'remaining_leave',

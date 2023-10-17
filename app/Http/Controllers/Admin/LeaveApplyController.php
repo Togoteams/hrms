@@ -18,7 +18,7 @@ use Illuminate\Validation\Rule;
 class LeaveApplyController extends Controller
 {
     use LeaveTraits;
-    public $page_name = " Apply Leave";
+    public $page_name = "Apply Leave";
     /**
      * Display a listing of the resource.
      */
@@ -114,7 +114,7 @@ class LeaveApplyController extends Controller
             $user = Auth::user();
         }
         // return $leavSlug=="leave-without-pay";
-        if (($this->balance_leave_by_type($request->leave_type_id, $user->id) > 0) || $leavSlug=="leave-without-pay" ) {
+        if (($this->balance_leave_by_type($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leavSlug=="leave-without-pay" ) {
             if ($validator->fails()) {
                 return $validator->errors();
             } else {
@@ -126,7 +126,7 @@ class LeaveApplyController extends Controller
                         'user_id' => $user->id,
                         'created_by' => Auth::user()->id,
                         'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave,
-                        'remaining_leave' => (int)$this->balance_leave_by_type($request->leave_type_id, $user->id)
+                        'remaining_leave' => (int)$this->balance_leave_by_type($request->leave_type_id, $user->id) - $request->leave_applies_for
 
                     ]);
                     LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));

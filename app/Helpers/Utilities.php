@@ -542,9 +542,20 @@ if (!function_exists('getHeadValue')) {
             return $unionFee;
         } elseif ($headSlug == "over_time") {
             $hoursInMonth = 192;
-            $perHoursRate = $basicAmout/$hoursInMonth;
-            $totalOverTimeHours = OvertimeSetting::where('date',">=",date("Y-m-"."01"))->where('date','<=',date("Y-m-".'31'))->sum('working_hours');
-            return number_format($totalOverTimeHours*$perHoursRate,2) *2;
+            $perHoursRate = $basicAmout / $hoursInMonth;
+            $overTimeAmount = 0;
+            $overtimes = OvertimeSetting::where('date',">=",date("Y-m-"."01"))->where('date','<=',date("Y-m-".'31'))->get();
+            foreach($overtimes  as $key => $overtime)
+            {
+                if($overtime->overtime_type=="holiday")
+                {
+                    $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate*2);  
+                }else
+                {
+                    $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate*1.5);  
+                }
+            }
+            return number_format($overTimeAmount);
         
         } elseif ($headSlug == "others_arrears") {
            $currentYear = date('Y');

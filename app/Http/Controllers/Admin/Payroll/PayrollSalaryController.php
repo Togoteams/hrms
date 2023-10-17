@@ -318,7 +318,7 @@ class PayrollSalaryController extends Controller
         $noOfempLeave = LeaveApply::where('user_id',$user_id)
         ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
         ->where('is_approved',0)
-        ->count();
+        ->sum('leave_applies_for');
         
         // return $noOfempLeave;
         $presentDay = $totalMonthDays - $noOfHoliday - $noOfempLeave;

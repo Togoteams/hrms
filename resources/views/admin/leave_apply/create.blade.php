@@ -126,7 +126,6 @@
         $("#start_date").on('change',function(){
             dt = new Date($(this).val());
             dt.setDate(dt.getDate() + 1);
-            console.log(dt.getFullYear+"/"+(dt.getMonth+1)+"/"+dt.getDate);
             if($("#end_date").val()=="")
             {
                 $("#end_date").val(dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate());
