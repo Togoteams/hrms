@@ -10,12 +10,12 @@
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" class="formsubmit" method="post"
@@ -26,7 +26,7 @@
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 
-                                        <div class="row pb-4 p-3 text-dark">
+                                        <div class="p-3 pb-4 row text-dark">
                                             <div class="mb-2 col-sm-3">
                                                 <div class="form-group">
                                                     <label for="type" class="required">Type</label>
@@ -37,7 +37,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                                <div class="col-sm-3 mb-2 passport_data">
+                                                <div class="mb-2 col-sm-3 passport_data">
                                                     <div class="form-group">
                                                         <label for="certificate_no">Passport No.</label>
                                                         <input id="certificate_no" placeholder="Enter Passport No." type="number"
@@ -45,32 +45,32 @@
                                                             class="form-control form-control-sm ">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3 mb-2 passport_data">
+                                                <div class="mb-2 col-sm-3 passport_data">
                                                     <div class="form-group">
                                                         <label for="certificate_issue_date">Passport Issue</label>
-                                                        <input id="certificate_issue_date" placeholder="Enter Date of Passport Expiry"
+                                                        <input id="certificate_issue_date" placeholder="Enter Passport Expiry"
                                                             type="date" value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_issue_date : '') : '' }}"
                                                             name="certificate_issue_date" class="form-control form-control-sm ">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-3 mb-2 passport_data">
+                                                <div class="mb-2 col-sm-3 passport_data">
                                                     <div class="form-group">
                                                         <label for="certificate_expiry_date">Passport Expiry</label>
-                                                        <input id="certificate_expiry_date" placeholder="Enter Date of Passport Expiry"
+                                                        <input id="certificate_expiry_date" placeholder="Enter Passport Expiry"
                                                             type="date" value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_expiry_date : '') : '' }}"
                                                             name="certificate_expiry_date" class="form-control form-control-sm ">
                                                     </div>
                                                 </div>
-                                            <div class="col-sm-3 mb-2 country_data">
+                                            <div class="mb-2 col-sm-3 country_data">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
-                                                    <input id="country" placeholder="Enter Country Name"
+                                                    <input id="country" placeholder="Enter Country"
                                                         type="text" value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->country : '') : '' }}"
                                                         name="country" class="form-control form-control-sm ">
                                                 </div>
                                             </div>
 
-                                            <div class="text-center pt-5">
+                                            <div class="pt-5 text-center">
                                                 <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
                                             </div>
                                         </div>

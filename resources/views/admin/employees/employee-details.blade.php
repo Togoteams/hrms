@@ -131,7 +131,7 @@
                                                     value="{{ !empty($employee) ? $employee->employment_type : '' }}"
                                                     class="form-control form-control-sm">
 
-                                                    <option disabled> - Select employment type- </option>
+                                                    <option disabled> - Select - </option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->employment_type == 'local' ? 'selected' : '') : '' }}
                                                         value="local">Local</option>
@@ -151,7 +151,7 @@
                                             </div>
                                             <div class="pt-2 col-1">
                                                 <select name="currency_salary" id="currency_salary" class="form-control">
-                                                    <option value=""> Select Currency</option>
+                                                    <option value=""> Select</option>
                                                     <option value="PULA">P</option>
                                                     <option value="$">$</option>
                                                 </select>
@@ -179,7 +179,7 @@
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
-                                                <label for="pension_opt">Pension Contribution Opt. <small
+                                                <label for="pension_opt">Pension Contribution<small
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-2">
@@ -198,7 +198,7 @@
 
                                             <div id="pensionDropdown" class="pt-3 col-2 fw-semibold">
                                                 <select name="pension_opt"  style="display: none;"  id="pension_opt" class="form-control">
-                                                    <option value="">Select Pension Contribution Opt.</option>
+                                                    <option value="">Select Pension Contribution %</option>
                                                     <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
                                                     <option value="5" {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>5%</option>
                                                 </select>

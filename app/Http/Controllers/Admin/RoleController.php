@@ -33,7 +33,7 @@ class RoleController extends BaseController
         }
 
         $request->validate([
-            'name'     =>  'required|string',
+            'name'     =>  'required|string|unique:roles,name',
             'short_code' => 'required|min:2|string',
             'role_type' => 'required|min:3|string',
         ]);

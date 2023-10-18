@@ -10,12 +10,12 @@
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" class="formsubmit" method="post"
@@ -26,51 +26,51 @@
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 
-                                        <div class="row pb-4 p-3 text-dark">
-                                            <div class="col-3 pt-3 fw-semibold">
+                                        <div class="p-3 pb-4 row text-dark">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="address">Address<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-9 pt-2">
+                                            <div class="pt-2 col-9">
                                                 <textarea id="address" placeholder="Enter Address" name="address" class="form-control">{{ $employee ? ($employee->address ? $employee->address->address : '') : '' }}</textarea>
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="zip">Zip<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="zip" placeholder="Enter Name of Zip"
+                                            <div class="pt-2 col-3">
+                                                <input id="zip" placeholder="Enter Zip"
                                                     type="text" name="zip" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->zip : '') : '' }}">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="city">City<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="city" placeholder="Enter Name of City"
+                                            <div class="pt-2 col-3">
+                                                <input id="city" placeholder="Enter City"
                                                     type="text" name="city" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->city : '') : '' }}">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="state">State<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="state" placeholder="Enter Name of State"
+                                            <div class="pt-2 col-3">
+                                                <input id="state" placeholder="Enter State"
                                                     type="text" name="state" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->state : '') : '' }}">
                                             </div>
 
-                                            <div class="col-3 pt-3 fw-semibold">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="country">Country<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
-                                                <input id="country" placeholder="Enter Name of Country"
+                                            <div class="pt-2 col-3">
+                                                <input id="country" placeholder="Enter Country"
                                                     type="text" name="country" class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->country : '') : '' }}">
                                             </div>
 
-                                            <div class="text-center pt-5">
+                                            <div class="pt-5 text-center">
                                                 <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
                                             </div>
                                         </div>

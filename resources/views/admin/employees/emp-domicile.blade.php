@@ -10,12 +10,12 @@
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" class="formsubmit" method="post"
@@ -26,18 +26,18 @@
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 
-                                        <div class="row pb-4 p-3 text-dark">
-                                            <div class="col-3 pt-3 fw-semibold">
+                                        <div class="p-3 pb-4 row text-dark">
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="place_of_domicile">Place of Domicile<small class="required-field">*</small></label>
                                             </div>
-                                            <div class="col-3 pt-2">
+                                            <div class="pt-2 col-3">
                                                 <input type="text" id="place_of_domicile" name="place_of_domicile"
                                                     value="{{ $employee ? $employee->place_of_domicile : '' }}"
-                                                    placeholder="Enter Place of Domicile"
+                                                    placeholder="Enter Domicile"
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="text-center pt-5">
+                                            <div class="pt-5 text-center">
                                                 <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
                                             </div>
                                         </div>
