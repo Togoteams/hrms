@@ -104,11 +104,11 @@
                                         </div>
                                     </td>
                                     <td class="table-column-ps-0">
-                                        <span class="d-block h5 mb-0">{{ $holiday->name }}</span>
+                                        <span class="mb-0 d-block h5">{{ $holiday->name }}</span>
                                         <!-- <span class="d-block fs-5">Human resources</span> -->
                                     </td>
                                     <td>
-                                        <span class="d-block h5 mb-0">{{ $holiday->date }}</span>
+                                        <span class="mb-0 d-block h5">{{ $holiday->date }}</span>
                                     </td>
                                     <td> {{ $holiday->description }}</td>
                                     <td>
@@ -146,13 +146,13 @@
                 <!-- Footer -->
                 <!-- <div class="card-footer">
                     <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
-                        <div class="col-sm mb-2 mb-sm-0">
+                        <div class="mb-2 col-sm mb-sm-0">
                             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
                                 <span class="me-2">Showing:</span>
 
                                 <div class="tom-select-custom">
                                     <select id="datatableEntries"
-                                        class="js-select form-select form-select-borderless w-auto" autocomplete="off"
+                                        class="w-auto js-select form-select form-select-borderless" autocomplete="off"
                                         data-hs-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true
@@ -200,7 +200,7 @@
                     <form method="post" action="{{ route('admin.holiday.add') }}" class="formsubmit">
                         @csrf
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="name" class="col-sm-3 col-form-label form-label">Name</label>
                             <div class="col-sm-9">
                                 <input type="hidden" class="form-control" name="holiday_id" id="holiday_id">
@@ -208,7 +208,7 @@
                                     placeholder="Name" aria-label="name">
                             </div>
                         </div>
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="name" class="col-sm-3 col-form-label form-label">Date</label>
                             <div class="col-sm-9">
                                 <input type="date" class="form-control" rows="4" cols="50" name="date"
@@ -216,7 +216,7 @@
                             </div>
                         </div>
                         <!-- End Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Is Paid</label>
                             <div class="col-sm-9">
                                 <select class="js-select form-select" autocomplete="off" name="is_optional"
@@ -231,7 +231,7 @@
                             </div>
                         </div>
                         <!-- Form -->
-                        <div class="row mb-4">
+                        <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Description</label>
                             <div class="col-sm-9">
                                 <textarea type="text" class="form-control" rows="4" cols="50" name="description" id="description"
@@ -243,7 +243,7 @@
                         <!-- End Form -->
 
                         <div class="d-flex justify-content-end">
-                            <div class="d-flex gap-3">
+                            <div class="gap-3 d-flex">
                                 <button type="button" class="btn btn-delete btn-sm" data-bs-dismiss="modal"
                                     aria-label="Close">Cancel</button>
                                 <button type="submit" class="btn btn-white">Save changes</button>
