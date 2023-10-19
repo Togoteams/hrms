@@ -65,7 +65,7 @@
                                     <td> {{ $role->description }}</td>
                                     <td>
                                         <div class="success-badges changeStatus" data-table="roles" data-uuid="{{$role->uuid}}"
-                                        data-message="inactive" @if($role->status=="active") data-value="active" @else data-value="inactive" @endif ><span class="legend-indicator bg-success"></span>{{ $role->status ?? 'Active' }}</div>
+                                         @if($role->status=="active") data-value="active" data-message="Inactive" @else data-value="inactive"  data-message="Active"@endif ><span class="legend-indicator   @if($role->status=="active") bg-success @else   bg-danger @endif"></span>{{ $role->status ?? 'Active' }}</div>
                                     </td>
 
                                     <td class="text-right">
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                         <!-- End Form -->
-                        <div class="mb-4 row">
+                        {{-- <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Role Type</label>
                             <div class="col-sm-9">
                                 <select class="js-select form-select" autocomplete="off" name="role_type" id="role_type"
@@ -176,7 +176,7 @@
                                     <option value="hr">Hr</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Form -->
                         <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Description</label>

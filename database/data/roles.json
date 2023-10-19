@@ -13,12 +13,12 @@
         {
             "name" :"Chief Manager HO",
             "short_code" :"CM",
-            "role_type" :"chief manager"
+            "role_type" :"chief_manager"
         },
         {
             "name" : "HR HEAD",
             "short_code" :"HH",
-            "role_type" :"hr head"
+            "role_type" :"hr_head"
         },
         {
             "name" : "BRANCH HEAD",

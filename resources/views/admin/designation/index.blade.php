@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <!-- <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -29,7 +29,7 @@
 
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
 
             <div class="page-header">
                 <div class="row">
@@ -71,8 +71,8 @@
                                     <td>{{ $item->description }}</td>
                                     <td>
                                         <div class="success-badges changeStatus" data-table="designations" data-uuid="{{$item->id}}"
-                                            @if($item->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
-                                            <span class="legend-indicator @if($item->status=="Active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}</div>
+                                            @if($item->status=="active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
+                                            <span class="legend-indicator @if($item->status=="active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}</div>
                                     </td>
                                     <td style="text-align:right;">
                                         <form id="edit{{ $item->id }}"

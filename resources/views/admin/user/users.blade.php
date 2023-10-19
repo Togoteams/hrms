@@ -80,7 +80,7 @@
                                     </td>
                                     <td>
                                             <div class="success-badges changeStatus" data-table="users" data-uuid="{{$user->uuid}}"
-                                                 @if($user->status=="active") data-value="active" data-message="Inactive" @else data-value="inactive" data-message="Active"  @endif> <span class="legend-indicator bg-success"></span>{{ $user->status ?? 'Active' }}</div>
+                                                 @if($user->status=="active") data-value="active" data-message="Inactive" @else data-value="inactive" data-message="Active"  @endif> <span class="legend-indicator @if($user->status=="active") bg-success @else bg-danger @endif"></span>{{ $user->status ?? 'Active' }}</div>
                                     </td>
 
 

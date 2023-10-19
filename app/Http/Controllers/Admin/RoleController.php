@@ -30,14 +30,14 @@ class RoleController extends BaseController
             $request->validate([
                 'name'     =>  'required|string|unique:roles,name,'.$roleId,
                 'short_code' => 'required|min:2|string',
-                'role_type' => 'required|min:3|string',
+                // 'role_type' => 'required|min:3|string',
             ]);
             $message = "Role  Updated Successfully";
         } else {
             $request->validate([
                 'name'     =>  'required|string|unique:roles,name',
                 'short_code' => 'required|min:2|string',
-                'role_type' => 'required|min:3|string',
+                // 'role_type' => 'required|min:3|string',
             ]);
             $message = "Role Created Successfully";
         }
