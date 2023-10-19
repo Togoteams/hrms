@@ -25,7 +25,7 @@ class UserController extends BaseController
         })->get();
 
         $employees = Employee::get(); 
-        $roles = Role::where('role_type','!=','admin')->get();
+        $roles = Role::where('role_type','!=','superadmin')->get();
         return view('admin.user.users', compact('users','roles','employees'));
     }
 
