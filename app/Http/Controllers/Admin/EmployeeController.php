@@ -87,6 +87,7 @@ class EmployeeController extends BaseController
                 'name' => ['required', 'string', 'max:255'],
                 'mobile' => ['required', 'numeric', 'min:10'],
                 'gender' => ['required'],
+                'role_id' => ['required', 'numeric'],
                 'marital_status' => ['required'],
                 'date_of_birth' => ['required', 'date', 'before:today'],
                 'emergency_contact' => ['nullable', 'numeric', 'min:10'],
@@ -112,7 +113,8 @@ class EmployeeController extends BaseController
                 $role_id =$request->role_id;
                 $user->roles()->sync($role_id);
             } else {
-                $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
+                $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email','role_id', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
+                
             }
 
             $employee = Employee::firstWhere('user_id', $user->id);

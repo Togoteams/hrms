@@ -10,6 +10,10 @@
             }
             return '';
         }
+        $userRoleSelect ="";
+        if (!empty($employee)) {
+            $userRoleSelect = $employee->user->roles?->first()?->id;
+        }
     @endphp
 
     <main id="content" role="main" class="main">
@@ -64,7 +68,7 @@
                                                     <option selected disabled> - Select role - </option>
                                                     
                                                     @foreach ($roles as $key => $value)
-                                                        <option value="{{ $value->id }}"  >{{ $value->name }}</option>
+                                                        <option value="{{ $value->id }}" @if($userRoleSelect==$value->id )  {{"selected"}} @endif  >{{ $value->name }}</option>
                                                     @endforeach
 
                                                 </select>
