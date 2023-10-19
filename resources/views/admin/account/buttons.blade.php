@@ -4,8 +4,8 @@
     <div class="row">
      <div class="d-flex">
      <button class="success-badges changeStatus" data-table="account" data-uuid="{{$item->id}}"
-         data-message="Inactive" @if($item->status=="Active") data-value="Inactive" @else data-value="Active" @endif>
-         <span class="legend-indicator bg-success"></span>{{ $item->status ?? 'Active' }}
+        @if($item->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
+        <span class="legend-indicator @if($item->status=="Active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}
      </button>
  
      <form id="edit{{ $item->id }}"

@@ -114,8 +114,8 @@
                                     <td>
                                         {{-- <div class="success-badges"><span class="legend-indicator bg-success"></span>{{ $holiday->status ?? 'Active' }}</div> --}}
                                         <button class="success-badges changeStatus" data-table="holidays" data-uuid="{{$holiday->uuid}}"
-                                            data-message="Inactive" @if($holiday->status=="Active") data-value="Inactive" @else data-value="Active" @endif>
-                                            <span class="legend-indicator bg-success"></span>{{ $holiday->status ?? 'Active' }}
+                                            @if($holiday->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
+                                            <span class="legend-indicator @if($holiday->status=="Active") bg-success @else bg-danger @endif "></span>{{ $holiday->status ?? 'Active' }}
                                         </button>
                                     </td>
 

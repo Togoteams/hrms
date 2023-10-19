@@ -73,8 +73,8 @@
                                 </td>
                                 <td>
                                     <div class="success-badges changeStatus" data-table="documents" data-uuid="{{$item->id}}"
-                                    data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
-                                    </span>{{ $item->status ?? 'Active' }}</div>
+                                        @if($item->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
+                                        <span class="legend-indicator @if($item->status=="Active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}</div>
                                 </td>
                                 <td style="text-align:right;">
                                     
