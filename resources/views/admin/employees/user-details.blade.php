@@ -99,7 +99,7 @@
                                                 <label for="emergency_contact">Emergency Contact No</label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input id="emergency_contact" placeholder="Enter Emergency Contact No."
+                                                <input id="emergency_contact" placeholder="Enter ."
                                                     type="tel"
                                                     value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
                                                     name="emergency_contact" class="form-control form-control-sm ">
@@ -110,7 +110,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input id="date_of_birth" placeholder="Enter date of birth" type="date"
+                                                <input id="date_of_birth" placeholder="Enter " type="date"
                                                     name="date_of_birth"
                                                     value="{{ !empty($employee) ? $employee->date_of_birth : '' }}"
                                                     class="form-control form-control-sm ">
@@ -140,9 +140,9 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <select id="marital_status" placeholder="Select Marital Status"
+                                                <select id="marital_status" placeholder="Select"
                                                     name="marital_status" class="form-control form-control-sm">
-                                                    <option selected disabled value=""> - Select Marital Status -
+                                                    <option selected disabled value=""> - Select -
                                                     </option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->marital_status == 'single' ? 'selected' : '') : '' }}
