@@ -14,7 +14,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="document_name" class="required">Document Name</label>
-                                    <input required id="document_name" placeholder="Enter Document Name of Document" min="1" max="100" type="text"
+                                    <input required id="document_name" placeholder="Enter Document Name" min="1" max="100" type="text"
                                         name="document_name" class="form-control form-control-sm ">
                                 </div>
                             </div>

@@ -16,14 +16,14 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="mb-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="name" class="required">Name</label>
-                                    <input type="text" required name="name" id="name" class="form-control" placeholder="Enter name of medical card">
+                                    <input type="text" required name="name" id="name" class="form-control" placeholder="Enter name ">
                                 </div>
                             </div>
 
                             <div class="mb-6 col-sm-6">
                                 <div class="form-group">
                                     <label for="amount" class="required">Amount</label>
-                                    <input type="number" required name="amount" id="amount" class="form-control" placeholder="Enter amount of medical card">
+                                    <input type="number" required name="amount" id="amount" class="form-control" placeholder="Enter amount">
                                 </div>
                             </div>
 

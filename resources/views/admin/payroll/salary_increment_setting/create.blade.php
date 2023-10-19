@@ -14,7 +14,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="increment_percentage" class="required">Salary Increment %</label>
-                                    <input required id="increment_percentage" placeholder="Enter Increment Percentage of Salary" min="1" max="100" type="number"
+                                    <input required id="increment_percentage" placeholder="Enter Increment Percentage" min="1" max="100" type="number"
                                         name="increment_percentage" class="form-control form-control-sm ">
                                 </div>
                             </div>

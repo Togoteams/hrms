@@ -56,7 +56,7 @@
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="claim_from_month" class="required">Claim for the period from month</label>
+                                    <label for="claim_from_month" class="required">Claim for period from month</label>
                                     <select name="claim_from_month" id="claim_from_month" class="form-control"  required>
                                         <option value="">Select From Month</option>
                                         <option value="1">January</option>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="claim_to_month" class="required">Claim for the period to month</label>
+                                    <label for="claim_to_month" class="required">Claim for period to month</label>
                                     <select name="claim_to_month" id="claim_to_month" class="form-control" required >
                                         <option value="">Select From Month</option>
                                         <option value="1">January</option>

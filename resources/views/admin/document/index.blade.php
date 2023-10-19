@@ -221,3 +221,13 @@
         // });
     </script>
 @endsection
+@push('custom-scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#select-all').change(function() {
+            $('.emp-checkbox').prop('checked', $(this).prop('checked'));
+        });
+    });
+</script>
+@endpush
