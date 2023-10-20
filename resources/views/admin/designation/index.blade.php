@@ -56,7 +56,6 @@
                                 <th>S.no</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Status</th>
                                 <th style="text-align:right;">Action</th>
                             </tr>
                         </thead>
@@ -69,14 +68,18 @@
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->description }}</td>
-                                    <td>
-                                        <div class="success-badges changeStatus" data-table="designations" data-uuid="{{$item->id}}"
-                                            @if($item->status=="active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
-                                            <span class="legend-indicator @if($item->status=="active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}</div>
-                                    </td>
+                               
                                     <td style="text-align:right;">
+                                        
+                                     
+
+                                            
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.designation.destroy', $item->id) }}">
+                                            <button type="button" data-table="designations" data-uuid="{{$item->id}}"
+                                                @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
+                                            </button>
                                             @can('edit-designations')
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.designation.edit', $item->id) }}', 'edit')"

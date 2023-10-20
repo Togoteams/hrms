@@ -239,7 +239,7 @@
                                                     value="{{ !empty($employee) ? $employee->amount_payable_to_bomaind_each_year : '' }}">
                                                     <option
                                                         {{ !empty($employee) ? ($employee->amount_payable_to_bomaind_each_year == '' ? 'selected' : '') : '' }}
-                                                        value=""> - Select  Bomaid Medical Card - </option>
+                                                        value=""> - Select  - </option>
                                                     @foreach ($bomaind as $item)
                                                         <option
                                                             {{ !empty($employee) ? ($item->id == $employee->amount_payable_to_bomaind_each_year ? 'selected' : '') : '' }}
