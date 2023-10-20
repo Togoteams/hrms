@@ -3,11 +3,11 @@
 <div class="button-container">
     <div class="row">
      <div class="d-flex">
-     <button class="success-badges changeStatus" data-table="currency_settings" data-uuid="{{$item->id}}"
-        @if($item->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
-        <span class="legend-indicator @if($item->status=="Active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}
-     </button>
- 
+     <button type="button" data-table="currency_settings" data-uuid="{{$item->id}}"
+        @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+        class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+            @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
+    </button>
      <form id="edit{{ $item->id }}"
          action="{{ route('admin.currency_settings.destroy', $item->id) }}">
          <button type="button"

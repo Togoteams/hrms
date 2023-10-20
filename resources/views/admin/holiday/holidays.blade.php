@@ -88,8 +88,7 @@
                                 <th class="table-column-ps-0">Name</th>
                                 <th>Date</th>
                                 <th>Description</th>
-                                <th>Status</th>
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 
@@ -111,13 +110,12 @@
                                         <span class="mb-0 d-block h5">{{ $holiday->date }}</span>
                                     </td>
                                     <td> {{ $holiday->description }}</td>
-                                    <td>
-                                        {{-- <div class="success-badges"><span class="legend-indicator bg-success"></span>{{ $holiday->status ?? 'Active' }}</div> --}}
+                                    {{-- <td>
                                         <button class="success-badges changeStatus" data-table="holidays" data-uuid="{{$holiday->uuid}}"
                                             @if($holiday->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
                                             <span class="legend-indicator @if($holiday->status=="Active") bg-success @else bg-danger @endif "></span>{{ $holiday->status ?? 'Active' }}
                                         </button>
-                                    </td>
+                                    </td> --}}
 
                                     <td>
                                         @can('edit-holidays')
@@ -135,6 +133,11 @@
                                                     title="Delete"></i>
                                             </button>
                                         @endcan
+                                        <button type="button" data-table="holidays" data-uuid="{{$holiday->uuid}}"
+                                            @if($holiday->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+                                            class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($holiday->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                @if($holiday->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach

@@ -78,7 +78,8 @@
                                             action="{{ route('admin.designation.destroy', $item->id) }}">
                                             <button type="button" data-table="designations" data-uuid="{{$item->id}}"
                                                 @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
+                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  
+                                                @else fa-toggle-off @endif" @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                             </button>
                                             @can('edit-designations')
                                             <button type="button"

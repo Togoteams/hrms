@@ -55,7 +55,6 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Type Name</th>
-                                <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -112,12 +111,6 @@
                                     data: 'type',
                                     name: 'type'
                                 },
-
-                                {
-                                    data: 'status',
-                                    name: 'status'
-                                },
-
 
                                 {
                                     data: 'action',

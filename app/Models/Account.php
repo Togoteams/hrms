@@ -18,9 +18,9 @@ class Account extends Model
         'status'
     ];
 
-    public function getStatusAttribute($showStatus)
-    {
-        return ucfirst($showStatus); 
-    }
+    // public function getStatusAttribute($showStatus)
+    // {
+    //     return ucfirst($showStatus); 
+    // }
 
 }

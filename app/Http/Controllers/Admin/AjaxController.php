@@ -14,11 +14,20 @@ use App\Http\Resources\HolidayResource;
 use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
 use App\Models\Account;
+use App\Models\Branch;
 use App\Models\CurrencySetting;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Document;
+use App\Models\EmplooyeLoans;
+use App\Models\Employee;
+use App\Models\EmployeeKra;
+use App\Models\EmployeePayScale;
+use App\Models\EmployeeSalary;
 use App\Models\Holiday;
+use App\Models\KraAttributes;
+use App\Models\LeaveType;
+use App\Models\Loans;
 use App\Models\MedicalCard;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\ReimbursementType;
@@ -190,6 +199,69 @@ class AjaxController extends BaseController
                     ]);
                     $message='Currency Setting Status updated';
                     break;
+                case 'employees':
+                    $id = $request->uuid;
+                    $data= Employee::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='employee Setting Status updated';
+                    break;
+                case 'employee-kra':
+                    $id = $request->uuid;
+                    $data= EmployeeKra::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='EmployeeKra Setting Status updated';
+                    break;
+                    case 'employees_loans':
+                        $id = $request->uuid;
+                        $data= EmplooyeLoans::where('id',$id)->update([
+                            "status"=>$request->value
+                        ]);
+                        $message='EmplooyeLoans Setting Status updated';
+                        break;
+                        case 'branch':
+                            $id = $request->uuid;
+                            $data= Branch::where('id',$id)->update([
+                                "status"=>$request->value
+                            ]);
+                            $message='Branch  Status updated';
+                            break;
+                            case 'employees-payscale':
+                                $id = $request->uuid;
+                                $data= EmployeePayScale::where('id',$id)->update([
+                                    "status"=>$request->value
+                                ]);
+                                $message='EmployeePayScale  Status updated';
+                                break;
+                                case 'employees_salary':
+                                    $id = $request->uuid;
+                                    $data= EmployeeSalary::where('id',$id)->update([
+                                        "status"=>$request->value
+                                    ]);
+                                    $message='Employee Salary Status updated';
+                                    break;
+                                case 'kra-attributes':
+                                    $id = $request->uuid;
+                                    $data= KraAttributes::where('id',$id)->update([
+                                        "status"=>$request->value
+                                    ]);
+                                    $message='Kra Attributes  Status updated';
+                                    break;
+                                case 'leave_type':
+                                    $id = $request->uuid;
+                                    $data= LeaveType::where('id',$id)->update([
+                                        "status"=>$request->value
+                                    ]);
+                                    $message='Leave Type Status updated';
+                                    break;
+                                case 'loans':
+                                    $id = $request->uuid;
+                                    $data= Loans::where('id',$id)->update([
+                                        "status"=>$request->value
+                                    ]);
+                                    $message='Loans Status updated';
+                                    break;
                 default:
                     return $this->responseJson(false,200,'Something Wrong Happened');
             }

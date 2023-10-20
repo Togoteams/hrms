@@ -10,9 +10,5 @@ class Department extends Model
     use HasFactory;
     protected $fillable = ['name', 'slug','status'];
 
-    public function getStatusAttribute($showStatus)
-    {
-        return ucfirst($showStatus); 
-    }
-
+   
 }

@@ -55,7 +55,6 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Name</th>
-                                <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -86,12 +85,6 @@
                                     data: 'name',
                                     name: 'name'
                                 },
-
-                                {
-                                    data: 'status',
-                                    name: 'status'
-                                },
-
 
                                 {
                                     data: 'action',

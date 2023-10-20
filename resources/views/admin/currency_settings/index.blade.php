@@ -58,7 +58,6 @@
                                 <th>Currency Amount From</th>
                                 <th>Currency Name To</th>
                                 <th>Currency Amount To</th>
-                                <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -101,13 +100,6 @@
                                     data: 'currency_amount_to',
                                     name: 'currency_amount_to'
                                 },
-
-                                {
-                                    data: 'status',
-                                    name: 'status'
-                                },
-
-
                                 {
                                     data: 'action',
                                     name: 'action',

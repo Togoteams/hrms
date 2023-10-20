@@ -38,7 +38,7 @@
                                 <th class="table-column-ps-0">Name</th>
                                 <th>Department</th>
                                 <th>Roles</th>
-                                <th>Status</th>
+                                {{-- <th>Status</th> --}}
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -78,10 +78,10 @@
                                     <td>
                                         <span class="mb-0 d-block h5">{{ $user->roles?->first()?->name }}</span>
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                             <div class="success-badges changeStatus" data-table="users" data-uuid="{{$user->uuid}}"
                                                  @if($user->status=="active") data-value="active" data-message="Inactive" @else data-value="inactive" data-message="Active"  @endif> <span class="legend-indicator @if($user->status=="active") bg-success @else bg-danger @endif"></span>{{ $user->status ?? 'Active' }}</div>
-                                    </td>
+                                    </td> --}}
 
 
                                     <td>
@@ -89,6 +89,11 @@
                                             data-table="users" data-form-modal="editUserModal" data-message="inactive"
                                             data-uuid="{{ $user->uuid }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                            <i class="fas fa-edit"></i></button>
+                                           <button type="button" data-table="users" data-uuid="{{$user->uuid}}"
+                                            @if($user->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+                                            class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($user->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                @if($user->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 {{-- @endif --}}

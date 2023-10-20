@@ -51,7 +51,6 @@
                                 <th>Document Name</th>
                                 <th>Document Type</th>
                                 <th>Document</th>
-                                <th>status</th>
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -71,11 +70,6 @@
                                         No Document Available
                                     @endif
                                 </td>
-                                <td>
-                                    <div class="success-badges changeStatus" data-table="documents" data-uuid="{{$item->id}}"
-                                        @if($item->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
-                                        <span class="legend-indicator @if($item->status=="Active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}</div>
-                                </td>
                                 <td style="text-align:right;">
                                     
                                     <form id="edit{{ $item->id }}"
@@ -83,6 +77,11 @@
                                             <button type="button" class="btn btn-white assign_doc" href="#" data-bs-toggle="modal" 
                                             data-bs-target="#staticBackdrop1" onclick="editForm('{{ route('admin.document.get.asign', $item->id) }}', 'assign_doc')" doc_id="{{$item->id}}">
                                                     Asign Employee Document
+                                                </button>
+                                                <button type="button" data-table="documents" data-uuid="{{$item->id}}"
+                                                    @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+                                                    class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                     @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                                 </button>
                                             @can('edit-document-management')
                                             <button type="button"

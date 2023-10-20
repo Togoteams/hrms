@@ -24,9 +24,9 @@ class Holiday extends Model
         });
     }
 
-    public function getStatusAttribute($showStatus)
-    {
-        return ucfirst($showStatus); 
-    }
+    // public function getStatusAttribute($showStatus)
+    // {
+    //     return ucfirst($showStatus); 
+    // }
 
 }

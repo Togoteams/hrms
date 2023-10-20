@@ -60,7 +60,6 @@
                                 <th>Closing Amount</th>
                                 <th>Account Type</th>
                                 <th>Description</th>
-                                <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -110,13 +109,6 @@
                                     data: 'description',
                                     name: 'description'
                                 },
-
-                                {
-                                    data: 'status',
-                                    name: 'status'
-                                },
-
-
                                 {
                                     data: 'action',
                                     name: 'action',

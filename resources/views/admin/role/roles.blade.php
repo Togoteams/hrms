@@ -39,8 +39,8 @@
                                 </th>
                                 <th class="table-column-ps-0">Name</th>
                                 <th>Type</th>
-                                <th>Description</th>
-                                <th>Status</th>
+                                {{-- <th>Description</th> --}}
+                                {{-- <th>Status</th> --}}
                                 <th style="text-align:right;">Action</th>
                             </tr>
                         </thead>
@@ -62,11 +62,14 @@
                                     <td>
                                         <span class="mb-0 d-block h5">{{ $role->role_type }}</span>
                                     </td>
-                                    <td> {{ $role->description }}</td>
-                                    <td>
+                                    {{-- <td> {{ $role->description }}</td> --}}
+                                    {{-- <td>
                                         <div class="success-badges changeStatus" data-table="roles" data-uuid="{{$role->uuid}}"
-                                         @if($role->status=="active") data-value="active" data-message="Inactive" @else data-value="inactive"  data-message="Active"@endif ><span class="legend-indicator   @if($role->status=="active") bg-success @else   bg-danger @endif"></span>{{ $role->status ?? 'Active' }}</div>
-                                    </td>
+                                         @if($role->status=="active") data-value="active" data-message="Inactive"
+                                         @else data-value="inactive"  data-message="Active"@endif ><span class="legend-indicator   
+                                         @if($role->status=="active") bg-success @else   bg-danger @endif"></span>{{ $role->status ?? 'Active' }}</div>
+                                        
+                                    </td> --}}
 
                                     <td class="text-right">
 
@@ -82,6 +85,11 @@
                                             data-uuid="{{ $role->uuid }}"
                                             class="btn btn-delete btn-sm deleteData" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                             <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                        <button type="button" data-table="roles" data-uuid="{{$role->uuid}}"
+                                            @if($role->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+                                            class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($role->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                @if($role->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                         </button>
                                     </td>
                                 </tr>

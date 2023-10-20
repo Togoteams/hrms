@@ -3,9 +3,14 @@
 <div class="button-container">
    <div class="row">
     <div class="d-flex">
-    <button class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
-        data-message="Inactive" @if($item->status=="Active") data-value="Inactive" @else data-value="Active" @endif>
-        <span class="legend-indicator bg-success"></span>{{ $item->status ?? 'Active' }}
+    {{-- <button class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
+        @if($item->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif>
+        <span class="legend-indicator @if($item->status=="Active") bg-success @else bg-danger @endif "></span>{{ $item->status ?? 'Active' }}
+    </button> --}}
+    <button type="button" data-table="reimbursement_types" data-uuid="{{$item->id}}"
+        @if($item->status=="Active") data-value="Inactive" data-message="Inactive"  @else data-value="Active" data-message="Active" @endif
+        class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="Active") fa-toggle-on  @else fa-toggle-off @endif" 
+            @if($item->status=="Active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
     </button>
 
     <form id="edit{{ $item->id }}"

@@ -84,7 +84,7 @@
                                             </button>
                                             @endcan
                                             @can('change-status-loans-types')
-                                            <button type="button"
+                                            {{-- <button type="button"
                                                 onclick="changeStatus('{{ route('admin.loans.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"
                                                 class="btn {{ $item->status == 'active' ? 'btn-success' : 'btn-secondary' }}  btn-sm">
@@ -93,6 +93,11 @@
                                                 @else
                                                     <i class="fas fa-times-circle"></i>
                                                 @endif
+                                            </button> --}}
+                                            <button type="button" data-table="loans" data-uuid="{{$item->id}}"
+                                                @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                    @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                             </button>
                                             @endcan
                                         </form>
