@@ -48,7 +48,7 @@ class SalaryIncrementController extends Controller
         $validator = Validator::make($request->all(), [
             'increment_percentage' => 'numeric|required',
             'employment_type' => 'required|string',
-            'effective_from' => 'required|date',
+            'effective_from' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'effective_to' => 'required|date|after:effective_from',
             'financial_year' => 'required|numeric'
         ]);
@@ -87,7 +87,7 @@ class SalaryIncrementController extends Controller
         $validator = Validator::make($request->all(), [
             'increment_percentage' => 'numeric|required',
             'employment_type' => 'required|string',
-            'effective_from' => 'required|date',
+            'effective_from' => 'required|date||before_or_equal:' . now()->format('Y-m-d'),
             'effective_to' => 'required|date|after:effective_from',
             'financial_year' => 'required|numeric'
         ]);

@@ -72,12 +72,23 @@ class EmployeeController extends BaseController
         if (empty($request->user_id)) {
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
-                'mobile' => ['required', 'numeric', 'min:10'],
+                'mobile' => ['required', 'numeric', 'digits_between:10,11'],
                 'role_id' => ['required', 'numeric'],
                 'gender' => ['required'],
                 'marital_status' => ['required'],
-                'date_of_birth' => ['required', 'date', 'before:today'],
-                'emergency_contact' => ['nullable', 'numeric', 'min:10'],
+                'date_of_birth' => ['required', 'date', 'before:today',
+                    function ($attribute, $value, $fail) {
+                        $date = new \DateTime($value);
+        
+                        $today = new \DateTime();
+                        $age = $today->diff($date)->y;
+        
+                        if ($age < 18 || $age > 60) {
+                            $fail('The ' . $attribute . ' must be between 18 and 60 years old.');
+                        }
+                    },
+                ],
+                'emergency_contact' => ['nullable', 'numeric', 'digits_between:10,11'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'username' => ['required', 'string', 'min:5', 'unique:users'],
                 'password' => ['required', 'confirmed', Password::defaults()]
@@ -85,12 +96,23 @@ class EmployeeController extends BaseController
         } else {
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
-                'mobile' => ['required', 'numeric', 'min:10'],
+                'mobile' => ['required', 'numeric', 'digits_between:10,11'],
                 'gender' => ['required'],
                 'role_id' => ['required', 'numeric'],
                 'marital_status' => ['required'],
-                'date_of_birth' => ['required', 'date', 'before:today'],
-                'emergency_contact' => ['nullable', 'numeric', 'min:10'],
+                'date_of_birth' => ['required','date','before:today',
+                    function ($attribute, $value, $fail) {
+                        $date = new \DateTime($value);
+        
+                        $today = new \DateTime();
+                        $age = $today->diff($date)->y;
+        
+                        if ($age < 18 || $age > 60) {
+                            $fail('The ' . $attribute . ' must be between 18 and 60 years old.');
+                        }
+                    },
+                ],                
+            'emergency_contact' => ['nullable', 'numeric', 'digits_between:10,11'],
             ]);
         }
         if ($request->user_id == '') {
@@ -164,14 +186,25 @@ class EmployeeController extends BaseController
             'designation_id'        => ['required', 'numeric'],
             'ec_number'             => ['required', 'numeric'],
             'id_number'             => ['nullable', 'numeric'],
-            'start_date'            => ['required', 'date','before:today'],
-            'currency'              => ['nullable', 'string'], 
-            'basic_salary'          => ['nullable', 'numeric'],
-            'date_of_current_basic' => ['nullable', 'date'],
+            'start_date'            => ['required','date',
+                function ($attribute, $value, $fail) {
+                    $minDate = now()->subYears(60); 
+                    $maxDate = now()->subYears(18);
+        
+                    $date = \DateTime::createFromFormat('Y-m-d', $value);
+        
+                    if ($date < $minDate || $date > $maxDate) {
+                        $fail('The ' . $attribute . ' must be between 18 and 60 years ago.');
+                    }
+                },
+            ], 
+           'currency'              => ['nullable', 'string'], 
+           'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
+           'date_of_current_basic' => ['nullable', 'date'],
             'employment_type'       => ['required', 'string'],
             'pension_opt'           => ['nullable', 'numeric'],
             'pension_contribution'  => ['nullable', 'string'],
-            'bank_account_number'   => ['required', 'numeric'],
+            'bank_account_number'   => ['required', 'numeric','digits_between:12,16'],
             'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
             'currency_salary'       => ['required', 'string'], 
 
@@ -215,9 +248,9 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'string', 'max:10'],
-            'city'      => ['required', 'string'],
-            'state'     => ['required', 'string'],
+            'zip'       => ['required', 'numeric',  'digits_between:5,10'],
+            'city'      => ['required', 'string', 'alpha'],
+            'state'     => ['required', 'string', 'alpha'],
             'country'   => ['required', 'string'],
         ]);
 
@@ -257,7 +290,7 @@ class EmployeeController extends BaseController
             // 'omang_expiry'      => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
             'type'       => ['required', 'string'],
             'certificate_no'       => ['required', 'numeric'],
-            'certificate_issue_date'       => ['required', 'date'],
+            'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
             'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date'],
             'country'       => ['required', 'string'],
 

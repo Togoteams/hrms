@@ -38,7 +38,7 @@
                                     </div>
                                 </th>
                                 <th class="table-column-ps-0">Name</th>
-                                <th>Type</th>
+                                {{-- <th>Type</th> --}}
                                 {{-- <th>Description</th> --}}
                                 {{-- <th>Status</th> --}}
                                 <th style="text-align:right;">Action</th>
@@ -59,9 +59,9 @@
                                         <span class="mb-0 d-block h5">{{ $role->name }}</span>
                                         <!-- <span class="d-block fs-5">Human resources</span> -->
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <span class="mb-0 d-block h5">{{ $role->role_type }}</span>
-                                    </td>
+                                    </td> --}}
                                     {{-- <td> {{ $role->description }}</td> --}}
                                     {{-- <td>
                                         <div class="success-badges changeStatus" data-table="roles" data-uuid="{{$role->uuid}}"
