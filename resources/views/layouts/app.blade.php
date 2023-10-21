@@ -386,16 +386,17 @@
     <!-- End Create a new user Modal -->
     @include('layouts.partials.footer')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @stack('custom-scripts')
+   
     <script>
         var APP_URL = "{{ url('/') }}";
     </script>
     <script src="{{ asset('assets/js/admin/common.js') }}"></script>
     <!-- End Style Switcher JS -->
     <script src="{{ asset('assets/js/method.js') }}"></script>
-
-
-
+    
+    @stack('custom-scripts')
+    <script type="text/javascript" src="{{ URL::asset('assets/js/admin/role.js') }}">
+    </script>
 </body>
 
 </html>
