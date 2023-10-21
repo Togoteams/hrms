@@ -121,14 +121,8 @@ class UserService
     }
     
     public function updateStatus(array $attributes,$id){
-        if( $attributes['value']=="active")
-        {
-            $attributes['status'] ="inactive";
-        }else
-        {
-            $attributes['status'] ="active";
-        }
-        // dd( $attributes['value']);
+       
+            $attributes['status'] = $attributes['value'];
         return $this->userRepository->updateUser($attributes, $id);
     }
 
