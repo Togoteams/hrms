@@ -15,15 +15,15 @@
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <div class="row py-3">
+                                    <div class="py-3 row">
                                         <div class="text-left">
                                             <button type="button" class="btn btn-white btn-sm" title="Add Department"
                                                 onclick="addDepartment({{ !empty($employee) ? $employee->user_id : '' }})">
@@ -35,7 +35,7 @@
                                         @if (!empty($employee->departmentHistory))
                                             @foreach ($employee->departmentHistory as $department)
                                                 <div class="pb-4">
-                                                    <div class="card p-3">
+                                                    <div class="p-3 card">
                                                         <div class="row">
                                                             <div class="col-9 text-dark">
                                                                 <div class="row">
@@ -45,12 +45,12 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-3 fw-semibold">Start Date</div>
-                                                                    <div class="col-3">{{ $department->start_date }}
+                                                                    <div class="col-3">{{ date("d-m-Y",strtotime($department->start_date)) }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-3 fw-semibold">End date</div>
-                                                                    <div class="col-3">{{ $department->end_date }}
+                                                                    <div class="col-3"> @if(!empty($department->end_date))  {{  date("d-m-Y",strtotime($department->end_date)) }} @else "Till Now" @endif
                                                                     </div>
                                                                 </div>
                                                                 @if (!empty($department->description))
@@ -118,16 +118,21 @@
 
                                     <div class="row">
 
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="department_name">Department Name<small
                                                         class="required-field">*</small></label>
-                                                <input id="department_name" placeholder="Enter Department Name"
-                                                    type="text" name="department_name" class="form-control form-control-"
-                                                    value="">
+                                                        <select name="department_name" id="department_name" class="form-control form-control-sm">
+                                                            <option value="" >--Select--</option>
+
+                                                            @foreach ($departments as $key => $department )
+                                                                    <option value="{{$department->name}}"> {{$department->name}} </option>
+                                                            @endforeach
+                                                        </select>
+                                              
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-2">
+                                        <div class="mb-2 col-md-3">
                                             <div class="form-group">
                                                 <label for="">Period of work<small
                                                         class="required-field">*</small></label>
@@ -135,12 +140,12 @@
                                                     type="date" class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-2">
+                                        <div class="mb-2 col-md-3">
                                             <label for=""></label>
                                             <input id="end_date" name="end_date" placeholder="End Date" type="date"
                                                 class="form-control form-control-sm">
                                         </div>
-                                        <div class="col-md-12 mb-2">
+                                        <div class="mb-2 col-md-12">
                                             <div class="form-group">
                                                 <label for="description">Description</label>
                                                 <textarea id="description" placeholder="Enter Description..." name="description" class="form-control"></textarea>
@@ -184,7 +189,8 @@
                 let start_date = $(event.currentTarget).data("start_date");
                 let end_date = $(event.currentTarget).data("end_date");
                 let description = $(event.currentTarget).data("description");
-
+                console.log(start_date);
+                console.log(end_date);
                 $("#id").val(id);
                 $("#user_id").val(user_id);
                 $("#department_name").val(department_name);

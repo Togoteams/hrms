@@ -15,15 +15,15 @@
                     <span class="name-title">Personal Profile</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.person-profile.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content this-div" id="v-pills-tabContent">
-                                    <div class="row py-3">
+                                    <div class="py-3 row">
                                         <div class="text-left">
                                             <button type="button" class="btn btn-white btn-sm" title="Add Qualification"
                                                 onclick="addQualification({{ Auth::user()->id }})">
@@ -35,7 +35,7 @@
                                         @foreach ($datas as $data)
                                             <div class="row">
                                                 <div class="pb-4">
-                                                    <div class="card p-3">
+                                                    <div class="p-3 card">
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
@@ -88,7 +88,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="card p-3 mb-5">No data to show</div>
+                                        <div class="p-3 mb-5 card">No data to show</div>
                                     @endif
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                     <input type="hidden" name="user_id" id="user_id">
 
                                     <div class="row">
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="exam_name">Exam Name<small
                                                         class="required-field">*</small></label>
@@ -124,7 +124,7 @@
                                                     name="exam_name" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="specialization">Specialization<small
                                                         class="required-field">*</small></label>
@@ -132,7 +132,7 @@
                                                     type="text" name="specialization" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="institute_name">Institute Name<small
                                                         class="required-field">*</small></label>
@@ -140,7 +140,7 @@
                                                     type="text" name="institute_name" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="university">University<small
                                                         class="required-field">*</small></label>
@@ -148,15 +148,15 @@
                                                     type="text" name="university" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
-                                            <div class="form-group">
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">    
                                                 <label for="year_of_passing">Year of Passing<small
                                                         class="required-field">*</small></label>
                                                 <input required id="year_of_passing" placeholder="Enter year of passing"
                                                     type="number" name="year_of_passing" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="marks">Marks(%)<small
                                                         class="required-field">*</small></label>

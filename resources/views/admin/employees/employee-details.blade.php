@@ -63,7 +63,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input id="ec_number" placeholder="Enter ec number" type="text"
+                                                <input id="ec_number" placeholder="Enter EC number" type="text"
                                                     name="ec_number"
                                                     value="{{ !empty($employee) ? $employee->ec_number : '' }}"
                                                     class="form-control form-control-sm ">
@@ -150,14 +150,14 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-1">
-                                                <select name="currency_salary" id="currency_salary" class="form-control">
+                                                <select name="currency_salary" id="currency_salary" name="currency_salary" class="form-control form-control-sm">
                                                     <option value=""> Select</option>
                                                     <option value="PULA">P</option>
                                                     <option value="$">$</option>
                                                 </select>
                                             </div>
                                             <div class="pt-2 col-2">
-                                                <input id="basic_salary" placeholder="Enter basic salary"
+                                                <input id="basic_salary" placeholder="Enter "
                                                     type="number" name="basic_salary"
                                                     value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
                                                     class="form-control form-control-sm ">
@@ -196,9 +196,9 @@
                                                     for="radio2">Yes</label>
                                             </div>
 
-                                            <div id="pensionDropdown" class="pt-3 col-2 fw-semibold">
+                                            <div id="pensionDropdown" class="pt-2 col-2 fw-semibold">
                                                 <select name="pension_opt"  style="display: none;"  id="pension_opt" class="form-control">
-                                                    <option value="">Select Pension Contribution %</option>
+                                                    <option value="">Choose  %</option>
                                                     <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
                                                     <option value="5" {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>5%</option>
                                                 </select>
@@ -253,7 +253,7 @@
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <input id="bank_account_number"
-                                                    placeholder="Enter bank account number" type="text"
+                                                    placeholder="Enter" type="number"
                                                     value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
                                                     name="bank_account_number" class="form-control form-control-sm ">
                                             </div>
@@ -342,13 +342,13 @@ $(document).ready(function() {
         var selectedEmploymentType = employmentTypeSelect.val();
         if (selectedEmploymentType === "local" || selectedEmploymentType === "local-contractual") {
             currencySelect.val("PULA");
-            currencySelect.prop("disabled", false); 
+            // currencySelect.prop("disabled", false); 
         } else if (selectedEmploymentType === "expatriate") {
             currencySelect.val("$");
-            currencySelect.prop("disabled", true);
+            // currencySelect.prop("disabled", true);
         } else {
             currencySelect.val(""); 
-            currencySelect.prop("disabled", false);
+            // currencySelect.prop("disabled", false);
         }
     });
     employmentTypeSelect.trigger("change");
