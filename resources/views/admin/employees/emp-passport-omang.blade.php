@@ -29,7 +29,7 @@
                                         <div class="p-3 pb-4 row text-dark">
                                             <div class="mb-2 col-sm-3">
                                                 <div class="form-group">
-                                                    <label for="type" class="required">Type</label>
+                                                    <label for="type" >Type</label>
                                                     <select name="type" class=" form-control" id="type" placeholder="Employee type">
                                                         <option value="">Select Option</option>
                                                         <option value="passport" {{ old('type', ($employee->passportOmang->type ?? '') == 'passport' ? 'selected' : '') }}>Passport</option>
@@ -40,7 +40,7 @@
                                                 <div class="mb-2 col-sm-3 passport_data">
                                                     <div class="form-group">
                                                         <label for="certificate_no">Passport No.</label>
-                                                        <input id="certificate_no" placeholder="Enter Passport No." type="number"
+                                                        <input id="certificate_no" placeholder="Enter Passport No." type="text"
                                                             value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_no : '') : '' }}" name="certificate_no"
                                                             class="form-control form-control-sm ">
                                                     </div>

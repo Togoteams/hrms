@@ -238,10 +238,10 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'numeric',  'digits_between:5,10'],
+            'zip'       => ['required', 'string'],
             'city'      => ['required', 'string', 'alpha'],
             'state'     => ['required', 'string', 'alpha'],
-            'country'   => ['required', 'string'],
+            'country'   => ['required', 'string','alpha'],
         ]);
 
         try {
@@ -279,10 +279,10 @@ class EmployeeController extends BaseController
             // 'omang_no'          => ['nullable', 'numeric'],
             // 'omang_expiry'      => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
             'type'       => ['required', 'string'],
-            'certificate_no'       => ['required', 'numeric'],
+            'certificate_no'       => ['required', 'string'],
             'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
             'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date','after_or_equal:today'],
-            'country'       => ['required', 'string'],
+            'country'       => ['required', 'string','alpha'],
 
         ]);
 

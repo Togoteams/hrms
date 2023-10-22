@@ -87,7 +87,7 @@ class PersonalInformationController extends Controller
              'salutation' => ['required', 'string'],
              'first_name' => ['required', 'string'],
              'last_name' => ['required', 'string'],
-             'birth_country' => ['required', 'string'],
+             'birth_country' => ['required', 'string','alpha'],
              'blood_group' => ['required','string'],
              'date_of_birth' => [
                 'required',
@@ -134,7 +134,7 @@ class PersonalInformationController extends Controller
             'address_line1' =>'required|string',
             'address_line2'=>'nullable|string',
             'state' => 'required|string',
-            'country' => 'required|string',
+            'country' => 'required|string|alpha',
             'email' => 'nullable|email',
             'number' => 'required | numeric | digits:10',
             'nationality' => 'required|string',
@@ -212,7 +212,7 @@ class PersonalInformationController extends Controller
             'zip'       => ['required', 'string'],
             'city'      => ['required', 'string'],
             'state'     => ['required', 'string'],
-            'country'   => ['required', 'string'],
+            'country'   => ['required', 'string','alpha'],
         ]);
 
         if ($validator->fails()) {
