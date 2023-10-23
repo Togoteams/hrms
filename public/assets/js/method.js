@@ -337,7 +337,7 @@ function setError(el, errr_message, bcolor) {
 
     el.style.borderColor = bcolor;
     if (errr_message != ' ') {
-        errr_message = el.name.replaceAll("_", " ") + " " + errr_message;
+        errr_message = errr_message;
     }
     el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
     var all_errors = document.getElementsByClassName("error" + el.name);

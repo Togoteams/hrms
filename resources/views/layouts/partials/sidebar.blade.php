@@ -267,7 +267,7 @@
                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
                                  href="{{ route('admin.medical-card.index') }}" data-placement="left">
                                  <i class="fa fa-truck nav-icon"></i>
-                                 <span class="nav-link-title">Bomaid Medical card Type</span>
+                                 <span class="nav-link-title">Bomaid Type</span>
                              </a>
                          </div>
                      @endcanany
