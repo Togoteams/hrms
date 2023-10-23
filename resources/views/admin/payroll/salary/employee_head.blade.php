@@ -35,7 +35,12 @@
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
             @php
-            $value = round(($head_data->value / $totalMonthDays) * $presentDay);
+            if(!empty($head_data))
+            {
+                $value = round(($head_data->value / $totalMonthDays) * $presentDay);  
+            }else {
+                $value = 0;
+            }
             @endphp
             <input onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"  value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>

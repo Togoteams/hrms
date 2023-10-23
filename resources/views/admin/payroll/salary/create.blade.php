@@ -132,14 +132,14 @@
             if (basicAmount) {
                 unionFee = basicAmount / 100;
             }
-            totalEarning = (basicAmount + getValue('allowance') + getValue('others_arrears')+ getValue('over_time')).toFixed(2);
+            totalEarning = (basicAmount + getValue('allowance') + getValue('others_arrears')+getValue('reimbursement')+ getValue('over_time')).toFixed(2);
             totalDeduction = (taxAmount + getValue('bomaid') + getValue('pension') + unionFee + getValue('other_deductions')).toFixed(2);
             setId('union_fee', unionFee);
 
         } else {
-            totalEarning = (basicAmount + getValue('entertainment_expenses') +
-                getValue('house_up_keep_allow') + getValue('education_allowance');
-            totalDeduction = getValue('provident_fund') + getValue('other_deductions')).toFixed(2);
+            totalEarning = (basicAmount + getValue('entertainment_expenses') + getValue('reimbursement')+
+                getValue('house_up_keep_allow') + getValue('education_allowance')).toFixed(2);
+            totalDeduction = (getValue('provident_fund') + getValue('other_deductions')).toFixed(2);
         }
 
         setId('gross_earning', totalEarning);

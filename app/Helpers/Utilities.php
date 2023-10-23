@@ -16,6 +16,7 @@ use App\Models\LeaveEncashment;
 use App\Models\MedicalCard;
 use App\Models\OvertimeSetting;
 use App\Models\PayrollSalaryIncrement;
+use App\Models\Reimbursement;
 
 if (!function_exists('isSluggable')) {
     function isSluggable($value)
@@ -515,6 +516,21 @@ if (!function_exists('safe_b64decode')) {
         return $data;
     }
 }
+if (!function_exists('getCurrencyIcon')) {
+    function getCurrencyIcon($currency)
+    {
+        $data =$currency;
+        if(strtolower($currency)=='usd')
+        {
+            $data ="$";
+        }else
+        {
+            $data ="P";
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getHeadValue')) {
     function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0)
     {
@@ -566,12 +582,19 @@ if (!function_exists('getHeadValue')) {
            ->where('employment_type',$emp->employment_type)->first();
             if(!empty($salaryIncrement))
             {
-                $noOfPendingMonth = $currentMonth;
+                // $noOfPendingMonth = $currentMonth;
                 $arrearsAmount = (($basicAmout / 100) * $salaryIncrement->increment_percentage) * $currentMonth;
-            
             }
             return $arrearsAmount;
-        }
+        } elseif ($headSlug == "reimbursement") {
+            $reimbursementAmount = 0 ;
+            $reimbursements = Reimbursement::where('claim_date',">=",date("Y-m-"."01"))->where('claim_date','<=',date("Y-m-".'31'))->get();
+            foreach($reimbursements as $reimbursement )
+            {
+                $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
+            }
+            return $reimbursementAmount;
+         }
         return $orginalValue;
     }
 }

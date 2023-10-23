@@ -199,7 +199,7 @@
                             @endif
 
                             @if (!empty($data['employee']->ec_number))
-                            <td class="payslip">Employee Id. :</td>
+                            <td class="payslip"> EC Number. :</td>
                             <td class="payslip">{{$data['employee']->ec_number}}</td>
                             @endif
 
@@ -224,19 +224,23 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="payslip">Salary Date :</td>
-                            <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td>
+                            {{-- <td class="payslip">Salary Date :</td>
+                            <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td> --}}
                             <td class="payslip">No. of Payable days :</td>
                             <td class="payslip">{{$presentDay}}</td>
+                            <td class="payslip">Annual Balanced Leave :</td>
+                            <td class="payslip">19</td>
                         </tr>
                         <tr>
 
 
-                            <td class="payslip">Total Workingdays :</td>
+                            <td class="payslip">Total Working days :</td>
                             <td class="payslip">{{$totalMonthDays}}</td>
 
-                            <td class="payslip">Total Absent : </td>
-                            <td class="payslip">{{$noOfempLeave}}</td>
+                            {{-- <td class="payslip">Total Absent : </td>
+                            <td class="payslip">{{$noOfempLeave}}</td> --}}
+                            <td class="payslip">No. Availed Leave :</td>
+                            <td class="payslip">3</td>
                         </tr>
                     </thead>
                 </table>

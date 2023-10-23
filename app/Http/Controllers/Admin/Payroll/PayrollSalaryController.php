@@ -301,7 +301,7 @@ class PayrollSalaryController extends Controller
         {
              return response()->json("Pay Scale not defined");
         }
-        $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
+        $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->orWhere('for', 'both')->where('deleted_at', null)->get();
         
         $arrears = PayrollSalaryIncrement::where('financial_year',date('Y'))->where('employment_type',$emp->employment_type)->where('effective_from','<=',date('Y-m-d h:i:s'))->where('effective_to','>=',date('Y-m-d h:i:s'))->first();
         $currentData = date('Y-m-d H:i:s');

@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                   
                     <!-- End Col -->
@@ -24,7 +24,7 @@
           
             @include('admin.employees_loans.create')
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
             <div class="page-header">
                 <div class="row">
                     <div class="mb-2 col-sm mb-sm-0">
@@ -41,8 +41,8 @@
                     </div>
                 </div>
             </div>
-                <div class="table-responsive mt-3 p-2">
-                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -136,8 +136,8 @@
             <div class="modal fade" id="modaledit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
-                    <div class="modal-content ">
-                        <div class="modal-header ">
+                    <div class="modal-content">
+                        <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>

@@ -10,6 +10,7 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
+use App\Models\CurrencySetting;
 use App\Models\Department;
 use App\Models\EmpAddress;
 use App\Models\EmpDepartmentHistory;
@@ -27,6 +28,7 @@ use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat\Wizard\Currency;
 
 class EmployeeController extends BaseController
 {
@@ -161,9 +163,10 @@ class EmployeeController extends BaseController
 
     public function viewEmployeeDetails($eid = null)
     {
-        $designation = Designation::all();
-        $membership = Membership::all();
-        $bomaind = MedicalCard::all();
+        $designation = Designation::where('status','active')->get();
+        $membership = Membership::get();
+        $bomaind = MedicalCard::where('status','active')->get();
+        $currencySetting = CurrencySetting::where('status','active')->get();
         
         $branch = Branch::where('status', 'active')->get();
 
@@ -173,6 +176,7 @@ class EmployeeController extends BaseController
                 'membership'    => $membership,
                 'branch'        => $branch,
                 'bomaind'       => $bomaind,
+                'currency_setting' =>$currencySetting,
                 'employee'      => $this->getEmployee($eid)
             ]
         );
