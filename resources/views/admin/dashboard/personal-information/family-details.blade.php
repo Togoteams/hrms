@@ -16,15 +16,15 @@
                     </span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.personal-information.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content this-div" id="v-pills-tabContent">
-                                    <div class="row py-3">
+                                    <div class="py-3 row">
                                         <div class="text-left">
                                             <button type="button" class="btn btn-white btn-sm"
                                                 onclick="addForm({{ Auth::user()->id }})">
@@ -36,87 +36,87 @@
                                         @foreach ($datas as $key => $data)
                                             <div class="row">
                                                 <div class="pb-4">
-                                                    <div class="card p-3">
+                                                    <div class="p-3 card">
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
-                                                                    <div class="col-3 fw-semibold pt-1">Relation:</div>
-                                                                    <div class="col-3 pt-1">
+                                                                    <div class="pt-1 col-3 fw-semibold">Relation:</div>
+                                                                    <div class="pt-1 col-3">
                                                                         {{ $data->relation }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Date of Birth:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Date of Birth:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->date_of_birth }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Name:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Name:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->name }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Depended:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Depended:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->depended }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Marital status:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Marital status:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->marital_status }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Gender:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Gender:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->gender }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Occupations:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Occupations:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->occupations }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Monthly Income:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Monthly Income:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->monthly_income }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Is Back of Baroda Employee:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Is Bank of Baroda Employee:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->bank_of_baroda_employee }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Address Line 1:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Address Line 1:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->address_line1 }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Address Line 2:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Address Line 2:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->address_line2 }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">State:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">State:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->state }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Country:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Country:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->country }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Email Id:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Email Id:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->email }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Phone number:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Phone number:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->number }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold pt-3">Nationality:</div>
-                                                                    <div class="col-3 pt-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Nationality:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ $data->nationality }}
                                                                     </div>
 
@@ -161,7 +161,7 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="card p-3 mb-5">No data to show</div>
+                                        <div class="p-3 mb-5 card">No data to show</div>
                                     @endif
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="date_of_birth" class="required">Date of Birth</label>
                                                 <input required value="" id="date_of_birth" name="date_of_birth"
@@ -212,13 +212,13 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <label for="name" class="required">Name</label>
                                             <input required value="" id="name" name="name"
                                                 placeholder="name" type="text"
                                                 class="form-control form-control-sm">
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="depended" class="required">Depended</label>
                                                         <select name="depended" class=" form-control" id="depended" placeholder="Employee depended">
@@ -228,7 +228,7 @@
                                                         </select>
                                              </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="marital_status" class="required">Marital status</label>
                                                         <select name="marital_status" class=" form-control" id="marital_status" placeholder="Employee marital_status">
@@ -238,7 +238,7 @@
                                                         </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="gender" class="required">Gender</label>
                                                         <select name="gender" class=" form-control" id="gender" placeholder="Employee gender">
@@ -249,7 +249,7 @@
                                                         </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="occupations" class="required">Occupations</label>
                                                 <input type="text" id="occupations" name="occupations"
@@ -257,7 +257,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="monthly_income" class="required">Monthly Income</label>
                                                 <input type="text" id="monthly_income" name="monthly_income"
@@ -265,9 +265,9 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
-                                                <label for="bank_of_baroda_employee" class="required">Is Back of Baroda Employee</label>
+                                                <label for="bank_of_baroda_employee" class="required">Is Bank of Baroda Employee</label>
                                                         <select name="bank_of_baroda_employee" class=" bank_of_baroda_employee form-control" id="bank_of_baroda_employee" placeholder="Employee bank_of_baroda_employee">
                                                             <option value="">Select Option</option>
                                                             <option value="yes">yes</option>
@@ -275,19 +275,19 @@
                                                         </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="address_line1" class="required">Address Line 1</label>
                                                 <textarea id="address_line1" placeholder="Enter address_line1..." name="address_line1" class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="address_line2">Address Line 2</label>
                                                 <textarea id="address_line2" placeholder="Enter address_line2..." name="address_line2" class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="state" class="required">State</label>
                                                 <input type="text" id="state" name="state"
@@ -295,7 +295,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="country" class="required">Country</label>
                                                 <input type="text" id="country" name="country"
@@ -303,7 +303,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="email">Email Id</label>
                                                 <input type="text" id="email" name="email"
@@ -311,7 +311,7 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="number" class="required">Phone number</label>
                                                 <input type="number" id="number" name="number"
@@ -319,7 +319,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="nationality" class="required">Nationality</label>
                                                 <input type="text" id="nationality" name="nationality"

@@ -15,19 +15,19 @@
                     <span class="name-title">Personal Information</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.personal-information.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
+                            <div class="mx-3 border rounded col-xxl-9 col-xl-8 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
-                                    <div class=" ">
+                                    <div class="">
                                         <div class="container mt-2 mb-2 ms-1">
                                             <div class="row">
-                                                <div class="col-md-10 py-4">
+                                                <div class="py-4 col-md-10">
                                                     <div class="left-div">
                                                         @if (!empty($data->passport_no) || !empty($data->omang_no))
                                                             <div class="row text-dark">
@@ -111,7 +111,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2 passport_data" style="display: none;">
+                                        <div class="mb-2 col-sm-6 passport_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="passport_no">Passport No.</label>
                                                 <input id="passport_no" placeholder="Enter Passport No." type="number"
@@ -119,7 +119,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2 passport_data" style="display: none;">
+                                        <div class="mb-2 col-sm-6 passport_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="passport_expiry">Passport Expiry</label>
                                                 <input id="passport_expiry" placeholder="Enter Date of Passport Expiry"
@@ -127,7 +127,7 @@
                                                     name="passport_expiry" class="form-control form-control-sm ">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2 omang_data" style="display: none;">
+                                        <div class="mb-2 col-sm-6 omang_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="omang_no">OMANG No.</label>
                                                 <input id="omang_no" placeholder="Enter omang No." type="number"
@@ -135,7 +135,7 @@
                                                     class="form-control form-control-sm ">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2 omang_data" style="display: none;">
+                                        <div class="mb-2 col-sm-6 omang_data" style="display: none;">
                                             <div class="form-group">
                                                 <label for="omang_expiry">OMANG Expiry</label>
                                                 <input id="omang_expiry" placeholder="Enter Date of OMANG Expiry"

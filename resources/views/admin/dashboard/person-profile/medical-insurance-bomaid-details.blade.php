@@ -60,7 +60,7 @@
                                                                 <div class="row showData">
                                                                     <div class="pt-3 col-3 fw-semibold">Insurance card Type</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->medicalCard->name }}                                                                    </div>
+                                                                        {{ $data->medicalCard?->name }}                                                                    </div>
                                                                 </div>
                                                             @else
                                                                 <span id="noDataMsg">No data to show</span>

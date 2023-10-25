@@ -187,7 +187,8 @@ class PersonalInformationController extends Controller
     {
         $page_name = "Contact";
         $validator = Validator::make($request->all(), [
-            'email' => ['string', 'email', 'max:255', 'unique:users'],
+            // 'email' => ['string', 'email', 'max:255', 'unique:users'],
+            'email' =>'required|email|max:255|unique:users,email,'.$request->user_id,
             'mobile' => ['numeric', 'min:10'],
             'emergency_contact' => ['numeric', 'min:10'],
         ]);
