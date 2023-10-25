@@ -40,7 +40,7 @@ class PersonProfileController extends BaseController
             'specialization' => ['string', 'required'],
             'institute_name' => ['string', 'required'],
             'university' => ['string', 'required'],
-            'year_of_passing' => ['numeric', 'required'],
+            'year_of_passing' => ['numeric', 'required','digits:4'],
             'marks' => ['numeric', 'required'],
         ]);
 
@@ -270,6 +270,7 @@ class PersonProfileController extends BaseController
     public function updateMedicalInsuranceBomaidDetails(Request $request)
     {
         $request->validate([
+            'medical_card_id' => ['required', 'numeric'],
             'company_name' => ['required', 'string'],
             'insurance_id' => ['required', 'numeric'],
             
@@ -333,7 +334,7 @@ class PersonProfileController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'company_name' => ['required', 'string'],
-            'start_date' => ['required', 'date'],
+            'start_date' => ['required', 'date', 'before_or_equal:' . now()->format('Y-m-d')],
             'reason' => ['required', 'string'],
             'designation_id' => ['required','numeric'],
             'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],

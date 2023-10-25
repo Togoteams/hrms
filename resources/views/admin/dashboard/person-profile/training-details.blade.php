@@ -65,7 +65,7 @@
                                                                         </div>
                                                                         <div class="pt-1 col-3">
                                                                             @php
-                                                                                $skills = explode(',', $data->skill); // Convert the string to an array
+                                                                                $skills = explode(',', $data->skill);
                                                                             @endphp
                                                                             @foreach ($skills as $skill)
                                                                                 <span class="badge rounded-pill bg-danger" style="font-size: 13px;">{{ $skill }}</span>

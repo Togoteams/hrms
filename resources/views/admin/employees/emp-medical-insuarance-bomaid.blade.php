@@ -28,6 +28,19 @@
 
                                         <div class="p-3 pb-4 row text-dark">
                                             <div class="pt-3 col-3 fw-semibold">
+                                                <label for="company_name">Insurance card Type<small class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-3">
+                                                <select name="medical_card_id" id="medical_card_id" class="form-control form-control-sm">
+                                                    <option value="">Select Card Type</option>
+                                                    @foreach($cardType as $card)
+                                                        <option value="{{ $card->id }}"  {{ !empty($employee) ? ($employee->medicalBomaid->medical_card_id == $card->id ? 'selected' : '') : '' }}>
+                                                            {{ $card->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="pt-3 col-3 fw-semibold">
                                                 <label for="company_name">Insurance Company Name<small class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">

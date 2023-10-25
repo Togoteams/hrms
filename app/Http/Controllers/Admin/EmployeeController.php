@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
 use App\Models\CurrencySetting;
-use App\Models\Department;
 use App\Models\EmpAddress;
 use App\Models\EmpDepartmentHistory;
 use App\Models\EmpMedicalInsurance;
@@ -29,6 +28,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat\Wizard\Currency;
+
 
 class EmployeeController extends BaseController
 {
@@ -163,7 +163,7 @@ class EmployeeController extends BaseController
 
     public function viewEmployeeDetails($eid = null)
     {
-        $designation = Designation::where('status','active')->get();
+       $designation = Designation::where('status','active')->get();
         $membership = Membership::get();
         $bomaind = MedicalCard::where('status','active')->get();
         $currencySetting = CurrencySetting::where('status','active')->get();
@@ -184,17 +184,28 @@ class EmployeeController extends BaseController
 
     public function postEmployeeDetails(Request $request)
     {
-        // return $request->all();
+        // $request;
         $request->validate([
 
             'branch_id'             => ['required', 'numeric'],
             'designation_id'        => ['required', 'numeric'],
             'ec_number'             => ['required', 'numeric'],
             'id_number'             => ['nullable', 'numeric'],
-            'start_date'            => ['required','date','before_or_equal:today'], 
-           'currency'              => ['nullable', 'string'], 
-           'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
-           'date_of_current_basic' => ['nullable', 'date'],
+            'start_date'            => ['required','date',
+                function ($attribute, $value, $fail) {
+                    $minDate = now()->subYears(60); 
+                    $maxDate = now()->subYears(18);
+        
+                    $date = \DateTime::createFromFormat('Y-m-d', $value);
+        
+                    if ($date < $minDate || $date > $maxDate) {
+                        $fail('The ' . $attribute . ' must be between 18 and 60 years ago.');
+                    }
+                },
+            ], 
+            'currency'              => ['nullable', 'string'], 
+            'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
+            'date_of_current_basic' => ['nullable', 'date'],
             'employment_type'       => ['required', 'string'],
             'pension_opt'           => ['nullable', 'numeric'],
             'pension_contribution'  => ['nullable', 'string'],
@@ -242,10 +253,10 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'string'],
+            'zip'       => ['required', 'numeric',  'digits_between:5,10'],
             'city'      => ['required', 'string', 'alpha'],
             'state'     => ['required', 'string', 'alpha'],
-            'country'   => ['required', 'string','alpha'],
+            'country'   => ['required', 'string'],
         ]);
 
         try {
@@ -283,10 +294,10 @@ class EmployeeController extends BaseController
             // 'omang_no'          => ['nullable', 'numeric'],
             // 'omang_expiry'      => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
             'type'       => ['required', 'string'],
-            'certificate_no'       => ['required', 'string'],
+            'certificate_no'       => ['required', 'numeric'],
             'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
-            'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date','after_or_equal:today'],
-            'country'       => ['required', 'string','alpha'],
+            'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date'],
+            'country'       => ['required', 'string'],
 
         ]);
 
@@ -368,13 +379,15 @@ class EmployeeController extends BaseController
 
     public function viewMedicalInsuaranceBomaid($eid = null)
     {
-        return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $this->getEmployee($eid)]);
+        $cardType = MedicalCard::all();
+        return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $this->getEmployee($eid),'cardType'=>$cardType]);
     }
 
 
     public function postMedicalInsuaranceBomaid(Request $request)
     {
         $request->validate([
+            'medical_card_id' => ['required', 'numeric'],
             'company_name' => ['required', 'string'],
             'insurance_id' => ['required', 'numeric'],
         ]);
@@ -434,8 +447,7 @@ class EmployeeController extends BaseController
 
     public function viewDepartmentHistory($eid = null)
     {
-        $departments = Department::where('status','active')->get();
-        return view('admin.employees.emp-department-history', ['employee' => $this->getEmployee($eid),'departments'=>$departments]);
+        return view('admin.employees.emp-department-history', ['employee' => $this->getEmployee($eid)]);
     }
 
     public function postDepartmentHistory(Request $request)
@@ -443,30 +455,27 @@ class EmployeeController extends BaseController
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
             $end_date = $validator->getData()['end_date'] ?? "";
-            $id = $validator->getData()['id'] ?? "";
             $overlappingRecord =true;
-            $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date,$id) {
-                $query->where('start_date', '<=', $end_date);
-                if(!empty($end_date))
-                {
-                    $query->where('end_date', '>=', $start_date);
-                }
-                if(!empty($id))
-                {
-                    $query->whereNotIn('id',[$id]);
-                }
-            })->first();
+            
+                $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date) {
+                    $query->where('start_date', '<=', $end_date);
+                    if(!empty($end_date))
+                    {
+                     $query->where('end_date', '>=', $start_date);
+                    }
+                })->first();
             return !$overlappingRecord;
         });
 
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
             return "The $attribute date range overlaps with an existing record.";
         });
-            $request->validate([
-                'department_name' => ['string', 'required'],
-                'start_date' => ['required', 'date', 'before_or_equal:','no_date_overlap'],
-                'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:today' ],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
-            ]);
+
+        $request->validate([
+            'department_name' => ['string', 'required'],
+            'start_date' => ['required', 'date', 'before_or_equal:','no_date_overlap'],
+            'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+        ]);
 
         try {
             if ($request->id == '') {

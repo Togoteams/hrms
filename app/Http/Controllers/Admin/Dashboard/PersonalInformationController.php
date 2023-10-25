@@ -87,7 +87,7 @@ class PersonalInformationController extends Controller
              'salutation' => ['required', 'string'],
              'first_name' => ['required', 'string'],
              'last_name' => ['required', 'string'],
-             'birth_country' => ['required', 'string','alpha'],
+             'birth_country' => ['required', 'string'],
              'blood_group' => ['required','string'],
              'date_of_birth' => [
                 'required',
@@ -119,22 +119,36 @@ class PersonalInformationController extends Controller
 
     public function addFamilyDetails(Request $request)
     {
-        $page_name = "Family Details";
+     $page_name = "Family Details";
      $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'relation' => 'required|string',
-            'date_of_birth'=> 'required|string',
+            'date_of_birth' => [
+                'required',
+                'date',
+                'before:today',
+                function ($attribute, $value, $fail) {
+                    $date = new \DateTime($value);
+            
+                    $today = new \DateTime();
+                    $age = $today->diff($date)->y;
+            
+                    if ($age < 18) {
+                        $fail('The ' . $attribute . ' must be at least 18 years old.');
+                    }
+                },
+            ],            
             'name' => 'required|string',
             'depended' => 'required|string',
             'marital_status' => 'required|string',
             'gender' => 'required|string',
             'occupations' => 'required|string',
-            'monthly_income' => 'required|string',
+            'monthly_income' => 'required|numeric|gte:2000',
             'bank_of_baroda_employee' => 'required|string',
             'address_line1' =>'required|string',
             'address_line2'=>'nullable|string',
             'state' => 'required|string',
-            'country' => 'required|string|alpha',
+            'country' => 'required|string',
             'email' => 'nullable|email',
             'number' => 'required | numeric | digits:10',
             'nationality' => 'required|string',
@@ -187,7 +201,7 @@ class PersonalInformationController extends Controller
     {
         $page_name = "Contact";
         $validator = Validator::make($request->all(), [
-            // 'email' => ['string', 'email', 'max:255', 'unique:users'],
+           // 'email' => ['string', 'email', 'max:255', 'unique:users'],
             'email' =>'required|email|max:255|unique:users,email,'.$request->user_id,
             'mobile' => ['numeric', 'min:10'],
             'emergency_contact' => ['numeric', 'min:10'],
@@ -213,7 +227,7 @@ class PersonalInformationController extends Controller
             'zip'       => ['required', 'string'],
             'city'      => ['required', 'string'],
             'state'     => ['required', 'string'],
-            'country'   => ['required', 'string','alpha'],
+            'country'   => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -237,26 +251,13 @@ class PersonalInformationController extends Controller
     public function updatePassport(Request $request)
     {
         $page_name = "Passport";
-        $type = $request->type;
-        if($type == 'passport'){
             $validator = Validator::make($request->all(), [
                 'type' => ['required', 'string'],
-                'passport_no'       => ['required', 'numeric'],
-                'passport_expiry'   => ['required', 'date'],
-                'omang_no'          => ['nullable', 'numeric'],
-                'omang_expiry'      => ['nullable', 'date'],
-
+                'certificate_no' => ['required', 'numeric'],
+                'certificate_issue_date' => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
+                'certificate_expiry_date' => ['required', 'date', 'after_or_equal:certificate_issue_date'],
+                'country' => ['required', 'string'],
             ]);
-      
-        }else{
-            $validator = Validator::make($request->all(), [
-                'type' => ['required', 'string'],
-                'passport_no'       => ['nullable', 'numeric'],
-                'passport_expiry'   => ['nullable', 'date'],
-                'omang_no'          => ['required', 'numeric'],
-                'omang_expiry'      => ['required', 'date'],
-            ]);
-        }
 
         if ($validator->fails()) {
             return $validator->errors();

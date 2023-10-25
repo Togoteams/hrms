@@ -60,7 +60,7 @@
                                                                 <div class="row showData">
                                                                     <div class="pt-3 col-3 fw-semibold">Insurance card Type</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->medicalCard?->name }}                                                                    </div>
+                                                                        {{ $data?->medicalCard?->name }}                                                                    </div>
                                                                 </div>
                                                             @else
                                                                 <span id="noDataMsg">No data to show</span>
@@ -101,11 +101,6 @@
                                                                     Insurance card Type<small class="required-field">*</small>
                                                                 </div>
                                                                 <div class="pt-2 col-3 margin-style">
-                                                                    {{-- <input type="number" name="insurance_id"
-                                                                        id="insurance_id"
-                                                                        placeholder="Enter Insurance Company Name"
-                                                                        class="form-control form-control-sm"
-                                                                        value="{{ !empty($data) ? $data->insurance_id : '' }}"> --}}
                                                                         <select name="medical_card_id" class="form-control" id="medical_card_id" placeholder="Employee department">
                                                                             <option value="">Select Option</option>
                                                                             @foreach($card as $cardData)
