@@ -59,7 +59,6 @@
                                                                         <div class="pt-1 col-3">
                                                                             {{ $data->grade}}
                                                                         </div>
-
                                                                         <div class="pt-1 col-3 fw-semibold">
                                                                             Skills
                                                                         </div>
@@ -177,6 +176,9 @@
                                             <div class="form-group">
                                                 <label for="skill" class="required">Skills</label>
                                                 <select class="form-control js-tags" multiple="multiple" name="skill[]" >
+                                                    @foreach(explode(',', $data->skill) as $skill)
+                                                    <option selected value="{{ $skill }}">{{ $skill }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>

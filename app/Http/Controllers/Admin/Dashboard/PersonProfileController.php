@@ -123,38 +123,36 @@ class PersonProfileController extends BaseController
     }
 
     public function postTrainingDetails(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'user_id' => ['required', 'numeric'],
-            'name' => ['required', 'string'],
-            'start_date' => ['required', 'date'],
-            'grade' => ['required','string'],
-            'end_date' => ['required', 'date', 'after:start_date'],
-            'skill' => ['required'],
-            'description' => ['required','string'],
+        {
+            $validator = Validator::make($request->all(), [
+                'user_id' => ['required', 'numeric'],
+                'name' => ['required', 'string'],
+                'start_date' => ['required', 'date'],
+                'grade' => ['required', 'string'],
+                'end_date' => ['required', 'date', 'after:start_date'],
+                'skill' => ['required', 'array'], 
+                'description' => ['required', 'string'],
+            ]);
 
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                if (empty($request->id)) {
-                    $skills = implode(',', $request->input('skill'));
-                    TrainingDetails::insertGetId(array_merge($request->except(['_token', 'id', 'skill']), ['skill' => $skills]));
-                    $message = "Record Created Successfully";
-                } else {
-                    TrainingDetails::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
-                    $message = "Record Updated Successfully";
+            if ($validator->fails()) {
+                return $validator->errors();
+            } else {
+                try {
+                    if (empty($request->id)) {
+                        $skills = $request->input('skill'); 
+                        TrainingDetails::insertGetId(array_merge($request->except(['_token', 'id']), ['skill' => implode(', ', $skills)]));
+                        $message = "Record Created Successfully";
+                    } else {
+                        TrainingDetails::where('id', $request->id)->update(array_merge($request->except(['_token', 'user_id', 'id']), ['skill' => implode(', ', $request->input('skill'))]));
+                        $message = "Record Updated Successfully";
+                    }
+                    return response()->json(['success' => $message]);
+                } catch (Exception $e) {
+                    return response()->json(['error' => $e->getMessage()]);
                 }
-                return response()->json(['success' => $message]);
-                // Session::put('success', $message);
-                // return redirect()->back();
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
             }
         }
-    }
+
 
     public function deleteTrainingDetails(Request $request)
     {
