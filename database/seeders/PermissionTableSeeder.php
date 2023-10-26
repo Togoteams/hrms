@@ -20,6 +20,8 @@ class PermissionTableSeeder extends Seeder
         foreach ($data->permissions as $key => $value) {
             Permission::updateOrCreate([
                 'name'=> $value->name,
+                'module'=> $value->module,
+
             ]);
         }
     }

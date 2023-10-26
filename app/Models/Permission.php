@@ -18,7 +18,8 @@ class Permission extends Model
         ];
     }
     protected $fillable =[
-        'name'
+        'name',
+        'module'
     ];
 
     public function scopeNotDashboard($query){
