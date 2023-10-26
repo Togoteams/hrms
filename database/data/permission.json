@@ -1,505 +1,505 @@
 {
     "permissions": [
         {
-            "name": "View Dashboard"
+            "name": "View Dashboard","module": "Dashboard"
         },
         {
-            "name": "Add Roles"
+            "name": "Add Roles","module": "Roles"
         },
         {
-            "name": "Edit Roles"
+            "name": "Edit Roles","module": "Roles"
         },
         {
-            "name": "Delete Roles"
+            "name": "Delete Roles","module": "Roles"
         },
         {
-            "name": "View Roles"
+            "name": "View Roles","module": "Roles"
         },
         {
-            "name": "Add Users"
+            "name": "Add Users","module": "Users"
         },
         {
-            "name": "Edit Users"
+            "name": "Edit Users","module": "Users"
         },
         {
-            "name": "View Users"
+            "name": "View Users","module": "Users"
         },
         {
-            "name": "Delete Users"
+            "name": "Delete Users","module": "Users"
         },
         {
-            "name": "Add Holidays"
+            "name": "Add Holidays","module": "Holidays"
         },
         {
-            "name": "Edit Holidays"
+            "name": "Edit Holidays","module": "Holidays"
         },
         {
-            "name": "Delete Holidays"
+            "name": "Delete Holidays","module": "Holidays"
         },
         {
-            "name": "View Holidays"
+            "name": "View Holidays","module": "Holidays"
         },
         {
-            "name": "Add Employees"
+            "name": "Add Employees","module": "Employees"
         },
         {
-            "name": "Edit Employees"
+            "name": "Edit Employees","module": "Employees"
         },
         {
-            "name": "View Employees"
+            "name": "View Employees","module": "Employees"
         },
         {
-            "name": "Delete Employees"
+            "name": "Delete Employees","module": "Employees"
         },
         {
-            "name": "Change Employees Status "
+            "name": "Change Employees Status ","module": "Employees"
         },
         {
-            "name": "Add Branch"
+            "name": "Add Branch","module": "Branch"
         },
         {
-            "name": "Edit Branch"
+            "name": "Edit Branch","module": "Branch"
         },
         {
-            "name": "View Branch"
+            "name": "View Branch","module": "Branch"
         },
         {
-            "name": "Delete Branch"
+            "name": "Delete Branch","module": "Branch"
         },
         {
-            "name": "Change Branch Status"
+            "name": "Change Branch Status","module": "Branch"
         },
         {
-            "name": "Add Designations"
+            "name": "Add Designations","module": "Designations"
         },
         {
-            "name": "Edit Designations"
+            "name": "Edit Designations","module": "Designations"
         },
         {
-            "name": "View Designations"
+            "name": "View Designations","module": "Designations"
         },
         {
-            "name": "Delete Designations"
+            "name": "Delete Designations","module": "Designations"
         },
         {
-            "name": "Add Memberships"
+            "name": "Add Memberships","module": "Memberships"
         },
         {
-            "name": "Edit Memberships"
+            "name": "Edit Memberships","module": "Memberships"
         },
         {
-            "name": "View Memberships"
+            "name": "View Memberships","module": "Memberships"
         },
         {
-            "name": "Delete Memberships"
+            "name": "Delete Memberships","module": "Memberships"
         },
         {
-            "name": "Profile Update"
+            "name": "Profile Update","module": "Profile Update"
         },
         {
-            "name": "Change Password"
+            "name": "Change Password","module": "Change Password"
         },
         {
-            "name": "Add Leave"
+            "name": "Add Leave","module": "Leave"
         },
         {
-            "name": "Edit Leave"
+            "name": "Edit Leave","module": "Leave"
         },
         {
-            "name": "View Leave"
+            "name": "View Leave","module": "Leave"
         },
         {
-            "name": "Delete Leave"
+            "name": "Delete Leave","module": "Leave"
         },
         {
-            "name": "Add Department"
+            "name": "Add Department","module": "Department"
         },
         {
-            "name": "Edit Department"
+            "name": "Edit Department","module": "Department"
         },
         {
-            "name": "View Department"
+            "name": "View Department","module": "Department"
         },
         {
-            "name": "Delete Department"
+            "name": "Delete Department","module": "Department"
         },
         {
-            "name": "Add Employee Transfer"
+            "name": "Add Employee Transfer","module": "Transfer"
         },
         {
-            "name": "Edit Employee Transfer"
+            "name": "Edit Employee Transfer","module": "Transfer"
         },
         {
-            "name": "View Employee Transfer"
+            "name": "View Employee Transfer","module": "Transfer"
         },
         {
-            "name": "Delete Employee Transfer"
+            "name": "Delete Employee Transfer","module": "Transfer"
         },
         {
-            "name": "Add Document Management"
+            "name": "Add Document Management","module": "Management"
         },
         {
-            "name": "Edit Document Management"
+            "name": "Edit Document Management","module": "Management"
         },
         {
-            "name": "View Document Management"
+            "name": "View Document Management","module": "Management"
         },
         {
-            "name": "Delete Document Management"
+            "name": "Delete Document Management","module": "Management"
         },
         {
-            "name": "Add Medical card Type"
+            "name": "Add Medical card Type","module": "Medical card Type"
         },
         {
-            "name": "Edit Medical card Type"
+            "name": "Edit Medical card Type","module": "Medical card Type"
         },
         {
-            "name": "View Medical card Type"
+            "name": "View Medical card Type","module": "Medical card Type"
         },
         {
-            "name": "Delete Medical card Type"
+            "name": "Delete Medical card Type","module": "Medical card Type"
         },
         {
-            "name": "Add Overtime Setting"
+            "name": "Add Overtime Setting","module": "Overtime Setting"
         },
         {
-            "name": "Edit Overtime Setting"
+            "name": "Edit Overtime Setting","module": "Overtime Setting"
         },
         {
-            "name": "View Overtime Setting"
+            "name": "View Overtime Setting","module": "Overtime Setting"
         },
         {
-            "name": "Delete Overtime Setting"
+            "name": "Delete Overtime Setting","module": "Overtime Setting"
         },
         {
-            "name": "Add Loans Types"
+            "name": "Add Loans Types","module": "Loans Types"
         },
         {
-            "name": "Edit Loans Types"
+            "name": "Edit Loans Types","module": "Loans Types"
         },
         {
-            "name": "View Loans Types"
+            "name": "View Loans Types","module": "Loans Types"
         },
         {
-            "name": "Delete Loans Types"
+            "name": "Delete Loans Types","module": "Loans Types"
         },
         {
-            "name": "Change Status Loans Types"
+            "name": "Change Status Loans Types","module": "Loans Types"
         },
         {
-            "name": "Add Apply Loans"
+            "name": "Add Apply Loans","module": "Apply Loans"
         },
         {
-            "name": "Edit Apply Loans"
+            "name": "Edit Apply Loans","module": "Apply Loans"
         },
         {
-            "name": "View Apply Loans"
+            "name": "View Apply Loans","module": "Apply Loans"
         },
         {
-            "name": "Delete Apply Loans"
+            "name": "Delete Apply Loans","module": "Apply Loans"
         },
         {
-            "name": "Change Status Apply Loans"
+            "name": "Change Status Apply Loans","module": "Apply Loans"
         },
         {
-            "name": "Add Loans"
+            "name": "Add Loans","module": "Loans"
         },
         {
-            "name": "Edit Loans"
+            "name": "Edit Loans","module": "Loans"
         },
         {
-            "name": "View Loans"
+            "name": "View Loans","module": "Loans"
         },
         {
-            "name": "Delete Loans"
+            "name": "Delete Loans","module": "Loans"
         },
         {
-            "name": "Add Kra"
+            "name": "Add Kra","module": "Kra"
         },
         {
-            "name": "Edit Kra"
+            "name": "Edit Kra","module": "Kra"
         },
         {
-            "name": "View Kra"
+            "name": "View Kra","module": "Kra"
         },
         {
-            "name": "Delete Kra"
+            "name": "Delete Kra","module": "Kra"
         },
         {
-            "name": "Add Attributes"
+            "name": "Add Attributes","module": "Attributes"
         },
         {
-            "name": "Edit Attributes"
+            "name": "Edit Attributes","module": "Attributes"
         },
         {
-            "name": "View Attributes"
+            "name": "View Attributes","module": "Attributes"
         },
         {
-            "name": "Delete Attributes"
+            "name": "Delete Attributes","module": "Attributes"
         },
         {
-            "name": "Change Status Attributes"
+            "name": "Change Status Attributes","module": "Attributes"
         },
         {
-            "name": "Add Employee Kra"
+            "name": "Add Employee Kra","module": "Employee Kra"
         },
         {
-            "name": "Edit Employee Kra"
+            "name": "Edit Employee Kra","module": "Employee Kra"
         },
         {
-            "name": "View Employee Kra"
+            "name": "View Employee Kra","module": "Employee Kra"
         },
         {
-            "name": "Delete Employee Kra"
+            "name": "Delete Employee Kra","module": "Employee Kra"
         },
         {
-            "name": "Change Status Employee Kra"
+            "name": "Change Status Employee Kra","module": "Employee Kra"
         },
         {
-            "name": "Print Employee Kra"
+            "name": "Print Employee Kra","module": "Employee Kra"
         },
         {
-            "name": "Add Leave Types"
+            "name": "Add Leave Types","module": "Leave Types"
         },
         {
-            "name": "Edit Leave Types"
+            "name": "Edit Leave Types","module": "Leave Types"
         },
         {
-            "name": "View Leave Types"
+            "name": "View Leave Types","module": "Leave Types"
         },
         {
-            "name": "Delete Leave Types"
+            "name": "Delete Leave Types","module": "Leave Types"
         },
         {
-            "name": "Change Status Leave Types"
+            "name": "Change Status Leave Types","module": "Leave Types"
         },
         {
-            "name": "Add LEAVE Apply"
+            "name": "Add LEAVE Apply","module": "LEAVE Apply"
         },
         {
-            "name": "Edit LEAVE Apply"
+            "name": "Edit LEAVE Apply","module": "LEAVE Apply"
         },
         {
-            "name": "View LEAVE Apply"
+            "name": "View LEAVE Apply","module": "LEAVE Apply"
         },
         {
-            "name": "Delete LEAVE Apply"
+            "name": "Delete LEAVE Apply","module": "LEAVE Apply"
         },
         {
-            "name": "Change Status LEAVE Apply"
+            "name": "Change Status LEAVE Apply","module": "LEAVE Apply"
         },
         {
-            "name": "Add LEAVE ENCASHMENT"
+            "name": "Add LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
         },
         {
-            "name": "Edit LEAVE ENCASHMENT"
+            "name": "Edit LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
         },
         {
-            "name": "View LEAVE ENCASHMENT"
+            "name": "View LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
         },
         {
-            "name": "Delete LEAVE ENCASHMENT"
+            "name": "Delete LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
         },
         {
-            "name": "Add LEAVE BALANCE REPORT"
+            "name": "Add LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
         },
         {
-            "name": "Edit LEAVE BALANCE REPORT"
+            "name": "Edit LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
         },
         {
-            "name": "View LEAVE BALANCE REPORT"
+            "name": "View LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
         },
         {
-            "name": "Delete LEAVE BALANCE REPORT"
+            "name": "Delete LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
         },
         {
-            "name": "Add LEAVE REQUEST HISTORY"
+            "name": "Add LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
         },
         {
-            "name": "Edit LEAVE REQUEST HISTORY"
+            "name": "Edit LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
         },
         {
-            "name": "View LEAVE REQUEST HISTORY"
+            "name": "View LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
         },
         {
-            "name": "Delete LEAVE REQUEST HISTORY"
+            "name": "Delete LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
         },
         {
-            "name": "Add LEAVE REQUEST REJECTED"
+            "name": "Add LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
         },
         {
-            "name": "Edit LEAVE REQUEST REJECTED"
+            "name": "Edit LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
         },
         {
-            "name": "View LEAVE REQUEST REJECTED"
+            "name": "View LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
         },
         {
-            "name": "Delete LEAVE REQUEST REJECTED"
+            "name": "Delete LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
         },
         {
-            "name": "Add LEAVE REPORTS"
+            "name": "Add LEAVE REPORTS","module": "LEAVE REPORTS"
         },
         {
-            "name": "Edit LEAVE REPORTS"
+            "name": "Edit LEAVE REPORTS","module": "LEAVE REPORTS"
         },
         {
-            "name": "View LEAVE REPORTS"
+            "name": "View LEAVE REPORTS","module": "LEAVE REPORTS"
         },
         {
-            "name": "Delete LEAVE REPORTS"
+            "name": "Delete LEAVE REPORTS","module": "LEAVE REPORTS"
         },
         {
-            "name": "Add Leave Settings"
+            "name": "Add Leave Settings","module": "Leave Settings"
         },
         {
-            "name": "Edit Leave Settings"
+            "name": "Edit Leave Settings","module": "Leave Settings"
         },
         {
-            "name": "View Leave Settings"
+            "name": "View Leave Settings","module": "Leave Settings"
         },
         {
-            "name": "Delete Leave Settings"
+            "name": "Delete Leave Settings","module": "Leave Settings"
         },
         {
-            "name": "Add Leave Type"
+            "name": "Add Leave Type","module": "Leave Type"
         },
         {
-            "name": "Edit Leave Type"
+            "name": "Edit Leave Type","module": "Leave Type"
         },
         {
-            "name": "View Leave Type"
+            "name": "View Leave Type","module": "Leave Type"
         },
         {
-            "name": "Delete Leave Type"
+            "name": "Delete Leave Type","module": "Leave Type"
         },
         {
-            "name": "Add Payroll"
+            "name": "Add Payroll","module": "Payroll"
         },
         {
-            "name": "Edit Payroll"
+            "name": "Edit Payroll","module": "Payroll"
         },
         {
-            "name": "View Payroll"
+            "name": "View Payroll","module": "Payroll"
         },
         {
-            "name": "Delete Payroll"
+            "name": "Delete Payroll","module": "Payroll"
         },
         {
-            "name": "Add Tax Slab Settings"
+            "name": "Add Tax Slab Settings","module": "Tax Slab Settings"
         },
         {
-            "name": "Edit Tax Slab Settings"
+            "name": "Edit Tax Slab Settings","module": "Tax Slab Settings"
         },
         {
-            "name": "View Tax Slab Settings"
+            "name": "View Tax Slab Settings","module": "Tax Slab Settings"
         },
         {
-            "name": "Delete Tax Slab Settings"
+            "name": "Delete Tax Slab Settings","module": "Tax Slab Settings"
         },
         {
-            "name": "Add Salary Increment Settings"
+            "name": "Add Salary Increment Settings","module": "Salary Increment Settings"
         },
         {
-            "name": "Edit Salary Increment Settings"
+            "name": "Edit Salary Increment Settings","module": "Salary Increment Settings"
         },
         {
-            "name": "View Salary Increment Settings"
+            "name": "View Salary Increment Settings","module": "Salary Increment Settings"
         },
         {
-            "name": "Delete Salary Increment Settings"
+            "name": "Delete Salary Increment Settings","module": "Salary Increment Settings"
         },
         {
-            "name": "Add Salary Increment Reporting"
+            "name": "Add Salary Increment Reporting","module": "Salary Increment Reporting"
         },
         {
-            "name": "Edit Salary Increment Reporting"
+            "name": "Edit Salary Increment Reporting","module": "Salary Increment Reporting"
         },
         {
-            "name": "View Salary Increment Reporting"
+            "name": "View Salary Increment Reporting","module": "Salary Increment Reporting"
         },
         {
-            "name": "Delete Salary Increment Reporting"
+            "name": "Delete Salary Increment Reporting","module": "Salary Increment Reporting"
         },
         {
-            "name": "Add Payroll Head"
+            "name": "Add Payroll Head","module": "Payroll Head"
         },
         {
-            "name": "Edit Payroll Head"
+            "name": "Edit Payroll Head","module": "Payroll Head"
         },
         {
-            "name": "View Payroll Head"
+            "name": "View Payroll Head","module": "Payroll Head"
         },
         {
-            "name": "Delete Payroll Head"
+            "name": "Delete Payroll Head","module": "Payroll Head"
         },
         {
-            "name": "Change Status Payroll Head"
+            "name": "Change Status Payroll Head","module": "Payroll Head"
         },
         {
-            "name": "Add Pay Scale"
+            "name": "Add Pay Scale","module": "Pay Scale"
         },
         {
-            "name": "Edit Pay Scale"
+            "name": "Edit Pay Scale","module": "Pay Scale"
         },
         {
-            "name": "View Pay Scale"
+            "name": "View Pay Scale","module": "Pay Scale"
         },
         {
-            "name": "Delete Pay Scale"
+            "name": "Delete Pay Scale","module": "Pay Scale"
         },
         {
-            "name": "Add Salary"
+            "name": "Add Salary","module": "Salary"
         },
         {
-            "name": "Edit Salary"
+            "name": "Edit Salary","module": "Salary"
         },
         {
-            "name": "View Salary"
+            "name": "View Salary","module": "Salary"
         },
         {
-            "name": "Delete Salary"
+            "name": "Delete Salary","module": "Salary"
         },
         {
-            "name": "Print Salary"
+            "name": "Print Salary","module": "Salary"
         },
         {
-            "name": "Add Reimbursement Type"
+            "name": "Add Reimbursement Type","module": "Reimbursement Type"
         },
         {
-            "name": "Edit Reimbursement Type"
+            "name": "Edit Reimbursement Type","module": "Reimbursement Type"
         },
         {
-            "name": "View Reimbursement Type"
+            "name": "View Reimbursement Type","module": "Reimbursement Type"
         },
         {
-            "name": "Delete Reimbursement Type"
+            "name": "Delete Reimbursement Type","module": "Reimbursement Type"
         },
         {
-            "name": "Add Reimbursement"
+            "name": "Add Reimbursement","module": "Reimbursement"
         },
         {
-            "name": "Edit Reimbursement"
+            "name": "Edit Reimbursement","module": "Reimbursement"
         },
         {
-            "name": "View Reimbursement"
+            "name": "View Reimbursement","module": "Reimbursement"
         },
         {
-            "name": "Delete Reimbursement"
+            "name": "Delete Reimbursement","module": "Reimbursement"
         },
         {
-            "name": "Change Status Reimbursement"
+            "name": "Change Status Reimbursement","module": "Reimbursement"
         },
         {
-            "name": "Add Manage Tax"
+            "name": "Add Manage Tax","module": "Manage Tax"
         },
         {
-            "name": "Edit Manage Tax"
+            "name": "Edit Manage Tax","module": "Manage Tax"
         },
         {
-            "name": "View Manage Tax"
+            "name": "View Manage Tax","module": "Manage Tax"
         },
         {
-            "name": "Delete Manage Tax"
+            "name": "Delete Manage Tax","module": "Manage Tax"
         }
     ]
 }

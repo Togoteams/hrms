@@ -80,8 +80,7 @@
                                                                 <div class="col-3 fw-semibold">Blood Group</div>
                                                                 <div class="col-3">{{ $data->blood_group }}</div>
                                                                 <div class="col-3 fw-semibold">Basic Salary</div>
-                                                                <div class="col-3">{{ $data->user?->payrollPayscale?->net_take_home }}</div>
-
+                                                                <div class="col-3">{{ $data->currency_salary }}  {{ $data->basic_salary }}</div>
                                                             </div>
                                                         </div>
                                                     @else
