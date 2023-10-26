@@ -24,14 +24,17 @@ class PersonalInformationController extends Controller
     {
         $page_name = "Employee";
         $data = Employee::where('user_id', Auth::user()->id)->first();
-        if(empty($data))
-        {
+        if (empty($data)) {
             return redirect('/');
         }
         $designation = Designation::all();
-        // $data = Employee::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation, 'page' => $page_name]);
+        
+        // Access the user's salutation
+        $salutation = $data->user->salutation;
+    
+        return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation, 'page' => $page_name, 'salutation' => $salutation]);
     }
+    
 
     public function viewFamilyDetails()
     {

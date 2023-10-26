@@ -41,7 +41,7 @@
                                                                 {{-- <div class="col-3 fw-semibold">Name</div>
                                                                 <div class="col-3">{{ $data->user->name }}</div> --}}
                                                                 <div class="col-3 fw-semibold">Salutation</div>
-                                                                <div class="col-3"> Miss</div>
+                                                                <div class="col-3">{{$salutation}}</div>
 
                                                                 <div class="col-3 fw-semibold">First Name</div>
                                                                 <div class="col-3"> {{ $firstName }}</div>
