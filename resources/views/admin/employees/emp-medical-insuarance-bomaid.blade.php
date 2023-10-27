@@ -34,7 +34,7 @@
                                                 <select name="medical_card_id" id="medical_card_id" class="form-control form-control-sm">
                                                     <option value="">Select Card Type</option>
                                                     @foreach($cardType as $card)
-                                                        <option value="{{ $card->id }}"  {{ !empty($employee) ? ($employee->medicalBomaid->medical_card_id == $card->id ? 'selected' : '') : '' }}>
+                                                        <option value="{{ $card->id }}"  {{ !empty($employee) && !empty($employee->medicalBomaid) && $employee->medicalBomaid->medical_card_id == $card->id ? 'selected' : '' }}>
                                                             {{ $card->name }}
                                                         </option>
                                                     @endforeach

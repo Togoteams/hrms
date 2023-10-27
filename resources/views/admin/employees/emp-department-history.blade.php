@@ -124,12 +124,10 @@
                                                         class="required-field">*</small></label>
                                                         <select name="department_name" id="department_name" class="form-control form-control-sm">
                                                             <option value="" >--Select--</option>
-
                                                             @foreach ($departments as $key => $department )
                                                                     <option value="{{$department->name}}"> {{$department->name}} </option>
                                                             @endforeach
                                                         </select>
-                                              
                                             </div>
                                         </div>
                                         <div class="mb-2 col-md-3">

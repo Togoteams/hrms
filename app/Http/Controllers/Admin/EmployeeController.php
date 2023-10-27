@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
 use App\Models\CurrencySetting;
+use App\Models\Department;
 use App\Models\EmpAddress;
 use App\Models\EmpDepartmentHistory;
 use App\Models\EmpMedicalInsurance;
@@ -447,7 +448,8 @@ class EmployeeController extends BaseController
 
     public function viewDepartmentHistory($eid = null)
     {
-        return view('admin.employees.emp-department-history', ['employee' => $this->getEmployee($eid)]);
+        $departments = Department::all();
+        return view('admin.employees.emp-department-history', ['employee' => $this->getEmployee($eid),'departments'=>$departments]);
     }
 
     public function postDepartmentHistory(Request $request)

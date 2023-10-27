@@ -104,6 +104,16 @@
                                                                         <a href="{{ asset('assets/document/' . $data->document) }}" download>Download</a>
                                                                     </div> 
 
+                                                                    <div class="pt-1 col-3 fw-semibold">Document View</div>
+                                                                    <div class="pt-1 col-3">
+                                                                        @if (in_array(pathinfo(asset('assets/document/'.$data->document), PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
+                                                                        <img src="{{ asset('assets/document/'.$data->document) }}" alt="image" width="70px" height="70px">
+                                                                    @elseif (in_array(pathinfo(asset('assets/document/'.$data->document), PATHINFO_EXTENSION), ['pdf']))
+                                                                        <a href="{{ asset('assets/document/'.$data->document) }}" target="_blank">
+                                                                            <img src="{{ asset('assets/document/') }}" alt="{{$data->document}}" width="70px" height="70px">
+                                                                        </a>
+                                                                    @endif                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                            
