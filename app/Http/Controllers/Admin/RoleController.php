@@ -85,7 +85,9 @@ class RoleController extends BaseController
     {
         $roleData= $this->roleService->findRole($id);
         $permissions= $this->roleService->getAllPermissions();
-        $permissions= $permissions->chunk(ceil($permissions->count()/13));
+
+        $permissions= collect($permissions)->groupBy('module');
+        // return $permissions;
         if($request->post()){
             DB::begintransaction();
             try{

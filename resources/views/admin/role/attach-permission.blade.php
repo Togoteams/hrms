@@ -44,12 +44,13 @@
                         </div>
                         <div class="grid grid-cols-12 gap-6">
                             <!-- Users cards -->
-                            @forelse ($permissions as $chunk)
+                            @forelse ($permissions as $key => $chunk)
                                 <!-- Card 1 -->
                                 <div class="bg-white rounded-sm col-span-full sm:col-span-6 xl:col-span-3 s b b-slate-200">
                                     <div class="flex flex-col h-full">
                                         <!-- Card top -->
                                         <div class="p-3 grow">
+                                            <h4>{{$key}}</h4>
                                             @forelse ($chunk as $permission)
                                                 <div class="mt-2 text-justify">
                                                     <div class="text-sm">
