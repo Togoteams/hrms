@@ -299,6 +299,7 @@
                      <span class="mt-4 dropdown-header">Master</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
+                     @canany(['add-account', 'edit-account', 'view-account', 'delete-account','change-status-account'])
                      <div class="nav-item">
                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.account.list' ? 'active' : '' }}"
                              href="{{ route('admin.account.index') }}" data-placement="left">
@@ -306,7 +307,9 @@
                              <span class="nav-link-title">Account</span>
                          </a>
                      </div>
+                     @endcanany
 
+                     @canany(['add-currency-settings', 'edit-currency-settings', 'view-currency-settings', 'delete-currency-settings','change-status-currency-settings'])
                      <div class="nav-item">
                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.currency_settings.list' ? 'active' : '' }}"
                             href="{{ route('admin.currency_settings.index') }}" data-placement="left">
@@ -314,6 +317,7 @@
                             <span class="nav-link-title">Currency Settings</span>
                         </a>
                     </div>
+                    @endcanany
 
                      @canany(['add-holidays', 'edit-holidays', 'view-holidays', 'delete-holidays'])
                          <div class="nav-item">
@@ -324,6 +328,8 @@
                              </a>
                          </div>
                      @endcanany
+
+                     @canany(['add-ttum-report', 'edit-ttum-report', 'view-ttum-report', 'delete-ttum-report','export-report-ttum-report'])
                      <div class="nav-item">
                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reports.ttum.list' ? 'active' : '' }}"
                             href="{{ route('admin.payroll.reports.ttum.list') }}" data-placement="left">
@@ -331,6 +337,8 @@
                             <span class="nav-link-title">TTUM report</span>
                         </a>
                     </div>
+                    @endcanany
+
 
                      {{-- @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves']) --}}
                      @canany(['add-leave', 'edit-leave', 'view-leave', 'delete-leave', 'add-leave-types',

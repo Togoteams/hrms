@@ -38,7 +38,7 @@
 
                     </div> --}}
                     <div class="col-sm-auto">
-                        @can('add-reimbursement-type')
+                        @can('add-currency-settings')
                         <button type="button" class="btn btn-white" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                                 Add {{ $page }}

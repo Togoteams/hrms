@@ -514,6 +514,9 @@
             "name": "Delete Account","module": "Account"
         },
         {
+            "name": "Change Status Account","module": "Account"
+        },
+        {
             "name": "Add Currency Settings","module": "Currency Settings"
         },
         {
@@ -526,6 +529,9 @@
             "name": "Delete Currency Settings","module": "Currency Settings"
         },
         {
+            "name": "Change Status Currency Settings","module": " Currency Settings"
+        },
+        {
             "name": "Add TTUM Report","module": "TTUM Report"
         },
         {
@@ -536,6 +542,10 @@
         },
         {
             "name": "Delete TTUM Report","module": "TTUM Report"
+        },
+        {
+            "name": " Export Report TTUM Report","module": "TTUM Report"
         }
+
     ]
 }
