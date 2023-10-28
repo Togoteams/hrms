@@ -180,31 +180,7 @@
                                                 Month(s)
                                             </div>
 
-                                            <div class="pt-3 col-3 fw-semibold">
-                                                <label for="pension_opt">Pension Contribution<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-2">
-                                                <input type="radio" id="radio1" name="pension_contribution" value="no"
-                                                    class="form-check-input" title="Select NO"
-                                                    {{ !empty($employee) && $employee->pension_contribution == 'no' ? 'checked' : '' }} />
-                                                <label class="form-check-label" title="Select NO"
-                                                    for="radio1">No</label>
-
-                                                <input type="radio" id="radio2" name="pension_contribution" value="yes"
-                                                    class="form-check-input" title="Select YES" style="margin-left: 20px"
-                                                    {{ !empty($employee) && $employee->pension_contribution == 'yes' ? 'checked' : '' }} />
-                                                <label class="form-check-label" title="Select YES"
-                                                    for="radio2">Yes</label>
-                                            </div>
-
-                                            <div id="pensionDropdown" class="pt-2 col-2 fw-semibold">
-                                                <select name="pension_opt"  style="display: none;"  id="pension_opt" class="form-control">
-                                                    <option value="">Choose  %</option>
-                                                    <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
-                                                    <option value="5" {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>5%</option>
-                                                </select>
-                                            </div>
+                                           
 
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="union_membership_id">Union Membership</label>
@@ -258,6 +234,31 @@
                                                     placeholder="Enter" type="number"
                                                     value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
                                                     name="bank_account_number" class="form-control form-control-sm ">
+                                            </div>
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="pension_opt">Pension Contribution<small
+                                                        class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-2">
+                                                <input type="radio" id="pradio1" name="pension_contribution" value="no"
+                                                    class="form-check-input" title="Select NO"
+                                                    {{ !empty($employee) && $employee->pension_contribution == 'no' ? 'checked' : '' }} />
+                                                <label class="form-check-label" title="Select NO"
+                                                    for="radio1">No</label>
+
+                                                <input type="radio" id="pradio2" name="pension_contribution" value="yes"
+                                                    class="form-check-input" title="Select YES" style="margin-left: 20px"
+                                                    {{ !empty($employee) && $employee->pension_contribution == 'yes' ? 'checked' : '' }} />
+                                                <label class="form-check-label" title="Select YES"
+                                                    for="radio2">Yes</label>
+                                            </div>
+
+                                            <div id="pensionDropdown" class="pt-2 col-2 fw-semibold">
+                                                <select name="pension_opt"  style="display: none;"  id="pension_opt" class="form-control">
+                                                    <option value="">Choose  %</option>
+                                                    <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
+                                                    <option value="5" {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>5%</option>
+                                                </select>
                                             </div>
 
                                             <div class="pt-5 text-center">
@@ -316,8 +317,8 @@
 
 <script>
     $(document).ready(function () {
-        var radioNo = $("#radio1");
-        var radioYes = $("#radio2");
+        var radioNo = $("#pradio1");
+        var radioYes = $("#pradio2");
         var pensionDropdown = $("#pension_opt");
 
         radioNo.change(function () {
