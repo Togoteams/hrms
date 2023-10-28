@@ -42,11 +42,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-12 gap-6">
+                        <div class="grid grid-cols-12 gap-6 row">
                             <!-- Users cards -->
                             @forelse ($permissions as $key => $chunk)
                                 <!-- Card 1 -->
-                                <div class="bg-white rounded-sm col-span-full sm:col-span-6 xl:col-span-3 s b b-slate-200">
+                                <div class="bg-white rounded-sm col-span-full col-md-3 sm:col-span-6 xl:col-span-3 s b b-slate-200">
                                     <div class="flex flex-col h-full">
                                         <!-- Card top -->
                                         <div class="p-3 grow">
