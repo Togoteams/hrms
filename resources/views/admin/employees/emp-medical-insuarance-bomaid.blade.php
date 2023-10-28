@@ -54,7 +54,7 @@
                                                 <label for="insurance_id">Insurance ID<small class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input type="number" id="insurance_id" name="insurance_id"
+                                                <input type="text" id="insurance_id" name="insurance_id"
                                                     value="{{ $employee ? ($employee->medicalBomaid ? $employee->medicalBomaid->insurance_id : '') : '' }}"
                                                     placeholder="Enter Insurance ID"
                                                     class="form-control form-control-sm">
