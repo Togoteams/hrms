@@ -50,9 +50,9 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>S.no</th>
-                                <th>Name</th>
+                                <th>Leave Type</th>
                                 <th>Employee type</th>
-                                <th>Total Leave Year</th>
+                                <th>Total Leave In Year</th>
                                 <th>Max leave at time</th>
                                 <th>Starting Date</th>
                                 <th>Is Certificate</th>
@@ -121,7 +121,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Name</label>
+                                            <label>Leave Type</label>
                                             <input type="text" name="name" class="form-control">
                                         </div>
                                     </div>
@@ -139,7 +139,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Total Leave Year</label>
+                                            <label>Total Leave In Year</label>
                                             <input type="text" name="total_leave_year" class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
@@ -254,7 +254,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Name</label>
+                                            <label>Leave Type</label>
                                             <input type="text" name="name" id="leave_setting_name"
                                                 class="form-control">
                                         </div>
@@ -274,7 +274,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Total Leave Year</label>
+                                            <label>Total Leave In Year</label>
                                             <input type="text" name="total_leave_year"
                                                 id="leave_setting_total_leave_year" class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
@@ -396,7 +396,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Name</label>
+                                            <label>Leave Type</label>
                                             <input type="text" name="name" id="leave_setting_name_view"
                                                 class="form-control">
                                         </div>
@@ -416,7 +416,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Total Leave Year</label>
+                                            <label>Total Leave In Year</label>
                                             <input type="text" name="total_leave_year"
                                                 id="leave_setting_total_leave_year_view" class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">

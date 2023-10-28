@@ -382,7 +382,7 @@
                                      'change-status-leave-apply'])
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
                                          href="{{ route('admin.leave_apply.index') }}" data-placement="left">
-                                         <span class="nav-link-title">LEAVE Apply/Modify</span>
+                                         <span class="nav-link-title">Leave Apply/Modify</span>
                                      </a>
                                  @endcanany
 
@@ -406,7 +406,7 @@
                                      'delete-leave-request-history', 'view-leave-request-history'])
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.request_history' ? 'active' : '' }}"
                                          href="{{ route('admin.leave_apply.request_history') }}" data-placement="left">
-                                         <span class="nav-link-title">LEAVE REQUEST HISTORY</span>
+                                         <span class="nav-link-title">Leave Request History</span>
                                      </a>
                                  @endcanany
 
@@ -414,7 +414,7 @@
                                      'delete-leave-request-rejected', 'view-leave-request-rejected'])
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.get_rejected_leave' ? 'active' : '' }}"
                                          href="{{ route('admin.leave_apply.get_rejected_leave') }}" data-placement="left">
-                                         <span class="nav-link-title">LEAVE REQUEST REJECTED</span>
+                                         <span class="nav-link-title">Leave Request Rejected</span>
                                      </a>
                                  @endcanany
 
@@ -422,7 +422,7 @@
                                      'view-leave-report'])
                                      <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
                                          href="{{ route('admin.leave_reports.index') }}" data-placement="left">
-                                         <span class="nav-link-title">LEAVE REPORTS</span>
+                                         <span class="nav-link-title">Leave Reports</span>
                                      </a>
                                  @endcanany
 
