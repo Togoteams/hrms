@@ -44,10 +44,10 @@
                                                                         {{ $data->name }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">
+                                                                    <div class="col-4 fw-semibold pt-1">
                                                                         Event date:
                                                                     </div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-6 pt-1">
                                                                         {{ date_format(date_create_from_format('Y-m-d', $data->event_date), 'd/m/Y') }}
                                                                     </div>
 

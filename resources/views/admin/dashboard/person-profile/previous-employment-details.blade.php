@@ -44,10 +44,10 @@
                                                                         {{ $data->company_name }}
                                                                     </div>
 
-                                                                    <div class="col-4 fw-semibold pt-3">
+                                                                    <div class="col-4 fw-semibold pt-1">
                                                                         Period of employment:
                                                                     </div>
-                                                                    <div class="col-6 pt-3">
+                                                                    <div class="col-6 pt-1">
                                                                         {{ date_format(date_create_from_format('Y-m-d', $data->start_date), 'd/m/Y') }}
                                                                         -
                                                                         {{ date_format(date_create_from_format('Y-m-d', $data->end_date), 'd/m/Y') }}

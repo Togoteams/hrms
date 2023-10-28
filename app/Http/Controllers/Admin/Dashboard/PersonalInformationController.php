@@ -146,7 +146,7 @@ class PersonalInformationController extends Controller
             'marital_status' => 'required|string',
             'gender' => 'required|string',
             'occupations' => 'required|string',
-            'monthly_income' => 'required|numeric|gte:2000',
+            'monthly_income' => 'required|numeric',
             'bank_of_baroda_employee' => 'required|string',
             'address_line1' =>'required|string',
             'address_line2'=>'nullable|string',

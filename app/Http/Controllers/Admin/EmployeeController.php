@@ -75,7 +75,7 @@ class EmployeeController extends BaseController
     {
         if (empty($request->user_id)) {
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z. ]+$/'],
                 'mobile' => ['required', 'numeric', 'digits_between:10,11'],
                 'role_id' => ['required', 'numeric'],
                 'gender' => ['required'],
@@ -99,7 +99,7 @@ class EmployeeController extends BaseController
             ]);
         } else {
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z. ]+$/'],
                 'mobile' => ['required', 'numeric', 'digits_between:10,11'],
                 'gender' => ['required'],
                 'role_id' => ['required', 'numeric'],

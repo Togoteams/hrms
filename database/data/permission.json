@@ -500,6 +500,42 @@
         },
         {
             "name": "Delete Manage Tax","module": "Manage Tax"
+        },
+        {
+            "name": "Add Account","module": "Account"
+        },
+        {
+            "name": "Edit Account","module": "Account"
+        },
+        {
+            "name": "View Account","module": "Account"
+        },
+        {
+            "name": "Delete Account","module": "Account"
+        },
+        {
+            "name": "Add Currency Settings","module": "Currency Settings"
+        },
+        {
+            "name": "Edit Currency Settings","module": "Currency Settings"
+        },
+        {
+            "name": "View Currency Settings","module": "Currency Settings"
+        },
+        {
+            "name": "Delete Currency Settings","module": "Currency Settings"
+        },
+        {
+            "name": "Add TTUM Report","module": "TTUM Report"
+        },
+        {
+            "name": "Edit TTUM Report","module": "TTUM Report"
+        },
+        {
+            "name": "View TTUM Report","module": "TTUM Report"
+        },
+        {
+            "name": "Delete TTUM Report","module": "TTUM Report"
         }
     ]
 }
