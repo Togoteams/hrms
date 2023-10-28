@@ -136,7 +136,7 @@ class UserAccountController extends Controller
 
         $profile->save();
 
-        return redirect()->back()->with('success', 'Password has been Changeded successfully!');
+        return redirect()->route('admin.dashboard')->with('success', 'Password has been changed successfully!');
     }
 
     public function resetPasswordSave(Request $request)

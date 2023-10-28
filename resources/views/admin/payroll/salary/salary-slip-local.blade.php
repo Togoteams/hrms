@@ -338,12 +338,12 @@
                 </div>
                 <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>
                 <ul style="padding-left: 12px;">
-                    <li>1. The student are expected to keep this cardneat and clean</li>
+                    {{-- <li>1. The student are expected to keep this cardneat and clean</li>
                     <li>2. In case the card is lost the duplicate card will be issued on payment of extra report card
                         free.</li>
                     <li>3. Promotion will be granted on the weight of both examination. To pass the monthly test is also
-                        compulsary.</li>
-                    <li>4. This is computer generated pay slip.</li>
+                        compulsary.</li> --}}
+                    <li>1. This is computer generated pay slip.</li>
                 </ul>
             </div>
         </page>

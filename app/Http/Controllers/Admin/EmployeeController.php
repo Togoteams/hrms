@@ -305,7 +305,7 @@ class EmployeeController extends BaseController
             ],
             'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
             'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date'],
-            'country'       => ['required', 'string'],
+            'country'       => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
 
         ]);
 
