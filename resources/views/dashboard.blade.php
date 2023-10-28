@@ -88,9 +88,8 @@
                             <!-- End Card -->
                         </div>
                         @endif
-                        @if(isemplooye())
+                        {{-- @if(isemplooye())
                         <div class="mb-3 col-sm-6 col-lg-2">
-                            <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ route('admin.userManualDownload', ['filename' => 'user_manual.pdf']) }}">
                                 <div class="text-center card-body">
@@ -103,15 +102,12 @@
 
                                     <div class="row align-items-center gx-2">
 
-                                        <!-- End Col -->
-                                        <!-- End Col -->
+                                       
                                     </div>
-                                    <!-- End Row -->
                                 </div>
                             </a>
-                            <!-- End Card -->
                         </div>
-                        @endif
+                        @endif --}}
 
 
                         <div class="mb-3 col-sm-6 col-lg-2">
