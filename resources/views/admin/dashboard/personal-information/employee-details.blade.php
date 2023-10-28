@@ -73,7 +73,7 @@
                                                                     $dob = new DateTime($data->date_of_birth);
                                                                     $now = new DateTime();
                                                                     $age = $now->diff($dob)->y;
-                                                                    echo $age;
+                                                                    echo $age . " years";
                                                                     ?>
                                                                 </div>
 
@@ -128,10 +128,10 @@
                                                 <label for="salutation" class="required">Salutation</label>
                                                 <select name="salutation" class="form-control" id="salutation" placeholder="Employee salutation">
                                                     <option value="">Select Option</option>
-                                                    <option value="mr" @if(old('salutation', $data->user->salutation) === 'mr') selected @endif>Mr</option>
-                                                    <option value="mrs" @if(old('salutation', $data->user->salutation) === 'mrs') selected @endif>Mrs</option> 
-                                                    <option value="miss" @if(old('salutation', $data->user->salutation) === 'miss') selected @endif>Miss</option> 
-                                                    <option value="dr" @if(old('salutation', $data->user->salutation) === 'dr') selected @endif>Dr</option> 
+                                                    <option value="Mr" @if(old('salutation', $data->user->salutation) === 'Mr') selected @endif>Mr</option>
+                                                    <option value="Mrs" @if(old('salutation', $data->user->salutation) === 'Mrs') selected @endif>Mrs</option> 
+                                                    <option value="Miss" @if(old('salutation', $data->user->salutation) === 'Miss') selected @endif>Miss</option> 
+                                                    <option value="Dr" @if(old('salutation', $data->user->salutation) === 'Dr') selected @endif>Dr</option> 
                                                 </select>
                                             </div>
                                         </div>

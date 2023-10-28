@@ -51,7 +51,7 @@
                                                                         <div class="mb-2 col-sm-3 passport_data">
                                                                             <div class="form-group">
                                                                                 <label for="certificate_no">Passport No.</label>
-                                                                                <input id="certificate_no" placeholder="Enter Passport No." type="number"
+                                                                                <input id="certificate_no" placeholder="Enter Passport No." type="text"
                                                                                     value="{{ $data ? ($data->certificate_no) : '' }}" name="certificate_no"
                                                                                     class="form-control form-control-sm ">
                                                                             </div>

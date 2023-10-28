@@ -88,10 +88,10 @@ class PersonalInformationController extends Controller
              'user_id' => ['required', 'numeric'],
              'gender' => ['required', 'string'],
              'salutation' => ['required', 'string'],
-             'first_name' => ['required', 'string'],
-             'last_name' => ['required', 'string'],
-             'birth_country' => ['required', 'string'],
-             'blood_group' => ['required','string'],
+             'first_name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+             'last_name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+             'birth_country' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+             'blood_group' => ['required','string','regex:/^[A-Z]+\+$/'],
              'date_of_birth' => [
                 'required',
                 'date',
@@ -227,10 +227,10 @@ class PersonalInformationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'string'],
-            'city'      => ['required', 'string'],
-            'state'     => ['required', 'string'],
-            'country'   => ['required', 'string'],
+            'zip'       => ['required', 'numeric','digits_between:5,10'],
+            'city'      => ['required', 'string', 'regex:/^[a-zA-Z. ]+$/'],
+            'state'     => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+            'country'   => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
         ]);
 
         if ($validator->fails()) {
@@ -255,11 +255,23 @@ class PersonalInformationController extends Controller
     {
         $page_name = "Passport";
             $validator = Validator::make($request->all(), [
-                'type' => ['required', 'string'],
-                'certificate_no' => ['required', 'numeric'],
-                'certificate_issue_date' => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
-                'certificate_expiry_date' => ['required', 'date', 'after_or_equal:certificate_issue_date'],
-                'country' => ['required', 'string'],
+                'type'       => ['required', 'string'],
+                'certificate_no' => [
+                    'required',
+                    'string',
+                    function ($attribute, $value, $fail) use ($request) {
+                        if ($request->type === 'passport') {
+                            if (!preg_match('/^[a-zA-Z0-9.]{8,12}$/', $value)) {
+                                $fail("The $attribute format is invalid for a passport. It should be between 8 and 12 characters, including letters, numbers, and dots.");
+                            }
+                        } elseif ($request->type === 'omang' && !preg_match('/^[0-9]{9}$/', $value)) {
+                            $fail("The $attribute format is invalid for an omang. It should be a 9-digit number.");
+                        }
+                    },
+                ],
+                'certificate_issue_date'=> ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
+                'certificate_expiry_date'=> ['required', 'date', 'after_or_equal:certificate_issue_date'],
+                'country' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
             ]);
 
         if ($validator->fails()) {
