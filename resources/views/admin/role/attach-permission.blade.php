@@ -9,7 +9,7 @@
             <div class="page-header">
                 <div class="row align-items-end">
                     <div class="mb-2 col-sm mb-sm-0">
-                        <h1 class="page-header-title">Roles: Attach Permission</h1>
+                        <h1 class="page-header-title">Allow Permission of ({{$roleData->name}})</h1>
                     </div>
                     <!-- End Col -->
                 </div>
