@@ -98,7 +98,7 @@ class DocumentController extends Controller
         $validator = Validator::make($request->all(), [
             'document_name' => 'string|required',
             'document_type' => 'required|string',
-            'document' => 'required|file|mimes:jpeg,jpg,png,pdf',
+            'document' => 'nullable|file|mimes:jpeg,jpg,png,pdf',
         ]);
         if ($validator->fails()) {
             return $validator->errors();

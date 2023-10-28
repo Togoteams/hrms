@@ -41,7 +41,7 @@
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="emi_amount">Emi Amount</label>
+                <label for="emi_amount">EMI Amount</label>
                 <input required id="emi_amount" placeholder="Enter emi_amount   " type="number"
                     name="emi_amount" value="{{ $data->emi_amount }}" class="form-control form-control-sm ">
             </div>
@@ -49,14 +49,14 @@
 
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="emi_start_date">Emi Start Date</label>
+                <label for="emi_start_date">EMI Start Date</label>
                 <input required id="emi_start_date" placeholder="Enter emi_start_date   "
                     type="date" value="{{ $data->emi_start_date }}" name="emi_start_date" class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="emi_end_date">Emi End Date</label>
+                <label for="emi_end_date">EMI End Date</label>
                 <input required id="emi_end_date" placeholder="Enter emi_end_date"
                     type="date" value="{{ $data->emi_end_date }}" name="emi_end_date" class="form-control form-control-sm ">
             </div>
@@ -64,14 +64,14 @@
         
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="tenure">tenure</label>
+                <label for="tenure">Tenure</label>
                 <input value="{{ $data->tenure }}" required id="tenure" placeholder="Enter correct tenure   "
                     type="number" name="tenure" class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
-                <label for="last_emi_amount">Last Emi Amount</label>
+                <label for="last_emi_amount">Last EMI Amount</label>
                 <input required id="last_emi_amount" placeholder="Enter last_emi_amount  "
                     type="number" name="last_emi_amount" value="{{ $data->last_emi_amount }}" class="form-control form-control-sm ">
             </div>

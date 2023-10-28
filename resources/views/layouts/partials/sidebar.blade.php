@@ -228,7 +228,7 @@
                                      data-bs-toggle="collapse" data-bs-target="#kra" aria-expanded="false"
                                      aria-controls="kra">
                                      <i class="fas fa-users-class nav-icon"></i>
-                                     <span class="nav-link-title">Kra</span>
+                                     <span class="nav-link-title">KRA</span>
                                  </a>
                                  <div id="kra"
                                      class="nav-collapse collapse {{ show(['employee-kra.index', 'kra-attributes.index']) }} "
@@ -242,7 +242,7 @@
                                      @canany(['add-employee-kra', 'edit-employee-kra', 'delete-employee-kra',
                                          'view-employee-kra', 'change-status-employee-kra', 'print-employee-kra'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-kra.index' ? 'active' : '' }}  "
-                                             href="{{ route('admin.employee-kra.index') }}"> Employee Kra</a>
+                                             href="{{ route('admin.employee-kra.index') }}"> Employee KRA</a>
                                      @endcanany
 
                                  </div>

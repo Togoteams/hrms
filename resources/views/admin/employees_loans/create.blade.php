@@ -15,10 +15,10 @@
                         <div class="row">
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="name">Employees Name</label>
+                                    <label for="name">Employee Name</label>
                                     <select required id="gender" placeholder="Enter correct gender   " name="user_id"
                                         class="form-control form-control-sm ">
-                                        <option selected disabled> - Select Employees- </option>
+                                        <option selected disabled> - Select Employee- </option>
                                         @foreach ($all_users as $au)
                                             <option value="{{ $au->user->id }}">{{ $au->user->name }} -
                                                 {{ $au->user->email }}</option>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="emi_amount">Emi Amount</label>
+                                    <label for="emi_amount">EMI Amount</label>
                                     <input required id="emi_amount"
                                         placeholder="Enter emi_amount   " type="number"
                                         name="emi_amount" class="form-control form-control-sm ">
@@ -58,14 +58,14 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="emi_start_date">Emi Start Date</label>
+                                    <label for="emi_start_date">EMI Start Date</label>
                                     <input required id="emi_start_date" placeholder="Enter emi_start_date   "
                                         type="date" name="emi_start_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="emi_end_date">Emi End Date</label>
+                                    <label for="emi_end_date">EMI End Date</label>
                                     <input required id="emi_end_date" placeholder="Enter emi_end_date"
                                         type="date" name="emi_end_date" class="form-control form-control-sm ">
                                 </div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
-                                    <label for="last_emi_amount">Last Emi Amount</label>
+                                    <label for="last_emi_amount">Last EMI Amount</label>
                                     <input required id="last_emi_amount" placeholder="Enter last_emi_amount  "
                                         type="number" name="last_emi_amount" class="form-control form-control-sm ">
                                 </div>

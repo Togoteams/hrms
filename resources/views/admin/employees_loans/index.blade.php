@@ -34,7 +34,7 @@
                         @can('add-apply-loans')
                         <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
-                            Add {{ $page }}
+                             {{ $page }}
                         </button>
                         @endcan
 
@@ -50,11 +50,11 @@
                                 <th>Ec Number</th>
                                 <th>Type Of Loan</th>
                                 <th>Loan Amount</th>
-                                <th>Emi Amount</th>
-                                <th>Emi Start Date</th>
-                                <th>Emi End Date </th>
-                                <th>tenure </th>
-                                <th>Last Emi Amount</th>
+                                <th>EMI Amount</th>
+                                <th>EMI Start Date</th>
+                                <th>EMI End Date </th>
+                                <th>Tenure </th>
+                                <th>Last EMI Amount</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
