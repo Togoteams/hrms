@@ -254,10 +254,10 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'numeric',  'digits_between:5,10'],
-            'city'      => ['required', 'string', 'alpha'],
-            'state'     => ['required', 'string', 'alpha'],
-            'country'   => ['required', 'string'],
+            'zip'       => ['required', 'numeric','digits_between:5,10'],
+            'city'      => ['required', 'string', 'regex:/^[a-zA-Z. ]+$/'],
+            'state'     => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+            'country'   => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
         ]);
 
         try {
