@@ -289,13 +289,20 @@ class EmployeeController extends BaseController
     public function postPassportOmang(Request $request)
     {
         $request->validate([
-            // 'passport_no'       => ['nullable', 'numeric'],
-            // 'passport_expiry'   => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
-
-            // 'omang_no'          => ['nullable', 'numeric'],
-            // 'omang_expiry'      => ['nullable', 'date', 'after_or_equal:' . now()->format('Y-m-d')],
             'type'       => ['required', 'string'],
-            'certificate_no'       => ['required', 'numeric'],
+            'certificate_no' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->type === 'passport') {
+                        if (!preg_match('/^[a-zA-Z0-9.]{8,12}$/', $value)) {
+                            $fail("The $attribute format is invalid for a passport. It should be between 8 and 12 characters, including letters, numbers, and dots.");
+                        }
+                    } elseif ($request->type === 'omang' && !preg_match('/^[0-9]{9}$/', $value)) {
+                        $fail("The $attribute format is invalid for an omang. It should be a 9-digit number.");
+                    }
+                },
+            ],
             'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
             'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date'],
             'country'       => ['required', 'string'],
