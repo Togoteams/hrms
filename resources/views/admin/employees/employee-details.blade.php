@@ -253,12 +253,22 @@
                                                     for="radio2">Yes</label>
                                             </div>
 
-                                            <div id="pensionDropdown" class="pt-2 col-2 fw-semibold">
-                                                <select name="pension_opt"  style="display: none;"  id="pension_opt" class="form-control">
-                                                    <option value="">Choose  %</option>
-                                                    <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
-                                                    <option value="5" {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>5%</option>
-                                                </select>
+                                            <div id="pensionDropdown"  style="display: none;" class="pt-2 col-6 fw-semibold">
+                                                <div class="row">
+                                                    <div class="pt-3 col-md-6">
+                                                        <label for="pension_opt">Pension %<small
+                                                            class="required-field">*</small></label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <select name="pension_opt"   id="pension_opt" class="form-control">
+                                                            <option value="">Choose  %</option>
+                                                            <option value="4" {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>4%</option>
+                                                            <option value="5" {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>5%</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                              
+                                               
                                             </div>
 
                                             <div class="pt-5 text-center">
@@ -319,7 +329,7 @@
     $(document).ready(function () {
         var radioNo = $("#pradio1");
         var radioYes = $("#pradio2");
-        var pensionDropdown = $("#pension_opt");
+        var pensionDropdown = $("#pensionDropdown");
 
         radioNo.change(function () {
             pensionDropdown.hide();
