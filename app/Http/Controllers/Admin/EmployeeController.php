@@ -423,7 +423,7 @@ class EmployeeController extends BaseController
     {
         $request->validate([
 
-            'place_of_domicile' => ['required', 'string'],
+            'place_of_domicile' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
 
         ]);
 
