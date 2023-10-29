@@ -32,6 +32,12 @@
                     <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                     <div class="row">
+                        {{-- <div class="mb-2 col-sm-4">
+                            <div class="form-group">
+                                <label for="pay_for_month_year" class="required">Pay For Month</label>
+                                <input type="month" class="form-control form-control-sm" name="pay_for_month_year" id="pay_for_month_year" required>
+                            </div>
+                        </div> --}}
                         <div class="mb-2 col-sm-4">
                             <div class="form-group">
                                 <label for="gender">Select Employees</label>

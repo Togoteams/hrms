@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('status')->default('active');
+            $table->string('pay_for_month_year')->nullable();
             $table->double('basic');
             // $table->double('fixed_deductions');
             // $table->double('other_deductions');

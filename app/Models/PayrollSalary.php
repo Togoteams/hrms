@@ -11,6 +11,7 @@ class PayrollSalary extends Model
     protected $fillable = [
         'employee_id',
         'user_id',
+        'pay_for_month_year',
         'status',
         'basic',
         // 'fixed_deductions',

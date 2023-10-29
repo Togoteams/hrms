@@ -1,8 +1,14 @@
 <div class="row">
     <div class="mb-2 col-sm-4">
         <div class="form-group">
+            <label for="pay_for_month_year" class="required">Pay For Month</label>
+            <input type="month" class="form-control form-control-sm" name="pay_for_month_year" id="pay_for_month_year" required>
+        </div>
+    </div>
+    <div class="mb-2 col-sm-4">
+        <div class="form-group">
             <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
-            <label for="basic">basic</label>
+            <label for="basic">Basic</label>
             @php
             $basic = round(($data->basic / $totalMonthDays) * $presentDay);
             @endphp

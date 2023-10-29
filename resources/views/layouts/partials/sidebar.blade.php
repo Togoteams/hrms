@@ -419,8 +419,8 @@
                <div class="nav-item">
                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document.list' ? 'active' : '' }}"
                        href="{{ route('admin.document.index') }}" data-placement="left">
-                       <i class="fa fa-file nav-icon"></i>
-                       <span class="nav-link-title">Document Management</span>
+                       <i class="fa fa-folder nav-icon"></i>
+                       <span class="nav-link-title">Documents</span>
                    </a>
                </div>
            @endcanany
@@ -430,7 +430,7 @@
                <div class="nav-item">
                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
                        href="{{ route('admin.medical-card.index') }}" data-placement="left">
-                       <i class="fa fa-truck nav-icon"></i>
+                       <i class="fa fa-medkit nav-icon"></i>
                        <span class="nav-link-title">Bomaid Type</span>
                    </a>
                </div>

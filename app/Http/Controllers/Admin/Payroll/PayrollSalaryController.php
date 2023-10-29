@@ -83,6 +83,7 @@ class PayrollSalaryController extends Controller
 
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
+            'pay_for_month_year' => 'required|string',
             'basic' => 'required|numeric',
             // 'fixed_deductions' => 'required|numeric',
             // 'other_deductions' => 'required|numeric',
@@ -100,6 +101,7 @@ class PayrollSalaryController extends Controller
                 $payroll = PayrollSalary::create([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
+                    'pay_for_month_year' =>  $request->pay_for_month_year,
                     'basic' =>  $request->basic,
                     'fixed_deductions' =>  $request->fixed_deductions,
                     'other_deductions' =>  $request->other_deductions,
@@ -196,6 +198,7 @@ class PayrollSalaryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
+            'pay_for_month_year' => 'required|string',
             'basic' => 'required|numeric',
             // 'fixed_deductions' => 'required|numeric',
             // 'other_deductions' => 'required|numeric',
@@ -212,6 +215,7 @@ class PayrollSalaryController extends Controller
                 $payroll = PayrollSalary::where('id', $id)->update([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
+                    'pay_for_month_year' =>  $request->pay_for_month_year,
                     'basic' =>  $request->basic,
                     // 'fixed_deductions' =>  $request->fixed_deductions,
                     // 'other_deductions' =>  $request->other_deductions,
