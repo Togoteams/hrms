@@ -55,7 +55,7 @@
                                                                     <div class="col-3">{{ $data->year_of_passing }}</div>
 
                                                                     <div class="col-3 fw-semibold">Marks</div>
-                                                                    <div class="col-3">{{ $data->marks }}</div>
+                                                                    <div class="col-3">{{ $data->marks }} %</div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 text-end">

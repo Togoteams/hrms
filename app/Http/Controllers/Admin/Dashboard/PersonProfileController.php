@@ -40,8 +40,8 @@ class PersonProfileController extends BaseController
             'specialization' => ['string', 'required'],
             'institute_name' => ['string', 'required'],
             'university' => ['string', 'required'],
-            'year_of_passing' => ['numeric', 'required','digits:4'],
-            'marks' => ['numeric', 'required'],
+            'year_of_passing' => ['numeric', 'required', 'digits:4', 'gt:1950', 'max:' . Date::now()->year],
+            'marks' => ['numeric', 'required', 'gt:0','between:0,100'],
         ]);
 
         if ($validator->fails()) {
@@ -96,7 +96,7 @@ class PersonProfileController extends BaseController
     public function postPlaceOfDomicile(Request $request)
     {
         $request->validate([
-            'place_of_domicile' => ['required', 'string'],
+            'place_of_domicile' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
         ]);
         try {
             if (empty($request->id)) {
