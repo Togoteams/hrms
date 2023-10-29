@@ -11,7 +11,7 @@
                     <form id="form_data" action="{{ route('admin.leave_type.store') }}">
                         @csrf
                         <div class="row">
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="leave_for">Leave For</label>
                                     <select required id="leave_for" placeholder="Enter leave_for of leave_type "
@@ -23,7 +23,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input required id="name" placeholder="Enter Name of leave_type "
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="nature_of_leave">nature_of_leave</label>
                                     <select required id="nature_of_leave" name="nature_of_leave"
@@ -42,7 +42,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="no_of_days">no_of_days</label>
                                     <input required id="no_of_days" placeholder="Enter no_of_days of leave_type "
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 mb-2">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">description</label>
                                     <textarea required id="description" placeholder="Enter Short Description of leave_type   " type="text"

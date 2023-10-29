@@ -18,9 +18,14 @@ return new class extends Migration
             $table->boolean('emp_type')->default(1)->comment('1=>local, 0=>ibo');
             $table->double('total_leave_year')->default(0);
             $table->double('max_leave_at_time')->default(0);
+            $table->double('extended_leaves_year')->default(0);
             $table->boolean('is_accumulated')->default(0)->comment('1=>yes, 0=>no');
             $table->double('is_accumulated_max_value')->default(0);
             $table->boolean('is_pro_data')->default(0)->comment('1=>yes, 0=>no');
+            $table->boolean('is_salary_deduction')->default(0)->comment('1=>yes, 0=>no');
+            $table->boolean('salary_deduction_per')->default(0)->comment('1=>yes, 0=>no');
+            $table->boolean('extended_leaves_deduction_per')->default(0)->comment('1=>yes, 0=>no');
+
             $table->boolean('starting_date')->default(0)->comment('1=>DOJ, 0=>Other Date');
             $table->boolean('is_count_holyday')->default(0)->comment('1=>yes, 0=>no');
             $table->boolean('is_leave_encash')->default(0)->comment('1=>yes, 0=>no');

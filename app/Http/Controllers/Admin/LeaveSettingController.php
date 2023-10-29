@@ -30,7 +30,12 @@ class LeaveSettingController extends Controller
             'starting_date'             => 'required',
             'is_count_holyday'          => 'required',
             'is_leave_encash'           => 'required',
-            'is_certificate'            => 'required|boolean'
+            'salary_deduction_per'           => 'required',
+            'extended_leaves_deduction_per'           => 'required',
+            'is_salary_deduction'           => 'required',
+            'extended_leaves_year'          => 'required',
+            'is_certificate'            => 'required|boolean',
+            
         ]);
         if($validator->fails()){ 
             $error = ['error'=>$validator->errors()->all()];
@@ -48,7 +53,11 @@ class LeaveSettingController extends Controller
                 'starting_date'             => $request->starting_date,
                 'is_count_holyday'          => $request->is_count_holyday,
                 'is_leave_encash'           => $request->is_leave_encash,
-                'is_certificate'            => $request->is_certificate
+                'is_certificate'            => $request->is_certificate,
+                'extended_leaves_year'            => $request->extended_leaves_year,
+                'salary_deduction_per'            => $request->salary_deduction_per,
+                'extended_leaves_deduction_per'            => $request->extended_leaves_deduction_per,
+                'is_salary_deduction'            => $request->is_salary_deduction
             ]);
             if($add){
                 return response()->json(['status'=>true, 'message'=>'leave setting add successfully'], 200);
@@ -76,6 +85,10 @@ class LeaveSettingController extends Controller
             'starting_date'             => 'required',
             'is_count_holyday'          => 'required',
             'is_leave_encash'           => 'required',
+            'salary_deduction_per'           => 'required',
+            'extended_leaves_deduction_per'           => 'required',
+            'is_salary_deduction'           => 'required',
+            'extended_leaves_year'          => 'required',
             'is_certificate'            => 'required|boolean'
         ]);
         if($validator->fails()){ 
@@ -94,7 +107,11 @@ class LeaveSettingController extends Controller
                 'starting_date'             => $request->starting_date,
                 'is_count_holyday'          => $request->is_count_holyday,
                 'is_leave_encash'           => $request->is_leave_encash,
-                'is_certificate'            => $request->is_certificate
+                'is_certificate'            => $request->is_certificate,
+                'extended_leaves_year'            => $request->extended_leaves_year,
+                'salary_deduction_per'            => $request->salary_deduction_per,
+                'extended_leaves_deduction_per'            => $request->extended_leaves_deduction_per,
+                'is_salary_deduction'            => $request->is_salary_deduction
             ]);
             if($add){
                 return response()->json(['status'=>true, 'message'=>'leave setting update successfully'], 200);

@@ -531,6 +531,22 @@ if (!function_exists('getCurrencyIcon')) {
         return $data;
     }
 }
+
+if (!function_exists('getLeavesSalary')) {
+    function getLeavesSalary($emp,$salaryMonth)
+    {
+        $salaryStartDate = date('Y-'.$salaryMonth.'-01');
+        $salaryEndDate = date('Y-'.$salaryMonth.'-31');
+        $totalAvailLeave = 0;
+        $noOfPaidLeave = DB::table("leave_applies")->where('start_date',">=",$salaryStartDate)->where('end_date','<=',$salaryEndDate)->where(['user_id'=>$emp])->where('is_approved',1)->get();
+        $noOfUnpaidLeave = DB::table("leave_applies")->where('start_date',">=",$salaryStartDate)->where('end_date','<=',$salaryEndDate)->where(['user_id'=>$emp])->where('is_approved',1)->get();
+         //dd($leavebalance);
+        //  $noOfPaidLeave = 0;
+        //  $noOfUnpaidLeave = 0;
+        return ['total_avail_leave_count'=>$totalAvailLeave,'no_of_paid_leave'=>$noOfPaidLeave,'no_of_unpaid_leave'=>$noOfUnpaidLeave];
+        
+    }
+}
 if (!function_exists('getHeadValue')) {
     function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0)
     {

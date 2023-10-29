@@ -22,7 +22,6 @@
                 <!-- End Row -->
             </div>
 
-            @include('admin.leave_type.create')
 
 
             <!-- Card -->
@@ -70,7 +69,7 @@
                                     <td>{{ $item->emp_type == '1' ? 'Local' : 'IBO' }}</td>
                                     <td>{{ $item->total_leave_year }}</td>
                                     <td>{{ $item->max_leave_at_time }}</td>
-                                    <td>{{ $item->starting_date == '1' ? 'DOJ' : 'Other Date' }}</td>
+                                    <td>{{ $item->starting_date == '1' ? 'DOJ' : 'From January' }}</td>
                                     <td>{{ $item->is_certificate == '1' ? 'Yes' : 'No' }}</td>
                                     <td>
                                         @can('edit-leave-type')
@@ -137,17 +136,50 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Total Leave In Year</label>
                                             <input type="text" name="total_leave_year" class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Extended Leave In Year</label>
+                                            <input type="text" name="extended_leaves_year" class="form-control"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Max leave at time</label>
                                             <input type="text" name="max_leave_at_time" class="form-control"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Is Salary Deduction</label>
+                                            <select name="is_salary_deduction" class="form-control">
+                                                <option value="">---Select---</option>
+                                                <option value=1>Yes</option>
+                                                <option value=0>No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Salary Deduction (%)</label>
+                                            <input type="text" name="salary_deduction_per" class="form-control"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Salary Deduction (%) In Extends</label>
+                                            <input type="text" name="extended_leaves_deduction_per" class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
@@ -272,7 +304,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Total Leave In Year</label>
                                             <input type="text" name="total_leave_year"
@@ -280,11 +312,44 @@
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Extended Leave In Year</label>
+                                            <input type="text" name="extended_leaves_year"  id="extended_leaves_year" class="form-control"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Max leave at time</label>
                                             <input type="text" name="max_leave_at_time"
                                                 id="leave_setting_max_leave_at_time" class="form-control"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Is Salary Deduction</label>
+                                            <select name="is_salary_deduction"  id="is_salary_deduction" class="form-control">
+                                                <option value="">---Select---</option>
+                                                <option value=1>Yes</option>
+                                                <option value=0>No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Salary Deduction (%)</label>
+                                            <input type="text" name="salary_deduction_per"  id="salary_deduction_per" class="form-control"
+                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Salary Deduction (%) In Extends</label>
+                                            <input type="text" name="extended_leaves_deduction_per"  id="extended_leaves_deduction_per" class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
@@ -592,6 +657,10 @@
                 $('#leave_setting_is_count_holyday').val(data['is_count_holyday']);
                 $('#leave_setting_is_leave_encash').val(data['is_leave_encash']);
                 $('#leave_setting_is_certificate').val(data['is_certificate']);
+                $('#extended_leaves_year').val(data['extended_leaves_year']);
+                $('#is_salary_deduction').val(data['is_salary_deduction']);
+                $('#salary_deduction_per').val(data['salary_deduction_per']);
+                $('#extended_leaves_deduction_per').val(data['extended_leaves_deduction_per']);
                 $('#leave_setting_edit_modal').modal('show');
             })
 

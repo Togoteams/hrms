@@ -8,7 +8,7 @@
     <!-- Page Header -->
     <div class="page-header">
       <div class="row align-items-end">
-        <div class="col-sm mb-2 mb-sm-0">
+        <div class="mb-2 col-sm mb-sm-0">
           <h1 class="page-header-title">Leaves</h1>
         </div>
         <!-- End Col -->
@@ -41,7 +41,7 @@
           </form>
         </div>
 
-        <div class="d-grid d-sm-flex justify-content-md-end align-items-sm-center gap-2">
+        <div class="gap-2 d-grid d-sm-flex justify-content-md-end align-items-sm-center">
           <!-- Datatable Info -->
           <div id="datatableCounterInfo" style="display: none;">
             <div class="d-flex align-items-center">
@@ -106,14 +106,14 @@
                 </div>
               </td>
               <td class="table-column-ps-0">
-                <span class="d-block h5 mb-0">{{$leave->leave_applies_for}}</span>
+                <span class="mb-0 d-block h5">{{$leave->leave_applies_for}}</span>
                 <!-- <span class="d-block fs-5">Human resources</span> -->
               </td>
               <td>
-                <span class="d-block h5 mb-0">{{$leave->start_date}}</span>
+                <span class="mb-0 d-block h5">{{$leave->start_date}}</span>
               </td>
               <td>
-                <span class="d-block h5 mb-0">{{$leave->end_date}}</span>
+                <span class="mb-0 d-block h5">{{$leave->end_date}}</span>
               </td>
               <td> {{$leave->leave_reason}}</td>
               <td>
@@ -143,13 +143,13 @@
       <!-- Footer -->
       <div class="card-footer">
         <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
-          <div class="col-sm mb-2 mb-sm-0">
+          <div class="mb-2 col-sm mb-sm-0">
             <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
               <span class="me-2">Showing:</span>
 
               <!-- Select -->
               <div class="tom-select-custom">
-                <select id="datatableEntries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" data-hs-tom-select-options='{
+                <select id="datatableEntries" class="w-auto js-select form-select form-select-borderless" autocomplete="off" data-hs-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true
                           }'>
@@ -201,32 +201,32 @@
         <form method="post" action="{{route('admin.leave.add')}}" class="formsubmit">
           @csrf
           <!-- Form -->
-          <div class="row mb-4">
+          <div class="mb-4 row">
             <label for="name" class="col-sm-3 col-form-label form-label">Leave Applies For</label>
             <div class="col-sm-9">
               <input type="hidden" class="form-control" name="leave_id" id="leave_id">
               <input type="text" class="form-control" name="leave_applies_for" id="leave_applies_for" placeholder="Leave Applies For" aria-label="Leave Applies For">
             </div>
           </div>
-          <div class="row mb-4">
+          <div class="mb-4 row">
             <label for="name" class="col-sm-3 col-form-label form-label">Start Date</label>
             <div class="col-sm-9">
               <input type="date" class="form-control" rows="4" cols="50" name="start_date" id="start_date" placeholder="" aria-label="">
             </div>
           </div>
-          <div class="row mb-4">
+          <div class="mb-4 row">
             <label for="name" class="col-sm-3 col-form-label form-label">End Date</label>
             <div class="col-sm-9">
               <input type="date" class="form-control" rows="4" cols="50" name="end_date" id="end_date" placeholder="" aria-label="">
             </div>
           </div>
-          <div class="row mb-4">
+          <div class="mb-4 row">
             <label for="name" class="col-sm-3 col-form-label form-label">Reason</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" name="leave_reason" id="leave_reason" placeholder="Reason" aria-label="Reason">
             </div>
           </div>
-          <div class="row mb-4">
+          <div class="mb-4 row">
             <label for="description" class="col-sm-3 col-form-label form-label">Remark</label>
             <div class="col-sm-9">
               <textarea type="text" class="form-control" rows="4" cols="50" name="remark" id="remark" placeholder="Remark" aria-label="Remark"></textarea>
@@ -237,7 +237,7 @@
           <!-- End Form -->
 
           <div class="d-flex justify-content-end">
-            <div class="d-flex gap-3">
+            <div class="gap-3 d-flex">
               <button type="button" class="btn btn-white" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
               <button type="submit" class="btn btn-white">Save changes</button>
             </div>

@@ -24,10 +24,12 @@ class DatabaseSeeder extends Seeder
             Brachseeders::class,
             TaxSlabSeeder::class,
             Membershipseeders::class,
+            CurrencySeetingSeeder::class,
             //Employeeseeders::class,
             PayrollHeadSeeder::class,
             DepartmentSeeder::class,
             LeaveSettingSeeder::class,
+         
 
         ]);
     }
