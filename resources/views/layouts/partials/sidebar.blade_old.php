@@ -1,21 +1,20 @@
  <!-- Navbar Vertical -->
 
  <aside
-     class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
+     class="bg-white js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered ">
      <div class="navbar-vertical-container">
          <div class="navbar-vertical-footer-offset">
              <!-- Logo -->
 
-             <a class="navbar-brand" href="index-2.html" aria-label="Front">
-                 <img src="{{ asset('assets/img/logo.svg') }}" alt="Logo" data-hs-theme-appearance="default">
-                 <img class="navbar-brand-logo" src="{{ asset('assets/svg/logos-light/logo.svg') }}" alt="Logo"
-                     data-hs-theme-appearance="dark">
-                 <img class="navbar-brand-logo-mini" src="{{ asset('assets/svg/logos/logo-short.svg') }}" alt="Logo"
-                     data-hs-theme-appearance="default">
-                 <img class="navbar-brand-logo-mini" src="{{ asset('assets/svg/logos-light/logo-short.svg') }}"
-                     alt="Logo" data-hs-theme-appearance="dark">
-             </a>
-
+             <a class="navbar-brand" href="{{url('/admin/dashboard')}}" aria-label="Front">
+            
+                <img class="navbar-brand-logo" src="{{ asset('assets/img/logo-cropped.svg')  }}" alt="Logo"
+                    data-hs-theme-appearance="dark">
+                <img class="navbar-brand-logo-mini" src="{{ asset('assets/img/logo-cropped.svg')  }}" alt="Logo"
+                    data-hs-theme-appearance="default">
+                <img class="navbar-brand-logo-mini" src="{{asset('assets/img/logo-cropped.svg')  }}"
+                    alt="Logo" data-hs-theme-appearance="dark">
+            </a>
              <!-- End Logo -->
 
              <!-- Navbar Vertical Toggle -->
@@ -41,22 +40,10 @@
                              </a>
                          </div>
 
-                     {{-- <div class="nav-item">
-                         <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
-                             data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards"
-                             aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
-                             <i class="bi-house-door nav-icon"></i>
-                             <span class="nav-link-title">Dashboards</span>
-                         </a>
-
-                         <div id="navbarVerticalMenuDashboards" class="nav-collapse collapse show"
-                             data-bs-parent="#navbarVerticalMenu">
-                             <a class="nav-link active" href="index-2.html">Default</a>
-                         </div>
-                     </div> --}}
+                   
                      <!-- End Collapse -->
 
-                     <span class="dropdown-header mt-4">Pages</span>
+                     <span class="mt-4 dropdown-header">Pages</span>
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                      <!-- Collapse -->
@@ -118,7 +105,7 @@
 
                          <!-- End Collapse -->
 
-                         <span class="dropdown-header mt-4">Master</span>
+                         <span class="mt-4 dropdown-header">Master</span>
                          <small class="bi-three-dots nav-subtitle-replacer"></small>
 
 

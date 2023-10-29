@@ -38,19 +38,7 @@
                          </a>
                      </div>
 
-                     {{-- <div class="nav-item">
-                         <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button"
-                             data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards"
-                             aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
-                             <i class="bi-house-door nav-icon"></i>
-                             <span class="nav-link-title">Dashboards</span>
-                         </a>
-
-                         <div id="navbarVerticalMenuDashboards" class="nav-collapse collapse show"
-                             data-bs-parent="#navbarVerticalMenu">
-                             <a class="nav-link active" href="index-2.html">Default</a>
-                         </div>
-                     </div> --}}
+                   
                      <!-- End Collapse -->
 
                      {{-- <span class="mt-4 dropdown-header">Pages</span> --}}

@@ -4,19 +4,18 @@
      class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered ">
      <div class="navbar-nav-wrap">
          <!-- Logo -->
-         <a class="navbar-brand" href="index-2.html" aria-label="Front">
-             <img class="navbar-brand-logo" src="{{ asset('assets/svg/logos/logo') }}" alt="Logo"
-                 data-hs-theme-appearance="default">
-             <img class="navbar-brand-logo" src="{{ asset('assets/svg/logos/logo.svg')  }}" alt="Logo"
+         <a class="navbar-brand" href="{{url('/admin/dashboard')}}" aria-label="Front">
+            
+             <img class="navbar-brand-logo" src="{{ asset('assets/img/logo-cropped.svg')  }}" alt="Logo"
                  data-hs-theme-appearance="dark">
-             <img class="navbar-brand-logo-mini" src="{{ asset('assets/svg/logos/logo.svg')  }}" alt="Logo"
+             <img class="navbar-brand-logo-mini" src="{{ asset('assets/img/logo-cropped.svg')  }}" alt="Logo"
                  data-hs-theme-appearance="default">
-             <img class="navbar-brand-logo-mini" src="{{asset('assets/svg/logos/logo.svg')  }}"
+             <img class="navbar-brand-logo-mini" src="{{asset('assets/img/logo-cropped.svg')  }}"
                  alt="Logo" data-hs-theme-appearance="dark">
          </a>
          <!-- End Logo -->
 
-         <div class="navbar-nav-wrap-content mr-auto">
+         <div class="mr-auto navbar-nav-wrap-content">
              <!-- Navbar Vertical Toggle -->
              <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
                  <i class="bi-arrow-bar-left navbar-toggler-short-align"
@@ -30,12 +29,12 @@
              <!-- End Navbar Vertical Toggle -->
 
              <!-- Search Form -->
-             <h1 class="tittle-nav pt-2">HRMS</h1>
+             <h1 class="pt-2 tittle-nav">HRMS</h1>
 
 
              <!-- End Search Form -->
          </div>
-         <div class=" mx-auto text-center nav-center-logo">
+         <div class="mx-auto text-center nav-center-logo">
 
             <img class="navbar-brand-logo" src="{{ asset('assets/img/logo-cropped.svg') }}" alt="Logo"
             data-hs-theme-appearance="default">
@@ -44,7 +43,7 @@
             <!-- End Search Form -->
         </div>
 
-         <div class="navbar-nav-wrap-content ml-auto">
+         <div class="ml-auto navbar-nav-wrap-content">
              <!-- Navbar -->
              <ul class="navbar-nav">
 
