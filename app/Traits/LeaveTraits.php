@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Employee;
 use App\Models\LeaveApply;
 use App\Models\LeaveEncashment;
 use App\Models\LeaveSetting;
@@ -15,6 +16,28 @@ trait LeaveTraits
             $user_id = auth()->user()->id;
         }
         $total_apply_leave = 0;
+        $emp = Employee::where('user_id',$user_id)->first();
+
+        $totalNoOfLeaveInBucket = 0;
+        $leaveSetting = LeaveSetting::find($leave_type_id);
+        $perYearLeave = $leaveSetting->total_leave_year;
+        $isProRata = $leaveSetting->is_pro_data;
+        $dateOfJoining = date("Y-m-d",strtotime($emp->start_date));
+        $currentDate = date("Y-m-d");
+
+        $diff = abs(strtotime($dateOfJoining) - strtotime($currentDate));
+
+        $years = floor($diff / (365*60*60*24));
+
+        $months = floor(($diff-$years  * 365*60*60*24) / (30*60*60*24));
+
+        $totalWorkingMonths  = $years*12+$months;
+        $perMonthLeave = ($perYearLeave/12);
+        // echo $years."year";
+        // echo $totalWorkingMonths."----";
+        $noOfTotalLeaveUptoData = ceil($perMonthLeave * $totalWorkingMonths);
+        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+        
         $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
         if (count($total_apply_leaves) > 0) {
             foreach ($total_apply_leaves as  $value) {
@@ -25,10 +48,10 @@ trait LeaveTraits
             }
             $total_apply_leave = $total_apply_leave + 1;
         }
-
-        $total_leave = LeaveSetting::find($leave_type_id)->total_leave_year;
+        // echo $total_apply_leave;
+        // $total_leave = LeaveSetting::find($leave_type_id)->total_leave_year;
         $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
-        $total = $total_leave - $total_apply_leave -  $encash_leave;
+        $total = $noOfTotalLeaveUptoData - $total_apply_leave -  $encash_leave;
         return $total;
     }
     public function only_encash_leave($user_id = '')

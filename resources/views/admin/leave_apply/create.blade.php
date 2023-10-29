@@ -126,11 +126,21 @@
         $("#start_date").on('change',function(){
             dt = new Date($(this).val());
             dt.setDate(dt.getDate() + 1);
-            if($("#end_date").val()=="")
-            {
-                $("#end_date").val(dt.getFullYear()+"-"+(dt.getMonth()+1)+"-"+dt.getDate());
-            }
-            console.log("ddsdsd");
+            // if($("#end_date").val()=="")
+            // {
+                var month = dt.getMonth()+1;
+                var day = dt.getDate();
+                if(month<9)
+                {
+                    month = "0"+month;
+                }
+                if(day<9)
+                {
+                    day = "0"+day;
+                }
+                $("#end_date").val(dt.getFullYear()+"-"+(month)+"-"+day);
+            // }
+            console.log("ddsdsd",dt.getFullYear()+"-"+(month)+"-"+day);
             getDays();
         });
         $("#end_date").on('change',function(){

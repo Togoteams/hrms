@@ -90,9 +90,11 @@ class LeaveApplyController extends Controller
             $userId = $validator->getData()['user_id'] ?? "";
             $overlappingRecord =true;
             
-            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date,$userId) {
-                $query->where('start_date', '<=', $start_date)->where('end_date', '>=', $end_date)->where('user_id',$userId);
-            })->first();
+
+            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
+                $query->where('start_date', '<=', $start_date)
+                ->where('end_date', '>=', $end_date);
+            })->where('user_id',$userId)->first();
             return !$overlappingRecord;
         });
 
@@ -103,8 +105,8 @@ class LeaveApplyController extends Controller
 
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'start_date' => ['required', 'date','after_or_equal:','no_date_overlap'],
-            'end_date' => ['required', 'date','after:start_date', 'after_or_equal:' . now()->format('Y-m-d')],
+            'start_date' => ['required', 'date','after_or_equal:','no_date_overlap','after:today'],
+            'end_date' => ['required', 'date', 'after_or_equal:' . now()->format('Y-m-d'),'no_date_overlap'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"],
             'remaining_leave' =>['required','numeric', Rule::when($leavSlug != 'leave-without-pay', 'min:1')]
         ]);
