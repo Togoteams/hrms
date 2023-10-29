@@ -176,9 +176,11 @@
                                             <div class="form-group">
                                                 <label for="skill" class="required">Skills</label>
                                                 <select class="form-control js-tags" multiple="multiple" name="skill[]" >
+                                                    @if(isset($data) && isset($data->skill))
                                                     @foreach(explode(',', $data->skill) as $skill)
-                                                    <option selected value="{{ $skill }}">{{ $skill }}</option>
+                                                        <option selected value="{{ $skill }}">{{ $skill }}</option>
                                                     @endforeach
+                                                @endif
                                                 </select>
                                             </div>
                                         </div>

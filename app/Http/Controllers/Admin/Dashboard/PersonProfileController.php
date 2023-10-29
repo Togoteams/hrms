@@ -189,7 +189,7 @@ class PersonProfileController extends BaseController
         $validator = Validator::make($request->all(), [
             'user_id' => ['required', 'numeric'],
             'name' => ['required', 'string'],
-            'event_date' => ['required', 'date'],
+            'event_date' => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
             'purpose' => ['required','string'],
             'description' => ['required','string'],
         ]);
@@ -270,7 +270,7 @@ class PersonProfileController extends BaseController
         $request->validate([
             'medical_card_id' => ['required', 'numeric'],
             'company_name' => ['required', 'string'],
-            'insurance_id' => ['required', 'numeric'],
+            'insurance_id' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
             
         ]);
         try {
@@ -300,7 +300,7 @@ class PersonProfileController extends BaseController
     public function updateDrivingLicenseDetails(Request $request)
     {
         $request->validate([
-            'license_no' => ['required', 'string'],
+            'license_no' => ['required', 'string', 'regex:/^[a-zA-Z0-9]+$/'],
         ]);
         try {
             if (empty($request->id)) {
