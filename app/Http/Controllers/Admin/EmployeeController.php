@@ -195,7 +195,7 @@ class EmployeeController extends BaseController
             'start_date'            => ['required','date',
                 function ($attribute, $value, $fail) {
                     $minDate = now()->subYears(60); 
-                    $maxDate = now()->subYears(18);
+                    $maxDate = now();
         
                     $date = \DateTime::createFromFormat('Y-m-d', $value);
         
