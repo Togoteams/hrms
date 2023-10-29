@@ -27,4 +27,8 @@ class Reimbursement extends Model
         return $this->belongsTo(ReimbursementType::class, 'type_id');
     }
 
+    public function currencySetting()
+    {
+        return $this->belongsTo(CurrencySetting::class, 'expenses_currency', 'id');
+    }
 }

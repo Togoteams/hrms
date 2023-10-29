@@ -151,7 +151,7 @@
                                             </div>
                                             <div class="pt-2 col-1">
                                                 <select name="currency_salary" id="currency_salary" name="currency_salary" class="form-control form-control-sm">
-                                                    <option value=""> Select</option>
+                                                    <option value="">Select</option>
                                                     @foreach ($currency_setting  as  $currency)
                                                         <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
                                                     @endforeach

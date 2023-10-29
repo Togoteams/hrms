@@ -33,13 +33,20 @@
                                 <select id="expenses_currency" placeholder="Select Currency"
                                     name="expenses_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select expenses_currency - </option>
-                                    <option
+                                    @foreach ($currencies  as  $currency)
+                                    <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                                @endforeach
+                                    {{-- @foreach($currency as $data)
+                                    <option value="{{ $data->id }}" {{ old('expenses_currency') == $data->id ? 'selected' : '' }}>
+                                       {{ $data->currency_name_from }}
+                                   </option>                                         
+                                   @endforeach --}}
+                                    {{-- <option
                                         {{ !empty($employee) ? ($employee->expenses_currency == 'pula' ? 'selected' : '') : '' }}
                                         value="pula">Pula( P )</option>
-                                
                                     <option
                                         {{ !empty($employee) ? ($employee->expenses_currency == 'dollar' ? 'selected' : '') : '' }}
-                                        value="dollar">Dollar( $ )</option>
+                                        value="dollar">Dollar( $ )</option> --}}
                                 </select>
                             </div>
                             <div class="mb-2 col-sm-6">
@@ -101,13 +108,10 @@
                                 <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
                                     name="reimbursement_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select Currency - </option>
-                                    <option
-                                        {{ !empty($employee) ? ($employee->reimbursement_currency == 'pula' ? 'selected' : '') : '' }}
-                                        value="pula">Pula( P )</option>
-                                   
-                                    <option
-                                        {{ !empty($employee) ? ($employee->reimbursement_currency == 'dollar' ? 'selected' : '') : '' }}
-                                        value="dollar">Dollar( $ )</option>
+                                    @foreach ($currencies  as  $currency)
+                                    <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                                @endforeach
+                                    
                                 </select>
                             </div>
                             <div class="mb-2 col-sm-6">

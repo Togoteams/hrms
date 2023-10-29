@@ -24,8 +24,11 @@
                 <select id="expenses_currency" placeholder="Select Currency"
                     name="expenses_currency" class="form-control form-control-sm" required>
                     <option selected disabled> - Select expenses_currency - </option>
-                    <option value="pula" {{ !empty($employee) && $employee->expenses_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
-                    <option value="dollar" {{ !empty($employee) && $employee->expenses_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option>
+                    @foreach ($currencies  as  $currency)
+                    <option value="{{$currency->currency_name_from}}" {{ $reimbursement->expenses_currency == $currency->currency_name_from ? 'selected' : '' }}>{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                    @endforeach
+                    {{-- <option value="pula" {{ !empty($employee) && $employee->expenses_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
+                    <option value="dollar" {{ !empty($employee) && $employee->expenses_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option> --}}
                 </select>
             </div>
             <div class="mb-2 col-sm-6">
@@ -87,8 +90,11 @@
                 <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
                     name="reimbursement_currency" class="form-control form-control-sm" required>
                     <option selected disabled> - Select Currency - </option>
-                    <option value="pula" {{ !empty($employee) && $employee->reimbursement_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
-                    <option value="dollar" {{ !empty($employee) && $employee->reimbursement_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option>
+                    @foreach ($currencies  as  $currency)
+                    <option value="{{$currency->currency_name_from}}"{{ !empty($reimbursement) && $reimbursement->reimbursement_currency == $currency->currency_name_from ? 'selected' : '' }}>{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                    @endforeach
+                    {{-- <option value="pula" {{ !empty($employee) && $employee->reimbursement_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
+                    <option value="dollar" {{ !empty($employee) && $employee->reimbursement_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option> --}}
                 </select>
             </div>
             <div class="mb-2 col-sm-6">

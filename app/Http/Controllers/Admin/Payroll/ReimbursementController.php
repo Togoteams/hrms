@@ -22,7 +22,7 @@ class ReimbursementController extends BaseController
     public function index(Request $request)
     {
             if ($request->ajax()) {
-            $data = Reimbursement::with('reimbursementype')->select('*');
+            $data = Reimbursement::with('reimbursementype','currencySetting')->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -34,8 +34,8 @@ class ReimbursementController extends BaseController
             }
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::where('status','active')->get();
-        $currency = CurrencySetting::where('status','active')->get();
-        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 'reimbursementType' => $reimbursementType, 'currency' => $currency, 'reimbursement' => $reimbursement]);
+        $currencies = CurrencySetting::where('status','active')->get();
+        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 'reimbursementType' => $reimbursementType, 'currencies' => $currencies, 'reimbursement' => $reimbursement]);
 
 
     }
@@ -99,7 +99,8 @@ class ReimbursementController extends BaseController
        
         $reimbursement = Reimbursement::find($id);
         $reimbursementType = ReimbursementType::where('status','active')->get();
-        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType, 'page' => $this->page_name]);    
+        $currencies = CurrencySetting::where('status','active')->get();
+        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$currencies, 'page' => $this->page_name]);    
     }
 
     
