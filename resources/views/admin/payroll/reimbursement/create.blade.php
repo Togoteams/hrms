@@ -36,17 +36,6 @@
                                     @foreach ($currencies  as  $currency)
                                     <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
                                 @endforeach
-                                    {{-- @foreach($currency as $data)
-                                    <option value="{{ $data->id }}" {{ old('expenses_currency') == $data->id ? 'selected' : '' }}>
-                                       {{ $data->currency_name_from }}
-                                   </option>                                         
-                                   @endforeach --}}
-                                    {{-- <option
-                                        {{ !empty($employee) ? ($employee->expenses_currency == 'pula' ? 'selected' : '') : '' }}
-                                        value="pula">Pula( P )</option>
-                                    <option
-                                        {{ !empty($employee) ? ($employee->expenses_currency == 'dollar' ? 'selected' : '') : '' }}
-                                        value="dollar">Dollar( $ )</option> --}}
                                 </select>
                             </div>
                             <div class="mb-2 col-sm-6">
