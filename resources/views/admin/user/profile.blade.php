@@ -40,13 +40,23 @@
                             <img class="img-profile rounded-circle" id="user_img" style="height: 70px;" src="">
                         @endif
                     </div>
-                    <div class="form-group mr-bot">
-
+                    <div class="form-group mr-bot d-flex">
+                        <div class="col-md-7">
                         <label for="image" class="required">Profile Pic </label>
                         <input type="file" name="image" id="image" accept="image/*" onchange="validateimg(this)" required>
                         @error('image')
                             <div class=" text-danger">{{ $message }}</div>
                         @enderror
+                       </div>
+                        <div class="col-md-5">
+                            <h6 class="card-subtitle">
+                                @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
+                                    <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 60px; width: 75px;">
+                                @else
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="Default Icon" style="height: 60px; width: 75px;">
+                                @endif
+                             </h6>
+                        </div>
                     </div>
 
                     <div class="form-group mr-bot">

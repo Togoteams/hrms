@@ -16,7 +16,8 @@ class UserAccountController extends Controller
 {
     public function viewProfile()
     {
-        return view('admin.user.profile');
+        $data = User::findOrFail(Auth::user()->id);
+        return view('admin.user.profile', compact('data'));
     }
 
     public function viewForgotPasswordPage()
@@ -112,7 +113,9 @@ class UserAccountController extends Controller
         $profile->save();
         $message = "Profile Updated";
         Session::put('success', $message);
-        return redirect()->back();
+        // return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('success', 'Profile has been Update successfully!');
+
     }
 
     public function viewPasswordReset()

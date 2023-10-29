@@ -22,7 +22,7 @@ class ReimbursementController extends BaseController
     public function index(Request $request)
     {
             if ($request->ajax()) {
-            $data = Reimbursement::with('reimbursementype','currencySetting')->select('*');
+            $data = Reimbursement::with('reimbursementype')->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

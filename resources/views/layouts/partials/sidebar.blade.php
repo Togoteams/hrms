@@ -250,28 +250,203 @@
                          </div>
                      @endcanany
 
-                     @canany(['add-document-management', 'edit-document-management', 'view-document-management',
-                         'delete-document-management'])
-                         <div class="nav-item">
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document.list' ? 'active' : '' }}"
-                                 href="{{ route('admin.document.index') }}" data-placement="left">
-                                 <i class="fa fa-file nav-icon"></i>
-                                 <span class="nav-link-title">Document Management</span>
-                             </a>
-                         </div>
-                     @endcanany
+                    
+                @canany(['add-leave', 'edit-leave', 'view-leave', 'delete-leave', 'add-leave-types',
+                     'edit-leave-types', 'delete-leave-types', 'view-leave-types', 'change-status-leave-types',
+                     'add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
+                     'change-status-leave-apply', 'add-leave-encashment', 'edit-leave-encashment',
+                     'delete-leave-encashment', 'view-leave-encashment', 'add-leave-balance-report',
+                     'edit-leave-balance-report', 'delete-leave-balance-report', 'view-leave-balance-report',
+                     'add-leave-request-history', 'edit-leave-request-history', 'delete-leave-request-history',
+                     'view-leave-request-history', 'add-leave-request-rejected', 'edit-leave-request-rejected',
+                     'delete-leave-request-rejected', 'view-leave-request-rejected', 'add-leave-report',
+                     'edit-leave-report', 'delete-leave-report', 'view-leave-report'])
 
-                     @canany(['add-medical-card-type', 'edit-medical-card-type', 'view-medical-card-type',
-                         'delete-medical-card-type'])
-                         <div class="nav-item">
-                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
-                                 href="{{ route('admin.medical-card.index') }}" data-placement="left">
-                                 <i class="fa fa-truck nav-icon"></i>
-                                 <span class="nav-link-title">Bomaid Type</span>
-                             </a>
-                         </div>
-                     @endcanany
+                     <div class="nav-item">
+                         <a class="nav-link dropdown-toggle " href="#leave" role="button"
+                             data-bs-toggle="collapse" data-bs-target="#leave" aria-expanded="false"
+                             aria-controls="leave">
+                             <i class="bi-person nav-icon"></i>
+                             <span class="nav-link-title">Leave</span>
+                         </a>
 
+                         <div id="leave"
+                             class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave']) }} "
+                             data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                             {{-- @canany(['add-leave-types', 'edit-leave-types', 'delete-leave-types', 'view-leave-types',
+                                 'change-status-leave-types'])
+                                 @if (!isemplooye())
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
+                                         href="{{ route('admin.leave_type.index') }}">Leave Types</a>
+                                 @endif
+                             @endcanany --}}
+                             @canany(['add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])
+                                <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
+                                    href="{{ route('admin.leavesettings.list') }}" data-placement="left">
+                                    <span class="nav-link-title">Leave Setting</span>
+                                </a>
+                            @endcanany
+
+                             @canany(['add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
+                                 'change-status-leave-apply'])
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.index') }}" data-placement="left">
+                                     <span class="nav-link-title">Leave Apply/Modify</span>
+                                 </a>
+                             @endcanany
+
+                             {{-- @canany(['add-leave-encashment', 'edit-leave-encashment', 'delete-leave-encashment',
+                                 'view-leave-encashment'])
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_encashment.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_encashment.index') }}" data-placement="left">
+                                     <span class="nav-link-title">LEAVE ENCASHMENT</span>
+                                 </a>
+                             @endcanany --}}
+
+                             {{-- @canany(['add-leave-balance-report', 'edit-leave-balance-report',
+                                 'delete-leave-balance-report', 'view-leave-balance-report'])
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.balance_history' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.balance_history') }}" data-placement="left">
+                                     <span class="nav-link-title">LEAVE BALANCE REPORT</span>
+                                 </a>
+                             @endcanany --}}
+
+                             @canany(['add-leave-request-history', 'edit-leave-request-history',
+                                 'delete-leave-request-history', 'view-leave-request-history'])
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.request_history' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.request_history') }}" data-placement="left">
+                                     <span class="nav-link-title">Leave Request History</span>
+                                 </a>
+                             @endcanany
+
+                             @canany(['add-leave-request-rejected', 'edit-leave-request-rejected',
+                                 'delete-leave-request-rejected', 'view-leave-request-rejected'])
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.get_rejected_leave' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_apply.get_rejected_leave') }}" data-placement="left">
+                                     <span class="nav-link-title">Leave Request Rejected</span>
+                                 </a>
+                             @endcanany
+
+                             @canany(['add-leave-report', 'edit-leave-report', 'delete-leave-report',
+                                 'view-leave-report'])
+                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
+                                     href="{{ route('admin.leave_reports.index') }}" data-placement="left">
+                                     <span class="nav-link-title">Leave Reports</span>
+                                 </a>
+                             @endcanany
+
+
+                         </div>
+                     </div>
+                   @endcanany
+
+                   
+                @canany(['add-payroll', 'edit-payroll', 'view-payroll', 'delete-payroll', 'add-tax-slab-settings',
+                   'edit-tax-slab-settings', 'delete-tax-slab-settings', 'view-tax-slab-settings',
+                   'add-salary-increment-settings', 'edit-salary-increment-settings',
+                   'delete-salary-increment-settings', 'view-salary-increment-settings',
+                   'add-salary-increment-reporting', 'edit-salary-increment-reporting',
+                   'delete-salary-increment-reporting', 'view-salary-increment-reporting', 'add-payroll-head',
+                   'edit-payroll-head', 'delete-payroll-head', 'view-payroll-head', 'change-status-payroll-head',
+                   'add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale', 'add-salary',
+                   'edit-salary', 'delete-salary', 'view-salary', 'print-salary', 'add-reimbursement-type',
+                   'edit-reimbursement-type', 'delete-reimbursement-type', 'view-reimbursement-type',
+                   'add-reimbursement', 'edit-reimbursement', 'delete-reimbursement', 'view-reimbursement',
+                   'change-status-reimbursement'])
+                   <div class="nav-item">
+                       <a class="nav-link dropdown-toggle " href="#emppayroll" role="button"
+                           data-bs-toggle="collapse" data-bs-target="#emppayroll" aria-expanded="false"
+                           aria-controls="emppayroll">
+                           <i class="fas fa-money-bill-wave nav-icon"></i>
+                           <span class="nav-link-title">Payroll</span>
+                       </a>
+
+                       <div id="emppayroll"
+                           class="nav-collapse collapse {{ show(['payroll.salary.index', 'payroll.payscale.index', 'payroll.head.index', 'payroll.tax-slab-setting.index', 'payroll.salary-increment-setting.index', 'payroll.salary-increment-reporting.index', 'payroll.reimbursement_type.index', 'payroll.reimbursement.index']) }} "
+                           data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                           @canany(['add-tax-slab-settings', 'edit-tax-slab-settings', 'delete-tax-slab-settings',
+                               'view-tax-slab-settings'])
+                               <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-slab-setting.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.tax-slab-setting.index') }}"> Tax Slab Settings</a>
+                           @endcanany
+
+                           @canany(['add-salary-increment-settings', 'edit-salary-increment-settings',
+                               'delete-salary-increment-settings', 'view-salary-increment-settings'])
+                               <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-setting.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.salary-increment-setting.index') }}"> Salary Increment
+                                   Settings</a>
+                           @endcanany
+                           @canany(['add-overtime-setting', 'edit-overtime-setting', 'view-overtime-setting',
+                           'delete-overtime-setting'])
+                              <div class="nav-item">
+                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
+                                      href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
+                                      <span class="nav-link-title">Overtime Setting</span>
+                                  </a>
+                              </div>
+                          @endcanany
+
+                           @canany(['add-salary-increment-reporting', 'edit-salary-increment-reporting',
+                               'delete-salary-increment-reporting', 'view-salary-increment-reporting'])
+                               {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-reporting.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.salary-increment-reporting.index') }}"> Salary
+                                   Increment Reporting</a> --}}
+                           @endcanany
+                           @canany(['add-payroll-head', 'edit-payroll-head', 'delete-payroll-head',
+                               'view-payroll-head', 'change-status-payroll-head'])
+                               <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.head.index') }}"> Payroll Head</a>
+                           @endcanany
+
+                           @canany(['add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale'])
+                               <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscale.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.payscale.index') }}"> Pay Scale</a>
+                           @endcanany
+
+                           @canany(['add-salary', 'edit-salary', 'delete-salary', 'view-salary', 'print-salary'])
+                               <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.salary.index') }}"> Salary</a>
+                           @endcanany
+
+                           @canany(['add-reimbursement-type', 'edit-reimbursement-type', 'delete-reimbursement-type',
+                               'view-reimbursement-type'])
+                               <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement_type.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.reimbursement_type.index') }}">Reimbursement Type</a>
+                           @endcanany
+
+                           @canany(['add-reimbursement', 'edit-reimbursement', 'delete-reimbursement',
+                               'view-reimbursement', 'change-status-reimbursement'])
+                               <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement.index' ? 'active' : '' }}  "
+                                   href="{{ route('admin.payroll.reimbursement.index') }}">Reimbursement</a>
+                           @endcanany
+
+
+                       </div>
+                   </div>
+               @endcanany
+               @canany(['add-document-management', 'edit-document-management', 'view-document-management',
+               'delete-document-management'])
+               <div class="nav-item">
+                   <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document.list' ? 'active' : '' }}"
+                       href="{{ route('admin.document.index') }}" data-placement="left">
+                       <i class="fa fa-file nav-icon"></i>
+                       <span class="nav-link-title">Document Management</span>
+                   </a>
+               </div>
+           @endcanany
+
+           @canany(['add-medical-card-type', 'edit-medical-card-type', 'view-medical-card-type',
+               'delete-medical-card-type'])
+               <div class="nav-item">
+                   <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
+                       href="{{ route('admin.medical-card.index') }}" data-placement="left">
+                       <i class="fa fa-truck nav-icon"></i>
+                       <span class="nav-link-title">Bomaid Type</span>
+                   </a>
+               </div>
+           @endcanany
                  
 
                      {{-- <div id="navbarVerticalMenuSettingMenu">
@@ -339,98 +514,6 @@
                     </div>
                     @endcanany
 
-
-                     {{-- @canany(['add-leaves', 'edit-leaves', 'view-leaves', 'delete-leaves']) --}}
-                     @canany(['add-leave', 'edit-leave', 'view-leave', 'delete-leave', 'add-leave-types',
-                         'edit-leave-types', 'delete-leave-types', 'view-leave-types', 'change-status-leave-types',
-                         'add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
-                         'change-status-leave-apply', 'add-leave-encashment', 'edit-leave-encashment',
-                         'delete-leave-encashment', 'view-leave-encashment', 'add-leave-balance-report',
-                         'edit-leave-balance-report', 'delete-leave-balance-report', 'view-leave-balance-report',
-                         'add-leave-request-history', 'edit-leave-request-history', 'delete-leave-request-history',
-                         'view-leave-request-history', 'add-leave-request-rejected', 'edit-leave-request-rejected',
-                         'delete-leave-request-rejected', 'view-leave-request-rejected', 'add-leave-report',
-                         'edit-leave-report', 'delete-leave-report', 'view-leave-report'])
-
-                         <div class="nav-item">
-                             <a class="nav-link dropdown-toggle " href="#leave" role="button"
-                                 data-bs-toggle="collapse" data-bs-target="#leave" aria-expanded="false"
-                                 aria-controls="leave">
-                                 <i class="bi-person nav-icon"></i>
-                                 <span class="nav-link-title">Leave</span>
-                             </a>
-
-                             <div id="leave"
-                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave']) }} "
-                                 data-bs-parent="#navbarVerticalMenuPagesMenu">
-
-                                 {{-- @canany(['add-leave-types', 'edit-leave-types', 'delete-leave-types', 'view-leave-types',
-                                     'change-status-leave-types'])
-                                     @if (!isemplooye())
-                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.leave_type.index' ? 'active' : '' }}  "
-                                             href="{{ route('admin.leave_type.index') }}">Leave Types</a>
-                                     @endif
-                                 @endcanany --}}
-                                 @canany(['add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])
-                                    <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
-                                        href="{{ route('admin.leavesettings.list') }}" data-placement="left">
-                                        <span class="nav-link-title">Leave Setting</span>
-                                    </a>
-                                @endcanany
-
-                                 @canany(['add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
-                                     'change-status-leave-apply'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.index' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_apply.index') }}" data-placement="left">
-                                         <span class="nav-link-title">Leave Apply/Modify</span>
-                                     </a>
-                                 @endcanany
-
-                                 {{-- @canany(['add-leave-encashment', 'edit-leave-encashment', 'delete-leave-encashment',
-                                     'view-leave-encashment'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_encashment.index' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_encashment.index') }}" data-placement="left">
-                                         <span class="nav-link-title">LEAVE ENCASHMENT</span>
-                                     </a>
-                                 @endcanany --}}
-
-                                 {{-- @canany(['add-leave-balance-report', 'edit-leave-balance-report',
-                                     'delete-leave-balance-report', 'view-leave-balance-report'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.balance_history' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_apply.balance_history') }}" data-placement="left">
-                                         <span class="nav-link-title">LEAVE BALANCE REPORT</span>
-                                     </a>
-                                 @endcanany --}}
-
-                                 @canany(['add-leave-request-history', 'edit-leave-request-history',
-                                     'delete-leave-request-history', 'view-leave-request-history'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.request_history' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_apply.request_history') }}" data-placement="left">
-                                         <span class="nav-link-title">Leave Request History</span>
-                                     </a>
-                                 @endcanany
-
-                                 @canany(['add-leave-request-rejected', 'edit-leave-request-rejected',
-                                     'delete-leave-request-rejected', 'view-leave-request-rejected'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_apply.get_rejected_leave' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_apply.get_rejected_leave') }}" data-placement="left">
-                                         <span class="nav-link-title">Leave Request Rejected</span>
-                                     </a>
-                                 @endcanany
-
-                                 @canany(['add-leave-report', 'edit-leave-report', 'delete-leave-report',
-                                     'view-leave-report'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_reports.index') }}" data-placement="left">
-                                         <span class="nav-link-title">Leave Reports</span>
-                                     </a>
-                                 @endcanany
-
-
-                             </div>
-                         </div>
-                     @endcanany
-
                      {{-- @canany(['add-leave-settings', 'edit-leave-settings', 'view-leave-settings',
                          'delete-leave-settings', 'add-leave-type', 'edit-leave-type', 'delete-leave-type',
                          'view-leave-type'])
@@ -451,90 +534,6 @@
                          </div>
                      @endcanany --}}
 
-                     @canany(['add-payroll', 'edit-payroll', 'view-payroll', 'delete-payroll', 'add-tax-slab-settings',
-                         'edit-tax-slab-settings', 'delete-tax-slab-settings', 'view-tax-slab-settings',
-                         'add-salary-increment-settings', 'edit-salary-increment-settings',
-                         'delete-salary-increment-settings', 'view-salary-increment-settings',
-                         'add-salary-increment-reporting', 'edit-salary-increment-reporting',
-                         'delete-salary-increment-reporting', 'view-salary-increment-reporting', 'add-payroll-head',
-                         'edit-payroll-head', 'delete-payroll-head', 'view-payroll-head', 'change-status-payroll-head',
-                         'add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale', 'add-salary',
-                         'edit-salary', 'delete-salary', 'view-salary', 'print-salary', 'add-reimbursement-type',
-                         'edit-reimbursement-type', 'delete-reimbursement-type', 'view-reimbursement-type',
-                         'add-reimbursement', 'edit-reimbursement', 'delete-reimbursement', 'view-reimbursement',
-                         'change-status-reimbursement'])
-                         <div class="nav-item">
-                             <a class="nav-link dropdown-toggle " href="#emppayroll" role="button"
-                                 data-bs-toggle="collapse" data-bs-target="#emppayroll" aria-expanded="false"
-                                 aria-controls="emppayroll">
-                                 <i class="fas fa-money-bill-wave nav-icon"></i>
-                                 <span class="nav-link-title">Payroll</span>
-                             </a>
-
-                             <div id="emppayroll"
-                                 class="nav-collapse collapse {{ show(['payroll.salary.index', 'payroll.payscale.index', 'payroll.head.index', 'payroll.tax-slab-setting.index', 'payroll.salary-increment-setting.index', 'payroll.salary-increment-reporting.index', 'payroll.reimbursement_type.index', 'payroll.reimbursement.index']) }} "
-                                 data-bs-parent="#navbarVerticalMenuPagesMenu">
-
-                                 @canany(['add-tax-slab-settings', 'edit-tax-slab-settings', 'delete-tax-slab-settings',
-                                     'view-tax-slab-settings'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-slab-setting.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.tax-slab-setting.index') }}"> Tax Slab Settings</a>
-                                 @endcanany
-
-                                 @canany(['add-salary-increment-settings', 'edit-salary-increment-settings',
-                                     'delete-salary-increment-settings', 'view-salary-increment-settings'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-setting.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.salary-increment-setting.index') }}"> Salary Increment
-                                         Settings</a>
-                                 @endcanany
-                                 @canany(['add-overtime-setting', 'edit-overtime-setting', 'view-overtime-setting',
-                                 'delete-overtime-setting'])
-                                    <div class="nav-item">
-                                        <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
-                                            href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
-                                            <span class="nav-link-title">Overtime Setting</span>
-                                        </a>
-                                    </div>
-                                @endcanany
-
-                                 @canany(['add-salary-increment-reporting', 'edit-salary-increment-reporting',
-                                     'delete-salary-increment-reporting', 'view-salary-increment-reporting'])
-                                     {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-reporting.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.salary-increment-reporting.index') }}"> Salary
-                                         Increment Reporting</a> --}}
-                                 @endcanany
-                                 @canany(['add-payroll-head', 'edit-payroll-head', 'delete-payroll-head',
-                                     'view-payroll-head', 'change-status-payroll-head'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.head.index') }}"> Payroll Head</a>
-                                 @endcanany
-
-                                 @canany(['add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscale.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.payscale.index') }}"> Pay Scale</a>
-                                 @endcanany
-
-                                 @canany(['add-salary', 'edit-salary', 'delete-salary', 'view-salary', 'print-salary'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.salary.index') }}"> Salary</a>
-                                 @endcanany
-
-                                 @canany(['add-reimbursement-type', 'edit-reimbursement-type', 'delete-reimbursement-type',
-                                     'view-reimbursement-type'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement_type.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.reimbursement_type.index') }}">Reimbursement Type</a>
-                                 @endcanany
-
-                                 @canany(['add-reimbursement', 'edit-reimbursement', 'delete-reimbursement',
-                                     'view-reimbursement', 'change-status-reimbursement'])
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement.index' ? 'active' : '' }}  "
-                                         href="{{ route('admin.payroll.reimbursement.index') }}">Reimbursement</a>
-                                 @endcanany
-
-
-                             </div>
-                         </div>
-                     @endcanany
                  </div>
                  {{-- @endcanany --}}
              </div>
