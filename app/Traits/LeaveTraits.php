@@ -31,11 +31,14 @@ trait LeaveTraits
 
         $months = floor(($diff-$years  * 365*60*60*24) / (30*60*60*24));
 
-        $totalWorkingMonths  = $years*12+$months;
+        $totalWorkingMonths  = $months;
         $perMonthLeave = ($perYearLeave/12);
         // echo $years."year";
         // echo $totalWorkingMonths."----";
         $noOfTotalLeaveUptoData = ceil($perMonthLeave * $totalWorkingMonths);
+
+        $total_leave = LeaveSetting::find($leave_type_id)->total_leave_year;
+
         $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
         
         $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
@@ -49,7 +52,6 @@ trait LeaveTraits
             $total_apply_leave = $total_apply_leave + 1;
         }
         // echo $total_apply_leave;
-        // $total_leave = LeaveSetting::find($leave_type_id)->total_leave_year;
         $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
         $total = $noOfTotalLeaveUptoData - $total_apply_leave -  $encash_leave;
         return $total;
