@@ -34,7 +34,7 @@ class HolidayController extends BaseController
         $request->validate([
             'name'     =>  'required|string',
             'date' => 'required',
-            'is_optional' => 'required|boolean',
+            'is_optional' => 'nullable|boolean',
         ]);
 
 

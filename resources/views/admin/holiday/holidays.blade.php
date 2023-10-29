@@ -219,7 +219,7 @@
                             </div>
                         </div>
                         <!-- End Form -->
-                        <div class="mb-4 row">
+                        {{-- <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Is Paid</label>
                             <div class="col-sm-9">
                                 <select class="js-select form-select" autocomplete="off" name="is_optional"
@@ -232,7 +232,7 @@
                                     <option value="0">No</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Form -->
                         <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Description</label>
