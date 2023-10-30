@@ -318,7 +318,7 @@ class PayrollSalaryController extends Controller
         $totalMonthDays = date('t');
         if($emp->employment_type=="local")
         {
-            // $totalMonthDays = 24;
+            $totalMonthDays = 24;
         }
 
         $noOfHoliday = Holiday::where('date','<=',date('Y-m-d'))->where('date','>',date('Y-m-d'))->where('status','active')->count();
