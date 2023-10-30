@@ -190,7 +190,7 @@ class EmployeeController extends BaseController
 
             'branch_id'             => ['required', 'numeric'],
             'designation_id'        => ['required', 'numeric'],
-            'ec_number'             => ['required', 'numeric'],
+            'ec_number'             => ['required', 'string'],
             'id_number'             => ['nullable', 'numeric'],
             'start_date'            => ['required','date',
                 function ($attribute, $value, $fail) {

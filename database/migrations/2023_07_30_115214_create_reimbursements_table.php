@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('reimbursements', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('type_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('expenses_currency')->nullable();
             $table->decimal('expenses_amount', 10, 2)->nullable();
             $table->date('claim_date')->nullable();

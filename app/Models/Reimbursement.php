@@ -12,6 +12,7 @@ class Reimbursement extends Model
     'expenses_currency',
     'expenses_amount',
     'claim_date',
+    'user_id',
     'claim_from_month',
     'claim_to_month',
     'reimbursement_currency',

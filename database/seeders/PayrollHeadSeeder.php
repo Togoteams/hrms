@@ -22,13 +22,13 @@ class PayrollHeadSeeder extends Seeder
             ['name' => 'Tax', 'slug' => 'tax', 'placeholder' => 'Tax', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
             ['name' => 'Allowance', 'slug' => 'allowance', 'placeholder' => 'Allowance', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
             ['name' => 'Reimbursement', 'slug' => 'reimbursement', 'placeholder' => 'Reimbursement', 'employment_type' => 'both', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
-            ['name' => 'Loan', 'slug' => 'loan', 'placeholder' => 'Loan', 'employment_type' => 'expatriate', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
+            ['name' => 'Loan', 'slug' => 'loan', 'placeholder' => 'Loan', 'employment_type' => 'expatriate', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
             ['name' => 'Others/Arrears', 'slug' => 'others_arrears', 'placeholder' => 'Others/Arrears', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
             ['name' => 'Over Time', 'slug' => 'over_time', 'placeholder' => 'Over Time', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
             ['name' => 'Entertainment Expenses', 'slug' => 'entertainment_expenses', 'placeholder' => 'Entertainment Expenses', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
             ['name' => 'House Up Keep Allow', 'slug' => 'house_up_keep_allow', 'placeholder' => 'House Up Keep Allow', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
             ['name' => 'Provident Fund', 'slug' => 'provident_fund', 'placeholder' => 'Provident Fund', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
-            ['name' => 'Education Allowance', 'slug' => 'education_allowance', 'placeholder' => 'Education Allowance', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
+            ['name' => 'Education Allowance For IND', 'slug' => 'education_allowance', 'placeholder' => 'Education Allowance', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
         );
         foreach ($all_member as $am) {
             PayrollHead::updateOrCreate(['slug'=>$am['slug']],$am);
