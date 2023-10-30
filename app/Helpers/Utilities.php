@@ -743,10 +743,10 @@ function max_min_range($max, $min, $number)
 
 function getEmpType($type)
 {
-    $text =1;
+    $text =0;
     if($type=="local")
     {
-        $text =0;
+        $text =1;
     }
     return $text;
 }

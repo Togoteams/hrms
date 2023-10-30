@@ -16,7 +16,7 @@ class LeaveSettingSeeder extends Seeder
         $all_taxes = array(
             // for local all leaves
             [ 'name' => 'SICK LEAVE','slug'=>'sick-leave','emp_type'=>1,'total_leave_year'=>20,'max_leave_at_time'=>0,'is_accumulated'=>0,'is_accumulated_max_value'=>0,'extended_leaves_year'=>0,'is_salary_deduction'=>0,'salary_deduction_per'=>0,'extended_leaves_deduction_per'=>0, 'is_pro_data' => 0, 'starting_date'=>0, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>1],
-            [ 'name' => 'EARNED LEAVE','slug'=>'earned-leave','emp_type'=>1,'total_leave_year'=>18,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'extended_leaves_year'=>0,'is_salary_deduction'=>0,'salary_deduction_per'=>0,'extended_leaves_deduction_per'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
+            [ 'name' => 'EARNED LEAVE','slug'=>'earned-leave','emp_type'=>1,'total_leave_year'=>18,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>54, 'extended_leaves_year'=>0,'is_salary_deduction'=>0,'salary_deduction_per'=>0,'extended_leaves_deduction_per'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
             [ 'name' => 'MATERNITY LEAVE','slug'=>'maternity-leave','emp_type'=>1,'total_leave_year'=>84,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'extended_leaves_year'=>14,'is_salary_deduction'=>1,'salary_deduction_per'=>50,'extended_leaves_deduction_per'=>75,  'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>1],
             [ 'name' => 'BEREAVEMENT LEAVE','slug'=>'bereavement-leave','emp_type'=>1,'total_leave_year'=>0,'max_leave_at_time'=>3,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'extended_leaves_year'=>0,'is_salary_deduction'=>0,'salary_deduction_per'=>0,'extended_leaves_deduction_per'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
             [ 'name' => 'LEAVE WITHOUT PAY','slug'=>'leave-without-pay','emp_type'=>1,'total_leave_year'=>0,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0, 'extended_leaves_year'=>0,'is_salary_deduction'=>1,'salary_deduction_per'=>100,'extended_leaves_deduction_per'=>0, 'is_pro_data' => 0, 'starting_date'=>1, 'is_count_holyday'=>1,'is_leave_encash'=>0,'is_certificate'=>0],
@@ -31,7 +31,7 @@ class LeaveSettingSeeder extends Seeder
         
         );
         foreach ($all_taxes as $all) {
-            LeaveSetting::updateOrCreate(["slug"=>$all['slug']],$all);
+            LeaveSetting::updateOrCreate(["slug"=>$all['slug'],'emp_type'=>$all['emp_type']],$all);
         }
     }
 }

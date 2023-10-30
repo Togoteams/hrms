@@ -54,7 +54,7 @@ class LeaveApplyController extends Controller
             $data = LeaveApply::with('user', 'leave_type')->select('*');
         }
         
-        $leave_type = LeaveSetting::where('emp_type',0)->get();
+        $leave_type = LeaveSetting::where('emp_type',1)->get();
         $all_users = Employee::where('status', 'active')->get();
         // return $leave_type;
         return view('admin.leave_apply.index', [
@@ -274,16 +274,8 @@ class LeaveApplyController extends Controller
     public function get_leave(Request $request)
     {
         $user_id = $request->user_id;
-         $employmentType = Employee::where('user_id', $user_id)->first()->employment_type ;
-        if($employmentType=="local")
-        {
-            $emp_type = 0;
-        }else{
-            $emp_type = 1;
-        }
-
         // echo Employee::where('user_id', $user_id)->first()->employment_type;
-        $leave_type = LeaveSetting::where('emp_type',$emp_type)->get();
+        $leave_type = LeaveSetting::where('emp_type',getEmpType(Employee::where('user_id', $user_id)->first()->employment_type))->get();
         // return $leave_type;
         echo '<option> -Select Leave Type - </option>';
         foreach ($leave_type as $l_type) {
