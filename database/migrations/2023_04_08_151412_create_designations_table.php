@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('designations', function (Blueprint $table) {
             $table->id();
             $table->string('name',75)->unique();
+            $table->string('slug',75)->unique();
             $table->text('description');
             $table->string('status', 30)->default('active')->nullable();
             $table->timestamps();

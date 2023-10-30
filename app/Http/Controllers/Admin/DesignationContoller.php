@@ -39,6 +39,7 @@ class DesignationContoller extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
+            // $request->merge('slug'=>"")
             Designation::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }

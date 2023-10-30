@@ -127,6 +127,7 @@ class LeaveApplyController extends Controller
                         'user_id' => $user->id,
                         'created_by' => Auth::user()->id,
                         'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
+                        'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
                         'remaining_leave' => (int)$this->balance_leave_by_type($request->leave_type_id, $user->id) - $request->leave_applies_for
 
                     ]);

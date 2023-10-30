@@ -32,23 +32,14 @@ trait LeaveTraits
         $months = floor(($diff-$years  * 365*60*60*24) / (30*60*60*24));
         $total_leave = 0;
 
-        // echo $leaveSetting->slug;
-        // echo $totalWorkingMonths."----";
         switch ($leaveSetting->slug) {
             case 'sick-leave':
-              // if($isProRata)
-              // {
                 $totalWorkingMonths  = date('m');
-              
                 $total_leave = ceil(($totalWorkingMonths/12 )* $perYearLeave);
-             
-              // }
               break;
             case "earned-leave":
-                // if($isProRata)
-                // {
                   $totalWorkingMonths  = $years*12+$months;
-                  if($emp->designation->name=="Tea Lady")
+                  if($emp->designation->slug=="tea_lady" || $emp->designation->slug=="messenger_driver")
                   {
                     $maxEarnedLeave = 45;
                     $perYearLeave = 15;
@@ -61,14 +52,12 @@ trait LeaveTraits
                   {
                     $total_leave = $maxEarnedLeave;
                   }
-                
-                
-                // }
               break;
-         
-            
+              case "maternity-leave":
+                  $total_leave = $perYearLeave;
+            break;
             default:
-             $total_leave =9;
+             $total_leave =$perYearLeave;
           }
        
         $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('approved_by')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->string('is_paid')->default(0);
+            $table->string('is_leave_counted_on_holiday')->default(0);
             $table->string('leave_reason');
             $table->date('apply_date')->nullable();
             $table->integer('remaining_leave');
