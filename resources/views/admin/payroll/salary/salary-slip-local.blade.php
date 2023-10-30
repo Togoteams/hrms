@@ -7,6 +7,8 @@
         <title>Payslip</title>
         <meta name="viewport" content="width=device-width" />
         <meta charset="UTF-8">
+        <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />

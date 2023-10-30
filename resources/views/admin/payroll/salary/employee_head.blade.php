@@ -13,28 +13,28 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="total_working_days">Total Working Days</label>
-            <input readonly required max="2"   type="text"  value="{{ $totalMonthDays ?? 0 }}" class="form-control form-control-sm ">
+            <input readonly required max="2" name="total_working_days"   type="text"  value="{{ $totalMonthDays ?? 0 }}" class="form-control form-control-sm">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="total_balanced_leave">Total Balanced Leave</label>
             
-            <input readonly  required max="3"   type="text"  value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
+            <input readonly  required max="3"  name="total_balanced_leave"  type="text"  value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="basic">No. Of Persent Days</label>
             
-            <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required max="2"   type="number"  value="{{ $presentDay ?? 0 }}" class="form-control form-control-sm ">
+            <input readonly onkeyup="amount_cal(this)" name="no_of_persent_days" onblur="taxCalCalculation()" required max="2"   type="number"  value="{{ $presentDay ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="no_of_payable_days">No. of Payable days</label>
             
-            <input readonly  required max="2"   type="number"  value="{{ $noOfPayableDays ?? 0 }}" class="form-control form-control-sm ">
+            <input readonly  required max="2"   type="number" name="no_of_payable_days"  value="{{ $noOfPayableDays ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="mb-2 col-sm-4">

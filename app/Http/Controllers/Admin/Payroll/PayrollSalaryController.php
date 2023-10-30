@@ -107,6 +107,10 @@ class PayrollSalaryController extends Controller
                     'basic' =>  $request->basic,
                     'fixed_deductions' =>  $request->fixed_deductions,
                     'other_deductions' =>  $request->other_deductions,
+                    'no_of_payable_days' =>  $request->no_of_payable_days,
+                    'no_of_persent_days' =>  $request->no_of_persent_days,
+                    'total_balanced_leave' =>  $request->total_balanced_leave,
+                    'total_working_days' =>  $request->total_working_days,
                     'net_take_home' =>  $request->net_take_home,
                     'ctc' =>  $request->ctc,
                     'total_employer_contribution' =>  $request->total_employer_contribution,
@@ -323,13 +327,25 @@ class PayrollSalaryController extends Controller
         ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
         ->where('is_approved',0)
         ->sum('leave_applies_for');
+
+        $noOfPaidLeave = LeaveApply::where('user_id',$user_id)
+        ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+        ->where('is_paid','paid')
+        ->sum('leave_applies_for');
+
+        $noOfUnPaidLeave = LeaveApply::where('user_id',$user_id)
+        ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+        ->where('is_paid','paid')
+        ->sum('leave_applies_for');
+        
         $noOfUnapprovedLeave = LeaveApply::where('user_id',$user_id)
         ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
-        ->whereNoIn('status',['approved','rejected'])
+        ->whereNotIn('status',['approved','rejected'])
         ->sum('leave_applies_for');
         
         // return $noOfempLeave;
         $presentDay = $totalMonthDays - $noOfHoliday - $noOfAvailedLeaves;
+        $noOfPayableDays =$totalMonthDays - $noOfHoliday- $noOfUnPaidLeave;
 
         return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
     }
