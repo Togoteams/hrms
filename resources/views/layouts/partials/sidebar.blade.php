@@ -385,12 +385,12 @@
                            @canany(['add-payroll-head', 'edit-payroll-head', 'delete-payroll-head',
                                'view-payroll-head', 'change-status-payroll-head'])
                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.head.index' ? 'active' : '' }}  "
-                                   href="{{ route('admin.payroll.head.index') }}"> Payroll Head</a>
+                                   href="{{ route('admin.payroll.head.index') }}"> Payroll Heads</a>
                            @endcanany
 
                            @canany(['add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale'])
                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscale.index' ? 'active' : '' }}  "
-                                   href="{{ route('admin.payroll.payscale.index') }}"> Pay Scale</a>
+                                   href="{{ route('admin.payroll.payscale.index') }}"> Payscale</a>
                            @endcanany
 
                            @canany(['add-salary', 'edit-salary', 'delete-salary', 'view-salary', 'print-salary'])

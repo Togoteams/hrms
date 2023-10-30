@@ -177,7 +177,7 @@
                                     PAYSLIP For the month of - {{strtoupper(date("M-Y",strtotime($data->created_at)))}}</p>
                             </td>
                             <td style="text-align: right;">
-                                <img src="https://cdn.moneytransfers.com/tr:orig-true,fo-auto/uploads/2023/01/1674731299-Bank%20of%20Baroda%20TR.svg" class="img-fluid" style="height: auto; width: 200px;">
+                                <img src="{{ asset('assets/img/logo-cropped.svg')  }}" class="img-fluid" style="height: auto; width: 200px;">
 
                             </td>
                         </tr>
@@ -227,20 +227,20 @@
                             {{-- <td class="payslip">Salary Date :</td>
                             <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td> --}}
                             <td class="payslip">No. of Payable days :</td>
-                            <td class="payslip">{{$presentDay}}</td>
+                            <td class="payslip">{{$data->no_of_payable_days}}</td>
                             <td class="payslip">Annual Balanced Leave :</td>
-                            <td class="payslip">19</td>
+                            <td class="payslip">{{$data->annual_balanced_leave}}</td>
                         </tr>
                         <tr>
 
 
                             <td class="payslip">Total Working days :</td>
-                            <td class="payslip">{{$totalMonthDays}}</td>
+                            <td class="payslip">{{$data->total_working_days}}</td>
 
                             {{-- <td class="payslip">Total Absent : </td>
-                            <td class="payslip">{{$noOfempLeave}}</td> --}}
+                            <td class="payslip">0</td> --}}
                             <td class="payslip">No. Availed Leave :</td>
-                            <td class="payslip">3</td>
+                            <td class="payslip">{{$data->no_availed_leave}}</td>
                         </tr>
                     </thead>
                 </table>

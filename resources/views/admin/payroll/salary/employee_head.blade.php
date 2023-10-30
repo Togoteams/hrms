@@ -7,7 +7,7 @@
             @php
             $basic = round(($data->basic / $totalMonthDays) * $presentDay);
             @endphp
-            <input onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
+            <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
@@ -22,6 +22,9 @@
     <div class="col-md-12">
         <h4>Earning</h4>
     </div>
+    @php
+    $readonlyArr = ['bomaid','pension','union_fee','tax'];
+    @endphp
     @foreach ($emp_head as $head)
     @php
     if (isset($data->user_id)) {
@@ -43,7 +46,7 @@
                 $value = 0;
             }
             @endphp
-            <input onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"  value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}}" class="form-control form-control-sm {{$head->head_type}}">
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"  value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
@@ -69,7 +72,7 @@
             @php    
             $value = round(($head_data->value / $totalMonthDays) * $presentDay);
             @endphp
-            <input onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{ $value ?? '' }}" class="form-control form-control-sm {{$head->head_type}}">
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{ $value ?? '' }}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
