@@ -350,7 +350,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', Auth::user()->id)->first()->employment_type) ?? '')->get();
+        $leave_type = LeaveSetting::get();
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_request_history', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
@@ -379,7 +379,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', Auth::user()->id)->first()->employment_type) ?? '')->get();
+        $leave_type = LeaveSetting::get();
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_request_rejected', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
