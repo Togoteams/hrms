@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="content container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -27,15 +27,14 @@
             @include('admin.leave_apply.type_of_leave')
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
-                <div class="table-responsive mt-3 p-2">
-                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+            <div class="mb-3 card mb-lg-5">
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Employee name</th>
-                                <th>Employee Email</th>
-                                <th>Employee Phone</th>
+                                <th>EC Number</th>
                                 <th>leave type</th>
                                 <th>From </th>
                                 <th>To</th>
@@ -63,19 +62,15 @@
                                         return i++;
                                     }
                                 },
-
-
+                               
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
-                                }, {
-                                    data: 'user.email',
-                                    name: 'user.email'
+                                },  {
+                                data: 'user.employee.ec_number',
+                                name: 'user.employee.ec_number'
                                 },
-                                {
-                                    data: 'user.mobile',
-                                    name: 'user.mobile'
-                                },
+
                                 {
                                     data: 'leave_type.name',
                                     name: 'leave_type.name'

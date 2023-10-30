@@ -159,19 +159,19 @@ class LeaveApplyController extends Controller
     {
 
         $data = LeaveApply::find($id);
-        $leave_type = LeaveSetting::where('status', 'active')->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', $data->user_id)->first()->employment_type) ?? '')->get();
         // ret
         return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
     public function status_modal($id)
     {
-        $leave_type = LeaveSetting::where('status', 'active')->get();
+        $leave_type = LeaveSetting::get();
 
         $data = LeaveApply::find($id);
         $leave_emp_data=LeaveApply::where('start_date','>=',$data->start_date)->Where('end_date','<=',$data->end_date)->where('status','approved')->get();
        
-        $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id);
+        $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id );
         // echo $data->leave_type_id."echo ";
         // echo $data->user_id."echo ";
         // return $remaining_leave;
@@ -225,11 +225,10 @@ class LeaveApplyController extends Controller
 
             try {
                 if ($request->status != "approved") {
+                   
                     LeaveApply::where('id', $id)->update([
                         'status' => $request->status,
-                    ]);
 
-                    LeaveApply::where('id', $id)->update([
                         'status_remarks' => $request->status_remarks,
                         'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
 
@@ -238,17 +237,17 @@ class LeaveApplyController extends Controller
                 if ($request->status == "approved") {
 
                     // checking how many leave is remaining for a particular user
-                    if ($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) >= get_day($leave_apply->start_date, $leave_apply->end_date)) {
-                        LeaveApply::where('id', $id)->update([
-                            'status' => $request->status,
-                        ]);
+
+                    if ($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id,'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) {
+                       
 
                         LeaveApply::where('id', $id)->update([
                             'status_remarks' => $request->status_remarks,
+                            'status' => $request->status,
                             'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
                         ]);
                     } else {
-                        return response()->json(['error' => " Applied leave is " . get_day($leave_apply->start_date, $leave_apply->end_date) . " but  they have only " . $this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
+                        return response()->json(['error' => " Applied leave is " . get_day($leave_apply->start_date, $leave_apply->end_date)+1 . " but  they have only " . $this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
                     }
                 }
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
@@ -300,10 +299,9 @@ class LeaveApplyController extends Controller
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('leave_applies.status', 'approved')->select('*');
+                $data = LeaveApply::with('user', 'user.employee','leave_type')->where('user_id', Auth::user()->id)->where('leave_applies.status', 'approved')->select('*');
             } else {
-
-                $data = LeaveApply::with('user', 'leave_type')->where('leave_applies.status', 'approved')->select('*');
+                $data = LeaveApply::with('user','user.employee', 'leave_type')->where('leave_applies.status', 'approved')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -320,7 +318,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveSetting::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveSetting::get();
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_balance_history', ['page' => 'Balance Reports', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
@@ -331,9 +329,9 @@ class LeaveApplyController extends Controller
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
+                $data = LeaveApply::with('user', 'leave_type','user.employee')->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
             } else {
-                $data = LeaveApply::with('user', 'leave_type')->where('status', 'pending')->get();
+                $data = LeaveApply::with('user', 'leave_type','user.employee')->where('status', 'pending')->get();
             }
             return Datatables::of($data)
                 ->addIndexColumn()

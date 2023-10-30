@@ -10,7 +10,7 @@ use App\Models\LeaveType;
 
 trait LeaveTraits
 {
-    public function balance_leave_by_type($leave_type_id, $user_id = '')
+    public function balance_leave_by_type($leave_type_id, $user_id = '',$action="")
     {
         if ($user_id == '') {
             $user_id = auth()->user()->id;
@@ -57,12 +57,21 @@ trait LeaveTraits
                   $total_leave = $perYearLeave;
             break;
             default:
-             $total_leave =$perYearLeave;
+             $total_leave = $perYearLeave;
           }
        
         $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
         
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
+        if($action=="update_status")
+        {
+          $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject','pending'])->get();
+
+        }else
+        {
+          $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
+
+        }
+        
         if (count($total_apply_leaves) > 0) {
             foreach ($total_apply_leaves as  $value) {
              
