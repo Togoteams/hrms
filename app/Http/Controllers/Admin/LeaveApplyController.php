@@ -8,7 +8,6 @@ use Yajra\DataTables\DataTables;
 use App\Models\Employee;
 use App\Models\LeaveApply;
 use App\Models\LeaveSetting;
-use App\Models\LeaveType;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Exception;
@@ -54,10 +53,10 @@ class LeaveApplyController extends Controller
         } else {
             $data = LeaveApply::with('user', 'leave_type')->select('*');
         }
-
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        
+        $leave_type = LeaveSetting::where('emp_type',0)->get();
         $all_users = Employee::where('status', 'active')->get();
-
+        // return $leave_type;
         return view('admin.leave_apply.index', [
             'page' => $this->page_name,
             'leave_type' => $leave_type,
@@ -127,7 +126,7 @@ class LeaveApplyController extends Controller
                         'uuid' => $user->uuid,
                         'user_id' => $user->id,
                         'created_by' => Auth::user()->id,
-                        'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave,
+                        'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
                         'remaining_leave' => (int)$this->balance_leave_by_type($request->leave_type_id, $user->id) - $request->leave_applies_for
 
                     ]);
@@ -146,7 +145,7 @@ class LeaveApplyController extends Controller
      */
     public function show(string $id)
     {
-        $leave_type = LeaveType::where('status', 'active')->get();
+        $leave_type = LeaveSetting::get();
 
         $data = LeaveApply::find($id);
         return view('admin.leave_apply.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
@@ -159,14 +158,14 @@ class LeaveApplyController extends Controller
     {
 
         $data = LeaveApply::find($id);
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveSetting::where('status', 'active')->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->get();
         // ret
         return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
     public function status_modal($id)
     {
-        $leave_type = LeaveType::where('status', 'active')->get();
+        $leave_type = LeaveSetting::where('status', 'active')->get();
 
         $data = LeaveApply::find($id);
         $leave_emp_data=LeaveApply::where('start_date','>=',$data->start_date)->Where('end_date','<=',$data->end_date)->where('status','approved')->get();
@@ -196,7 +195,7 @@ class LeaveApplyController extends Controller
             try {
                 $request->request->add([
                     'updated_by' => Auth::user()->id,
-                    'is_paid' => LeaveType::find($request->leave_type_id)->nature_of_leave,
+                    'is_paid' => LeaveSetting::find($request->leave_type_id)->nature_of_leave,
 
                 ]);
                 LeaveApply::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));
@@ -275,7 +274,17 @@ class LeaveApplyController extends Controller
     public function get_leave(Request $request)
     {
         $user_id = $request->user_id;
-        $leave_type = LeaveSetting::where('emp_type', Employee::where('user_id', $user_id)->first()->employment_type ?? '')->get();
+         $employmentType = Employee::where('user_id', $user_id)->first()->employment_type ;
+        if($employmentType=="local")
+        {
+            $emp_type = 0;
+        }else{
+            $emp_type = 1;
+        }
+
+        // echo Employee::where('user_id', $user_id)->first()->employment_type;
+        $leave_type = LeaveSetting::where('emp_type',$emp_type)->get();
+        // return $leave_type;
         echo '<option> -Select Leave Type - </option>';
         foreach ($leave_type as $l_type) {
             echo '  <option value="' . $l_type->id . '">' . $l_type->name . '</option>';
@@ -318,7 +327,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveSetting::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_balance_history', ['page' => 'Balance Reports', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
@@ -348,7 +357,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', Auth::user()->id)->first()->employment_type) ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_request_history', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
@@ -377,7 +386,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', Auth::user()->id)->first()->employment_type) ?? '')->get();
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_request_rejected', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }

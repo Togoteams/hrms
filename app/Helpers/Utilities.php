@@ -740,3 +740,23 @@ function max_min_range($max, $min, $number)
         return $number;
     }
 }
+
+function getEmpType($type)
+{
+    $text =1;
+    if($type=="local")
+    {
+        $text =0;
+    }
+    return $text;
+}
+function getPaidString($type)
+{
+    $text ="paid";
+    if($type==1)
+    {
+        $text ="unpaid";
+    }
+    return $text;
+}
+

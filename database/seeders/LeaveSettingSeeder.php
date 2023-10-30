@@ -28,16 +28,10 @@ class LeaveSettingSeeder extends Seeder
              [ 'name' => 'CASUAL LEAVE','slug'=>'casual-leave','emp_type'=>0,'total_leave_year'=>12,'max_leave_at_time'=>4,'is_accumulated'=>0,'is_accumulated_max_value'=>0,'extended_leaves_year'=>0,'is_salary_deduction'=>0,'salary_deduction_per'=>0,'extended_leaves_deduction_per'=>0, 'is_pro_data' => 1, 'starting_date'=>0, 'is_count_holyday'=>0,'is_leave_encash'=>0,'is_certificate'=>0],
              [ 'name' => 'PRIVILEGED LEAVE','slug'=>'privileged-leave','emp_type'=>0,'total_leave_year'=>30,'max_leave_at_time'=>0,'is_accumulated'=>1,'is_accumulated_max_value'=>0,'extended_leaves_year'=>0,'is_salary_deduction'=>0,'salary_deduction_per'=>0,'extended_leaves_deduction_per'=>0, 'is_pro_data' => 1, 'starting_date'=>1, 'is_count_holyday'=>1,'is_leave_encash'=>1,'is_certificate'=>0],
 
-
-
-           
-
-
-
         
         );
         foreach ($all_taxes as $all) {
-            LeaveSetting::insert($all);
+            LeaveSetting::updateOrCreate(["slug"=>$all['slug']],$all);
         }
     }
 }

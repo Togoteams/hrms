@@ -30,15 +30,34 @@ trait LeaveTraits
         $years = floor($diff / (365*60*60*24));
 
         $months = floor(($diff-$years  * 365*60*60*24) / (30*60*60*24));
+        $total_leave = 0;
 
-        $totalWorkingMonths  = $months;
-        $perMonthLeave = ($perYearLeave/12);
-        // echo $years."year";
+        echo $leaveSetting->slug;
         // echo $totalWorkingMonths."----";
-        $noOfTotalLeaveUptoData = ceil($perMonthLeave * $totalWorkingMonths);
-
-        $total_leave = LeaveSetting::find($leave_type_id)->total_leave_year;
-
+        switch ($leaveSetting->slug) {
+            case 'sick-leave':
+              if($isProRata)
+              {
+                $totalWorkingMonths  = date('m');
+                echo $totalWorkingMonths;
+                $perMonthLeave = ($perYearLeave/12);
+                $total_leave = ($totalWorkingMonths/12* $perYearLeave);
+              }
+              break;
+            case "earned-leave":
+                if($isProRata)
+                {
+                  $totalWorkingMonths  = $years*12+$months;
+                  $perMonthLeave = ($perYearLeave/12);
+                  $total_leave = ($perMonthLeave * $totalWorkingMonths);
+                }
+              break;
+         
+            
+            default:
+             $total_leave =9;
+          }
+       
         $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
         
         $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
@@ -53,7 +72,7 @@ trait LeaveTraits
         }
         // echo $total_apply_leave;
         $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
-        $total = $noOfTotalLeaveUptoData - $total_apply_leave -  $encash_leave;
+        $total = $total_leave - $total_apply_leave -  $encash_leave;
         return $total;
     }
     public function only_encash_leave($user_id = '')
