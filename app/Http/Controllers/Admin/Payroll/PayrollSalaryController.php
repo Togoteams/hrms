@@ -109,7 +109,7 @@ class PayrollSalaryController extends Controller
                     'other_deductions' =>  $request->other_deductions,
                     'no_of_payable_days' =>  $request->no_of_payable_days,
                     'no_of_persent_days' =>  $request->no_of_persent_days,
-                    'total_balanced_leave' =>  $request->total_balanced_leave,
+                    'annual_balanced_leave' =>  $request->annual_balanced_leave,
                     'total_working_days' =>  $request->total_working_days,
                     'net_take_home' =>  $request->net_take_home,
                     'ctc' =>  $request->ctc,

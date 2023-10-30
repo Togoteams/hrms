@@ -18,9 +18,9 @@
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
-            <label for="total_balanced_leave">Total Balanced Leave</label>
+            <label for="annual_balanced_leave">Total Balanced Leave</label>
             
-            <input readonly  required max="3"  name="total_balanced_leave"  type="text"  value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
+            <input readonly  required max="3"  name="annual_balanced_leave"  type="text"  value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
@@ -34,14 +34,14 @@
         <div class="form-group">
             <label for="no_of_payable_days">No. of Payable days</label>
             
-            <input readonly  required max="2"   type="number" name="no_of_payable_days"  value="{{ $noOfPayableDays ?? 0 }}" class="form-control form-control-sm ">
+            <input readonly  required max="2"  name="no_of_payable_days"  type="number"   value="{{ $noOfPayableDays ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
-            <label for="basic">No. Availed Leave :</label>
+            <label for="no_availed_leave">No. Availed Leave :</label>
             
-            <input readonly  required max="2"   type="number" value="{{$noOfAvailedLeaves ?? 0}}"  class="form-control form-control-sm ">
+            <input readonly  required max="2"  name="no_availed_leave"  type="number" value="{{$noOfAvailedLeaves ?? 0}}"  class="form-control form-control-sm ">
         </div>
     </div>
 </div>
