@@ -339,6 +339,12 @@ class LeaveApplyController extends Controller
                     $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
                     return $actionBtn;
                 })
+                ->editColumn('start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('end_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
+                })
                 ->rawColumns(['action'])
                 ->make(true);
         }
