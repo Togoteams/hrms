@@ -51,6 +51,7 @@
     </div>
     @php
     $readonlyArr = ['bomaid','pension','union_fee','tax'];
+    $fixedHeadsArr = ['bomaid','over_time'];
     @endphp
     @foreach ($emp_head as $head)
     @php
@@ -68,12 +69,17 @@
             @php
             if(!empty($head_data))
             {
-                $value = round(($head_data->value / $totalMonthDays) * $presentDay);  
+                if(in_array($head->slug,$fixedHeadsArr))
+                {
+                    $value = round($head_data->value); 
+                }else {
+                    $value = round(($head_data->value / $totalMonthDays) * $presentDay);  
+                }
             }else {
                 $value = 0;
             }
             @endphp
-            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"  value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}}" class="form-control form-control-sm {{$head->head_type}}">
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"  value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}} " class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
@@ -96,8 +102,13 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
-            @php    
-            $value = round(($head_data->value / $totalMonthDays) * $presentDay);
+            @php  
+            if(in_array($head->slug,$fixedHeadsArr))
+                {
+                    $value = round($head_data->value); 
+                }else {
+                    $value = round(($head_data->value / $totalMonthDays) * $presentDay);  
+                }  
             @endphp
             <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{ $value ?? '' }}" class="form-control form-control-sm {{$head->head_type}}">
         </div>

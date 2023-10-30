@@ -324,22 +324,22 @@ class PayrollSalaryController extends Controller
         $noOfHoliday = Holiday::where('date','<=',date('Y-m-d'))->where('date','>',date('Y-m-d'))->where('status','active')->count();
         
         $noOfAvailedLeaves = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
         ->where('is_approved',0)
         ->sum('leave_applies_for');
 
         $noOfPaidLeave = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
         ->where('is_paid','paid')
         ->sum('leave_applies_for');
 
         $noOfUnPaidLeave = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
         ->where('is_paid','paid')
         ->sum('leave_applies_for');
         
         $noOfUnapprovedLeave = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-d', strtotime("-1 months")))->where('end_date','>',date('Y-m-d'))
+        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
         ->whereNotIn('status',['approved','rejected'])
         ->sum('leave_applies_for');
         
