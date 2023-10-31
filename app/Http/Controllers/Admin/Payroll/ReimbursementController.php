@@ -62,8 +62,8 @@ class ReimbursementController extends BaseController
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'claim_from_month' => 'required|numeric',
             'claim_to_month' => 'required|numeric',
-            'reimbursement_currency' => 'required|string',
-            'reimbursement_amount' => 'required|numeric|gt:0',
+            // 'reimbursement_currency' => 'required|string',
+            // 'reimbursement_amount' => 'required|numeric|gt:0',
             'reimbursement_notes' => 'required|string',
         ]);
 
@@ -117,8 +117,8 @@ class ReimbursementController extends BaseController
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'claim_from_month' => 'required|numeric',
             'claim_to_month' => 'required|numeric',
-            'reimbursement_currency' => 'required|string',
-            'reimbursement_amount' => 'required|numeric|gt:0',
+            // 'reimbursement_currency' => 'required|string',
+            // 'reimbursement_amount' => 'required|numeric|gt:0',
             'reimbursement_notes' => 'required|string',
         ]);
         if ($validator->fails()) {

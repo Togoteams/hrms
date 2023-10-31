@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\Salary\SalaryController;
 use App\Http\Controllers\Admin\Dashboard\PersonProfileController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\DocumentTypeController;
 use App\Http\Controllers\Admin\EmployeeKraController;
 use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\EmployeeTransferControler;
@@ -200,6 +201,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee-kra/status/{id}', [EmployeeKraController::class, 'status'])->name('employee-kra.status');
     Route::get('employee/employee-kra/{user_id}', [EmployeeKraController::class, 'create'])->name('employee.employee-kra.create');
     Route::get('employee/print/employee-kra/print/{user_id}', [EmployeeKraController::class, 'print'])->name('employee-kra.print');
+
+    Route::resource('document_type',DocumentTypeController::class);
 
     Route::resource('document',DocumentController::class);
     Route::post('document/asign', [DocumentController::class, 'asign'])->name('document.asign');

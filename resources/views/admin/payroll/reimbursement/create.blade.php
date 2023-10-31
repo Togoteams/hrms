@@ -47,7 +47,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="claim_date" class="required">Claim date</label>
-                                    <input type="date" name="claim_date" required id="claim_date" class="form-control" placeholder="claim_date" value="{{ old('claim_date') }}">
+                                    <input type="date" name="claim_date" readonly required id="claim_date" class="form-control" placeholder="claim_date" value="{{ old('claim_date', now()->format('Y-m-d')) }}">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">
@@ -90,25 +90,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-6">
-                                <label for="reimbursement_currency">Reimbursement Currency <small
-                                        class="required-field">*</small></label>
-                            
-                                <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
-                                    name="reimbursement_currency" class="form-control form-control-sm" required>
-                                    <option selected disabled> - Select Currency - </option>
-                                    @foreach ($currencies  as  $currency)
-                                    <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
-                                @endforeach
-                                    
-                                </select>
-                            </div>
-                            <div class="mb-2 col-sm-6">
-                                <div class="form-group">
-                                    <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
-                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{ old('reimbursement_amount') }}">
-                                </div>
-                            </div>
+                           
                             <div class="mb-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="reimbursement_notes" class="required">Reimbursement notes</label>

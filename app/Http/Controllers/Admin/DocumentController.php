@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\DocumentEmp;
+use App\Models\DocumentType;
 use App\Models\Employee;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,8 +22,9 @@ class DocumentController extends Controller
     public function index()
     {
         $data =  Document::all();
+        $documentType = DocumentType::get();
         $all_users = Employee::with('user')->get();
-        return view('admin.document.index', ['page' => $this->page_name,'data' => $data,'all_users'=>$all_users]);
+        return view('admin.document.index', ['page' => $this->page_name,'data' => $data,'all_users'=>$all_users, 'documentType' => $documentType]);
 
     }
 
@@ -78,7 +80,8 @@ class DocumentController extends Controller
     public function edit(string $id)
     {
         $data = Document::find($id);
-        return view('admin.document.edit', ['data' => $data, 'page' => $this->page_name]);   
+        $documentType = DocumentType::get();
+        return view('admin.document.edit', ['data' => $data, 'page' => $this->page_name, 'documentType' => $documentType]);   
     }
 
     public function documentAssignedit(string $id)

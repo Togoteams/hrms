@@ -56,8 +56,8 @@
                             <th>Claim date</th>
                             <th>Claim for the period from month</th>
                             <th>Claim for the period to month</th>
-                            <th>Reimbursement Currency</th>
-                            <th>Reimbursement Amount</th>
+                            {{-- <th>Reimbursement Currency</th>
+                            <th>Reimbursement Amount</th> --}}
                             <th>Reimbursement Notes</th>
                             <th>status</th>
                             <th width="100px">Action</th>
@@ -124,14 +124,6 @@
                                     ];
                                     return months[data - 1];
                                 }
-                            },
-                            {
-                                data: 'reimbursement_currency',
-                                name: 'reimbursement_currency'
-                            },
-                            {
-                                data: 'reimbursement_amount',
-                                name: 'reimbursement_amount'
                             },
                             {
                                 data: 'reimbursement_notes',
@@ -226,6 +218,25 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="mb-2 col-sm-6">
+                                <label for="reimbursement_currency">Reimbursement Currency <small
+                                        class="required-field">*</small></label>
+                            
+                                <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
+                                    name="reimbursement_currency" class="form-control form-control-sm" required>
+                                    <option selected disabled> - Select Currency - </option>
+                                    @foreach ($currencies  as  $currency)
+                                    <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                                @endforeach
+                                    
+                                </select>
+                            </div>
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
+                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{ old('reimbursement_amount') }}">
+                                </div>
+                            </div>
                             <div class="mb-2 col-md-12">
                                 <div class="form-group">
                                     <label for="expenses">Reimbursement Reason</label>
@@ -241,7 +252,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                            <button type="submit" class="btn btn-primary status_add " id="">Add</button>
+                            <button type="submit" class="btn btn-primary status_add " id="">Submit</button>
                         </div>
                     </form>
                 </div>

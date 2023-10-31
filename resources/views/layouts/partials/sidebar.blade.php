@@ -414,16 +414,37 @@
                        </div>
                    </div>
                @endcanany
-               @canany(['add-document-management', 'edit-document-management', 'view-document-management',
-               'delete-document-management'])
-               <div class="nav-item">
-                   <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document.list' ? 'active' : '' }}"
-                       href="{{ route('admin.document.index') }}" data-placement="left">
-                       <i class="fa fa-folder nav-icon"></i>
-                       <span class="nav-link-title">Documents</span>
-                   </a>
-               </div>
-           @endcanany
+               <div id="navbarVerticalMenuPagesMenu">
+                <!-- Collapse -->
+                <div class="nav-item">
+                    <a class="nav-link dropdown-toggle " href="#documents" role="button"
+                        data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false"
+                        aria-controls="documents">
+                        <i class="fa fa-folder nav-icon"></i>
+                        <span class="nav-link-title">Documents Mangement</span>
+                    </a>
+                    <div id="documents"
+                        class="nav-collapse collapse {{ show(['document.index', 'document_type.index']) }} "
+                        data-bs-parent="#navbarVerticalMenuPagesMenu">
+
+                        @canany(['add-document-management', 'edit-document-management', 'view-document-management',
+                             'delete-document-management'])
+                            <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document_type.index' ? 'active' : '' }}  "
+                                href="{{ route('admin.document_type.index') }}">Document Type</a>
+                        @endcanany
+                        @canany(['add-document-management', 'edit-document-management', 'view-document-management',
+                             'delete-document-management'])
+                             <div class="nav-item">
+                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document.list' ? 'active' : '' }}"
+                                     href="{{ route('admin.document.index') }}" data-placement="left">
+                                     <span class="nav-link-title">Documents</span>
+                                 </a>
+                             </div>
+                         @endcanany
+
+                    </div>
+                </div>
+            </div>
 
            @canany(['add-medical-card-type', 'edit-medical-card-type', 'view-medical-card-type',
                'delete-medical-card-type'])

@@ -9,24 +9,19 @@
                     name="document_name" class="form-control form-control-sm " value="{{$data->document_name}}">
             </div>
         </div>
-     
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="document_type" class="required">Document Type</label>
-                <select required id="document_type"  name="document_type" class="form-control form-control-sm">
-                    <option value="">Select Document Type </option>
-                    <option @if($data->document_type=="onbording") {{"selected"}} @endif value="onbording">Onbording</option>
-                    <option  @if($data->document_type=="other") {{"select"}} @endif value="other">Other</option>
-                </select>
+                <select name="document_type" class="form-control" id="document_type" required>
+                    <option value="">Select Option</option>
+                    @foreach($documentType as $type)
+                        <option value="{{ $type->id }}" {{ $type->id == $data->document_type ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>                
             </div>
         </div>
-       
-        {{-- <div class="mb-2 col-sm-6">
-            <div class="form-group">
-                <label for="current_document" class="required">Current Document</label> <br>
-                <img src="{{asset('asset/img/'.$data->document)}}" alt="image" width="70px" height="70px">
-            </div>
-        </div> --}}
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="current_document" class="required">Current Document</label> <br>
@@ -39,15 +34,12 @@
                 @endif
             </div>
         </div>
-        
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="document">Replace Document</label>
                 <input id="document" type="file" name="document"class="form-control form-control-sm">
             </div>
         </div>
-        
-
     </div>
     <hr>
     <div class="text-center ">
