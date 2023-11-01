@@ -50,16 +50,16 @@
                     <thead>
                         <tr>
                             <th>SI.</th>
-                            <th>Reimbursement Type</th>
-                            <th>Expenses Currency</th>
-                            <th>Expenses Amount</th>
+                            <th>Type</th>
+                            <th>Expense Currency</th>
+                            <th>Expense Amount</th>
                             <th>Claim date</th>
-                            <th>Claim for the period from month</th>
-                            <th>Claim for the period to month</th>
+                            <th>From month</th>
+                            <th>To month</th>
                             {{-- <th>Reimbursement Currency</th>
                             <th>Reimbursement Amount</th> --}}
-                            <th>Reimbursement Notes</th>
-                            <th>status</th>
+                            <th>Notes</th>
+                            <th>Status</th>
                             <th width="100px">Action</th>
                         </tr>
                     </thead>
