@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Reimbursement extends Model
 {
     use HasFactory;
-    protected $fillable = ['type_id', 
+    protected $fillable = [
+    'user_id',
+    'type_id', 
     'expenses_currency',
     'expenses_amount',
     'claim_date',

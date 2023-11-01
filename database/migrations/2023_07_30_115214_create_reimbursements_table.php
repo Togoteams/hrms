@@ -30,6 +30,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('type_id')->references('id')->on('reimbursement_types');
+            $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

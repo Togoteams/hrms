@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReimbursementController extends BaseController
@@ -55,33 +56,61 @@ class ReimbursementController extends BaseController
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        
         $validator = Validator::make($request->all(), [
             'type_id' => 'required|numeric',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
-            'claim_from_month' => 'required|numeric',
-            'claim_to_month' => 'required|numeric',
-            // 'reimbursement_currency' => 'required|string',
-            // 'reimbursement_amount' => 'required|numeric|gt:0',
+            'claim_from_month' => [
+                'required',
+                'numeric',
+            ],
+            'claim_to_month' => [
+                'required',
+                'numeric',
+            ],
             'reimbursement_notes' => 'required|string',
         ]);
-
+        
+        $validator->after(function ($validator) use ($request, $user) {
+            $overlapExists = Reimbursement::where('user_id', $user->id)
+                ->where(function ($query) use ($request) {
+                    $query->where(function ($query) use ($request) {
+                        $query->where('claim_from_month', '<=', $request->claim_to_month)
+                            ->where('claim_to_month', '>=', $request->claim_from_month);
+                    })
+                    ->orWhere(function ($query) use ($request) {
+                        $query->where('claim_from_month', '<=', $request->claim_to_month)
+                            ->where('claim_to_month', '>=', $request->claim_to_month);
+                    });
+                })
+                ->where('id', '!=', $request->id)
+                ->exists();
+        
+            if ($overlapExists) {
+                $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
+            }
+        });
+        
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
-                $request->request->add(['created_at' => Auth::user()->id]);
-                $request->request->add(['status' =>"pending"]);
-                Reimbursement::insertGetId($request->except(['_token', '_method']));
+                $request->merge([
+                    'user_id' => $user->id,
+                    'status' => "pending",
+                ]);
+                Reimbursement::create($request->except(['_token', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
-
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
-
+        
     }
+    
 
     /**
      * Display the specified resource.
@@ -110,26 +139,52 @@ class ReimbursementController extends BaseController
      */
     public function update(Request $request, string $id)
     {
+        $user = Auth::user();
+    
         $validator = Validator::make($request->all(), [
             'type_id' => 'required|numeric',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
-            'claim_from_month' => 'required|numeric',
-            'claim_to_month' => 'required|numeric',
-            // 'reimbursement_currency' => 'required|string',
-            // 'reimbursement_amount' => 'required|numeric|gt:0',
+            'claim_from_month' => [
+                'required',
+                'numeric',
+            ],
+            'claim_to_month' => [
+                'required',
+                'numeric',
+            ],
             'reimbursement_notes' => 'required|string',
         ]);
+    
+        $validator->after(function ($validator) use ($request, $user, $id) {
+            $overlapExists = Reimbursement::where('user_id', $user->id)
+                ->where(function ($query) use ($request) {
+                    $query->where(function ($query) use ($request) {
+                        $query->where('claim_from_month', '<=', $request->claim_to_month)
+                            ->where('claim_to_month', '>=', $request->claim_from_month);
+                    })
+                    ->orWhere(function ($query) use ($request) {
+                        $query->where('claim_from_month', '<=', $request->claim_to_month)
+                            ->where('claim_to_month', '>=', $request->claim_to_month);
+                    });
+                })
+                ->where('id', '!=', $id)
+                ->exists();
+    
+            if ($overlapExists) {
+                $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
+            }
+        });
+    
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            // $request->request->add(['updated_by'=>Auth::user()->id]);
-            Reimbursement::where('id', $id)->update($request->except('_token', '_method'));
+            Reimbursement::where('id', $id)->update($request->except(['_token', '_method']));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
-
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -149,11 +204,15 @@ class ReimbursementController extends BaseController
         // dd($request->all());
         $request->validate([
             'status' => ['required','string'],
-            'reimbursement_reason' => ['required','string'],                      
+            'reimbursement_reason' => ['required','string'], 
+            'reimbursement_currency' => 'required|string',
+            'reimbursement_amount' => 'required|numeric|gt:0',                     
         ]);
                 // dd($request->all());
         $reimbursement = Reimbursement::find($request->payroll_id);
         $reimbursement->reimbursement_reason = $request['reimbursement_reason'];
+        $reimbursement->reimbursement_currency = $request['reimbursement_currency'];
+        $reimbursement->reimbursement_amount = $request['reimbursement_amount'];
         $reimbursement->status = $request['status'];
         if($request->status=='approved')
         {

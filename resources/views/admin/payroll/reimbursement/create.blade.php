@@ -11,7 +11,8 @@
                 <div class="modal-body">
                     <form id="form_data" action="{{ route('admin.payroll.reimbursement.store') }}">
                         @csrf
-                        <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
+                        <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
+                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                         <div class="row">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
@@ -47,7 +48,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="claim_date" class="required">Claim date</label>
-                                    <input type="date" name="claim_date" readonly required id="claim_date" class="form-control" placeholder="claim_date" value="{{ old('claim_date', now()->format('Y-m-d')) }}">
+                                    <input type="date" name="claim_date"  required id="claim_date" class="form-control" placeholder="claim_date" value="{{ old('claim_date', now()->format('Y-m-d')) }}">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">
@@ -74,7 +75,7 @@
                                 <div class="form-group">
                                     <label for="claim_to_month" class="required">Claim for period to month</label>
                                     <select name="claim_to_month" id="claim_to_month" class="form-control" required >
-                                        <option value="">Select From Month</option>
+                                        <option value="">Select To Month</option>
                                         <option value="1">January</option>
                                         <option value="2">February</option>
                                         <option value="3">March</option>

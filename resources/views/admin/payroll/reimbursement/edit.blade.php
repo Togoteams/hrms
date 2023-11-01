@@ -45,7 +45,7 @@
             </div>
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
-                    <label for="claim_from_month" class="required">Claim for the period from month</label>
+                    <label for="claim_from_month" class="required">Claim For Period From Month</label>
                     <select name="claim_from_month" id="claim_from_month" class="form-control"  required>
                         <option value="">Select From Month</option>
                         <option value="1" {{$reimbursement->claim_from_month == 1 ? 'selected' : ''}}>January</option>
@@ -65,9 +65,9 @@
             </div>
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
-                    <label for="claim_to_month" class="required">Claim for the period to month</label>
+                    <label for="claim_to_month" class="required">Claim For Period To Month</label>
                     <select name="claim_to_month" id="claim_to_month" class="form-control" required >
-                        <option value="">Select From Month</option>
+                        <option value="">Select To Month</option>
                         <option value="1" {{$reimbursement->claim_to_month == 1 ? 'selected' : ''}}>January</option>
                         <option value="2" {{$reimbursement->claim_to_month == 2 ? 'selected' : ''}}>February</option>
                         <option value="3" {{$reimbursement->claim_to_month == 3 ? 'selected' : ''}}>March</option>
@@ -81,26 +81,6 @@
                         <option value="11" {{$reimbursement->claim_to_month == 11 ? 'selected' : ''}}>November</option>
                         <option value="12" {{$reimbursement->claim_to_month == 12 ? 'selected' : ''}}>December</option>
                     </select>
-                </div>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <label for="reimbursement_currency">Reimbursement Currency <small
-                        class="required-field">*</small></label>
-            
-                <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
-                    name="reimbursement_currency" class="form-control form-control-sm" required>
-                    <option selected disabled> - Select Currency - </option>
-                    @foreach ($currencies  as  $currency)
-                    <option value="{{$currency->currency_name_from}}"{{ !empty($reimbursement) && $reimbursement->reimbursement_currency == $currency->currency_name_from ? 'selected' : '' }}>{{getCurrencyIcon($currency->currency_name_from)}}</option>
-                    @endforeach
-                    {{-- <option value="pula" {{ !empty($employee) && $employee->reimbursement_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
-                    <option value="dollar" {{ !empty($employee) && $employee->reimbursement_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option> --}}
-                </select>
-            </div>
-            <div class="mb-2 col-sm-6">
-                <div class="form-group">
-                    <label class="required" for="reimbursement_amount">Reimbursement Amount</label>
-                    <input type="text" name="reimbursement_amount" required id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{$reimbursement->reimbursement_amount}}">
                 </div>
             </div>
             <br>
