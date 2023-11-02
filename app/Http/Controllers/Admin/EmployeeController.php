@@ -481,11 +481,24 @@ class EmployeeController extends BaseController
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
             return "The $attribute date range overlaps with an existing record.";
         });
+        $employee = Employee::where('user_id', $request->user_id)->first();
 
         $request->validate([
-            'department_name' => ['string', 'required'],
-            'start_date' => ['required', 'date', 'before_or_equal:','no_date_overlap'],
-            'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+            'department_name' => [
+                'string',
+                'required',
+                Rule::unique('emp_department_histories')
+                    ->where(function ($query) use ($request) {
+                        return $query->where('user_id', $request->user_id);
+                    })
+                    ->ignore($request->id),
+            ],
+            'start_date' => [
+                'required',
+                'date',
+                'after:' . $employee->start_date,
+            ],
+            'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         try {
