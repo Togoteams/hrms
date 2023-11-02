@@ -206,6 +206,8 @@ class EmployeeController extends BaseController
             ], 
             'currency'              => ['nullable', 'string'], 
             'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
+            'basic_salary_for_india' => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
+            'currency_salary_for_india'  => ['required', 'string'], 
             'date_of_current_basic' => ['nullable', 'date'],
             'employment_type'       => ['required', 'string'],
             'pension_opt'           => ['nullable', 'numeric'],

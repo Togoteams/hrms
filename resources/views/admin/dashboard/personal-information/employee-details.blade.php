@@ -65,7 +65,11 @@
                                                                 <div class="col-3">{{ $data->basic_salary }}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Date of Birth</div>
-                                                                <div class="col-3">{{ $data->date_of_birth }}</div>
+                                                                <div class="col-3">{{ date('d-m-Y', strtotime($data->date_of_birth)) }}</div>
+
+                                                                <div class="col-3 fw-semibold">Date of joining</div>
+                                                                <div class="col-3">{{ date('d-m-Y', strtotime($data->start_date)) }}</div>
+
 
                                                                 <div class="col-3 fw-semibold">Age</div>
                                                                 <div class="col-3"> 

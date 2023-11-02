@@ -192,6 +192,22 @@
                                                     value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
+
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="basic_salary_for_india">Basic Salary For India<small
+                                                        class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-1">
+                                                <select name="currency_salary_for_india" id="currency_salary_for_india" name="currency_salary_for_india" class="form-control form-control-sm">
+                                                   <option value="INR">INR</option>
+                                                </select>
+                                            </div>
+                                            <div class="pt-2 col-2">
+                                                <input  id="basic_salary_for_india" placeholder="Enter "
+                                                    type="number" name="basic_salary_for_india"
+                                                    value="{{ !empty($employee) ? $employee->basic_salary_for_india : '' }}"
+                                                    class="form-control form-control-sm ">
+                                            </div>
                                            
 
                                             <div class="pt-3 col-3 fw-semibold contractDiv">

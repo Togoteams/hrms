@@ -37,30 +37,38 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                                <div class="mb-2 col-sm-3 passport_data">
-                                                    <div class="form-group">
-                                                        <label for="certificate_no">Passport No.</label>
-                                                        <input id="certificate_no" placeholder="Enter Passport No." type="text"
-                                                            value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_no : '') : '' }}" name="certificate_no"
-                                                            class="form-control form-control-sm ">
-                                                    </div>
+                                            <div class="mb-2 col-sm-3 passport_data">
+                                                <div class="form-group">
+                                                    <label for="certificate_no" id="certificate_no_label">Passport No.</label>
+                                                    <input id="certificate_no" data-placeholder-passport="Enter Passport No." data-placeholder-omang="Enter OMANG No." type="text"
+                                                        placeholder="Enter Passport No." 
+                                                        value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_no : '') : '' }}" name="certificate_no"
+                                                        class="form-control form-control-sm">
                                                 </div>
-                                                <div class="mb-2 col-sm-3 passport_data">
-                                                    <div class="form-group">
-                                                        <label for="certificate_issue_date">Passport Issue</label>
-                                                        <input id="certificate_issue_date" placeholder="Enter Passport Expiry"
-                                                            type="date" value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_issue_date : '') : '' }}"
-                                                            name="certificate_issue_date" class="form-control form-control-sm ">
-                                                    </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="mb-2 col-sm-3 passport_data">
+                                                <div class="form-group">
+                                                    <label for="certificate_issue_date" id="certificate_issue_date_label">Passport Issue</label>
+                                                    <input id="certificate_issue_date" data-placeholder-passport-issue="Enter Passport Issue" data-placeholder-omang-issue="Enter OMANG Issue"
+                                                        placeholder="Enter Passport Issue" type="date"
+                                                        value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_issue_date : '') : '' }}"
+                                                        name="certificate_issue_date" class="form-control form-control-sm">
                                                 </div>
-                                                <div class="mb-2 col-sm-3 passport_data">
-                                                    <div class="form-group">
-                                                        <label for="certificate_expiry_date">Passport Expiry</label>
-                                                        <input id="certificate_expiry_date" placeholder="Enter Passport Expiry"
-                                                            type="date" value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_expiry_date : '') : '' }}"
-                                                            name="certificate_expiry_date" class="form-control form-control-sm ">
-                                                    </div>
+                                            </div>
+                                            
+                                            <div class="mb-2 col-sm-3 passport_data">
+                                                <div class="form-group">
+                                                    <label for="certificate_expiry_date" id="certificate_expiry_date_label">Passport Expiry</label>
+                                                    <input id="certificate_expiry_date" data-placeholder-passport-expiry="Enter Passport Expiry" data-placeholder-omang-expiry="Enter OMANG Expiry"
+                                                        placeholder="Enter Passport Expiry" type="date"
+                                                        value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_expiry_date : '') : '' }}"
+                                                        name="certificate_expiry_date" class="form-control form-control-sm">
                                                 </div>
+                                            </div>
+                                            
+                                            
                                             <div class="mb-2 col-sm-3 country_data">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
@@ -86,42 +94,55 @@
 @endsection
 @push('custom-scripts')
 <script>
-    $(document).ready(function () {
-        // Get references to relevant elements
-        var typeSelect = $('#type');
-        var labelCertificateNo = $('label[for="certificate_no"]');
-        var labelCertificateIssueDate = $('label[for="certificate_issue_date"]');
-        var labelCertificateExpiryDate = $('label[for="certificate_expiry_date"]');
+   $(document).ready(function () {
+    var typeSelect = $('#type');
+    var certificateNoInput = $('#certificate_no');
+    var issueDateInput = $('#certificate_issue_date');
+    var expiryDateInput = $('#certificate_expiry_date');
 
-        // Initial label texts
-        var defaultLabelTexts = {
-            certificateNo: labelCertificateNo.text(),
-            certificateIssueDate: labelCertificateIssueDate.text(),
-            certificateExpiryDate: labelCertificateExpiryDate.text()
-        };
+    var certificateNoLabel = $('#certificate_no_label');
+    var issueDateLabel = $('#certificate_issue_date_label');
+    var expiryDateLabel = $('#certificate_expiry_date_label');
 
-        // Change label texts based on selected type
-        typeSelect.on('change', function () {
-            var selectedType = $(this).val();
-            if (selectedType === 'omang') {
-                labelCertificateNo.text('OMANG No.');
-                labelCertificateIssueDate.text('OMANG Issue');
-                labelCertificateExpiryDate.text('OMANG Expiry');
-            } else if (selectedType === 'passport') {
-                labelCertificateNo.text('Passport No.');
-                labelCertificateIssueDate.text('Passport Issue');
-                labelCertificateExpiryDate.text('Passport Expiry');
-            } else {
-                labelCertificateNo.text(defaultLabelTexts.certificateNo);
-                labelCertificateIssueDate.text(defaultLabelTexts.certificateIssueDate);
-                labelCertificateExpiryDate.text(defaultLabelTexts.certificateExpiryDate);
-            }
-        });
+    var defaultPlaceholderNo = certificateNoInput.attr('placeholder');
+    var defaultPlaceholderIssue = issueDateInput.attr('placeholder');
+    var defaultPlaceholderExpiry = expiryDateInput.attr('placeholder');
 
-        // Trigger the change event initially
-        typeSelect.trigger('change');
+    typeSelect.on('change', function () {
+        var selectedType = $(this).val();
+
+        if (selectedType === 'omang') {
+            certificateNoLabel.text('OMANG No.');
+            certificateNoInput.attr('placeholder', certificateNoInput.data('placeholder-omang'));
+            issueDateLabel.text('OMANG Issue');
+            issueDateInput.attr('placeholder', issueDateInput.data('placeholder-omang-issue'));
+            expiryDateLabel.text('OMANG Expiry');
+            expiryDateInput.attr('placeholder', expiryDateInput.data('placeholder-omang-expiry'));
+        } else if (selectedType === 'passport') {
+            certificateNoLabel.text('Passport No.');
+            certificateNoInput.attr('placeholder', certificateNoInput.data('placeholder-passport'));
+            issueDateLabel.text('Passport Issue');
+            issueDateInput.attr('placeholder', issueDateInput.data('placeholder-passport-issue'));
+            expiryDateLabel.text('Passport Expiry');
+            expiryDateInput.attr('placeholder', expiryDateInput.data('placeholder-passport-expiry'));
+        } else {
+            certificateNoLabel.text('Passport No.');
+            certificateNoInput.attr('placeholder', defaultPlaceholderNo);
+            issueDateLabel.text('Passport Issue');
+            issueDateInput.attr('placeholder', defaultPlaceholderIssue);
+            expiryDateLabel.text('Passport Expiry');
+            expiryDateInput.attr('placeholder', defaultPlaceholderExpiry);
+        }
     });
+
+    typeSelect.trigger('change');
+});
+
 </script>
+
+
+
+
 
 
 @endpush
