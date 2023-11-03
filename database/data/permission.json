@@ -1,550 +1,550 @@
 {
     "permissions": [
         {
-            "name": "View Dashboard","module": "Dashboard"
+            "name": "View Dashboard","module": "Dashboard", "permissions for":"admin"
         },
         {
-            "name": "Add Roles","module": "Roles"
+            "name": "Add Roles","module": "Roles", "permissions for":"admin"
         },
         {
-            "name": "Edit Roles","module": "Roles"
+            "name": "Edit Roles","module": "Roles", "permissions for":"admin"
         },
         {
-            "name": "Delete Roles","module": "Roles"
+            "name": "Delete Roles","module": "Roles", "permissions for":"admin"
         },
         {
-            "name": "View Roles","module": "Roles"
+            "name": "View Roles","module": "Roles", "permissions for":"admin"
         },
         {
-            "name": "Add Users","module": "Users"
+            "name": "Add Users","module": "Users", "permissions for":"admin"
         },
         {
-            "name": "Edit Users","module": "Users"
+            "name": "Edit Users","module": "Users", "permissions for":"admin"
         },
         {
-            "name": "View Users","module": "Users"
+            "name": "View Users","module": "Users", "permissions for":"admin"
         },
         {
-            "name": "Delete Users","module": "Users"
+            "name": "Delete Users","module": "Users", "permissions for":"admin"
         },
         {
-            "name": "Add Holidays","module": "Holidays"
+            "name": "Add Holidays","module": "Holidays", "permissions for":"admin"
         },
         {
-            "name": "Edit Holidays","module": "Holidays"
+            "name": "Edit Holidays","module": "Holidays", "permissions for":"admin"
         },
         {
-            "name": "Delete Holidays","module": "Holidays"
+            "name": "Delete Holidays","module": "Holidays", "permissions for":"admin"
         },
         {
-            "name": "View Holidays","module": "Holidays"
+            "name": "View Holidays","module": "Holidays", "permissions for":"admin"
         },
         {
-            "name": "Add Employees","module": "Employees"
+            "name": "Add Employees","module": "Employees", "permissions for":"admin"
         },
         {
-            "name": "Edit Employees","module": "Employees"
+            "name": "Edit Employees","module": "Employees", "permissions for":"admin"
         },
         {
-            "name": "View Employees","module": "Employees"
+            "name": "View Employees","module": "Employees", "permissions for":"admin"
         },
         {
-            "name": "Delete Employees","module": "Employees"
+            "name": "Delete Employees","module": "Employees", "permissions for":"admin"
         },
         {
-            "name": "Change Employees Status ","module": "Employees"
+            "name": "Change Employees Status ","module": "Employees", "permissions for":"admin"
         },
         {
-            "name": "Add Branch","module": "Branch"
+            "name": "Add Branch","module": "Branch", "permissions for":"admin"
         },
         {
-            "name": "Edit Branch","module": "Branch"
+            "name": "Edit Branch","module": "Branch", "permissions for":"admin"
         },
         {
-            "name": "View Branch","module": "Branch"
+            "name": "View Branch","module": "Branch", "permissions for":"admin"
         },
         {
-            "name": "Delete Branch","module": "Branch"
+            "name": "Delete Branch","module": "Branch", "permissions for":"admin"
         },
         {
-            "name": "Change Branch Status","module": "Branch"
+            "name": "Change Branch Status","module": "Branch", "permissions for":"admin"
         },
         {
-            "name": "Add Designations","module": "Designations"
+            "name": "Add Designations","module": "Designations", "permissions for":"admin"
         },
         {
-            "name": "Edit Designations","module": "Designations"
+            "name": "Edit Designations","module": "Designations", "permissions for":"admin"
         },
         {
-            "name": "View Designations","module": "Designations"
+            "name": "View Designations","module": "Designations", "permissions for":"admin"
         },
         {
-            "name": "Delete Designations","module": "Designations"
+            "name": "Delete Designations","module": "Designations", "permissions for":"admin"
         },
         {
-            "name": "Add Memberships","module": "Memberships"
+            "name": "Add Memberships","module": "Memberships", "permissions for":"admin"
         },
         {
-            "name": "Edit Memberships","module": "Memberships"
+            "name": "Edit Memberships","module": "Memberships", "permissions for":"admin"
         },
         {
-            "name": "View Memberships","module": "Memberships"
+            "name": "View Memberships","module": "Memberships", "permissions for":"admin"
         },
         {
-            "name": "Delete Memberships","module": "Memberships"
+            "name": "Delete Memberships","module": "Memberships", "permissions for":"admin"
         },
         {
-            "name": "Profile Update","module": "Profile Update"
+            "name": "Profile Update","module": "Profile Update", "permissions for":"admin"
         },
         {
-            "name": "Change Password","module": "Change Password"
+            "name": "Change Password","module": "Change Password", "permissions for":"admin"
         },
         {
-            "name": "Add Leave","module": "Leave"
+            "name": "Add Leave","module": "Leave", "permissions for":"admin"
         },
         {
-            "name": "Edit Leave","module": "Leave"
+            "name": "Edit Leave","module": "Leave", "permissions for":"admin"
         },
         {
-            "name": "View Leave","module": "Leave"
+            "name": "View Leave","module": "Leave", "permissions for":"admin"
         },
         {
-            "name": "Delete Leave","module": "Leave"
+            "name": "Delete Leave","module": "Leave", "permissions for":"admin"
         },
         {
-            "name": "Add Department","module": "Department"
+            "name": "Add Department","module": "Department", "permissions for":"admin"
         },
         {
-            "name": "Edit Department","module": "Department"
+            "name": "Edit Department","module": "Department", "permissions for":"admin"
         },
         {
-            "name": "View Department","module": "Department"
+            "name": "View Department","module": "Department", "permissions for":"admin"
         },
         {
-            "name": "Delete Department","module": "Department"
+            "name": "Delete Department","module": "Department", "permissions for":"admin"
         },
         {
-            "name": "Add Employee Transfer","module": "Transfer"
+            "name": "Add Employee Transfer","module": "Transfer", "permissions for":"admin"
         },
         {
-            "name": "Edit Employee Transfer","module": "Transfer"
+            "name": "Edit Employee Transfer","module": "Transfer", "permissions for":"admin"
         },
         {
-            "name": "View Employee Transfer","module": "Transfer"
+            "name": "View Employee Transfer","module": "Transfer", "permissions for":"admin"
         },
         {
-            "name": "Delete Employee Transfer","module": "Transfer"
+            "name": "Delete Employee Transfer","module": "Transfer", "permissions for":"admin"
         },
         {
-            "name": "Add Document Management","module": "Management"
+            "name": "Add Document Management","module": "Management", "permissions for":"admin"
         },
         {
-            "name": "Edit Document Management","module": "Management"
+            "name": "Edit Document Management","module": "Management", "permissions for":"admin"
         },
         {
-            "name": "View Document Management","module": "Management"
+            "name": "View Document Management","module": "Management", "permissions for":"admin"
         },
         {
-            "name": "Delete Document Management","module": "Management"
+            "name": "Delete Document Management","module": "Management", "permissions for":"admin"
         },
         {
-            "name": "Add Medical card Type","module": "Medical card Type"
+            "name": "Add Medical card Type","module": "Medical card Type", "permissions for":"admin"
         },
         {
-            "name": "Edit Medical card Type","module": "Medical card Type"
+            "name": "Edit Medical card Type","module": "Medical card Type", "permissions for":"admin"
         },
         {
-            "name": "View Medical card Type","module": "Medical card Type"
+            "name": "View Medical card Type","module": "Medical card Type", "permissions for":"admin"
         },
         {
-            "name": "Delete Medical card Type","module": "Medical card Type"
+            "name": "Delete Medical card Type","module": "Medical card Type", "permissions for":"admin"
         },
         {
-            "name": "Add Overtime Setting","module": "Overtime Setting"
+            "name": "Add Overtime Setting","module": "Overtime Setting", "permissions for":"admin"
         },
         {
-            "name": "Edit Overtime Setting","module": "Overtime Setting"
+            "name": "Edit Overtime Setting","module": "Overtime Setting", "permissions for":"admin"
         },
         {
-            "name": "View Overtime Setting","module": "Overtime Setting"
+            "name": "View Overtime Setting","module": "Overtime Setting", "permissions for":"admin,employee"
         },
         {
-            "name": "Delete Overtime Setting","module": "Overtime Setting"
+            "name": "Delete Overtime Setting","module": "Overtime Setting", "permissions for":"admin"
         },
         {
-            "name": "Add Loans Types","module": "Loans Types"
+            "name": "Add Loans Types","module": "Loans Types", "permissions for":"admin"
         },
         {
-            "name": "Edit Loans Types","module": "Loans Types"
+            "name": "Edit Loans Types","module": "Loans Types", "permissions for":"admin"
         },
         {
-            "name": "View Loans Types","module": "Loans Types"
+            "name": "View Loans Types","module": "Loans Types", "permissions for":"admin"
         },
         {
-            "name": "Delete Loans Types","module": "Loans Types"
+            "name": "Delete Loans Types","module": "Loans Types", "permissions for":"admin"
         },
         {
-            "name": "Change Status Loans Types","module": "Loans Types"
+            "name": "Change Status Loans Types","module": "Loans Types", "permissions for":"admin"
         },
         {
-            "name": "Add Apply Loans","module": "Apply Loans"
+            "name": "Add Apply Loans","module": "Apply Loans", "permissions for":"admin"
         },
         {
-            "name": "Edit Apply Loans","module": "Apply Loans"
+            "name": "Edit Apply Loans","module": "Apply Loans", "permissions for":"admin"
         },
         {
-            "name": "View Apply Loans","module": "Apply Loans"
+            "name": "View Apply Loans","module": "Apply Loans", "permissions for":"admin,employee"
         },
         {
-            "name": "Delete Apply Loans","module": "Apply Loans"
+            "name": "Delete Apply Loans","module": "Apply Loans", "permissions for":"admin"
         },
         {
-            "name": "Change Status Apply Loans","module": "Apply Loans"
+            "name": "Change Status Apply Loans","module": "Apply Loans", "permissions for":"admin"
         },
         {
-            "name": "Add Loans","module": "Loans"
+            "name": "Add Loans","module": "Loans", "permissions for":"admin"
         },
         {
-            "name": "Edit Loans","module": "Loans"
+            "name": "Edit Loans","module": "Loans", "permissions for":"admin"
         },
         {
-            "name": "View Loans","module": "Loans"
+            "name": "View Loans","module": "Loans", "permissions for":"admin"
         },
         {
-            "name": "Delete Loans","module": "Loans"
+            "name": "Delete Loans","module": "Loans", "permissions for":"admin"
         },
         {
-            "name": "Add Kra","module": "Kra"
+            "name": "Add Kra","module": "Kra", "permissions for":"admin"
         },
         {
-            "name": "Edit Kra","module": "Kra"
+            "name": "Edit Kra","module": "Kra", "permissions for":"admin"
         },
         {
-            "name": "View Kra","module": "Kra"
+            "name": "View Kra","module": "Kra", "permissions for":"admin"
         },
         {
-            "name": "Delete Kra","module": "Kra"
+            "name": "Delete Kra","module": "Kra", "permissions for":"admin"
         },
         {
-            "name": "Add Attributes","module": "Attributes"
+            "name": "Add Attributes","module": "Attributes", "permissions for":"admin"
         },
         {
-            "name": "Edit Attributes","module": "Attributes"
+            "name": "Edit Attributes","module": "Attributes", "permissions for":"admin"
         },
         {
-            "name": "View Attributes","module": "Attributes"
+            "name": "View Attributes","module": "Attributes", "permissions for":"admin"
         },
         {
-            "name": "Delete Attributes","module": "Attributes"
+            "name": "Delete Attributes","module": "Attributes", "permissions for":"admin"
         },
         {
-            "name": "Change Status Attributes","module": "Attributes"
+            "name": "Change Status Attributes","module": "Attributes", "permissions for":"admin"
         },
         {
-            "name": "Add Employee Kra","module": "Employee Kra"
+            "name": "Add Employee Kra","module": "Employee Kra", "permissions for":"admin"
         },
         {
-            "name": "Edit Employee Kra","module": "Employee Kra"
+            "name": "Edit Employee Kra","module": "Employee Kra", "permissions for":"admin"
         },
         {
-            "name": "View Employee Kra","module": "Employee Kra"
+            "name": "View Employee Kra","module": "Employee Kra", "permissions for":"admin,employee"
         },
         {
-            "name": "Delete Employee Kra","module": "Employee Kra"
+            "name": "Delete Employee Kra","module": "Employee Kra", "permissions for":"admin"
         },
         {
-            "name": "Change Status Employee Kra","module": "Employee Kra"
+            "name": "Change Status Employee Kra","module": "Employee Kra", "permissions for":"admin"
         },
         {
-            "name": "Print Employee Kra","module": "Employee Kra"
+            "name": "Print Employee Kra","module": "Employee Kra", "permissions for":"admin,employee"
         },
         {
-            "name": "Add Leave Types","module": "Leave Types"
+            "name": "Add Leave Types","module": "Leave Types", "permissions for":"admin"
         },
         {
-            "name": "Edit Leave Types","module": "Leave Types"
+            "name": "Edit Leave Types","module": "Leave Types", "permissions for":"admin"
         },
         {
-            "name": "View Leave Types","module": "Leave Types"
+            "name": "View Leave Types","module": "Leave Types", "permissions for":"admin"
         },
         {
-            "name": "Delete Leave Types","module": "Leave Types"
+            "name": "Delete Leave Types","module": "Leave Types", "permissions for":"admin"
         },
         {
-            "name": "Change Status Leave Types","module": "Leave Types"
+            "name": "Change Status Leave Types","module": "Leave Types", "permissions for":"admin"
         },
         {
-            "name": "Add LEAVE Apply","module": "LEAVE Apply"
+            "name": "Add Leave Apply","module": "Leave Apply", "permissions for":"admin,employee"
         },
         {
-            "name": "Edit LEAVE Apply","module": "LEAVE Apply"
+            "name": "Edit Leave Apply","module": "Leave Apply", "permissions for":"admin,employee"
         },
         {
-            "name": "View LEAVE Apply","module": "LEAVE Apply"
+            "name": "View Leave Apply","module": "Leave Apply", "permissions for":"admin"
         },
         {
-            "name": "Delete LEAVE Apply","module": "LEAVE Apply"
+            "name": "Delete Leave Apply","module": "Leave Apply", "permissions for":"admin,employee"
         },
         {
-            "name": "Change Status LEAVE Apply","module": "LEAVE Apply"
+            "name": "Change Status Leave Apply","module": "Leave Apply", "permissions for":"admin"
         },
         {
-            "name": "Add LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
+            "name": "Add Leave Encashment","module": "Leave Encashment", "permissions for":"admin"
         },
         {
-            "name": "Edit LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
+            "name": "Edit Leave Encashment","module": "Leave Encashment", "permissions for":"admin"
         },
         {
-            "name": "View LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
+            "name": "View Leave Encashment","module": "Leave Encashment", "permissions for":"admin"
         },
         {
-            "name": "Delete LEAVE ENCASHMENT","module": "LEAVE ENCASHMENT"
+            "name": "Delete Leave Encashment","module": "Leave Encashment", "permissions for":"admin"
         },
         {
-            "name": "Add LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
+            "name": "Add Leave Balance Report","module": "Leave Balance Report", "permissions for":"admin"
         },
         {
-            "name": "Edit LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
+            "name": "Edit Leave Balance Report","module": "Leave Balance Report", "permissions for":"admin"
         },
         {
-            "name": "View LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
+            "name": "View Leave Balance Report","module": "Leave Balance Report", "permissions for":"admin"
         },
         {
-            "name": "Delete LEAVE BALANCE REPORT","module": "LEAVE BALANCE REPORT"
+            "name": "Delete Leave Balance Report","module": "Leave Balance Report", "permissions for":"admin"
         },
         {
-            "name": "Add LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
+            "name": "Add Leave Request History","module": "Leave Request History", "permissions for":"admin"
         },
         {
-            "name": "Edit LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
+            "name": "Edit Leave Request History","module": "Leave Request History", "permissions for":"admin"
         },
         {
-            "name": "View LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
+            "name": "View Leave Request History","module": "Leave Request History", "permissions for":"admin"
         },
         {
-            "name": "Delete LEAVE REQUEST HISTORY","module": "LEAVE REQUEST HISTORY"
+            "name": "Delete Leave Request History","module": "Leave Request History", "permissions for":"admin"
         },
         {
-            "name": "Add LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
+            "name": "Add Leave Request Rejected","module": "Leave Request Rejected", "permissions for":"admin"
         },
         {
-            "name": "Edit LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
+            "name": "Edit Leave Request Rejected","module": "Leave Request Rejected", "permissions for":"admin"
         },
         {
-            "name": "View LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
+            "name": "View Leave Request Rejected","module": "Leave Request Rejected", "permissions for":"admin"
         },
         {
-            "name": "Delete LEAVE REQUEST REJECTED","module": "LEAVE REQUEST REJECTED"
+            "name": "Delete Leave Request Rejected","module": "Leave Request Rejected", "permissions for":"admin"
         },
         {
-            "name": "Add LEAVE REPORTS","module": "LEAVE REPORTS"
+            "name": "Add Leave Reports","module": "Leave Reports", "permissions for":"admin"
         },
         {
-            "name": "Edit LEAVE REPORTS","module": "LEAVE REPORTS"
+            "name": "Edit Leave Reports","module": "Leave Reports", "permissions for":"admin"
         },
         {
-            "name": "View LEAVE REPORTS","module": "LEAVE REPORTS"
+            "name": "View Leave Reports","module": "Leave Reports", "permissions for":"admin"
         },
         {
-            "name": "Delete LEAVE REPORTS","module": "LEAVE REPORTS"
+            "name": "Delete Leave Reports","module": "Leave Reports", "permissions for":"admin"
         },
         {
-            "name": "Add Leave Settings","module": "Leave Settings"
+            "name": "Add Leave Settings","module": "Leave Settings", "permissions for":"admin"
         },
         {
-            "name": "Edit Leave Settings","module": "Leave Settings"
+            "name": "Edit Leave Settings","module": "Leave Settings", "permissions for":"admin"
         },
         {
-            "name": "View Leave Settings","module": "Leave Settings"
+            "name": "View Leave Settings","module": "Leave Settings", "permissions for":"admin"
         },
         {
-            "name": "Delete Leave Settings","module": "Leave Settings"
+            "name": "Delete Leave Settings","module": "Leave Settings", "permissions for":"admin"
         },
         {
-            "name": "Add Leave Type","module": "Leave Type"
+            "name": "Add Leave Type","module": "Leave Type", "permissions for":"admin"
         },
         {
-            "name": "Edit Leave Type","module": "Leave Type"
+            "name": "Edit Leave Type","module": "Leave Type", "permissions for":"admin"
         },
         {
-            "name": "View Leave Type","module": "Leave Type"
+            "name": "View Leave Type","module": "Leave Type", "permissions for":"admin"
         },
         {
-            "name": "Delete Leave Type","module": "Leave Type"
+            "name": "Delete Leave Type","module": "Leave Type", "permissions for":"admin"
         },
         {
-            "name": "Add Payroll","module": "Payroll"
+            "name": "Add Payroll","module": "Payroll", "permissions for":"admin"
         },
         {
-            "name": "Edit Payroll","module": "Payroll"
+            "name": "Edit Payroll","module": "Payroll", "permissions for":"admin"
         },
         {
-            "name": "View Payroll","module": "Payroll"
+            "name": "View Payroll","module": "Payroll", "permissions for":"admin"
         },
         {
-            "name": "Delete Payroll","module": "Payroll"
+            "name": "Delete Payroll","module": "Payroll", "permissions for":"admin"
         },
         {
-            "name": "Add Tax Slab Settings","module": "Tax Slab Settings"
+            "name": "Add Tax Slab Settings","module": "Tax Slab Settings", "permissions for":"admin"
         },
         {
-            "name": "Edit Tax Slab Settings","module": "Tax Slab Settings"
+            "name": "Edit Tax Slab Settings","module": "Tax Slab Settings", "permissions for":"admin"
         },
         {
-            "name": "View Tax Slab Settings","module": "Tax Slab Settings"
+            "name": "View Tax Slab Settings","module": "Tax Slab Settings", "permissions for":"admin"
         },
         {
-            "name": "Delete Tax Slab Settings","module": "Tax Slab Settings"
+            "name": "Delete Tax Slab Settings","module": "Tax Slab Settings", "permissions for":"admin"
         },
         {
-            "name": "Add Salary Increment Settings","module": "Salary Increment Settings"
+            "name": "Add Salary Increment Settings","module": "Salary Increment Settings", "permissions for":"admin"
         },
         {
-            "name": "Edit Salary Increment Settings","module": "Salary Increment Settings"
+            "name": "Edit Salary Increment Settings","module": "Salary Increment Settings", "permissions for":"admin"
         },
         {
-            "name": "View Salary Increment Settings","module": "Salary Increment Settings"
+            "name": "View Salary Increment Settings","module": "Salary Increment Settings", "permissions for":"admin"
         },
         {
-            "name": "Delete Salary Increment Settings","module": "Salary Increment Settings"
+            "name": "Delete Salary Increment Settings","module": "Salary Increment Settings", "permissions for":"admin"
         },
         {
-            "name": "Add Salary Increment Reporting","module": "Salary Increment Reporting"
+            "name": "Add Salary Increment Reporting","module": "Salary Increment Reporting", "permissions for":"admin"
         },
         {
-            "name": "Edit Salary Increment Reporting","module": "Salary Increment Reporting"
+            "name": "Edit Salary Increment Reporting","module": "Salary Increment Reporting", "permissions for":"admin"
         },
         {
-            "name": "View Salary Increment Reporting","module": "Salary Increment Reporting"
+            "name": "View Salary Increment Reporting","module": "Salary Increment Reporting", "permissions for":"admin"
         },
         {
-            "name": "Delete Salary Increment Reporting","module": "Salary Increment Reporting"
+            "name": "Delete Salary Increment Reporting","module": "Salary Increment Reporting", "permissions for":"admin"
         },
         {
-            "name": "Add Payroll Head","module": "Payroll Head"
+            "name": "Add Payroll Head","module": "Payroll Head", "permissions for":"admin"
         },
         {
-            "name": "Edit Payroll Head","module": "Payroll Head"
+            "name": "Edit Payroll Head","module": "Payroll Head", "permissions for":"admin"
         },
         {
-            "name": "View Payroll Head","module": "Payroll Head"
+            "name": "View Payroll Head","module": "Payroll Head", "permissions for":"admin"
         },
         {
-            "name": "Delete Payroll Head","module": "Payroll Head"
+            "name": "Delete Payroll Head","module": "Payroll Head", "permissions for":"admin"
         },
         {
-            "name": "Change Status Payroll Head","module": "Payroll Head"
+            "name": "Change Status Payroll Head","module": "Payroll Head", "permissions for":"admin"
         },
         {
-            "name": "Add Pay Scale","module": "Pay Scale"
+            "name": "Add Pay Scale","module": "Pay Scale", "permissions for":"admin"
         },
         {
-            "name": "Edit Pay Scale","module": "Pay Scale"
+            "name": "Edit Pay Scale","module": "Pay Scale", "permissions for":"admin"
         },
         {
-            "name": "View Pay Scale","module": "Pay Scale"
+            "name": "View Pay Scale","module": "Pay Scale", "permissions for":"admin"
         },
         {
-            "name": "Delete Pay Scale","module": "Pay Scale"
+            "name": "Delete Pay Scale","module": "Pay Scale", "permissions for":"admin"
         },
         {
-            "name": "Add Salary","module": "Salary"
+            "name": "Add Salary","module": "Salary", "permissions for":"admin"
         },
         {
-            "name": "Edit Salary","module": "Salary"
+            "name": "Edit Salary","module": "Salary", "permissions for":"admin"
         },
         {
-            "name": "View Salary","module": "Salary"
+            "name": "View Salary","module": "Salary", "permissions for":"admin,employee"
         },
         {
-            "name": "Delete Salary","module": "Salary"
+            "name": "Delete Salary","module": "Salary", "permissions for":"admin"
         },
         {
-            "name": "Print Salary","module": "Salary"
+            "name": "Print Salary","module": "Salary", "permissions for":"admin,employee"
         },
         {
-            "name": "Add Reimbursement Type","module": "Reimbursement Type"
+            "name": "Add Reimbursement Type","module": "Reimbursement Type", "permissions for":"admin"
         },
         {
-            "name": "Edit Reimbursement Type","module": "Reimbursement Type"
+            "name": "Edit Reimbursement Type","module": "Reimbursement Type", "permissions for":"admin"
         },
         {
-            "name": "View Reimbursement Type","module": "Reimbursement Type"
+            "name": "View Reimbursement Type","module": "Reimbursement Type", "permissions for":"admin"
         },
         {
-            "name": "Delete Reimbursement Type","module": "Reimbursement Type"
+            "name": "Delete Reimbursement Type","module": "Reimbursement Type", "permissions for":"admin"
         },
         {
-            "name": "Add Reimbursement","module": "Reimbursement"
+            "name": "Add Reimbursement","module": "Reimbursement", "permissions for":"employee"
         },
         {
-            "name": "Edit Reimbursement","module": "Reimbursement"
+            "name": "Edit Reimbursement","module": "Reimbursement", "permissions for":"admin,employee"
         },
         {
-            "name": "View Reimbursement","module": "Reimbursement"
+            "name": "View Reimbursement","module": "Reimbursement", "permissions for":"admin,employee"
         },
         {
-            "name": "Delete Reimbursement","module": "Reimbursement"
+            "name": "Delete Reimbursement","module": "Reimbursement", "permissions for":"admin,employee"
         },
         {
-            "name": "Change Status Reimbursement","module": "Reimbursement"
+            "name": "Change Status Reimbursement","module": "Reimbursement", "permissions for":"admin"
         },
         {
-            "name": "Add Manage Tax","module": "Manage Tax"
+            "name": "Add Manage Tax","module": "Manage Tax", "permissions for":"admin"
         },
         {
-            "name": "Edit Manage Tax","module": "Manage Tax"
+            "name": "Edit Manage Tax","module": "Manage Tax", "permissions for":"admin"
         },
         {
-            "name": "View Manage Tax","module": "Manage Tax"
+            "name": "View Manage Tax","module": "Manage Tax", "permissions for":"admin"
         },
         {
-            "name": "Delete Manage Tax","module": "Manage Tax"
+            "name": "Delete Manage Tax","module": "Manage Tax", "permissions for":"admin"
         },
         {
-            "name": "Add Account","module": "Account"
+            "name": "Add Account","module": "Account", "permissions for":"admin"
         },
         {
-            "name": "Edit Account","module": "Account"
+            "name": "Edit Account","module": "Account", "permissions for":"admin"
         },
         {
-            "name": "View Account","module": "Account"
+            "name": "View Account","module": "Account", "permissions for":"admin"
         },
         {
-            "name": "Delete Account","module": "Account"
+            "name": "Delete Account","module": "Account", "permissions for":"admin"
         },
         {
-            "name": "Change Status Account","module": "Account"
+            "name": "Change Status Account","module": "Account", "permissions for":"admin"
         },
         {
-            "name": "Add Currency Settings","module": "Currency Settings"
+            "name": "Add Currency Settings","module": "Currency Settings", "permissions for":"admin"
         },
         {
-            "name": "Edit Currency Settings","module": "Currency Settings"
+            "name": "Edit Currency Settings","module": "Currency Settings", "permissions for":"admin"
         },
         {
-            "name": "View Currency Settings","module": "Currency Settings"
+            "name": "View Currency Settings","module": "Currency Settings", "permissions for":"admin"
         },
         {
-            "name": "Delete Currency Settings","module": "Currency Settings"
+            "name": "Delete Currency Settings","module": "Currency Settings", "permissions for":"admin"
         },
         {
-            "name": "Change Status Currency Settings","module": " Currency Settings"
+            "name": "Change Status Currency Settings","module": " Currency Settings", "permissions for":"admin"
         },
         {
-            "name": "Add TTUM Report","module": "TTUM Report"
+            "name": "Add TTUM Report","module": "TTUM Report", "permissions for":"admin"
         },
         {
-            "name": "Edit TTUM Report","module": "TTUM Report"
+            "name": "Edit TTUM Report","module": "TTUM Report", "permissions for":"admin"
         },
         {
-            "name": "View TTUM Report","module": "TTUM Report"
+            "name": "View TTUM Report","module": "TTUM Report", "permissions for":"admin"
         },
         {
-            "name": "Delete TTUM Report","module": "TTUM Report"
+            "name": "Delete TTUM Report","module": "TTUM Report", "permissions for":"admin"
         },
         {
-            "name": " Export Report TTUM Report","module": "TTUM Report"
+            "name": " Export Report TTUM Report","module": "TTUM Report", "permissions for":"admin"
         }
 
     ]

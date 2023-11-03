@@ -21,6 +21,7 @@ class PermissionTableSeeder extends Seeder
             Permission::updateOrCreate([
                 'name'=> $value->name,
                 'module'=> $value->module,
+                'permissions_for' => $value->{'permissions for'},
 
             ]);
         }
