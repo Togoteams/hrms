@@ -523,6 +523,15 @@
                     </div>
                     @endcanany
 
+                    <div class="nav-item">
+                        <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.country.list' ? 'active' : '' }}"
+                            href="{{ route('admin.country.index') }}" data-placement="left">
+                            <i class="fa fa-medkit nav-icon"></i>
+                            <span class="nav-link-title">Country</span>
+                        </a>
+                    </div>
+                    
+
                      {{-- @canany(['add-leave-settings', 'edit-leave-settings', 'view-leave-settings',
                          'delete-leave-settings', 'add-leave-type', 'edit-leave-type', 'delete-leave-type',
                          'view-leave-type'])

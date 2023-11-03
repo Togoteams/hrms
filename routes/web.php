@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CurrencyController;
 use App\Http\Controllers\Admin\DesignationContoller;
 use Illuminate\Support\Facades\Route;
@@ -123,6 +124,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
    
     Route::resource('account',AccountController::class);
+
+    Route::resource('country',CountryController::class);
+
 
     Route::resource('currency_settings', CurrencyController::class);
 

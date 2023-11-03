@@ -15,6 +15,7 @@ use App\Services\Leave\LeaveService;
 use App\Http\Resources\Leave\LeaveResource;
 use App\Models\Account;
 use App\Models\Branch;
+use App\Models\Country;
 use App\Models\CurrencySetting;
 use App\Models\Department;
 use App\Models\Designation;
@@ -191,6 +192,13 @@ class AjaxController extends BaseController
                         "status"=>$request->value
                     ]);
                     $message='Account Status updated';
+                    break;
+                case 'country':
+                    $id = $request->uuid;
+                    $data= Country::where('id',$id)->update([
+                        "status"=>$request->value
+                    ]);
+                    $message='Country Status updated';
                     break;
                 case 'currency_settings':
                     $id = $request->uuid;
