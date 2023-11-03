@@ -46,9 +46,13 @@
          <div class="ml-auto navbar-nav-wrap-content">
              <!-- Navbar -->
              <ul class="navbar-nav">
-                @if (auth()->user()->employee)
-                <li style="color: white;">{{ auth()->user()->salutation }} {{ auth()->user()->name }} {{ auth()->user()->employee->ec_number }}</li>
-                @endif
+               
+                <li style="color: white;">{{ auth()->user()->salutation }} {{ auth()->user()->name }} 
+                    @if (auth()->user()->employee)
+                    {{ auth()->user()->employee->ec_number }}
+                    @endif
+                </li>
+         
                  <li class="nav-item">
                      <!-- Account -->
                      <div class="dropdown">
