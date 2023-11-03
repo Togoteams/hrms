@@ -19,11 +19,11 @@
                 </div>
             </div>
             <div class="mb-2 col-sm-6">
-                <label for="expenses_currency">Expenses Currency  <small
+                <label for="expenses_currency">Expense Currency  <small
                         class="required-field">*</small></label>
                 <select id="expenses_currency" placeholder="Select Currency"
                     name="expenses_currency" class="form-control form-control-sm" required>
-                    <option selected disabled> - Select expenses_currency - </option>
+                    <option selected disabled> - Select - </option>
                     @foreach ($currencies  as  $currency)
                     <option value="{{$currency->currency_name_from}}" {{ $reimbursement->expenses_currency == $currency->currency_name_from ? 'selected' : '' }}>{{getCurrencyIcon($currency->currency_name_from)}}</option>
                     @endforeach
@@ -33,8 +33,8 @@
             </div>
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
-                    <label for="expenses_amount" class="required">Expenses Amount</label>
-                    <input type="number" required name="expenses_amount" id="expenses_amount" class="form-control" placeholder="expenses_amount" value="{{$reimbursement->expenses_amount}}">
+                    <label for="expenses_amount" class="required">Expense Amount</label>
+                    <input type="number" required name="expenses_amount" id="expenses_amount" class="form-control" placeholder="Expenses Amount" value="{{$reimbursement->expenses_amount}}">
                 </div>
             </div>
             <div class="mb-2 col-sm-6">

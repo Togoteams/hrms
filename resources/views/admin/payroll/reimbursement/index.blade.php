@@ -234,13 +234,13 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
-                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement_amount" value="{{ old('reimbursement_amount') }}">
+                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement amount" value="{{ old('reimbursement_amount') }}">
                                 </div>
                             </div>
                             <div class="mb-2 col-md-12">
                                 <div class="form-group">
                                     <label for="expenses">Reimbursement Reason</label>
-                                    <textarea name="reimbursement_reason" id="reimbursement_reason" cols="30" rows="10" class="form-control" placeholder="reimbursement_reason"></textarea>
+                                    <textarea name="reimbursement_reason" id="reimbursement_reason" cols="30" rows="10" class="form-control" placeholder="Reimbursement Reason"></textarea>
                                 </div>
                                 <span class="text-danger">
                                     @error('reimbursement_reason')
