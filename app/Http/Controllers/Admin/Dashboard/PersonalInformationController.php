@@ -88,10 +88,10 @@ class PersonalInformationController extends Controller
              'user_id' => ['required', 'numeric'],
              'gender' => ['required', 'string'],
              'salutation' => ['required', 'string'],
-             'first_name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
-             'last_name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+             'name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+            //  'last_name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
              'birth_country' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
-             'blood_group' => ['required','string','regex:/^[A-Z]+\+$/'],
+             'blood_group' => ['required','string'],
              'date_of_birth' => [
                 'required',
                 'date',
@@ -110,9 +110,9 @@ class PersonalInformationController extends Controller
         } else {
             try {
                 // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
-                Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'salutation', 'first_name','last_name','name']));
+                Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'salutation','name']));
                 // User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
-                User::where('id', $request->user_id)->update(['name'=>$request->first_name." ".$request->last_name,'first_name'=>$request->first_name,'last_name'=>$request->last_name,'salutation'=>$request->salutation]);
+                User::where('id', $request->user_id)->update(['name'=>$request->name,'salutation'=>$request->salutation]);
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);

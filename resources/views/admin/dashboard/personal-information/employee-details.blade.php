@@ -29,12 +29,12 @@
                                             <div class="row">
                                                 <div class="py-4 col-md-10">
                                                     @if (!empty($data))
-                                                    @php
+                                                    {{-- @php
                                                         $fullName = $data->user->name;
                                                         $nameParts = explode(' ', $fullName);
                                                         $firstName = $nameParts[0];
                                                         $lastName = count($nameParts) > 1 ? $nameParts[count($nameParts) - 1] : '';
-                                                    @endphp
+                                                    @endphp --}}
 
                                                         <div class="left-div">
                                                             <div class="row text-dark">
@@ -43,11 +43,11 @@
                                                                 <div class="col-3 fw-semibold">Salutation</div>
                                                                 <div class="col-3">{{$salutation}}</div>
 
-                                                                <div class="col-3 fw-semibold">First Name</div>
-                                                                <div class="col-3"> {{ $firstName }}</div>
+                                                                <div class="col-3 fw-semibold">Name</div>
+                                                                <div class="col-3"> {{  $data->user->name }}</div>
 
-                                                                <div class="col-3 fw-semibold">Last Name</div>
-                                                                <div class="col-3">{{ $lastName }}</div>
+                                                                {{-- <div class="col-3 fw-semibold">Last Name</div>
+                                                                <div class="col-3">{{ $lastName }}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Gender</div>
                                                                 <div class="col-3">{{ $data->gender }}</div>
@@ -84,7 +84,7 @@
                                                                 <div class="col-3 fw-semibold">Blood Group</div>
                                                                 <div class="col-3">{{ $data->blood_group }}</div>
                                                                 <div class="col-3 fw-semibold">Basic Salary</div>
-                                                                <div class="col-3">{{ $data->currency_salary }}  {{ $data->basic_salary }}</div>
+                                                                <div class="col-3">{{getCurrencyIcon($data->currency_salary)}}  {{ $data->basic_salary }}</div>
                                                             </div>
                                                         </div>
                                                     @else
@@ -141,20 +141,20 @@
                                         </div>
                                          <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="first_name">First Name<small class="required-field">*</small></label>
-                                                <input required id="first_name" placeholder="Enter First Name of Employee "
-                                                    type="text" name="first_name" class="form-control form-control-"
-                                                    value="{{ $data->user->first_name }}">
+                                                <label for="name">Name<small class="required-field">*</small></label>
+                                                <input required id="name" placeholder="Enter Name of Employee "
+                                                    type="text" name="name" class="form-control form-control-"
+                                                    value="{{ $data->user->name }}">
                                             </div>
                                         </div>
-                                         <div class="mb-2 col-sm-6">
+                                         {{-- <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="last_name">Last Name<small class="required-field">*</small></label>
                                                 <input required id="last_name" placeholder="Enter Last Name of Employee "
                                                     type="text" name="last_name" class="form-control form-control-"
                                                     value="{{ $data->user->last_name }}">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="birth_country">Birth Country<small class="required-field">*</small></label>
@@ -235,10 +235,23 @@
                                             <div class="form-group">
                                                 <label for="blood_group">Blood Group<small
                                                         class="required-field">*</small></label>
-                                                <input required id="blood_group"
+                                                {{-- <input required id="blood_group"
                                                     placeholder="Enter blood_group" type="text"
                                                     value="{{ $data->blood_group }}" name="blood_group"
-                                                    class="form-control form-control-sm">
+                                                    class="form-control form-control-sm"> --}}
+                                                    <select required id="blood_group" placeholder=""
+                                                    name="blood_group" class="form-control form-control-sm ">
+                                                    <option disabled> - Select - </option>
+                                                    <option {{ $data->blood_group == 'A+' ? 'selected' : '' }} value="A+">A+</option>
+                                                    <option {{ $data->blood_group == 'A-' ? 'selected' : '' }} value="A-">A-</option>
+                                                    <option {{ $data->blood_group == 'B+' ? 'selected' : '' }}value="B+">B+</option>
+                                                    <option {{ $data->blood_group == 'B-' ? 'selected' : '' }}value="B-">B-</option>
+                                                    <option {{ $data->blood_group == 'O+' ? 'selected' : '' }}value="B+">O+</option>
+                                                    <option {{ $data->blood_group == 'O-' ? 'selected' : '' }}value="B+">O-</option>
+                                                    <option {{ $data->blood_group == 'AB+' ? 'selected' : '' }}value="AB+">AB+</option>
+                                                    <option {{ $data->blood_group == 'AB-' ? 'selected' : '' }}value="AB-">AB-</option>
+
+                                                </select>
                                             </div>
                                         </div>
 

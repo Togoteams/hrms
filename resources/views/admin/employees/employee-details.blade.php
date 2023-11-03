@@ -199,7 +199,7 @@
                                             </div>
                                             <div class="pt-2 col-1">
                                                 <select name="currency_salary_for_india" id="currency_salary_for_india" name="currency_salary_for_india" class="form-control form-control-sm">
-                                                   <option value="INR">INR</option>
+                                                   <option value="INR">₹</option>
                                                 </select>
                                             </div>
                                             <div class="pt-2 col-2">
