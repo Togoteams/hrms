@@ -222,27 +222,27 @@
                 <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                     <thead>
                         <tr>
-                            <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
-                            </td>
+                            {{-- <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
+                            </td> --}}
                         </tr>
                         <tr>
                             {{-- <td class="payslip">Salary Date :</td>
                             <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td> --}}
-                            <td class="payslip">No. of Payable days :</td>
+                            {{-- <td class="payslip">No. of Payable days :</td>
                             <td class="payslip">{{$data->no_of_payable_days}}</td>
                             <td class="payslip">Annual Balanced Leave :</td>
-                            <td class="payslip">{{$data->annual_balanced_leave}}</td>
+                            <td class="payslip">{{$data->annual_balanced_leave}}</td> --}}
                         </tr>
                         <tr>
 
 
-                            <td class="payslip">Total Working days :</td>
-                            <td class="payslip">{{$data->total_working_days}}</td>
+                            {{-- <td class="payslip">Total Working days :</td>
+                            <td class="payslip">{{$data->total_working_days}}</td> --}}
 
                             {{-- <td class="payslip">Total Absent : </td>
                             <td class="payslip">0</td> --}}
-                            <td class="payslip">No. Availed Leave :</td>
-                            <td class="payslip">{{$data->no_availed_leave}}</td>
+                            {{-- <td class="payslip">No. Availed Leave :</td>
+                            <td class="payslip">{{$data->no_availed_leave}}</td> --}}
                         </tr>
                     </thead>
                 </table>

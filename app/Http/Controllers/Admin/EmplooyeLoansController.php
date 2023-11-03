@@ -55,23 +55,41 @@ class EmplooyeLoansController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'loan_id' => 'required|numeric',
             'loan_amount' => 'required|numeric',
             'emi_amount' => 'required|numeric',
             'emi_start_date' => 'required|date',
-            'emi_end_date' => 'required|date|after_or_equal:emi_start_date',
+            'emi_end_date' => 'required|date|after_or_equal:emi_start_date|date_range_not_overlap',
             'tenure' => 'required|numeric',
             'last_emi_amount' => 'required|numeric',
             'description' => 'nullable|string',
-
         ]);
-
+    
+        // Add custom validation rule for date range overlap check
+        $validator->addExtension('date_range_not_overlap', function ($attribute, $value, $parameters) use ($request) {
+            $start = \Carbon\Carbon::parse($request->input($attribute));
+            $end = \Carbon\Carbon::parse($request->input($parameters[0]));
+    
+            // Perform the date range overlap check here
+            // Replace this with your actual logic
+            if ($start < $end) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    
+        // Add custom error message for the custom rule
+        Validator::addReplacer('date_range_not_overlap', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', $attribute, 'The :attribute date range overlaps with an existing loan.');
+        });
+    
         if ($validator->fails()) {
             return $validator->errors();
         } else {
+            // Your code to store the data if validation passes
             try {
                 $request->request->add(['employee_id' => Employee::where('user_id', $request->user_id)->first()->id]);
                 $request->request->add(['created_by' => Auth::user()->id]);
@@ -79,11 +97,11 @@ class EmplooyeLoansController extends Controller
                 EmplooyeLoans::insertGetId($request->except(['_token', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
-
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
     }
+    
 
     /**
      * Display the specified resource.
