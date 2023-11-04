@@ -47,11 +47,11 @@
              <!-- Navbar -->
              <ul class="navbar-nav">
                
-                <li style="color: white; word-spacing: 3px"><strong>{{ auth()->user()->salutation }} {{ auth()->user()->name }} 
+                <li style="color: white; word-spacing: 3px"><b>{{ auth()->user()->salutation }} {{ auth()->user()->name }} 
                     @if (auth()->user()->employee)
                      ({{ auth()->user()->employee->ec_number }})
                     @endif
-                    </strong>
+                    </b>
                 </li>
          
                  <li class="nav-item">
