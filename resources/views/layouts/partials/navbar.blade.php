@@ -51,7 +51,7 @@
                     @if (auth()->user()->employee)
                      ({{ auth()->user()->employee->ec_number }})
                     @endif
-                    <strong>
+                    </strong>
                 </li>
          
                  <li class="nav-item">
