@@ -15,8 +15,10 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="row">
                             <div class="mb-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="name" class="required">Employee Type</label>
-                                    <input type="text" required name="name" id="name" class="form-control" placeholder="Enter name ">
+                                    <label for="user_id" class="required">Employee</label>
+                                    <select name="user_id" id="user_id"  class="form-control">
+                                        <option value="">- Select -</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="mb-6 col-sm-6">

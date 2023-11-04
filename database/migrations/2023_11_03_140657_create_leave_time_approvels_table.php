@@ -13,8 +13,16 @@ return new class extends Migration
     {
         Schema::create('leave_time_approvels', function (Blueprint $table) {
             $table->id();
-            
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('leave_type_id')->nullable();
+            $table->text('description',)->nullable();
+            $table->enum('status',["active","inactive"])->default('active'); 
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('leave_type_id')->references('id')->on('leave_settings');
+
+
         });
     }
 
