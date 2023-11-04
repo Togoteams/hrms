@@ -16,6 +16,19 @@
                         <div class="row">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
+                                    <label for="emp_id" class="required">Employee</label>
+                                    <select name="emp_id" class="form-control" id="emp_id">
+                                        <option value="">- Select -</option>
+                                        @foreach ($Employees as $employee)
+                                            <option value="{{ $employee->emp_id }}">
+                                                {{ $employee->user->name }}({{ $employee->ec_number }})
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
                                     <label for="type" class="required">Reimbursement Type</label>
                                     <select name="type_id" class="form-control" id="type_id" placeholder="Reimbursement type">
                                         <option value="">Select Option</option>
@@ -49,6 +62,23 @@
                                 <div class="form-group">
                                     <label for="claim_date" class="required">Claim date</label>
                                     <input type="date" name="claim_date"  required id="claim_date" class="form-control" placeholder="claim_date" value="{{ old('claim_date', now()->format('Y-m-d')) }}">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label class="required" for="financial_year">Financial year</label>
+                                    <select required id="financial_year" name="financial_year"
+                                        class="form-control form-control-sm">
+                                        <option selected disabled=""> - Select financial year- </option>
+                                        @php
+                                            $currentYear = date('Y');
+                                        @endphp 
+                                        <option value="{{$currentYear-2}}">{{$currentYear-2}}</option>
+                                        <option value="{{$currentYear-1}}">{{$currentYear-1}}</option>
+                                        <option value="{{$currentYear}}">{{$currentYear}}</option>
+                                        <option value="{{$currentYear+1}}">{{$currentYear+1}}</option>
+                                        <option value="{{$currentYear+2}}">{{$currentYear+2}}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">

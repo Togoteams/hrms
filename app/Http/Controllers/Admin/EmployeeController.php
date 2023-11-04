@@ -76,7 +76,7 @@ class EmployeeController extends BaseController
         if (empty($request->user_id)) {
             $request->validate([
                 'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z. ]+$/'],
-                'mobile' => ['required', 'numeric', 'digits_between:10,11'],
+                'mobile' => ['required', 'numeric', 'digits_between:7,8'],
                 'role_id' => ['required', 'numeric'],
                 'gender' => ['required'],
                 'marital_status' => ['required'],
@@ -92,7 +92,7 @@ class EmployeeController extends BaseController
                         }
                     },
                 ],
-                'emergency_contact' => ['nullable', 'numeric', 'digits_between:10,11'],
+                'emergency_contact' => ['nullable', 'numeric', 'digits_between:7,8'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'username' => ['required', 'string', 'min:5', 'unique:users'],
                 'password' => ['required', 'confirmed', Password::defaults()]
@@ -100,7 +100,7 @@ class EmployeeController extends BaseController
         } else {
             $request->validate([
                 'name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z. ]+$/'],
-                'mobile' => ['required', 'numeric', 'digits_between:10,11'],
+                'mobile' => ['required', 'numeric', 'digits_between:7,8'],
                 'gender' => ['required'],
                 'role_id' => ['required', 'numeric'],
                 'marital_status' => ['required'],
@@ -116,7 +116,7 @@ class EmployeeController extends BaseController
                         }
                     },
                 ],                
-            'emergency_contact' => ['nullable', 'numeric', 'digits_between:10,11'],
+            'emergency_contact' => ['nullable', 'numeric', 'digits_between:7,8'],
             ]);
         }
         if ($request->user_id == '') {

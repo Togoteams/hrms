@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\payroll;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\CurrencySetting;
+use App\Models\Employee;
 use App\Models\Reimbursement;
 use App\Models\ReimbursementType;
 use Exception;
@@ -33,10 +34,15 @@ class ReimbursementController extends BaseController
                 ->rawColumns(['action'])
                 ->make(true);
             }
+        $Employees = Employee::all();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::where('status','active')->get();
         $currencies = CurrencySetting::where('status','active')->get();
-        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 'reimbursementType' => $reimbursementType, 'currencies' => $currencies, 'reimbursement' => $reimbursement]);
+        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 
+        'reimbursementType' => $reimbursementType, 
+        'currencies' => $currencies, 
+        'reimbursement' => $reimbursement,
+         'Employees' => $Employees]);
 
 
     }
@@ -62,6 +68,7 @@ class ReimbursementController extends BaseController
             'type_id' => 'required|numeric',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
+            'financial_year' => 'required|numeric',
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'claim_from_month' => [
                 'required',
@@ -72,6 +79,7 @@ class ReimbursementController extends BaseController
                 'numeric',
             ],
             'reimbursement_notes' => 'required|string',
+            
         ]);
         
         $validator->after(function ($validator) use ($request, $user) {
@@ -145,6 +153,7 @@ class ReimbursementController extends BaseController
             'type_id' => 'required|numeric',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
+            'financial_year' => 'required|numeric',
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'claim_from_month' => [
                 'required',

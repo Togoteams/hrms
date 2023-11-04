@@ -193,21 +193,21 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="pt-3 col-3 fw-semibold">
-                                                <label for="basic_salary_for_india">Basic Salary For India<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-1">
-                                                <select name="currency_salary_for_india" id="currency_salary_for_india" name="currency_salary_for_india" class="form-control form-control-sm">
-                                                   <option value="inr">₹</option>
-                                                </select>
-                                            </div>
-                                            <div class="pt-2 col-2">
-                                                <input  id="basic_salary_for_india" placeholder="Enter "
-                                                    type="number" name="basic_salary_for_india"
-                                                    value="{{ !empty($employee) ? $employee->basic_salary_for_india : '' }}"
-                                                    class="form-control form-control-sm ">
-                                            </div>
+                                                <div class="pt-3 col-3 fw-semibold basic-salary-india-container" style="display: none">
+                                                    <label for="basic_salary_for_india">Basic Salary For India<small
+                                                            class="required-field">*</small></label>
+                                                </div>
+                                                <div class="pt-2 col-1 basic-salary-india-container" style="display: none">
+                                                    <select name="currency_salary_for_india" id="currency_salary_for_india" name="currency_salary_for_india" class="form-control form-control-sm">
+                                                    <option value="inr">₹</option>
+                                                    </select>
+                                                </div>
+                                                <div class="pt-2 col-2 basic-salary-india-container" style="display: none">
+                                                    <input  id="basic_salary_for_india" placeholder="Enter "
+                                                        type="number" name="basic_salary_for_india"
+                                                        value="{{ !empty($employee) ? $employee->basic_salary_for_india : '' }}"
+                                                        class="form-control form-control-sm">
+                                                </div>
                                            
 
                                             <div class="pt-3 col-3 fw-semibold contractDiv">
@@ -335,6 +335,20 @@
                 $(".contractDivEdit").hide() && $("#contract_duration").val("");
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#employment_type').change(function () {
+                var selectedValue = $(this).val();
+                if (selectedValue === 'expatriate') {
+                    $('.basic-salary-india-container').show();
+                } else {
+                    $('.basic-salary-india-container').hide();
+                }
+            });
+        });
+    </script>
+
+
 
 <script>
     $(document).ready(function () {
