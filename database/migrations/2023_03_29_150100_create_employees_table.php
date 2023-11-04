@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('contract_duration')->nullable();
             $table->decimal('basic_salary')->nullable();
             $table->decimal('basic_salary_for_india')->nullable();
-            $table->string('currency_salary_for_india')->default('INR');
+            $table->string('currency_salary_for_india')->default('inr');
             $table->dateTime('date_of_current_basic')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('birth_country',100)->nullable();
