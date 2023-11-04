@@ -40,8 +40,8 @@
                                                             <div class="row text-dark">
                                                                 {{-- <div class="col-3 fw-semibold">Name</div>
                                                                 <div class="col-3">{{ $data->user->name }}</div> --}}
-                                                                <div class="col-3 fw-semibold">Salutation</div>
-                                                                <div class="col-3">{{$salutation}}</div>
+                                                                {{-- <div class="col-3 fw-semibold">Salutation</div>
+                                                                <div class="col-3">{{$salutation}}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Name</div>
                                                                 <div class="col-3"> {{  $data->user->name }}</div>
@@ -50,12 +50,11 @@
                                                                 <div class="col-3">{{ $lastName }}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Gender</div>
-                                                                <div class="col-3">{{ $data->gender }}</div>
+                                                                <div class="col-3">{{ ucfirst($data->gender) }}</div>
 
-                                                                <div class="col-3 fw-semibold">User Name</div>
-                                                                <div class="col-3">{{ $data->user->username }}</div>
+                                                              
 
-                                                                <div class="col-3 fw-semibold">Ec Number</div>
+                                                                <div class="col-3 fw-semibold">EC Number</div>
                                                                 <div class="col-3">{{ $data->ec_number }}</div>
 
                                                                 <div class="col-3 fw-semibold">Designation</div>
@@ -82,7 +81,7 @@
                                                                 </div>
 
                                                                 <div class="col-3 fw-semibold">Blood Group</div>
-                                                                <div class="col-3">{{ $data->blood_group }}</div>
+                                                                <div class="col-3">{{ $data->blood_group ?? "N/A" }}</div>
                                                                 <div class="col-3 fw-semibold">Basic Salary</div>
                                                                 <div class="col-3">{{getCurrencyIcon($data->currency_salary)}}  {{ $data->basic_salary }}</div>
                                                             </div>
@@ -127,7 +126,7 @@
                                     <input type="hidden" name="id" value="{{ !empty($data) ? $data->id : '' }}">
 
                                     <div class="row">
-                                        <div class="mb-2 col-sm-6">
+                                        {{-- <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="salutation" class="required">Salutation</label>
                                                 <select name="salutation" class="form-control" id="salutation" placeholder="Employee salutation">
@@ -138,7 +137,7 @@
                                                     <option value="Dr" @if(old('salutation', $data->user->salutation) === 'Dr') selected @endif>Dr</option> 
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                          <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="name">Name<small class="required-field">*</small></label>
@@ -185,7 +184,7 @@
                                                         Female</option>
                                                     <option {{ $data->gender == 'others' ? 'selected' : '' }}
                                                         value="others">
-                                                        others</option>
+                                                        Others</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -41,7 +41,7 @@
                                 {{-- <th>Type</th> --}}
                                 {{-- <th>Description</th> --}}
                                 {{-- <th>Status</th> --}}
-                                <th style="text-align:right;">Action</th>
+                                <th >Action</th>
                             </tr>
                         </thead>
 

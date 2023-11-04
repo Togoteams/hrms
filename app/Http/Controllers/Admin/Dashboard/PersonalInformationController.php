@@ -87,7 +87,7 @@ class PersonalInformationController extends Controller
             //  'name' => ['required', 'string'],
              'user_id' => ['required', 'numeric'],
              'gender' => ['required', 'string'],
-             'salutation' => ['required', 'string'],
+            //  'salutation' => ['required', 'string'],
              'name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
             //  'last_name' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
              'birth_country' => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
@@ -112,7 +112,7 @@ class PersonalInformationController extends Controller
                 // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
                 Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'salutation','name']));
                 // User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'gender', 'designation_id', 'basic_salary']));
-                User::where('id', $request->user_id)->update(['name'=>$request->name,'salutation'=>$request->salutation]);
+                User::where('id', $request->user_id)->update(['name'=>$request->name]);
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
