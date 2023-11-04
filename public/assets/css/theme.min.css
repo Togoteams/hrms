@@ -21595,7 +21595,7 @@ fieldset:disabled .btn {
 
 .card-hover-shadow {
     transition: .3s;
-    min-height: 140px !important;
+    min-height: 150px !important;
 }
 
 .card-hover-shadow:hover {
