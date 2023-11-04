@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\EmployeePayScaleController;
 use App\Http\Controllers\Admin\EmployeeTransferControler;
 use App\Http\Controllers\Admin\KraAttributesController;
 use App\Http\Controllers\Admin\LeaveSettingController;
+use App\Http\Controllers\Admin\LeaveTimeApprovelController;
 use App\Http\Controllers\Admin\MedicalCardController;
 use App\Http\Controllers\Admin\OvertimeController;
 use App\Http\Controllers\Admin\Payroll\PayrollHeadController;
@@ -222,6 +223,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('leave_type/status/{id}', [LeaveTypeCobntroller::class, 'status'])->name('leave_type.status');
     // leave route start
     Route::resource('leave_apply', LeaveApplyController::class);
+
+    Route::resource('leave_time_approved', LeaveTimeApprovelController::class);
 
     Route::get('leave_balance_history/', [LeaveApplyController::class, 'balance_history'])->name('leave_apply.balance_history');
     Route::get('leave_request_history/', [LeaveApplyController::class, 'request_history'])->name('leave_apply.request_history');
