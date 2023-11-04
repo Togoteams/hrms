@@ -186,6 +186,8 @@ class EmployeeController extends BaseController
     public function postEmployeeDetails(Request $request)
     {
         // $request;
+        $employee = Employee::find($request->id);
+        $forWork = date("Y-m-d", strtotime("+18 years",strtotime($employee->date_of_birth)));
         $request->validate([
 
             'branch_id'             => ['required', 'numeric'],
@@ -202,7 +204,7 @@ class EmployeeController extends BaseController
                     if ($date < $minDate || $date > $maxDate) {
                         $fail('The ' . $attribute . ' must be between 18 and 60 years ago.');
                     }
-                },
+                },   'after_or_equal:' . $forWork,
             ], 
             'currency'              => ['nullable', 'string'], 
             'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
