@@ -49,7 +49,7 @@
                
                 <li style="color: white;">{{ auth()->user()->salutation }} {{ auth()->user()->name }} 
                     @if (auth()->user()->employee)
-                    {{ auth()->user()->employee->ec_number }}
+                    ({{ auth()->user()->employee->ec_number }})
                     @endif
                 </li>
          
