@@ -11,11 +11,17 @@ class LeaveTimeApprovel extends Model
     protected $fillable = [
         'user_id',
         'leave_type_id', 
-         'description',
+        'approval_date',
+        'description',
         'status'
     ];
-        public function leaveType()
-        {
-            return $this->belongsTo(LeaveSetting::class, 'leave_type_id');
-        }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    
+    public function leaveSetting()
+    {
+        return $this->belongsTo(LeaveSetting::class, 'leave_type_id');
+    }
 }

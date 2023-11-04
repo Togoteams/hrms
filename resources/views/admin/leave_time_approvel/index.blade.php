@@ -52,8 +52,9 @@
                        <thead>
                             <tr>
                                 <th>SI.</th>
-                                <th>Leave Type</th>
                                 <th>Employee Name</th>
+                                <th>Leave Type</th>
+                                <th>Approval Date</th>
                                 <th>Description</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -79,11 +80,17 @@
                                     orderable: false,
                                     searchable: false
                                 },
-
-                             
                                 {
-                                    data: 'name',
-                                    name: 'name'
+                                    data: 'user.name', 
+                                    name: 'user.name',
+                                },
+                                {
+                                    data: 'leaveSetting.name',
+                                    name: 'leaveSetting.name',
+                                },
+                                {
+                                    data: 'approval_date',
+                                    name: 'approval_date'
                                 },
                                 {
                                     data: 'description',
@@ -149,3 +156,28 @@
 
     </main>
 @endsection
+@push('custom-scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const userDropdown = document.getElementById('user_id');
+        const leaveTypeDropdown = document.getElementById('leave_type_id');
+
+        if (userDropdown && leaveTypeDropdown) {
+            userDropdown.addEventListener('change', function () {
+                const selectedEmployeeType = userDropdown.options[userDropdown.selectedIndex].getAttribute('data-employee-type');
+
+                for (let i = 0; i < leaveTypeDropdown.options.length; i++) {
+                    const leaveTypeEmployeeType = leaveTypeDropdown.options[i].getAttribute('data-employee-type');
+                    if (selectedEmployeeType === leaveTypeEmployeeType || leaveTypeEmployeeType === '0') {
+                        leaveTypeDropdown.options[i].style.display = 'block';
+                    } else {
+                        leaveTypeDropdown.options[i].style.display = 'none';
+                    }
+                }
+            });
+        }
+    });
+</script>
+@endpush
+
+
