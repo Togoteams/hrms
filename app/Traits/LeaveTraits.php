@@ -6,7 +6,7 @@ use App\Models\Employee;
 use App\Models\LeaveApply;
 use App\Models\LeaveEncashment;
 use App\Models\LeaveSetting;
-use App\Models\LeaveType;
+use App\Models\LeaveTimeApprovel;
 
 trait LeaveTraits
 {
@@ -50,8 +50,15 @@ trait LeaveTraits
 
     switch ($leaveSetting->slug) {
       case 'sick-leave':
-        $totalWorkingMonths = date('m') -1;
-        $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
+
+        if($emp->employment_type=="expatriate")
+        {
+          $total_leave = $years * $perYearLeave;
+        }else
+        {
+          $totalWorkingMonths =( date('m') -1);
+          $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+        }
         break;
       case "earned-leave":
         if($years>=1)
@@ -63,28 +70,38 @@ trait LeaveTraits
           } else {
             $maxEarnedLeave = 54;
           }
-          $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
+          $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
           if ($total_leave >= $maxEarnedLeave) {
             $total_leave = $maxEarnedLeave;
           }
         }
         break;
       case "maternity-leave":
-        $total_leave = $perYearLeave;
+        $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->first();
+        if(!empty($isMaternityLeave))
+        {
+          $total_leave = $perYearLeave;
+        }
+        break;
+      case "casual-leave":
+        $totalWorkingMonths =( date('m') -1);
+        $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
         break;
       case "privileged-leave":
         $maxEarnedLeave = 90;
+        
         if($years>=1)
         {
-          $totalWorkingMonths  = $years * 12 + $months;
-          $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
+          $totalWorkingMonths  = ($years-1) * 12 + $months;
+          // echo $totalWorkingMonths/12;
+          $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
           if ($total_leave >= $maxEarnedLeave) {
             $total_leave = $maxEarnedLeave;
           }
         }
        
         break;
-      default:
+      default:  
       
         $total_leave = $perYearLeave;
     }

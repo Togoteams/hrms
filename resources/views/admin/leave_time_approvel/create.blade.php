@@ -19,7 +19,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <select name="user_id" id="user_id" class="form-control">
                                         <option value="">- Select -</option>
                                         @foreach ($Employees as $employee)
-                                            <option value="{{ $employee->user_id }}" data-employee-type="{{ $employee->employee_type }}">
+                                            <option value="{{ $employee->user_id }}" data-employee-type="{{ $employee->employment_type }}">
                                                 {{ $employee->user->name }}({{ $employee->ec_number }})
                                             </option>
                                         @endforeach
@@ -33,7 +33,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <select name="leave_type_id" id="leave_type_id" class="form-control" required>
                                         <option value="">- Select -</option>
                                         @foreach ($leave_setting as $setting)
-                                            <option value="{{ $setting->id }}" data-employee-type="{{ $setting->emp_type }}">
+                                            <option value="{{ $setting->id }}" data-employee-type="{{$setting->emp_type}}">
                                                 {{ $setting->name }}
                                             </option>
                                         @endforeach
@@ -73,13 +73,20 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
                     userDropdown.addEventListener('change', function () {
                         const selectedEmployeeType = userDropdown.options[userDropdown.selectedIndex].getAttribute('data-employee-type');
-
+                        console.log(selectedEmployeeType);
                         for (let i = 0; i < leaveTypeDropdown.options.length; i++) {
                             const leaveTypeEmployeeType = leaveTypeDropdown.options[i].getAttribute('data-employee-type');
-                            if (selectedEmployeeType === leaveTypeEmployeeType || leaveTypeEmployeeType === '0') {
-                                leaveTypeDropdown.options[i].style.display = 'block';
-                            } else {
+                            console.log(leaveTypeEmployeeType);
+                            if(selectedEmployeeType == "local" && leaveTypeEmployeeType == 1)
+                            {
+                                // console.log(leaveTypeEmployeeType);
+                            // }
+                            // if (selectedEmployeeType === leaveTypeEmployeeType || leaveTypeEmployeeType === '0') {
                                 leaveTypeDropdown.options[i].style.display = 'none';
+                            } else {
+                                // console.log(leaveTypeEmployeeType);
+                             
+                                leaveTypeDropdown.options[i].style.display = 'block';
                             }
                         }
                     });
