@@ -41,7 +41,7 @@
                         <div class="mb-2 col-sm-4">
                             <div class="form-group">
                                 <label for="gender">Select Employees</label>
-                                <select required onchange="editForm('{{ route('admin.payroll.salary.emp.head') }}/'+this.value, 'edit')" id="employee" placeholder="Enter correct Employee  " name="user_id" class="form-control form-control-sm ">
+                                <select required  id="select_employee" placeholder="Enter correct Employee  " name="user_id" class="form-control form-control-sm ">
                                     <option selected disabled> - Select Employees- </option>
                                     @foreach ($all_users as $au)
                                     <option value="{{ $au->user->id }}">{{ $au->user->name }} -
@@ -51,14 +51,11 @@
                                 </select>
                             </div>
                         </div>
-                        {{-- <div class="mb-2 col-sm-4">
+                        <div class="mb-2 col-sm-4">
                             <div class="form-group">
-                                <label for="gender">Salary Month</label>
-                                <select required onchange="callEditMethod()" id="gender" placeholder="Enter correct gender  " name="user_id" class="form-control form-control-sm ">
-                                    
-                                </select>
+                                <button type="button" onclick="callEditMethod()" class="btn btn-primary">Search</button>
                             </div>
-                        </div> --}}
+                        </div>
                         <span id="edit">
 
                         </span>
@@ -153,11 +150,14 @@
         setId('net_take_home', totalEarning - totalDeduction);
 
     }
-    
-    // const editUrl="{{ route('admin.payroll.salary.emp.head') }}/";
-    // function callEditMethod()
-    // {
-    //     var empId = 
-    //     editForm(editUrl+this.value, 'edit');
-    // }
+    // editForm('{{ route('admin.payroll.salary.emp.head') }}/'+this.value, 'edit')
+    const editUrl="{{ route('admin.payroll.salary.emp.head') }}/";
+    function callEditMethod()
+    {
+        var empId = $("#select_employee").val();
+        // var empId = $("#employee").val();
+        // console.log(empId);
+        var pay_for_month_year = $("#pay_for_month_year").val();
+        editForm(editUrl+empId+"/"+pay_for_month_year, 'edit');
+    }
 </script>

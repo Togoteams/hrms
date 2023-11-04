@@ -325,7 +325,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');
         Route::get('print-salary-slip/{id}', [PayrollSalaryController::class, 'print'])->name('salary.print');
 
-        Route::get('salary/get-emp-head/{user_id?}', [PayrollSalaryController::class, 'get_employee_data'])->name('salary.emp.head');
+        Route::get('salary/get-emp-head/{user_id?}/{salary_month?}', [PayrollSalaryController::class, 'get_employee_data'])->name('salary.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
     });
 

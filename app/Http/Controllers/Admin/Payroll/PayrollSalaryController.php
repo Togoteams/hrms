@@ -292,9 +292,14 @@ class PayrollSalaryController extends Controller
         // }
     }
 
-    public function get_employee_data($user_id = null)
+    public function get_employee_data($user_id = null,$salary_month = null)
     {
         $page = $this->page_name;
+        $salaryMonth = $salary_month;
+        $salaryStartDate =date("Y-m-d", strtotime("-1 months",strtotime($salaryMonth."-20")));
+        $salaryEndDate = $salaryMonth;
+        // echo $salaryStartDate."---";
+        // echo $salaryEndDate;
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
         if(empty($data))
@@ -322,7 +327,7 @@ class PayrollSalaryController extends Controller
         }
 
         $noOfHoliday = Holiday::where('date','<=',date('Y-m-d'))->where('date','>',date('Y-m-d'))->where('status','active')->count();
-        
+        // return $noOfHoliday;
         $noOfAvailedLeaves = LeaveApply::where('user_id',$user_id)
         ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
         ->where('is_approved',0)
