@@ -6484,7 +6484,7 @@ fieldset:disabled .btn {
     --bs-modal-footer-border-color: var(--bs-border-color);
     --bs-modal-footer-border-width: 0.0625rem;
     position: fixed;
-    top: 0;
+    top: 50px;
     left: 0;
     z-index: var(--bs-modal-zindex);
     display: none;
