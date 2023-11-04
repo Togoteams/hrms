@@ -604,7 +604,7 @@ if (!function_exists('getHeadValue')) {
             return $arrearsAmount;
         } elseif ($headSlug == "reimbursement") {
             $reimbursementAmount = 0;
-            $reimbursements = Reimbursement::where('claim_date',">=",date("Y-m-"."01"))->where('claim_date','<=',date("Y-m-".'31'))->get();
+            $reimbursements = Reimbursement::where('claim_date',">=",date("Y-m-"."01"))->where('claim_date','<=',date("Y-m-".'31'))->where('user_id',$emp->user_id)->get();
             foreach($reimbursements as $reimbursement )
             {
                 $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;

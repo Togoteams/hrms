@@ -28,6 +28,9 @@ class OvertimeController extends Controller
                     $actionBtn = view('admin.overtime_settings.buttons', ['item' => $row, "route" => 'overtime-settings']);
                     return $actionBtn;
                 })
+                ->editColumn('date', function ($data) {
+                    return \Carbon\Carbon::parse($data->date)->isoFormat('DD.MM.YYYY');
+                })
                 ->rawColumns(['action'])
                 ->make(true);
             }

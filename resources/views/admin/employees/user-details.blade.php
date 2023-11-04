@@ -10,7 +10,7 @@
             }
             return '';
         }
-        $userRoleSelect ="";
+        $userRoleSelect = '';
         if (!empty($employee)) {
             $userRoleSelect = $employee->user->roles?->first()?->id;
         }
@@ -51,7 +51,8 @@
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
-                                                <label for="username">User-Name <small  class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
+                                                <label for="username">User-Name <small
+                                                        class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <input id="username" placeholder="Enter User Name" type="text"
@@ -60,15 +61,18 @@
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
                                             </div>
                                             <div class="pt-3 col-3 fw-semibold">
-                                                <label for="role">Select Role<small class="required-field">*</small></label>
+                                                <label for="role">Select Role<small
+                                                        class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <select id="role_id" placeholder="Select role" name="role_id"
                                                     class="form-control form-control-sm">
                                                     <option selected disabled> - Select role - </option>
-                                                    
+
                                                     @foreach ($roles as $key => $value)
-                                                        <option value="{{ $value->id }}" @if($userRoleSelect==$value->id )  {{"selected"}} @endif  >{{ $value->name }}</option>
+                                                        <option value="{{ $value->id }}"
+                                                            @if ($userRoleSelect == $value->id) {{ 'selected' }} @endif>
+                                                            {{ $value->name }}</option>
                                                     @endforeach
 
                                                 </select>
@@ -90,19 +94,34 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input id="mobile" placeholder="Enter Mobile No" type="tel"
-                                                    value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
-                                                    name="mobile" class="form-control form-control-sm">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <label for="mobile" class="pt-2">+267</label>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        <input id="mobile" pattern="\d"  maxlength="8" minlength="7"
+                                                            placeholder="Enter Mobile No" type="text"
+                                                            value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
+                                                            name="mobile" class="form-control form-control-sm">
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="emergency_contact">Emergency Contact No</label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input id="emergency_contact" placeholder="Enter ."
-                                                    type="tel"
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <label for="mobile" class="pt-2">+267</label>
+                                                    </div>
+                                                    <div class="col-10">
+                                                <input id="emergency_contact" placeholder="Enter ." pattern="\d"
+                                                    maxlength="8" minlength="7"
                                                     value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
                                                     name="emergency_contact" class="form-control form-control-sm ">
+                                                </div>
+                                            </div>
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
@@ -117,7 +136,8 @@
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
-                                                <label for="gender">Gender<small class="required-field">*</small></label>
+                                                <label for="gender">Gender<small
+                                                        class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <select id="gender" placeholder="Select gender" name="gender"
@@ -140,8 +160,8 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <select id="marital_status" placeholder="Select"
-                                                    name="marital_status" class="form-control form-control-sm">
+                                                <select id="marital_status" placeholder="Select" name="marital_status"
+                                                    class="form-control form-control-sm">
                                                     <option selected disabled value=""> - Select -
                                                     </option>
                                                     <option

@@ -25,6 +25,7 @@ trait LeaveTraits
     }
     return $totalNoOfLeaveInBucket;
   }
+  // Get total leave apply by user id for per leave type
   public function balance_leave_by_type($leave_type_id, $user_id = '', $action = "")
   {
     if ($user_id == '') {
@@ -49,26 +50,42 @@ trait LeaveTraits
 
     switch ($leaveSetting->slug) {
       case 'sick-leave':
-        $totalWorkingMonths  = date('m');
+        $totalWorkingMonths = date('m') -1;
         $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
         break;
       case "earned-leave":
-        $totalWorkingMonths  = $years * 12 + $months;
-        if ($emp->designation->slug == "tea_lady" || $emp->designation->slug == "messenger_driver") {
-          $maxEarnedLeave = 45;
-          $perYearLeave = 15;
-        } else {
-          $maxEarnedLeave = 54;
-        }
-        $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
-        if ($total_leave >= $maxEarnedLeave) {
-          $total_leave = $maxEarnedLeave;
+        if($years>=1)
+        {
+          $totalWorkingMonths  = $years * 12 + $months;
+          if ($emp->designation->slug == "tea_lady" || $emp->designation->slug == "messenger_driver") {
+            $maxEarnedLeave = 45;
+            $perYearLeave = 15; // if any change in default leave 
+          } else {
+            $maxEarnedLeave = 54;
+          }
+          $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
+          if ($total_leave >= $maxEarnedLeave) {
+            $total_leave = $maxEarnedLeave;
+          }
         }
         break;
       case "maternity-leave":
         $total_leave = $perYearLeave;
         break;
+      case "privileged-leave":
+        $maxEarnedLeave = 90;
+        if($years>=1)
+        {
+          $totalWorkingMonths  = $years * 12 + $months;
+          $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
+          if ($total_leave >= $maxEarnedLeave) {
+            $total_leave = $maxEarnedLeave;
+          }
+        }
+       
+        break;
       default:
+      
         $total_leave = $perYearLeave;
     }
 
