@@ -99,7 +99,7 @@
                                                         <label for="mobile" class="pt-2">+267</label>
                                                     </div>
                                                     <div class="col-10">
-                                                        <input id="mobile" pattern="\d"  maxlength="8" minlength="7"
+                                                        <input id="mobile"   maxlength="8" minlength="7"  pattern="[0-9]+"
                                                             placeholder="Enter Mobile No" type="text"
                                                             value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
                                                             name="mobile" class="form-control form-control-sm">
@@ -116,7 +116,7 @@
                                                         <label for="mobile" class="pt-2">+267</label>
                                                     </div>
                                                     <div class="col-10">
-                                                <input id="emergency_contact" placeholder="Enter ." pattern="\d"
+                                                <input id="emergency_contact" placeholder="Enter ."  pattern="[0-9]+"
                                                     maxlength="8" minlength="7"
                                                     value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
                                                     name="emergency_contact" class="form-control form-control-sm ">

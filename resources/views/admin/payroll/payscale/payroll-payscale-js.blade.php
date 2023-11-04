@@ -14,9 +14,9 @@
         var taxAbleAmount = 0;
         if(employmentType=="local")
         {
-        taxAbleAmount = (basicAmount + getValue('allowance'))- (getValue('bomaid'));
+        taxAbleAmount = (basicAmount + getValue('allowance'))- (getValue('bomaid')+ getValue('pension'));
         }else{
-         taxAbleAmount = (basicAmount + getValue('entertainment_expenses')+getValue('house_up_keep_allow')+getValue('education_allowance'))- (getValue('bomaid')+ getValue('pension'));
+         taxAbleAmount = (basicAmount + getValue('entertainment_expenses')+getValue('house_up_keep_allow')+getValue('education_allowance'));
         }
 
         $.ajax({

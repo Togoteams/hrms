@@ -426,7 +426,7 @@
                         data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false"
                         aria-controls="documents">
                         <i class="fa fa-folder nav-icon"></i>
-                        <span class="nav-link-title">Documents Mangement</span>
+                        <span class="nav-link-title">Documents</span>
                     </a>
                     <div id="documents"
                         class="nav-collapse collapse {{ show(['document.index', 'document_type.index']) }} "

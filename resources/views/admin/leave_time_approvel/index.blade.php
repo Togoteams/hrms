@@ -85,8 +85,8 @@
                                     name: 'user.name',
                                 },
                                 {
-                                    data: 'leaveSetting.name',
-                                    name: 'leaveSetting.name',
+                                    data: 'leave_setting.name',
+                                    name: 'leave_setting.name',
                                 },
                                 {
                                     data: 'approval_date',

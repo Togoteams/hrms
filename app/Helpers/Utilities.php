@@ -565,6 +565,10 @@ if (!function_exists('getHeadValue')) {
                 $pensionAmount = ($basicAmout / 100) * $emp->pension_opt;
                 return $pensionAmount;
             }
+        }elseif ($headSlug == "house_up_keep_allow") {
+            $houseUpKeepAllow = 0;
+            $houseUpKeepAllow = ($basicAmout / 100) * 10;
+            return $houseUpKeepAllow;
         } elseif ($headSlug == "union_fee") {
             $isUnionFee = $emp->union_membership_id;
             $unionFee = 0;
