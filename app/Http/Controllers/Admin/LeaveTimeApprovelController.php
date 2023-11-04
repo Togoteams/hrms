@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\LeaveSetting;
 use Illuminate\Http\Request;
 
 class LeaveTimeApprovelController extends Controller
@@ -10,11 +11,12 @@ class LeaveTimeApprovelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Leave Time Approvel";
+    public $page_name = "Leave Type Approvel";
 
     public function index()
     {
-        return view('admin.leave_time_approvel.index', ['page' => $this->page_name]);
+        $maternityLeaveTypes = LeaveSetting::where('name', 'MATERNITY LEAVE')->get();
+        return view('admin.leave_time_approvel.index', ['page' => $this->page_name, 'leave_setting' => $maternityLeaveTypes]);
 
     }
 

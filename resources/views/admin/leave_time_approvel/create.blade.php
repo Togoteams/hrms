@@ -8,18 +8,28 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">  
-             <form id="form_data" action="{{ route('admin.country.store') }}">
+             <form id="form_data" action="{{ route('admin.leave_time_approved.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                         <div class="row">
                             <div class="mb-6 col-sm-6">
                                 <div class="form-group">
-                                    <label for="name" class="required">Name</label>
+                                    <label for="name" class="required">Employee Type</label>
                                     <input type="text" required name="name" id="name" class="form-control" placeholder="Enter name ">
                                 </div>
                             </div>
-
+                            <div class="mb-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="leave_type_id" class="required">Leave Type</label>
+                                    <select name="leave_type_id" id="leave_type_id" class="form-control" required>
+                                        <option value="">- select -</option>
+                                        @foreach ($leave_setting as $setting)
+                                            <option value="{{ $setting->id }}">{{ $setting->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="mb-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">Description</label>

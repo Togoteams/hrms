@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('leave_time_approvels', function (Blueprint $table) {
             $table->id();
+            
             $table->timestamps();
         });
     }
