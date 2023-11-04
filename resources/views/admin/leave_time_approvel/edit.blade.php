@@ -38,7 +38,7 @@
         <div class="mb-6 col-sm-6">
             <div class="form-group">
                 <label for="approval_date">Approval Date</label>
-                <input type="date" name="approval_date" id="approval_date" class="form-control" value="{{ $leave->approval_date }}">
+                <input type="date" name="approval_date" readonly id="approval_date" class="form-control" value="{{ $leave->approval_date }}">
             </div>
         </div>
 

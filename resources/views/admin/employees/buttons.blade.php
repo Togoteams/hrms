@@ -15,7 +15,7 @@
     {{-- EDIT BUTTON --}}
     @can('edit-employees')
     <a type="button" class="btn btn-edit btn-sm"
-        href="{{ route('admin.employee.userDetails.form', $item->emp_id) }}" title="Edit Employee" target="_blank">
+        href="{{ route('admin.employee.userDetails.form', $item->emp_id) }}" title="Edit Employee">
         <i class="fas fa-edit"></i>
     </a>
     @endcan
