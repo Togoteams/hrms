@@ -296,7 +296,7 @@ class PayrollSalaryController extends Controller
     {
         $page = $this->page_name;
         $salaryMonth = $salary_month;
-        $salaryStartDate =date("Y-m-d", strtotime("-1 months",strtotime($salaryMonth."-20")));
+        $salaryStartDate = date("Y-m-d", strtotime("-1 months",strtotime($salaryMonth."-20")));
         $salaryEndDate = $salaryMonth;
         // echo $salaryStartDate."---";
         // echo $salaryEndDate;

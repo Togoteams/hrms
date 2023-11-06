@@ -234,15 +234,14 @@
 
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
-                                    <div>
+                                   
                                         <input type="password" class="form-control" name="password" id="password"
-                                        placeholder="password" aria-label="Your login password">
-                                    </div>
-                                    <div>
+                                        placeholder="Password" aria-label="Your login password">
+                                    
                                         <input type="password" class="form-control" name="confirm_password"
                                         id="confirm_password" placeholder="Confirm Password"
                                         aria-label="Confirm Password Should be similar as password">
-                                    </div>
+                                   
                                     
                                 </div>
                             </div>
