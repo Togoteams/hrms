@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\Designation;
 use App\Models\Document;
 use App\Models\EmpAddress;
@@ -153,7 +154,7 @@ class PersonalInformationController extends Controller
             'state' => 'required|string',
             'country' => 'required|string',
             'email' => 'nullable|email',
-            'number' => 'required | numeric | digits:10',
+            'number' => 'required | numeric | digits_between:7,8',
             'nationality' => 'required|string',
         ]);
         if ($validator->fails()) {

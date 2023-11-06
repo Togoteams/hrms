@@ -94,7 +94,6 @@ class EmployeeController extends BaseController
                 ],
                 'emergency_contact' => ['nullable', 'numeric', 'digits_between:7,8'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'username' => ['required', 'string', 'min:5', 'unique:users'],
                 'password' => ['required', 'confirmed', Password::defaults()]
             ]);
         } else {
@@ -121,7 +120,7 @@ class EmployeeController extends BaseController
         }
         if ($request->user_id == '') {
             $user = new User();
-            $user->username = $request->username;
+            // $user->username = $request->username;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
         } else {
@@ -135,11 +134,11 @@ class EmployeeController extends BaseController
             if (empty($request->id)) {
                 $request->request->add(['user_id' => $user->id]);
                 $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
-                $employee = Employee::insertGetId($request->except(['_token', 'name', 'role_id','email', 'mobile', 'username', 'password', 'password_confirmation', 'id']));
+                $employee = Employee::insertGetId($request->except(['_token', 'name', 'role_id','email', 'mobile', 'password', 'password_confirmation', 'id']));
                 $role_id =$request->role_id;
                 $user->roles()->sync($role_id);
             } else {
-                $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email','role_id', 'mobile', 'username', 'password', 'password_confirmation', 'id', 'user_id']));
+                $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email','role_id', 'mobile',  'password', 'password_confirmation', 'id', 'user_id']));
                 
             }
 
@@ -192,7 +191,7 @@ class EmployeeController extends BaseController
 
             'branch_id'             => ['required', 'numeric'],
             'designation_id'        => ['required', 'numeric'],
-            'ec_number'             => ['required', 'string'],
+            'ec_number'             => ['required', 'string', 'unique:employees'],
             'id_number'             => ['nullable', 'numeric'],
             'start_date'            => ['required','date',
                 function ($attribute, $value, $fail) {
@@ -561,10 +560,10 @@ class EmployeeController extends BaseController
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile' => ['required', 'numeric', 'min:10'],
-            'username' => ['required', 'string', 'min:5', 'unique:users'],
+            // 'username' => ['required', 'string', 'min:5', 'unique:users'],
             'password' => ['required', 'confirmed', Password::defaults()],
             'designation_id' => ['required', 'numeric'],
-            'ec_number' => ['required', 'numeric'],
+            'ec_number' => ['required', 'string', 'unique:employees'],
             'id_number' => ['required', 'numeric'],
             'employment_type' => ['required', 'string'],
             'contract_duration' => ['numeric'],
@@ -588,14 +587,14 @@ class EmployeeController extends BaseController
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'username' => $request->username,
+            // 'username' => $request->username,
             'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
         ]);
         try {
             $request->request->add(['user_id' => $user->id]);
             $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
-            Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'username', 'password', 'password_confirmation', '_method']));
+            Employee::insertGetId($request->except(['_token', 'name', 'email', 'mobile', 'password', 'password_confirmation', '_method']));
             $role_id = Role::where('short_code', 'employee')->value('id');
             $user->roles()->sync($role_id);
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
@@ -636,8 +635,7 @@ class EmployeeController extends BaseController
     {
         $request->validate([
             'designation_id' => ['required', 'numeric'],
-            'ec_number' => ['required', 'numeric'],
-            'ec_number' => ['required', 'numeric'],
+            'ec_number' => ['required', 'string', 'unique:employees'],
             'id_number' => ['required', 'numeric'],
             'employment_type' => ['required', 'string'],
             'contract_duration' => ['numeric'],

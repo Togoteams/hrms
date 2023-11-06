@@ -50,16 +50,16 @@
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            <div class="pt-3 col-3 fw-semibold">
+                                            {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="username">User-Name <small
                                                         class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-3">
+                                            </div> --}}
+                                            {{-- <div class="pt-2 col-3">
                                                 <input id="username" placeholder="Enter User Name" type="text"
                                                     name="username"
                                                     value="{{ !empty($employee) ? $employee->user->username : '' }}"
                                                     class="form-control form-control-sm" {{ isHideCheck($employee) }}>
-                                            </div>
+                                            </div> --}}
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="role">Select Role<small
                                                         class="required-field">*</small></label>

@@ -112,7 +112,7 @@
 
                                                                     <div class="pt-3 col-3 fw-semibold">Phone number:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->number }}
+                                                                      +267 {{ $data->number }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Nationality:</div>
@@ -314,10 +314,22 @@
                                         <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="number" class="required">Phone number</label>
-                                                <input type="number" id="number" name="number"
+                                                {{-- <input type="number" id="number" name="number"
                                                     placeholder="Enter number"
-                                                    class="form-control form-control-sm" required>
+                                                    class="form-control form-control-sm" required> --}}
                                             </div>
+                                            <div class="col-12 d-flex">
+                                                <label for="number" class="pt-2">+267</label>
+                                                <input id="number"   maxlength="8" minlength="7"  pattern="[0-9]+"
+                                                    placeholder="Enter Mobile No" type="text"
+                                                    name="number" class="form-control form-control-sm">
+                                            </div>
+                                            {{-- <div class="col-4">
+                                                <input id="mobile"   maxlength="8" minlength="7"  pattern="[0-9]+"
+                                                    placeholder="Enter Mobile No" type="text"
+                                                    value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
+                                                    name="mobile" class="form-control form-control-sm">
+                                            </div> --}}
                                         </div>
                                         <div class="mb-2 col-md-6">
                                             <div class="form-group">
