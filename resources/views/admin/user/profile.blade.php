@@ -33,15 +33,15 @@
 
 
             <h3 class="text-center font-weight-bold txt-color .mr-m-2p">Profile Update</h3>
-            <div class="row mx-5 justify-content-center">
+            <div class="mx-5 row justify-content-center">
                 <div class="col-6">
                     <form action="{{ route('admin.image.update') }}" method="post" enctype='multipart/form-data'>
                         {{ csrf_field() }}
-                        <div class="card w-75 position-relative overflow-hidden">
-                            <div class="card-body p-4">
+                        <div class="overflow-hidden card w-75 position-relative">
+                            <div class="p-4 card-body">
 
                                 <h5 class="card-title fw-semibold">Change Profile</h5>
-                                <p class="card-subtitle mb-4">Change your profile picture from here</p>
+                                <p class="mb-4 card-subtitle">Change your profile picture from here</p>
                                 <div class="form-group" id="image_preview_section">
                                     @if (!empty(Auth::user()->media))
                                         <img class="img-profile rounded-circle" id="user_img" style="height: 70px;"
@@ -78,8 +78,7 @@
                                     <p class="mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-sm btn-primary" id="formSubmit"
-                                        onclick="return formValidate();">
+                                    <button type="submit" class="btn btn-sm btn-primary">
                                         Update
                                     </button>
                                 </div>
@@ -88,21 +87,21 @@
                     </form>
                 </div>
                 <div class="col-6">
-                    <div class="card w-75 position-relative overflow-hidden">
-                        <div class="card-body p-4">
+                    <div class="overflow-hidden card w-75 position-relative">
+                        <div class="p-4 card-body">
                             <h5 class="card-title fw-semibold">Change Password</h5>
-                            <p class="card-subtitle mb-4">To change your password please confirm here</p>
+                            <p class="mb-4 card-subtitle">To change your password please confirm here</p>
                             <form action="{{ route('admin.password.reset') }}" method="post">
                                 @csrf()
 
-                                <div class="form-group mb-4">
+                                {{-- <div class="mb-4 form-group">
                                     <label for="exampleInputPassword1" class="form-label">Current
                                         Password</label>
                                     <input type="password" class="form-control" id="exampleInputPassword1"
                                         value="12345678910">
-                                </div>
+                                </div> --}}
 
-                                <div class="form-group mb-4">
+                                <div class="mb-4 form-group">
 
                                     <!-- Label -->
                                     <label class="" for="password" />
@@ -138,7 +137,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <center>
-                                                    <button class="btn btn-sm btn-primary mb-3" id="formSubmit"
+                                                    <button class="mb-3 btn btn-sm btn-primary" id="formSubmit"
                                                         onclick="return formValidate();">
                                                         Reset
                                                     </button>
