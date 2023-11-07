@@ -65,9 +65,15 @@
                                                 <label for="country">Country<small class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input id="country" placeholder="Enter Country"
-                                                    type="text" name="country" class="form-control"
-                                                    value="{{ $employee ? ($employee->address ? $employee->address->country : '') : '' }}">
+                                                <select name="country" id="country" class="form-control form-control-sm" required>
+                                                    <option value="">- Select -</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->name }}"
+                                                            {{ $employee && $employee->address && $employee->address->country == $country->name ? 'selected' : '' }}>
+                                                            {{ $country->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="pt-5 text-center">

@@ -41,7 +41,7 @@
                                                                 <div class="row text-dark">
                                                                     <div class="col-4 fw-semibold pt-1"> Name:</div>
                                                                     <div class="col-6 pt-1">
-                                                                        {{ $data->name }}
+                                                                        {{ ucfirst($data->name) }}
                                                                     </div>
 
                                                                     <div class="col-4 fw-semibold pt-1">
@@ -53,7 +53,7 @@
 
                                                                     <div class="col-4 fw-semibold pt-1">Purpose</div>
                                                                     <div class="col-6 pt-1">
-                                                                        {{ $data->purpose }}
+                                                                        {{ ucfirst($data->purpose) }}
                                                                     </div>
 
                                                                     <div class="col-4 fw-semibold pt-1">Description</div>

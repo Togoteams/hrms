@@ -91,12 +91,12 @@
                                                                 <div class="row text-dark">
                                                                     <div class="pt-1 col-3 fw-semibold">Document Name:</div>
                                                                     <div class="pt-1 col-3">
-                                                                        {{ $data->document_name }}
+                                                                        {{ ucfirst($data->document_name) }}
                                                                     </div>
                                                                    
                                                                     <div class="pt-1 col-3 fw-semibold">Document Type:</div>
                                                                     <div class="pt-1 col-3">
-                                                                        {{ $data->document_type }}
+                                                                        {{ ucfirst($data->document_type) }}
                                                                     </div>                                                                                                                      
                                                                    
                                                                     <div class="pt-1 col-3 fw-semibold">Document:</div>

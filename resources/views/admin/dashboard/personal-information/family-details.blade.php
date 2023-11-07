@@ -42,7 +42,7 @@
                                                                 <div class="row text-dark">
                                                                     <div class="pt-1 col-3 fw-semibold">Relation:</div>
                                                                     <div class="pt-1 col-3">
-                                                                        {{ $data->relation }}
+                                                                        {{ ucfirst($data->relation) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Date of Birth:</div>
@@ -52,27 +52,27 @@
 
                                                                     <div class="pt-3 col-3 fw-semibold">Name:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->name }}
+                                                                        {{ ucfirst($data->name) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Depended:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->depended }}
+                                                                        {{ ucfirst($data->depended) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Marital status:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->marital_status }}
+                                                                        {{ ucfirst($data->marital_status) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Gender:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->gender }}
+                                                                        {{ ucfirst($data->gender) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Occupations:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->occupations }}
+                                                                        {{ ucfirst($data->occupations) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Monthly Income:</div>
@@ -82,22 +82,22 @@
 
                                                                     <div class="pt-3 col-3 fw-semibold">Is Bank of Baroda Employee:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->bank_of_baroda_employee }}
+                                                                        {{ ucfirst($data->bank_of_baroda_employee) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Address Line 1:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->address_line1 }}
+                                                                        {{ ucfirst($data->address_line1) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Address Line 2:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->address_line2 }}
+                                                                        {{ ucfirst($data->address_line2) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">State:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->state }}
+                                                                        {{ ucfirst($data->state) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Country:</div>
@@ -117,7 +117,7 @@
 
                                                                     <div class="pt-3 col-3 fw-semibold">Nationality:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->nationality }}
+                                                                        {{ ucfirst($data->nationality) }}
                                                                     </div>
 
                                                                 </div>
@@ -298,9 +298,12 @@
                                         <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="country" class="required">Country</label>
-                                                <input type="text" id="country" name="country"
-                                                    placeholder="Enter country Name"
-                                                    class="form-control form-control-sm" required>
+                                                <select name="country" id="country" class="form-control form-control-sm" placeholder="Enter country Name" required>
+                                                    <option value="">Select</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->name}}">{{ $country->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="mb-2 col-md-6">

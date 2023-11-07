@@ -72,9 +72,15 @@
                                             <div class="mb-2 col-sm-3 country_data">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>
-                                                    <input id="country" placeholder="Enter Country"
-                                                        type="text" value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->country : '') : '' }}"
-                                                        name="country" class="form-control form-control-sm ">
+                                                    <select name="country" id="country" class="form-control form-control-sm" required>
+                                                        <option value="">- Select -</option>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->name }}"
+                                                                {{ $employee && $employee->passportOmang && $employee->passportOmang->country == $country->name ? 'selected' : '' }}>
+                                                                {{ $country->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
 

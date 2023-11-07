@@ -44,7 +44,7 @@
                                                                 <div class="col-3">{{$salutation}}</div> --}}
 
                                                                 <div class="col-3 fw-semibold">Name</div>
-                                                                <div class="col-3"> {{  $data->user->name }}</div>
+                                                                <div class="col-3"> {{  ucfirst($data->user->name) }}</div>
 
                                                                 {{-- <div class="col-3 fw-semibold">Last Name</div>
                                                                 <div class="col-3">{{ $lastName }}</div> --}}

@@ -43,8 +43,8 @@
                                                                             <label for="type" class="required">Type</label>
                                                                             <select name="type" class=" form-control" id="type" placeholder="Employee type">
                                                                                 <option value="">Select Option</option>
-                                                                                <option value="passport" {{ $data->type == 'passport' ? 'selected' : '' }}>Passport</option>
-                                                                                <option value="omang" {{ $data->type == 'omang' ? 'selected' : '' }}>Omang</option>
+                                                                                <option value="passport" {{ isset($data) && $data->type == 'passport' ? 'selected' : '' }}>Passport</option>
+                                                                                <option value="omang" {{ isset($data) && $data->type == 'omang' ? 'selected' : '' }}>Omang</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -75,9 +75,18 @@
                                                                     <div class="mb-2 col-sm-3 country_data">
                                                                         <div class="form-group">
                                                                             <label for="country">Country</label>
-                                                                            <input id="country" placeholder="Enter Country"
+                                                                            {{-- <input id="country" placeholder="Enter Country"
                                                                                 type="text" value="{{ $data ? ($data->country) : '' }}"
-                                                                                name="country" class="form-control form-control-sm ">
+                                                                                name="country" class="form-control form-control-sm "> --}}
+                                                                            <select name="country" id="country" class="form-control form-control-sm" required>
+                                                                                <option value="">- Select -</option>
+                                                                                @foreach ($countries as $country)
+                                                                                    <option value="{{ $country->name}}"
+                                                                                        {{ $data && $data->country == $country->name ? 'selected' : '' }}>
+                                                                                        {{ $country->name }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="text-center ">
@@ -138,8 +147,8 @@
                                                 <label for="type" class="required">Type</label>
                                                 <select name="type" class="type form-control" id="type" placeholder="Employee type">
                                                     <option value="">Select Option</option>
-                                                    <option value="passport" @if(old('type', $data->type) === 'passport') selected @endif>Passport</option>
-                                                    <option value="omang" @if(old('type', $data->type) === 'omang') selected @endif>OMANG</option> 
+                                                    <option value="passport" @if($data && $data->type === 'passport') selected @endif>Passport</option>
+                                                    <option value="omang" @if($data && $data->type === 'omang') selected @endif>OMANG</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -42,8 +42,9 @@ class PersonalInformationController extends Controller
         $page_name = "Family Details";
         // $data = Employee::where('user_id', Auth::user()->id)->first();
         // $designation = Designation::all();
+        $countries = Country::all();
         $datas = FamilyDetail::where('user_id', Auth::user()->id)->get();
-        return view('admin.dashboard.personal-information.family-details', ['page' => $page_name, 'datas'=>$datas]);
+        return view('admin.dashboard.personal-information.family-details', ['page' => $page_name, 'datas'=>$datas , 'countries'=>$countries]);
     }
 
     public function viewDocumentDetails()
@@ -76,8 +77,9 @@ class PersonalInformationController extends Controller
     public function viewPassport()
     {
         $page_name = "Passport";
+        $countries = Country::all();
         $data = EmpPassportOmang::where('user_id', Auth::user()->id)->first();
-        return view('admin.dashboard.personal-information.passport', ['data' => $data, 'page' => $page_name]);
+        return view('admin.dashboard.personal-information.passport', ['data' => $data, 'page' => $page_name, 'countries'=>$countries]);
     }
 
     public function updateEmployeeDetails(Request $request)
@@ -263,10 +265,10 @@ class PersonalInformationController extends Controller
                     function ($attribute, $value, $fail) use ($request) {
                         if ($request->type === 'passport') {
                             if (!preg_match('/^[a-zA-Z0-9.]{8,12}$/', $value)) {
-                                $fail("The $attribute format is invalid for a passport. It should be between 8 and 12 characters, including letters, numbers, and dots.");
+                                $fail("The certificate no format is invalid for a passport. It should be between 8 and 12 characters, including letters, numbers, and dots.");
                             }
                         } elseif ($request->type === 'omang' && !preg_match('/^[0-9]{9}$/', $value)) {
-                            $fail("The $attribute format is invalid for an omang. It should be a 9-digit number.");
+                            $fail("The certificate no format is invalid for an omang. It should be a 9-digit number.");
                         }
                     },
                 ],

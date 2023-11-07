@@ -10,6 +10,7 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
+use App\Models\Country;
 use App\Models\CurrencySetting;
 use App\Models\Department;
 use App\Models\EmpAddress;
@@ -250,7 +251,8 @@ class EmployeeController extends BaseController
 
     public function viewAddress($eid = null)
     {
-        return view('admin.employees.emp-address', ['employee' => $this->getEmployee($eid)]);
+        $countries = Country::all();
+        return view('admin.employees.emp-address', ['employee' => $this->getEmployee($eid), 'countries'=>$countries]);
     }
 
     public function postAddress(Request $request)
@@ -260,7 +262,7 @@ class EmployeeController extends BaseController
             'zip'       => ['required', 'numeric','digits_between:5,10'],
             'city'      => ['required', 'string', 'regex:/^[a-zA-Z. ]+$/'],
             'state'     => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
-            'country'   => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+            'country'   => ['required', 'string'],
         ]);
 
         try {
@@ -286,7 +288,8 @@ class EmployeeController extends BaseController
 
     public function viewPassportOmang($eid = null)
     {
-        return view('admin.employees.emp-passport-omang', ['employee' => $this->getEmployee($eid)]);
+        $countries = Country::all();
+        return view('admin.employees.emp-passport-omang', ['employee' => $this->getEmployee($eid), 'countries'=>$countries]);
     }
 
     public function postPassportOmang(Request $request)
@@ -299,16 +302,16 @@ class EmployeeController extends BaseController
                 function ($attribute, $value, $fail) use ($request) {
                     if ($request->type === 'passport') {
                         if (!preg_match('/^[a-zA-Z0-9.]{8,12}$/', $value)) {
-                            $fail("The $attribute format is invalid for a passport. It should be between 8 and 12 characters, including letters, numbers, and dots.");
+                            $fail("The certificate no format is invalid for a passport. It should be between 8 and 12 characters, including letters, numbers, and dots.");
                         }
                     } elseif ($request->type === 'omang' && !preg_match('/^[0-9]{9}$/', $value)) {
-                        $fail("The $attribute format is invalid for an omang. It should be a 9-digit number.");
+                        $fail("The certificate no format is invalid for an omang. It should be a 9-digit number.");
                     }
                 },
             ],
             'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
             'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date'],
-            'country'       => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+            'country'       => ['required', 'string'],
 
         ]);
 
