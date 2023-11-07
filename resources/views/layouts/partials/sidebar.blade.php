@@ -248,7 +248,9 @@
                      'add-leave-request-history', 'edit-leave-request-history', 'delete-leave-request-history',
                      'view-leave-request-history', 'add-leave-request-rejected', 'edit-leave-request-rejected',
                      'delete-leave-request-rejected', 'view-leave-request-rejected', 'add-leave-report',
-                     'edit-leave-report', 'delete-leave-report', 'view-leave-report'])
+                     'edit-leave-report', 'delete-leave-report', 'view-leave-report','add-leave-type-approval',
+                     'edit-leave-type-approval', 'delete-leave-type-approval',
+                     'view-leave-type-approval','change-status-leave-type-approval'])
 
                      <div class="nav-item">
                          <a class="nav-link dropdown-toggle " href="#leave" role="button"
@@ -324,10 +326,14 @@
                                  </a>
                              @endcanany
 
+                             @canany(['add-leave-type-approval', 'edit-leave-type-approval', 'delete-leave-type-approval',
+                             'view-leave-type-approval','change-status-leave-type-approval'])
                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_time_approved.index' ? 'active' : '' }}"
                                 href="{{ route('admin.leave_time_approved.index') }}" data-placement="left">
                                 <span class="nav-link-title">Leave Type Approval</span>
                             </a>
+                            @endcanany
+
 
 
                          </div>
@@ -421,6 +427,9 @@
                @endcanany
                <div id="navbarVerticalMenuPagesMenu">
                 <!-- Collapse -->
+                @canany(['add-document-type', 'edit-document-type', 'view-document-type',
+                'delete-document-type','change-status-document-type','add-document-management', 'edit-document-management', 'view-document-management',
+                             'delete-document-management'])
                 <div class="nav-item">
                     <a class="nav-link dropdown-toggle " href="#documents" role="button"
                         data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false"
@@ -432,8 +441,8 @@
                         class="nav-collapse collapse {{ show(['document.index', 'document_type.index']) }} "
                         data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                        @canany(['add-document-management', 'edit-document-management', 'view-document-management',
-                             'delete-document-management'])
+                        @canany(['add-document-type', 'edit-document-type', 'view-document-type',
+                             'delete-document-type','change-status-document-type'])
                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document_type.index' ? 'active' : '' }}  "
                                 href="{{ route('admin.document_type.index') }}">Document Type</a>
                         @endcanany
@@ -449,6 +458,8 @@
 
                     </div>
                 </div>
+                @endcanany
+
             </div>
 
            @canany(['add-medical-card-type', 'edit-medical-card-type', 'view-medical-card-type',
@@ -528,6 +539,7 @@
                     </div>
                     @endcanany
 
+                    @canany(['add-country', 'edit-country', 'view-country', 'delete-country','change-status-country'])
                     <div class="nav-item">
                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.country.list' ? 'active' : '' }}"
                             href="{{ route('admin.country.index') }}" data-placement="left">
@@ -535,6 +547,8 @@
                             <span class="nav-link-title">Country</span>
                         </a>
                     </div>
+                    @endcanany
+
                     
 
                      {{-- @canany(['add-leave-settings', 'edit-leave-settings', 'view-leave-settings',

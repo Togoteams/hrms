@@ -545,6 +545,51 @@
         },
         {
             "name": " Export Report TTUM Report","module": "TTUM Report", "permissions for":"admin"
+        },
+        {
+            "name": "Add Leave Type Approval","module": "Leave Type Approval", "permissions for":"admin,branch supervisor,employee"
+        },
+        {
+            "name": "Edit Leave Type Approval","module": "Leave Type Approval", "permissions for":"admin,branch supervisor,employee"
+        },
+        {
+            "name": "View Leave Type Approval","module": "Leave Type Approval", "permissions for":"admin,branch supervisor,employee"
+        },
+        {
+            "name": "Delete Leave Type Approval","module": "Leave Type Approval", "permissions for":"admin,branch supervisor"
+        },
+        {
+            "name": "Change Status Leave Type Approval","module": "Leave Type Approval", "permissions for":"admin,branch supervisor"
+        },
+        {
+            "name": "Add Document Type","module": "Document Type", "permissions for":"admin"
+        },
+        {
+            "name": "Edit Document Type","module": "Document Type", "permissions for":"admin"
+        },
+        {
+            "name": "View Document Type","module": "Document Type", "permissions for":"admin"
+        },
+        {
+            "name": "Delete Document Type","module": "Document Type", "permissions for":"admin"
+        },
+        {
+            "name": "Change Status Document Type","module": "Document Type", "permissions for":"admin"
+        },
+        {
+            "name": "Add Country","module": "Country", "permissions for":"admin"
+        },
+        {
+            "name": "Edit Country","module": "Country", "permissions for":"admin"
+        },
+        {
+            "name": "View Country","module": "Country", "permissions for":"admin"
+        },
+        {
+            "name": "Delete Country","module": "Country", "permissions for":"admin"
+        },
+        {
+            "name": "Change Status Country","module": "Country", "permissions for":"admin"
         }
 
     ]

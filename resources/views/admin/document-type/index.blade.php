@@ -38,10 +38,12 @@
 
                     </div> --}}
                     <div class="col-sm-auto">
-                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                        @can('add-document-type')
+                            <button type="button" class="btn btn-white" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                                 Add {{ $page }}
                             </button>
+                         @endcan
                         </div>
 
                 </div>
