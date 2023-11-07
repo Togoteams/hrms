@@ -13,8 +13,10 @@ class LeaveTimeApprovel extends Model
         'leave_type_id', 
         'approval_date',
         'description',
-        'status'
-    ];
+        'status',
+        'description_reason',
+        'approved_at',
+        'rejected_at'];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

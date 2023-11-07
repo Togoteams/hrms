@@ -17,7 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('leave_type_id')->nullable();
             $table->string('approval_date',)->nullable();
             $table->text('description',)->nullable();
-            $table->enum('status',["active","inactive"])->default('active'); 
+            $table->string('description_reason')->nullable();
+            $table->string('status')->default('pending')->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->timestamp('rejected_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -123,9 +123,15 @@
                                         <div class="col-md-6 mb-2">
                                             <div class="form-group">
                                                 <label for="country">Country<small class="required-field">*</small></label>
-                                                <input required id="country" placeholder="Enter Name of Country"
-                                                    type="text" name="country" class="form-control"
-                                                    value="{{ $data ? $data->country : '' }}">
+                                                <select name="country" id="country" class="form-control" required>
+                                                    <option value="">- Select Country -</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->name }}"
+                                                            {{ $data && $data->country == $country->name ? 'selected' : '' }}>
+                                                            {{ $country->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

@@ -152,6 +152,57 @@
 
             {{-- edit form model end  --}}
 
+               {{--start status Modal  --}}
+        <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Status change of {{ $page }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="formSubmit" action="{{route('admin.leave_approval.status')}}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <input type="hidden" value="" id="status_id" name="leave_id">
+                            <div class="mb-2 col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
+                                    <select name="status" class="form-control" id="status">
+                                        <option value="">Selected Option</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="approved">Approved</option>
+                                        <option value="rejected">Rejected</option>
+                                    </select>
+                                    <span class="text-danger">
+                                        @error('status')
+                                        {{$message}}
+                                        @enderror
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-md-12">
+                                <div class="form-group">
+                                    <label for="expenses">Description Reason</label>
+                                    <textarea name="description_reason" id="description_reason" cols="30" rows="10" class="form-control" placeholder="Description Reason"></textarea>
+                                </div>
+                                {{-- <span class="text-danger">
+                                    @error('description_reason')
+                                    {{$message}}
+                                    @enderror
+                                </span> --}}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                            <button type="submit" class="btn btn-primary status_add " id="">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{-- End Status Modal --}}
+
         </div>
 
     </main>
@@ -185,6 +236,14 @@
             });
         });
     });
+</script>
+{{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> --}}
+<script>
+   $(document).on('click', '.status_change', function(e) {
+        var stat_id = $(this).val();
+        $('#status_id').val(stat_id);
+        $('#statusModal').modal('show');
+});
 </script>
 
 @endpush

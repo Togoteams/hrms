@@ -1,11 +1,13 @@
 <div class="button-container">
     <div class="row">
        <div class="d-flex">
-            <button type="button" data-table="leave_time_approved" data-uuid="{{$item->id}}"
+            {{-- <button type="button" data-table="leave_time_approved" data-uuid="{{$item->id}}"
                 @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
                 class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
                     @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
-            </button>
+            </button> --}}
+            <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
+
             <form id="edit{{ $item->id }}"
                 action="{{ route('admin.leave_time_approved.destroy', $item->id) }}">
 

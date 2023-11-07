@@ -61,7 +61,7 @@ class LeaveTimeApprovelController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            $request->request->add(['status' =>"active"]);
+            $request->request->add(['status' =>"pending"]);
             LeaveTimeApprovel::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
@@ -119,4 +119,28 @@ class LeaveTimeApprovelController extends Controller
             return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);
         }
     }
+
+
+    public function status(Request $request)
+    {   
+        $request->validate([
+            'status' => ['required','string'],
+            'description_reason' => ['nullable','string'], 
+        ]);
+        dd($request->all());
+        $leave = LeaveTimeApprovel::find($request->leave_id);
+        $leave->description_reason = $request['description_reason'];
+        $leave->status = $request['status'];
+        if($request->status=='approved')
+        {
+           $leave->approved_at=date('Y-m-d h:i:s');
+        }
+        if($request->status=='rejected')
+        {
+           $leave->rejected_at=date('Y-m-d h:i:s');
+        }
+        $leave->save();
+        return $this->responseJson(true,200,'status created successfully',$leave);
+    }
+
 }

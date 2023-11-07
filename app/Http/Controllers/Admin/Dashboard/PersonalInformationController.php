@@ -69,9 +69,10 @@ class PersonalInformationController extends Controller
     public function viewAddress()
     {
         $page_name = "Address";
+        $countries = Country::all();
         $data = EmpAddress::where('user_id', Auth::user()->id)->first();
         // return $data;
-        return view('admin.dashboard.personal-information.address', ['data' => $data, 'page' => $page_name]);
+        return view('admin.dashboard.personal-information.address', ['data' => $data, 'page' => $page_name,'countries'=>$countries]);
     }
 
     public function viewPassport()
