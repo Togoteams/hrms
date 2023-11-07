@@ -86,7 +86,6 @@
                             <th>EC Number</th>
                             <th>leave type</th>
                             <th>Apply for</th>
-                            <th>Balance Leave</th>
                             <th>From </th>
                             <th>To</th>
                             <th>Paid/Unpaid</th>
@@ -128,10 +127,7 @@
                                 data: 'leave_applies_for',
                                 name: 'leave_applies_for'
                             },
-                            {
-                                data: 'remaining_leave',
-                                name: 'remaining_leave'
-                            },
+                           
                             {
                                 data: 'start_date',
                                 name: 'start_date'
@@ -252,11 +248,11 @@
     // date picker
     </script>
     <script>
-         window.onload = function() { //from ww  w . j  a  va2s. c  o  m
-            var today = new Date().toISOString().split('T')[0];
-            document.getElementsByName("start_date_edit")[0].setAttribute('min', today);
-            document.getElementsByName("end_date_edit")[0].setAttribute('min', today);
-        }
+        //  window.onload = function() { //from ww  w . j  a  va2s. c  o  m
+        //     var today = new Date().toISOString().split('T')[0];
+        //     document.getElementsByName("start_date_edit")[0].setAttribute('min', today);
+        //     document.getElementsByName("end_date_edit")[0].setAttribute('min', today);
+        // }
           $(document).ready(function() {
             $(document).on('change',"#start_date_edit",function() {
                 console.log("sdsd");

@@ -86,11 +86,10 @@
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="remark"> Describe the Leave reason (optional)</label>
-                                    <textarea rows="12" id="remark" placeholder="Describe the Leave reason  " name="remark" class="form-control form-control-sm "></textarea>
+                                    <textarea rows="3" id="remark" placeholder="Describe the Leave reason  " name="remark" class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>
                         </div>
-                        <hr>
                         <div class="text-center ">
                             <button type="button" onclick="ajaxCall('form_data')" class="btn btn-white submit">
                                 {{ $page }}</button>
@@ -104,11 +103,11 @@
     @push('custom-scripts')
     <script>
          
-    window.onload = function() { //from ww  w . j  a  va2s. c  o  m
-        var today = new Date().toISOString().split('T')[0];
-        document.getElementsByName("start_date")[0].setAttribute('min', today);
-        document.getElementsByName("end_date")[0].setAttribute('min', today);
-    }
+        // window.onload = function() { //from ww  w . j  a  va2s. c  o  m
+        //     var today = new Date().toISOString().split('T')[0];
+        //     document.getElementsByName("start_date")[0].setAttribute('min', today);
+        //     document.getElementsByName("end_date")[0].setAttribute('min', today);
+        // }
         function change_leave(e) {
             var text = e.options[e.selectedIndex].text;
             console.log(text);
@@ -126,20 +125,18 @@
         $("#start_date").on('change',function(){
             dt = new Date($(this).val());
             dt.setDate(dt.getDate() + 1);
-            // if($("#end_date").val()=="")
-            // {
-                var month = dt.getMonth()+1;
-                var day = dt.getDate();
-                if(month<9)
-                {
-                    month = "0"+month;
-                }
-                if(day<9)
-                {
-                    day = "0"+day;
-                }
-                $("#end_date").val(dt.getFullYear()+"-"+(month)+"-"+day);
-            // }
+            var month = dt.getMonth()+1;
+            var day = dt.getDate();
+            if(month<10)
+            {
+                month = "0"+month;
+            }
+            
+            if(day<10)
+            {
+                day = "0"+day;
+            }
+            $("#end_date").val(dt.getFullYear()+"-"+(month)+"-"+day);
             console.log("ddsdsd",dt.getFullYear()+"-"+(month)+"-"+day);
             getDays();
         });

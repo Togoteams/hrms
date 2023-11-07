@@ -71,7 +71,9 @@
                 {{ $total_reject }} </div>
         </a>
     </div>
+    @if (!isemplooye())
     <div class="col-lg-2"></div>
+    @endif
     <div class="text-right col-lg-2 auto">
         <div class="mt-2 " style="text-align: right;">
             @can('add-leave-apply')

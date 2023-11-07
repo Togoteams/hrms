@@ -96,7 +96,7 @@ body {
 }
 
 hr {
-    margin: 1.75rem 0;
+    margin: 0.75rem 0;
     color: rgba(231, 234, 243, .7);
     border: 0;
     border-top: .0625rem solid;
@@ -6466,7 +6466,7 @@ fieldset:disabled .btn {
 .modal {
     --bs-modal-zindex: 101;
     --bs-modal-width: 550px;
-    --bs-modal-padding: 2rem;
+    --bs-modal-padding: 1rem;
     --bs-modal-margin: 0.5rem;
     --bs-modal-bg: #fff;
     --bs-modal-border-color: transparent;
@@ -6476,7 +6476,7 @@ fieldset:disabled .btn {
     --bs-modal-inner-border-radius: 0.6875rem;
     --bs-modal-header-padding-x: 2rem;
     --bs-modal-header-padding-y: 2rem;
-    --bs-modal-header-padding: 2rem 2rem;
+    --bs-modal-header-padding: 1rem 1rem;
     --bs-modal-header-border-color: var(--bs-border-color);
     --bs-modal-header-border-width: 0;
     --bs-modal-title-line-height: 1.5;
@@ -31899,7 +31899,8 @@ label.form-control {
 .table-align-middle tbody tr,
 .table-align-middle td,
 .table-align-middle th {
-    vertical-align: middle
+    vertical-align: middle;
+    text-align: center;
 }
 
 .table-text-center,

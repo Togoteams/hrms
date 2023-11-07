@@ -19,10 +19,10 @@
     @if (!isemplooye())
         <input type="hidden" name="_method" value="DELETE">
         @if ($item->status != 'approved')
-            {{-- <button type="button" id="delete{{ $item->id }}"
+            <button type="button" id="delete{{ $item->id }}"
                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
-            </button> --}}
+            </button>
         @endif
         @can('change-status-leave-apply')
         <button type="button"

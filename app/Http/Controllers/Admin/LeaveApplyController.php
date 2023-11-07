@@ -107,8 +107,8 @@ class LeaveApplyController extends Controller
 
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'start_date' => ['required', 'date','after_or_equal:','no_date_overlap','after:today'],
-            'end_date' => ['required', 'date', 'after_or_equal:' . now()->format('Y-m-d'),'no_date_overlap'],
+            'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
+            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"],
             'remaining_leave' =>['required','numeric', Rule::when($leavSlug != 'leave-without-pay', 'min:1')]
         ]);
@@ -117,12 +117,12 @@ class LeaveApplyController extends Controller
         } else {
             $user = Auth::user();
         }
-        // return $leavSlug=="leave-without-pay";
         if (($this->balance_leave_by_type($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leavSlug=="leave-without-pay" ) {
             if ($validator->fails()) {
                 return $validator->errors();
             } else {
                 try {
+                    return response()->json(['error' => "Something wrong heppend"]);
 
                     $request->request->add([
                         'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
