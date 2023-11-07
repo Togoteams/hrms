@@ -177,70 +177,12 @@
         <script>
             'use strict';
 
-            var name_error = true;
-            var email_error = true;
 
-            $(document).ready(function() {
-                $(document).on("change", "#name", function(e) {
-                    nameValidate();
-                });
-                $(document).on("change", "#email", function(e) {
-                    emailValidate();
-                });
-            });
 
-            //Name Validation
-            function nameValidate() {
-                let regex = /^[a-zA-Z' ']*$/;
-                let name = $.trim($("#name").val());
-                if (!name) {
-                    name_error = true;
-                    $("#name").addClass('is-invalid');
-                    return $("#name_error").html('Name is Required');
-                } else if (!regex.test(name)) {
-                    name_error = true;
-                    $("#name").addClass('is-invalid');
-                    return $("#name_error").html('Only Alphabets are Allowed');
-                }
-                name_error = false;
-                $("#name").removeClass('is-invalid');
-                $("#name_error").html('');
-            }
 
-            //Email Validation
-            function emailValidate() {
-                let email = $.trim($("#email").val());
-                let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-                if (!email) {
-                    email_error = true;
-                    $("#email").addClass('is-invalid');
-                    return $("#email_error").html('Email is Required');
-                } else if (!email.match(validRegex)) {
-                    email_error = true;
-                    $("#email").addClass('is-invalid');
-                    return $("#email_error").html('Email Format is Invalid');
-                }
-                email_error = false;
-                $("#email").removeClass('is-invalid');
-                $("#email_error").html('');
-            }
 
-            function formValidate() {
-                nameValidate();
-                emailValidate();
 
-                if (name_error || email_error) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Please Fill Carefully!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    return false;
-                } else {
-                    return true;
-                }
-            }
+
 
 
             function validateimg(ctrl) {
@@ -292,6 +234,112 @@
                 } else {
                     alert("Please select a valid Image file.");
                     return false;
+                }
+            }
+        </script>
+
+        @if (!empty(Session::get('success')))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: '{{ Session::get('success') }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>
+            @php
+                Session::forget('success');
+            @endphp
+        @endif
+        {{-- Passwords Update Validation --}}
+
+        <script>
+            'use strict';
+
+            let password_error = true;
+            let password_confirmation_error = true;
+
+            $(document).ready(function() {
+                $(document).on("change", "#password", function(e) {
+                    passwordValidate();
+                });
+                $(document).on("change", "#password_confirmation", function(e) {
+                    confirmPasswordValidate();
+                });
+                $(document).on("submit", "#formSubmit", function(e) {
+                    paswordsMatch();
+                });
+            });
+
+            //Password Validation
+            function passwordValidate() {
+                let password = $.trim($("#password").val());
+                if (!password) {
+                    password_error = true;
+                    $("#password").addClass("is-invalid");
+                    return $("#password_error").html("Password is Required");
+                } else if (password.length < 8) {
+                    password_error = true;
+                    $("#password").addClass("is-invalid");
+                    return $("#password_error").html(
+                        "Password must be of 8 characters"
+                    );
+                }
+                password_error = false;
+                $("#password").removeClass("is-invalid");
+                $("#password_error").html("");
+            }
+
+            //Confirm Password Validation
+            function confirmPasswordValidate() {
+                let password_confirmation = $.trim(
+                    $("#password_confirmation").val()
+                );
+                if (!password_confirmation) {
+                    password_confirmation_error = true;
+                    $("#password_confirmation").addClass("is-invalid");
+                    return $("#password_confirmation_error").html(
+                        "Confirm Password is Required"
+                    );
+                }
+                password_confirmation_error = false;
+                $("#password_confirmation").removeClass("is-invalid");
+                $("#password_confirmation_error").html("");
+            }
+
+            // Passwords Matching Validation
+            function paswordsMatch() {
+                let password = $.trim($("#password").val());
+                let password_confirmation = $.trim(
+                    $("#password_confirmation").val()
+                );
+                if (password != password_confirmation) {
+                    password_confirmation_error = true;
+                    $("#password_confirmation").addClass("is-invalid");
+                    return $("#password_confirmation_error").html(
+                        "Password And Confirm Password must be Same"
+                    );
+                }
+                password_confirmation_error = false;
+                $("#password_confirmation").removeClass("is-invalid");
+                $("#password_confirmation_error").html("");
+            }
+
+            function formValidate() {
+                passwordValidate();
+                confirmPasswordValidate();
+                paswordsMatch();
+
+                if (password_error || password_confirmation_error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Please Fill Carefully!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    return false;
+                } else {
+                    return true;
                 }
             }
         </script>
