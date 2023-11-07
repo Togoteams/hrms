@@ -66,19 +66,4 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 </div>
             </div>
         </div>
-        <script>
-            $(document).ready(function () {
-                $('#user_id').change(function () {
-                    const selectedEmployeeType = $('#user_id option:selected').data('employee-type');
-                    $('#leave_type_id option').each(function () {
-                        const leaveTypeEmployeeType = $(this).data('employee-type');
-                        if (selectedEmployeeType === 'local' && leaveTypeEmployeeType == 1) {
-                            $(this).hide();
-                        } else {
-                            $(this).show();
-                        }
-                    });
-                });
-            });
-        </script>
-
+        
