@@ -259,21 +259,6 @@
             "name": "Print Employee Kra","module": "Employee Kra", "permissions for":"admin,employee"
         },
         {
-            "name": "Add Leave Types","module": "Leave Types", "permissions for":"admin"
-        },
-        {
-            "name": "Edit Leave Types","module": "Leave Types", "permissions for":"admin"
-        },
-        {
-            "name": "View Leave Types","module": "Leave Types", "permissions for":"admin"
-        },
-        {
-            "name": "Delete Leave Types","module": "Leave Types", "permissions for":"admin"
-        },
-        {
-            "name": "Change Status Leave Types","module": "Leave Types", "permissions for":"admin"
-        },
-        {
             "name": "Add Leave Apply","module": "Leave Apply", "permissions for":"admin,employee"
         },
         {
@@ -359,18 +344,6 @@
         },
         {
             "name": "Delete Leave Settings","module": "Leave Settings", "permissions for":"admin"
-        },
-        {
-            "name": "Add Leave Type","module": "Leave Type", "permissions for":"admin"
-        },
-        {
-            "name": "Edit Leave Type","module": "Leave Type", "permissions for":"admin"
-        },
-        {
-            "name": "View Leave Type","module": "Leave Type", "permissions for":"admin"
-        },
-        {
-            "name": "Delete Leave Type","module": "Leave Type", "permissions for":"admin"
         },
         {
             "name": "Add Payroll","module": "Payroll", "permissions for":"admin"

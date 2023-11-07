@@ -239,8 +239,8 @@
                      @endcanany
 
                     
-                @canany(['add-leave', 'edit-leave', 'view-leave', 'delete-leave', 'add-leave-types',
-                     'edit-leave-types', 'delete-leave-types', 'view-leave-types', 'change-status-leave-types',
+                @canany(['add-leave', 'edit-leave', 'view-leave', 'delete-leave', 'add-leave-settings', 
+                'edit-leave-settings', 'delete-leave-settings', 'view-leave-settings',
                      'add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
                      'change-status-leave-apply', 'add-leave-encashment', 'edit-leave-encashment',
                      'delete-leave-encashment', 'view-leave-encashment', 'add-leave-balance-report',
@@ -271,7 +271,7 @@
                                          href="{{ route('admin.leave_type.index') }}">Leave Types</a>
                                  @endif
                              @endcanany --}}
-                             @canany(['add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])
+                             @canany(['add-leave-settings', 'edit-leave-settings', 'delete-leave-settings', 'view-leave-settings'])
                                 <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leavesettings.list' ? 'active' : '' }}"
                                     href="{{ route('admin.leavesettings.list') }}" data-placement="left">
                                     <span class="nav-link-title">Leave Setting</span>
