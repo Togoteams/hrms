@@ -14,6 +14,8 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LeaveTraits;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
+
 class LeaveApplyController extends Controller
 {
     use LeaveTraits;
@@ -85,7 +87,7 @@ class LeaveApplyController extends Controller
 
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
-            $end_date = $validator->getData()['end_date'] ?? "";
+            $end_date = $validator->getData()['end_date'] ?? date('Y-m-d');
             $userId = $validator->getData()['user_id'] ?? "";
             $overlappingRecord =true;
             
@@ -98,7 +100,8 @@ class LeaveApplyController extends Controller
         });
 
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
-            return "The $attribute date range overlaps with an existing record.";
+            $value = Str::headline(Str::camel($attribute));
+            return "The $value date range overlaps with an existing record.";
         });
 
 

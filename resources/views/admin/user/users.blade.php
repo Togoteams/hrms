@@ -4,7 +4,7 @@
 @section('content')
     <main id="content" role="main" class="main">
         <!-- Content -->
-        <div class="content container-fluid">
+        <div class="container-fluid">
            
 
             <!-- Card -->

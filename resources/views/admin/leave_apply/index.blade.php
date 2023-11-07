@@ -5,9 +5,9 @@
 @section('content')
 <main id="content" role="main" class="main">
     <!-- Content -->
-    <div class="content container-fluid">
+    <div class="container-fluid">
         <!-- Page Header -->
-        <div class="mt-2 mb-2 border-bottom">
+        <div class="mb-2 border-bottom">
             <div class="row align-items-center">
                 <div class="col">
                     <h1 class="page-header-title">{{ $page }}</h1>
@@ -24,21 +24,15 @@
 
             <!-- End Row -->
         </div>
-        <div class="row">
-            <div class="col-sm-9"></div>
-            <div class="mt-2 text-right col-sm-3 auto" style="text-align: right;">
-                @can('add-leave-apply')
-                <button type="button" class="text-right btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    {{ $page }}
-                </button>
-                @endcan
-
-            </div>
-        </div>
+        
         @include('admin.leave_apply.create')
+       
         <!-- Card -->
         @include('admin.leave_apply.type_of_leave')
-
+        <div class="row">
+            <div class="col-sm-9"></div>
+            
+        </div>
         <div class="mb-3 card mb-lg-5">
             {{-- <div class="accordion" id="accordionExample">
                 <div class="accordion-item">

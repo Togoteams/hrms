@@ -29,7 +29,7 @@
             }
         }
     </style>
-    <div class="content container-fluid mr-2p">
+    <div class="container-fluid mr-2p">
         <div class="row mx-auto justify-content-center">
             <div class="col-6 bg-white form-div card">
                 <h3 class="text-center font-weight-bold txt-color mr-m-2p">Password Reset</h3>

@@ -4,7 +4,7 @@
 @section('content')
     <main id="content" role="main" class="main">
         <!-- Content -->
-        <div class="content container-fluid">
+        <div class="container-fluid">
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">

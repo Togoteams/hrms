@@ -29,7 +29,7 @@
 @section('content')
     <main id="content" role="main" class="main">
         <!-- Content -->
-        <div class="content container-fluid">
+        <div class="container-fluid">
 
 
             <h3 class="text-center font-weight-bold txt-color .mr-m-2p">Profile Update</h3>

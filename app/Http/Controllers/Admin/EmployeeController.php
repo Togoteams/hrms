@@ -10,6 +10,8 @@ use App\Models\Membership;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Branch;
+use Illuminate\Support\Str;
+
 use App\Models\Country;
 use App\Models\CurrencySetting;
 use App\Models\Department;
@@ -469,21 +471,27 @@ class EmployeeController extends BaseController
     {
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
-            $end_date = $validator->getData()['end_date'] ?? "";
+            $end_date = $validator->getData()['end_date'] ?? date('Y-m-d');
+            $id = $validator->getData()['id'] ?? "";
             $overlappingRecord =true;
             
-                $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date) {
-                    $query->where('start_date', '<=', $end_date);
-                    if(!empty($end_date))
-                    {
-                     $query->where('end_date', '>=', $start_date);
-                    }
-                })->first();
+            $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date,$id) {
+                $query->where('start_date', '<=', $end_date);
+                if(!empty($end_date))
+                {
+                    $query->where('end_date', '>=', $start_date);
+                }
+                if(!empty($id))
+                {
+                    $query->whereNotIn('id', [$id]);
+                }
+            })->first();
             return !$overlappingRecord;
         });
 
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
-            return "The $attribute date range overlaps with an existing record.";
+            $value = Str::headline(Str::camel($attribute));
+            return "The $value  range overlaps with an existing record.";
         });
         $employee = Employee::where('user_id', $request->user_id)->first();
 
@@ -499,10 +507,10 @@ class EmployeeController extends BaseController
             ],
             'start_date' => [
                 'required',
-                'date',
+                'date','no_date_overlap',
                 'after:' . $employee->start_date,
             ],
-            'end_date' => ['required', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
+            'end_date' => ['sometimes','nullable', 'date', 'after:start_date','no_date_overlap', 'before_or_equal:' . now()->format('Y-m-d')],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);
 
         try {

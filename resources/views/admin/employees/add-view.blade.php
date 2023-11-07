@@ -8,7 +8,7 @@
         }
     </style>
     <main id="content" role="main" class="main">
-        <div class="content container-fluid">
+        <div class="container-fluid">
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
