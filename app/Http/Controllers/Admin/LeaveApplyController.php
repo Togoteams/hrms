@@ -122,7 +122,7 @@ class LeaveApplyController extends Controller
                 return $validator->errors();
             } else {
                 try {
-                    return response()->json(['error' => "Something wrong heppend"]);
+                    // return response()->json(['error' => "Something wrong heppend"]);
 
                     $request->request->add([
                         'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
