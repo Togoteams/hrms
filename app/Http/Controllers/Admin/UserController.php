@@ -42,7 +42,6 @@ class UserController extends BaseController
             // 'name'     =>  'required|string',
             'first_name'     =>  'required|string',
             'role_id'     =>  'required|exists:roles,id',
-            'username' => 'required|min:3|string|unique:users,username,'.$userId,
             'email' => 'required|min:3|string|unique:users,email,'.$userId,
             'mobile' => 'required|min:3|string|unique:users,mobile,'.$userId,
             'password'=>'required|min:8|string',
@@ -51,7 +50,6 @@ class UserController extends BaseController
         $request->merge(['name'=>$request->first_name." ".$request->last_name]);
         $data = [
             'name' => $request->name,
-            'username' => $request->username,
             'email' => $request->email,
             'mobile' => $request->mobile,
             'password' => Hash::make($request->password),

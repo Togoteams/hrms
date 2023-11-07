@@ -48,7 +48,6 @@
                                 <th>Employee Id</th>
                                 <th>Employee name</th>
                                 <th>Employee Email</th>
-                                <th>Employee username</th>
                                 <th>Employee Phone</th>
                                 <th>Employee Gender</th>
                                 <th width="100px">Action</th>
@@ -84,9 +83,6 @@
                                 }, {
                                     data: 'user.email',
                                     name: 'user.email'
-                                }, {
-                                    data: 'user.username',
-                                    name: 'user.username'
                                 },
                                 {
                                     data: 'user.mobile',

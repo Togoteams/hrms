@@ -6,4 +6,10 @@ $(document).ready(function() {
       console.log("sdhsj");
       $('.formsubmit').trigger("reset");
     });
+    $( ".addbtn" ).click(function() {
+      console.log("sdhsj");
+      $('.submit').trigger("reset");
+    });
   });
+
+  

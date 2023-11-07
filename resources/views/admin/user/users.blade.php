@@ -220,14 +220,14 @@
                         <!-- End Form -->
 
                         <!-- Form -->
-                        <div class="mb-4 row">
+                        {{-- <div class="mb-4 row">
                             <label for="username" class="col-sm-3 col-form-label form-label">Username</label>
 
                             <div class="col-sm-9">
                                 <input type="username" class="form-control" name="username" id="username"
                                     placeholder="username" aria-label="username">
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="mb-4 row">
                             <label for="password" class="col-sm-3 col-form-label form-label">Password <i
                                     class="tio-help-outlined text-body ms-1"></i></label>

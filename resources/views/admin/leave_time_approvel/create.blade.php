@@ -66,30 +66,19 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 </div>
             </div>
         </div>
-           <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const userDropdown = document.getElementById('user_id');
-                    const leaveTypeDropdown = document.getElementById('leave_type_id');
-
-                    userDropdown.addEventListener('change', function () {
-                        const selectedEmployeeType = userDropdown.options[userDropdown.selectedIndex].getAttribute('data-employee-type');
-                        console.log(selectedEmployeeType);
-                        for (let i = 0; i < leaveTypeDropdown.options.length; i++) {
-                            const leaveTypeEmployeeType = leaveTypeDropdown.options[i].getAttribute('data-employee-type');
-                            console.log(leaveTypeEmployeeType);
-                            if(selectedEmployeeType == "local" && leaveTypeEmployeeType == 1)
-                            {
-                                // console.log(leaveTypeEmployeeType);
-                            // }
-                            // if (selectedEmployeeType === leaveTypeEmployeeType || leaveTypeEmployeeType === '0') {
-                                leaveTypeDropdown.options[i].style.display = 'none';
-                            } else {
-                                // console.log(leaveTypeEmployeeType);
-                             
-                                leaveTypeDropdown.options[i].style.display = 'block';
-                            }
+        <script>
+            $(document).ready(function () {
+                $('#user_id').change(function () {
+                    const selectedEmployeeType = $('#user_id option:selected').data('employee-type');
+                    $('#leave_type_id option').each(function () {
+                        const leaveTypeEmployeeType = $(this).data('employee-type');
+                        if (selectedEmployeeType === 'local' && leaveTypeEmployeeType == 1) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
                         }
                     });
                 });
-</script>
+            });
+        </script>
 
