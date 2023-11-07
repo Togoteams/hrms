@@ -24,7 +24,7 @@
         <div class="mb-6 col-sm-6">
             <div class="form-group">
                 <label for="leave_type_id" class="required">Leave Type</label>
-                <select name="leave_type_id" id="leave_type_id" class="form-control" required>
+                <select name="leave_type_id" id="edit_leave_type_id" class="form-control" required>
                     <option value="">- Select -</option>
                     @foreach ($leave_setting as $setting)
                     <option value="{{ $setting->id }}" data-employee-type="{{ $setting->emp_type }}" {{ old('leave_type_id', $leave->leave_type_id) == $setting->id ? 'selected' : '' }}>

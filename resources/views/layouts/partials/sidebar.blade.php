@@ -239,7 +239,7 @@
                      @endcanany
 
                     
-                @canany(['add-leave', 'edit-leave', 'view-leave', 'delete-leave', 'add-leave-settings', 
+                @canany([ 'add-leave-settings', 
                 'edit-leave-settings', 'delete-leave-settings', 'view-leave-settings',
                      'add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
                      'change-status-leave-apply', 'add-leave-encashment', 'edit-leave-encashment',

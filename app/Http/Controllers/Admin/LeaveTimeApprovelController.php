@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\LeaveSetting;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
-class LeaveTimeApprovelController extends Controller
+class LeaveTimeApprovelController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -56,7 +57,7 @@ class LeaveTimeApprovelController extends Controller
             'user_id' => 'required|numeric',
             'leave_type_id' => 'required|numeric',
             'approval_date' => 'required|date',
-            'description' => 'nullable|string', 
+            'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -85,7 +86,7 @@ class LeaveTimeApprovelController extends Controller
         })->get();
         $maternityLeaveTypes = LeaveSetting::where('name', 'MATERNITY LEAVE')->get();
         $leave = LeaveTimeApprovel::find($id);
-        return view('admin.leave_time_approvel.edit', ['leave' => $leave,'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees, 'page' => $this->page_name]); 
+        return view('admin.leave_time_approvel.edit', ['leave' => $leave,'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees, 'page' => $this->page_name]);
     }
 
     /**
@@ -97,7 +98,7 @@ class LeaveTimeApprovelController extends Controller
             'user_id' => 'required|numeric',
             'leave_type_id' => 'required|numeric',
             'approval_date' => 'required|date',
-            'description' => 'nullable|string', 
+            'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -122,12 +123,12 @@ class LeaveTimeApprovelController extends Controller
 
 
     public function status(Request $request)
-    {   
+    {
         $request->validate([
             'status' => ['required','string'],
-            'description_reason' => ['nullable','string'], 
+            'description_reason' => ['nullable','string'],
         ]);
-        dd($request->all());
+        // dd($request->all());
         $leave = LeaveTimeApprovel::find($request->leave_id);
         $leave->description_reason = $request['description_reason'];
         $leave->status = $request['status'];
