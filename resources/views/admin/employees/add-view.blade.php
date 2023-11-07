@@ -20,15 +20,15 @@
                     <span class="name-title">Person Profile</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <div class="row py-3">
+                                    <div class="py-3 row">
                                         <div class="text-left">
                                             {{-- <button type="button" class="btn btn-white btn-sm" title="Add Qualification"
                                                 onclick="addQualification({{ Auth::user()->id }})">
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="pb-4">
-                                            <div class="card p-3">
+                                            <div class="p-3 card">
                                                 <div class="row">
                                                     <div class="col-9">
                                                         <div class="row text-dark">
@@ -52,10 +52,10 @@
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="">
                                                                     <button class="btn btn-delete btn-sm bt" title="Delete">
-                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                        <i class="fa-solid fa fa-lg"></i>
                                                                     </button>
                                                                 </form>
-                                                                <button class="btn btn-edit btn-sm bt float-right" title="Edit"
+                                                                <button class="float-right btn btn-edit btn-sm bt" title="Edit"
                                                                     id="editButton"
                                                                     data-id="{{ $data->id }}"
                                                                     data-user_id="{{ Auth::user()->id }}"
@@ -99,14 +99,14 @@
                                     <input type="hidden" name="user_id" id="user_id">
 
                                     <div class="row">
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="exam_name">Exam Name</label>
                                                 <input required id="exam_name" placeholder="Enter exam name" type="text"
                                                     name="exam_name" class="form-control form-control-" value="">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="specialization">Specialization</label>
                                                 <input required id="specialization" placeholder="Enter specialization"
@@ -114,7 +114,7 @@
                                                     value="">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="institute_name">Institute Name</label>
                                                 <input required id="institute_name" placeholder="Enter institute name"
@@ -122,7 +122,7 @@
                                                     value="">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="university">University</label>
                                                 <input required id="university" placeholder="Enter university"
@@ -130,7 +130,7 @@
                                                     value="">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="year_of_passing">Year of Passing</label>
                                                 <input required id="year_of_passing" placeholder="Enter year of passing"
@@ -138,7 +138,7 @@
                                                     value="">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mb-2">
+                                        <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="marks">Marks(%)</label>
                                                 <input required id="marks" placeholder="Enter marks in percentage"

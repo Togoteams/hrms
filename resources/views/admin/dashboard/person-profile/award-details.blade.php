@@ -79,7 +79,7 @@
                                                                         title="Delete" data-id="{{ $data->id }}"
                                                                         data-token="{{ csrf_token() }}"
                                                                         data-action="{{ route('admin.person.profile.award.details.delete') }}">
-                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                        <i class="fa-solid fa-trash-alt-alt fa-lg"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>

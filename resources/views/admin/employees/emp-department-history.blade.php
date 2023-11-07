@@ -39,24 +39,24 @@
                                                         <div class="row">
                                                             <div class="col-9 text-dark">
                                                                 <div class="row">
-                                                                    <div class="col-3 fw-semibold">Department Name</div>
-                                                                    <div class="col-3">{{ $department->department_name }}
+                                                                    <div class="col-4 fw-semibold">Department Name</div>
+                                                                    <div class="col-4">{{ $department->department_name }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-3 fw-semibold">Start Date</div>
-                                                                    <div class="col-3">{{ date("d-m-Y",strtotime($department->start_date)) }}
+                                                                    <div class="col-4 fw-semibold">Start Date</div>
+                                                                    <div class="col-4">{{ date("d-m-Y",strtotime($department->start_date)) }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-3 fw-semibold">End date</div>
-                                                                    <div class="col-3"> @if(!empty($department->end_date))  {{  date("d-m-Y",strtotime($department->end_date)) }} @else "Till Now" @endif
+                                                                    <div class="col-4 fw-semibold">End date</div>
+                                                                    <div class="col-4"> @if(!empty($department->end_date))  {{  date("d-m-Y",strtotime($department->end_date)) }} @else "Till Now" @endif
                                                                     </div>
                                                                 </div>
                                                                 @if (!empty($department->description))
                                                                     <div class="row">
-                                                                        <div class="col-3 fw-semibold">Description</div>
-                                                                        <div class="col-3">{{ $department->description }}
+                                                                        <div class="col-4 fw-semibold">Description</div>
+                                                                        <div class="col-4">{{ $department->description }}
                                                                         </div>
                                                                     </div>
                                                                 @endif
@@ -78,7 +78,7 @@
                                                                         title="Delete" data-id="{{ $department->id }}"
                                                                         data-token="{{ csrf_token() }}"
                                                                         data-action="{{ route('admin.employee.departmentHistory.delete') }}">
-                                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                                        <i class="fa-solid fas fa-trash-alt fa-lg"></i>
                                                                     </button>
 
                                                                 </div>
