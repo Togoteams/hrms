@@ -324,9 +324,9 @@
                                  </a>
                              @endcanany
 
-                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_time_approved.index' ? 'active' : '' }}"
+                            <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_time_approved.index' ? 'active' : '' }}"
                                 href="{{ route('admin.leave_time_approved.index') }}" data-placement="left">
-                                <span class="nav-link-title">Leave Type Approvel</span>
+                                <span class="nav-link-title">Leave Type Approval</span>
                             </a>
 
 
