@@ -102,12 +102,11 @@ class UserAccountController extends Controller
         $profile = User::where('id', Auth::user()->id)->first();
         $profile->name = $request->name;
         $profile->email = strtolower($request->email);
-        if($request->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            $filename = time() .'.' . $extension;
-            $file->move('assets/profile',$filename);
+            $filename = time() . '.' . $extension;
+            $file->move('assets/profile', $filename);
             $profile->image = $filename;
         }
         $profile->save();
@@ -115,7 +114,32 @@ class UserAccountController extends Controller
         Session::put('success', $message);
         // return redirect()->route('admin.dashboard');
         return redirect()->route('admin.dashboard')->with('success', 'Profile has been Update successfully!');
+    }
 
+    public function imageUpdate(Request $request)
+    {
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+
+            'image' => 'required|image|mimes:jpeg,jpg,png',
+
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $profile = User::where('id', Auth::user()->id)->first();
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('assets/profile', $filename);
+            $profile->image = $filename;
+        }
+        $profile->save();
+        $message = "Profile Updated";
+        Session::put('success', $message);
+        // return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.dashboard')->with('success', 'Profile has been Update successfully!');
     }
 
     public function viewPasswordReset()
@@ -135,7 +159,7 @@ class UserAccountController extends Controller
         );
         $profile = User::where('id', Auth::user()->id)->first();
         $profile->password = Hash::make($request->password);
-        $profile->password_is_changed=1;
+        $profile->password_is_changed = 1;
 
         $profile->save();
 

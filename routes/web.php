@@ -22,7 +22,7 @@ use App\Http\Controllers\Admin\LeaveEncashmentController;
 use App\Http\Controllers\Admin\LeaveTypeCobntroller;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\LoansController;
-use App\Http\Controllers\Admin\TaxController;   
+use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\UserAccountController;
 use App\Http\Controllers\Admin\Dashboard\PersonalInformationController;
 use App\Http\Controllers\Admin\LeaveReportsController;
@@ -80,6 +80,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/passport-details', 'viewPassport')->name('passport');
             Route::post('/update-passport', 'updatePassport')->name('passport.update');
         });
+
+
     Route::controller(PersonProfileController::class)
         ->as('person.profile.')
         ->prefix('person-profile')
@@ -113,7 +115,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/permanent-contractual', 'viewPermanentContractual')->name('permanent.contractual.view');
 
             Route::get('/payscale-details', 'viewPayscaleDetails')->name('payscale.details.view');
-
         });
     Route::get('/download/{filename}', [DashboardController::class, 'userManualDownload'])->name('userManualDownload');
 
@@ -123,10 +124,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::match(['get', 'post'], '/{id}/attach-permission', 'attachPermission')->name('attach.permission');
     });
 
-   
-    Route::resource('account',AccountController::class);
 
-    Route::resource('country',CountryController::class);
+    Route::resource('account', AccountController::class);
+
+    Route::resource('country', CountryController::class);
 
 
     Route::resource('currency_settings', CurrencyController::class);
@@ -152,7 +153,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     });
     Route::controller(LeaveSettingController::class)->as('leavesettings.')->prefix('leavesettings/')->group(function () {
         Route::get('/list', 'index')->name('list');
-        Route::post('/add', 'store')->name('add'); 
+        Route::post('/add', 'store')->name('add');
         Route::post('/edit', 'edit')->name('edit');
         Route::get('/delete', 'delete')->name('delete');
     });
@@ -185,12 +186,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/department-history/{eid?}', [EmployeeController::class, 'viewDepartmentHistory'])->name('employee.departmentHistory.form');
     Route::post('employee/department-history', [EmployeeController::class, 'postDepartmentHistory'])->name('employee.departmentHistory.post');
     Route::post('employee/delete-department-history', [EmployeeController::class, 'deleteDepartmentHistory'])->name('employee.departmentHistory.delete');
-    Route::resource('employee-transfer',EmployeeTransferControler::class);
-    Route::post('/admin/employee-transfer',[EmployeeTransferControler::class, 'status'])->name('status');
+    Route::resource('employee-transfer', EmployeeTransferControler::class);
+    Route::post('/admin/employee-transfer', [EmployeeTransferControler::class, 'status'])->name('status');
 
-     // Department start
-     Route::resource('department',DepartmentController::class);
-     // Department  end
+    // Department start
+    Route::resource('department', DepartmentController::class);
+    // Department  end
 
     Route::resource('designation', DesignationContoller::class);
     Route::resource('tax', TaxController::class);
@@ -207,14 +208,14 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/employee-kra/{user_id}', [EmployeeKraController::class, 'create'])->name('employee.employee-kra.create');
     Route::get('employee/print/employee-kra/print/{user_id}', [EmployeeKraController::class, 'print'])->name('employee-kra.print');
 
-    Route::resource('document_type',DocumentTypeController::class);
+    Route::resource('document_type', DocumentTypeController::class);
 
-    Route::resource('document',DocumentController::class);
+    Route::resource('document', DocumentController::class);
     Route::post('document/asign', [DocumentController::class, 'asign'])->name('document.asign');
     Route::get('document-get/asign/{id}', [DocumentController::class, 'documentAssignedit'])->name('document.get.asign');
 
     // Medical Cart start
-    Route::resource('medical-card',MedicalCardController::class);
+    Route::resource('medical-card', MedicalCardController::class);
     // Medical Cart end
 
     Route::resource('overtime-settings', OvertimeController::class);
@@ -235,7 +236,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
     Route::post('get_balance_leave/', [LeaveApplyController::class, 'get_balance_leave'])->name('leave_apply.get_balance_leave');
     Route::get('rejected_leave/', [LeaveApplyController::class, 'get_rejected_leave'])->name('leave_apply.get_rejected_leave');
-    //Leave Settings start 
+    //Leave Settings start
     // Route::resource('leave_setting', LeaveSettingController::class);
     //   encashemnt start
     Route::resource('leave_encashment', LeaveEncashmentController::class);
@@ -270,8 +271,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
     Route::post('password-update', [UserAccountController::class, 'passwordReset'])->name('password.reset');
+    Route::post('image-update', [UserAccountController::class, 'imageUpdate'])->name('image.update');
 
-    
+
     // Payroll
     Route::prefix('payroll')->as('payroll.')->group(function () {
         Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
@@ -283,7 +285,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::controller(PayrollReportController::class)->as('reports.')->prefix('reports')->group(function () {
             Route::get('/ttum-view', 'ttumReport')->name('ttum.list');
             Route::post('/ttum-export', 'ttumReportExport')->name('ttum.exports');
-            
         });
 
         /*--------------------------------------------- Pay Roll Tax slab Settting Crud Start---------------------------------------------------------------*/
@@ -291,11 +292,11 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('tax-slab-setting/status/{id}', [TaxSlabSettingController::class, 'status'])->name('tax-slab-setting.status');
         /*--------------------------------------------- Pay Roll Tax slab Settting Crud End---------------------------------------------------------------*/
 
-         /*--------------------------------------------- Pay Roll Salary Increment Settting Crud Start---------------------------------------------------------------*/
-         Route::resource('salary-increment-setting', SalaryIncrementController::class);
+        /*--------------------------------------------- Pay Roll Salary Increment Settting Crud Start---------------------------------------------------------------*/
+        Route::resource('salary-increment-setting', SalaryIncrementController::class);
         //  Route::get('salary-increment-setting/status/{id}', [SalaryIncrementController::class, 'status'])->name('salary-increment-setting.status');
-         /*--------------------------------------------- Pay Roll Salary Increment Settting Crud End---------------------------------------------------------------*/
- 
+        /*--------------------------------------------- Pay Roll Salary Increment Settting Crud End---------------------------------------------------------------*/
+
         /*--------------------------------------------- Pay Roll Salary Increment Reporting Crud Start---------------------------------------------------------------*/
         Route::resource('salary-increment-reporting', SalaryReportingController::class);
         /*--------------------------------------------- Pay Roll Salary Increment Reporting Crud End---------------------------------------------------------------*/
@@ -312,14 +313,14 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('payscale/get-emp-head/{user_id?}', [PayRollPayscaleCotroller::class, 'get_employee_data'])->name('payscale.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
 
-          // Pay Roll ReimbursementTypeController start
-          Route::resource('reimbursement_type',ReimbursementTypeController::class);
-          // Pay Roll ReimbursementTypeController end
-  
-          // Pay Roll ReimbursementController start
-          Route::resource('reimbursement',ReimbursementController::class);
-          Route::post('/admin/payroll/reimbursement',[ReimbursementController::class,'status'])->name('status');
-          // Pay Roll ReimbursementController end
+        // Pay Roll ReimbursementTypeController start
+        Route::resource('reimbursement_type', ReimbursementTypeController::class);
+        // Pay Roll ReimbursementTypeController end
+
+        // Pay Roll ReimbursementController start
+        Route::resource('reimbursement', ReimbursementController::class);
+        Route::post('/admin/payroll/reimbursement', [ReimbursementController::class, 'status'])->name('status');
+        // Pay Roll ReimbursementController end
         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
         Route::resource('salary', PayrollSalaryController::class);
         Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');
@@ -363,4 +364,4 @@ Route::controller(LoginController::class)->as('login.')->prefix('login/')->group
 Route::get('admin/dashboard', [DashboardController::class, 'viewDashboard'])
     ->middleware(['auth', 'verified', 'changed.password'])
     ->name('admin.dashboard');
-    require __DIR__ . '/auth.php';
+require __DIR__ . '/auth.php';
