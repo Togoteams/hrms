@@ -14,7 +14,7 @@ class CountryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "country";
+    public $page_name = "Country";
 
     public function index(Request $request)
     {

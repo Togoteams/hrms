@@ -29,11 +29,12 @@ class PersonalInformationController extends Controller
             return redirect('/');
         }
         $designation = Designation::all();
-
+        $countries = Country::all();
         // Access the user's salutation
         $salutation = $data->user->salutation;
 
-        return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation, 'page' => $page_name, 'salutation' => $salutation]);
+        return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation,
+         'page' => $page_name, 'salutation' => $salutation]);
     }
 
 
