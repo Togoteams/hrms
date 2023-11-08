@@ -439,7 +439,7 @@
 <script>
     $(document).ready(function() {
         var stdCodeSelect = $('#std_code');
-        var emergencyContactInput = $('#emergency_contact');
+        var emergencyContactInput = $('#number');
         var stdCodeLengths = {
             '+267': {
                 minLength: 7,

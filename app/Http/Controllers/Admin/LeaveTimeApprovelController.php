@@ -144,7 +144,9 @@ class LeaveTimeApprovelController extends BaseController
            $leave->rejected_at=date('Y-m-d h:i:s');
         }
         $leave->save();
-        return $this->responseJson(true,200,'status created successfully',$leave);
+        // return $this->responseJson(true,200,'status created successfully',$leave);
+        return response()->json(['success' => $this->page_name . " status created successfully"]);
+
     }
 
 }
