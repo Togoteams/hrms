@@ -81,8 +81,8 @@ class LeaveApplyController extends Controller
      */
     public function store(Request $request)
     {
-        $leavSlug = LeaveSetting::find($request->leave_type_id)->slug;
-
+        $leaveType = LeaveSetting::find($request->leave_type_id);
+        $leaveSlug = $leaveType->slug;
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
             $end_date = $validator->getData()['end_date'];
@@ -118,22 +118,26 @@ class LeaveApplyController extends Controller
             'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
             'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
             "doc1" => ["mimetypes:application/pdf", "max:10000"],
-            'remaining_leave' =>['required','numeric', Rule::when($leavSlug != 'leave-without-pay', 'min:1')]
+            'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave') , 'min:1')]
         ]);
         if (isset($request->user_id) && $request->user_id != '') {
             $user = User::find($request->user_id);
         } else {
             $user = Auth::user();
         }
-        if (($this->balance_leave_by_type($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leavSlug=="leave-without-pay" ) {
+        if (($this->balance_leave_by_type($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leaveSlug=="leave-without-pay" || $leaveSlug =="bereavement-leave" ) {
             if ($validator->fails()) {
                 return $validator->errors();
             } else {
                 try {
                     // return response()->json(['error' => "Something wrong heppend"]);
-                    $remainingLeave = (int)$this->balance_leave_by_type($request->leave_type_id, $user->id) - $request->leave_applies_for;
-
+                    $remainingLeave = (int)$this->balance_leave_by_type($request->leave_type_id, $user->id);
                     $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
+
+                    if(!in_array($leaveSlug,$balanceLeaveHideArr))
+                    {
+                        $remainingLeave = $remainingLeave -  $request->leave_applies_for;
+                    }
                     $request->request->add([
                         'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
                         'uuid' => $user->uuid,
@@ -179,16 +183,23 @@ class LeaveApplyController extends Controller
 
     public function status_modal($id)
     {
-        $leave_type = LeaveSetting::get();
-
+        
         $data = LeaveApply::find($id);
-        $leave_emp_data=LeaveApply::where('start_date','>=',$data->start_date)->Where('end_date','<=',$data->end_date)->where('status','approved')->get();
+        $leave_type = LeaveSetting::find($data->leave_type_id);
+        // $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
+        // if(!in_array($leaveSlug,$balanceLeaveHideArr))
+        // {
+        //     $remainingLeave = $remainingLeave -  $request->leave_applies_for;
+        // }
+        $leave_emp_data = LeaveApply::where('start_date','>=',$data->start_date)->Where('end_date','<=',$data->end_date)
+        ->where('status','approved')
+        ->get();
        
         $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id );
         // echo $data->leave_type_id."echo ";
         // echo $data->user_id."echo ";
         // return $remaining_leave;
-        return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'remaining_leave' => $remaining_leave,'leave_emp_data'=>$leave_emp_data]);
+        return view('admin.leave_apply.status', ['data' => $data, 'page' => $this->page_name,'leave_type'=>$leave_type, 'remaining_leave' => $remaining_leave,'leave_emp_data'=>$leave_emp_data]);
     }
     /**
      * Update the specified resource in storage.
@@ -223,11 +234,13 @@ class LeaveApplyController extends Controller
 
     public function status(Request $request, $id)
     {
+        $leaveType = LeaveSetting::find($request->leave_type_id);
+        $leaveSlug = $leaveType->slug;
+
         $validator = Validator::make($request->all(), [
-            'remaining_leave' => ['required', 'numeric', 'min:1'],
+            'remaining_leave' => ['numeric',Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave') ,'required','min:1')],
             'status' => ['required', 'string'],
             'status_remarks' => ['required', 'string'],
-
         ]);
 
         if ($validator->fails()) {
@@ -250,8 +263,13 @@ class LeaveApplyController extends Controller
                 if ($request->status == "approved") {
 
                     // checking how many leave is remaining for a particular user
-
-                    if ($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id,'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) {
+                    $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
+                    $isIgnoreBalanced =0;
+                    if(in_array($leaveSlug,$balanceLeaveHideArr))
+                    {
+                        $isIgnoreBalanced =1;
+                    }
+                    if (($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id,'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
                        
 
                         LeaveApply::where('id', $id)->update([
@@ -287,8 +305,10 @@ class LeaveApplyController extends Controller
     public function get_leave(Request $request)
     {
         $user_id = $request->user_id;
+        $leaveHideArr =['maternity-leave'];
+
         // echo Employee::where('user_id', $user_id)->first()->employment_type;
-        $leave_type = LeaveSetting::where('emp_type',getEmpType(Employee::where('user_id', $user_id)->first()->employment_type))->get();
+        $leave_type = LeaveSetting::where('emp_type',getEmpType(Employee::where('user_id', $user_id)->first()->employment_type))->whereNotIn('slug',$leaveHideArr)->get();
         // return $leave_type;
         echo '<option> -Select Leave Type - </option>';
         foreach ($leave_type as $l_type) {

@@ -33,9 +33,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Employee name</th>
-                                <th>Employee Email</th>
-                                <th>Employee Phone</th>
+                                <th>EC Number</th>
                                 <th>leave type</th>
+                                <th>Apply for</th>
                                 <th>From </th>
                                 <th>To</th>
                                 <th>status</th>
@@ -61,23 +61,22 @@
                                         return i++;
                                     }
                                 },
-
-
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
                                 }, {
-                                    data: 'user.email',
-                                    name: 'user.email'
-                                },
-                                {
-                                    data: 'user.mobile',
-                                    name: 'user.mobile'
+                                    data: 'user.employee.ec_number',
+                                    name: 'user.employee.ec_number'
                                 },
                                 {
                                     data: 'leave_type.name',
                                     name: 'leave_type.name'
                                 },
+                                {
+                                data: 'leave_applies_for',
+                                name: 'leave_applies_for'
+                                },
+                                
                                 {
                                     data: 'start_date',
                                     name: 'start_date'
@@ -151,7 +150,7 @@
             <!-- Modal -->
             <div class="modal fade" id="modalstatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
+                <div class="modal-dialog modal-md">
                     <div class="modal-content ">
                         <div class="modal-header ">
                             <h5 class="modal-title" id="staticBackdropLabel"> Status change of {{ $page }}</h5>

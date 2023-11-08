@@ -7,7 +7,7 @@
 
 
         <div class="table-responsive">
-            Total Employee on the leave - <strong class="text-bob">{{ $leave_emp_data->count('*') }}</strong> between
+            Total Employee on the leave -: <strong class="text-bob">{{ $leave_emp_data->count('*') }}</strong> between
             <span class="text-bob">{{ date('d-M-Y', strtotime($data->start_date)) }}</span> to <span
                 class="text-bob">{{ date('d-M-Y', strtotime($data->end_date)) }}</span>
             @if ($leave_emp_data->count('*') > 0)
@@ -38,8 +38,16 @@
                 </table>
             @endif
         </div>
-
-
+        @php
+            $isBalanceLeaveHide =0;
+            $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
+            $leaveSlug = $leave_type->slug;
+            if(!in_array($leaveSlug,$balanceLeaveHideArr))
+            {
+               $isBalanceLeaveHide=1;
+            }
+        @endphp 
+        @if($isBalanceLeaveHide)
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="remaining_leave"> Balance Leave</label>
@@ -48,6 +56,7 @@
                     class="form-control form-control-sm ">
             </div>
         </div>
+        @endif
 
         <div class="mb-2 col-sm-6">
             <div class="form-group">
@@ -67,7 +76,7 @@
                     class="form-control form-control-sm ">
                     <option disabled> -Select Leave Types- </option>
                     <option disabled {{ $data->status == 'pending' ? 'selected' : '' }} value="pending">Pending</option>
-                    <option {{ $data->status == 'approved' ? 'selected' : '' }} value="approved">Approved</option>
+                    <option {{ $data->status == 'approved' ? 'selected' : '' }} value="approved">Approve</option>
                     <option {{ $data->status == 'reject' ? 'selected' : '' }} value="reject">Reject</option>
                 </select>
 

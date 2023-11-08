@@ -207,7 +207,7 @@
         {{-- status form model start --}}
         <!-- Modal -->
         <div class="modal fade" id="modalstatus" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content ">
                     <div class="modal-header ">
                         <h5 class="modal-title" id="staticBackdropLabel"> Status change of {{ $page }}</h5>
