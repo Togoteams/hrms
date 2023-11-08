@@ -14,6 +14,7 @@ use App\Models\LeaveType;
 use App\Models\Employee;
 use App\Models\LeaveEncashment;
 use App\Models\MedicalCard;
+use App\Models\LeaveTimeApprovel;
 use App\Models\OvertimeSetting;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\Reimbursement;
@@ -550,7 +551,11 @@ if (!function_exists('getLeavesSalary')) {
 if (!function_exists('getHeadValue')) {
     function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0)
     {
-        $basicAmout = $emp->basic_salary;
+        $basicAmout = $basic;
+        if($basic==0)
+        {
+            $basicAmout = $emp->basic_salary;
+        }
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
@@ -580,7 +585,7 @@ if (!function_exists('getHeadValue')) {
             $hoursInMonth = 192;
             $perHoursRate = $basicAmout / $hoursInMonth;
             $overTimeAmount = 0;
-            $overtimes = OvertimeSetting::where('date',">=",date("Y-m-"."01"))->where('user_id',$emp->user_id)->where('date','<=',date("Y-m-".'31'))->get();
+            $overtimes = OvertimeSetting::where('date',">=",date("Y-m-d", strtotime("-1 months",strtotime("Y-m-"."-20"))))->where('user_id',$emp->user_id)->where('date','<=',date("Y-m-".'20'))->get();
             foreach($overtimes  as $key => $overtime)
             {
                 if($overtime->overtime_type=="holiday")
@@ -762,18 +767,25 @@ function balance_leave_by_typeForEmp($leave_type_id, $user_id = '', $action = ""
           }
           break;
         case "maternity-leave":
-          $total_leave = $perYearLeave;
+            $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->where('status','approved')->first();
+            if(!empty($isMaternityLeave))
+            {
+              $total_leave = $perYearLeave;
+            }
           break;
         default:
           $total_leave = $perYearLeave;
       }
   
       $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+      $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
+
+      $ignoreLeaveIds = LeaveSetting::whereIn('slug',$balanceLeaveHideArr)->pluck('id')->toArray();
   
       if ($action == "update_status") {
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject', 'pending'])->get();
+        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject', 'pending'])->get();
       } else {
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
+        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
       }
   
       if (count($total_apply_leaves) > 0) {

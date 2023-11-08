@@ -60,7 +60,7 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
-            <input onkeyup="amount_cal(this)" value="{{$payscaleDeductionAmount}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"      value="{{ $head_data->value ?? '' }}" class="form-control form-control-sm {{$head->head_type}}">
+            <input onkeyup="amount_cal(this)" value="{{$payscaleDeductionAmount}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"     class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif

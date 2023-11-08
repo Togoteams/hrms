@@ -346,12 +346,14 @@ class PayrollSalaryController extends Controller
 
         // return $noOfUnPaidLeave;
         $noOfUnapprovedLeave = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',$salaryStartDate)->where('end_date','<',$salaryEndDate)
+        ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
         ->whereNotIn('status',['approved','rejected'])
+        ->where('is_paid','paid')
         ->sum('leave_applies_for');
         
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave;
-        // return $noOfempLeave;
+        // echo $noOfUnPaidLeave;
+        // return $noOfUnapprovedLeave;
 
         $presentDay = $totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave);
         // return $presentDay;

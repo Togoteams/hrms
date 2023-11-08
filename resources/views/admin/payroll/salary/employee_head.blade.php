@@ -117,7 +117,7 @@
                     $value = round(($head_data?->value / $totalMonthDays) * $presentDay);  
                 }  
             @endphp
-            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{ $value ?? '' }}" class="form-control form-control-sm {{$head->head_type}}">
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
