@@ -37,8 +37,41 @@
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="approval_date">Approval Date</label>
-                <input type="date" name="approval_date" readonly id="approval_date" class="form-control" value="{{ $leave->approval_date }}">
+                <label for="start_date">Start date</label>
+                <input type="date" name="start_date" id="start_date"
+                    class="form-control" value="{{$leave->start_date}}">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="end_date">End date</label>
+                <input type="date" name="end_date"  id="end_date"
+                    class="form-control" value="{{$leave->end_date}}">
+            </div>
+        </div>
+        <div class="mb-2 col-sm-6">
+            <div class="form-group">
+                <label for="current_document" class="required">Current Document</label> <br>
+                @if (in_array(pathinfo(asset('assets/leave_document/'.$leave->document), PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
+                    <img src="{{ asset('assets/leave_document/'.$leave->document) }}" alt="image" width="70px" height="70px">
+                @elseif (in_array(pathinfo(asset('assets/leave_document/'.$leave->document), PATHINFO_EXTENSION), ['pdf']))
+                    <a href="{{ asset('assets/leave_document/'.$leave->document) }}" target="_blank">
+                        <img src="{{ asset('assets/leave_document/') }}" alt="{{$leave->document}}" width="70px" height="70px">
+                    </a>
+                @endif
+            </div>
+        </div>
+        <div class="mb-2 col-sm-6">
+            <div class="form-group">
+                <label for="document">Replace Document</label>
+                <input id="document" type="file" name="document"class="form-control form-control-sm">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reason">Reason</label>
+                <input type="text" name="reason" id="reason" class="form-control" placeholder="Enter Reason..."
+                value="{{ $leave->reason }}">
             </div>
         </div>
 

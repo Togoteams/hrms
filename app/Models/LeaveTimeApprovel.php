@@ -10,8 +10,12 @@ class LeaveTimeApprovel extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'leave_type_id', 
-        'approval_date',
+        'leave_type_id',
+        'request_date',
+        'start_date',
+        'end_date',
+        'document',
+        'reason',
         'description',
         'status',
         'description_reason',
@@ -21,7 +25,7 @@ class LeaveTimeApprovel extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function leaveSetting()
     {
         return $this->belongsTo(LeaveSetting::class, 'leave_type_id');

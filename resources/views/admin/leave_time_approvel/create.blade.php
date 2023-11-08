@@ -10,7 +10,9 @@
             <div class="modal-body">
                 <form id="form_data" action="{{ route('admin.leave_time_approved.store') }}">
                     @csrf
-                    <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
+                    {{-- <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}"> --}}
+                    <input type="hidden" name="request_date" readonly id="request_date"
+                    class="form-control" value="{{ old('request_date', now()->format('Y-m-d')) }}">
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -42,12 +44,31 @@
                                 </select>
                             </div>
                         </div>
-
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="approval_date">Approval Date</label>
-                                <input type="date" name="approval_date" readonly id="approval_date"
-                                    class="form-control" value="{{ old('approval_date', now()->format('Y-m-d')) }}">
+                                <label for="start_date">Start date</label>
+                                <input type="date" name="start_date" id="start_date"
+                                    class="form-control" value="">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="end_date">End date</label>
+                                <input type="date" name="end_date"  id="end_date"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="document">Document</label>
+                                <input type="file" name="document"  id="document"
+                                    class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="reason">Reason</label>
+                                <input type="text" name="reason" id="reason" class="form-control" placeholder="Enter Reason...">
                             </div>
                         </div>
                         <div class="mb-12 col-sm-12">

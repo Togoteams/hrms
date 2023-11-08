@@ -17,7 +17,7 @@ class LeaveTimeApprovelController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Leave Type Approval";
+    public $page_name = "Maternity leave Request";
 
     public function index(Request $request)
     {
@@ -29,8 +29,14 @@ class LeaveTimeApprovelController extends BaseController
                     $actionBtn = view('admin.leave_time_approvel.buttons', ['item' => $row, "route" => 'leave_time_approved']);
                     return $actionBtn;
                 })
-                ->editColumn('approval_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->approval_date)->isoFormat('DD.MM.YYYY');
+                ->editColumn('request_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->request_date)->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('end_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -59,14 +65,29 @@ class LeaveTimeApprovelController extends BaseController
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'leave_type_id' => 'required|numeric',
-            'approval_date' => 'required|date',
+            'request_date' => 'required|date',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'reason' => 'required|string',
+            'document' => 'required|file|mimes:jpeg,jpg,png,pdf',
             'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
+
+            $leaveData = $request->except('_token');
+
+            if ($request->hasFile('document')) {
+                $file = $request->file('document');
+                $extension = $file->getClientOriginalExtension();
+                $filename = $file->getClientOriginalName();
+                $file->move('assets/leave_document', $filename);
+                $leaveData['document'] = $filename;
+            }
+
             $request->request->add(['status' =>"pending"]);
-            LeaveTimeApprovel::create($request->except('_token'));
+            LeaveTimeApprovel::create($leaveData);
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
     }
@@ -100,13 +121,26 @@ class LeaveTimeApprovelController extends BaseController
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'leave_type_id' => 'required|numeric',
-            'approval_date' => 'required|date',
+            'request_date' => 'nullable|date',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'reason' => 'required|string',
+            'document' => 'nullable|file|mimes:jpeg,jpg,png,pdf',
             'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            LeaveTimeApprovel::where('id', $id)->update($request->except('_token', '_method'));
+            $leaveData = $request->except('_token', '_method');
+
+            if ($request->hasFile('document')) {
+                $file = $request->file('document');
+                $extension = $file->getClientOriginalExtension();
+                $filename = $file->getClientOriginalName();
+                $file->move('assets/leave_document', $filename);
+                $leaveData['document'] = $filename;
+            }
+            LeaveTimeApprovel::where('id', $id)->update($leaveData);
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
     }

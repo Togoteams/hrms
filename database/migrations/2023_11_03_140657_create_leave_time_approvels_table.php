@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('leave_type_id')->nullable();
-            $table->string('approval_date',)->nullable();
+            $table->string('request_date',)->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
+            $table->string('document')->nullable();
+            $table->string('reason')->nullable();
             $table->text('description',)->nullable();
             $table->string('description_reason')->nullable();
             $table->string('status')->default('pending')->nullable();

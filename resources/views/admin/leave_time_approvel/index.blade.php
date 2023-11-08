@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.leave_time_approvel.create')
 
             <!-- Card -->
@@ -57,7 +57,11 @@
                                 <th>SI.</th>
                                 <th>Employee Name</th>
                                 <th>Leave Type</th>
-                                <th>Approval Date</th>
+                                <th>Request date</th>
+                                <th>Start date</th>
+                                <th>End date</th>
+                                <th>Document</th>
+                                <th>Reason</th>
                                 <th>Description</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -65,7 +69,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                  
+
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -84,7 +88,7 @@
                                     searchable: false
                                 },
                                 {
-                                    data: 'user.name', 
+                                    data: 'user.name',
                                     name: 'user.name',
                                 },
                                 {
@@ -92,8 +96,31 @@
                                     name: 'leave_setting.name',
                                 },
                                 {
-                                    data: 'approval_date',
-                                    name: 'approval_date'
+                                    data: 'request_date',
+                                    name: 'request_date'
+                                },
+                                {
+                                    data: 'start_date',
+                                    name: 'start_date'
+                                },
+                                {
+                                    data: 'end_date',
+                                    name: 'end_date'
+                                },
+                                {
+                                    data: 'document',
+                                    name: 'document',
+                                    render: function (data, type, row) {
+                                        if (data) {
+                                            return '<a href="' + "{{ asset('assets/leave_document/') }}" + '/' + data + '" download>Download</a>';
+                                        } else {
+                                            return 'No Document Available';
+                                        }
+                                    }
+                                },
+                                {
+                                    data: 'reason',
+                                    name: 'reason'
                                 },
                                 {
                                     data: 'description',

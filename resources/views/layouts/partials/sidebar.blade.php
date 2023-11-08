@@ -38,7 +38,7 @@
                          </a>
                      </div>
 
-                   
+
                      <!-- End Collapse -->
 
                      {{-- <span class="mt-4 dropdown-header">Pages</span> --}}
@@ -105,7 +105,7 @@
                                              href="{{ route('admin.designation.index') }}">Designation</a>
                                      @endcanany
 
-                                    
+
                                      {{-- @canany(['add-memberships', 'edit-memberships', 'view-memberships',
                                          'delete-memberships'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.membership.index' ? 'active' : '' }} "
@@ -238,8 +238,8 @@
                          </div>
                      @endcanany
 
-                    
-                @canany([ 'add-leave-settings', 
+
+                @canany([ 'add-leave-settings',
                 'edit-leave-settings', 'delete-leave-settings', 'view-leave-settings',
                      'add-leave-apply', 'edit-leave-apply', 'delete-leave-apply', 'view-leave-apply',
                      'change-status-leave-apply', 'add-leave-encashment', 'edit-leave-encashment',
@@ -330,7 +330,7 @@
                              'view-leave-type-approval','change-status-leave-type-approval'])
                             <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_time_approved.index' ? 'active' : '' }}"
                                 href="{{ route('admin.leave_time_approved.index') }}" data-placement="left">
-                                <span class="nav-link-title">Leave Type Approval</span>
+                                <span class="nav-link-title">Maternity leave Request</span>
                             </a>
                             @endcanany
 
@@ -340,7 +340,7 @@
                      </div>
                    @endcanany
 
-                   
+
                 @canany(['add-payroll', 'edit-payroll', 'view-payroll', 'delete-payroll', 'add-tax-slab-settings',
                    'edit-tax-slab-settings', 'delete-tax-slab-settings', 'view-tax-slab-settings',
                    'add-salary-increment-settings', 'edit-salary-increment-settings',
@@ -472,7 +472,7 @@
                    </a>
                </div>
            @endcanany
-                 
+
 
                      {{-- <div id="navbarVerticalMenuSettingMenu">
                          <!-- Collapse -->
@@ -549,7 +549,7 @@
                     </div>
                     @endcanany
 
-                    
+
 
                      {{-- @canany(['add-leave-settings', 'edit-leave-settings', 'view-leave-settings',
                          'delete-leave-settings', 'add-leave-type', 'edit-leave-type', 'delete-leave-type',
@@ -565,7 +565,7 @@
                              <div id="leavesetting" class="nav-collapse collapse {{ show(['leavesettings.list']) }} "
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                               
+
 
                              </div>
                          </div>
