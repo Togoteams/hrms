@@ -99,7 +99,7 @@
                                                         <label for="mobile" class="pt-2">+267</label>
                                                     </div>
                                                     <div class="col-10">
-                                                        <input id="mobile"   maxlength="8" minlength="7"  pattern="[0-9]+"
+                                                        <input id="mobile" maxlength="8" minlength="7" pattern="[0-9]+"
                                                             placeholder="Enter Mobile No" type="text"
                                                             value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
                                                             name="mobile" class="form-control form-control-sm">
@@ -112,16 +112,22 @@
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <div class="row">
-                                                    <div class="col-2">
-                                                        <label for="mobile" class="pt-2">+267</label>
+                                                    <div class="col-5">
+                                                        <select name="std_code" id="std_code" class="form-control">
+                                                            <option value="">Code</option>
+                                                            @foreach ($countries as $country)
+                                                                <option value="{{ $country->std_code }}">
+                                                                    {{ $country->std_code }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
-                                                    <div class="col-10">
-                                                <input id="emergency_contact" placeholder="Enter ."  pattern="[0-9]+"
-                                                    maxlength="8" minlength="7"
-                                                    value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
-                                                    name="emergency_contact" class="form-control form-control-sm ">
+                                                    <div class="col-7">
+                                                        <input id="emergency_contact" placeholder="Enter ." pattern="[0-9]+"
+                                                            maxlength="8" minlength="7"
+                                                            value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
+                                                            name="emergency_contact" class="form-control form-control-sm ">
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
@@ -228,4 +234,35 @@
     </main>
 @endsection
 @push('custom-scripts')
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var stdCodeSelect = $('#std_code');
+            var emergencyContactInput = $('#emergency_contact');
+            var stdCodeLengths = {
+                '+267': {
+                    minLength: 7,
+                    maxLength: 8
+                },
+                '+91': {
+                    minLength: 10,
+                    maxLength: 10
+                },
+            };
+
+            stdCodeSelect.on('change', function() {
+                var selectedStdCode = stdCodeSelect.val();
+                if (selectedStdCode in stdCodeLengths) {
+                    var lengths = stdCodeLengths[selectedStdCode];
+                    emergencyContactInput.attr('minlength', lengths.minLength);
+                    emergencyContactInput.attr('maxlength', lengths.maxLength);
+                } else {
+                    // Reset the minlength and maxlength if the selected std_code is not found
+                    emergencyContactInput.removeAttr('minlength');
+                    emergencyContactInput.removeAttr('maxlength');
+                }
+            });
+            stdCodeSelect.trigger('change');
+        });
+    </script>
 @endpush

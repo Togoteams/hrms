@@ -112,7 +112,7 @@
 
                                                                     <div class="pt-3 col-3 fw-semibold">Phone number:</div>
                                                                     <div class="pt-3 col-3">
-                                                                      +267 {{ $data->number }}
+                                                                     {{$data->std_code}} {{ $data->number }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Nationality:</div>
@@ -142,6 +142,7 @@
                                                                         data-state="{{ $data->state }}"
                                                                         data-country="{{ $data->country }}"
                                                                         data-email="{{ $data->email }}"
+                                                                        data-std_code="{{ $data->std_code }}"
                                                                         data-number="{{ $data->number }}"
                                                                         data-nationality="{{ $data->nationality }}">
                                                                         <i class="fas fa-edit"></i>
@@ -196,11 +197,11 @@
                                                 <select name="relation" class=" form-control" id="relation" placeholder="Employee relation">
                                                     <option value="">Select Option</option>
                                                     <option value="father">Father</option>
-                                                    <option value="mother">Mother</option> 
-                                                    <option value="brother">Brother</option> 
-                                                    <option value="sister">Sister</option> 
-                                                    <option value="child">Child</option> 
-                                                    <option value="spouse">Spouse</option> 
+                                                    <option value="mother">Mother</option>
+                                                    <option value="brother">Brother</option>
+                                                    <option value="sister">Sister</option>
+                                                    <option value="child">Child</option>
+                                                    <option value="spouse">Spouse</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -224,7 +225,7 @@
                                                         <select name="depended" class=" form-control" id="depended" placeholder="Employee depended">
                                                             <option value="">Select Option</option>
                                                             <option value="yes">Yes</option>
-                                                            <option value="no">No</option> 
+                                                            <option value="no">No</option>
                                                         </select>
                                              </div>
                                         </div>
@@ -234,7 +235,7 @@
                                                         <select name="marital_status" class=" form-control" id="marital_status" placeholder="Employee marital_status">
                                                             <option value="">Select Option</option>
                                                             <option value="unmarried">Unmarried</option>
-                                                            <option value="married">Married</option> 
+                                                            <option value="married">Married</option>
                                                         </select>
                                             </div>
                                         </div>
@@ -244,8 +245,8 @@
                                                         <select name="gender" class=" form-control" id="gender" placeholder="Employee gender">
                                                             <option value="">Select Option</option>
                                                             <option value="male">Male</option>
-                                                            <option value="female">Female</option> 
-                                                            <option value="other">Other</option> 
+                                                            <option value="female">Female</option>
+                                                            <option value="other">Other</option>
                                                         </select>
                                             </div>
                                         </div>
@@ -271,7 +272,7 @@
                                                         <select name="bank_of_baroda_employee" class=" bank_of_baroda_employee form-control" id="bank_of_baroda_employee" placeholder="Employee bank_of_baroda_employee">
                                                             <option value="">Select Option</option>
                                                             <option value="yes">yes</option>
-                                                            <option value="no">No</option> 
+                                                            <option value="no">No</option>
                                                         </select>
                                             </div>
                                         </div>
@@ -317,22 +318,23 @@
                                         <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="number" class="required">Phone number</label>
-                                                {{-- <input type="number" id="number" name="number"
-                                                    placeholder="Enter number"
-                                                    class="form-control form-control-sm" required> --}}
                                             </div>
-                                            <div class="col-12 d-flex">
-                                                <label for="number" class="pt-2">+267</label>
-                                                <input id="number"   maxlength="8" minlength="7"  pattern="[0-9]+"
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <select name="std_code" id="std_code" class="form-control">
+                                                        <option value="">Code</option>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->std_code }}">
+                                                                {{ $country->std_code }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-7">
+                                                    <input id="number"   maxlength="8" minlength="7"  pattern="[0-9]+"
                                                     placeholder="Enter Mobile No" type="text"
                                                     name="number" class="form-control form-control-sm">
+                                                </div>
                                             </div>
-                                            {{-- <div class="col-4">
-                                                <input id="mobile"   maxlength="8" minlength="7"  pattern="[0-9]+"
-                                                    placeholder="Enter Mobile No" type="text"
-                                                    value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
-                                                    name="mobile" class="form-control form-control-sm">
-                                            </div> --}}
                                         </div>
                                         <div class="mb-2 col-md-6">
                                             <div class="form-group">
@@ -392,9 +394,10 @@
                 let state = $(event.currentTarget).data("state");
                 let country = $(event.currentTarget).data("country");
                 let email = $(event.currentTarget).data("email");
+                let std_code = $(event.currentTarget).data("std_code");
                 let number = $(event.currentTarget).data("number");
                 let nationality = $(event.currentTarget).data("nationality");
-               
+
 
                 $("#id").val(id);
                 $("#user_id").val(user_id);
@@ -412,9 +415,10 @@
                 $("#state").val(state);
                 $("#country").val(country);
                 $("#email").val(email);
+                $("#std_code").val(std_code);
                 $("#number").val(number);
                 $("#nationality").val(nationality);
-              
+
 
             });
         });
@@ -425,11 +429,41 @@
     //            if(bank_of_baroda_employee == "yes"){
     //                 $('.emp').show();
 
-    //            }else if (bank_of_baroda_employee === "no"){ 
+    //            }else if (bank_of_baroda_employee === "no"){
     //                 $('.emp').hide();
     //            }
     //       });
     //     });
     </script>
+
+<script>
+    $(document).ready(function() {
+        var stdCodeSelect = $('#std_code');
+        var emergencyContactInput = $('#emergency_contact');
+        var stdCodeLengths = {
+            '+267': {
+                minLength: 7,
+                maxLength: 8
+            },
+            '+91': {
+                minLength: 10,
+                maxLength: 10
+            },
+        };
+
+        stdCodeSelect.on('change', function() {
+            var selectedStdCode = stdCodeSelect.val();
+            if (selectedStdCode in stdCodeLengths) {
+                var lengths = stdCodeLengths[selectedStdCode];
+                emergencyContactInput.attr('minlength', lengths.minLength);
+                emergencyContactInput.attr('maxlength', lengths.maxLength);
+            } else {
+                emergencyContactInput.removeAttr('minlength');
+                emergencyContactInput.removeAttr('maxlength');
+            }
+        });
+        stdCodeSelect.trigger('change');
+    });
+</script>
 
 @endpush

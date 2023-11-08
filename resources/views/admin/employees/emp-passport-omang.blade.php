@@ -40,14 +40,17 @@
                                             <div class="mb-2 col-sm-3 passport_data">
                                                 <div class="form-group">
                                                     <label for="certificate_no" id="certificate_no_label">Passport No.</label>
-                                                    <input id="certificate_no" data-placeholder-passport="Enter Passport No." data-placeholder-omang="Enter OMANG No." type="text"
-                                                        placeholder="Enter Passport No." 
+                                                    <input id="certificate_no" data-placeholder-passport="Enter Passport No."
+                                                     data-placeholder-omang="Enter OMANG No." type="text"
+                                                     maxlength="12"
+                                                     minlength="8"
+                                                        placeholder="Enter Passport No."
                                                         value="{{ $employee ? ($employee->passportOmang ? $employee->passportOmang->certificate_no : '') : '' }}" name="certificate_no"
                                                         class="form-control form-control-sm">
                                                 </div>
                                             </div>
-                                            
-                                            
+
+
                                             <div class="mb-2 col-sm-3 passport_data">
                                                 <div class="form-group">
                                                     <label for="certificate_issue_date" id="certificate_issue_date_label">Passport Issue</label>
@@ -57,7 +60,7 @@
                                                         name="certificate_issue_date" class="form-control form-control-sm">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="mb-2 col-sm-3 passport_data">
                                                 <div class="form-group">
                                                     <label for="certificate_expiry_date" id="certificate_expiry_date_label">Passport Expiry</label>
@@ -67,8 +70,8 @@
                                                         name="certificate_expiry_date" class="form-control form-control-sm">
                                                 </div>
                                             </div>
-                                            
-                                            
+
+
                                             <div class="mb-2 col-sm-3 country_data">
                                                 <div class="form-group">
                                                     <label for="country">Country</label>

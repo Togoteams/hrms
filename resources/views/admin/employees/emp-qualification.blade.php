@@ -40,19 +40,19 @@
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
                                                                     <div class="col-3 fw-semibold">Exam Name</div>
-                                                                    <div class="col-3">{{ $qualification->exam_name }}
+                                                                    <div class="col-3">{{ ucfirst($qualification->exam_name) }}
                                                                     </div>
 
                                                                     <div class="col-3 fw-semibold">Specialization</div>
-                                                                    <div class="col-3">{{ $qualification->specialization }}
+                                                                    <div class="col-3">{{ ucfirst($qualification->specialization) }}
                                                                     </div>
 
                                                                     <div class="col-3 fw-semibold">Institute Name</div>
-                                                                    <div class="col-3">{{ $qualification->institute_name }}
+                                                                    <div class="col-3">{{ ucfirst($qualification->institute_name) }}
                                                                     </div>
 
                                                                     <div class="col-3 fw-semibold">University</div>
-                                                                    <div class="col-3">{{ $qualification->university }}
+                                                                    <div class="col-3">{{ ucfirst($qualification->university)}}
                                                                     </div>
 
                                                                     <div class="col-3 fw-semibold">Year of passing</div>

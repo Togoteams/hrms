@@ -74,7 +74,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
-                                                <input type="number" id="id_number" placeholder="Enter id number" 
+                                                <input type="number" id="id_number" placeholder="Enter id number"
                                                     name="id_number"
                                                     value="{{ !empty($employee) ? $employee->id_number : '' }}"
                                                     class="form-control form-control-sm ">
@@ -115,9 +115,14 @@
                                             </div>
                                             <div class="pt-2 col-4">
                                                 <input id="bank_account_number"
-                                                    placeholder="Enter" type="number"
+                                                    placeholder="Enter ."
+                                                    type="text"
+                                                    pattern="[0-9]+"
+                                                    maxlength="16"
+                                                    minlength="12"
                                                     value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
-                                                    name="bank_account_number" class="form-control form-control-sm ">
+                                                    name="bank_account_number"
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             {{-- <div class="pt-3 col-3 fw-semibold">
@@ -131,7 +136,7 @@
                                                     <option
                                                         {{ !empty($employee) ? ($employee->currency == 'pula' ? 'selected' : '') : '' }}
                                                         value="pula">Pula( P )</option>
-                                                    
+
                                                     <option
                                                         {{ !empty($employee) ? ($employee->currency == 'dollar' ? 'selected' : '') : '' }}
                                                         value="dollar">Dollar( $ )</option>
@@ -183,7 +188,7 @@
                                                     @foreach ($currency_setting  as  $currency)
                                                         <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
                                                     @endforeach
-                                                   
+
                                                 </select>
                                             </div>
                                             <div class="pt-2 col-3">
@@ -208,7 +213,7 @@
                                                         value="{{ !empty($employee) ? $employee->basic_salary_for_india : '' }}"
                                                         class="form-control form-control-sm">
                                                 </div>
-                                           
+
 
                                             <div class="pt-3 col-2 fw-semibold contractDiv">
                                                 <label for="contract_duration">Contract Duration<small
@@ -224,7 +229,7 @@
                                                 Month(s)
                                             </div>
 
-                                           
+
 
                                             <div class="pt-3 col-2 fw-semibold">
                                                 <label for="union_membership_id">Union Membership</label>
@@ -243,9 +248,9 @@
                                                     for="radio2">Yes</label>
                                             </div>
 
-                                           
 
-                                           
+
+
                                             <div class="pt-3 col-2 fw-semibold">
                                                 <label for="pension_opt">Pension Contribution<small
                                                         class="required-field">*</small></label>
@@ -278,8 +283,8 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                              
-                                               
+
+
                                             </div>
 
                                             <div class="pt-5 text-center">
@@ -380,12 +385,12 @@ $(document).ready(function() {
         var selectedEmploymentType = employmentTypeSelect.val();
         if (selectedEmploymentType === "local" || selectedEmploymentType === "local-contractual") {
             currencySelect.val("PULA");
-            // currencySelect.prop("disabled", false); 
+            // currencySelect.prop("disabled", false);
         } else if (selectedEmploymentType === "expatriate") {
             currencySelect.val("USD");
             // currencySelect.prop("disabled", true);
         } else {
-            currencySelect.val(""); 
+            currencySelect.val("");
             // currencySelect.prop("disabled", false);
         }
     });

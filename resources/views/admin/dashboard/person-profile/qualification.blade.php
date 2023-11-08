@@ -40,16 +40,16 @@
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
                                                                     <div class="col-3 fw-semibold">Exam Name</div>
-                                                                    <div class="col-3">{{ $data->exam_name }}</div>
+                                                                    <div class="col-3">{{ ucfirst($data->exam_name) }}</div>
 
                                                                     <div class="col-3 fw-semibold">Specialization</div>
-                                                                    <div class="col-3">{{ $data->specialization }}</div>
+                                                                    <div class="col-3">{{ ucfirst($data->specialization) }}</div>
 
                                                                     <div class="col-3 fw-semibold">Institute Name</div>
-                                                                    <div class="col-3">{{ $data->institute_name }}</div>
+                                                                    <div class="col-3">{{ ucfirst($data->institute_name) }}</div>
 
                                                                     <div class="col-3 fw-semibold">University</div>
-                                                                    <div class="col-3">{{ $data->university }}</div>
+                                                                    <div class="col-3">{{ ucfirst($data->university) }}</div>
 
                                                                     <div class="col-3 fw-semibold">Year of passing</div>
                                                                     <div class="col-3">{{ $data->year_of_passing }}</div>
@@ -149,7 +149,7 @@
                                             </div>
                                         </div>
                                         <div class="mb-2 col-sm-6">
-                                            <div class="form-group">    
+                                            <div class="form-group">
                                                 <label for="year_of_passing">Year of Passing<small
                                                         class="required-field">*</small></label>
                                                 <input required id="year_of_passing" placeholder="Enter year of passing"

@@ -48,7 +48,8 @@ class CountryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:countries,name',
-            'description' => 'nullable|string', 
+            'std_code' => 'required|string',
+            'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -73,7 +74,7 @@ class CountryController extends Controller
     public function edit(string $id)
     {
         $country = Country::find($id);
-        return view('admin.country.edit', ['country' => $country, 'page' => $this->page_name]);   
+        return view('admin.country.edit', ['country' => $country, 'page' => $this->page_name]);
     }
 
     /**
@@ -83,7 +84,8 @@ class CountryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'description' => 'nullable|string',       
+            'std_code' => 'required|string',
+            'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();

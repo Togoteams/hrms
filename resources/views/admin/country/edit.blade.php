@@ -14,7 +14,13 @@
                     placeholder="Enter medical card name" value="{{ $country->name }}">
             </div>
         </div>
-
+        <div class="mb-6 col-sm-6">
+            <div class="form-group">
+                <label for="std_code" class="required">Std Code</label>
+                <input type="text" required name="std_code" id="std_code" class="form-control"
+                placeholder="Enter Std Code "  value="{{ $country->std_code }}">
+            </div>
+        </div>
 
         <div class="mb-12 col-sm-12">
             <div class="form-group">

@@ -29,13 +29,13 @@ class PersonalInformationController extends Controller
             return redirect('/');
         }
         $designation = Designation::all();
-        
+
         // Access the user's salutation
         $salutation = $data->user->salutation;
-    
+
         return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation, 'page' => $page_name, 'salutation' => $salutation]);
     }
-    
+
 
     public function viewFamilyDetails()
     {
@@ -49,13 +49,13 @@ class PersonalInformationController extends Controller
 
     public function viewDocumentDetails()
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
         $datas = DB::table('document_emps')
-            ->join('documents', 'document_emps.document_id', '=', 'documents.id') 
+            ->join('documents', 'document_emps.document_id', '=', 'documents.id')
             ->where('document_emps.emp_id', $user->id)
             ->select('documents.*')
             ->get();
-        //  dd($datas);   
+        //  dd($datas);
         return view('admin.dashboard.personal-information.document-details', ['datas' => $datas]);
     }
 
@@ -110,7 +110,7 @@ class PersonalInformationController extends Controller
         ]);
         if ($validator->fails()) {
             return $validator->errors();
-            
+
         } else {
             try {
                 // Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'name', 'username']));
@@ -136,15 +136,15 @@ class PersonalInformationController extends Controller
                 'before:today',
                 function ($attribute, $value, $fail) {
                     $date = new \DateTime($value);
-            
+
                     $today = new \DateTime();
                     $age = $today->diff($date)->y;
-            
+
                     if ($age < 18) {
                         $fail('The ' . $attribute . ' must be at least 18 years old.');
                     }
                 },
-            ],            
+            ],
             'name' => 'required|string',
             'depended' => 'required|string',
             'marital_status' => 'required|string',
@@ -157,6 +157,7 @@ class PersonalInformationController extends Controller
             'state' => 'required|string',
             'country' => 'required|string',
             'email' => 'nullable|email',
+            'std_code' => 'required|string',
             'number' => 'required | numeric | digits_between:7,8',
             'nationality' => 'required|string',
         ]);

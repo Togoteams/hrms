@@ -31,15 +31,15 @@
                                                     @if (!empty($data))
                                                         <div class="row left-div text-dark">
                                                             <div class="col-2 fw-semibold">City</div>
-                                                            <div class="col-4">{{ $data ? $data->city : '' }}</div>
+                                                            <div class="col-4">{{ ucfirst($data ? $data->city : '') }}</div>
                                                             <div class="col-2 fw-semibold">State</div>
-                                                            <div class="col-4">{{ $data ? $data->state : '' }}</div>
+                                                            <div class="col-4">{{ ucfirst($data ? $data->state : '') }}</div>
                                                             <div class="col-2 fw-semibold">Country</div>
                                                             <div class="col-4">{{ $data ? $data->country : '' }}</div>
                                                             <div class="col-2 fw-semibold">Zip</div>
                                                             <div class="col-4">{{ $data ? $data->zip : '' }}</div>
                                                             <div class="col-2 fw-semibold">Address</div>
-                                                            <div class="col-4">{{ $data ? $data->address : '' }}</div>
+                                                            <div class="col-4">{{ ucfirst($data ? $data->address : '') }}</div>
                                                         </div>
                                                     @else
                                                         No data to show
@@ -100,7 +100,10 @@
                                             <div class="form-group">
                                                 <label for="zip">Zip<small class="required-field">*</small></label>
                                                 <input required id="zip" placeholder="Enter Name of Zip"
-                                                    type="text" name="zip" class="form-control"
+                                                    type="text" name="zip"
+                                                    pattern="[0-9]+"
+                                                    maxlength="10"
+                                                    minlength="5" class="form-control"
                                                     value="{{ $data ? $data->zip : '' }}">
                                             </div>
                                         </div>

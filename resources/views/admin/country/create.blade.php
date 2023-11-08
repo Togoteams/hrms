@@ -7,7 +7,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <h5 class="modal-title" id="staticBackdropLabel">{{ $page }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">  
+        <div class="modal-body">
              <form id="form_data" action="{{ route('admin.country.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
@@ -19,7 +19,12 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <input type="text" required name="name" id="name" class="form-control" placeholder="Enter name ">
                                 </div>
                             </div>
-
+                            <div class="mb-6 col-sm-6">
+                                <div class="form-group">
+                                    <label for="std_code" class="required">Std Code</label>
+                                    <input type="text" required name="std_code" id="std_code" class="form-control" placeholder="Enter Std Code ">
+                                </div>
+                            </div>
                             <div class="mb-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">Description</label>
@@ -33,7 +38,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     {{ $page }}</button>
                             </div>
                         </div>
-                       
+
                     </div>
 
                 </div>
@@ -45,7 +50,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     document.getElementById('type_id').innerText = data + " amount"
                 } else {
                     document.getElementById('type_id').innerText = data
-    
+
                 }
             }
         </script>

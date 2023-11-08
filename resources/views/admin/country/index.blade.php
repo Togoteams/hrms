@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.country.create')
 
             <!-- Card -->
@@ -55,6 +55,7 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Name</th>
+                                <th>Std Code</th>
                                 <th>Description</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -62,7 +63,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                  
+
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -81,10 +82,14 @@
                                     searchable: false
                                 },
 
-                             
+
                                 {
                                     data: 'name',
                                     name: 'name'
+                                },
+                                {
+                                    data: 'std_code',
+                                    name: 'std_code'
                                 },
                                 {
                                     data: 'description',

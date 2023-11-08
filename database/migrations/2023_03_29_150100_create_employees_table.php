@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('ec_number')->nullable();
             $table->string('gender')->nullable();
             $table->string('marital_status')->nullable();
+            $table->string('std_code')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->string('id_number')->nullable();
             $table->string('contract_duration')->nullable();
@@ -36,7 +37,7 @@ return new class extends Migration
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->string('pension_contribution')->nullable();
             $table->string('pension_opt')->nullable();
-            $table->enum('union_membership_id',["yes","no"])->nullable();            
+            $table->enum('union_membership_id',["yes","no"])->nullable();
             $table->string('amount_payable_to_bomaind_each_year')->nullable();
             $table->string('currency')->nullable();
             $table->string('bank_account_number')->nullable();

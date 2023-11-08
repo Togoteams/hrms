@@ -39,7 +39,11 @@
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <input id="zip" placeholder="Enter Zip"
-                                                    type="text" name="zip" class="form-control"
+                                                    type="text" name="zip"
+                                                    pattern="[0-9]+"
+                                                    maxlength="10"
+                                                    minlength="5"
+                                                    class="form-control"
                                                     value="{{ $employee ? ($employee->address ? $employee->address->zip : '') : '' }}">
                                             </div>
 

@@ -71,7 +71,8 @@ class EmployeeController extends BaseController
     public function viewUserDetails($eid = null)
     {
         $roles = Role::getRoles()->get();
-        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid),'roles'=>$roles]);
+        $countries = Country::all();
+        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid),'roles'=>$roles,'countries'=>$countries]);
     }
 
     public function postUserDetails(Request $request)
@@ -86,16 +87,17 @@ class EmployeeController extends BaseController
                 'date_of_birth' => ['required', 'date', 'before:today',
                     function ($attribute, $value, $fail) {
                         $date = new \DateTime($value);
-        
+
                         $today = new \DateTime();
                         $age = $today->diff($date)->y;
-        
+
                         if ($age < 18 || $age > 60) {
                             $fail('The ' . $attribute . ' must be between 18 and 60 years old.');
                         }
                     },
                 ],
-                'emergency_contact' => ['nullable', 'numeric', 'digits_between:7,8'],
+                'std_code' => ['required'],
+                'emergency_contact' => ['nullable', 'numeric'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'confirmed', Password::defaults()]
             ]);
@@ -109,16 +111,17 @@ class EmployeeController extends BaseController
                 'date_of_birth' => ['required','date','before:today',
                     function ($attribute, $value, $fail) {
                         $date = new \DateTime($value);
-        
+
                         $today = new \DateTime();
                         $age = $today->diff($date)->y;
-        
+
                         if ($age < 18 || $age > 60) {
                             $fail('The ' . $attribute . ' must be between 18 and 60 years old.');
                         }
                     },
-                ],                
-            'emergency_contact' => ['nullable', 'numeric', 'digits_between:7,8'],
+                ],
+            'std_code' => ['required'],
+            'emergency_contact' => ['nullable', 'numeric'],
             ]);
         }
         if ($request->user_id == '') {
@@ -142,7 +145,7 @@ class EmployeeController extends BaseController
                 $user->roles()->sync($role_id);
             } else {
                 $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email','role_id', 'mobile',  'password', 'password_confirmation', 'id', 'user_id']));
-                
+
             }
 
             $employee = Employee::firstWhere('user_id', $user->id);
@@ -170,7 +173,7 @@ class EmployeeController extends BaseController
         $membership = Membership::get();
         $bomaind = MedicalCard::where('status','active')->get();
         $currencySetting = CurrencySetting::where('status','active')->get();
-        
+
         $branch = Branch::where('status', 'active')->get();
 
         return view('admin.employees.employee-details',[
@@ -197,27 +200,27 @@ class EmployeeController extends BaseController
             'id_number'             => ['nullable', 'numeric'],
             'start_date'            => ['required','date',
                 function ($attribute, $value, $fail) {
-                    $minDate = now()->subYears(60); 
+                    $minDate = now()->subYears(60);
                     $maxDate = now();
-        
+
                     $date = \DateTime::createFromFormat('Y-m-d', $value);
-        
+
                     if ($date < $minDate || $date > $maxDate) {
                         $fail('The ' . $attribute . ' must be between 18 and 60 years ago.');
                     }
                 },   'after_or_equal:' . $forWork,
-            ], 
-            'currency'              => ['nullable', 'string'], 
+            ],
+            'currency'              => ['nullable', 'string'],
             'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
             'basic_salary_for_india' => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
-            'currency_salary_for_india'  => ['required', 'string'], 
+            'currency_salary_for_india'  => ['required', 'string'],
             'date_of_current_basic' => ['nullable', 'date'],
             'employment_type'       => ['required', 'string'],
             'pension_opt'           => ['nullable', 'numeric'],
             'pension_contribution'  => ['nullable', 'string'],
             'bank_account_number'   => ['required', 'numeric','digits_between:12,16'],
             'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
-            'currency_salary'       => ['required', 'string'], 
+            'currency_salary'       => ['required', 'string'],
 
 
         ]);
@@ -231,7 +234,7 @@ class EmployeeController extends BaseController
         try {
             if ($request->pension_contribution == "no") {
                 $request->merge(['pension_opt' => NULL]);
-            } 
+            }
             Employee::where('id', $request->id)->update($request->except(['_token', 'id', 'user_id']));
             $employee = Employee::find($request->id);
 
@@ -324,7 +327,7 @@ class EmployeeController extends BaseController
             }
             $message = "Saved Successfully";
             $employee = Employee::firstWhere('user_id', $request->user_id);
-            
+
             return $this->responseJson(
                 true,
                 200,
@@ -473,7 +476,7 @@ class EmployeeController extends BaseController
             $end_date = $validator->getData()['end_date'] ?? date('Y-m-d');
             $id = $validator->getData()['id'] ?? "";
             $overlappingRecord =true;
-            
+
             $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date,$id) {
                 $query->where('start_date', '<=', $end_date);
                 if(!empty($end_date))

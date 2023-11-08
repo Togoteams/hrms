@@ -24,6 +24,7 @@ class FamilyDetail extends Model
         'state',
         'country',
         'email',
+        'std_code',
         'number',
         'nationality',
     ];

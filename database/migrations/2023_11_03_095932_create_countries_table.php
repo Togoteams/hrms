@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('std_code')->nullable();
             $table->text('description',)->nullable();
-            $table->enum('status',["active","inactive"])->default('active'); 
+            $table->enum('status',["active","inactive"])->default('active');
             $table->timestamps();
         });
     }

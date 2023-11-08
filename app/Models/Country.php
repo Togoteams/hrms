@@ -10,6 +10,7 @@ class Country extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'std_code',
          'description',
          'status'];
 }
