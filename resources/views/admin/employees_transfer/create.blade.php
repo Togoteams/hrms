@@ -64,7 +64,7 @@
                             <div class="mb-4 col-sm-12">
                                 <div class="form-group">
                                     <label for="transfer_reason" class="required">Transfer Reason</label>
-                                    <textarea name="transfer_reason" id="transfer_reason" cols="30" rows="10" class="form-control" placeholder=" Enter Transfer Reason"></textarea>
+                                    <textarea name="transfer_reason" id="transfer_reason" cols="30" rows="3" class="form-control" placeholder=" Enter Transfer Reason"></textarea>
                                 </div>
                             </div>
                             {{-- <span id="edit">

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('slug', 50)->nullable();
             $table->string('short_code',50)->nullable();
             $table->string('role_type',50)->nullable();
+            $table->tinyInteger('is_system_define')->default(0)->nullable();
             $table->text('description')->nullable();
             $table->string('status', 30)->default('active')->nullable();
             $table->timestamp('deleted_at')->nullable();

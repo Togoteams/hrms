@@ -23,12 +23,12 @@
         {
             "name" : "BRANCH HEAD",
             "short_code" :"BH",
-            "role_type" :"branch head"
+            "role_type" :"branch_head"
         },
         {
             "name" : "BRANCH SUPERVISOR ",
             "short_code" :"BS",
-            "role_type" :"branch supervisor"
+            "role_type" :"branch_supervisor"
         },
         {
             "name" : "EMPLOYEE",

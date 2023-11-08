@@ -59,7 +59,7 @@
                                      data-bs-target="#navbarVerticalMenuPagesUserProfileMenu" aria-expanded="false"
                                      aria-controls="navbarVerticalMenuPagesUserProfileMenu">
                                      <i class="bi-person nav-icon"></i>
-                                     <span class="nav-link-title">User Accounts</span>
+                                     <span class="nav-link-title">Roles</span>
                                  </a>
 
                                  <div id="navbarVerticalMenuPagesUserProfileMenu"
@@ -70,10 +70,10 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.role.list' ? 'active' : '' }}  "
                                              href="{{ route('admin.role.list') }}">Roles</a>
                                      @endcanany
-                                     @canany(['add-users', 'edit-users', 'view-users', 'delete-users'])
+                                     {{-- @canany(['add-users', 'edit-users', 'view-users', 'delete-users'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.user.list' ? 'active' : '' }} "
                                              href="{{ route('admin.user.list') }}">Users</a>
-                                     @endcanany
+                                     @endcanany --}}
                                  </div>
                              </div>
                          </div>
