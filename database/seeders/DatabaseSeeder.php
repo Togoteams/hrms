@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             PayrollHeadSeeder::class,
             DepartmentSeeder::class,
             LeaveSettingSeeder::class,
-         
+            CountrySeeder::class,
+
 
         ]);
     }
