@@ -41,7 +41,7 @@
                                                                 <div class="row text-dark">
                                                                     <div class="pt-1 col-3 fw-semibold">Training Name</div>
                                                                     <div class="pt-1 col-3">
-                                                                        {{ $data->name }}
+                                                                        {{ ucfirst($data->name) }}
                                                                     </div>
 
                                                                     <div class="pt-1 col-3 fw-semibold">
@@ -57,7 +57,7 @@
                                                                             Traning Grade
                                                                         </div>
                                                                         <div class="pt-1 col-3">
-                                                                            {{ $data->grade}}
+                                                                            {{ ucfirst($data->grade)}}
                                                                         </div>
                                                                         <div class="pt-1 col-3 fw-semibold">
                                                                             Skills
@@ -187,11 +187,11 @@
                                         <div class="mb-2 col-md-12">
                                             <div class="form-group">
                                                 <label for="description" class="required">Description</label>
-                                                <textarea name="description" id="description" cols="30" rows="10" 
+                                                <textarea name="description" id="description" cols="30" rows="10"
                                                 placeholder="Enter Traning Description...." class="form-control form-control-sm" required></textarea>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                     <hr>
                                     <div class="text-center ">

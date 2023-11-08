@@ -52,7 +52,7 @@
                                                                 <div class="col-3 fw-semibold">Gender</div>
                                                                 <div class="col-3">{{ ucfirst($data->gender) }}</div>
 
-                                                              
+
 
                                                                 <div class="col-3 fw-semibold">EC Number</div>
                                                                 <div class="col-3">{{ $data->ec_number }}</div>
@@ -71,7 +71,7 @@
 
 
                                                                 <div class="col-3 fw-semibold">Age</div>
-                                                                <div class="col-3"> 
+                                                                <div class="col-3">
                                                                     <?php
                                                                     $dob = new DateTime($data->date_of_birth);
                                                                     $now = new DateTime();
@@ -132,9 +132,9 @@
                                                 <select name="salutation" class="form-control" id="salutation" placeholder="Employee salutation">
                                                     <option value="">Select Option</option>
                                                     <option value="Mr" @if(old('salutation', $data->user->salutation) === 'Mr') selected @endif>Mr</option>
-                                                    <option value="Mrs" @if(old('salutation', $data->user->salutation) === 'Mrs') selected @endif>Mrs</option> 
-                                                    <option value="Miss" @if(old('salutation', $data->user->salutation) === 'Miss') selected @endif>Miss</option> 
-                                                    <option value="Dr" @if(old('salutation', $data->user->salutation) === 'Dr') selected @endif>Dr</option> 
+                                                    <option value="Mrs" @if(old('salutation', $data->user->salutation) === 'Mrs') selected @endif>Mrs</option>
+                                                    <option value="Miss" @if(old('salutation', $data->user->salutation) === 'Miss') selected @endif>Miss</option>
+                                                    <option value="Dr" @if(old('salutation', $data->user->salutation) === 'Dr') selected @endif>Dr</option>
                                                 </select>
                                             </div>
                                         </div> --}}
@@ -157,19 +157,20 @@
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="birth_country">Birth Country<small class="required-field">*</small></label>
-                                                <input required id="birth_country" placeholder="Enter Birth Country of Employee "
+                                                {{-- <input required id="birth_country" placeholder="Enter Birth Country of Employee "
                                                     type="text" name="birth_country" class="form-control form-control-"
-                                                    value="{{ $data->birth_country }}">
+                                                    value="{{ $data->birth_country }}"> --}}
+                                                    <select required id="birth_country" name="birth_country" class="form-control form-control">
+                                                        <option value="">- Select Birth Country -</option>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->name }}" {{ $country->name == $data->birth_country ? 'selected' : '' }}>
+                                                                {{ $country->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                             </div>
                                         </div>
-                                        {{-- <div class="mb-2 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="name">Name<small class="required-field">*</small></label>
-                                                <input required id="name" placeholder="Enter Name of Employee "
-                                                    type="text" name="name" class="form-control form-control-"
-                                                    value="{{ $data->user->name }}">
-                                            </div>
-                                        </div> --}}
+                                       
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="gender">Gender<small class="required-field">*</small></label>

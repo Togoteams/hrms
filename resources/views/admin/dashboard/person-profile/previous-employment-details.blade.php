@@ -41,7 +41,7 @@
                                                                 <div class="row text-dark">
                                                                     <div class="pt-1 col-4 fw-semibold">Company Name</div>
                                                                     <div class="pt-1 col-6">
-                                                                        {{ $data->company_name }}
+                                                                        {{ ucfirst($data->company_name) }}
                                                                     </div>
 
                                                                     <div class="pt-1 col-4 fw-semibold">
@@ -69,7 +69,7 @@
 
                                                                     <div class="pt-1 col-4 fw-semibold">Designation</div>
                                                                     <div class="pt-1 col-6">
-                                                                        {{ $data->designation->name }}
+                                                                        {{ ucfirst($data->designation->name) }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -169,7 +169,7 @@
                                                     <option value="{{ $designationdata->id }}" {{ !empty($data) && $data->designation_id == $designationdata->id ? 'selected' : '' }}>
                                                        {{ $designationdata->name }}
                                                    </option>
-                                                   @endforeach 
+                                                   @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@
                                                 <textarea id="description" placeholder="Enter Description..." name="description" class="form-control"></textarea>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                     <hr>
                                     <div class="text-center ">

@@ -40,14 +40,14 @@
                                                         <div class="row">
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
-                                                                    <div class="pt-1 col-3 fw-semibold">Relation:</div>
-                                                                    <div class="pt-1 col-3">
+                                                                    <div class="pt-3 col-3 fw-semibold">Relation:</div>
+                                                                    <div class="pt-3 col-3">
                                                                         {{ ucfirst($data->relation) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Date of Birth:</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->date_of_birth }}
+                                                                        {{ date('d-m-Y', strtotime($data->date_of_birth)) }}
                                                                     </div>
 
                                                                     <div class="pt-3 col-3 fw-semibold">Name:</div>
@@ -194,7 +194,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="relation" class="required">Relation</label>
-                                                <select name="relation" class=" form-control" id="relation" placeholder="Employee relation">
+                                                <select name="relation" class=" form-control" id="relation">
                                                     <option value="">Select Option</option>
                                                     <option value="father">Father</option>
                                                     <option value="mother">Mother</option>
@@ -209,14 +209,14 @@
                                             <div class="form-group">
                                                 <label for="date_of_birth" class="required">Date of Birth</label>
                                                 <input required value="" id="date_of_birth" name="date_of_birth"
-                                                    placeholder=" Enter date_of_birth" type="date"
+                                                    placeholder=" Enter date of birth" type="date"
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="name" class="required">Name</label>
                                             <input required value="" id="name" name="name"
-                                                placeholder="name" type="text"
+                                                placeholder=" Enter Name" type="text"
                                                 class="form-control form-control-sm">
                                         </div>
                                         <div class="col-md-6">
@@ -242,7 +242,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender" class="required">Gender</label>
-                                                        <select name="gender" class=" form-control" id="gender" placeholder="Employee gender">
+                                                        <select name="gender" class=" form-control" id="gender">
                                                             <option value="">Select Option</option>
                                                             <option value="male">Male</option>
                                                             <option value="female">Female</option>
@@ -254,7 +254,7 @@
                                             <div class="form-group">
                                                 <label for="occupations" class="required">Occupations</label>
                                                 <input type="text" id="occupations" name="occupations"
-                                                    placeholder="Enter occupations of Family"
+                                                    placeholder="Enter Occupation"
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
@@ -262,37 +262,26 @@
                                             <div class="form-group">
                                                 <label for="monthly_income" class="required">Monthly Income</label>
                                                 <input type="text" id="monthly_income" name="monthly_income"
-                                                    placeholder="Enter Monthly Income Of Family"
+                                                    placeholder="Enter Monthly Income"
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="bank_of_baroda_employee" class="required">Is Bank of Baroda Employee</label>
-                                                        <select name="bank_of_baroda_employee" class=" bank_of_baroda_employee form-control" id="bank_of_baroda_employee" placeholder="Employee bank_of_baroda_employee">
+                                                        <select name="bank_of_baroda_employee" class=" bank_of_baroda_employee form-control" id="bank_of_baroda_employee">
                                                             <option value="">Select Option</option>
                                                             <option value="yes">yes</option>
                                                             <option value="no">No</option>
                                                         </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="address_line1" class="required">Address Line 1</label>
-                                                <textarea id="address_line1" placeholder="Enter address_line1..." name="address_line1" class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="address_line2">Address Line 2</label>
-                                                <textarea id="address_line2" placeholder="Enter address_line2..." name="address_line2" class="form-control"></textarea>
-                                            </div>
-                                        </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="state" class="required">State</label>
                                                 <input type="text" id="state" name="state"
-                                                    placeholder="Enter state Name "
+                                                    placeholder="Enter State"
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
@@ -311,7 +300,7 @@
                                             <div class="form-group">
                                                 <label for="email">Email Id</label>
                                                 <input type="text" id="email" name="email"
-                                                    placeholder="Enter email Name"
+                                                    placeholder="Enter Email"
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
@@ -321,7 +310,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-5">
-                                                    <select name="std_code" id="std_code" class="form-control">
+                                                    <select name="std_code" id="std_code" class="form-control form-control-sm">
                                                         <option value="">Code</option>
                                                         @foreach ($countries as $country)
                                                             <option value="{{ $country->std_code }}">
@@ -342,6 +331,18 @@
                                                 <input type="text" id="nationality" name="nationality"
                                                     placeholder="Enter Nationality"
                                                     class="form-control form-control-sm" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="address_line1" class="required">Address Line 1</label>
+                                                <textarea id="address_line1" placeholder="Enter Address Line 1..." name="address_line1" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="address_line2">Address Line 2</label>
+                                                <textarea id="address_line2" placeholder="Enter Address Line 2..." name="address_line2" class="form-control"></textarea>
                                             </div>
                                         </div>
                                     </div>

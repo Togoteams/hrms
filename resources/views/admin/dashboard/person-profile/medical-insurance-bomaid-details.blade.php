@@ -48,7 +48,7 @@
                                                                         Insurance Company Name
                                                                     </div>
                                                                     <div class="pt-1 col-3">
-                                                                        {{ $data->company_name }}
+                                                                        {{ ucfirst($data->company_name) }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row showData">
@@ -60,7 +60,7 @@
                                                                 <div class="row showData">
                                                                     <div class="pt-3 col-3 fw-semibold">Insurance card Type</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data?->medicalCard?->name }}                                                                    </div>
+                                                                        {{ ucfirst($data?->medicalCard?->name) }}                                                                    </div>
                                                                 </div>
                                                             @else
                                                                 <span id="noDataMsg">No data to show</span>
@@ -107,7 +107,7 @@
                                                                                 <option value="{{ $cardData->id }}" {{ !empty($data) && $data->medical_card_id == $cardData->id ? 'selected' : '' }}>
                                                                                     {{ $cardData->name }}
                                                                                 </option>
-                                                                            @endforeach 
+                                                                            @endforeach
                                                                         </select>
                                                                 </div>
 

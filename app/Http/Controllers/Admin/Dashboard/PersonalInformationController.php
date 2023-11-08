@@ -34,7 +34,7 @@ class PersonalInformationController extends Controller
         $salutation = $data->user->salutation;
 
         return view('admin.dashboard.personal-information.employee-details', ['data' => $data, 'designation' => $designation,
-         'page' => $page_name, 'salutation' => $salutation]);
+         'page' => $page_name, 'countries'=>$countries,'salutation' => $salutation]);
     }
 
 
