@@ -52,8 +52,8 @@
                             </div>
                         </div>
                         <div class="mb-2 col-sm-4">
-                            <div class="form-group">
-                                <button type="button" onclick="callEditMethod()" class="btn btn-primary">Search</button>
+                            <div class="mt-4 form-group">
+                                <button type="button" onclick="callEditMethod()" class="btn btn-primary btn-sm">Search</button>
                             </div>
                         </div>
                         <span id="edit">
@@ -61,8 +61,8 @@
                         </span>
                     </div>
                     <hr>
-                    <div class="text-center" style="display: none" id="table_data_btn">
-                        <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary">Add
+                    <div class="mt-1 text-center" style="display: none" id="table_data_btn">
+                        <button type="button" onclick="ajaxCall('form_data')" class="btn btn-primary btn-sm">Add
                             {{ $page }}</button>
                     </div>
                 </form>
@@ -156,8 +156,22 @@
     {
         var empId = $("#select_employee").val();
         // var empId = $("#employee").val();
-        // console.log(empId);
+        console.log(empId);
+        $(".err_message").removeClass("d-block").hide();
         var pay_for_month_year = $("#pay_for_month_year").val();
-        editForm(editUrl+empId+"/"+pay_for_month_year, 'edit');
+        if(empId==null || empId=="" )
+        {
+            let empErrMessage ="Please Select Employee";
+            $("#select_employee").after("<p class='d-block text-danger err_message'>" + empErrMessage + "</p>");
+        }
+        if(pay_for_month_year=="")
+        {
+            let valueMessage="Please Select salary Month";
+            $("#pay_for_month_year").after("<p class='d-block text-danger err_message'>" +valueMessage +"</p>");
+        }
+        
+        if(pay_for_month_year!="" && empId!=""){
+            editForm(editUrl+empId+"/"+pay_for_month_year, 'edit');
+        }
     }
 </script>

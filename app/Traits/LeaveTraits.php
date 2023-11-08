@@ -22,6 +22,7 @@ trait LeaveTraits
     $leaveSettings = LeaveSetting::where('emp_type', getEmpType($emp->employment_type))->get();
     foreach ($leaveSettings as $key => $leaveSetting) {
       $totalNoOfLeaveInBucket = $totalNoOfLeaveInBucket + $this->balance_leave_by_type($leaveSetting->id,$user_id);
+      // echo $totalNoOfLeaveInBucket."</br>";
     }
     return $totalNoOfLeaveInBucket;
   }
@@ -77,7 +78,7 @@ trait LeaveTraits
         }
         break;
       case "maternity-leave":
-        $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->first();
+        $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->where('status','approved')->first();
         if(!empty($isMaternityLeave))
         {
           $total_leave = $perYearLeave;

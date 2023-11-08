@@ -1,8 +1,8 @@
-label{
+label {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     text-transform: capitalize;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     color: #6a6a6a;
     letter-spacing: 0.3px;
 }

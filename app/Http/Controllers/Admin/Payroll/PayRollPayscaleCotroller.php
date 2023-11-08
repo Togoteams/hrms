@@ -71,13 +71,16 @@ class PayRollPayscaleCotroller extends BaseController
         if($empType=="expatriate")
         {
             $extraAmount = ((($taxableAmount - $taxSlab->from)/100)*$taxSlab->ibo_tax_per);
-            $taxAmount = ($taxSlab->additional_ibo_amount + $extraAmount)/12 ;
 
+            $taxAmount = ($taxSlab->additional_ibo_amount + $extraAmount)/12 ;
+            $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + $extraAmount);
         }else{
-            $extraAmount = ((($taxableAmount - $taxSlab->from)/100)*$taxSlab->local_tax_per);
+
+            $extraAmount = ((($taxableAmount - $taxSlab->from)/100) * $taxSlab->local_tax_per);
+            $yearlyTaxAmount =  ($taxSlab->additional_local_amount + $extraAmount);
             $taxAmount = ($taxSlab->additional_local_amount + $extraAmount)/12;
         }
-        return $this->responseJson(true,200,"",["tax_amount"=>round($taxAmount),'taxable_amount'=>$taxableAmount]);
+        return $this->responseJson(true,200,"",["tax_amount"=>round($taxAmount),'extraAmount'=>$extraAmount,'yearlyTaxAmount'=>$yearlyTaxAmount,'taxable_amount'=>$taxableAmount]);
     }
 
     /**

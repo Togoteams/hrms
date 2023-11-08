@@ -12,12 +12,13 @@
         employmentType = document.getElementById('employment_type').value;
         var taxCalcUrl ="{{route('admin.payroll.payscale.tax.cal')}}";
         var taxAbleAmount = 0;
+
         if(employmentType=="local")
         {
-        taxAbleAmount = (basicAmount + getValue('allowance'))- (getValue('bomaid')+ getValue('pension'));
+            taxAbleAmount = (basicAmount + getValue('allowance'))- (getValue('bomaid') + getValue('pension'));
         }else{
-         taxAbleAmount = (basicAmount + getValue('entertainment_expenses')+getValue('house_up_keep_allow')+getValue('education_allowance'));
-        }
+            taxAbleAmount = (basicAmount + getValue('entertainment_expenses') + getValue('house_up_keep_allow') + getValue('education_allowance'));
+        } 
 
         $.ajax({
             url: taxCalcUrl,
@@ -42,21 +43,21 @@
 
 
     function amount_cal(data, operator = null) {
+
+        
         var total_gross_amount = 0;
         var total_deduction = 0;
         var totalEarning = 0;
         var totalDeduction = 0;
         
         var employmentType = document.getElementById('employment_type').value;
-        var unionFee = 0;
+        var unionFee = getValue('union_fee');
         console.log(employmentType);
         var basicAmount = getValue('basic');
         if(employmentType=="local")
         {
             var taxAmount = getValue('tax');
-            if(basicAmount){
-                unionFee = basicAmount/100;
-            }
+            
             totalEarning = basicAmount + getValue('allowance') + getValue('others_arrears');
                     totalDeduction = taxAmount + getValue('bomaid') + getValue('pension') + unionFee  + getValue('other_deductions');
             setId('union_fee', unionFee);

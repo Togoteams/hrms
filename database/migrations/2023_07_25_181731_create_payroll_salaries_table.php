@@ -23,6 +23,7 @@ return new class extends Migration
             $table->double('annual_balanced_leave')->default(0);
             $table->double('no_availed_leave')->default(0);
             $table->double('no_of_persent_days')->default(0);
+            $table->double('total_loss_of_pay')->default(0);
             // $table->double('fixed_deductions');
             // $table->double('other_deductions');
             $table->double('net_take_home');

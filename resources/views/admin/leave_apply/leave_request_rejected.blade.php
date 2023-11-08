@@ -39,6 +39,7 @@
                                 <th>Apply for</th>
                                 <th>From </th>
                                 <th>To</th>
+                                <th>Paid/Unpaid</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -71,15 +72,15 @@
                                     data: 'user.employee.ec_number',
                                     name: 'user.employee.ec_number'
                                 },
-                                
+
                                 {
                                     data: 'leave_type.name',
                                     name: 'leave_type.name'
                                 },
                                 {
-                                data: 'leave_applies_for',
-                                name: 'leave_applies_for'
-                            },
+                                    data: 'leave_applies_for',
+                                    name: 'leave_applies_for'
+                                },
                                 {
                                     data: 'start_date',
                                     name: 'start_date'
@@ -87,6 +88,9 @@
                                 {
                                     data: 'end_date',
                                     name: 'end_date'
+                                }, {
+                                    data: 'is_paid',
+                                    name: 'is_paid'
                                 },
                                 {
                                     data: 'status',

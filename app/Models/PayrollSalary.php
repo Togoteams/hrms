@@ -17,6 +17,7 @@ class PayrollSalary extends Model
         'total_working_days',
         'annual_balanced_leave',
         'no_of_persent_days',
+        'total_loss_of_pay',
         'no_of_payable_days',
         // 'fixed_deductions',
         // 'other_deductions',

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('payroll_salary_id')->references('id')->on('payroll_salaries');
             $table->foreignId('payroll_head_id')->references('id')->on('payroll_heads');
-            $table->string('value');
+            $table->double('value',10,2);
             $table->string('status')->default('active');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();

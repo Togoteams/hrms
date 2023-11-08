@@ -44,11 +44,9 @@ class PayrollSalaryController extends Controller
             {
                 $data = PayrollSalary::with('user', 'employee')
                 ->where('user_id',auth()->user()->id)->get();
-
             }
             else{
                 $data = PayrollSalary::with('user', 'employee')->get();
-
             }
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -297,7 +295,7 @@ class PayrollSalaryController extends Controller
         $page = $this->page_name;
         $salaryMonth = $salary_month;
         $salaryStartDate = date("Y-m-d", strtotime("-1 months",strtotime($salaryMonth."-20")));
-        $salaryEndDate = $salaryMonth;
+        $salaryEndDate = date("Y-m-d", strtotime($salaryMonth."-20"));
         // echo $salaryStartDate."---";
         // echo $salaryEndDate;
         $emp = Employee::where('user_id', $user_id)->first();
@@ -318,6 +316,7 @@ class PayrollSalaryController extends Controller
         }
 
         $totalBalancedLeave = $this->getTotalBalancedLeave($user_id);
+        // return $totalBalancedLeave;
         $noOfPayableDays = 0;
         $noOfAvailedLeaves = 0;
         $totalMonthDays = date('t');
@@ -326,32 +325,38 @@ class PayrollSalaryController extends Controller
             $totalMonthDays = 24;
         }
 
-        $noOfHoliday = Holiday::where('date','<=',date('Y-m-d'))->where('date','>',date('Y-m-d'))->where('status','active')->count();
+        $noOfHoliday = Holiday::where('date','<=',$salaryStartDate)->where('date','>',$salaryEndDate)->where('status','active')->count();
         // return $noOfHoliday;
-        $noOfAvailedLeaves = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
-        ->where('is_approved',0)
-        ->sum('leave_applies_for');
+        // $noOfAvailedLeaves = LeaveApply::where('user_id',$user_id)
+        // ->where('start_date','>',$salaryStartDate)->where('end_date','<',$salaryEndDate)
+        // ->where('status',"approved")
+        // ->sum('leave_applies_for');
 
         $noOfPaidLeave = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
+        ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
         ->where('is_paid','paid')
+        ->where('status','approved')
         ->sum('leave_applies_for');
 
+        $noOfAvailedLeaves = $noOfPaidLeave;
         $noOfUnPaidLeave = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
-        ->where('is_paid','paid')
+        ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
+        ->where('is_paid','unpaid')
         ->sum('leave_applies_for');
-        
+
+        // return $noOfUnPaidLeave;
         $noOfUnapprovedLeave = LeaveApply::where('user_id',$user_id)
-        ->where('start_date','>',date('Y-m-'."01"))->where('end_date','>',date('Y-m-'."31"))
+        ->where('start_date','>',$salaryStartDate)->where('end_date','<',$salaryEndDate)
         ->whereNotIn('status',['approved','rejected'])
         ->sum('leave_applies_for');
         
+        $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave;
         // return $noOfempLeave;
-        $presentDay = $totalMonthDays - $noOfHoliday - $noOfAvailedLeaves;
-        $noOfPayableDays =$totalMonthDays - $noOfHoliday- $noOfUnPaidLeave;
 
-        return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
+        $presentDay = $totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave);
+        // return $presentDay;
+        $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave);
+
+        return view('admin.payroll.salary.employee_head', compact('emp_head','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
     }
 }

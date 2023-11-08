@@ -36,9 +36,10 @@
                                 <th>Employee name</th>
                                 <th>EC Number</th>
                                 <th>leave type</th>
+                                <th>Apply for</th>
                                 <th>From </th>
                                 <th>To</th>
-                                <th>Balance Leave</th>
+                                <th>Paid/Unpaid</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -76,6 +77,10 @@
                                     name: 'leave_type.name'
                                 },
                                 {
+                                data: 'leave_applies_for',
+                                name: 'leave_applies_for'
+                            },
+                                {
                                     data: 'start_date',
                                     name: 'start_date'
                                 },
@@ -84,9 +89,9 @@
                                     name: 'end_date'
                                 },
                                 {
-                                    data: 'remaining_leave',
-                                    name: 'remaining_leave'
-                                },
+                                data: 'is_paid',
+                                name: 'is_paid'
+                            },
                                 {
                                     data: 'status',
                                     name: 'status'
