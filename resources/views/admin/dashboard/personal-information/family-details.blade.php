@@ -191,7 +191,7 @@
                                     <input type="hidden" id="user_id" name="user_id" value="{{Auth::user()->id}}">
                                     <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
                                     <div class="row">
-                                        <div class="mb-2 col-sm-6">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="relation" class="required">Relation</label>
                                                 <select name="relation" class=" form-control" id="relation" placeholder="Employee relation">
@@ -205,7 +205,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="date_of_birth" class="required">Date of Birth</label>
                                                 <input required value="" id="date_of_birth" name="date_of_birth"
@@ -213,13 +213,13 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <label for="name" class="required">Name</label>
                                             <input required value="" id="name" name="name"
                                                 placeholder="name" type="text"
                                                 class="form-control form-control-sm">
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="depended" class="required">Depended</label>
                                                         <select name="depended" class=" form-control" id="depended" placeholder="Employee depended">
@@ -229,7 +229,7 @@
                                                         </select>
                                              </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="marital_status" class="required">Marital status</label>
                                                         <select name="marital_status" class=" form-control" id="marital_status" placeholder="Employee marital_status">
@@ -239,7 +239,7 @@
                                                         </select>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="gender" class="required">Gender</label>
                                                         <select name="gender" class=" form-control" id="gender" placeholder="Employee gender">
@@ -250,7 +250,7 @@
                                                         </select>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="occupations" class="required">Occupations</label>
                                                 <input type="text" id="occupations" name="occupations"
@@ -258,7 +258,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="monthly_income" class="required">Monthly Income</label>
                                                 <input type="text" id="monthly_income" name="monthly_income"
@@ -266,7 +266,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="bank_of_baroda_employee" class="required">Is Bank of Baroda Employee</label>
                                                         <select name="bank_of_baroda_employee" class=" bank_of_baroda_employee form-control" id="bank_of_baroda_employee" placeholder="Employee bank_of_baroda_employee">
@@ -276,19 +276,19 @@
                                                         </select>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address_line1" class="required">Address Line 1</label>
                                                 <textarea id="address_line1" placeholder="Enter address_line1..." name="address_line1" class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="address_line2">Address Line 2</label>
                                                 <textarea id="address_line2" placeholder="Enter address_line2..." name="address_line2" class="form-control"></textarea>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="state" class="required">State</label>
                                                 <input type="text" id="state" name="state"
@@ -296,7 +296,7 @@
                                                     class="form-control form-control-sm" required>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="country" class="required">Country</label>
                                                 <select name="country" id="country" class="form-control form-control-sm" placeholder="Enter country Name" required>
@@ -307,7 +307,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email">Email Id</label>
                                                 <input type="text" id="email" name="email"
@@ -315,9 +315,9 @@
                                                     class="form-control form-control-sm">
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="number" class="required">Phone number</label>
+                                                <label for="number" class="required">Phone No.</label>
                                             </div>
                                             <div class="row">
                                                 <div class="col-5">
@@ -330,13 +330,13 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-7">
-                                                    <input id="number"   maxlength="8" minlength="7"  pattern="[0-9]+"
-                                                    placeholder="Enter Mobile No" type="text"
+                                                    <input id="phone_no"   maxlength="8" minlength="7"  pattern="[0-9]+"
+                                                    placeholder="Enter Phone No" type="text"
                                                     name="number" class="form-control form-control-sm">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-md-6">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="nationality" class="required">Nationality</label>
                                                 <input type="text" id="nationality" name="nationality"
@@ -439,7 +439,7 @@
 <script>
     $(document).ready(function() {
         var stdCodeSelect = $('#std_code');
-        var emergencyContactInput = $('#number');
+        var emergencyContactInput = $('#phone_no');
         var stdCodeLengths = {
             '+267': {
                 minLength: 7,
@@ -453,6 +453,7 @@
 
         stdCodeSelect.on('change', function() {
             var selectedStdCode = stdCodeSelect.val();
+            console.log("selectedStdCode",selectedStdCode);
             if (selectedStdCode in stdCodeLengths) {
                 var lengths = stdCodeLengths[selectedStdCode];
                 emergencyContactInput.attr('minlength', lengths.minLength);

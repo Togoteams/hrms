@@ -131,7 +131,9 @@ class LeaveApplyController extends Controller
             } else {
                 try {
                     // return response()->json(['error' => "Something wrong heppend"]);
+                    $remainingLeave = (int)$this->balance_leave_by_type($request->leave_type_id, $user->id) - $request->leave_applies_for;
 
+                    $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
                     $request->request->add([
                         'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
                         'uuid' => $user->uuid,
@@ -139,7 +141,7 @@ class LeaveApplyController extends Controller
                         'created_by' => Auth::user()->id,
                         'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
                         'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
-                        'remaining_leave' => (int)$this->balance_leave_by_type($request->leave_type_id, $user->id) - $request->leave_applies_for
+                        'remaining_leave' => $remainingLeave
 
                     ]);
                     LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
@@ -299,8 +301,15 @@ class LeaveApplyController extends Controller
         $remaining_leave = 0;
 
         $remaining_leave = $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
-
-        return $remaining_leave;
+        $leave_type_slug = LeaveSetting::find($request->leave_type_id)->slug;
+        $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
+        $isBalanceLeaveHide = false;
+        if(in_array($leave_type_slug,$balanceLeaveHideArr))
+        {
+            $isBalanceLeaveHide = true;
+        } 
+        return response()->json(['status' =>true,'data'=>['remaining_leave'=>$remaining_leave,'leave_type_slug'=>$leave_type_slug,'is_balance_leave_hide'=>$isBalanceLeaveHide]]);
+        // return $remaining_leave;
     }
 
 

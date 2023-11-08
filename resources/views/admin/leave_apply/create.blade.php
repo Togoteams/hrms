@@ -42,7 +42,7 @@
 
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
+                            <div class="mb-2 col-sm-4 balance_leave_section" >
                                 <div class="form-group">
                                     <label for="balance_leave1">balance_leave</label>
                                     <input readonly required id="balance_leave1" placeholder="Enter correct balance_leave" type="text" name="remaining_leave" class="form-control form-control-sm ">
@@ -129,15 +129,22 @@
             dataType: "json",
             success: function (result) {
                console.log(result);
-            //    if(result.status==true)
-            //    {
-            //     var data = result.data;
-            //     $("#tax").val(data.tax_amount);
-            //     console.log(data.tax_amount);
-            //    }else
-            //    {
-            //     $("#tax").val(0);
-            //    }
+               if(result.status==true)
+               {
+                var data = result.data;
+                if(data.is_balance_leave_hide)
+                {
+                    $("#balance_leave1").val(0);
+                    $(".balance_leave_section").css('display','none');
+                }else
+                {
+                    $("#balance_leave1").val(data.remaining_leave);
+                    $(".balance_leave_section").css('display','');
+                }
+               }else
+               {
+                $("#balance_leave1").val(0);
+               }
             //    amount_cal(e);
             },
         });
