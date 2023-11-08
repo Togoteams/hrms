@@ -29,6 +29,9 @@ class LeaveTimeApprovelController extends BaseController
                     $actionBtn = view('admin.leave_time_approvel.buttons', ['item' => $row, "route" => 'leave_time_approved']);
                     return $actionBtn;
                 })
+                ->editColumn('approval_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->approval_date)->isoFormat('DD.MM.YYYY');
+                })
                 ->rawColumns(['action'])
                 ->make(true);
             }

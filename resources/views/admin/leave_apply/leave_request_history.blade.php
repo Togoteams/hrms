@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <div class="col">
                         <h1 class="page-header-title">{{ $page }}</h1>
@@ -26,9 +26,9 @@
 
             @include('admin.leave_apply.type_of_leave')
 
-            <div class="card mb-3 mb-lg-5">
-                <div class="table-responsive mt-3 p-2">
-                    <table class="table data-table  table-thead-bordered table-nowrap table-align-middle card-table">
+            <div class="mb-3 card mb-lg-5">
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>

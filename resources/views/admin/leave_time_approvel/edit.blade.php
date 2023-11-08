@@ -7,7 +7,7 @@
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="row">
-        <div class="mb-6 col-sm-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label for="user_id" class="required">Employee</label>
                 <select name="user_id" id="user_id" class="form-control">
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="mb-6 col-sm-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label for="leave_type_id" class="required">Leave Type</label>
                 <select name="leave_type_id" id="edit_leave_type_id" class="form-control" required>
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="mb-6 col-sm-6">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label for="approval_date">Approval Date</label>
                 <input type="date" name="approval_date" readonly id="approval_date" class="form-control" value="{{ $leave->approval_date }}">

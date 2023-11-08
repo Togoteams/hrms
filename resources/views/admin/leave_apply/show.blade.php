@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-6 mb-2">
+    <div class="mb-2 col-sm-6">
         <div class="form-group">
             <label for="leave_type_id">Leave Types</label>
             <select disabled required id="leave_type_id" placeholder="Enter correct leave_type_id   " type="text"
@@ -14,14 +14,14 @@
         </div>
     </div>
 
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="start_date">start_date</label>
             <input disabled required id="start_date" placeholder="Enter correct start_date   " type="date"
                 value="{{ $data->start_date }}" name="start_date" class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="end_date">end_date</label>
             <input disabled required id="end_date" placeholder="Enter correct end_date   " type="date"
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="doc">Required Document</label>
             <div class="row">
@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12 mb-2">
+    <div class="mb-2 col-sm-12">
         <div class="form-group">
             <label for="Reason">leave_reason</label>
             <input disabled required id="leave_reason" placeholder="Enter correct leave_reason   "
@@ -51,10 +51,10 @@
         </div>
     </div>
 
-    <div class="col-sm-12 mb-2">
+    <div class="mb-2 col-sm-12">
         <div class="form-group">
             <label for="remark">remark</label>
-            <textarea disabled rows="12" required id="remark" placeholder="Enter correct remark   " name="remark"
+            <textarea disabled rows="3" required id="remark" placeholder="Enter correct remark   " name="remark"
                 class="form-control form-control-sm ">{{ $data->remark }}</textarea>
         </div>
     </div>

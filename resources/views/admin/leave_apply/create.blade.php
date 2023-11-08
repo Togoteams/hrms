@@ -119,7 +119,29 @@
                 document.getElementById('doc').removeAttribute("required", "");
 
             }
-            selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
+            var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}"; 
+            var user_id = $("#user_id").val();
+            var leave_type_id = $("#leave_type_id").val();
+            $.ajax({
+            url: getBalanceUrl,
+            type: "get",
+            data:{"user_id":user_id,'leave_type_id':leave_type_id},
+            dataType: "json",
+            success: function (result) {
+               console.log(result);
+            //    if(result.status==true)
+            //    {
+            //     var data = result.data;
+            //     $("#tax").val(data.tax_amount);
+            //     console.log(data.tax_amount);
+            //    }else
+            //    {
+            //     $("#tax").val(0);
+            //    }
+            //    amount_cal(e);
+            },
+        });
+            // selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
         }
          
         $("#start_date").on('change',function(){

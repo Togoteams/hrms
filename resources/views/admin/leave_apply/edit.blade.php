@@ -73,7 +73,7 @@
         <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="remark">remark</label>
-                <textarea rows="12" required id="remark" placeholder="Enter correct remark   " name="remark"
+                <textarea rows="3" required id="remark" placeholder="Enter correct remark   " name="remark"
                     class="form-control form-control-sm ">{{ $data->remark }}</textarea>
             </div>
         </div>

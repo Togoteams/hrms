@@ -74,15 +74,18 @@
     @if (!isemplooye())
     <div class="col-lg-2"></div>
     @endif
+    @if(Route::currentRouteName() == 'admin.leave_apply.index')
     <div class="text-right col-lg-2 auto">
         <div class="mt-2 " style="text-align: right;">
             @can('add-leave-apply')
             <button type="button" class="text-right btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                {{ $page }}
+                {{ $page }} 
             </button>
             @endcan
 
         </div>
     </div>
+    @endif
+    
     
 </div>

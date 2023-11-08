@@ -191,10 +191,9 @@ class EmployeeController extends BaseController
         $employee = Employee::find($request->id);
         $forWork = date("Y-m-d", strtotime("+18 years",strtotime($employee->date_of_birth)));
         $request->validate([
-
             'branch_id'             => ['required', 'numeric'],
             'designation_id'        => ['required', 'numeric'],
-            'ec_number'             => ['required', 'string', 'unique:employees'],
+            'ec_number'             => ['required', 'string', 'unique:employees,ec_number,'.$employee->id],
             'id_number'             => ['nullable', 'numeric'],
             'start_date'            => ['required','date',
                 function ($attribute, $value, $fail) {

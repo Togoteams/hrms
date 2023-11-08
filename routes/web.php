@@ -235,7 +235,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::put('leave_apply/status/{id}', [LeaveApplyController::class, 'status'])->name('leave_apply.status');
 
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
-    Route::post('get_balance_leave/', [LeaveApplyController::class, 'get_balance_leave'])->name('leave_apply.get_balance_leave');
+    Route::get('get_balance_leave/', [LeaveApplyController::class, 'get_balance_leave'])->name('leave_apply.get_balance_leave');
     Route::get('rejected_leave/', [LeaveApplyController::class, 'get_rejected_leave'])->name('leave_apply.get_rejected_leave');
     //Leave Settings start
     // Route::resource('leave_setting', LeaveSettingController::class);

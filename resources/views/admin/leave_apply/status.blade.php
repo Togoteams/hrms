@@ -76,7 +76,7 @@
         <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="status_remarks"> Status remark</label>
-                <textarea rows="12" required id="status_remarks" placeholder="Enter correct status_remarks"
+                <textarea rows="3" required id="status_remarks" placeholder="Enter correct status_remarks"
                     name="status_remarks" class="form-control form-control-sm">{{ $data->status_remarks }}</textarea>
             </div>
         </div>

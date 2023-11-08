@@ -24,8 +24,6 @@ class LeaveApplyController extends Controller
      * Display a listing of the resource.
      */
 
-
-
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -87,14 +85,24 @@ class LeaveApplyController extends Controller
 
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
-            $end_date = $validator->getData()['end_date'] ?? date('Y-m-d');
+            $end_date = $validator->getData()['end_date'];
+            $today = date('Y-m-d');
             $userId = $validator->getData()['user_id'] ?? "";
             $overlappingRecord =true;
             
 
-            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
-                $query->where('start_date', '<=', $start_date)
-                ->where('end_date', '>=', $end_date);
+            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date,$today) {
+                $query->where(function ($q1) use ($start_date, $end_date,$today) {
+                    $q1->whereBetween('start_date', array($start_date, $end_date));
+                })
+                ->orWhere(function ($q2) use ($start_date, $end_date,$today) {
+                    $q2->where('start_date', '<=', $start_date)
+                    ->where('end_date', '>=', $end_date);
+                })
+                ->orWhere(function ($q3) use ($start_date, $end_date,$today) {
+                    $q3->whereBetween('end_date', array($start_date, $end_date));
+
+                });
             })->where('user_id',$userId)->first();
             return !$overlappingRecord;
         });
