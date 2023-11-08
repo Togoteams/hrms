@@ -31901,13 +31901,13 @@ label.form-control {
 .table-align-middle td,
 .table-align-middle th {
     vertical-align: middle;
-    text-align: center;
+    text-align: justify;
 }
 
 .table-text-center,
 .table-text-center td,
 .table-text-center th {
-    text-align: center
+    text-align: justify
 }
 
 .table-text-start,
