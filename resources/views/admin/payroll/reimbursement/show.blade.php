@@ -35,22 +35,6 @@
         <div class="form-group">
             <label for="claim_to_month">Claim For Period To Month :- </label>
             <label for="claim_to_month">{{ $data->claim_to_month }} </label>
-
-            {{-- <select name="claim_to_month" id="claim_to_month" class="form-control" required >
-                <option value="">Select To Month</option>
-                <option value="1" {{$reimbursement->claim_to_month == 1 ? 'selected' : ''}}>January</option>
-                <option value="2" {{$reimbursement->claim_to_month == 2 ? 'selected' : ''}}>February</option>
-                <option value="3" {{$reimbursement->claim_to_month == 3 ? 'selected' : ''}}>March</option>
-                <option value="4" {{$reimbursement->claim_to_month == 4 ? 'selected' : ''}}>April</option>
-                <option value="5" {{$reimbursement->claim_to_month == 5 ? 'selected' : ''}}>May</option>
-                <option value="6" {{$reimbursement->claim_to_month == 6 ? 'selected' : ''}}>June</option>
-                <option value="7" {{$reimbursement->claim_to_month == 7 ? 'selected' : ''}}>July</option>
-                <option value="8" {{$reimbursement->claim_to_month == 8 ? 'selected' : ''}}>August</option>
-                <option value="9" {{$reimbursement->claim_to_month == 9 ? 'selected' : ''}}>September</option>
-                <option value="10" {{$reimbursement->claim_to_month == 10 ? 'selected' : ''}}>October</option>
-                <option value="11" {{$reimbursement->claim_to_month == 11 ? 'selected' : ''}}>November</option>
-                <option value="12" {{$reimbursement->claim_to_month == 12 ? 'selected' : ''}}>December</option>
-            </select> --}}
         </div>
     </div>
     <div class="col-sm-6">

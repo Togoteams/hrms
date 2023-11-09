@@ -198,6 +198,26 @@
                                                     class="form-control form-control-sm ">
                                             </div>
 
+                                            <div class="pt-3 col-2 fw-semibold salary-type-container " style="display: none">
+                                                <label for="salary_type">Salary Type<small
+                                                        class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-4 salary-type-container" style="display: none">
+                                                <select id="salary_type" placeholder="Enter Salary Type"
+                                                    name="salary_type"
+                                                    value="{{ !empty($employee) ? $employee->salary_type : '' }}"
+                                                    class="form-control form-control-sm">
+
+                                                    <option>- Select -</option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->salary_type == 'npfs' ? 'selected' : '') : '' }}
+                                                        value="npfs">NPFS</option>
+                                                    <option
+                                                        {{ !empty($employee) ? ($employee->salary_type == 'pf' ? 'selected' : '') : '' }}
+                                                        value="pf">PF</option>
+                                                </select>
+                                            </div>
+
                                                 <div class="pt-3 col-2 fw-semibold basic-salary-india-container" style="display: none">
                                                     <label for="basic_salary_for_india">Basic Salary For India<small
                                                             class="required-field">*</small></label>
@@ -213,6 +233,16 @@
                                                         value="{{ !empty($employee) ? $employee->basic_salary_for_india : '' }}"
                                                         class="form-control form-control-sm">
                                                 </div>
+                                                <div class="pt-3 col-2 fw-semibold da-container" style="display: none">
+                                                    <label for="da">DA(%)</label>
+                                                </div>
+                                                <div class="pt-2 col-4 da-container" style="display: none">
+                                                    <input  id="da" placeholder="Enter "
+                                                        type="text" name="da"  maxlength="3" minlength="1"  pattern="[0-9]+"
+                                                        value="{{ !empty($employee) ? $employee->da : '' }}"
+                                                        class="form-control form-control-sm">
+                                                </div>
+
 
 
                                             <div class="pt-3 col-2 fw-semibold contractDiv">
@@ -340,18 +370,53 @@
                 $(".contractDivEdit").hide() && $("#contract_duration").val("");
         });
     </script>
-    <script>
+     {{-- <script>
         $(document).ready(function () {
             $('#employment_type').change(function () {
                 var selectedValue = $(this).val();
                 if (selectedValue === 'expatriate') {
-                    $('.basic-salary-india-container').show();
+                    $('.salary-type-container').show();
                 } else {
-                    $('.basic-salary-india-container').hide();
+                    $('.salary-type-container').hide();
                 }
             });
         });
     </script>
+     --}}
+
+     <script>
+        $(document).ready(function () {
+            function showHideContainers() {
+                var selectedEmploymentType = $('#employment_type').val();
+                var selectedSalaryType = $('#salary_type').val();
+                $('.salary-type-container').hide();
+                $('.basic-salary-india-container').hide();
+                $('.da-container').hide();
+
+                if (selectedEmploymentType === 'expatriate') {
+                    $('.salary-type-container').show();
+
+                    if (selectedSalaryType === 'npfs') {
+                        $('.basic-salary-india-container').show();
+                        $('.da-container').show();
+                    } else if (selectedSalaryType === 'pf') {
+                        $('.basic-salary-india-container').show();
+                    }
+                }
+            }
+
+            showHideContainers();
+
+            $('#employment_type').change(function () {
+                showHideContainers();
+            });
+
+            $('#salary_type').change(function () {
+                showHideContainers();
+            });
+        });
+    </script>
+
 
 
 
