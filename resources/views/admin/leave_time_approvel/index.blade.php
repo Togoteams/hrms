@@ -56,13 +56,10 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Employee Name</th>
-                                <th>Leave Type</th>
                                 <th>Request date</th>
-                                <th>Start date</th>
-                                <th>End date</th>
-                                <th>Document</th>
+                                <th>From date</th>
+                                <th>To date</th>
                                 <th>Reason</th>
-                                <th>Description</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -92,10 +89,6 @@
                                     name: 'user.name',
                                 },
                                 {
-                                    data: 'leave_setting.name',
-                                    name: 'leave_setting.name',
-                                },
-                                {
                                     data: 'request_date',
                                     name: 'request_date'
                                 },
@@ -107,24 +100,20 @@
                                     data: 'end_date',
                                     name: 'end_date'
                                 },
-                                {
-                                    data: 'document',
-                                    name: 'document',
-                                    render: function (data, type, row) {
-                                        if (data) {
-                                            return '<a href="' + "{{ asset('assets/leave_document/') }}" + '/' + data + '" download>Download</a>';
-                                        } else {
-                                            return 'No Document Available';
-                                        }
-                                    }
-                                },
+                                // {
+                                //     data: 'document',
+                                //     name: 'document',
+                                //     render: function (data, type, row) {
+                                //         if (data) {
+                                //             return '<a href="' + "{{ asset('assets/leave_document/') }}" + '/' + data + '" download>Download</a>';
+                                //         } else {
+                                //             return 'No Document Available';
+                                //         }
+                                //     }
+                                // },
                                 {
                                     data: 'reason',
                                     name: 'reason'
-                                },
-                                {
-                                    data: 'description',
-                                    name: 'description'
                                 },
                                 {
                                     data: 'action',
@@ -159,6 +148,23 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="modal fade" id="modalshow" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content ">
+                        <div class="modal-header ">
+                            <h5 class="modal-title" id="staticBackdropLabel"> Show {{ $page }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="show">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
 
             {{-- edit form model end  --}}
 

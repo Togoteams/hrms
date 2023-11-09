@@ -37,14 +37,14 @@
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="start_date">Start date</label>
+                <label for="start_date">From date</label>
                 <input type="date" name="start_date" id="start_date"
                     class="form-control" value="{{$leave->start_date}}">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="end_date">End date</label>
+                <label for="end_date">To date</label>
                 <input type="date" name="end_date"  id="end_date"
                     class="form-control" value="{{$leave->end_date}}">
             </div>

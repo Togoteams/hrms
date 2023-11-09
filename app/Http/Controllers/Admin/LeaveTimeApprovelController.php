@@ -97,7 +97,12 @@ class LeaveTimeApprovelController extends BaseController
      */
     public function show(string $id)
     {
-        //
+        $Employees = Employee::whereHas('user', function ($query) {
+            $query->where('gender', 'female');
+        })->get();
+        $maternityLeaveTypes = LeaveSetting::where('name', 'MATERNITY LEAVE')->get();
+        $data = LeaveTimeApprovel::find($id);
+        return view('admin.leave_time_approvel.show', ['data' => $data,'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees, 'page' => $this->page_name]);
     }
 
     /**
