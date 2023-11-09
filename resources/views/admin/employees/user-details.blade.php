@@ -113,7 +113,7 @@
                                             <div class="pt-2 col-3">
                                                 <div class="row">
                                                     <div class="col-5">
-                                                        <select name="std_code" id="std_code" class="form-control">
+                                                        <select name="std_code" id="std_code" class="form-control form-control-sm ">
                                                             <option value="">Code</option>
                                                             @foreach ($countries as $country)
                                                                 <option value="{{ $country->std_code }}">

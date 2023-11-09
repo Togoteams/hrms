@@ -48,13 +48,17 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $leaveHideArr =['maternity-leave'];
+
         if (isemplooye()) {
             $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
+            $leave_type = LeaveSetting::where('emp_type',getEmpType(Employee::where('user_id', Auth::user()->id)->first()->employment_type))->whereNotIn('slug',$leaveHideArr)->get();
         } else {
             $data = LeaveApply::with('user', 'leave_type')->select('*');
+            $leave_type = LeaveSetting::where('emp_type',1)->whereNotIn('slug',$leaveHideArr)->get();
+
         }
         
-        $leave_type = LeaveSetting::where('emp_type',1)->get();
         $all_users = Employee::where('status', 'active')->get();
         // return $leave_type;
         return view('admin.leave_apply.index', [
@@ -220,7 +224,7 @@ class LeaveApplyController extends Controller
             try {
                 $request->request->add([
                     'updated_by' => Auth::user()->id,
-                    'is_paid' => LeaveSetting::find($request->leave_type_id)->nature_of_leave,
+                    'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction)
 
                 ]);
                 LeaveApply::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));

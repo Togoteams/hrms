@@ -54,7 +54,11 @@ trait LeaveTraits
 
         if($emp->employment_type=="expatriate")
         {
-          $total_leave = $years * $perYearLeave;
+          $total_leave = $perYearLeave;
+          if($years>1)
+          {
+            $total_leave = $years * $perYearLeave;
+          }
         }else
         {
           if($years>1)

@@ -750,42 +750,81 @@ function balance_leave_by_typeForEmp($leave_type_id, $user_id = '', $action = ""
   
       switch ($leaveSetting->slug) {
         case 'sick-leave':
-          $totalWorkingMonths  = date('m');
-          $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
+  
+          if($emp->employment_type=="expatriate")
+          {
+            $total_leave = $perYearLeave;
+            if($years>1)
+            {
+              $total_leave = $years * $perYearLeave;
+            }
+          }else
+          {
+            if($years>1)
+            {
+              $totalWorkingMonths = (date('m') -1);
+            }else
+            {
+              $totalWorkingMonths = ($months -1);
+            }
+            $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+          }
           break;
         case "earned-leave":
-          $totalWorkingMonths  = $years * 12 + $months;
-          if ($emp->designation->slug == "tea_lady" || $emp->designation->slug == "messenger_driver") {
-            $maxEarnedLeave = 45;
-            $perYearLeave = 15;
-          } else {
-            $maxEarnedLeave = 54;
-          }
-          $total_leave = ceil(($totalWorkingMonths / 12) * $perYearLeave);
-          if ($total_leave >= $maxEarnedLeave) {
-            $total_leave = $maxEarnedLeave;
+          if($years>=1)
+          {
+            $totalWorkingMonths  = $years * 12 + $months;
+            if ($emp->designation->slug == "tea_lady" || $emp->designation->slug == "messenger_driver") {
+              $maxEarnedLeave = 45;
+              $perYearLeave = 15; // if any change in default leave 
+            } else {
+              $maxEarnedLeave = 54;
+            }
+            $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+            if ($total_leave >= $maxEarnedLeave) {
+              $total_leave = $maxEarnedLeave;
+            }
           }
           break;
         case "maternity-leave":
-            $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->where('status','approved')->first();
-            if(!empty($isMaternityLeave))
-            {
-              $total_leave = $perYearLeave;
-            }
+          $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->where('status','approved')->first();
+          if(!empty($isMaternityLeave))
+          {
+            $total_leave = $perYearLeave;
+          }
           break;
-        default:
+        case "casual-leave":
+          $totalWorkingMonths =( date('m') -1);
+          $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+          break;
+        case "privileged-leave":
+          $maxEarnedLeave = 90;
+          
+          if($years>=1)
+          {
+            $totalWorkingMonths  = ($years-1) * 12 + $months;
+            // echo $totalWorkingMonths/12;
+            $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+            if ($total_leave >= $maxEarnedLeave) {
+              $total_leave = $maxEarnedLeave;
+            }
+          }
+         
+          break;
+        default:  
+        
           $total_leave = $perYearLeave;
       }
   
       $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
       $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
-
+  
       $ignoreLeaveIds = LeaveSetting::whereIn('slug',$balanceLeaveHideArr)->pluck('id')->toArray();
   
       if ($action == "update_status") {
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject', 'pending'])->get();
+        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status', ['reject', 'pending'])->get();
       } else {
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->get();
+        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status', ['reject'])->get();
       }
   
       if (count($total_apply_leaves) > 0) {
