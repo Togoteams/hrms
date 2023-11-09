@@ -104,26 +104,26 @@
                             {
                                 data: 'claim_from_month',
                                 name: 'claim_from_month',
-                                render: function(data, type, full, meta) {
-                                    var months = [
-                                        'January', 'February', 'March', 'April',
-                                        'May', 'June', 'July', 'August',
-                                        'September', 'October', 'November', 'December'
-                                    ];
-                                    return months[data - 1];
-                                }
+                                // render: function(data, type, full, meta) {
+                                //     var months = [
+                                //         'January', 'February', 'March', 'April',
+                                //         'May', 'June', 'July', 'August',
+                                //         'September', 'October', 'November', 'December'
+                                //     ];
+                                //     return months[data - 1];
+                                // }
                             },
                             {
                                 data: 'claim_to_month',
                                 name: 'claim_to_month',
-                                render: function(data, type, full, meta) {
-                                    var months = [
-                                        'January', 'February', 'March', 'April',
-                                        'May', 'June', 'July', 'August',
-                                        'September', 'October', 'November', 'December'
-                                    ];
-                                    return months[data - 1];
-                                }
+                                // render: function(data, type, full, meta) {
+                                //     var months = [
+                                //         'January', 'February', 'March', 'April',
+                                //         'May', 'June', 'July', 'August',
+                                //         'September', 'October', 'November', 'December'
+                                //     ];
+                                //     return months[data - 1];
+                                // }
                             },
                             {
                                 data: 'reimbursement_notes',
@@ -177,7 +177,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content ">
                     <div class="modal-header ">
-                        <h5 class="modal-title" id="staticBackdropLabel">Edit {{ $page }}</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"> Show {{ $page }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body" id="show">
@@ -221,14 +221,14 @@
                             <div class="mb-2 col-sm-6">
                                 <label for="reimbursement_currency">Reimbursement Currency <small
                                         class="required-field">*</small></label>
-                            
+
                                 <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
                                     name="reimbursement_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select Currency - </option>
                                     @foreach ($currencies  as  $currency)
                                     <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
                                 @endforeach
-                                    
+
                                 </select>
                             </div>
                             <div class="mb-2 col-sm-6">
@@ -271,7 +271,7 @@
         // e.preventDefault();
         var stat_id = $(this).val();
         // alert(stat_id);
-        // $("#input").val(text); 
+        // $("#input").val(text);
         $('#status_id').val(stat_id);
         $('#statusModal').modal('show');
     });

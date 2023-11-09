@@ -1,5 +1,5 @@
-   
-   
+
+
 <form id="form_edit" action="{{ route('admin.payroll.reimbursement.update',$reimbursement->id) }}">
      @csrf
     <input type="hidden" name="_method" value="PUT">
@@ -13,7 +13,7 @@
                             @foreach($reimbursementType as $data)
                             <option value="{{ $data->id }}" {{ $data->id == $reimbursement->type_id ? 'selected' : '' }}>
                             {{ $data->type }}
-                        </option>                                        
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -95,7 +95,7 @@
                     {{ $page }}</button>
             </div>
         </div>
-        
+
  </form>
 
 

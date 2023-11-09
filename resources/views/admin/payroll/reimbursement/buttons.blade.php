@@ -23,10 +23,16 @@
             href="#" data-bs-toggle="modal" data-bs-target="#modalstatus"
             class="btn @if ($item->status == 'pending') btn-warning @elseif ($item->status == 'reject') btn-danger @elseif($item->status == 'approved') btn-success @else btn-secondary @endif btn-sm">{{ $item->status }}</button>
     @endif
-  
+
 </form> --}}
 <form id="edit{{ $item->id }}" action="{{ route('admin.payroll.reimbursement.destroy', $item->id) }}">
-          @can('edit-reimbursement')                              
+    @can('view-reimbursement')
+    <button type="button" onclick="editForm('{{ route('admin.payroll.reimbursement.show', $item->id) }}', 'show')" href="#"
+        data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
+    </button>
+    @endcan
+
+          @can('edit-reimbursement')
         <button type="button"
             onclick="editForm('{{ route('admin.payroll.reimbursement.edit', $item->id) }}', 'edit')"
             href="#" data-bs-toggle="modal" data-bs-target="#modaledit"

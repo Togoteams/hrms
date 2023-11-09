@@ -38,9 +38,9 @@ class ReimbursementController extends BaseController
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::where('status','active')->get();
         $currencies = CurrencySetting::where('status','active')->get();
-        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name, 
-        'reimbursementType' => $reimbursementType, 
-        'currencies' => $currencies, 
+        return view('admin.payroll.reimbursement.index', ['page' => $this->page_name,
+        'reimbursementType' => $reimbursementType,
+        'currencies' => $currencies,
         'reimbursement' => $reimbursement,
          'Employees' => $Employees]);
 
@@ -63,7 +63,7 @@ class ReimbursementController extends BaseController
     public function store(Request $request)
     {
         $user = Auth::user();
-        
+
         $validator = Validator::make($request->all(), [
             'type_id' => 'required|numeric',
             'expenses_currency' => 'required|string',
@@ -79,9 +79,9 @@ class ReimbursementController extends BaseController
                 'numeric',
             ],
             'reimbursement_notes' => 'required|string',
-            
+
         ]);
-        
+
         $validator->after(function ($validator) use ($request, $user) {
             $overlapExists = Reimbursement::where('user_id', $user->id)
                 ->where(function ($query) use ($request) {
@@ -96,12 +96,12 @@ class ReimbursementController extends BaseController
                 })
                 ->where('id', '!=', $request->id)
                 ->exists();
-        
+
             if ($overlapExists) {
                 $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
             }
         });
-        
+
         if ($validator->fails()) {
             return $validator->errors();
         } else {
@@ -116,16 +116,19 @@ class ReimbursementController extends BaseController
                 return response()->json(['error' => $e->getMessage()]);
             }
         }
-        
+
     }
-    
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $data = Reimbursement::find($id);
+        $reimbursementType = ReimbursementType::where('status','active')->get();
+        $currencies = CurrencySetting::where('status','active')->get();
+        return view('admin.payroll.reimbursement.show', ['data' => $data, 'reimbursementType' => $reimbursementType,'currencies'=>$currencies, 'page' => $this->page_name]);
     }
 
     /**
@@ -133,14 +136,14 @@ class ReimbursementController extends BaseController
      */
     public function edit(string $id)
     {
-       
+
         $reimbursement = Reimbursement::find($id);
         $reimbursementType = ReimbursementType::where('status','active')->get();
         $currencies = CurrencySetting::where('status','active')->get();
-        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$currencies, 'page' => $this->page_name]);    
+        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$currencies, 'page' => $this->page_name]);
     }
 
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -148,7 +151,7 @@ class ReimbursementController extends BaseController
     public function update(Request $request, string $id)
     {
         $user = Auth::user();
-    
+
         $validator = Validator::make($request->all(), [
             'type_id' => 'required|numeric',
             'expenses_currency' => 'required|string',
@@ -165,7 +168,7 @@ class ReimbursementController extends BaseController
             ],
             'reimbursement_notes' => 'required|string',
         ]);
-    
+
         $validator->after(function ($validator) use ($request, $user, $id) {
             $overlapExists = Reimbursement::where('user_id', $user->id)
                 ->where(function ($query) use ($request) {
@@ -180,12 +183,12 @@ class ReimbursementController extends BaseController
                 })
                 ->where('id', '!=', $id)
                 ->exists();
-    
+
             if ($overlapExists) {
                 $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
             }
         });
-    
+
         if ($validator->fails()) {
             return $validator->errors();
         } else {
@@ -193,7 +196,7 @@ class ReimbursementController extends BaseController
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -209,13 +212,13 @@ class ReimbursementController extends BaseController
     }
 
     public function status(Request $request)
-    {   
+    {
         // dd($request->all());
         $request->validate([
             'status' => ['required','string'],
-            'reimbursement_reason' => ['required','string'], 
+            'reimbursement_reason' => ['required','string'],
             'reimbursement_currency' => 'required|string',
-            'reimbursement_amount' => 'required|numeric|gt:0',                     
+            'reimbursement_amount' => 'required|numeric|gt:0',
         ]);
                 // dd($request->all());
         $reimbursement = Reimbursement::find($request->payroll_id);
