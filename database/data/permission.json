@@ -205,10 +205,10 @@
             "name": "Change Status Attributes","module": "Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Add Employee Kra","module": "Employee Kra", "permissions_for":"admin"
+            "name": "Add Employee Kra","module": "Employee Kra", "permissions_for":"admin,branch_supervisor"
         },
         {
-            "name": "Edit Employee Kra","module": "Employee Kra", "permissions_for":"admin"
+            "name": "Edit Employee Kra","module": "Employee Kra", "permissions_for":"admin,branch_supervisor"
         },
         {
             "name": "View Employee Kra","module": "Employee Kra", "permissions_for":"admin,employee"
@@ -220,37 +220,37 @@
             "name": "Change Status Employee Kra","module": "Employee Kra", "permissions_for":"admin"
         },
         {
-            "name": "Print Employee Kra","module": "Employee Kra", "permissions_for":"admin,employee"
+            "name": "Print Employee Kra","module": "Employee Kra", "permissions_for":"admin,hr_head,chief_manager,employee"
         },
         {
-            "name": "Add Leave Apply","module": "Leave Apply", "permissions_for":"admin,employee"
+            "name": "Add Leave Apply","module": "Leave Apply", "permissions_for":"all"
         },
         {
-            "name": "Edit Leave Apply","module": "Leave Apply", "permissions_for":"admin,employee"
+            "name": "Edit Leave Apply","module": "Leave Apply", "permissions_for":"all"
         },
         {
-            "name": "View Leave Apply","module": "Leave Apply", "permissions_for":"admin"
+            "name": "View Leave Apply","module": "Leave Apply", "permissions_for":"all"
         },
         {
-            "name": "Delete Leave Apply","module": "Leave Apply", "permissions_for":"admin,employee"
+            "name": "Delete Leave Apply","module": "Leave Apply", "permissions_for":"admin,employee,hr_head"
         },
         {
-            "name": "Change Status Leave Apply","module": "Leave Apply", "permissions_for":"admin"
+            "name": "Change Status Leave Apply","module": "Leave Apply", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Add Leave Encashment","module": "Leave Encashment", "permissions_for":"admin"
+            "name": "Add Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
         },
         {
-            "name": "Edit Leave Encashment","module": "Leave Encashment", "permissions_for":"admin"
+            "name": "Edit Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
         },
         {
-            "name": "View Leave Encashment","module": "Leave Encashment", "permissions_for":"admin"
+            "name": "View Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
         },
         {
-            "name": "Delete Leave Encashment","module": "Leave Encashment", "permissions_for":"admin"
+            "name": "Delete Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
         },
         {
-            "name": "Add Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin"
+            "name": "Add Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin,employee,hr_head"
         },
         {
             "name": "Edit Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin"
@@ -308,18 +308,6 @@
         },
         {
             "name": "Delete Leave Settings","module": "Leave Settings", "permissions_for":"admin"
-        },
-        {
-            "name": "Add Payroll","module": "Payroll", "permissions_for":"admin"
-        },
-        {
-            "name": "Edit Payroll","module": "Payroll", "permissions_for":"admin"
-        },
-        {
-            "name": "View Payroll","module": "Payroll", "permissions_for":"admin"
-        },
-        {
-            "name": "Delete Payroll","module": "Payroll", "permissions_for":"admin"
         },
         {
             "name": "Add Tax Slab Settings","module": "Tax Slab Settings", "permissions_for":"admin"
@@ -394,22 +382,22 @@
             "name": "View Salary","module": "Salary", "permissions_for":"admin,employee"
         },
         {
-            "name": "Delete Salary","module": "Salary", "permissions_for":"admin"
+            "name": "Delete Salary","module": "Salary", "permissions_for":"admin,chief_manager"
         },
         {
             "name": "Print Salary","module": "Salary", "permissions_for":"admin,employee"
         },
         {
-            "name": "Add Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin"
+            "name": "Add Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Edit Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin"
+            "name": "Edit Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "View Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin"
+            "name": "View Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Delete Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin"
+            "name": "Delete Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin,hr_head"
         },
         {
             "name": "Add Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee"
@@ -424,7 +412,7 @@
             "name": "Delete Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee"
         },
         {
-            "name": "Change Status Reimbursement","module": "Reimbursement", "permissions_for":"admin"
+            "name": "Change Status Reimbursement","module": "Reimbursement", "permissions_for":"admin,hr_head"
         },
         {
             "name": "Add Manage Tax","module": "Manage Tax", "permissions_for":"admin,chief_manager"
@@ -484,49 +472,49 @@
             "name": " Export Report TTUM Report","module": "TTUM Report", "permissions_for":"admin"
         },
         {
-            "name": "Add Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch supervisor,employee"
+            "name": "Add Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch_supervisor,employee"
         },
         {
-            "name": "Edit Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch supervisor,employee"
+            "name": "Edit Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch_supervisor,employee"
         },
         {
-            "name": "View Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch supervisor,employee"
+            "name": "View Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch_supervisor,employee"
         },
         {
-            "name": "Delete Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch supervisor"
+            "name": "Delete Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch_supervisor"
         },
         {
-            "name": "Change Status Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch supervisor"
+            "name": "Change Status Leave Type Approval","module": "Leave Type Approval", "permissions_for":"admin,branch_supervisor"
         },
         {
-            "name": "Add Document Type","module": "Document Type", "permissions_for":"admin"
+            "name": "Add Document Type","module": "Document Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Edit Document Type","module": "Document Type", "permissions_for":"admin"
+            "name": "Edit Document Type","module": "Document Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "View Document Type","module": "Document Type", "permissions_for":"admin"
+            "name": "View Document Type","module": "Document Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Delete Document Type","module": "Document Type", "permissions_for":"admin"
+            "name": "Delete Document Type","module": "Document Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Change Status Document Type","module": "Document Type", "permissions_for":"admin"
+            "name": "Change Status Document Type","module": "Document Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Add Country","module": "Country", "permissions_for":"admin"
+            "name": "Add Country","module": "Country", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "Edit Country","module": "Country", "permissions_for":"admin"
+            "name": "Edit Country","module": "Country", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "View Country","module": "Country", "permissions_for":"admin"
+            "name": "View Country","module": "Country", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "Delete Country","module": "Country", "permissions_for":"admin"
+            "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "Change Status Country","module": "Country", "permissions_for":"admin"
+            "name": "Change Status Country","module": "Country", "permissions_for":"admin,chief_manager"
         }
 
     ]
