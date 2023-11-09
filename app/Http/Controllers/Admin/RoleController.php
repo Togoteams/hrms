@@ -8,6 +8,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Role;
+use App\Models\Permission;
 use App\Services\Role\RoleService;
 class RoleController extends BaseController
 {
@@ -87,8 +88,8 @@ class RoleController extends BaseController
         $permissions= $this->roleService->getAllPermissions();
 
         $permissions= collect($permissions)->groupBy('module');
-        // return $permissions;
         if($request->post()){
+           
             DB::begintransaction();
             try{
                 $roleData->permissions()->detach();

@@ -25,7 +25,7 @@
             "name": "Delete Holidays","module": "Holidays", "permissions_for":"admin,hr_head,branch_head"
         },
         {
-            "name": "View Holidays","module": "Holidays", "permissions_for":"all"
+            "name": "View Holidays","module": "Holidays", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Add Employees","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
@@ -70,22 +70,22 @@
             "name": "Delete Designations","module": "Designations", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "Profile Update","module": "Profile Update", "permissions_for":"all"
+            "name": "Profile Update","module": "Profile Update", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Change Password","module": "Change Password", "permissions_for":"all"
+            "name": "Change Password","module": "Change Password", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Add Leave","module": "Leave", "permissions_for":"all"
+            "name": "Add Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Edit Leave","module": "Leave", "permissions_for":"all"
+            "name": "Edit Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "View Leave","module": "Leave", "permissions_for":"all"
+            "name": "View Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Delete Leave","module": "Leave", "permissions_for":"all"
+            "name": "Delete Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Add Department","module": "Department", "permissions_for":"admin,chief_manager"
@@ -118,7 +118,7 @@
             "name": "Edit Document Management","module": "Management", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "View Document Management","module": "Management", "permissions_for":"all"
+            "name": "View Document Management","module": "Management", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Delete Document Management","module": "Management", "permissions_for":"admin,hr_head,chief_manager"
@@ -223,13 +223,13 @@
             "name": "Print Employee Kra","module": "Employee Kra", "permissions_for":"admin,hr_head,chief_manager,employee"
         },
         {
-            "name": "Add Leave Apply","module": "Leave Apply", "permissions_for":"all"
+            "name": "Add Leave Apply","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Edit Leave Apply","module": "Leave Apply", "permissions_for":"all"
+            "name": "Edit Leave Apply","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "View Leave Apply","module": "Leave Apply", "permissions_for":"all"
+            "name": "View Leave Apply","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Delete Leave Apply","module": "Leave Apply", "permissions_for":"admin,employee,hr_head"
@@ -238,16 +238,16 @@
             "name": "Change Status Leave Apply","module": "Leave Apply", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Add Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
+            "name": "Add Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Edit Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
+            "name": "Edit Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "View Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
+            "name": "View Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Delete Leave Encashment","module": "Leave Encashment", "permissions_for":"all"
+            "name": "Delete Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Add Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin,employee,hr_head"

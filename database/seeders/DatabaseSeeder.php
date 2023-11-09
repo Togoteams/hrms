@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserTableSeeder::class,
             RolesTableSeeder::class,
             LeaveTypes::class,
+            RolePermissionSeeder::class,
             Designationseeders::class,
             Brachseeders::class,
             TaxSlabSeeder::class,

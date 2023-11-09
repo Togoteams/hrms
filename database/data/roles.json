@@ -1,17 +1,12 @@
 {
     "roles":[
         {
-            "name" : "Super Admin",
-            "short_code" : "SA",
-            "role_type" : "superadmin"
-        },
-        {
-            "name" : "Managing director",
+            "name" : "MANAGING DIRECTOR",
             "short_code" : "MD",
             "role_type" : "admin"
         },
         {
-            "name" :"Chief Manager HO",
+            "name" :"CHIEF MANAGER HO",
             "short_code" :"CM",
             "role_type" :"chief_manager"
         },
