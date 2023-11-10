@@ -184,7 +184,9 @@ class LeaveTimeApprovelController extends BaseController
         }
         $leave->save();
         // return $this->responseJson(true,200,'status created successfully',$leave);
-        return response()->json(['success' => $this->page_name . " status created successfully"]);
+        // return response()->json(['success' => $this->page_name . " status created successfully"]);
+        return redirect()->back()->with('success', $this->page_name . ' status created successfully');
+
 
     }
 
