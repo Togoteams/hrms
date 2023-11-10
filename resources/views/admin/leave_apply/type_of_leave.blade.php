@@ -16,7 +16,7 @@
         $total_reject = App\Models\LeaveApply::where('user_id', Auth::user()->id)
             ->where('status', 'approved')
             ->count('*');
-            $total_applied_leave = App\Models\LeaveApply::whereIn('status', ['pending'])
+            $total_applied_leave = App\Models\LeaveApply::where('user_id', Auth::user()->id)->whereIn('status', ['pending'])
             ->count('*');
     } else {
         $data = App\Models\LeaveApply::with('user', 'leave_type')->select('*');
