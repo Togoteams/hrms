@@ -126,9 +126,14 @@ class ReimbursementController extends BaseController
     public function show(string $id)
     {
         $data = Reimbursement::find($id);
+        $employee = Employee::where('status','active')->get();
         $reimbursementType = ReimbursementType::where('status','active')->get();
         $currencies = CurrencySetting::where('status','active')->get();
-        return view('admin.payroll.reimbursement.show', ['data' => $data, 'reimbursementType' => $reimbursementType,'currencies'=>$currencies, 'page' => $this->page_name]);
+        return view('admin.payroll.reimbursement.show', ['data' => $data,
+        'reimbursementType' => $reimbursementType,
+        'currencies'=>$currencies,
+        'employee' => $employee,
+         'page' => $this->page_name]);
     }
 
     /**

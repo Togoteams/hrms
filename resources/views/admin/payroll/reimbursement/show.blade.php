@@ -1,4 +1,12 @@
 <div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="user_id">Employee :- </label>
+            <label for="">{{ $data->user->name }}
+            </label>
+
+        </div>
+    </div>
     <div class="mb-2 col-sm-6">
         <div class="form-group">
             <label for="type_id">Reimbursement Type :- </label>
