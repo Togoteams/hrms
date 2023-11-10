@@ -19,6 +19,8 @@ use App\Models\OvertimeSetting;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\Reimbursement;
 use App\Models\LeaveSetting;
+use App\Models\EmplooyeLoans;
+
 if (!function_exists('isSluggable')) {
     function isSluggable($value)
     {
@@ -552,6 +554,8 @@ if (!function_exists('getHeadValue')) {
     function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0)
     {
         $basicAmout = $basic;
+        $startDate =date("Y-m-20", strtotime("-1 month"));
+        $endDate = date("Y-m-20");
         if($basic==0)
         {
             $basicAmout = $emp->basic_salary;
@@ -585,7 +589,7 @@ if (!function_exists('getHeadValue')) {
             $hoursInMonth = 192;
             $perHoursRate = $basicAmout / $hoursInMonth;
             $overTimeAmount = 0;
-            $overtimes = OvertimeSetting::where('date',">=",date("Y-m-d", strtotime("-1 months",strtotime("Y-m-"."-20"))))->where('user_id',$emp->user_id)->where('date','<=',date("Y-m-".'20'))->get();
+            $overtimes = OvertimeSetting::where('date',">=",$startDate)->where('user_id',$emp->user_id)->where('date','<=',$endDate)->get();
             foreach($overtimes  as $key => $overtime)
             {
                 if($overtime->overtime_type=="holiday")
@@ -613,12 +617,35 @@ if (!function_exists('getHeadValue')) {
             return $arrearsAmount;
         } elseif ($headSlug == "reimbursement") {
             $reimbursementAmount = 0;
-            $reimbursements = Reimbursement::where('claim_date',">=",date("Y-m-"."01"))->where('claim_date','<=',date("Y-m-".'31'))->where('user_id',$emp->user_id)->get();
+            $reimbursements = Reimbursement::where('claim_date',">=",$startDate)->where('claim_date','<=',$endDate)->where('user_id',$emp->user_id)->get();
             foreach($reimbursements as $reimbursement )
             {
                 $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
             }
             return $reimbursementAmount;
+         }elseif ($headSlug == "loan") {
+            $loanAmount = 0;
+            $loan = EmplooyeLoans::
+            // where('emi_start_date',"<=",$startDate)
+            // ->where('emi_end_date','>=',$endDate)
+            // ->where('user_id',$emp->user_id)->
+            where(function ($query) use ($startDate, $endDate) {
+                $query->where(function ($q1) use ($startDate, $endDate) {
+                    $q1->whereBetween('emi_start_date', array($startDate, $endDate));
+                })
+                ->orWhere(function ($q2) use ($startDate, $endDate) {
+                    $q2->where('emi_start_date', '<=', $startDate)
+                    ->where('emi_end_date', '>=', $endDate);
+                })
+                ->orWhere(function ($q3) use ($startDate, $endDate) {
+                    $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+                })
+                ;
+            })->
+            where('user_id',$emp->user_id)
+            ->first();
+            $loanAmount = $loan->emi_amount ?? 0;
+            return $loanAmount;
          }
         return $orginalValue;
     }

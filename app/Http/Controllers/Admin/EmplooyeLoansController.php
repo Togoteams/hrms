@@ -74,10 +74,11 @@ class EmplooyeLoansController extends Controller
         ]);
 
         // Add custom validation rule for date range overlap check
-        $validator->addExtension('date_range_not_overlap', function ($attribute, $value, $parameters) use ($request) {
-            $start = \Carbon\Carbon::parse($request->input($attribute));
-            $end = \Carbon\Carbon::parse($request->input($parameters[0]));
-
+        $validator->addExtension('date_range_not_overlap', function ($attribute, $value, $parameters,$validator) use ($request) {
+            $start = \Carbon\Carbon::parse($validator->getData()['emi_start_date']);
+            $end = \Carbon\Carbon::parse($validator->getData()['emi_end_date']);
+            // $start_date = $validator->getData()['start_date'];
+            // $end_date = $validator->getData()['end_date'];
             // Perform the date range overlap check here
             // Replace this with your actual logic
             if ($start < $end) {
@@ -88,7 +89,7 @@ class EmplooyeLoansController extends Controller
         });
 
         // Add custom error message for the custom rule
-        Validator::addReplacer('date_range_not_overlap', function ($message, $attribute, $rule, $parameters) {
+        Validator::replacer('date_range_not_overlap', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':attribute', $attribute, 'The :attribute date range overlaps with an existing loan.');
         });
 
