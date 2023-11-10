@@ -1,6 +1,4 @@
 <div class="row">
-
-
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="emp_name">Employee name :- </label>
@@ -13,7 +11,7 @@
             <label for="emp_name">EC Number :- </label>
             <label for="emp_name"> {{ $data->user->employee->ec_number }}</label>
         </div>
-    </div>
+    </div>  
 
     <div class="mb-2 col-sm-4">
         <div class="form-group">
@@ -31,13 +29,13 @@
 
     <div class="mb-2 col-sm-4">
         <div class="form-group">
-            <label for="start_date">start_date</label>
+            <label for="start_date">Start Date :- </label>
             <label for="start_date">{{ date('d-m-Y', strtotime($data->start_date)) }}</label>
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
-            <label for="end_date">end_date</label>
+            <label for="end_date">End date :- </label>
             <label for="end_date">{{ date('d-m-Y', strtotime($data->end_date)) }}</label>
         </div>
     </div>
@@ -68,30 +66,28 @@
             <label for="status">{{ucfirst($data->status)}}</label>
         </div>
     </div>
-
+    @if ($data->doc != '')
     <div class="mb-2 col-sm-4">
-        <div class="form-group">
-            <label for="doc">Required Document</label>
+        <div class="">
+            <label >Required Document</label>
             <label>
-
-                @if ($data->doc != '')
-                    <iframe class="img-fluid" src="{{ asset('upload/leave_doc/' . $data->doc) }}"
-                        frameborder="1"></iframe>
-                @endif
+                <iframe class="img-fluid" src="{{ asset('upload/leave_doc/' . $data->doc) }}"
+                    frameborder="1"></iframe>
             </label>
         </div>
     </div>
+    @endif
 
     <div class="mb-2 col-sm-12">
         <div class="form-group">
-            <label for="Reason">leave Reason :- </label>
+            <label for="Reason">Leave Reason :- </label>
             <label for="Reason">{{ $data->leave_reason }}</label>
         </div>
     </div>
 
     <div class="mb-2 col-sm-12">
         <div class="form-group">
-            <label for="remark">remark</label>
+            <label for="remark">Remark :- </label>
             <label for="remark">{{ $data->remark }}</label>
         </div>
     </div>
