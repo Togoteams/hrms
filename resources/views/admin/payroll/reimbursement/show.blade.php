@@ -61,6 +61,23 @@
             <label for="status">{{ucfirst($data->status)}}</label>
         </div>
     </div>
+    <div class="mb-2 col-sm-6">
+        <label for="reimbursement_currency">Reimbursement Currency :- </label>
+        <label for="">{{getCurrencyIcon($data->currency_name_from)}}</label>
+    </div>
+    <div class="mb-2 col-sm-6">
+        <div class="form-group">
+            <label for="reimbursement_amount">Reimbursement Amount :- </label>
+            <label for="reimbursement_amount">{{$data->reimbursement_amount}}</label>
+        </div>
+    </div>
+    <div class="mb-2 col-sm-12">
+        <div class="form-group">
+            <label for="reimbursement_reason">Reimbursement Reason :- </label>
+            <label  for="reimbursement_reason">{{$data->reimbursement_reason}}</label>
+
+        </div>
+    </div>
     <div class="mb-2 col-sm-12">
         <div class="form-group">
             <label for="reimbursement_notes">Reimbursement notes :- </label>

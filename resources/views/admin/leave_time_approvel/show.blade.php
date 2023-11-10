@@ -31,13 +31,20 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="approved_at">Approved date :- </label>
-            <label for="approved_at">{{ date('d-m-Y', strtotime($data->approved_at))}}</label>
-        </div>
+            @if(!empty($data->approved_at) && $data->approved_at != '1970-01-01')
+            <label for="approved_at">{{ date('d-m-Y', strtotime($data->approved_at)) }}</label>
+            @else
+                <label for="approved_at">N/A</label>
+            @endif        </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
             <label for="rejected_at">Rejected date :- </label>
+            @if(!empty($data->rejected_at) && $data->rejected_at != '1970-01-01')
             <label for="rejected_at">{{ date('d-m-Y', strtotime($data->rejected_at)) }}</label>
+            @else
+                <label for="rejected_at">N/A</label>
+            @endif
         </div>
     </div>
     <div class="col-sm-6">
