@@ -43,20 +43,16 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="loan_amount">Loan Amount</label>
-                                    <input required id="loan_amount"
-                                        placeholder="Enter loan_amount" type="number"
-                                        name="loan_amount"
-                                        maxlength="7" minlength="3" pattern="[0-9]+"
-                                         class="form-control form-control-sm ">
+                                    <input required id="loan_amount" placeholder="Enter loan_amount" type="text"
+                                        name="loan_amount" maxlength="7" minlength="3" pattern="[0-9]+"
+                                        class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="emi_amount">EMI Amount</label>
-                                    <input required id="emi_amount"
-                                        placeholder="Enter emi_amount   " type="number"
-                                        name="emi_amount"
-                                        maxlength="7" minlength="3" pattern="[0-9]+"
+                                    <input required id="emi_amount" placeholder="Enter emi_amount   " type="text"
+                                        name="emi_amount" maxlength="7" minlength="3" pattern="[0-9]+"
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -70,8 +66,8 @@
                             <div class="col-sm-4 mb-2">
                                 <div class="form-group">
                                     <label for="emi_end_date">EMI End Date</label>
-                                    <input required id="emi_end_date" placeholder="Enter emi_end_date"
-                                        type="date" name="emi_end_date" class="form-control form-control-sm ">
+                                    <input required id="emi_end_date" placeholder="Enter emi_end_date" type="date"
+                                        name="emi_end_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-4 mb-2">
@@ -85,16 +81,15 @@
                                 <div class="form-group">
                                     <label for="last_emi_amount">Last EMI Amount</label>
                                     <input required id="last_emi_amount" placeholder="Enter last_emi_amount  "
-                                        type="number" name="last_emi_amount"
-                                        maxlength="7" minlength="3" pattern="[0-9]+"
-                                        class="form-control form-control-sm ">
+                                        type="text" name="last_emi_amount" maxlength="7" minlength="3"
+                                        pattern="[0-9]+" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="col-sm-12 mb-2">
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea  id="description" placeholder="Enter  Description..." type="text"
-                                        name="description" class="form-control form-control-sm "></textarea>
+                                    <textarea id="description" placeholder="Enter  Description..." type="text" name="description"
+                                        class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>
                         </div>

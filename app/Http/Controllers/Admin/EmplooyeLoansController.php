@@ -33,6 +33,12 @@ class EmplooyeLoansController extends Controller
                     $actionBtn = view('admin.employees_loans.buttons', ['item' => $row, "route" => 'employees_loans']);
                     return $actionBtn;
                 })
+                ->editColumn('emi_start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->emi_start_date)->isoFormat('DD.MM.YYYY');
+                })
+                ->editColumn('emi_end_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->emi_end_date)->isoFormat('DD.MM.YYYY');
+                })
                 ->rawColumns(['action'])
                 ->make(true);
         }
@@ -66,12 +72,12 @@ class EmplooyeLoansController extends Controller
             'last_emi_amount' => 'required|numeric',
             'description' => 'nullable|string',
         ]);
-    
+
         // Add custom validation rule for date range overlap check
         $validator->addExtension('date_range_not_overlap', function ($attribute, $value, $parameters) use ($request) {
             $start = \Carbon\Carbon::parse($request->input($attribute));
             $end = \Carbon\Carbon::parse($request->input($parameters[0]));
-    
+
             // Perform the date range overlap check here
             // Replace this with your actual logic
             if ($start < $end) {
@@ -80,12 +86,12 @@ class EmplooyeLoansController extends Controller
                 return false;
             }
         });
-    
+
         // Add custom error message for the custom rule
         Validator::addReplacer('date_range_not_overlap', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':attribute', $attribute, 'The :attribute date range overlaps with an existing loan.');
         });
-    
+
         if ($validator->fails()) {
             return $validator->errors();
         } else {
@@ -101,7 +107,7 @@ class EmplooyeLoansController extends Controller
             }
         }
     }
-    
+
 
     /**
      * Display the specified resource.

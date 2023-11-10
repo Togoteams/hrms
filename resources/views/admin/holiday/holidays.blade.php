@@ -107,7 +107,7 @@
                                         <!-- <span class="d-block fs-5">Human resources</span> -->
                                     </td>
                                     <td>
-                                        <span class="mb-0 d-block h5">{{ $holiday->date }}</span>
+                                        <span class="mb-0 d-block h5">{{  date('d-m-Y', strtotime($holiday->date)) }}</span>
                                     </td>
                                     <td> {{ $holiday->description }}</td>
                                     {{-- <td>
@@ -135,7 +135,7 @@
                                         @endcan
                                         <button type="button" data-table="holidays" data-uuid="{{$holiday->uuid}}"
                                             @if($holiday->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                            class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($holiday->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                            class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($holiday->status=="active") fa-toggle-on  @else fa-toggle-off @endif"
                                                 @if($holiday->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"></i>
                                         </button>
                                     </td>

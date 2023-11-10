@@ -48,11 +48,11 @@ class AccountController extends Controller
         $validator = Validator::make($request->all(), [
             'account_number' => 'required|string|digits_between:12,16',
             'name' => 'required|string|regex:/^[a-zA-Z. ]+$/',
-            'opening_amount' => 'required|numeric',
-            'closing_amount' => 'required|numeric',
+            'opening_amount' => 'required|numeric|digits_between:3,7',
+            'closing_amount' => 'required|numeric|digits_between:3,7',
             'account_type' => 'required|string',
             'description' => 'required|string',
-           
+
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -76,7 +76,7 @@ class AccountController extends Controller
     public function edit(string $id)
     {
         $account = Account::find($id);
-        return view('admin.account.edit', ['account' => $account, 'page' => $this->page_name]);   
+        return view('admin.account.edit', ['account' => $account, 'page' => $this->page_name]);
     }
 
     /**
@@ -87,10 +87,10 @@ class AccountController extends Controller
         $validator = Validator::make($request->all(), [
             'account_number' => 'required|string|digits_between:12,16',
             'name' => 'required|string',
-            'opening_amount' => 'required|numeric',
-            'closing_amount' => 'required|numeric',
+            'opening_amount' => 'required|numeric|digits_between:3,7',
+            'closing_amount' => 'required|numeric|digits_between:3,7',
             'account_type' => 'required|string',
-            'description' => 'required|string',           
+            'description' => 'required|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();

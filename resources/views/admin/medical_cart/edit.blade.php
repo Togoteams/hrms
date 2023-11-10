@@ -18,8 +18,9 @@
         <div class="mb-6 col-sm-6">
             <div class="form-group">
                 <label for="amount" class="required">Amount</label>
-                <input type="number" required name="amount" id="amount" class="form-control"
-                    placeholder="Enter amount of medical card" value="{{ $medical->amount }}">
+                <input type="text" required maxlength="7" minlength="3" pattern="[0-9]+" name="amount"
+                    id="amount" class="form-control" placeholder="Enter amount of medical card"
+                    value="{{ $medical->amount }}">
             </div>
         </div>
 

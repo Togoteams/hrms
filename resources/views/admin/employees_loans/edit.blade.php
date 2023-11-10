@@ -35,33 +35,35 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="loan_amount">Loan Amount</label>
-                <input required id="loan_amount" placeholder="Enter loan_amount   " type="number"
-                    name="loan_amount" value="{{ $data->loan_amount }}" class="form-control form-control-sm ">
+                <input required id="loan_amount" placeholder="Enter loan_amount   " type="text" maxlength="7"
+                    minlength="3" pattern="[0-9]+" name="loan_amount" value="{{ $data->loan_amount }}"
+                    class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="emi_amount">EMI Amount</label>
-                <input required id="emi_amount" placeholder="Enter emi_amount   " type="number"
-                    name="emi_amount" value="{{ $data->emi_amount }}" class="form-control form-control-sm ">
+                <input required id="emi_amount" placeholder="Enter emi_amount   " type="text" maxlength="7"
+                    minlength="3" pattern="[0-9]+" name="emi_amount" value="{{ $data->emi_amount }}"
+                    class="form-control form-control-sm ">
             </div>
         </div>
 
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="emi_start_date">EMI Start Date</label>
-                <input required id="emi_start_date" placeholder="Enter emi_start_date   "
-                    type="date" value="{{ $data->emi_start_date }}" name="emi_start_date" class="form-control form-control-sm ">
+                <input required id="emi_start_date" placeholder="Enter emi_start_date   " type="date"
+                    value="{{ $data->emi_start_date }}" name="emi_start_date" class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="emi_end_date">EMI End Date</label>
-                <input required id="emi_end_date" placeholder="Enter emi_end_date"
-                    type="date" value="{{ $data->emi_end_date }}" name="emi_end_date" class="form-control form-control-sm ">
+                <input required id="emi_end_date" placeholder="Enter emi_end_date" type="date"
+                    value="{{ $data->emi_end_date }}" name="emi_end_date" class="form-control form-control-sm ">
             </div>
         </div>
-        
+
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="tenure">Tenure</label>
@@ -72,8 +74,9 @@
         <div class="col-sm-4 mb-2">
             <div class="form-group">
                 <label for="last_emi_amount">Last EMI Amount</label>
-                <input required id="last_emi_amount" placeholder="Enter last_emi_amount  "
-                    type="number" name="last_emi_amount" value="{{ $data->last_emi_amount }}" class="form-control form-control-sm ">
+                <input required id="last_emi_amount" placeholder="Enter last_emi_amount  " maxlength="7" minlength="3"
+                    pattern="[0-9]+" type="text" name="last_emi_amount" value="{{ $data->last_emi_amount }}"
+                    class="form-control form-control-sm ">
             </div>
         </div>
         <div class="col-sm-12 mb-2">
