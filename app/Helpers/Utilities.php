@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CurrencySetting;
 use App\Models\Role;
 use App\Models\UsersRoles;
 use Illuminate\Support\Str;
@@ -551,14 +552,29 @@ if (!function_exists('getLeavesSalary')) {
     }
 }
 if (!function_exists('getHeadValue')) {
-    function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0)
+    function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0,$salary_month="")
     {
         $basicAmout = $basic;
         $startDate =date("Y-m-20", strtotime("-1 month"));
         $endDate = date("Y-m-20");
+        /**
+         * If Salary Month is empty then salary will be make as for current month
+         */
+        if(!empty($salary_month))
+        {
+            $startDate = date("Y-m-d", strtotime("-1 months",strtotime($salary_month."-20")));
+            $endDate = date("Y-m-d", strtotime($salary_month."-20"));
+        }
+        $employmentType = $emp->employment_type ;
+        $multipleValue = 1;
+        if($employmentType=="expatriate")
+        {
+            $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->where('status','active')->first();
+            $multipleValue = $currencySeeting->currency_amount_to;
+        }
         if($basic==0)
         {
-            $basicAmout = $emp->basic_salary;
+            $basicAmout = $emp->basic_salary * $multipleValue;
         }
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
@@ -574,6 +590,23 @@ if (!function_exists('getHeadValue')) {
                 $pensionAmount = ($basicAmout / 100) * $emp->pension_opt;
                 return $pensionAmount;
             }
+        } elseif ($headSlug == "provident_fund") {
+            $inrBasicAmount = $emp->basic_salary_for_india;
+
+            if($emp->salary_type=="npfs")
+            {
+                $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
+            }
+            $inrToPulaAmount = 1;
+            $currencySeeting = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','pula')->first();
+            if(!empty($currencySeeting))
+            {
+                $inrToPulaAmount = $currencySeeting->currency_amount_to;
+            }
+            // if ($isPensionApplied == "yes") {
+            $providentFound = $inrBasicAmount * $inrToPulaAmount;
+            return $providentFound;
+            // }
         }elseif ($headSlug == "house_up_keep_allow") {
             $houseUpKeepAllow = 0;
             $houseUpKeepAllow = ($basicAmout / 100) * 10;
@@ -606,7 +639,8 @@ if (!function_exists('getHeadValue')) {
            $currentYear = date('Y');
            $currentMonth = date('m');
            $arrearsAmount = 0;
-           $salaryIncrement = PayrollSalaryIncrement::where('financial_year',$currentYear)
+           $salaryIncrement = PayrollSalaryIncrement::where('financial_year',$currentYear)->
+           whereBetween('effective_from', array($startDate, $endDate))
         //    ->where('effective_from','>=',date('Y-m-d'))->where('effective_to','<=',date('Y-m-d'))
            ->where('employment_type',$emp->employment_type)->first();
             if(!empty($salaryIncrement))
@@ -617,18 +651,25 @@ if (!function_exists('getHeadValue')) {
             return $arrearsAmount;
         } elseif ($headSlug == "reimbursement") {
             $reimbursementAmount = 0;
-            $reimbursements = Reimbursement::where('claim_date',">=",$startDate)->where('claim_date','<=',$endDate)->where('user_id',$emp->user_id)->get();
-            foreach($reimbursements as $reimbursement )
+            $reimbursements = Reimbursement::whereBetween('claim_date', array($startDate, $endDate))
+
+            // ->where('user_id',$emp->user_id)
+            ->where('status','approved')
+            ->get();
+            foreach($reimbursements as $reimbursement)
             {
-                $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
+                if($reimbursement->reimbursement_currency=="usd")
+                {
+                    $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount * $multipleValue;
+                }else
+                {
+                    $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
+                }
             }
             return $reimbursementAmount;
          }elseif ($headSlug == "loan") {
             $loanAmount = 0;
             $loan = EmplooyeLoans::
-            // where('emi_start_date',"<=",$startDate)
-            // ->where('emi_end_date','>=',$endDate)
-            // ->where('user_id',$emp->user_id)->
             where(function ($query) use ($startDate, $endDate) {
                 $query->where(function ($q1) use ($startDate, $endDate) {
                     $q1->whereBetween('emi_start_date', array($startDate, $endDate));

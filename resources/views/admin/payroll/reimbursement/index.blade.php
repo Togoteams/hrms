@@ -6,7 +6,7 @@
     <!-- Content -->
     <div class="container-fluid">
         <!-- Page Header -->
-        <div class="mt-2 mb-2 border-bottom">
+        <div class="mt-2 border-bottom">
             <div class="row align-items-center">
 
                 <!-- End Col -->
@@ -28,7 +28,7 @@
         <div class="mb-3 card mb-lg-5">
             <div class="page-header">
                 <div class="row">
-                    <div class="mb-2 col-sm mb-sm-0">
+                    <div class="col-sm mb-sm-0">
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
@@ -202,7 +202,10 @@
                         @csrf
                         <div class="modal-body">
                             <input type="hidden" value="" id="status_id" name="payroll_id">
-                            <div class="mb-2 col-md-6">
+                            <div class="row">
+
+                           
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
                                     <select name="status" class="form-control" id="status">
@@ -218,7 +221,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-6">
+                            <div class="col-sm-6">
                                 <label for="reimbursement_currency">Reimbursement Currency <small
                                         class="required-field">*</small></label>
 
@@ -231,22 +234,23 @@
 
                                 </select>
                             </div>
-                            <div class="mb-2 col-sm-6">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
                                     <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement amount" value="{{ old('reimbursement_amount') }}">
                                 </div>
                             </div>
-                            <div class="mb-2 col-md-12">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="expenses">Reimbursement Reason</label>
-                                    <textarea name="reimbursement_reason" id="reimbursement_reason" cols="30" rows="10" class="form-control" placeholder="Reimbursement Reason"></textarea>
+                                    <textarea name="reimbursement_reason" id="reimbursement_reason" cols="30" rows="3" class="form-control" placeholder="Reimbursement Reason"></textarea>
                                 </div>
                                 <span class="text-danger">
                                     @error('reimbursement_reason')
                                     {{$message}}
                                     @enderror
                                 </span>
+                            </div>
                             </div>
                         </div>
                         <div class="modal-footer">

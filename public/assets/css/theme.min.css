@@ -31902,6 +31902,7 @@ label.form-control {
 .table-align-middle th {
     vertical-align: middle;
     text-align: justify;
+    font-size: 14px;
 }
 
 .table-text-center,

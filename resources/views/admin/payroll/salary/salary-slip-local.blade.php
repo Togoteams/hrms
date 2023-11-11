@@ -222,8 +222,8 @@
                 <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                     <thead>
                         <tr>
-                            {{-- <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
-                            </td> --}}
+                            <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
+                            </td>
                         </tr>
                         <tr>
                             {{-- <td class="payslip">Salary Date :</td>
@@ -236,8 +236,8 @@
                         <tr>
 
 
-                            {{-- <td class="payslip">Total Working days :</td>
-                            <td class="payslip">{{$data->total_working_days}}</td> --}}
+                            <td class="payslip">Loss Of Pay :</td>
+                            <td class="payslip">{{$data->total_loss_of_pay}}</td>
 
                             {{-- <td class="payslip">Total Absent : </td>
                             <td class="payslip">0</td> --}}

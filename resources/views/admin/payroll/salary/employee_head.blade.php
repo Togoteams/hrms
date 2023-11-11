@@ -5,7 +5,7 @@
             <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
             <label for="basic">Basic</label>
             @php
-            $basic = round(($data->basic / $totalMonthDays) * $presentDay);
+            $basic = round(($data->basic / $totalMonthDays) * $noOfPayableDays);
             @endphp
             <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
         </div>
@@ -80,13 +80,13 @@
                 {
                     $value = round($head_data->value); 
                 }else {
-                    $value = round(($head_data->value / $totalMonthDays) * $presentDay);  
+                    $value = round(($head_data->value / $totalMonthDays) * $noOfPayableDays);  
                 }
             }else {
                 $value = 0;
             }
             @endphp
-            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"  value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}}" class="form-control form-control-sm {{$head->head_type}}">
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"  value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value,$salary_month)}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
@@ -114,10 +114,10 @@
                 {
                     $value = round($head_data?->value); 
                 }else {
-                    $value = round(($head_data?->value / $totalMonthDays) * $presentDay);  
+                    $value = round(($head_data?->value / $totalMonthDays) * $noOfPayableDays);  
                 }  
             @endphp
-            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value)}}" class="form-control form-control-sm {{$head->head_type}}">
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value,$salary_month)}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif

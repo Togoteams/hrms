@@ -16,6 +16,7 @@ class CurrencySeetingSeeder extends Seeder
         $currency = [
             ['currency_name_from'=>"pula",'currency_name_to'=>'usd','currency_amount_from'=>"1",'currency_amount_to'=>"0.073"],
             ['currency_name_from'=>"usd",'currency_name_to'=>'pula','currency_amount_from'=>"1",'currency_amount_to'=>"13.73"],
+            ['currency_name_from'=>"inr",'currency_name_to'=>'pula','currency_amount_from'=>"1",'currency_amount_to'=>"0.16"],
         ];
         foreach($currency as $key => $value)
         {

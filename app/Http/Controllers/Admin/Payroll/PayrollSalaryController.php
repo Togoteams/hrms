@@ -108,6 +108,7 @@ class PayrollSalaryController extends Controller
                     'no_of_payable_days' =>  $request->no_of_payable_days,
                     'no_of_persent_days' =>  $request->no_of_persent_days,
                     'annual_balanced_leave' =>  $request->annual_balanced_leave,
+                    'total_loss_of_pay' =>  $request->total_loss_of_pay,
                     'total_working_days' =>  $request->total_working_days,
                     'net_take_home' =>  $request->net_take_home,
                     'ctc' =>  $request->ctc,
@@ -275,19 +276,18 @@ class PayrollSalaryController extends Controller
         }
     } //
 
-    public function print($user_id)
+    public function print($salaryId)
     {
 
-        $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('user_id', $user_id)->first();
-        $salary = EmpSalary::where('user_id', $user_id)->first();
+        $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
      
-        // if($data->employee->employment_type=="local")
-        // {
-            return view('admin.payroll.salary.salary-slip-local', compact('data', 'salary'));
-        // }else
-        // {
-        //     return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'salary'));
-        // }
+        if($data->employee->employment_type=="local")
+        {
+            return view('admin.payroll.salary.salary-slip-local', compact('data'));
+        }else
+        {
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data'));
+        }
     }
 
     public function get_employee_data($user_id = null,$salary_month = null)
@@ -359,6 +359,6 @@ class PayrollSalaryController extends Controller
         // return $presentDay;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave);
 
-        return view('admin.payroll.salary.employee_head', compact('emp_head','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
+        return view('admin.payroll.salary.employee_head', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
     }
 }

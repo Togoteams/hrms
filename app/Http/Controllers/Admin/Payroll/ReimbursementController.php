@@ -31,6 +31,9 @@ class ReimbursementController extends BaseController
                     $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
                     return $actionBtn;
                 })
+                ->editColumn('claim_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->claim_date)->isoFormat('DD.MM.YYYY');
+                })
                 ->rawColumns(['action'])
                 ->make(true);
             }
