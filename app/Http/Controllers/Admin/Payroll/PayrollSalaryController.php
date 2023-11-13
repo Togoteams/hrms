@@ -325,7 +325,8 @@ class PayrollSalaryController extends Controller
             $totalMonthDays = 24;
         }
 
-        $noOfHoliday = Holiday::where('date','<=',$salaryStartDate)->where('date','>',$salaryEndDate)->where('status','active')->count();
+        $noOfHoliday = Holiday::where('date','<=',$salaryStartDate)->where('date','>=',$salaryEndDate)
+        ->where('status','active')->count();
         // return $noOfHoliday;
         // $noOfAvailedLeaves = LeaveApply::where('user_id',$user_id)
         // ->where('start_date','>',$salaryStartDate)->where('end_date','<',$salaryEndDate)
@@ -342,12 +343,13 @@ class PayrollSalaryController extends Controller
         $noOfUnPaidLeave = LeaveApply::where('user_id',$user_id)
         ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
         ->where('is_paid','unpaid')
+        ->whereNotIn('status',['reject'])
         ->sum('leave_applies_for');
 
         // return $noOfUnPaidLeave;
         $noOfUnapprovedLeave = LeaveApply::where('user_id',$user_id)
         ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
-        ->whereNotIn('status',['approved','rejected'])
+        ->whereNotIn('status',['approved','reject'])
         ->where('is_paid','paid')
         ->sum('leave_applies_for');
         
