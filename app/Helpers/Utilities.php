@@ -934,6 +934,21 @@ function max_min_range($max, $min, $number)
     }
 }
 
+function getAllDates($startingDate, $endingDate)
+{
+    $datesArray = [];
+
+    $startingDate = strtotime($startingDate);
+    $endingDate = strtotime($endingDate);
+         
+    for ($currentDate = $startingDate; $currentDate <= $endingDate; $currentDate += (86400)) {
+        $date = date('Y-m-d', $currentDate);
+        $datesArray[] = $date;
+    }
+
+    return $datesArray;
+}
+
 function getEmpType($type)
 {
     $text =0;

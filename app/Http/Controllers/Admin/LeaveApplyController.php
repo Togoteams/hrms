@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Employee;
 use App\Models\LeaveApply;
+use App\Models\LeaveDate;
 use App\Models\LeaveSetting;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
@@ -40,10 +41,10 @@ class LeaveApplyController extends Controller
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->editColumn('end_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -56,7 +57,6 @@ class LeaveApplyController extends Controller
         } else {
             $data = LeaveApply::with('user', 'leave_type')->select('*');
             $leave_type = LeaveSetting::where('emp_type',1)->whereNotIn('slug',$leaveHideArr)->get();
-
         }
         
         $all_users = Employee::where('status', 'active')->get();
@@ -66,7 +66,6 @@ class LeaveApplyController extends Controller
             'leave_type' => $leave_type,
             'all_user' => $all_users,
             'data' => $data,
-
 
         ]);
     }
@@ -105,7 +104,6 @@ class LeaveApplyController extends Controller
                 })
                 ->orWhere(function ($q3) use ($start_date, $end_date,$today) {
                     $q3->whereBetween('end_date', array($start_date, $end_date));
-
                 });
             })->where('user_id',$userId)->first();
             return !$overlappingRecord;
@@ -150,9 +148,13 @@ class LeaveApplyController extends Controller
                         'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
                         'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
                         'remaining_leave' => $remainingLeave
-
                     ]);
-                    LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
+                    $leaveId  =  LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
+                    $allDate = getAllDates($request->start_date,$request->end_date);
+                    foreach($allDate as $date)
+                    {
+                        $leaveDate = LeaveDate::create(['leave_id'=>$leaveId,'leave_date'=>$date]);
+                    }
                     return response()->json(['success' => $this->page_name . " Added Successfully"]);
                 } catch (Exception $e) {
                     return response()->json(['error' => $e->getMessage()]);
@@ -300,7 +302,7 @@ class LeaveApplyController extends Controller
         try {
             $user =  LeaveApply::find($id);
             LeaveApply::destroy($id);
-            User::destroy($user->user_id);
+            // User::destroy($user->user_id);
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
@@ -354,10 +356,10 @@ class LeaveApplyController extends Controller
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->editColumn('end_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -384,10 +386,10 @@ class LeaveApplyController extends Controller
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->editColumn('end_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -413,10 +415,10 @@ class LeaveApplyController extends Controller
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->editColumn('end_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->end_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);

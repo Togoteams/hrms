@@ -18,14 +18,13 @@ use App\Models\Loans;
 use App\Models\PayrollHead;
 use App\Models\PayrollPayscaleHead;
 use App\Models\LeaveApply;
-use App\Models\LeaveDate;
 use App\Models\PayrollSalary;
 use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\User;
 use App\Traits\PayrollTraits;
 use App\Traits\LeaveTraits;
-class PayrollSalaryController extends Controller
+class PayrollSalaryControllerBk extends Controller
 {
     public  $page_name = "Payroll Salary";
     use PayrollTraits;
@@ -334,85 +333,25 @@ class PayrollSalaryController extends Controller
         // ->where('status',"approved")
         // ->sum('leave_applies_for');
 
-        // $noOfPaidLeave = LeaveApply::where('user_id',$user_id)
-        // ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
-        // ->where('is_paid','paid')
-        // ->where('status','approved')
-        // ->sum('leave_applies_for');
+        $noOfPaidLeave = LeaveApply::where('user_id',$user_id)
+        ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
+        ->where('is_paid','paid')
+        ->where('status','approved')
+        ->sum('leave_applies_for');
 
-        // $totalLeaveInMonth = LeaveApply::where(function ($query) use ($salaryStartDate, $salaryEndDate) {
-        //     $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-        //         $q1->whereBetween('start_date', array($salaryStartDate, $salaryEndDate));
-        //     })
-        //     ->orWhere(function ($q2) use ($salaryStartDate, $salaryEndDate) {
-        //         $q2->where('start_date', '<=', $salaryStartDate)
-        //         ->where('end_date', '>=', $salaryEndDate);
-        //     })
-        //     ->orWhere(function ($q3) use ($salaryStartDate, $salaryEndDate) {
-        //         $q3->whereBetween('end_date', array($salaryStartDate, $salaryEndDate));
-        //     });
-        // })->where('user_id',$user_id)->get();
-
-        /**
-         * This is no of paid  leave who take unpaid , approved and pending leave
-         */
-
-        $noOfUnPaidLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
-            $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate));
-            });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','unpaid')->whereNotIn('status',['reject']);
-        })->count();
-
-        /**
-         * This is no of paid  leave who take paid and approved leave
-         */
-
-        $noOfPaidLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
-            $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate));
-            });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')
-            ->where('status','approved');
-        })->count();
-
-
-        $noOfUnapprovedLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
-            $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate));
-            });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')->whereNotIn('status',['approved','reject']);
-        })->count();
-
-        $noOfDay = 0;
-        // return $noOfUnPaidLeave;
-        // foreach($totalLeaveInMonth as $key => $leave){
-        //     if($salaryEndDate > $leave->end_date)
-        //     {
-        //         $noOfDay = $noOfDay + get_day($leave->start_date,$leave->end_date) +1;
-        //     }elseif($salaryEndDate > $leave->end_date || $salaryEndDate > $leave->end_date ){
-        //     }else
-        //     {
-        //         $noOfDay = $noOfDay + get_day($leave->start_date,$salaryEndDate) +1;
-        //     }
-        // }
-        // return $totalLeaveInMonth;
         $noOfAvailedLeaves = $noOfPaidLeave;
-        // $noOfUnPaidLeave = LeaveApply::where('user_id',$user_id)
-        // ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
-        // ->where('is_paid','unpaid')
-        // ->whereNotIn('status',['reject'])
-        // ->sum('leave_applies_for');
+        $noOfUnPaidLeave = LeaveApply::where('user_id',$user_id)
+        ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
+        ->where('is_paid','unpaid')
+        ->whereNotIn('status',['reject'])
+        ->sum('leave_applies_for');
 
         // return $noOfUnPaidLeave;
-        // $noOfUnapprovedLeave = LeaveApply::where('user_id',$user_id)
-        // ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
-        // ->whereNotIn('status',['approved','reject'])
-        // ->where('is_paid','paid')
-        // ->sum('leave_applies_for');
+        $noOfUnapprovedLeave = LeaveApply::where('user_id',$user_id)
+        ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
+        ->whereNotIn('status',['approved','reject'])
+        ->where('is_paid','paid')
+        ->sum('leave_applies_for');
         
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave;
         // echo $noOfUnPaidLeave;

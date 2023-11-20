@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class LeaveApply extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
     public function user()
     {
         return $this->belongsTo(User::class);
