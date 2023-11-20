@@ -142,11 +142,11 @@ class PayrollSalaryController extends Controller
                     $data['transaction_number'] =rand(1111111,9999999);
                     $data['transaction_type'] = "credit";
                     $data['transaction_amount'] = $payroll->total_deduction+$payroll->gross_earning;
-                    $data['transaction_currency'] ="BWP";
-                    $data['user_id'] =$payroll->user_id;
+                    $data['transaction_currency'] = "BWP";
+                    $data['user_id'] = $payroll->user_id;
                     $data['transaction_at'] = date('Y-m-d H:i:s');
-                    $data['refrence_id'] =$payroll->id;
-                    $data['refrence_table_type'] =get_class($payroll);
+                    $data['refrence_id'] = $payroll->id;
+                    $data['refrence_table_type'] = get_class($payroll);
                     $this->saveTtumData($data);
                 }
 
@@ -328,30 +328,7 @@ class PayrollSalaryController extends Controller
 
         $noOfHoliday = Holiday::where('date','<=',$salaryStartDate)->where('date','>=',$salaryEndDate)
         ->where('status','active')->count();
-        // return $noOfHoliday;
-        // $noOfAvailedLeaves = LeaveApply::where('user_id',$user_id)
-        // ->where('start_date','>',$salaryStartDate)->where('end_date','<',$salaryEndDate)
-        // ->where('status',"approved")
-        // ->sum('leave_applies_for');
-
-        // $noOfPaidLeave = LeaveApply::where('user_id',$user_id)
-        // ->where('start_date','>=',$salaryStartDate)->where('end_date','<=',$salaryEndDate)
-        // ->where('is_paid','paid')
-        // ->where('status','approved')
-        // ->sum('leave_applies_for');
-
-        // $totalLeaveInMonth = LeaveApply::where(function ($query) use ($salaryStartDate, $salaryEndDate) {
-        //     $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-        //         $q1->whereBetween('start_date', array($salaryStartDate, $salaryEndDate));
-        //     })
-        //     ->orWhere(function ($q2) use ($salaryStartDate, $salaryEndDate) {
-        //         $q2->where('start_date', '<=', $salaryStartDate)
-        //         ->where('end_date', '>=', $salaryEndDate);
-        //     })
-        //     ->orWhere(function ($q3) use ($salaryStartDate, $salaryEndDate) {
-        //         $q3->whereBetween('end_date', array($salaryStartDate, $salaryEndDate));
-        //     });
-        // })->where('user_id',$user_id)->get();
+       
 
         /**
          * This is no of paid  leave who take unpaid , approved and pending leave

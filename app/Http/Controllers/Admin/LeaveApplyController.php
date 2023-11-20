@@ -153,7 +153,8 @@ class LeaveApplyController extends Controller
                     $allDate = getAllDates($request->start_date,$request->end_date);
                     foreach($allDate as $date)
                     {
-                        $leaveDate = LeaveDate::create(['leave_id'=>$leaveId,'leave_date'=>$date]);
+                        $isHoliday = isHolidayDate($date);
+                        $leaveDate = LeaveDate::create(['leave_id'=>$leaveId,'leave_date'=>$date,'is_holiday'=>$isHoliday]);
                     }
                     return response()->json(['success' => $this->page_name . " Added Successfully"]);
                 } catch (Exception $e) {

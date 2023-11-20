@@ -21,6 +21,8 @@ use App\Models\PayrollSalaryIncrement;
 use App\Models\Reimbursement;
 use App\Models\LeaveSetting;
 use App\Models\EmplooyeLoans;
+use App\Models\Holiday;
+use App\Models\LeaveDate;
 
 if (!function_exists('isSluggable')) {
     function isSluggable($value)
@@ -890,19 +892,29 @@ function balance_leave_by_typeForEmp($leave_type_id, $user_id = '', $action = ""
       $ignoreLeaveIds = LeaveSetting::whereIn('slug',$balanceLeaveHideArr)->pluck('id')->toArray();
   
       if ($action == "update_status") {
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status', ['reject', 'pending'])->get();
+
+        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
+          $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject','pending']);
+        })->count();
+  
       } else {
-        $total_apply_leaves =  LeaveApply::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status', ['reject'])->get();
+        
+        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
+          $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject']);
+        })->count();
       }
   
-      if (count($total_apply_leaves) > 0) {
-        foreach ($total_apply_leaves as  $value) {
   
-          $no_of_days = get_day($value->start_date, $value->end_date);
-          $total_apply_leave = $total_apply_leave + $no_of_days;
-        }
-        $total_apply_leave = $total_apply_leave + 1;
-      }
+    //   if (count($total_apply_leaves) > 0) {
+    //     foreach ($total_apply_leaves as  $value) {
+  
+    //       $no_of_days = get_day($value->start_date, $value->end_date);
+    //       $total_apply_leave = $total_apply_leave + $no_of_days;
+    //     }
+    //     $total_apply_leave = $total_apply_leave + 1;
+    //   }
+      $total_apply_leave = $total_apply_leave + 1;
+
       // echo $total_apply_leave;
       $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
       $total = $total_leave - $total_apply_leave -  $encash_leave;
@@ -948,6 +960,25 @@ function getAllDates($startingDate, $endingDate)
 
     return $datesArray;
 }
+
+function isHolidayDate($date)
+{
+    $isHoliday = false;
+    $holidayArray=['Sun','Sat'];
+    $dayName = date('D',strtotime($date));
+    $holiday = Holiday::where('date',$date)->first();
+    if(!empty($holiday))
+    {
+        $holidayName = date('D',strtotime($holiday->date));  
+        $holidayArray[] = $holidayName;
+    }
+    if(in_array($dayName,$holidayArray))
+    {
+        $isHoliday = true;
+    }
+    return $isHoliday;
+}
+
 
 function getEmpType($type)
 {
