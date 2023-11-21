@@ -89,20 +89,19 @@ class LeaveApplyController extends Controller
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
             $end_date = $validator->getData()['end_date'];
-            $today = date('Y-m-d');
             $userId = $validator->getData()['user_id'] ?? "";
             $overlappingRecord =true;
             
 
-            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date,$today) {
-                $query->where(function ($q1) use ($start_date, $end_date,$today) {
+            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
+                $query->where(function ($q1) use ($start_date, $end_date) {
                     $q1->whereBetween('start_date', array($start_date, $end_date));
                 })
-                ->orWhere(function ($q2) use ($start_date, $end_date,$today) {
+                ->orWhere(function ($q2) use ($start_date, $end_date) {
                     $q2->where('start_date', '<=', $start_date)
                     ->where('end_date', '>=', $end_date);
                 })
-                ->orWhere(function ($q3) use ($start_date, $end_date,$today) {
+                ->orWhere(function ($q3) use ($start_date, $end_date) {
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
             })->where('user_id',$userId)->first();
@@ -154,7 +153,8 @@ class LeaveApplyController extends Controller
                     foreach($allDate as $date)
                     {
                         $isHoliday = isHolidayDate($date);
-                        $leaveDate = LeaveDate::create(['leave_id'=>$leaveId,'leave_date'=>$date,'is_holiday'=>$isHoliday]);
+                        $payType = $request->pay_type ?? "full_pay";
+                        $leaveDate = LeaveDate::create(['leave_id'=>$leaveId,'leave_date'=>$date,'is_holiday'=>$isHoliday,'pay_type'=>$payType]);
                     }
                     return response()->json(['success' => $this->page_name . " Added Successfully"]);
                 } catch (Exception $e) {
@@ -328,14 +328,23 @@ class LeaveApplyController extends Controller
         $remaining_leave = 0;
 
         $remaining_leave = $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
-        $leave_type_slug = LeaveSetting::find($request->leave_type_id)->slug;
+        $leave_type = LeaveSetting::find($request->leave_type_id);
+        $leave_type_slug = $leave_type->slug;
         $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
         $isBalanceLeaveHide = false;
+        $isIboSickLeave = false;
+
+        // return $leave_type_slug;
+
         if(in_array($leave_type_slug,$balanceLeaveHideArr))
         {
             $isBalanceLeaveHide = true;
         } 
-        return response()->json(['status' =>true,'data'=>['remaining_leave'=>$remaining_leave,'leave_type_slug'=>$leave_type_slug,'is_balance_leave_hide'=>$isBalanceLeaveHide]]);
+        if(!empty($leave_type) && $leave_type->emp_type == 0 &&  $leave_type->slug=="sick-leave")
+        {
+            $isIboSickLeave = true;
+        }
+        return response()->json(['status' =>true,'data'=>['remaining_leave'=>$remaining_leave,'leave_type_slug'=>$leave_type_slug,'is_ibo_sick_leave'=>$isIboSickLeave,'is_balance_leave_hide'=>$isBalanceLeaveHide]]);
         // return $remaining_leave;
     }
 

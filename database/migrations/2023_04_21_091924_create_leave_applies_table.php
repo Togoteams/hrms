@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('leave_type_id');
             $table->unsignedBigInteger('user_id');
             $table->string('leave_applies_for');
+            $table->string('pay_type')->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->string('is_approved')->default(0);

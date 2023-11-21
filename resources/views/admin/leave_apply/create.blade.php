@@ -42,6 +42,17 @@
 
                                 </div>
                             </div>
+                            <div class="mb-2 col-sm-4 ibo-pay-type" style="display: none">
+                                <div class="form-group">
+                                    <label for="pay_type">Pay Type</label>
+                                    <select  id="pay_type"  placeholder="Enter correct pay_type " type="text" name="pay_type" class="form-control form-control-sm ">
+                                        <option selected disabled> -Select Types- </option>
+                                        <option value="half_pay">Half Pay</option>
+                                        <option value="full_pay">Full Pay</option>
+                                    </select>
+
+                                </div>
+                            </div>
                             <div class="mb-2 col-sm-4 balance_leave_section" >
                                 <div class="form-group">
                                     <label for="balance_leave1">balance_leave</label>
@@ -79,7 +90,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason</label>
-                                    <input required id="leave_reason" placeholder="Enter correct leave_reason ex - i want to 2 days for my sister merage  " type="text" name="leave_reason" class="form-control form-control-sm ">
+                                    <input required id="leave_reason" placeholder="Enter leave_reason eg:- i want to 2 days leave for my sister marriage  " type="text" name="leave_reason" class="form-control form-control-sm ">
                                 </div>
                             </div>
 
@@ -114,10 +125,8 @@
             if (text == "SICK LEAVE" || text=="MATERNITY LEAVE") {
                 document.getElementById('doc').setAttribute("required", "");
                 // document.getElementById('doc').;
-
             } else {
                 document.getElementById('doc').removeAttribute("required", "");
-
             }
             var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}"; 
             var user_id = $("#user_id").val();
@@ -141,6 +150,15 @@
                     $("#balance_leave1").val(data.remaining_leave);
                     $(".balance_leave_section").css('display','');
                 }
+                
+                if(data.is_ibo_sick_leave)
+                {
+                    $(".ibo-pay-type").css('display','block');
+                }else
+                {
+                    $(".ibo-pay-type").css('display','none');
+                }
+                
                }else
                {
                 $("#balance_leave1").val(0);
