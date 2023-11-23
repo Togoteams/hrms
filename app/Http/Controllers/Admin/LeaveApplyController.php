@@ -92,7 +92,6 @@ class LeaveApplyController extends Controller
             $userId = $validator->getData()['user_id'] ?? "";
             $overlappingRecord =true;
             
-
             $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
                 $query->where(function ($q1) use ($start_date, $end_date) {
                     $q1->whereBetween('start_date', array($start_date, $end_date));
@@ -111,6 +110,11 @@ class LeaveApplyController extends Controller
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
             $value = Str::headline(Str::camel($attribute));
             return "The $value date range overlaps with an existing record.";
+        });
+
+        Validator::replacer('bereavement_leave_max_limit', function ($message, $attribute, $rule, $parameters) {
+            $value = Str::headline(Str::camel($attribute));
+            return "The bereavement_leave  leave shoul be.";
         });
 
 
@@ -153,7 +157,7 @@ class LeaveApplyController extends Controller
                     foreach($allDate as $date)
                     {
                         $isHoliday = isHolidayDate($date);
-                        $payType = $request->pay_type ?? "full_pay";
+                        $payType = $request->pay_type ?? "";
                         $leaveDate = LeaveDate::create(['leave_id'=>$leaveId,'leave_date'=>$date,'is_holiday'=>$isHoliday,'pay_type'=>$payType]);
                     }
                     return response()->json(['success' => $this->page_name . " Added Successfully"]);

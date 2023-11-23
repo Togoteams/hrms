@@ -44,10 +44,10 @@
                                 <p class="mb-4 card-subtitle">Change your profile picture from here</p>
                                 <div class="form-group" id="image_preview_section">
                                     @if (!empty(Auth::user()->media))
-                                        <img class="img-profile rounded-circle" id="user_img" style="height: 70px;"
+                                        <img class="img-profile rounded-circle" id="user_img" style="height: 75px;"
                                             src="{{ Auth::user()->media->getUrl() }}">
                                     @else
-                                        <img class="img-profile rounded-circle" id="user_img" style="height: 70px;"
+                                        <img class="img-profile rounded-circle" id="user_img" style="height: 75px;"
                                             src="">
                                     @endif
                                 </div>
@@ -66,11 +66,11 @@
                                                 @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
                                                     <img class="dashboard-icon"
                                                         src="{{ asset('assets/profile/' . $data->image) }}"
-                                                        alt="Profile Image" style="height: 60px; width: 75px;">
+                                                        alt="Profile Image" style="height: 75px; width: 75px;">
                                                 @else
                                                     <img class="dashboard-icon"
-                                                        src="{{ asset('assets/img/dashboard/icon6.png') }}"
-                                                        alt="Default Icon" style="height: 60px; width: 75px;">
+                                                        src="{{ asset('assets/profile/profileImage.png') }}"
+                                                        alt="Default Icon" style="height: 75px; width: 75px;">
                                                 @endif
                                             </h6>
                                         </div>

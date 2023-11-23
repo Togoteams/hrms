@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('leave_id');
             $table->date('leave_date');
             $table->tinyInteger('is_holiday')->nullable()->default('0');
-            $table->string('pay_type')->nullable()->default('full_pay');
+            $table->string('pay_type')->nullable();
             $table->timestamps();
         });
     }

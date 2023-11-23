@@ -186,7 +186,7 @@
                                             <div class="pt-2 col-1">
                                                 <select name="currency_salary" id="currency_salary" name="currency_salary" class="form-control form-control-sm">
                                                     @foreach ($currency_setting  as  $currency)
-                                                        <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                                                        <option value="{{$currency->currency_name_from}}" {{ ($employee->currency_salary == ($currency->currency_name_from) ? 'selected' : '')  }}>{{getCurrencyIcon($currency->currency_name_from)}}</option>
                                                     @endforeach
 
                                                 </select>
@@ -449,10 +449,10 @@ $(document).ready(function() {
     employmentTypeSelect.change(function() {
         var selectedEmploymentType = employmentTypeSelect.val();
         if (selectedEmploymentType === "local" || selectedEmploymentType === "local-contractual") {
-            currencySelect.val("PULA");
+            currencySelect.val("pula");
             // currencySelect.prop("disabled", false);
         } else if (selectedEmploymentType === "expatriate") {
-            currencySelect.val("USD");
+            currencySelect.val("usd");
             // currencySelect.prop("disabled", true);
         } else {
             currencySelect.val("");

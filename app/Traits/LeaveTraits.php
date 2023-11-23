@@ -125,15 +125,32 @@ trait LeaveTraits
 
     if ($action == "update_status") {
 
+      $noOfHalfPayLeave  = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
+        $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject','pending']);
+      })->where('pay_type','half_pay')->count();
+
+      $noOfFullPayLeave  = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
+        $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject','pending']);
+      })->where('pay_type','full_pay')->count();
+
       $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
         $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject','pending']);
-      })->count();
+      })->where('pay_type','')->count();
 
     } else {
-      
+
+      $noOfHalfPayLeave  = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
+        $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject','pending']);
+      })->where('pay_type','half_pay')->count();
+
+      $noOfFullPayLeave  = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
+        $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject','pending']);
+      })->where('pay_type','full_pay')->count();
+
       $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
         $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject']);
-      })->count();
+      })->where('pay_type','')->count();
+
     }
 
     // if (count($total_apply_leaves) > 0) {
@@ -144,7 +161,7 @@ trait LeaveTraits
     //   }
     //   $total_apply_leave = $total_apply_leave + 1;
     // }
-    $total_apply_leave = $total_apply_leave + 1;
+    $total_apply_leave = $total_apply_leave + $noOfHalfPayLeave + ($noOfFullPayLeave *2) + 1;
 
     // echo $total_apply_leave;
     $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');

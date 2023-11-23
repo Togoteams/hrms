@@ -529,6 +529,8 @@ if (!function_exists('getCurrencyIcon')) {
         if(strtolower($currency)=='usd')
         {
             $data ="$";
+        }elseif(strtolower($currency)=='inr'){
+            $data ='₹';
         }else
         {
             $data ="P";
