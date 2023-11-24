@@ -66,7 +66,7 @@
                                      @if (auth()->user()->image && file_exists(public_path('assets/profile/' . auth()->user()->image)))
                                      <img class="avatar-img" src="{{ asset('assets/profile/' . auth()->user()->image) }}" alt="Profile Image">
                                     @else
-                                        <img class="avatar-img" src="{{ asset('assets/img/160x160/user.png') }}" alt="Default Icon">
+                                        <img class="avatar-img" src="{{ asset('assets/profile/profileImage.png') }}" alt="Default Icon">
                                     @endif    
                                  <span class="avatar-status avatar-sm-status avatar-status-success"></span>
                              </div>

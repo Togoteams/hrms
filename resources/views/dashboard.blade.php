@@ -18,11 +18,11 @@
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.profile')}}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
-                                    {{-- <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt=""> --}}
+                                    {{-- <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}}" alt=""> --}}
                                     @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
-                                        <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 56px; width: 70px;">
+                                        <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 65px; width: 70px;">
                                     @else
-                                        <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon6.png') }}" alt="Default Icon" style="height: 56px; width: 70px;">
+                                        <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}" alt="Default Icon" style="height:70px; width: 70px;">
                                     @endif
                                     </h6>
                                     <h2 class="text-white card-title">Profile</h2>
@@ -45,7 +45,7 @@
                                 href="{{ url('admin/personal-info/employee-details')}}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
-                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon1.png') }}" alt="">
+                                    <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}" alt="">
                                     </h6>
                                     <h2 class="text-white card-title">Personal Information</h2>
 

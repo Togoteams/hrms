@@ -161,7 +161,7 @@ trait LeaveTraits
     //   }
     //   $total_apply_leave = $total_apply_leave + 1;
     // }
-    $total_apply_leave = $total_apply_leave + $noOfHalfPayLeave + ($noOfFullPayLeave *2) + 1;
+    $total_apply_leave = $total_apply_leave + $noOfHalfPayLeave + ($noOfFullPayLeave *2);
 
     // echo $total_apply_leave;
     $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');

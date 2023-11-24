@@ -6,12 +6,14 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\LeaveSetting;
+use App\Models\LeaveApply;
 use App\Models\LeaveTimeApprovel;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 class LeaveTimeApprovelController extends BaseController
 {
     /**
@@ -85,6 +87,8 @@ class LeaveTimeApprovelController extends BaseController
                 $file->move('assets/leave_document', $filename);
                 $leaveData['document'] = $filename;
             }
+         
+
 
             $request->request->add(['status' =>"pending"]);
             LeaveTimeApprovel::create($leaveData);
@@ -166,17 +170,56 @@ class LeaveTimeApprovelController extends BaseController
 
     public function status(Request $request)
     {
+      
         $request->validate([
             'status' => ['required','string'],
             'description_reason' => ['nullable','string'],
         ]);
-        // dd($request->all());
         $leave = LeaveTimeApprovel::find($request->leave_id);
+       
         $leave->description_reason = $request['description_reason'];
         $leave->status = $request['status'];
         if($request->status=='approved')
-        {
-           $leave->approved_at=date('Y-m-d h:i:s');
+        {   
+            $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id]);
+
+            $leave->approved_at = date('Y-m-d h:i:s');
+            $leaveType = LeaveSetting::find($request->leave_type_id);
+            $leaveSlug = $leaveType->slug;
+
+           Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
+               $start_date = $validator->getData()['start_date'];
+               $end_date = $validator->getData()['end_date'];
+               $userId = $validator->getData()['user_id'] ?? "";
+               $overlappingRecord =true;
+               
+               $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
+                   $query->where(function ($q1) use ($start_date, $end_date) {
+                       $q1->whereBetween('start_date', array($start_date, $end_date));
+                   })
+                   ->orWhere(function ($q2) use ($start_date, $end_date) {
+                       $q2->where('start_date', '<=', $start_date)
+                       ->where('end_date', '>=', $end_date);
+                   })
+                   ->orWhere(function ($q3) use ($start_date, $end_date) {
+                       $q3->whereBetween('end_date', array($start_date, $end_date));
+                   });
+               })->where('user_id',$userId)->first();
+               return !$overlappingRecord;
+           });
+   
+           Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
+               $value = Str::headline(Str::camel($attribute));
+               return "The $value date range overlaps with an existing record.";
+           });
+           $request->validate([
+               'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+               'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
+               'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
+               "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable'],
+               'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1','nullable')]
+           ]);
+           return app('App\Http\Controllers\Admin\LeaveApplyController')->store($request);
         }
         if($request->status=='rejected')
         {

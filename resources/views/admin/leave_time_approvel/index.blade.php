@@ -196,7 +196,7 @@
                         <h5 class="modal-title" id="exampleModalLabel">Status change of {{ $page }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form class="formSubmit" action="{{route('admin.leave_approval.status')}}" method="POST">
+                    <form class="formsubmit" action="{{route('admin.leave_approval.status')}}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <input type="hidden" value="" id="status_id" name="leave_id">
@@ -204,7 +204,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
                                     <select name="status" class="form-control" id="status">
-                                        <option value="">Selected Option</option>
+                                        <option value="">select option</option>
                                         <option value="pending">Pending</option>
                                         <option value="approved">Approved</option>
                                         <option value="rejected">Rejected</option>
@@ -219,7 +219,7 @@
                             <div class="mb-2 col-md-12">
                                 <div class="form-group">
                                     <label for="expenses">Description Reason</label>
-                                    <textarea name="description_reason" id="description_reason" cols="30" rows="10" class="form-control" placeholder="Description Reason"></textarea>
+                                    <textarea name="description_reason" id="description_reason" cols="30" rows="3" class="form-control" placeholder="Description Reason"></textarea>
                                 </div>
                                 {{-- <span class="text-danger">
                                     @error('description_reason')
@@ -231,7 +231,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
-                            <button type="submit" class="btn btn-primary status_add " id="">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="">Submit</button>
                         </div>
                     </form>
                 </div>
