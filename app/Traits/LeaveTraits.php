@@ -67,7 +67,7 @@ trait LeaveTraits
             $totalWorkingMonths = (date('m') -1);
           }else
           {
-            $totalWorkingMonths = ($months -1);
+            $totalWorkingMonths = (date('m') -1);
           }
           $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
         }
