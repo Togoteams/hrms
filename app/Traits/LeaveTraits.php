@@ -62,12 +62,12 @@ trait LeaveTraits
           }
         }else
         {
-          if($years>1)
+          if($years>=1)
           {
             $totalWorkingMonths = (date('m') -1);
           }else
           {
-            $totalWorkingMonths = (date('m') -1);
+            $totalWorkingMonths = ($months -1);
           }
           $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
         }
