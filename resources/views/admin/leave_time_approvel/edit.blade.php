@@ -56,7 +56,7 @@
                     <img src="{{ asset('assets/leave_document/'.$leave->document) }}" alt="image" width="70px" height="70px">
                 @elseif (in_array(pathinfo(asset('assets/leave_document/'.$leave->document), PATHINFO_EXTENSION), ['pdf']))
                     <a href="{{ asset('assets/leave_document/'.$leave->document) }}" target="_blank">
-                        <img src="{{ asset('assets/leave_document/') }}" alt="{{$leave->document}}" width="70px" height="70px">
+                        <img src="{{ asset('assets/img/pdf.png') }}" alt="{{$leave->document}}" width="30px" height="30px">{{$leave->document}}
                     </a>
                 @endif
             </div>
