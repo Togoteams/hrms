@@ -112,16 +112,16 @@
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <div class="row">
-                                                    <div class="col-5">
-                                                        <select name="std_code" id="std_code" class="form-control form-control-sm ">
+                                                    <div class="col-4">
+                                                        <select name="std_code" id="std_code" class="form-control form-control-sm">
                                                             <option value="">Code</option>
                                                             @foreach ($countries as $country)
-                                                                <option value="{{ $country->std_code }}" @if($employee->std_code==$country->std_code) selected @endif>
+                                                                <option value="{{ $country->std_code }}" @if($employee) @if($employee?->std_code==$country->std_code) selected @endif @endif>
                                                                     {{ $country->std_code }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="col-7">
+                                                    <div class="col-8">
                                                         <input id="emergency_contact" placeholder="Enter ." pattern="[0-9]+"
                                                             maxlength="8" minlength="7"
                                                             value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
