@@ -72,19 +72,22 @@
 </main>
 @endsection
 
-
+@push('custom-scripts')
 <script>
     function setId(id, value) {
         document.getElementById(id).value = value;
     }
 
     function getValue(id) {
+        // console.log(id);
         return Number(document.getElementById(id).value);
     }
 
     function taxCalCalculation(e) {
+        console.log("sdsd");
         employmentType = document.getElementById('employment_type').value;
         var basicAmount = getValue('basic');
+        console.log(basicAmount);
         var taxCalcUrl = "{{route('admin.payroll.payscale.tax.cal')}}";
         var taxAbleAmount = 0;
         if (employmentType == "local") {
@@ -128,8 +131,8 @@
 
         var employmentType = document.getElementById('employment_type').value;
         var unionFee = 0;
-        console.log(employmentType);
         var basicAmount = getValue('basic');
+        console.log(basicAmount);
         if (employmentType == "local") {
             var taxAmount = getValue('tax');
             if (basicAmount) {
@@ -138,11 +141,16 @@
             totalEarning = (basicAmount + getValue('allowance') + getValue('others_arrears')+getValue('reimbursement')+ getValue('over_time')).toFixed(2);
             totalDeduction = (taxAmount + getValue('bomaid') + getValue('pension') + unionFee + getValue('other_deductions')).toFixed(2);
             setId('union_fee', unionFee);
-
         } else {
+            console.log(employmentType,'out');
+            console.log(getValue('entertainment_expenses'));
+            console.log(getValue('reimbursement'));
+            console.log(getValue('house_up_keep_allow'));
+            console.log(getValue('education_allowance'));
+            console.log(getValue('recovery_for_car'));
             totalEarning = (basicAmount + getValue('entertainment_expenses') + getValue('reimbursement')+
                 getValue('house_up_keep_allow') + getValue('education_allowance')).toFixed(2);
-            totalDeduction = (getValue('provident_fund') + getValue('other_deductions')).toFixed(2);
+            totalDeduction = (getValue('provident_fund') + getValue('other_deductions')+ getValue('recovery_for_car')).toFixed(2);
         }
 
         setId('gross_earning', totalEarning);
@@ -172,6 +180,17 @@
         
         if(pay_for_month_year!="" && empId!=""){
             editForm(editUrl+empId+"/"+pay_for_month_year, 'edit');
+            // taxCalCalculation();
+            setTimeout(() => {
+                 taxCalCalculation(2);
+            }, 1500);
         }
     }
+
+    $(document).ready(function() {
+        // taxCalCalculation("e");
+    });
 </script>
+ 
+@endpush
+

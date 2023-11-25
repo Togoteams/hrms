@@ -362,7 +362,7 @@
                        </a>
 
                        <div id="emppayroll"
-                           class="nav-collapse collapse {{ show(['payroll.salary.index', 'payroll.payscale.index', 'payroll.head.index', 'payroll.tax-slab-setting.index', 'payroll.salary-increment-setting.index', 'payroll.salary-increment-reporting.index', 'payroll.reimbursement_type.index', 'payroll.reimbursement.index']) }} "
+                           class="nav-collapse collapse {{ show(['payroll.salary.index','payroll.salary.create','overtime-settings.index', 'payroll.payscale.index','payroll.payscale.create', 'payroll.head.index', 'payroll.tax-slab-setting.index', 'payroll.salary-increment-setting.index', 'payroll.salary-increment-reporting.index', 'payroll.reimbursement_type.index', 'payroll.reimbursement.index']) }} "
                            data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                            @canany(['add-tax-slab-settings', 'edit-tax-slab-settings', 'delete-tax-slab-settings',
