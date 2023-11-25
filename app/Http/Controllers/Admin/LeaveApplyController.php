@@ -121,12 +121,12 @@ class LeaveApplyController extends Controller
         //     return "The bereavement_leave  leave shoul be.";
         // });
 
-
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
             'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
             'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
             "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable'],
+            'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],
             'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1')]
         ]);
         if (isset($request->user_id) && $request->user_id != '') {
