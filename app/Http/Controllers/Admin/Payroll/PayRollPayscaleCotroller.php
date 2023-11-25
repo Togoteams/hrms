@@ -20,6 +20,7 @@ class PayRollPayscaleCotroller extends BaseController
 {
     public  $page_name =   "Payroll PayScale";
     use PayrollTraits;
+
     /**
      * Display a listing of the resource.
      */
@@ -255,6 +256,12 @@ class PayRollPayscaleCotroller extends BaseController
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
         $emp_head = PayrollHead::whereIn('employment_type', [$emp->employment_type,'both'])->where('status', 'active')->whereIn('for', ['payscale','both'])->where('deleted_at', null)->get();
-        return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data','emp'));
+        if($emp->employment_type=="expatriate")
+        {
+            return view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head', 'page', 'data','emp'));
+        }else
+        {
+            return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data','emp'));
+        }
     }
 }
