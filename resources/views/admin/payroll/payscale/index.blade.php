@@ -45,7 +45,7 @@
                         <thead>
                             <tr>
                                 <th>SI.</th>
-                                <th>Employee Id</th>
+                                {{-- <th>Employee Id</th> --}}
                                 <th>Employee Code</th>
                                 <th>Employee Name</th>
                                 <th>Basic</th>
@@ -77,10 +77,6 @@
                                 },
 
                              
-                                {
-                                    data: 'employee.emp_id',
-                                    name: 'employee.emp_id'
-                                },
 
                                 {
                                     data: 'employee.ec_number',

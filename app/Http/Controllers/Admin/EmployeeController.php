@@ -300,6 +300,8 @@ class EmployeeController extends BaseController
 
     public function postPassportOmang(Request $request)
     {
+        $employee = Employee::firstWhere('user_id', $request->user_id);
+
         $request->validate([
             'type'       => ['required', 'string'],
             'certificate_no' => [
@@ -315,7 +317,7 @@ class EmployeeController extends BaseController
                     }
                 },
             ],
-            'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
+            'certificate_issue_date'       => ['required', 'date','before_or_equal:' . now()->format('Y-m-d'),'after_or_equal:'.$employee->date_of_birth],
             'certificate_expiry_date'       => ['required', 'date', 'after_or_equal:certificate_issue_date'],
             'country'       => ['required', 'string'],
 

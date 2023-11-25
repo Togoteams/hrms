@@ -15,6 +15,10 @@
 <div class="row">
     <div class="col-md-12">
         <h4>Earning</h4>
+        @php
+        $readonlyArr = ['bomaid','pension','union_fee','tax','over_time'];
+        $fixedHeadsArr = ['bomaid','over_time'];
+        @endphp
     </div>
     @foreach ($emp_head as $head)
     @php
@@ -32,7 +36,7 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
-            <input onkeyup="amount_cal(this)" onblur="taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{$payscaleAmount}}" class="form-control form-control-sm {{$head->head_type}}">
+            <input onkeyup="amount_cal(this)" @if(in_array($head->slug,$readonlyArr)) readonly @endif onblur="taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{$payscaleAmount}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
@@ -60,7 +64,7 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
-            <input onkeyup="amount_cal(this)" value="{{$payscaleDeductionAmount}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"     class="form-control form-control-sm {{$head->head_type}}">
+            <input onkeyup="amount_cal(this)" @if(in_array($head->slug,$readonlyArr)) readonly @endif value="{{$payscaleDeductionAmount}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"     class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif

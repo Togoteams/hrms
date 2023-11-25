@@ -69,9 +69,9 @@
              totalDeduction = getValue('provident_fund') + getValue('other_deductions');
         }
 
-        setId('gross_earning', totalEarning);
-        setId('total_deduction', totalDeduction);
-        setId('net_take_home', totalEarning-totalDeduction);
+        setId('gross_earning', totalEarning.toFixed(2));
+        setId('total_deduction', totalDeduction.toFixed(2));
+        setId('net_take_home',(totalEarning-totalDeduction).toFixed(2));
 
     }
    

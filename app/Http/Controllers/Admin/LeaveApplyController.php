@@ -49,7 +49,7 @@ class LeaveApplyController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leaveHideArr =['maternity-leave'];
+        $leaveHideArr = ['maternity-leave'];
 
         if (isemplooye()) {
             $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
@@ -111,6 +111,10 @@ class LeaveApplyController extends Controller
             $value = Str::headline(Str::camel($attribute));
             return "The $value date range overlaps with an existing record.";
         });
+        
+        /**
+         * Vaidation for specail leave like, maternity-leave,bereavement-leave
+         */
 
         // Validator::replacer('bereavement_leave_max_limit', function ($message, $attribute, $rule, $parameters) {
         //     $value = Str::headline(Str::camel($attribute));
