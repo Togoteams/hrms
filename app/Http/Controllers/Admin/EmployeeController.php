@@ -477,10 +477,11 @@ class EmployeeController extends BaseController
             $start_date = $validator->getData()['start_date'];
             $end_date = $validator->getData()['end_date'] ?? date('Y-m-d');
             $id = $validator->getData()['id'] ?? "";
-            $overlappingRecord =true;
+            $userId = $validator->getData()['user_id'] ?? "";
+            $overlappingRecord =  true;
 
-            $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date,$id) {
-                $query->where('start_date', '<=', $end_date);
+            $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date,$id,$userId) {
+                $query->where('start_date', '<=', $end_date)->where('user_id',$userId);
                 if(!empty($end_date))
                 {
                     $query->where('end_date', '>=', $start_date);

@@ -103,7 +103,7 @@ class LeaveApplyController extends Controller
                 ->orWhere(function ($q3) use ($start_date, $end_date) {
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
-            })->where('user_id',$userId)->first();
+            })->whereNotIn('status',['reject'])->where('user_id',$userId)->first();
             return !$overlappingRecord;
         });
 
