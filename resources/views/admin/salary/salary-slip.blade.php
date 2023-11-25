@@ -54,11 +54,11 @@
    </style>
   </head>
   <body class="mx-auto">
-   <div class="container-fluid px-5 pt-4 pb-5">
+   <div class="px-5 pt-4 pb-5 container-fluid">
     <div><img src="{{ asset('assets/img/logo-cropped.svg') }}" width="200px"></div>
     <div class="row">
         <div class="col-md-12">
-            <div class="text-center lh-1 mb-5">
+            <div class="mb-5 text-center lh-1">
                 <h4 class="fw-bold text-orange">Salary Slip</h4> <span class="fw-normal">Salary slip for the month of June 2021</span>
             </div>
 
@@ -93,8 +93,8 @@
                     </div>
 
                 </div>
-                <table class="mt-4 table table-bordered">
-                    <thead class="bg-orange text-white">
+                <table class="table mt-4 table-bordered">
+                    <thead class="text-white bg-orange">
                         <tr>
                             <th scope="col">Earnings</th>
                             <th scope="col">Amount</th>
@@ -189,7 +189,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <div class="d-flex flex-column mt-2"> <span class="fw-bolder text-orange">For Bank of Baroda</span> <span class="mt-4">Authorised Signature</span> </div>
+                <div class="mt-2 d-flex flex-column"> <span class="fw-bolder text-orange">For Bank of Baroda</span> <span class="mt-4">Authorised Signature</span> </div>
             </div>
         </div>
     </div>

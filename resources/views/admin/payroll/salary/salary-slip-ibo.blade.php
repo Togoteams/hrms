@@ -33,7 +33,7 @@
 
             page[size="A4"] {
                 width: 21cm;
-                height: 45.7cm;
+                height: 29.7cm;
             }
 
             @page {
@@ -162,7 +162,6 @@
         <page size="A4">
 
             <div class="page-layout">
-
 
                 <table class="mt-4" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                     <tbody>

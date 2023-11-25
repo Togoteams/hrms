@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="form_data" action="{{ route('admin.leave_time_approved.store') }}">
+                <form  class="formsubmit fileupload" action="{{ route('admin.leave_time_approved.store') }}" id="leave_store">
                     @csrf
                     {{-- <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}"> --}}
                     <input type="hidden" name="request_date" readonly id="request_date"
@@ -33,7 +33,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="leave_type_id" class="required">Leave Type</label>
-                                <select name="leave_type_id" id="leave_type_id" class="form-control" required>
+                                <select name="leave_type_id" id="leave_type_id" class="form-control" >
                                     <option value="">- Select -</option>
                                     @foreach ($leave_setting as $setting)
                                         <option value="{{ $setting->id }}"
@@ -80,7 +80,7 @@
 
                         <hr>
                         <div class="text-center ">
-                            <button onclick="ajaxCall('form_data')" type="button" class="btn btn-white">Add
+                            <button  type="submit" class="btn btn-white">Add
                                 {{ $page }}</button>
                         </div>
                     </div>

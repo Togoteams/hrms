@@ -152,7 +152,7 @@ class LeaveApplyController extends Controller
                         'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
                         'remaining_leave' => $remainingLeave
                     ]);
-                    $leaveId  =  LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method']));
+                    $leaveId  =  LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method','leave_id','description_reason']));
                     $allDate = getAllDates($request->start_date,$request->end_date);
                     foreach($allDate as $date)
                     {
@@ -160,7 +160,7 @@ class LeaveApplyController extends Controller
                         $payType = $request->pay_type ?? "";
                         $leaveDate = LeaveDate::create(['leave_id'=>$leaveId,'leave_date'=>$date,'is_holiday'=>$isHoliday,'pay_type'=>$payType]);
                     }
-                    return response()->json(['success' => $this->page_name . " Added Successfully"]);
+                    return response()->json(['success' => $this->page_name . " Added Successfully",'status'=>true]);
                 } catch (Exception $e) {
                     return response()->json(['error' => $e->getMessage()]);
                 }

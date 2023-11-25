@@ -64,19 +64,57 @@ class LeaveTimeApprovelController extends BaseController
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric',
-            'leave_type_id' => 'required|numeric',
-            'request_date' => 'required|date',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-            'reason' => 'required|string',
-            'document' => 'required|file|mimes:jpeg,jpg,png,pdf',
-            'description' => 'nullable|string',
+       
+        Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
+            $start_date = $validator->getData()['start_date'];
+            $end_date = $validator->getData()['end_date'];
+            $userId = $validator->getData()['user_id'] ?? "";
+            $overlappingRecord =true;
+            
+            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
+                $query->where(function ($q1) use ($start_date, $end_date) {
+                    $q1->whereBetween('start_date', array($start_date, $end_date));
+                })
+                ->orWhere(function ($q2) use ($start_date, $end_date) {
+                    $q2->where('start_date', '<=', $start_date)
+                    ->where('end_date', '>=', $end_date);
+                })
+                ->orWhere(function ($q3) use ($start_date, $end_date) {
+                    $q3->whereBetween('end_date', array($start_date, $end_date));
+                });
+            })->where('user_id',$userId)->first();
+            return !$overlappingRecord;
+        });
+
+        $leaveType = LeaveSetting::find($request->leave_type_id);
+        $leaveSlug = $leaveType?->slug;
+
+        Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
+            $value = Str::headline(Str::camel($attribute));
+            return "The $value date range overlaps with an existing record.";
+        });
+        $request->validate([
+            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+            'user_id' => ['required', 'numeric', 'exists:users,id'],
+            'request_date' => ['required', 'date'],
+            'reason' => ['required', 'string'],
+            'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
+            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
+            "document" => ["max:10000",'required'],
         ]);
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
+        // $validator = Validator::make($request->all(), [
+        //     'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+        //     'user_id' => ['required', 'numeric', 'exists:users,id'],
+        //     'request_date' => ['required', 'date'],
+        //     'reason' => ['required', 'date'],
+        //     'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
+        //     'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
+        //     "document" => ["mimetypes:application/pdf", "max:10000",'nullable'],
+        //     'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1','nullable')]
+        // ]);
+        // if ($validator->fails()) {
+        //     return $validator->errors();
+        // } else {
 
             $leaveData = $request->except('_token');
 
@@ -87,13 +125,11 @@ class LeaveTimeApprovelController extends BaseController
                 $file->move('assets/leave_document', $filename);
                 $leaveData['document'] = $filename;
             }
-         
-
 
             $request->request->add(['status' =>"pending"]);
             LeaveTimeApprovel::create($leaveData);
-            return response()->json(['success' => $this->page_name . " Added Successfully"]);
-        }
+            return response()->json(['status'=>true,'message' => $this->page_name . " Added Successfully",'data'=>[]]);
+        // }
     }
 
     /**
@@ -181,7 +217,7 @@ class LeaveTimeApprovelController extends BaseController
         $leave->status = $request['status'];
         if($request->status=='approved')
         {   
-            $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id]);
+            $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id,'remaining_leave'=>0]);
 
             $leave->approved_at = date('Y-m-d h:i:s');
             $leaveType = LeaveSetting::find($request->leave_type_id);
@@ -219,16 +255,19 @@ class LeaveTimeApprovelController extends BaseController
                "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable'],
                'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1','nullable')]
            ]);
-           return app('App\Http\Controllers\Admin\LeaveApplyController')->store($request);
+          $response =  app('App\Http\Controllers\Admin\LeaveApplyController')->store($request);
+        //   if($response)
+        //   re
         }
         if($request->status=='rejected')
         {
            $leave->rejected_at=date('Y-m-d h:i:s');
         }
         $leave->save();
+        return response()->json(['status'=>true,'message' => $this->page_name . " Status updated Successfully",'data'=>[]]);
+
         // return $this->responseJson(true,200,'status created successfully',$leave);
         // return response()->json(['success' => $this->page_name . " status created successfully"]);
-        return redirect()->back()->with('success', $this->page_name . ' status created successfully');
 
 
     }

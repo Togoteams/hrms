@@ -33,7 +33,7 @@
 
             page[size="A4"] {
                 width: 21cm;
-                height: 45.7cm;
+                height: 29.7cm;
             }
 
             @page {
@@ -225,24 +225,18 @@
                             <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
                             </td>
                         </tr>
+                        
                         <tr>
-                            {{-- <td class="payslip">Salary Date :</td>
-                            <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td> --}}
-                            {{-- <td class="payslip">No. of Payable days :</td>
-                            <td class="payslip">{{$data->no_of_payable_days}}</td>
-                            <td class="payslip">Annual Balanced Leave :</td>
-                            <td class="payslip">{{$data->annual_balanced_leave}}</td> --}}
-                        </tr>
-                        <tr>
-
-
                             <td class="payslip">Loss Of Pay :</td>
                             <td class="payslip">{{$data->total_loss_of_pay}}</td>
-
-                            {{-- <td class="payslip">Total Absent : </td>
-                            <td class="payslip">0</td> --}}
-                            {{-- <td class="payslip">No. Availed Leave :</td>
-                            <td class="payslip">{{$data->no_availed_leave}}</td> --}}
+                            {{-- <td class="payslip"> </td>
+                            <td class="payslip"> </td>
+                            <td class="payslip"> </td>
+                            <td class="payslip"> </td> --}}
+                            <td class="payslip">Total Absent : </td>
+                            <td class="payslip">0</td>
+                            <td class="payslip">No. Availed Leave :</td>
+                            <td class="payslip">{{$data->no_availed_leave}}</td>
                         </tr>
                     </thead>
                 </table>
@@ -340,12 +334,7 @@
                 </div>
                 <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>
                 <ul style="padding-left: 12px;">
-                    {{-- <li>1. The student are expected to keep this cardneat and clean</li>
-                    <li>2. In case the card is lost the duplicate card will be issued on payment of extra report card
-                        free.</li>
-                    <li>3. Promotion will be granted on the weight of both examination. To pass the monthly test is also
-                        compulsary.</li> --}}
-                    <li>1. This is computer generated pay slip.</li>
+                    <li>This is computer generated pay slip.</li>
                 </ul>
             </div>
         </page>

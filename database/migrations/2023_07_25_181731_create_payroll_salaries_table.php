@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('employment_type')->nullable();
             $table->string('status')->default('active');
             $table->string('pay_for_month_year')->nullable();
             $table->double('basic');
@@ -24,11 +25,7 @@ return new class extends Migration
             $table->double('no_availed_leave')->default(0);
             $table->double('no_of_persent_days')->default(0);
             $table->double('total_loss_of_pay')->default(0);
-            // $table->double('fixed_deductions');
-            // $table->double('other_deductions');
             $table->double('net_take_home');
-            // $table->double('ctc');
-            // $table->double('total_employer_contribution');
             $table->double('total_deduction');
             $table->double('gross_earning');
             $table->unsignedBigInteger('updated_by')->nullable();

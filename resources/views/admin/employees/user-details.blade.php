@@ -157,7 +157,7 @@
                                                         value="female">Female</option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->gender == 'others' ? 'selected' : '') : '' }}
-                                                        value="others">others</option>
+                                                        value="others">Others</option>
                                                 </select>
                                             </div>
 
