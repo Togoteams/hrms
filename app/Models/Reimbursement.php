@@ -24,7 +24,14 @@ class Reimbursement extends Model
     'status',
     'approved_at',
     'rejected_at'];
-    
+
+    public function scopeGetReimbursement($query)
+    {
+        return $query
+        ->where('status', 'active');
+
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -77,5 +84,6 @@ class Reimbursement extends Model
 
         return $monthNames[$this->attributes['claim_to_month']];
     }
+
 
 }

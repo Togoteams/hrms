@@ -16,9 +16,12 @@ class CurrencySetting extends Model
         'status'
     ];
 
-    // public function getStatusAttribute($showStatus)
-    // {
-    //     return ucfirst($showStatus); 
-    // }
+    public function scopeGetCurrency($query)
+    {
+        return $query
+        ->where('status', 'active');
+
+    }
+
 
 }

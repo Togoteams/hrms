@@ -36,10 +36,10 @@ class EmployeeSalaryController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $designation = Designation::all();
+        $designation = Designation::getDesignation()->get();
         $membership = Membership::all();
         $users = User::where('status', 'active')->get();
-        $branch = Branch::where('status', 'active')->get();
+        $branch = Branch::getBranch()->get();
         return view('admin.employees_salary.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch, 'users' => $users]);
     }
     /**
@@ -109,9 +109,9 @@ class EmployeeSalaryController extends Controller
      */
     public function show(string $id)
     {
-        $designation = Designation::all();
+        $designation = Designation::getDesignation()->get();
         $membership = Membership::all();
-        $branch = Branch::where('status', 'active')->get();
+        $branch = Branch::getBranch()->get();
         $data = EmployeeSalary::find($id);
         return view('admin.employees_salary.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }

@@ -9,4 +9,10 @@ class Branch extends Model
 {
     use HasFactory;
     protected $fillable=['name','code','address','city','state','country','landmark','status','description'];
+    public function scopeGetBranch($query)
+         {
+             return $query
+             ->where('status', 'active');
+
+         }
 }

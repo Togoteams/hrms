@@ -39,8 +39,8 @@ class ReimbursementController extends BaseController
             }
         $Employees = Employee::all();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
-        $reimbursementType = ReimbursementType::where('status','active')->get();
-        $currencies = CurrencySetting::where('status','active')->get();
+        $reimbursementType = ReimbursementType::getReimbursement()->get();
+        $currencies = CurrencySetting::getCurrency()->get();
         return view('admin.payroll.reimbursement.index', ['page' => $this->page_name,
         'reimbursementType' => $reimbursementType,
         'currencies' => $currencies,
@@ -130,8 +130,8 @@ class ReimbursementController extends BaseController
     {
         $data = Reimbursement::find($id);
         $employee = Employee::where('status','active')->get();
-        $reimbursementType = ReimbursementType::where('status','active')->get();
-        $currencies = CurrencySetting::where('status','active')->get();
+        $reimbursementType = ReimbursementType::getReimbursement()->get();
+        $currencies = CurrencySetting::getCurrency()->get();
         return view('admin.payroll.reimbursement.show', ['data' => $data,
         'reimbursementType' => $reimbursementType,
         'currencies'=>$currencies,
@@ -146,8 +146,8 @@ class ReimbursementController extends BaseController
     {
 
         $reimbursement = Reimbursement::find($id);
-        $reimbursementType = ReimbursementType::where('status','active')->get();
-        $currencies = CurrencySetting::where('status','active')->get();
+        $reimbursementType = ReimbursementType::getReimbursement()->get();
+        $currencies = CurrencySetting::getCurrency()->get();
         return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$currencies, 'page' => $this->page_name]);
     }
 

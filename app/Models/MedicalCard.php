@@ -16,9 +16,10 @@ class MedicalCard extends Model
          'description',
          'status'];
 
-        //  public function getStatusAttribute($showStatus)
-        //  {
-        //      return ucfirst($showStatus); 
-        //  }
-     
+         public function scopeGetMedicalCard($query)
+         {
+             return $query
+             ->where('status', 'active');
+
+         }
 }

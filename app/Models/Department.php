@@ -9,6 +9,12 @@ class Department extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'slug','status'];
+    public function scopeGetDepartment($query)
+    {
+        return $query
+        ->where('status', 'active');
 
-   
+    }
+
+
 }

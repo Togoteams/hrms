@@ -28,8 +28,8 @@ class PersonalInformationController extends Controller
         if (empty($data)) {
             return redirect('/');
         }
-        $designation = Designation::all();
-        $countries = Country::all();
+        $designation = Designation::getDesignation()->get();
+        $countries = Country::getCountry()->get();
         // Access the user's salutation
         $salutation = $data->user->salutation;
 
@@ -43,7 +43,7 @@ class PersonalInformationController extends Controller
         $page_name = "Family Details";
         // $data = Employee::where('user_id', Auth::user()->id)->first();
         // $designation = Designation::all();
-        $countries = Country::all();
+        $countries = Country::getCountry()->get();
         $datas = FamilyDetail::where('user_id', Auth::user()->id)->get();
         return view('admin.dashboard.personal-information.family-details', ['page' => $page_name, 'datas'=>$datas , 'countries'=>$countries]);
     }
@@ -70,7 +70,7 @@ class PersonalInformationController extends Controller
     public function viewAddress()
     {
         $page_name = "Address";
-        $countries = Country::all();
+        $countries = Country::getCountry()->get();
         $data = EmpAddress::where('user_id', Auth::user()->id)->first();
         // return $data;
         return view('admin.dashboard.personal-information.address', ['data' => $data, 'page' => $page_name,'countries'=>$countries]);
@@ -79,7 +79,7 @@ class PersonalInformationController extends Controller
     public function viewPassport()
     {
         $page_name = "Passport";
-        $countries = Country::all();
+        $countries = Country::getCountry()->get();
         $data = EmpPassportOmang::where('user_id', Auth::user()->id)->first();
         return view('admin.dashboard.personal-information.passport', ['data' => $data, 'page' => $page_name, 'countries'=>$countries]);
     }

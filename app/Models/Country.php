@@ -13,4 +13,10 @@ class Country extends Model
         'std_code',
          'description',
          'status'];
+    public function scopeGetCountry($query)
+    {
+        return $query
+        ->where('status', 'active');
+
+    }
 }

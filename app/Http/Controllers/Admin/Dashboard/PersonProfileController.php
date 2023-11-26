@@ -130,7 +130,7 @@ class PersonProfileController extends BaseController
             'start_date' => ['required', 'date','before_or_equal:' . now()->format('Y-m-d')],
             'grade' => ['required', 'string'],
             'end_date' => ['required', 'date', 'after:start_date'],
-            'skill' => ['required', 'array'], 
+            'skill' => ['required', 'array'],
             'description' => ['required', 'string'],
         ]);
 
@@ -139,7 +139,7 @@ class PersonProfileController extends BaseController
         } else {
             try {
                 if (empty($request->id)) {
-                    $skills = $request->input('skill'); 
+                    $skills = $request->input('skill');
                     TrainingDetails::insertGetId(array_merge($request->except(['_token', 'id']), ['skill' => implode(', ', $skills)]));
                     $message = "Record Created Successfully";
                 } else {
@@ -260,7 +260,7 @@ class PersonProfileController extends BaseController
     public function viewMedicalInsuranceBomaidDetails()
     {
         $data = EmpMedicalInsurance::where('user_id', Auth::user()->id)->first();
-        $card = MedicalCard::get();
+        $card = MedicalCard::getMedicalCard()->get();
         // return $data;
         return view('admin.dashboard.person-profile.medical-insurance-bomaid-details', ['data' => $data,'card'=>$card]);
     }
@@ -271,7 +271,7 @@ class PersonProfileController extends BaseController
             'medical_card_id' => ['required', 'numeric'],
             'company_name' => ['required', 'string'],
             'insurance_id' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
-            
+
         ]);
         try {
             if (empty($request->id)) {
@@ -322,7 +322,7 @@ class PersonProfileController extends BaseController
 
     public function viewPreviousEmploymentDetails()
     {
-        $designation = Designation::get();
+        $designation = Designation::getDesignation()->get();
         $datas = EmploymentHistory::where('user_id', Auth::user()->id)->get();
         // dd($designation);
         return view('admin.dashboard.person-profile.previous-employment-details', ['datas' => $datas, 'designation' =>$designation]);

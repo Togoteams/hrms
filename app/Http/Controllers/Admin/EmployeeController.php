@@ -70,8 +70,8 @@ class EmployeeController extends BaseController
 
     public function viewUserDetails($eid = null)
     {
-        $roles = Role::where('status', 'active')->get();
-        $countries = Country::all();
+        $roles = Role::getRoles()->where('status','active')->get();
+        $countries = Country::getCountry()->get();
         return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid),'roles'=>$roles,'countries'=>$countries]);
     }
 
@@ -169,12 +169,12 @@ class EmployeeController extends BaseController
 
     public function viewEmployeeDetails($eid = null)
     {
-       $designation = Designation::where('status','active')->get();
+       $designation = Designation::getDesignation()->get();
         $membership = Membership::get();
-        $bomaind = MedicalCard::where('status','active')->get();
-        $currencySetting = CurrencySetting::where('status','active')->get();
+        $bomaind = MedicalCard::getMedicalCard()->get();
+        $currencySetting = CurrencySetting::getCurrency()->get();
 
-        $branch = Branch::where('status', 'active')->get();
+        $branch = Branch::getBranch()->get();
 
         return view('admin.employees.employee-details',[
                 'page'          => $this->page_name,
@@ -257,7 +257,7 @@ class EmployeeController extends BaseController
 
     public function viewAddress($eid = null)
     {
-        $countries = Country::all();
+        $countries = Country::getCountry()->get();
         return view('admin.employees.emp-address', ['employee' => $this->getEmployee($eid), 'countries'=>$countries]);
     }
 
@@ -294,7 +294,7 @@ class EmployeeController extends BaseController
 
     public function viewPassportOmang($eid = null)
     {
-        $countries = Country::all();
+        $countries = Country::getCountry()->get();
         return view('admin.employees.emp-passport-omang', ['employee' => $this->getEmployee($eid), 'countries'=>$countries]);
     }
 
@@ -401,7 +401,7 @@ class EmployeeController extends BaseController
 
     public function viewMedicalInsuaranceBomaid($eid = null)
     {
-        $cardType = MedicalCard::all();
+        $cardType = MedicalCard::getMedicalCard()->get();
         return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $this->getEmployee($eid),'cardType'=>$cardType]);
     }
 
@@ -469,7 +469,7 @@ class EmployeeController extends BaseController
 
     public function viewDepartmentHistory($eid = null)
     {
-        $departments = Department::all();
+        $departments = Department::getDepartment()->get();
         return view('admin.employees.emp-department-history', ['employee' => $this->getEmployee($eid),'departments'=>$departments]);
     }
 
