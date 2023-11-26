@@ -70,7 +70,7 @@ class EmployeeController extends BaseController
 
     public function viewUserDetails($eid = null)
     {
-        $roles = Role::getRoles()->get();
+        $roles = Role::where('status', 'active')->get();
         $countries = Country::all();
         return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid),'roles'=>$roles,'countries'=>$countries]);
     }
