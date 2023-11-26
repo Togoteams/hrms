@@ -16,6 +16,7 @@ use App\Models\TaxSlabSetting;
 use App\Models\PayrollPayscaleHead;
 use App\Models\User;
 use App\Traits\PayrollTraits;
+use App\Models\CurrencySetting;
 class PayRollPayscaleCotroller extends BaseController
 {
     public  $page_name =   "Payroll PayScale";
@@ -91,7 +92,7 @@ class PayRollPayscaleCotroller extends BaseController
     {
         
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|numeric|unique:payroll_payscales,user_id',
+            'user_id' => 'required|numeric',
             'basic' => 'required|numeric',
             // 'fixed_deductions' => 'required|numeric',
             // 'other_deductions' => 'required|numeric',
@@ -160,8 +161,22 @@ class PayRollPayscaleCotroller extends BaseController
         $page = $this->page_name;
         $emp = Employee::where('user_id', $payscale->user_id)->first();
         $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
-        $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
-        return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head', compact('emp_head','emp', 'page', 'data', 'edit')), 'data' => $payscale]);
+        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        if(!empty($currencySeeting))
+        {
+            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+        }
+        $emp_head = PayrollHead::where('employment_type', $emp->employment_type)
+        ->orWhere('employment_type', 'both')->where('status', 'active')
+        ->where('for', 'payscale')
+        ->where('deleted_at', null)->get();
+        if($emp->employment_type=="expatriate")
+        {
+            return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head','emp', 'page', 'data', 'edit','pulaToUSDAmount')), 'data' => $payscale]);
+        }
+        else{
+            return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head', compact('emp_head','emp', 'page', 'data', 'edit')), 'data' => $payscale]);
+        }
     }
 
     /**
@@ -255,10 +270,15 @@ class PayRollPayscaleCotroller extends BaseController
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
+        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        if(!empty($currencySeeting))
+        {
+            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+        }
         $emp_head = PayrollHead::whereIn('employment_type', [$emp->employment_type,'both'])->where('status', 'active')->whereIn('for', ['payscale','both'])->where('deleted_at', null)->get();
         if($emp->employment_type=="expatriate")
         {
-            return view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head', 'page', 'data','emp'));
+            return view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head', 'page', 'data','emp','pulaToUSDAmount'));
         }else
         {
             return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data','emp'));

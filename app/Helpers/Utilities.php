@@ -576,10 +576,10 @@ if (!function_exists('getHeadValue')) {
             $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->where('status','active')->first();
             $multipleValue = $currencySeeting->currency_amount_to;
         }
-        if($basic==0)
-        {
-            $basicAmout = $emp->basic_salary * $multipleValue;
-        }
+        // if($basic==0)
+        // {
+        //     $basicAmout = $emp->basic_salary * $multipleValue;
+        // }
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
@@ -602,14 +602,21 @@ if (!function_exists('getHeadValue')) {
                 $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
             }
             $inrToPulaAmount = 1;
+            $pulaToUSDAmount = 1;
             $currencySeeting = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','pula')->first();
             if(!empty($currencySeeting))
             {
                 $inrToPulaAmount = $currencySeeting->currency_amount_to;
             }
+            $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+            if(!empty($currencySeeting))
+            {
+                $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+            }
             // if ($isPensionApplied == "yes") {
-            $providentFound = $inrBasicAmount * $inrToPulaAmount;
-            return $providentFound;
+            $providentFound = ((($inrBasicAmount / 100)) * 10);
+            $providentFound = $providentFound * number_format($inrToPulaAmount * $pulaToUSDAmount,3);
+            return number_format($providentFound,2);
             // }
         }elseif ($headSlug == "house_up_keep_allow") {
             $houseUpKeepAllow = 0;

@@ -39,7 +39,7 @@
                                     <select required  onchange="editForm('{{ route('admin.payroll.payscale.emp.head') }}/'+this.value, 'edit')"
                                         id="gender" placeholder="Enter correct gender  " name="user_id"
                                         class="form-control form-control-sm ">
-                                        <option selected disabled> - Select Employees- </option>
+                                        <option selected > - Select Employees- </option>
                                         @foreach ($all_users as $au)
                                             <option value="{{ $au->user->id }}">{{ $au->user->name }} -
                                                 {{ $au->user->email }}</option>

@@ -51,22 +51,28 @@
         var totalDeduction = 0;
         
         var employmentType = document.getElementById('employment_type').value;
-        var unionFee = getValue('union_fee');
         console.log(employmentType);
         var basicAmount = getValue('basic');
         if(employmentType=="local")
         {
             var taxAmount = getValue('tax');
-            
+            var unionFee = getValue('union_fee');
+
             totalEarning = basicAmount + getValue('allowance') + getValue('others_arrears');
-                    totalDeduction = taxAmount + getValue('bomaid') + getValue('pension') + unionFee  + getValue('other_deductions');
+            totalDeduction = taxAmount + getValue('bomaid') + getValue('pension') + unionFee  + getValue('other_deductions');
             setId('union_fee', unionFee);
 
         }else
         {
+            var educationAllowanceAmount = getValue('education_allowance');
+            var otherDeductions = getValue('other_deductions');
+            var pulaToUSDAmount = getValue('pulaToUSDAmount');
+            var educationAllowanceAmount = educationAllowanceAmount * pulaToUSDAmount;
+            var otherDeductions = otherDeductions * pulaToUSDAmount;
+
             totalEarning = basicAmount + getValue('entertainment_expenses')+
-             getValue('house_up_keep_allow')+  getValue('education_allowance');
-             totalDeduction = getValue('provident_fund') + getValue('other_deductions');
+             getValue('house_up_keep_allow')+  educationAllowanceAmount;
+             totalDeduction = getValue('provident_fund') + otherDeductions + getValue('recovery_for_car') ;
         }
 
         setId('gross_earning', totalEarning.toFixed(2));
