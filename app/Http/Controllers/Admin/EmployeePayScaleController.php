@@ -35,10 +35,10 @@ class EmployeePayScaleController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $designation = Designation::all();
+        $designation = Designation::getDesignation()->get();
         $membership = Membership::all();
         $users = User::where('status', 'active')->get();
-        $branch = Branch::where('status', 'active')->get();
+        $branch = Branch::getBranch()->get();
         return view('admin.employees_payscale.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch, 'users' => $users]);
     }
     /**
@@ -108,9 +108,9 @@ class EmployeePayScaleController extends Controller
      */
     public function show(string $id)
     {
-        $designation = Designation::all();
+        $designation = Designation::getDesignation()->get();
         $membership = Membership::all();
-        $branch = Branch::where('status', 'active')->get();
+        $branch = Branch::getBranch()->get();
         $data = EmployeePayScale::find($id);
         $users = User::all();
 
@@ -121,9 +121,9 @@ class EmployeePayScaleController extends Controller
      */
     public function edit(string $id)
     {
-        $designation = Designation::all();
+        $designation = Designation::getDesignation()->get();
         $membership = Membership::all();
-        $branch = Branch::where('status', 'active')->get();
+        $branch = Branch::getBranch()->get();
         $data = EmployeePayScale::find($id);
         $users = User::all();
 
@@ -194,7 +194,7 @@ class EmployeePayScaleController extends Controller
     }
 
 
-  
+
 
     /**
      * Remove the specified resource from storage.

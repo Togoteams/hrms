@@ -39,11 +39,15 @@ class ReimbursementController extends BaseController
             }
         $Employees = Employee::all();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
-        $reimbursementType = ReimbursementType::getReimbursement()->get();
+        $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
+        // Filter currencies to include only 'pula' and 'usd'
+        $allowedCurrencies = ['pula', 'usd'];
+        $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
+
         return view('admin.payroll.reimbursement.index', ['page' => $this->page_name,
         'reimbursementType' => $reimbursementType,
-        'currencies' => $currencies,
+        'currencies' => $filteredCurrencySetting,
         'reimbursement' => $reimbursement,
          'Employees' => $Employees]);
 
@@ -130,11 +134,16 @@ class ReimbursementController extends BaseController
     {
         $data = Reimbursement::find($id);
         $employee = Employee::where('status','active')->get();
-        $reimbursementType = ReimbursementType::getReimbursement()->get();
+        $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
+
+        // Filter currencies to include only 'pula' and 'usd'
+        $allowedCurrencies = ['pula', 'usd'];
+        $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
+
         return view('admin.payroll.reimbursement.show', ['data' => $data,
         'reimbursementType' => $reimbursementType,
-        'currencies'=>$currencies,
+        'currencies'=>$filteredCurrencySetting,
         'employee' => $employee,
          'page' => $this->page_name]);
     }
@@ -146,9 +155,14 @@ class ReimbursementController extends BaseController
     {
 
         $reimbursement = Reimbursement::find($id);
-        $reimbursementType = ReimbursementType::getReimbursement()->get();
+        $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
-        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$currencies, 'page' => $this->page_name]);
+
+         // Filter currencies to include only 'pula' and 'usd'
+         $allowedCurrencies = ['pula', 'usd'];
+         $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
+
+        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$filteredCurrencySetting, 'page' => $this->page_name]);
     }
 
 

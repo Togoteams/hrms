@@ -174,6 +174,10 @@ class EmployeeController extends BaseController
         $bomaind = MedicalCard::getMedicalCard()->get();
         $currencySetting = CurrencySetting::getCurrency()->get();
 
+        // Filter currencies to include only 'pula' and 'usd'
+        $allowedCurrencies = ['pula', 'usd'];
+        $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
+
         $branch = Branch::getBranch()->get();
 
         return view('admin.employees.employee-details',[
@@ -182,7 +186,7 @@ class EmployeeController extends BaseController
                 'membership'    => $membership,
                 'branch'        => $branch,
                 'bomaind'       => $bomaind,
-                'currency_setting' =>$currencySetting,
+                'currency_setting' =>$filteredCurrencySetting,
                 'employee'      => $this->getEmployee($eid)
             ]
         );

@@ -12,6 +12,12 @@ class ReimbursementType extends Model
 
     public function getStatusAttribute($showStatus)
     {
-        return ucfirst($showStatus); 
+        return ucfirst($showStatus);
+    }
+    public function scopeGetReimbursementType($query)
+    {
+        return $query
+        ->where('status', 'active');
+
     }
 }

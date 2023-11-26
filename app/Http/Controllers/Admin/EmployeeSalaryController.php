@@ -120,9 +120,9 @@ class EmployeeSalaryController extends Controller
      */
     public function edit(string $id)
     {
-        $designation = Designation::all();
+        $designation = Designation::getDesignation()->get();
         $membership = Membership::all();
-        $branch = Branch::where('status', 'active')->get();
+        $branch = Branch::getBranch()->get();
         $data = EmployeeSalary::find($id);
         return view('admin.employees_salary.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }

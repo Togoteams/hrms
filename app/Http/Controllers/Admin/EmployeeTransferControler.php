@@ -36,8 +36,8 @@ class EmployeeTransferControler extends Controller
                 ->make(true);
             }
         $all_users = Employee::get();
-        $department = Department::get();
-        $branch = Branch::get();
+        $department = Department::getDepartment()->get();
+        $branch = Branch::getBranch()->get();
         // dd($all_users);
         return view('admin.employees_transfer.index', ['page' => $this->page_name, 'all_users'=>$all_users,'department'=>$department,'branch'=>$branch]);
 
@@ -67,7 +67,7 @@ class EmployeeTransferControler extends Controller
                 'transfer_reason' => 'required|string',
 
             ]);
-      
+
         }else{
             $validator = Validator::make($request->all(), [
                 'emp_id' =>'required|numeric',
@@ -109,9 +109,9 @@ class EmployeeTransferControler extends Controller
     {
         $item = EmployeeTransfer::find($id);
         $all_users = Employee::get();
-        $department = Department::get();
-        $branch = Branch::get();       
-        return view('admin.employees_transfer.edit', ['item'=>$item,'all_users'=>$all_users,'department'=>$department,'branch'=>$branch, 'page' => $this->page_name]);    
+        $department = Department::getDepartment()->get();
+        $branch = Branch::getBranch()->get();
+        return view('admin.employees_transfer.edit', ['item'=>$item,'all_users'=>$all_users,'department'=>$department,'branch'=>$branch, 'page' => $this->page_name]);
     }
 
     /**
@@ -129,7 +129,7 @@ class EmployeeTransferControler extends Controller
                 'transfer_reason' => 'required|string',
 
             ]);
-      
+
         }else{
             $validator = Validator::make($request->all(), [
                 'emp_id' =>'required|numeric',
@@ -147,7 +147,7 @@ class EmployeeTransferControler extends Controller
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -163,7 +163,7 @@ class EmployeeTransferControler extends Controller
     }
 
     public function status(Request $request)
-    {   
+    {
         // dd($request->all());
         $request->validate([
             'status' => ['required','string'],

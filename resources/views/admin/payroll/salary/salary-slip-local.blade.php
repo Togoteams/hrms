@@ -225,7 +225,7 @@
                             <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
                             </td>
                         </tr>
-                        
+
                         <tr>
                             <td class="payslip">Loss Of Pay :</td>
                             <td class="payslip">{{$data->total_loss_of_pay}}</td>
