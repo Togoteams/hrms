@@ -129,19 +129,19 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="gross_earning">Gross Earning</label>
-            <input required id="gross_earning" placeholder="Enter correct Gross Earning" type="text" value="{{ $data->gross_earning ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
+            <input required id="gross_earning"  readonly placeholder="Enter correct Gross Earning" type="text" value="{{ $data->gross_earning ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
             <label for="total_deduction">Total Deduction</label>
-            <input required id="total_deduction" placeholder="Enter correct Total Deduction" type="text" value="{{ $data->total_deduction ?? '' }}" name="total_deduction" class="form-control form-control-sm ">
+            <input required id="total_deduction" readonly placeholder="Enter correct Total Deduction" type="text" value="{{ $data->total_deduction ?? '' }}" name="total_deduction" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
             <label for="net_take_home">Net Take Home</label>
-            <input required id="net_take_home" placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ $data->net_take_home ?? '' }}" name="net_take_home" class="form-control form-control-sm ">
+            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ $data->net_take_home ?? '' }}" name="net_take_home" class="form-control form-control-sm ">
         </div>
     </div>
 </div>

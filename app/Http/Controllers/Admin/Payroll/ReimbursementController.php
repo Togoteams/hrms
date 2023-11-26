@@ -192,15 +192,17 @@ class ReimbursementController extends BaseController
         ]);
 
         $validator->after(function ($validator) use ($request, $user, $id) {
+            $claim_to_month = $request->claim_to_month;
+            $claim_from_month = $request->claim_from_month;
             $overlapExists = Reimbursement::where('user_id', $user->id)
-                ->where(function ($query) use ($request) {
-                    $query->where(function ($query) use ($request) {
-                        $query->where('claim_from_month', '<=', $request->claim_to_month)
-                            ->where('claim_to_month', '>=', $request->claim_from_month);
+                ->where(function ($query) use ($request,$claim_from_month,$claim_to_month) {
+                    $query->where(function ($query) use ($request,$claim_from_month,$claim_to_month) {
+                        $query->where('claim_from_month', '<=', $claim_to_month)
+                            ->where('claim_to_month', '>=', $claim_from_month);
                     })
-                    ->orWhere(function ($query) use ($request) {
-                        $query->where('claim_from_month', '<=', $request->claim_to_month)
-                            ->where('claim_to_month', '>=', $request->claim_to_month);
+                    ->orWhere(function ($query2) use ($request,$claim_from_month,$claim_to_month) {
+                        $query2->where('claim_from_month', '<=', $claim_to_month)
+                            ->where('claim_to_month', '>=', $claim_to_month);
                     });
                 })
                 ->where('id', '!=', $id)

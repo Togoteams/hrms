@@ -284,6 +284,7 @@ class PayrollSalaryController extends Controller
 
         $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
         $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        $pulaToUSDAmount=1;
         if(!empty($currencySeeting))
         {
             $pulaToUSDAmount = $currencySeeting->currency_amount_to;

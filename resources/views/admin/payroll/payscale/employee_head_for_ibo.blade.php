@@ -12,7 +12,7 @@
 @php
     $grossEarning =$emp->basic_salary;
     $totalDeduction = 0;
-    $pulaInsertionArr =['education_allowance','other_deductions'];
+    $pulaInsertionArr = ['education_allowance','other_deductions'];
 @endphp
 <div class="row">
     <div class="col-md-12">
@@ -60,7 +60,7 @@
     @endphp
     @if($head->head_type=="deduction")
     @php
-        $payscaleDeductionAmount = getHeadValue($emp,$head->slug,"",$emp->basic_salary);
+        $payscaleDeductionAmount = getHeadValue($emp,$head->slug,"payscale",$emp->basic_salary);
         $totalDeduction = $totalDeduction + $payscaleDeductionAmount;
     @endphp
     <div class="mb-2 col-sm-4">
@@ -77,20 +77,20 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="gross_earning">gross_earning</label>
-            <input required id="gross_earning" placeholder="Enter correct Gross Earning   " type="text" value="{{ number_format($grossEarning,2) }}" name="gross_earning" class="form-control form-control-sm ">
+            <input required id="gross_earning" readonly placeholder="Enter correct Gross Earning   " type="text" value="{{ number_format($grossEarning,2) }}" name="gross_earning" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="total_deduction">total_deduction</label>
-            <input required id="total_deduction" placeholder="Enter correct Total Deduction   " type="text" value="{{ number_format($totalDeduction,2) }}" name="total_deduction" class="form-control form-control-sm ">
+            <input required id="total_deduction" readonly placeholder="Enter correct Total Deduction   " type="text" value="{{ number_format($totalDeduction,2) }}" name="total_deduction" class="form-control form-control-sm ">
         </div>
     </div>
 
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="net_take_home">net_take_home</label>
-            <input required id="net_take_home" placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ number_format(($grossEarning -  $totalDeduction),2) }}" name="net_take_home" class="form-control form-control-sm ">
+            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ number_format(($grossEarning -  $totalDeduction),2) }}" name="net_take_home" class="form-control form-control-sm ">
         </div>
     </div>
 </div>
