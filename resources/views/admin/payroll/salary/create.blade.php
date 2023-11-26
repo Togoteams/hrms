@@ -138,9 +138,15 @@
             setId('union_fee', unionFee);
         } else {
           
+            var educationAllowanceAmount = getValue('education_allowance');
+            var otherDeductions = getValue('other_deductions');
+            var pulaToUSDAmount = getValue('pulaToUSDAmount');
+            var educationAllowanceAmount = (educationAllowanceAmount * pulaToUSDAmount);
+            var otherDeductions = (otherDeductions * pulaToUSDAmount);
+
             totalEarning = (basicAmount + getValue('entertainment_expenses') + getValue('reimbursement')+
-                getValue('house_up_keep_allow') + getValue('education_allowance')).toFixed(2);
-            totalDeduction = (getValue('provident_fund') + getValue('other_deductions')+ getValue('recovery_for_car')).toFixed(2);
+                getValue('house_up_keep_allow') + educationAllowanceAmount);
+            totalDeduction = (getValue('provident_fund') + otherDeductions + getValue('recovery_for_car'));
         }
 
         setId('gross_earning', totalEarning.toFixed(2));

@@ -26,6 +26,7 @@ use App\Models\User;
 use App\Traits\PayrollTraits;
 use Carbon\Carbon;
 use App\Traits\LeaveTraits;
+use App\Models\CurrencySetting;
 class PayrollSalaryController extends Controller
 {
     public  $page_name = "Payroll Salary";
@@ -282,13 +283,17 @@ class PayrollSalaryController extends Controller
     {
 
         $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
-     
+        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        if(!empty($currencySeeting))
+        {
+            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+        }
         if($data->employee->employment_type=="local")
         {
             return view('admin.payroll.salary.salary-slip-local', compact('data'));
         }else
         {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data'));
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data','pulaToUSDAmount'));
         }
     }
 
@@ -394,7 +399,11 @@ class PayrollSalaryController extends Controller
         
         $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPaySickLeave;
        
-        
+        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        if(!empty($currencySeeting))
+        {
+            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+        }
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave;
         // echo $noOfUnPaidLeave;
         // return $noOfUnapprovedLeave;
@@ -402,7 +411,13 @@ class PayrollSalaryController extends Controller
         $presentDay = $totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave);
         // return $presentDay;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave);
+        
+        if($emp->employment_type=="expatriate")
+        {
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','pulaToUSDAmount'));
+        }else{
+            return view('admin.payroll.salary.employee_head', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
 
-        return view('admin.payroll.salary.employee_head', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
+        }
     }
 }

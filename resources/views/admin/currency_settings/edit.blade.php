@@ -10,8 +10,8 @@
                 <label for="currency_name_from" class="required">Currency Name From</label>
                 <select name="currency_name_from" id="currency_name_from" class="form-control">
                     <option value="">Select Currency Name From</option>
-                    <option value="usd" @if ($currency->currency_name_from == 'USD') selected @endif>USD</option>
-                    <option value="pula" @if ($currency->currency_name_from == 'PULA') selected @endif>PULA</option>
+                    <option value="usd" @if ($currency->currency_name_from == 'usd') selected @endif>USD</option>
+                    <option value="pula" @if ($currency->currency_name_from == 'pula') selected @endif>PULA</option>
                 </select>
             </div>
         </div>

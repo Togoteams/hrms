@@ -4,7 +4,7 @@
         <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
         <div class="form-group">
             <label for="basic">IBO Salary</label>
-            <input onkeyup="amount_cal(this)" value="{{$emp->basic_salary}}" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
+            <input onkeyup="amount_cal(this)" value="{{$emp->basic_salary}}" readonly onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
             <input  value="{{$pulaToUSDAmount}}"  id="pulaToUSDAmount" type="hidden" name="pulaToUSDAmount"  class="form-control form-control-sm">
         </div>
     </div>

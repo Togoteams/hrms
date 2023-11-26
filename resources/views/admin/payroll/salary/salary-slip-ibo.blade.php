@@ -267,12 +267,25 @@
 
                                 @php
                                 $noOfIncome = $noOfIncome +1;
-                                $totalIncomeAmount = $totalIncomeAmount + $value->value
+                                if($value->payroll_head->slug=="education_allowance")
+                                {
+                                    $totalIncomeAmount = $totalIncomeAmount + ($value->value  * $pulaToUSDAmount);
+
+                                }else {
+                                    $totalIncomeAmount = $totalIncomeAmount + $value->value;
+                                }
                                 @endphp
                                 <tr>
+                                    @if($value->payroll_head->slug=="education_allowance")
+                                    <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                    <!-- <td style="text-align: right;">{{$value->value}}</td> -->
+                                    <td style="text-align: right;">{{$value->value * $pulaToUSDAmount}}</td>
+                                    @else
                                     <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <!-- <td style="text-align: right;">{{$value->value}}</td> -->
                                     <td style="text-align: right;">{{$value->value}}</td>
+                                    @endif
+                                    
                                 </tr>
                                 @endif
                                 @endforeach
@@ -300,11 +313,22 @@
                                 @if ($value->payroll_head->head_type=="deduction")
                                 @php
                                 $noOfDescription = $noOfDescription +1;
-                                $totalDeductionAmount = $totalDeductionAmount + $value->value;
+                                if($value->payroll_head->slug=="other_deductions")
+                                {
+                                    $totalDeductionAmount = $totalDeductionAmount + ($value->value * $pulaToUSDAmount);
+                                }else {
+                                    $totalDeductionAmount = $totalDeductionAmount + $value->value;
+                                }
                                 @endphp
                                 <tr>
+                                    @if($value->payroll_head->slug=="other_deductions")
+                                    <td style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
+                                    <td style="text-align: right;">{{$value->value * $pulaToUSDAmount}}</td>
+                                    @else
                                     <td style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <td style="text-align: right;">{{$value->value}}</td>
+                                    @endif
+                                  
                                 </tr>
                                 @endif
                                 @endforeach

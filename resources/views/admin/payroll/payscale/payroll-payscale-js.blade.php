@@ -67,8 +67,8 @@
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
             var pulaToUSDAmount = getValue('pulaToUSDAmount');
-            var educationAllowanceAmount = educationAllowanceAmount * pulaToUSDAmount;
-            var otherDeductions = otherDeductions * pulaToUSDAmount;
+            var educationAllowanceAmount = (educationAllowanceAmount * pulaToUSDAmount).toFixed(2);
+            var otherDeductions = (otherDeductions * pulaToUSDAmount).toFixed(2);
 
             totalEarning = basicAmount + getValue('entertainment_expenses')+
              getValue('house_up_keep_allow')+  educationAllowanceAmount;
