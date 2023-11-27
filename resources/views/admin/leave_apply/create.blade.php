@@ -10,10 +10,7 @@
                     <form id="form_data" action="{{ route('admin.leave_apply.store') }}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
-
-
                         <div class="row">
-
                             @if (!isemplooye())
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">

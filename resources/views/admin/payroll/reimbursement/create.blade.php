@@ -12,21 +12,25 @@
                     <form id="form_data" action="{{ route('admin.payroll.reimbursement.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d H:i:s') }}">
-                        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                        
                         <div class="row">
+                            @if (!isemplooye())
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="emp_id" class="required">Employee</label>
-                                    <select name="emp_id" class="form-control" id="emp_id">
+                                    <label for="user_id" class="required">Employee</label>
+                                    <select name="user_id" class="form-control" id="user_id">
                                         <option value="">- Select -</option>
                                         @foreach ($Employees as $employee)
-                                            <option value="{{ $employee->emp_id }}">
+                                            <option value="{{ $employee->user->id }}">
                                                 {{ $employee->user->name }}({{ $employee->ec_number }})
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                            @else
+                            <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                            @endif
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="type" class="required">Reimbursement Type</label>

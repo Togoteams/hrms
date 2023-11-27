@@ -51,6 +51,8 @@
                         <tr>
                             <th>SI.</th>
                             <th>Type</th>
+                            <th>Empolyee Code</th>
+                            <th>Empolyee Name</th>
                             <th>Expense Currency</th>
                             <th>Expense Amount</th>
                             <th>Claim date</th>
@@ -83,7 +85,14 @@
                                 orderable: false,
                                 searchable: false
                             },
-
+                            {
+                                data: 'user.name',
+                                name: 'user.name'
+                            },
+                            {
+                                data: 'user.employee.ec_number',
+                                name: 'user.employee.ec_number'
+                            },
 
                             {
                                 data: 'reimbursementype.type',

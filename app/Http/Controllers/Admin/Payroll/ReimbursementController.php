@@ -24,7 +24,7 @@ class ReimbursementController extends BaseController
     public function index(Request $request)
     {
             if ($request->ajax()) {
-            $data = Reimbursement::with('reimbursementype')->select('*');
+            $data = Reimbursement::with('reimbursementype','user','user.employee')->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -37,7 +37,7 @@ class ReimbursementController extends BaseController
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        $Employees = Employee::all();
+        $Employees = Employee::getActiveEmp()->get();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
@@ -69,10 +69,11 @@ class ReimbursementController extends BaseController
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
         $validator = Validator::make($request->all(), [
             'type_id' => 'required|numeric',
+            'user_id' => 'required|numeric|exists:users,id',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
             'financial_year' => 'required|numeric',
@@ -88,9 +89,9 @@ class ReimbursementController extends BaseController
             'reimbursement_notes' => 'required|string',
 
         ]);
-
-        $validator->after(function ($validator) use ($request, $user) {
-            $overlapExists = Reimbursement::where('user_id', $user->id)
+        $userId = $request->user_id;
+        $validator->after(function ($validator) use ($request, $userId) {
+            $overlapExists = Reimbursement::where('user_id', $userId)
                 ->where(function ($query) use ($request) {
                     $query->where(function ($query) use ($request) {
                         $query->where('claim_from_month', '<=', $request->claim_to_month)
@@ -114,7 +115,7 @@ class ReimbursementController extends BaseController
         } else {
             try {
                 $request->merge([
-                    'user_id' => $user->id,
+                    'user_id' => $userId,
                     'status' => "pending",
                 ]);
                 Reimbursement::create($request->except(['_token', '_method']));
