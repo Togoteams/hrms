@@ -663,8 +663,7 @@ if (!function_exists('getHeadValue')) {
         } elseif ($headSlug == "reimbursement") {
             $reimbursementAmount = 0;
             $reimbursements = Reimbursement::whereBetween('claim_date', array($startDate, $endDate))
-
-            // ->where('user_id',$emp->user_id)
+            ->where('user_id',$emp->user_id)
             ->where('status','approved')
             ->get();
             foreach($reimbursements as $reimbursement)
