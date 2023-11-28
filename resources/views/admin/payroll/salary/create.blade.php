@@ -125,17 +125,18 @@
         var totalDeduction = 0;
 
         var employmentType = document.getElementById('employment_type').value;
-        var unionFee = 0;
+       
         var basicAmount = getValue('basic');
         console.log(basicAmount);
         if (employmentType == "local") {
+            var unionFee = getValue('union_fee');
             var taxAmount = getValue('tax');
-            if (basicAmount) {
-                unionFee = basicAmount / 100;
-            }
+            // if (basicAmount) {
+            //     unionFee = basicAmount / 100;
+            // }
             totalEarning = (basicAmount + getValue('allowance') + getValue('others_arrears')+getValue('reimbursement')+ getValue('over_time')).toFixed(2);
             totalDeduction = (taxAmount + getValue('bomaid') + getValue('pension') + unionFee + getValue('other_deductions')).toFixed(2);
-            setId('union_fee', unionFee);
+            // setId('union_fee', unionFee);
         } else {
           
             var educationAllowanceAmount = getValue('education_allowance');
@@ -149,9 +150,9 @@
             totalDeduction = (getValue('provident_fund') + otherDeductions + getValue('recovery_for_car'));
         }
 
-        setId('gross_earning', totalEarning.toFixed(2));
-        setId('total_deduction', totalDeduction.toFixed(2));
-        setId('net_take_home', (totalEarning - totalDeduction).toFixed(2));
+        setId('gross_earning', totalEarning);
+        setId('total_deduction', totalDeduction);
+        setId('net_take_home', (totalEarning - totalDeduction));
 
     }
     // editForm('{{ route('admin.payroll.salary.emp.head') }}/'+this.value, 'edit')
