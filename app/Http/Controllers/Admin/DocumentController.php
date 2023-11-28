@@ -22,7 +22,7 @@ class DocumentController extends Controller
     public function index()
     {
         $data =  Document::all();
-        $documentType = DocumentType::get();
+        $documentType = DocumentType::getDocumentType()->get();
         $all_users = Employee::with('user')->get();
         return view('admin.document.index', ['page' => $this->page_name,'data' => $data,'all_users'=>$all_users, 'documentType' => $documentType]);
 
@@ -45,13 +45,13 @@ class DocumentController extends Controller
             'document_name' => 'string|required',
             'document_type' => 'required|string',
             'document' => 'required|file|mimes:jpeg,jpg,png,pdf',
-           
+
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             $documentData = $request->except('_token');
-        
+
             if ($request->hasFile('document')) {
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
@@ -59,9 +59,9 @@ class DocumentController extends Controller
                 $file->move('assets/document', $filename);
                 $documentData['document'] = $filename;
             }
-        
+
             Document::create($documentData);
-        
+
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
     }
@@ -80,8 +80,8 @@ class DocumentController extends Controller
     public function edit(string $id)
     {
         $data = Document::find($id);
-        $documentType = DocumentType::get();
-        return view('admin.document.edit', ['data' => $data, 'page' => $this->page_name, 'documentType' => $documentType]);   
+        $documentType = DocumentType::getDocumentType()->get();
+        return view('admin.document.edit', ['data' => $data, 'page' => $this->page_name, 'documentType' => $documentType]);
     }
 
     public function documentAssignedit(string $id)
@@ -89,7 +89,7 @@ class DocumentController extends Controller
         $data = Document::find($id);
         // return $data;
         $all_users = Employee::with('user')->get();
-        return view('admin.document.asign_emp', ['data' => $data, 'page' => $this->page_name,'all_users'=>$all_users]);   
+        return view('admin.document.asign_emp', ['data' => $data, 'page' => $this->page_name,'all_users'=>$all_users]);
     }
 
 
@@ -105,10 +105,10 @@ class DocumentController extends Controller
         ]);
         if ($validator->fails()) {
             return $validator->errors();
-         } 
+         }
          else {
             $documentData = $request->except('_token', '_method');
-        
+
             if ($request->hasFile('document')) {
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
@@ -116,7 +116,7 @@ class DocumentController extends Controller
                 $file->move('assets/document', $filename);
                 $documentData['document'] = $filename;
             }
-        
+
             Document::where('id', $id)->update($documentData);
             // Document::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);

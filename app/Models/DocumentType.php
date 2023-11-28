@@ -12,4 +12,11 @@ class DocumentType extends Model
         'name',
          'description',
          'status'];
+
+    public function scopeGetDocumentType($query)
+    {
+        return $query
+        ->where('status', 'active');
+
+    }
 }
