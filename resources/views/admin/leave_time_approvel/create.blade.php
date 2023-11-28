@@ -61,7 +61,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="document">Document</label>
-                                <input type="file" name="document"  id="document"
+                                <input type="file" accept="application/pdf" name="document"  id="document"
                                     class="form-control" >
                             </div>
                         </div>

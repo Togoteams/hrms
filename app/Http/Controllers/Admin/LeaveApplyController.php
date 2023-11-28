@@ -176,6 +176,8 @@ class LeaveApplyController extends Controller
                     {
                         $remainingLeave = $remainingLeave -  $request->leave_applies_for;
                     }
+                    
+                    $allDate = getAllDates($request->start_date,$request->end_date);
                     $request->request->add([
                         'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
                         'uuid' => $user->uuid,
@@ -186,7 +188,7 @@ class LeaveApplyController extends Controller
                         'remaining_leave' => $remainingLeave
                     ]);
                     $leaveId  =  LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method','leave_id','description_reason']));
-                    $allDate = getAllDates($request->start_date,$request->end_date);
+                    
                     foreach($allDate as $date)
                     {
                         $isHoliday = isHolidayDate($date);

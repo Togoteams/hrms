@@ -355,7 +355,7 @@ class PayrollSalaryController extends Controller
         })->whereHas('leaveApply', function($q) use ($user_id) {
             $q->where('user_id',$user_id)->where('is_paid','unpaid')->whereNotIn('status',['reject']);
         })->count();
-
+        // return $noOfUnPaidLeave;
         /**
          * This is no of paid  leave who take paid and approved leave
          */
@@ -379,14 +379,24 @@ class PayrollSalaryController extends Controller
             ->where('status','approved');
         })->count();
 
-        $halfPaySickLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
+        $halfPayLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
                 $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','half_pay');
             });
         })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')
+            $q->where('user_id',$user_id)
             ->where('status','approved');
         })->count();
+
+        $quarterPayLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
+            $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','quarter_pay');
+            });
+        })->whereHas('leaveApply', function($q) use ($user_id) {
+            $q->where('user_id',$user_id)
+            ->where('status','approved');
+        })->count();
+        // return
 
         $noOfUnapprovedLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
@@ -398,20 +408,25 @@ class PayrollSalaryController extends Controller
 
         $noOfDay = 0;
 
-        $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPaySickLeave;
+        $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
 
         $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
         if(!empty($currencySeeting))
         {
             $pulaToUSDAmount = $currencySeeting->currency_amount_to;
         }
-        $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave;
+
+        $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
         // echo $noOfUnPaidLeave;
         // return $noOfUnapprovedLeave;
-
-        $presentDay = $totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave);
+        // $noOfPayableDays
+        $presentDay = intval($totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave + $quarterPayLeave));
+        if( $presentDay<0)
+        {
+            $presentDay =0;
+        }
         // return $presentDay;
-        $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave);
+        $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave/2)+($quarterPayLeave * 0.25));
 
         if($emp->employment_type=="expatriate")
         {

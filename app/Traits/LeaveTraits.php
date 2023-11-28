@@ -18,9 +18,9 @@ trait LeaveTraits
     }
     $total_apply_leave = 0;
     $emp = Employee::where('user_id', $user_id)->first();
-
     $totalNoOfLeaveInBucket = 0;
-    $leaveSettings = LeaveSetting::where('emp_type', getEmpType($emp->employment_type))->get();
+    $leaveHideArr = ['maternity-leave'];
+    $leaveSettings = LeaveSetting::where('emp_type', getEmpType($emp->employment_type))->whereNotIn('slug',$leaveHideArr)->get();
     foreach ($leaveSettings as $key => $leaveSetting) {
       $totalNoOfLeaveInBucket = $totalNoOfLeaveInBucket + $this->balance_leave_by_type($leaveSetting->id,$user_id);
       // echo $totalNoOfLeaveInBucket."</br>";

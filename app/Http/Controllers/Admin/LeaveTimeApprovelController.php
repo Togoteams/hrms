@@ -217,7 +217,7 @@ class LeaveTimeApprovelController extends BaseController
         $leave->status = $request['status'];
         if($request->status=='approved')
         {
-            $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id,'remaining_leave'=>0]);
+            $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id,'remaining_leave'=>0,'leave_applies_for'=>count(getAllDates($leave->start_date,$leave->end_date))]);
 
             $leave->approved_at = date('Y-m-d h:i:s');
             $leaveType = LeaveSetting::find($request->leave_type_id);
@@ -248,6 +248,14 @@ class LeaveTimeApprovelController extends BaseController
                $value = Str::headline(Str::camel($attribute));
                return "The $value date range overlaps with an existing record.";
            });
+           $isMaternityLeave = LeaveApply::where('leave_type_id',$request->leave_id)->where('user_id',$leave->user_id)->get();
+           if(!empty($isMaternityLeave))
+           {
+            $request->merge(['pay_type'=>'quarter_pay']);
+           }else
+           {
+            $request->merge(['pay_type'=>'half_pay']);
+           }
            $request->validate([
                'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
                'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],

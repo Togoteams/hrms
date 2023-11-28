@@ -11,15 +11,15 @@
             <form id="edit{{ $item->id }}"
                 action="{{ route('admin.leave_time_approved.destroy', $item->id) }}">
 
-                {{-- @if(!isemplooye())
+                @if(!isemplooye())
                 @can('change-status-leave-type-approval')
                 <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
                 @endcan
-                @endif --}}
+                @endif
 
-                @can('change-status-leave-type-approval')
+                {{-- @can('change-status-leave-type-approval')
                 <button type="button"class="btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
-                @endcan
+                @endcan --}}
 
 
                 @can('view-leave-type-approval')
