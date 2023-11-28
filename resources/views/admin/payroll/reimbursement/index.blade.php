@@ -105,10 +105,7 @@
                                 data: 'expenses_amount',
                                 name: 'expenses_amount'
                             },
-                            {
-                                data: 'claim_date',
-                                name: 'claim_date'
-                            },
+                            
                             {
                                 data: 'claim_date',
                                 name: 'claim_date'

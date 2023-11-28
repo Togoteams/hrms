@@ -289,12 +289,18 @@ class PayrollSalaryController extends Controller
         {
             $pulaToUSDAmount = $currencySeeting->currency_amount_to;
         }
+        $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
+        $inrToUSDAmount = 1;
+        if(!empty($currencySeetingInrUsd))
+        {
+            $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
+        }
         if($data->employee->employment_type=="local")
         {
             return view('admin.payroll.salary.salary-slip-local', compact('data'));
         }else
         {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data','pulaToUSDAmount'));
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data','pulaToUSDAmount','inrToUSDAmount'));
         }
     }
 
@@ -411,9 +417,17 @@ class PayrollSalaryController extends Controller
         $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
 
         $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        $pulaToUSDAmount = 1;
         if(!empty($currencySeeting))
         {
             $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+        }
+        
+        $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
+        $inrToUSDAmount = 1;
+        if(!empty($currencySeetingInrUsd))
+        {
+            $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
         }
 
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
@@ -430,7 +444,7 @@ class PayrollSalaryController extends Controller
 
         if($emp->employment_type=="expatriate")
         {
-            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','pulaToUSDAmount'));
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','pulaToUSDAmount','inrToUSDAmount'));
         }else{
             return view('admin.payroll.salary.employee_head', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
 

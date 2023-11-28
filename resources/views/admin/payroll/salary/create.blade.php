@@ -134,18 +134,18 @@
             // if (basicAmount) {
             //     unionFee = basicAmount / 100;
             // }
-            totalEarning = (basicAmount + getValue('allowance') + getValue('others_arrears')+getValue('reimbursement')+ getValue('over_time')).toFixed(2);
+            totalEarning = (basicAmount + getValue('allowance') + getValue('others_arrears')+ getValue('over_time')).toFixed(2);
             totalDeduction = (taxAmount + getValue('bomaid') + getValue('pension') + unionFee + getValue('other_deductions')).toFixed(2);
             // setId('union_fee', unionFee);
         } else {
           
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
-            var pulaToUSDAmount = getValue('pulaToUSDAmount');
-            var educationAllowanceAmount = (educationAllowanceAmount * pulaToUSDAmount);
-            var otherDeductions = (otherDeductions * pulaToUSDAmount);
+            var inrToUSDAmount = getValue('inrToUSDAmount');
+            var educationAllowanceAmount = (educationAllowanceAmount * inrToUSDAmount);
+            var otherDeductions = (otherDeductions * inrToUSDAmount);
 
-            totalEarning = (basicAmount + getValue('entertainment_expenses') + getValue('reimbursement')+
+            totalEarning = (basicAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount);
             totalDeduction = (getValue('provident_fund') + otherDeductions + getValue('recovery_for_car'));
         }

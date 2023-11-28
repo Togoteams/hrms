@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="name">Select Employees</label>
             <select disabled required id="gender" placeholder="Enter correct gender   " name="user_id"
@@ -13,7 +13,7 @@
             </select>
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="username"> Select Loans</label>
             <select disabled required id="loan_id" name="loan_id" class="form-control form-control-sm ">
@@ -27,14 +27,14 @@
         </div>
     </div>
 
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="start_date">start_date</label>
             <input disabled required id="start_date" placeholder="Enter correct start_date   " type="date"
                 value="{{ $data->start_date }}" name="start_date" class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="end_date">end_date</label>
             <input disabled value="{{ $data->end_date }}" required id="end_date"
@@ -42,7 +42,7 @@
                 class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="principal_amount">principal_amount</label>
             <input disabled value="{{ $data->principal_amount }}" required id="principal_amount"
@@ -50,7 +50,7 @@
                 class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="maturity_amount">maturity_amount</label>
             <input disabled value="{{ $data->maturity_amount }}" required id="maturity_amount"
@@ -58,14 +58,14 @@
                 class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="tenure">tenure</label>
             <input disabled value="{{ $data->tenure }}" required id="tenure" placeholder="Enter correct tenure   "
                 type="number" name="tenure" class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="sanctioned">sanctioned</label>
             <input disabled value="{{ $data->sanctioned }}" required id="sanctioned"
@@ -73,7 +73,7 @@
                 class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-4 mb-2">
+    <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="sanctioned_amount">sanctioned_amount</label>
             <input disabled required id="sanctioned_amount" placeholder="Enter correct sanctioned_amount   "
@@ -81,7 +81,7 @@
                 class="form-control form-control-sm ">
         </div>
     </div>
-    <div class="col-sm-12 mb-2">
+    <div class="mb-2 col-sm-12">
         <div class="form-group">
             <label for="description">Designation</label>
             <textarea disabled required id="description" placeholder="Enter Short Description of Designation   " name="description"

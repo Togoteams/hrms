@@ -32,7 +32,7 @@
     </button>
     @endcan
 
-          @can('edit-reimbursement')
+        @can('edit-reimbursement')
         <button type="button"
             onclick="editForm('{{ route('admin.payroll.reimbursement.edit', $item->id) }}', 'edit')"
             href="#" data-bs-toggle="modal" data-bs-target="#modaledit"

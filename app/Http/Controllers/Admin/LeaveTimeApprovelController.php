@@ -258,8 +258,8 @@ class LeaveTimeApprovelController extends BaseController
            }
            $request->validate([
                'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-               'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
-               'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
+               'start_date' => ['required', 'date','no_date_overlap'],
+               'end_date' => ['required', 'date','no_date_overlap'],
                "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable'],
                'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1','nullable')]
            ]);

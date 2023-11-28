@@ -36,7 +36,7 @@ class ReimbursementController extends BaseController
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        $Employees = Employee::getActiveEmp()->get();
+        $Employees = Employee::getActiveEmp()->where('employment_type','local')->get();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
@@ -133,7 +133,7 @@ class ReimbursementController extends BaseController
     public function show(string $id)
     {
         $data = Reimbursement::find($id);
-        $employee = Employee::where('status','active')->get();
+        $employee = Employee::where('status','active')->where('employment_type','local')->get();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
 

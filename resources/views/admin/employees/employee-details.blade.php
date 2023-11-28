@@ -210,8 +210,8 @@
 
                                                     <option>- Select -</option>
                                                     <option
-                                                        {{ !empty($employee) ? ($employee->salary_type == 'npfs' ? 'selected' : '') : '' }}
-                                                        value="npfs">NPFS</option>
+                                                        {{ !empty($employee) ? ($employee->salary_type == 'nps' ? 'selected' : '') : '' }}
+                                                        value="nps">NPS</option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->salary_type == 'pf' ? 'selected' : '') : '' }}
                                                         value="pf">PF</option>
@@ -396,7 +396,7 @@
                 if (selectedEmploymentType === 'expatriate') {
                     $('.salary-type-container').show();
 
-                    if (selectedSalaryType === 'npfs') {
+                    if (selectedSalaryType === 'nps') {
                         $('.basic-salary-india-container').show();
                         $('.da-container').show();
                     } else if (selectedSalaryType === 'pf') {

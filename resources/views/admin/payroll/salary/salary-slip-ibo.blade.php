@@ -269,7 +269,7 @@
                                 $noOfIncome = $noOfIncome +1;
                                 if($value->payroll_head->slug=="education_allowance")
                                 {
-                                    $totalIncomeAmount = $totalIncomeAmount + ($value->value  * $pulaToUSDAmount);
+                                    $totalIncomeAmount = $totalIncomeAmount + ($value->value  * $inrToUSDAmount);
 
                                 }else {
                                     $totalIncomeAmount = $totalIncomeAmount + $value->value;
@@ -279,7 +279,7 @@
                                     @if($value->payroll_head->slug=="education_allowance")
                                     <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <!-- <td style="text-align: right;">{{$value->value}}</td> -->
-                                    <td style="text-align: right;">{{$value->value * $pulaToUSDAmount}}</td>
+                                    <td style="text-align: right;">{{$value->value * $inrToUSDAmount}}</td>
                                     @else
                                     <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <!-- <td style="text-align: right;">{{$value->value}}</td> -->
@@ -354,8 +354,8 @@
                             <tr><th></th></tr>
                             <tr><th></th></tr>
                                 <tr>
-
-                                    <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total Deduction) : {{$data->net_take_home}} <span style="font-weight: 100;">(Rupees {{convertNumberToWords($data->net_take_home)}} )</span></th>
+                                    <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total Deduction) : {{$data->net_take_home}} <span style="font-weight: 100;">($ {{convertNumberToWords($data->net_take_home)}} )</span></th>
+                                    <th style="padding-left: 1%;">Net Take Home (In Pula) (Gross Earning - Total Deduction) : {{$data->net_take_home/$pulaToUSDAmount}} <span style="font-weight: 100;">(P {{convertNumberToWords($data->net_take_home/$pulaToUSDAmount)}} )</span></th>
                                 </tr>
                             </tbody>
                         </table>`

@@ -89,7 +89,7 @@ class LeaveApplyController extends Controller
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
             $end_date = $validator->getData()['end_date'];
-            $userId = $validator->getData()['user_id'] ?? "";
+            $userId = $validator->getData()['user_id'] ?? auth()->user()->id;
             $overlappingRecord =true;
 
             $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
@@ -156,8 +156,8 @@ class LeaveApplyController extends Controller
 
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
-            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
+            'start_date' => ['required', 'date','no_date_overlap'],
+            'end_date' => ['required', 'date','no_date_overlap'],
             "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],
             'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],
             'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1')]

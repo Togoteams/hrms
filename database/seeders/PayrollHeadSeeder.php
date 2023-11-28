@@ -21,7 +21,6 @@ class PayrollHeadSeeder extends Seeder
             ['name' => 'Other Deductions', 'slug' => 'other_deductions', 'placeholder' => 'Other deductions', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
             ['name' => 'Tax', 'slug' => 'tax', 'placeholder' => 'Tax', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
             ['name' => 'Allowance', 'slug' => 'allowance', 'placeholder' => 'Allowance', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
-            ['name' => 'Reimbursement', 'slug' => 'reimbursement', 'placeholder' => 'Reimbursement', 'employment_type' => 'both', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
             ['name' => 'Loan', 'slug' => 'loan', 'placeholder' => 'Loan', 'employment_type' => 'expatriate', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1,],
             ['name' => 'Others/Arrears', 'slug' => 'others_arrears', 'placeholder' => 'Others/Arrears', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],
             ['name' => 'Over Time', 'slug' => 'over_time', 'placeholder' => 'Over Time', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1,],

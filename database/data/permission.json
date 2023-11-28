@@ -100,28 +100,28 @@
             "name": "Delete Department","module": "Department", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "Add Employee Transfer","module": "Transfer", "permissions_for":"admin,hr_head"
+            "name": "Add Employee Transfer","module": "Employee Transfer", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Edit Employee Transfer","module": "Transfer", "permissions_for":"admin,hr_head"
+            "name": "Edit Employee Transfer","module": "Employee Transfer", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "View Employee Transfer","module": "Transfer", "permissions_for":"admin,hr_head"
+            "name": "View Employee Transfer","module": "Employee Transfer", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Delete Employee Transfer","module": "Transfer", "permissions_for":"admin,hr_head"
+            "name": "Delete Employee Transfer","module": "Employee Transfer", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Add Document Management","module": "Management", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Add Document Management","module": "Document Management", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "Edit Document Management","module": "Management", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Edit Document Management","module": "Document Management", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "View Document Management","module": "Management", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+            "name": "View Document Management","module": "Document Management", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Delete Document Management","module": "Management", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Delete Document Management","module": "Document Management", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
             "name": "Add Medical card Type","module": "Medical card Type", "permissions_for":"admin,hr_head,chief_manager"
@@ -190,19 +190,19 @@
             "name": "Delete Kra","module": "Kra", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "Add Attributes","module": "Attributes", "permissions_for":"admin"
+            "name": "Add Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Edit Attributes","module": "Attributes", "permissions_for":"admin"
+            "name": "Edit Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "View Attributes","module": "Attributes", "permissions_for":"admin"
+            "name": "View Attributes","module": " Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Delete Attributes","module": "Attributes", "permissions_for":"admin"
+            "name": "Delete Attributes","module": " Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Change Status Attributes","module": "Attributes", "permissions_for":"admin"
+            "name": "Change Status Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
             "name": "Add Employee Kra","module": "Employee Kra", "permissions_for":"admin,branch_supervisor"
@@ -361,16 +361,16 @@
             "name": "Change Status Payroll Head","module": "Payroll Head", "permissions_for":"admin"
         },
         {
-            "name": "Add Pay Scale","module": "Pay Scale", "permissions_for":"admin"
+            "name": "Add Pay Scale","module": "Payscale", "permissions_for":"admin"
         },
         {
-            "name": "Edit Pay Scale","module": "Pay Scale", "permissions_for":"admin"
+            "name": "Edit Pay Scale","module": "Payscale", "permissions_for":"admin"
         },
         {
-            "name": "View Pay Scale","module": "Pay Scale", "permissions_for":"admin"
+            "name": "View Pay Scale","module": "Payscale", "permissions_for":"admin"
         },
         {
-            "name": "Delete Pay Scale","module": "Pay Scale", "permissions_for":"admin"
+            "name": "Delete Pay Scale","module": "Payscale", "permissions_for":"admin"
         },
         {
             "name": "Add Salary","module": "Salary", "permissions_for":"admin"
@@ -454,7 +454,7 @@
             "name": "Delete Currency Settings","module": "Currency Settings", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "Change Status Currency Settings","module": " Currency Settings", "permissions_for":"admin,chief_manager"
+            "name": "Change Status Currency Settings","module": "Currency Settings", "permissions_for":"admin,chief_manager"
         },
         {
             "name": "Add TTUM Report","module": "TTUM Report", "permissions_for":"admin"
