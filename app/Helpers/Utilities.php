@@ -644,7 +644,8 @@ if (!function_exists('getHeadValue')) {
                     $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate*1.5);  
                 }
             }
-            return number_format($overTimeAmount,'.',"");
+            return number_format($overTimeAmount,2,'.',"");
+            // return number_format($overTimeAmount,'.',"");
         
         } elseif ($headSlug == "others_arrears") {
            $currentYear = date('Y');
