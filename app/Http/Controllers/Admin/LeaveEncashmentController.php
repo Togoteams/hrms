@@ -54,8 +54,8 @@ class LeaveEncashmentController extends Controller
                 ->make(true);
         }
 
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
-        $all_users = Employee::where('status', 'active')->get();
+        $leave_type = LeaveType::getLeaveType()->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
+        $all_users = Employee::getActiveEmp()->get();
         return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users, 'total_remaining_leave' => $this->total_remaining_leave()]);
     }
 
@@ -108,7 +108,7 @@ class LeaveEncashmentController extends Controller
      */
     public function show(string $id)
     {
-        $leave_type = LeaveType::where('status', 'active')->get();
+        $leave_type = LeaveType::getLeaveType()->get();
 
         $data = LeaveEncashment::find($id);
         return view('admin.leave_encashment.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'total_remaining_leave' => $this->balance_leave_by_type($data->leave_type_id, $data->user_id)]);
@@ -121,14 +121,14 @@ class LeaveEncashmentController extends Controller
     {
 
         $data = LeaveEncashment::find($id);
-        $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->get();
+        $leave_type = LeaveType::getLeaveType()->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->getActiveEmp()->get();
 
         return view('admin.leave_encashment.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
     public function status_modal($id)
     {
-        $leave_type = LeaveType::where('status', 'active')->get();
+        $leave_type = LeaveType::getLeaveType()->get();
 
         $data = LeaveEncashment::find($id);
         return view('admin.leave_encashment.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
@@ -206,10 +206,10 @@ class LeaveEncashmentController extends Controller
         $emploment_type = Employee::where('user_id', $user_id)->first()->employment_type ?? '';
         echo '<option> -Select Leave Type - </option>';
         if ($emploment_type == "local") {
-            $leave_type = LeaveType::where('status', 'active')->where('name', 'EARNED LEAVE')->first();
+            $leave_type = LeaveType::getLeaveType()->where('name', 'EARNED LEAVE')->first();
             echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
         } else {
-            $leave_type = LeaveType::where('status', 'active')->where('name', 'PRIVILEGED LEAVE')->first();
+            $leave_type = LeaveType::getLeaveType()->where('name', 'PRIVILEGED LEAVE')->first();
             echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
         }
     }

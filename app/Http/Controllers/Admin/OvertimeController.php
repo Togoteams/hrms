@@ -34,9 +34,9 @@ class OvertimeController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
             }
-            
+
         // $data = OvertimeSetting::all();
-        $all_users = Employee::with('user')->get();
+        $all_users = Employee::with('user')->getActiveEmp()->get();
         // dd($all_users);
         return view('admin.overtime_settings.index', ['page' => $this->page_name,'all_users' => $all_users]);
 
@@ -54,14 +54,14 @@ class OvertimeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {       
+    {
         // dd($request);
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'date' => 'required|date',
             'working_hours' => 'required|numeric|gt:0',
             'working_min' => 'nullable|numeric|gt:0|max:59',
-            'overtime_type' => 'required|string',           
+            'overtime_type' => 'required|string',
         ]);
         // dd($request->all());
         if ($validator->fails()) {
@@ -88,8 +88,8 @@ class OvertimeController extends Controller
     public function edit(string $id)
     {
         $item = OvertimeSetting::find($id);
-        $all_users = Employee::with('user')->get();
-        return view('admin.overtime_settings.edit', ['item'=>$item,'all_users'=>$all_users,'page' => $this->page_name]);    
+        $all_users = Employee::with('user')->getActiveEmp()->get();
+        return view('admin.overtime_settings.edit', ['item'=>$item,'all_users'=>$all_users,'page' => $this->page_name]);
     }
 
     /**
@@ -102,7 +102,7 @@ class OvertimeController extends Controller
             'date' => 'required|date',
             'working_hours' => 'required|numeric|gt:0',
             'working_min' => 'nullable|numeric|gt:0|max:59',
-            'overtime_type' => 'required|string',           
+            'overtime_type' => 'required|string',
         ]);
 
         if ($validator->fails()) {
