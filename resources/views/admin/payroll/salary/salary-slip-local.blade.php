@@ -240,8 +240,8 @@
                         </tr>
                     </thead>
                 </table>
-                <div class="row">
-                    <div class="col-md-6">
+                {{-- <div class="row">
+                    <div class="col-md-6"> --}}
                         <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                             <tbody>
                                 <tr>
@@ -277,9 +277,9 @@
                                     <th style="text-align: right;">{{$totalIncomeAmount}}</th>
                                 </tr>
                             </tbody>
-                        </table>
+                        {{-- </table>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6"> --}}
                         <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                             <tbody>
                                 <tr>
@@ -312,13 +312,13 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    {{-- </div> --}}
 
 
                 </div>
-                <div class="row">
+                {{-- <div class="row">
 
-                    <div class="col-md-12">
+                    <div class="col-md-12"> --}}
                         <table class="payslipcard" width="100%" border="0" style="font-size: 18Px;font-weight: bold;">
                             <tbody>
                             <tr><th></th></tr>
@@ -330,8 +330,8 @@
                                 </tr>
                             </tbody>
                         </table>`
-                    </div>
-                </div>
+                    {{-- </div>
+                </div> --}}
                 <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>
                 <ul style="padding-left: 12px;">
                     <li>This is computer generated pay slip.</li>

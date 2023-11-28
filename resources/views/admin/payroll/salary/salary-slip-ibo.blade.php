@@ -285,7 +285,7 @@
                                     <!-- <td style="text-align: right;">{{$value->value}}</td> -->
                                     <td style="text-align: right;">{{$value->value}}</td>
                                     @endif
-                                    
+
                                 </tr>
                                 @endif
                                 @endforeach
@@ -328,7 +328,7 @@
                                     <td style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <td style="text-align: right;">{{$value->value}}</td>
                                     @endif
-                                  
+
                                 </tr>
                                 @endif
                                 @endforeach

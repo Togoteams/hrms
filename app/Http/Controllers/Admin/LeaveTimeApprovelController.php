@@ -64,13 +64,13 @@ class LeaveTimeApprovelController extends BaseController
      */
     public function store(Request $request)
     {
-       
+
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
             $start_date = $validator->getData()['start_date'];
             $end_date = $validator->getData()['end_date'];
             $userId = $validator->getData()['user_id'] ?? "";
             $overlappingRecord =true;
-            
+
             $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
                 $query->where(function ($q1) use ($start_date, $end_date) {
                     $q1->whereBetween('start_date', array($start_date, $end_date));
@@ -99,7 +99,7 @@ class LeaveTimeApprovelController extends BaseController
             'request_date' => ['required', 'date'],
             'reason' => ['required', 'string'],
             'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
-            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
+            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap','after_or_equal:start_date'],
             "document" => ["max:10000",'required'],
         ]);
         // $validator = Validator::make($request->all(), [
@@ -168,7 +168,7 @@ class LeaveTimeApprovelController extends BaseController
             'leave_type_id' => 'required|numeric',
             'request_date' => 'nullable|date',
             'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
             'reason' => 'required|string',
             'document' => 'nullable|file|mimes:jpeg,jpg,png,pdf',
             'description' => 'nullable|string',
@@ -206,17 +206,17 @@ class LeaveTimeApprovelController extends BaseController
 
     public function status(Request $request)
     {
-      
+
         $request->validate([
             'status' => ['required','string'],
             'description_reason' => ['nullable','string'],
         ]);
         $leave = LeaveTimeApprovel::find($request->leave_id);
-       
+
         $leave->description_reason = $request['description_reason'];
         $leave->status = $request['status'];
         if($request->status=='approved')
-        {   
+        {
             $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id,'remaining_leave'=>0]);
 
             $leave->approved_at = date('Y-m-d h:i:s');
@@ -228,7 +228,7 @@ class LeaveTimeApprovelController extends BaseController
                $end_date = $validator->getData()['end_date'];
                $userId = $validator->getData()['user_id'] ?? "";
                $overlappingRecord =true;
-               
+
                $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
                    $query->where(function ($q1) use ($start_date, $end_date) {
                        $q1->whereBetween('start_date', array($start_date, $end_date));
@@ -243,7 +243,7 @@ class LeaveTimeApprovelController extends BaseController
                })->whereNotIn('status',['reject'])->where('user_id',$userId)->first();
                return !$overlappingRecord;
            });
-   
+
            Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
                $value = Str::headline(Str::camel($attribute));
                return "The $value date range overlaps with an existing record.";

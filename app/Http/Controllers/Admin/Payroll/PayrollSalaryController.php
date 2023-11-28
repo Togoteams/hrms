@@ -135,7 +135,7 @@ class PayrollSalaryController extends Controller
                 }
                 $empAccounts = Account::where('name',$emp->user->name)->first();
                 if(empty($empAccounts))
-                {   
+                {
                     $empAccounts = Account::create(['name'=>$emp->user->name,'opening_amount'=>0,'closing_amount'=>0]);
                 }
                 if($empAccounts)
@@ -312,7 +312,7 @@ class PayrollSalaryController extends Controller
             }
             $salaryEndDate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $salaryEndDate) ) ));
         // }
-        
+
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
         if(empty($data))
@@ -342,7 +342,7 @@ class PayrollSalaryController extends Controller
 
         $noOfHoliday = Holiday::where('date','<=',$salaryStartDate)->where('date','>=',$salaryEndDate)
         ->where('status','active')->count();
-       
+
 
         /**
          * This is no of paid  leave who take unpaid , approved and pending leave
@@ -397,9 +397,9 @@ class PayrollSalaryController extends Controller
         })->count();
 
         $noOfDay = 0;
-        
+
         $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPaySickLeave;
-       
+
         $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
         if(!empty($currencySeeting))
         {
@@ -412,7 +412,7 @@ class PayrollSalaryController extends Controller
         $presentDay = $totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave);
         // return $presentDay;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave);
-        
+
         if($emp->employment_type=="expatriate")
         {
             return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','pulaToUSDAmount'));

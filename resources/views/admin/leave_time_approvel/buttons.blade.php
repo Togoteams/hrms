@@ -11,11 +11,16 @@
             <form id="edit{{ $item->id }}"
                 action="{{ route('admin.leave_time_approved.destroy', $item->id) }}">
 
-                @if(!isemplooye())
+                {{-- @if(!isemplooye())
                 @can('change-status-leave-type-approval')
                 <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
                 @endcan
-                @endif
+                @endif --}}
+
+                @can('change-status-leave-type-approval')
+                <button type="button"class="btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
+                @endcan
+
 
                 @can('view-leave-type-approval')
                 <button type="button" onclick="editForm('{{ route('admin.leave_time_approved.show', $item->id) }}', 'show')" href="#"
@@ -23,14 +28,15 @@
                 </button>
                 @endcan
 
-                @can('edit-leave-type-approval')
+                @if($item->status == 'pending' && Gate::allows('edit-leave-type-approval'))
                 <button type="button"
                     onclick="editForm('{{ route('admin.leave_time_approved.edit', $item->id) }}', 'edit')"
                     href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                    class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
+                    class="btn btn-edit btn-sm">
+                    <i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
                 </button>
-                @endcan
-                
+                @endif
+
                 @csrf
                 <input type="hidden" name="_method" value="DELETE">
                 @can('delete-leave-type-approval')
