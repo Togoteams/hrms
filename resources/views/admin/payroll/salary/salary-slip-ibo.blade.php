@@ -175,7 +175,7 @@
                                     <span>(Botswana)</span>
                                 </h3>
                                 <p class="mb-0 text-left" style="text-align: left;">
-                                    PAYSLIP For the month of - {{strtoupper(date("M-Y",strtotime($data->created_at)))}}</p>
+                                    PAYSLIP For the month of - {{strtoupper(date("M-Y",strtotime($data->pay_for_month_year)))}}</p>
                             </td>
                             <td style="text-align: right;">
                                 <img src="{{ asset('assets/img/logo-cropped.svg')  }}" class="img-fluid" style="height: auto; width: 200px;">

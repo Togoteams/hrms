@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\payroll;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
 use App\Models\CurrencySetting;
 use App\Models\Employee;
 use App\Models\Reimbursement;

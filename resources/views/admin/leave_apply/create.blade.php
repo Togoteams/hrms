@@ -15,10 +15,10 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="user_id">Employee</label>
-                                    <select onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')" required id="user_id" placeholder="Enter correct user_id   " type="text" name="user_id" class="form-control form-control-sm ">
+                                    <select onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')" required id="user_id" placeholder="Enter correct user_id" type="text" name="user_id" class="form-control form-control-sm ">
                                         <option selected disabled> -Select Employee - </option>
                                         @foreach ($all_user as $user)
-                                        <option value="{{ $user->user->id }}">{{ $user->user->name }} -
+                                        <option value="{{ $user->user->id }}" data-employment_type="{{$user->employment_type}}" >{{ $user->user->name }} -
                                             {{ $user->user->email }}
                                         </option>
                                         @endforeach
@@ -30,10 +30,10 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types</label>
-                                    <select required id="leave_type_id" onchange="change_leave(this)" placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id" class="form-control form-control-sm ">
+                                    <select required id="leave_type_id" onchange="change_leave()" placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id" class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
                                         @foreach ($leave_type as $l_type)
-                                        <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
+                                        <option value="{{ $l_type->id }}" data-leave_slug="{{$l_type->slug}}">{{ $l_type->name }}</option>
                                         @endforeach
                                     </select>
 
@@ -60,13 +60,13 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="start_date">start_date</label>
-                                    <input required id="start_date" placeholder="Enter correct start_date   " type="date" name="start_date" class="form-control form-control-sm ">
+                                    <input required id="start_date" placeholder="Enter correct start_date   " onchange="change_leave()" type="date" name="start_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="end_date">end_date</label>
-                                    <input required id="end_date" placeholder="Enter correct end_date   " type="date" name="end_date" class="form-control form-control-sm ">
+                                    <input required id="end_date" placeholder="Enter correct end_date   " type="date" onchange="change_leave()" name="end_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-4">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="text-center ">
-                            <button type="button" onclick="ajaxCall('form_data')" class="btn btn-white submit">
+                            <button type="button" onclick="ajaxCall('form_data'),change_leave(this)" class="btn btn-white submit">
                                 {{ $page }}</button>
                         </div>
                     </form>
@@ -116,13 +116,22 @@
         //     document.getElementsByName("start_date")[0].setAttribute('min', today);
         //     document.getElementsByName("end_date")[0].setAttribute('min', today);
         // }
-        function change_leave(e) {
-            var text = e.options[e.selectedIndex].text;
-            console.log(text);
-            if (text == "SICK LEAVE" || text=="MATERNITY LEAVE") {
+        function change_leave() {
+            getDays();
+            var leaveSlug = $("#leave_type_id").find(':selected').data('leave-slug');
+            var employment_type = $("#user_id").find(':selected').data('employment_type');
+            var leave_applies_for = $("#leave_applies_for").val() ?? 1;
+            console.log(leave_applies_for);
+            if(employment_type=="expatriate" && leaveSlug=="sick-leave" && leave_applies_for >=2)
+            {
                 document.getElementById('doc').setAttribute("required", "");
-                // document.getElementById('doc').;
-            } else {
+                console.log("expatriate");
+            }else if(employment_type=="local" && (leaveSlug=="sick-leave" || leaveSlug=="maternity-leave"))
+            {
+                document.getElementById('doc').setAttribute("required", "");
+                console.log("local");
+            }
+            else {
                 document.getElementById('doc').removeAttribute("required", "");
             }
             var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}"; 
@@ -134,7 +143,6 @@
             data:{"user_id":user_id,'leave_type_id':leave_type_id},
             dataType: "json",
             success: function (result) {
-               console.log(result);
                if(result.status==true)
                {
                 var data = result.data;
@@ -181,7 +189,6 @@
                 day = "0"+day;
             }
             $("#end_date").val(dt.getFullYear()+"-"+(month)+"-"+day);
-            console.log("ddsdsd",dt.getFullYear()+"-"+(month)+"-"+day);
             getDays();
         });
         $("#end_date").on('change',function(){
@@ -190,12 +197,16 @@
         function getDays() {
             date1 = new Date( $("#start_date").val());
             date2 = new Date($("#end_date").val());
+            $("#leave_applies_for").val(0);
             var milli_secs = date1.getTime() - date2.getTime();
-             
+            var days = 0;
+            days = Math.round(Math.abs(milli_secs / (1000 * 3600 * 24)))+1;
             // Convert the milli seconds to Days 
-            var days = milli_secs / (1000 * 3600 * 24);
-            // document.getElementById("ans").innerHTML =
-            $("#leave_applies_for").val(Math.round(Math.abs(days))+1);
+            if(days.toString()== "NaN")
+            {
+                days = 0;
+            }
+            $("#leave_applies_for").val(Number(days));
         }
     </script>
     @endpush

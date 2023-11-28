@@ -86,17 +86,16 @@
                                 searchable: false
                             },
                             {
+                                data: 'reimbursementype.type',
+                                name: 'reimbursementype.type'
+                            },
+                            {
                                 data: 'user.name',
                                 name: 'user.name'
                             },
                             {
                                 data: 'user.employee.ec_number',
                                 name: 'user.employee.ec_number'
-                            },
-
-                            {
-                                data: 'reimbursementype.type',
-                                name: 'reimbursementype.type'
                             },
                             {
                                 data: 'expenses_currency',
@@ -105,6 +104,10 @@
                             {
                                 data: 'expenses_amount',
                                 name: 'expenses_amount'
+                            },
+                            {
+                                data: 'claim_date',
+                                name: 'claim_date'
                             },
                             {
                                 data: 'claim_date',
@@ -218,8 +221,8 @@
                                 <div class="form-group">
                                     <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
                                     <select name="status" class="form-control" id="status">
-                                        <option value="">Selected Option</option>
-                                        <option value="pending">Pending</option>
+                                        <option value="" disabled>Selected Option</option>
+                                        <option value="pending"> Pending</option>
                                         <option value="approved">Approved</option>
                                         <option value="rejected">Rejected</option>
                                     </select>

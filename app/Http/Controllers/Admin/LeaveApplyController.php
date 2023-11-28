@@ -115,25 +115,54 @@ class LeaveApplyController extends Controller
         /**
          * Vaidation for specail leave like, maternity-leave,bereavement-leave
          */
-
-        // Validator::replacer('bereavement_leave_max_limit', function ($message, $attribute, $rule, $parameters) {
-        //     $value = Str::headline(Str::camel($attribute));
-        //     return "The bereavement_leave  leave shoul be.";
-        // });
-
-        $validator = Validator::make($request->all(), [
-            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
-            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
-            "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable'],
-            'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],
-            'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1')]
-        ]);
         if (isset($request->user_id) && $request->user_id != '') {
             $user = User::find($request->user_id);
         } else {
             $user = Auth::user();
         }
+
+         Validator::extend('sick_leave_document', function ($attribute, $value, $parameters, $validator) {
+            $userId = $validator->getData()['user_id'] ?? "";
+            $doc1 = $validator->getData()['doc1'] ?? "";
+            $leaveType = LeaveSetting::find($validator->getData()['leave_type_id'] ?? "");
+            $leaveSlug = $leaveType->slug;
+           if (isset($userId) && $userId != '') {
+                $user = User::find($userId);
+            } else {
+                $user = Auth::user();
+            }
+            $employment_type = "";
+            $employment_type = $user?->employee?->employment_type;
+
+            $leave_applies_for = $validator->getData()['leave_applies_for'] ?? "";
+            $sickDocumentNeed = false;
+            if(empty($doc1) && $leaveSlug == ('bereavement-leave' || 'sick-leave'))
+            {
+                if($employment_type=="expatriate" &&  $leave_applies_for==2)
+                {
+                    $sickDocumentNeed=true;
+                }elseif($employment_type=="local"){
+                    $sickDocumentNeed=true;
+                }
+            }
+            
+            return !$sickDocumentNeed;
+        });
+
+        Validator::replacer('sick_leave_document', function ($message, $attribute, $rule, $parameters) {
+            $value = Str::headline(Str::camel($attribute));
+            return "The $value docuement is required.";
+        });
+        
+        $validator = Validator::make($request->all(), [
+            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+            'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
+            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
+            "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],
+            'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],
+            'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1')]
+        ]);
+        
         if (($this->balance_leave_by_type($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leaveSlug == "leave-without-pay" || $leaveSlug == "maternity-leave" || $leaveSlug =="bereavement-leave" ) {
             if ($validator->fails()) {
                 return $validator->errors();
@@ -327,7 +356,7 @@ class LeaveApplyController extends Controller
         // return $leave_type;
         echo '<option> -Select Leave Type - </option>';
         foreach ($leave_type as $l_type) {
-            echo '  <option value="' . $l_type->id . '">' . $l_type->name . '</option>';
+            echo '  <option value="' . $l_type->id . '" data-leave-slug="'.$l_type->slug.'" >' . $l_type->name . '</option>';
         }
     }
 
