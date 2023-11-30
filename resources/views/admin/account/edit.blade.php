@@ -22,33 +22,17 @@
             </div>
         </div>
 
-        <div class="mb-2 col-sm-6">
-            <div class="form-group">
-                <label for="opening_amount" class="required">Opening Amount</label>
-                <input type="number" required maxlength="7" minlength="3" pattern="[0-9]+" name="opening_amount"
-                    id="opening_amount" class="form-control" placeholder="Enter Opening Amount"
-                    value="{{ $account->opening_amount }}">
-            </div>
-        </div>
 
-        <div class="mb-2 col-sm-6">
-            <div class="form-group">
-                <label for="closing_amount" class="required">Closing Amount</label>
-                <input type="number" required maxlength="7" minlength="3" pattern="[0-9]+" name="closing_amount"
-                    id="closing_amount" class="form-control" placeholder="Enter Closing Amount"
-                    value="{{ $account->closing_amount }}">
-            </div>
-        </div>
 
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="account_type">Account Type</label>
                 <select name="account_type" class="form-control" id="account_type">
                     <option value="">Select Option</option>
-                    <option value="nominal account"
-                        {{ $account->account_type === 'nominal account' ? 'selected' : '' }}>Nominal Account</option>
-                    <option value="assets account" {{ $account->account_type === 'assets account' ? 'selected' : '' }}>
-                        Assets Account</option>
+                    <option value="employee"
+                        {{ $account->account_type === 'employee' ? 'selected' : '' }}>Employee</option>
+                    <option value="office" {{ $account->office === 'office' ? 'selected' : '' }}>
+                        Office</option>
                 </select>
             </div>
         </div>

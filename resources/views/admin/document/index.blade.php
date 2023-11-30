@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                   
+
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -20,7 +20,7 @@
 
                 <!-- End Row -->
             </div>
-            
+
              @include('admin.document.create')
 
 
@@ -61,7 +61,7 @@
                                     {{ $loop->index + 1 }}
                                 </td>
                                 <td>{{$item->document_name}}</td>
-                                <td>{{$item->document_type}}</td>
+                                <td>{{ $item->documentType->name }}</td>
                                 {{-- <td>{{$item->document}}</td> --}}
                                 <td>
                                     @if($item->document)
@@ -71,16 +71,16 @@
                                     @endif
                                 </td>
                                 <td style="text-align:right;">
-                                    
+
                                     <form id="edit{{ $item->id }}"
                                         action="{{ route('admin.document.destroy', $item->id) }}">
-                                            <button type="button" class="btn btn-white assign_doc" href="#" data-bs-toggle="modal" 
+                                            <button type="button" class="btn btn-white assign_doc" href="#" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop1" onclick="editForm('{{ route('admin.document.get.asign', $item->id) }}', 'assign_doc')" doc_id="{{$item->id}}">
                                                     Asign Employee Document
                                                 </button>
                                                 <button type="button" data-table="documents" data-uuid="{{$item->id}}"
                                                     @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                                    class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                    class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif"
                                                      @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                                 </button>
                                             @can('edit-document-management')
@@ -100,7 +100,7 @@
                                             @endcan
                                     </form>
                                 </td>
-                              </tr>   
+                              </tr>
                               @endforeach
                         </tbody>
                     </table>
@@ -122,7 +122,7 @@
                                   searchable: false
                               },
 
-                           
+
                               {
                                   data: 'increment_percentage',
                                   name: 'increment_percentage'

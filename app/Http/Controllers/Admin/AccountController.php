@@ -48,8 +48,6 @@ class AccountController extends Controller
         $validator = Validator::make($request->all(), [
             'account_number' => 'required|string|digits_between:12,16',
             'name' => 'required|string|regex:/^[a-zA-Z. ]+$/',
-            'opening_amount' => 'required|numeric|digits_between:3,7',
-            'closing_amount' => 'required|numeric|digits_between:3,7',
             'account_type' => 'required|string',
             'description' => 'required|string',
 
@@ -87,8 +85,6 @@ class AccountController extends Controller
         $validator = Validator::make($request->all(), [
             'account_number' => 'required|string|digits_between:12,16',
             'name' => 'required|string',
-            'opening_amount' => 'required|numeric|digits_between:3,7',
-            'closing_amount' => 'required|numeric|digits_between:3,7',
             'account_type' => 'required|string',
             'description' => 'required|string',
         ]);

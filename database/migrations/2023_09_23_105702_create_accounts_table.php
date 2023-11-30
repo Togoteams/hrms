@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('account_number')->nullable();
             $table->string('name')->nullable();
-            $table->string('opening_amount')->nullable();
-            $table->string('closing_amount')->nullable();
             $table->string('account_type')->nullable();
             $table->string('description')->nullable();
-            $table->enum('status',["active","inactive"])->default('active');            
+            $table->enum('status',["active","inactive"])->default('active');
             $table->timestamps();
         });
     }

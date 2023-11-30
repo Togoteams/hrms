@@ -20,8 +20,6 @@ trait HasRolesAndPermissions
     {
         return $this->hasMany(UsersRoles::class);
     }
-
-
     /**
      * @return mixed
      */
@@ -29,7 +27,6 @@ trait HasRolesAndPermissions
     {
         return $this->belongsToMany(Permission::class,'users_permissions');
     }
-
     /**
      * @param mixed ...$roles
      * @return bool
@@ -42,7 +39,6 @@ trait HasRolesAndPermissions
         }
         return false;
     }
-
     /**
      * @param $permission
      * @return bool

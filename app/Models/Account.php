@@ -11,8 +11,6 @@ class Account extends Model
     protected $fillable = [
         'account_number',
         'name',
-        'opening_amount',
-        'closing_amount',
         'account_type',
         'description',
         'status'
@@ -20,7 +18,7 @@ class Account extends Model
 
     // public function getStatusAttribute($showStatus)
     // {
-    //     return ucfirst($showStatus); 
+    //     return ucfirst($showStatus);
     // }
 
 }

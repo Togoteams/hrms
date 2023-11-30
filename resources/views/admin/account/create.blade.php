@@ -31,31 +31,31 @@
                             </div>
                         </div>
 
-                        <div class="mb-2 col-sm-6">
+                        {{-- <div class="mb-2 col-sm-6">
                             <div class="form-group">
                                 <label for="opening_amount" class="required">Opening Amount</label>
                                 <input type="text" required name="opening_amount" maxlength="7" minlength="3"
                                     pattern="[0-9]+" id="opening_amount" class="form-control"
                                     placeholder="Enter Opening Amount">
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="mb-2 col-sm-6">
+                        {{-- <div class="mb-2 col-sm-6">
                             <div class="form-group">
                                 <label for="closing_amount" class="required">Closing Amount</label>
                                 <input type="text" required maxlength="7" minlength="3" pattern="[0-9]+"
                                     name="closing_amount" id="closing_amount" class="form-control"
                                     placeholder="Enter Closing Amount">
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="mb-2 col-sm-6">
                             <div class="form-group">
                                 <label for="account_type">Account Type</label>
                                 <select name="account_type" class="form-control" id="account_type">
                                     <option value="">Selected Option</option>
-                                    <option value="nominal account">Nominal Account</option>
-                                    <option value="assets account">Assets Account</option>
+                                    <option value="employee">Employee</option>
+                                    <option value="office">office</option>
                                 </select>
                             </div>
                         </div>

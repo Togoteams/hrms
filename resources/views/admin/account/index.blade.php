@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.account.create')
 
             <!-- Card -->
@@ -56,8 +56,6 @@
                                 <th>SI.</th>
                                 <th>Account Number</th>
                                 <th>Account Name</th>
-                                <th>Opening Amount</th>
-                                <th>Closing Amount</th>
                                 <th>Account Type</th>
                                 <th>Description</th>
                                 <th width="100px">Action</th>
@@ -66,7 +64,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                  
+
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -92,14 +90,6 @@
                                 {
                                     data: 'name',
                                     name: 'name'
-                                },
-                                {
-                                    data: 'opening_amount',
-                                    name: 'opening_amount'
-                                },
-                                {
-                                    data: 'closing_amount',
-                                    name: 'closing_amount'
                                 },
                                 {
                                     data: 'account_type',

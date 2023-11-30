@@ -21,7 +21,7 @@ class DocumentController extends Controller
 
     public function index()
     {
-        $data =  Document::all();
+        $data = Document::with('documentType')->get();
         $documentType = DocumentType::getDocumentType()->get();
         $all_users = Employee::with('user')->get();
         return view('admin.document.index', ['page' => $this->page_name,'data' => $data,'all_users'=>$all_users, 'documentType' => $documentType]);
