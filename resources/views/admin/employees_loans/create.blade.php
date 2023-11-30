@@ -21,7 +21,7 @@
                                         <option selected disabled> - Select Employee- </option>
                                         @foreach ($all_users as $au)
                                             <option value="{{ $au->user->id }}">{{ $au->user->name }} -
-                                                {{ $au->user->email }}</option>
+                                                {{ $au->ec_number }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -33,7 +33,7 @@
                                         class="form-control form-control-sm ">
                                         <option selected disabled> - Select Loans- </option>
                                         @foreach ($loans as $loan)
-                                            <option value="{{ $loan->id }}">{{ $loan->name }} 
+                                            <option value="{{ $loan->id }}">{{ $loan->name }}
                                             </option>
                                         @endforeach
                                     </select>

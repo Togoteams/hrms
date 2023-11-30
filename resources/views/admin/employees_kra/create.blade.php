@@ -40,7 +40,7 @@
                                         <option selected disabled> - Select Employees- </option>
                                         @foreach ($all_users as $au)
                                             <option value="{{ $au->user->id }}">{{ $au->user->name }} -
-                                                {{ $au->user->email }}</option>
+                                                {{ $au->ec_number }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -61,8 +61,8 @@
                                         @foreach ($kra_attributes as $kra)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
-                                                <td style="max-width:220px;"> <b>{{ $kra->name }} - </b> 
-                                                   
+                                                <td style="max-width:220px;"> <b>{{ $kra->name }} - </b>
+
                                                     <input required type="hidden" name="attribute_name[]"
                                                         value="{{ $kra->name }}">
                                                     <input required type="hidden" name="attribute_description[]"

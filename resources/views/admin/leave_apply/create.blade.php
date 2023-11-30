@@ -19,7 +19,7 @@
                                         <option selected disabled> -Select Employee - </option>
                                         @foreach ($all_user as $user)
                                         <option value="{{ $user->user->id }}" data-employment_type="{{$user->employment_type}}" >{{ $user->user->name }} -
-                                            {{ $user->user->email }}
+                                            {{ $user->ec_number }}
                                         </option>
                                         @endforeach
                                     </select>
@@ -110,7 +110,7 @@
     </div>
     @push('custom-scripts')
     <script>
-         
+
         // window.onload = function() { //from ww  w . j  a  va2s. c  o  m
         //     var today = new Date().toISOString().split('T')[0];
         //     document.getElementsByName("start_date")[0].setAttribute('min', today);
@@ -134,7 +134,7 @@
             else {
                 document.getElementById('doc').removeAttribute("required", "");
             }
-            var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}"; 
+            var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}";
             var user_id = $("#user_id").val();
             var leave_type_id = $("#leave_type_id").val();
             $.ajax({
@@ -155,7 +155,7 @@
                     $("#balance_leave1").val(data.remaining_leave);
                     $(".balance_leave_section").css('display','');
                 }
-                
+
                 if(data.is_ibo_sick_leave)
                 {
                     $(".ibo-pay-type").css('display','block');
@@ -163,7 +163,7 @@
                 {
                     $(".ibo-pay-type").css('display','none');
                 }
-                
+
                }else
                {
                 $("#balance_leave1").val(0);
@@ -173,7 +173,7 @@
         });
             // selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
         }
-         
+
         $("#start_date").on('change',function(){
             dt = new Date($(this).val());
             dt.setDate(dt.getDate() + 1);
@@ -183,7 +183,7 @@
             {
                 month = "0"+month;
             }
-            
+
             if(day<10)
             {
                 day = "0"+day;
@@ -201,7 +201,7 @@
             var milli_secs = date1.getTime() - date2.getTime();
             var days = 0;
             days = Math.round(Math.abs(milli_secs / (1000 * 3600 * 24)))+1;
-            // Convert the milli seconds to Days 
+            // Convert the milli seconds to Days
             if(days.toString()== "NaN")
             {
                 days = 0;

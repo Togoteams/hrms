@@ -144,7 +144,7 @@ class PayRollPayscaleCotroller extends BaseController
      */
     public function show(string $id)
     {
-        $all_users = Employee::get();
+        $all_users = Employee::getActiveEmp()->get();
         $loans = Loans::where('status', 'active')->get();
         $data = PayRollPayscale::find($id);
 
@@ -159,7 +159,7 @@ class PayRollPayscaleCotroller extends BaseController
         $edit = true;
         $payscale = PayRollPayscale::find($id);
         $page = $this->page_name;
-        $emp = Employee::where('user_id', $payscale->user_id)->first();
+        $emp = Employee::where('user_id', $payscale->user_id)->getActiveEmp()->first();
         $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
         $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
         if(!empty($currencySeeting))
