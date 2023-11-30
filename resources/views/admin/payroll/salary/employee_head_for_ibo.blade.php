@@ -8,6 +8,7 @@
             $basic = round(($data->basic / $totalMonthDays) * $noOfPayableDays);
             @endphp
             <input  value="{{$pulaToUSDAmount}}" readonly  id="pulaToUSDAmount" type="hidden" name="pulaToUSDAmount"  class="form-control form-control-sm">
+            <input  value="{{$inrToUSDAmount}}" readonly  id="inrToUSDAmount" type="hidden" name="inrToUSDAmount"  class="form-control form-control-sm">
             <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
         </div>
     </div>
@@ -58,9 +59,12 @@
         <h4>Earning</h4>
     </div>
     @php
-    $readonlyArr = ['bomaid','pension','union_fee','tax','over_time'];
+    $readonlyArr = ['bomaid','pension','union_fee','tax','over_time','provident_fund'];
     $fixedHeadsArr = ['bomaid','over_time'];
-    $pulaInsertionArr =['education_allowance','other_deductions'];
+    $inrCurrencyHead = ['provident_fund'];
+    $pulaCurrencyHead = ['provident_fund'];
+    $pulaInsertionArr =['other_deductions'];
+    $inrInsertionArr =['education_allowance'];
     @endphp
     @foreach ($emp_head as $head)
     @php
@@ -74,7 +78,7 @@
     @if($head->head_type=="income")
     <div class="col-sm-3">
         <div class="form-group">
-            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif</label>
+            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif  @if(in_array($head->slug,$inrInsertionArr)) ({{"In INR"}}) @endif</label>
             @php
             if(!empty($head_data))
             {
@@ -110,7 +114,7 @@
     @if($head->head_type=="deduction")
     <div class="col-sm-3">
         <div class="form-group">
-            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif</label>
+            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif </label>
             @php  
             if(in_array($head->slug,$fixedHeadsArr))
             {
@@ -122,6 +126,8 @@
             <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value,$salary_month)}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
+    
+   
     @endif
     @endforeach
 </div>
