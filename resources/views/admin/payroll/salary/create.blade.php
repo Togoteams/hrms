@@ -45,7 +45,7 @@
                                     <option selected disabled> - Select Employees- </option>
                                     @foreach ($all_users as $au)
                                     <option value="{{ $au->user->id }}">{{ $au->user->name }} -
-                                        {{ $au->user->email }}
+                                        {{ $au->ec_number }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -94,7 +94,7 @@
             taxAbleAmount = (basicAmount + getValue('allowance'))- (getValue('bomaid') + getValue('pension'));
         }else{
             taxAbleAmount = (basicAmount + getValue('entertainment_expenses') + getValue('house_up_keep_allow') + getValue('education_allowance'));
-        } 
+        }
 
         $.ajax({
             url: taxCalcUrl,
@@ -125,7 +125,7 @@
         var totalDeduction = 0;
 
         var employmentType = document.getElementById('employment_type').value;
-       
+
         var basicAmount = getValue('basic');
         console.log(basicAmount);
         if (employmentType == "local") {
@@ -138,7 +138,7 @@
             totalDeduction = (taxAmount + getValue('bomaid') + getValue('pension') + unionFee + getValue('other_deductions')).toFixed(2);
             // setId('union_fee', unionFee);
         } else {
-          
+
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
             var inrToUSDAmount = getValue('inrToUSDAmount');
@@ -174,7 +174,7 @@
             let valueMessage="Please Select salary Month";
             $("#pay_for_month_year").after("<p class='d-block text-danger err_message'>" +valueMessage +"</p>");
         }
-        
+
         if(pay_for_month_year!="" && empId!=""){
             editForm(editUrl+empId+"/"+pay_for_month_year, 'edit');
             // taxCalCalculation();
@@ -188,6 +188,6 @@
         // taxCalCalculation("e");
     });
 </script>
- 
+
 @endpush
 

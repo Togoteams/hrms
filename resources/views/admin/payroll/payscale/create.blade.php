@@ -32,7 +32,7 @@
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                         <div class="row">
-                          
+
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="gender">Select Employees</label>
@@ -42,7 +42,7 @@
                                         <option selected > - Select Employees- </option>
                                         @foreach ($all_users as $au)
                                             <option value="{{ $au->user->id }}">{{ $au->user->name }} -
-                                                {{ $au->user->email }}</option>
+                                                {{ $au->ec_number}}</option>
                                         @endforeach
                                     </select>
                                 </div>

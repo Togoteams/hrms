@@ -53,9 +53,9 @@ class PayRollPayscaleCotroller extends BaseController
     public function create($user_id = null)
     {
         if ($user_id != null) {
-            $all_users = Employee::where('status', 'active')->where('user_id', $user_id)->get();
+            $all_users = Employee::getActiveEmp()->where('user_id', $user_id)->get();
         } else {
-            $all_users = Employee::where('status', 'active')->get();
+            $all_users = Employee::getActiveEmp()->get();
         }
         $page = $this->page_name;
         $taxSlabs = TaxSlabSetting::where('status', 'active')->get();
@@ -90,7 +90,7 @@ class PayRollPayscaleCotroller extends BaseController
      */
     public function store(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'basic' => 'required|numeric',

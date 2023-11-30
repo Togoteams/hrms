@@ -90,13 +90,14 @@
                                 name: 'reimbursementype.type'
                             },
                             {
-                                data: 'user.name',
-                                name: 'user.name'
-                            },
-                            {
                                 data: 'user.employee.ec_number',
                                 name: 'user.employee.ec_number'
                             },
+                            {
+                                data: 'user.name',
+                                name: 'user.name'
+                            },
+
                             {
                                 data: 'expenses_currency',
                                 name: 'expenses_currency'
@@ -105,7 +106,7 @@
                                 data: 'expenses_amount',
                                 name: 'expenses_amount'
                             },
-                            
+
                             {
                                 data: 'claim_date',
                                 name: 'claim_date'
@@ -213,7 +214,7 @@
                             <input type="hidden" value="" id="status_id" name="payroll_id">
                             <div class="row">
 
-                           
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>

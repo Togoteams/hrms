@@ -12,6 +12,7 @@
                     <option value="">Select Currency Name From</option>
                     <option value="usd" @if ($currency->currency_name_from == 'usd') selected @endif>USD</option>
                     <option value="pula" @if ($currency->currency_name_from == 'pula') selected @endif>PULA</option>
+                    <option value="inr" @if ($currency->currency_name_from == 'inr') selected @endif>INR</option>
                 </select>
             </div>
         </div>
@@ -32,6 +33,7 @@
                     <option value="">Select Currency Name To</option>
                     <option value="usd" @if ($currency->currency_name_to == 'usd') selected @endif>USD</option>
                     <option value="pula" @if ($currency->currency_name_to == 'pula') selected @endif>PULA</option>
+                    <option value="inr" @if ($currency->currency_name_to == 'inr') selected @endif>INR</option>
                 </select>
             </div>
         </div>

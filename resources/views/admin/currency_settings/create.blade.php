@@ -20,6 +20,7 @@
                                     <option value="">Select Currency Name From</option>
                                     <option value="usd">USD</option>
                                     <option value="pula">PULA</option>
+                                    <option value="inr">INR</option>
                                 </select>
                             </div>
                         </div>
@@ -40,6 +41,7 @@
                                     <option value="">Select Currency Name To</option>
                                     <option value="usd">USD</option>
                                     <option value="pula">PULA</option>
+                                    <option value="inr">INR</option>
                                 </select>
                             </div>
                         </div>
