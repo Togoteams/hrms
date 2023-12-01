@@ -691,11 +691,8 @@ if (!function_exists('getHeadValue')) {
                 })
                 ->orWhere(function ($q3) use ($startDate, $endDate) {
                     $q3->whereBetween('emi_end_date', array($startDate, $endDate));
-                })
-                ;
-            })->
-            where('user_id',$emp->user_id)
-            ->first();
+                });
+            })->where('user_id',$emp->user_id)->first();
             $loanAmount = $loan->emi_amount ?? 0;
             return $loanAmount;
          }

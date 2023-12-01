@@ -361,6 +361,12 @@
             "name": "Change Status Payroll Head","module": "Payroll Head", "permissions_for":"admin"
         },
         {
+            "name": "Report Tax For IBO","module": "Tax For IBO", "permissions_for":"admin"
+        },
+        {
+            "name": "Calcualte Tax For IBO","module": "Tax For IBO", "permissions_for":"admin"
+        },
+        {
             "name": "Add Pay Scale","module": "Payscale", "permissions_for":"admin"
         },
         {

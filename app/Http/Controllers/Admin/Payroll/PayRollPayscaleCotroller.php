@@ -66,23 +66,10 @@ class PayRollPayscaleCotroller extends BaseController
 
         $taxableAmount = $request->taxable_amount * 12;
         // echo $taxableAmount;
-        $taxSlab = TaxSlabSetting::where('from','<=',$taxableAmount)->where('to','>=',$taxableAmount)->where('status', 'active')->first();
-        // echo $taxSlab;
         $empType = $request->employment_type;
-
-        if($empType=="expatriate")
-        {
-            $extraAmount = ((($taxableAmount - $taxSlab->from)/100)*$taxSlab->ibo_tax_per);
-
-            $taxAmount = ($taxSlab->additional_ibo_amount + $extraAmount)/12 ;
-            $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + $extraAmount);
-        }else{
-
-            $extraAmount = ((($taxableAmount - $taxSlab->from)/100) * $taxSlab->local_tax_per);
-            $yearlyTaxAmount =  ($taxSlab->additional_local_amount + $extraAmount);
-            $taxAmount = ($taxSlab->additional_local_amount + $extraAmount)/12;
-        }
-        return $this->responseJson(true,200,"",["tax_amount"=>round($taxAmount),'extraAmount'=>$extraAmount,'yearlyTaxAmount'=>$yearlyTaxAmount,'taxable_amount'=>$taxableAmount]);
+        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$empType]);
+        
+        return $this->responseJson(true,200,"",$taxData);
     }
 
     /**

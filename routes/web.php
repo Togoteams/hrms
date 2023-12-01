@@ -48,6 +48,7 @@ use App\Http\Controllers\Admin\Payroll\ReimbursementController;
 use App\Http\Controllers\Admin\Payroll\ReimbursementTypeController;
 use App\Http\Controllers\Admin\SalaryReportingController;
 use App\Http\Controllers\SalaryIncrementController;
+use App\Http\Controllers\Admin\Payroll\PayrollIboTaxController;
 use App\Http\Controllers\PayrollReportController;
 use App\Models\KraAttributes;
 use App\Models\LeaveSetting;
@@ -325,6 +326,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
         Route::resource('salary', PayrollSalaryController::class);
         Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');
+        Route::get('tax-for-ibo/report', [PayrollIboTaxController::class, 'iboTaxReport'])->name('tax-for-ibo.report');
+        Route::match(['get', 'post'], '/tax-for-ibo/calculate', [PayrollIboTaxController::class, 'iboTaxCalculate'])->name('tax-for-ibo.calculate');
+        Route::match(['get', 'post'], '/tax-for-ibo/show/{user_id?}/{financial_year?}', [PayrollIboTaxController::class, 'get_tax_head_data'])->name('tax-for-ibo.show');
         Route::get('print-salary-slip/{id}', [PayrollSalaryController::class, 'print'])->name('salary.print');
 
         Route::get('salary/get-emp-head/{user_id?}/{salary_month?}', [PayrollSalaryController::class, 'get_employee_data'])->name('salary.emp.head');
