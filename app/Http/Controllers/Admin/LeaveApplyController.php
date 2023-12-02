@@ -306,7 +306,7 @@ class LeaveApplyController extends Controller
                 {
                     $remainingLeave = $remainingLeave -  $request->leave_applies_for;
                 }
-                return $remainingLeave;
+                // return $remainingLeave;
                     
                 $request->request->add([
                     'updated_by' => Auth::user()->id,
