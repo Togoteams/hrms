@@ -106,7 +106,7 @@ class LeaveApplyController extends Controller
             })->whereNotIn('status',['reject'])->where('user_id',$userId)->first();
             return !$overlappingRecord;
         });
-
+ 
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
             $value = Str::headline(Str::camel($attribute));
             return "The $value date range overlaps with an existing record.";
@@ -119,7 +119,7 @@ class LeaveApplyController extends Controller
             $user = User::find($request->user_id);
         } else {
             $user = Auth::user();
-        }
+        } 
 
          Validator::extend('sick_leave_document', function ($attribute, $value, $parameters, $validator) {
             $userId = $validator->getData()['user_id'] ?? "";
@@ -222,7 +222,8 @@ class LeaveApplyController extends Controller
     {
 
         $data = LeaveApply::find($id);
-        $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', $data->user_id)->first()->employment_type) ?? '')->get();
+        $leaveHideArr = ['maternity-leave'];
+        $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', $data->user_id)->first()->employment_type) ?? '')->whereNotIn('slug',$leaveHideArr)->get();
         // ret
         return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
@@ -252,22 +253,66 @@ class LeaveApplyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = Validator::make($request->all(), [
-            'leave_type_id' => ['required', 'numeric'],
-            'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
-            "doc1" => ["mimetypes:application/pdf", "max:10000"]
+        $leaveType = LeaveSetting::find($request->leave_type_id);
+        $leaveSlug = $leaveType->slug;
+        $request->merge(['id'=>$id]);
+        // return  $request->id;
+        $user_id = $request->user_id;   
+        Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
+            $start_date = $validator->getData()['start_date'];
+            $end_date = $validator->getData()['end_date'];
+            $edit_id = $validator->getData()['id'];
+            $userId = $validator->getData()['user_id'] ?? auth()->user()->id;
+            $overlappingRecord =true;
 
+            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
+                $query->where(function ($q1) use ($start_date, $end_date) {
+                    $q1->whereBetween('start_date', array($start_date, $end_date));
+                })
+                ->orWhere(function ($q2) use ($start_date, $end_date) {
+                    $q2->where('start_date', '<=', $start_date)
+                    ->where('end_date', '>=', $end_date);
+                })
+                ->orWhere(function ($q3) use ($start_date, $end_date) {
+                    $q3->whereBetween('end_date', array($start_date, $end_date));
+                });
+            })->whereNotIn('status',['reject'])->where('user_id',$userId)->whereNotIn('id',[$edit_id])->first();
+            return !$overlappingRecord;
+        });
+
+        Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
+            $value = Str::headline(Str::camel($attribute));
+            return "The $value date range overlaps with an existing record.";
+        });
+
+       
+        $validator = Validator::make($request->all(), [
+            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+            'start_date' => ['required', 'date','no_date_overlap'],
+            'end_date' => ['required', 'date','no_date_overlap', 'after_or_equal:start_date'],
+            "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],
+            'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],
+            'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1')]
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             try {
+                // return "dda";
+                $remainingLeave = (int)$this->balance_leave_by_type($request->leave_type_id, $user_id);
+                $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
+                if(!in_array($leaveSlug,$balanceLeaveHideArr))
+                {
+                    $remainingLeave = $remainingLeave -  $request->leave_applies_for;
+                }
+                return $remainingLeave;
+                    
                 $request->request->add([
                     'updated_by' => Auth::user()->id,
-                    'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction)
-
+                    'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
+                    'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
+                    'remaining_leave' => $remainingLeave
                 ]);
                 LeaveApply::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));
                 $request->has('doc1') ? $this->update_images('leave_applies', $id, $request->file('doc1'), 'leave_doc', 'doc') : LeaveApply::find($id)->doc;

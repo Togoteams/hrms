@@ -73,7 +73,7 @@
                                 <div class="form-group">
                                     <label for="leave_applies_for">leave_applies_for</label>
                                     <input required readonly id="leave_applies_for"
-                                        placeholder="Enter correct leave_applies_for " value="0" type="text"
+                                        placeholder="Enter correct leave_applies_for " value="0" type="text" 
                                         name="leave_applies_for" class="form-control form-control-sm ">
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason</label>
-                                    <input required id="leave_reason" placeholder="Enter leave_reason eg:- i want to 2 days leave for my sister marriage  " type="text" name="leave_reason" class="form-control form-control-sm ">
+                                    <input required id="leave_reason" placeholder="eg:- i want to 2 days leave for my sister marriage  " type="text" name="leave_reason" class="form-control form-control-sm ">
                                 </div>
                             </div>
 
@@ -110,12 +110,6 @@
     </div>
     @push('custom-scripts')
     <script>
-
-        // window.onload = function() { //from ww  w . j  a  va2s. c  o  m
-        //     var today = new Date().toISOString().split('T')[0];
-        //     document.getElementsByName("start_date")[0].setAttribute('min', today);
-        //     document.getElementsByName("end_date")[0].setAttribute('min', today);
-        // }
         function change_leave() {
             getDays();
             var leaveSlug = $("#leave_type_id").find(':selected').data('leave-slug');
@@ -171,7 +165,6 @@
             //    amount_cal(e);
             },
         });
-            // selectDrop('form_data', '{{ route('admin.leave_apply.get_balance_leave') }}', 'balance_leave1')
         }
 
         $("#start_date").on('change',function(){

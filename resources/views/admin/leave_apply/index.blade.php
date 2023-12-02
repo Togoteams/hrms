@@ -228,53 +228,97 @@
 </main>
 @endsection
 @push('custom-scripts')
-
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-    // date picker
-    $( document ).ready(function() {
-        // $("#start_date").datepicker({ minDate: '0',dateFormat: 'dd-mm-yy' });
-        // $("#end_date").datepicker({ dateFormat: 'dd-mm-yy' });
-    
-        // $("#start_date").on("change", function () {
-        //     var fromdate = $(this).val();
-        //     console.log("fromdate",fromdate.replace(/-/g,"/"));
-        //     // var end = new Date(fromdate.replace(/-/g,"/"));
-        //     // console.log(end);
-        //     // $("#end_date").datepicker({ minDate: end });
-
-        // });
-    }); 
-    // date picker
-    </script>
-    <script>
-        //  window.onload = function() { //from ww  w . j  a  va2s. c  o  m
-        //     var today = new Date().toISOString().split('T')[0];
-        //     document.getElementsByName("start_date_edit")[0].setAttribute('min', today);
-        //     document.getElementsByName("end_date_edit")[0].setAttribute('min', today);
-        // }
-          $(document).ready(function() {
-            $(document).on('change',"#start_date_edit",function() {
-                console.log("sdsd");
-                getEditDays();
-            });
-            $(document).on('change',"#end_date_edit",function() {
-                console.log("sdsdsdsdsd");
-            // $("#end_date_edit").on('change', function() {
-                getEditDays();
-            });
-
-        });
-
-        function getEditDays() {
-            date1 = new Date($("#start_date_edit").val());
-            date2 = new Date($("#end_date_edit").val());
-            var milli_secs = date1.getTime() - date2.getTime();
-
-            // Convert the milli seconds to Days 
-            var days = milli_secs / (1000 * 3600 * 24);
-            // document.getElementById("ans").innerHTML =
-            $("#leave_applies_for_edit").val(Math.round(Math.abs(days)) + 1);
+    function change_leave_edit() {
+        getDaysEdit();
+        var leaveSlug = $("#edit_leave_type_id").find(':selected').data('leave-slug');
+        var employment_type = $("#employment_type").val();
+        var leave_applies_for = $("#leave_applies_for_edit").val() ?? 1;
+        console.log(leave_applies_for);
+        if(employment_type=="expatriate" && leaveSlug=="sick-leave" && leave_applies_for >=2)
+        {
+            document.getElementById('edit_doc').setAttribute("required", "");
+            console.log("expatriate");
+        }else if(employment_type=="local" && (leaveSlug=="sick-leave" || leaveSlug=="maternity-leave"))
+        {
+            document.getElementById('edit_doc').setAttribute("required", "");
+            console.log("local");
         }
-    </script>
+        else {
+            document.getElementById('edit_doc').removeAttribute("required", "");
+        }
+        var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}";
+        var user_id = $("#edit_user_id").val();
+        console.log(user_id);
+        var leave_type_id = $("#edit_leave_type_id").val();
+        console.log(leave_type_id);
+        // $.ajax({
+        // url: getBalanceUrl,
+        // type: "get",
+        // data:{"user_id":user_id,'leave_type_id':leave_type_id},
+        // dataType: "json",
+        //     success: function (result) {
+        //     if(result.status==true)
+        //     {
+        //         var data = result.data;
+        //         if(data.is_balance_leave_hide)
+        //         {
+        //             $("#edit_balance_leave1").val(0);
+        //             $(".balance_leave_section").css('display','none');
+        //         }else
+        //         {
+        //             $("#edit_balance_leave1").val(data.remaining_leave);
+        //             $(".balance_leave_section").css('display','');
+        //         }
+
+        //         if(data.is_ibo_sick_leave)
+        //         {
+        //             $(".ibo-pay-type").css('display','block');
+        //         }else
+        //         {
+        //             $(".ibo-pay-type").css('display','none');
+        //         }
+        //     }else
+        //     {
+        //         $("#edit_balance_leave1").val(0);
+        //     }
+        //     },
+        // });
+    }
+
+    $("#start_date_edit").on('change',function(){
+        dt = new Date($(this).val());
+        dt.setDate(dt.getDate() + 1);
+        var month = dt.getMonth()+1;
+        var day = dt.getDate();
+        if(month<10)
+        {
+            month = "0"+month;
+        }
+
+        if(day<10)
+        {
+            day = "0"+day;
+        }
+        $("#end_date_edit").val(dt.getFullYear()+"-"+(month)+"-"+day);
+        getDaysEdit();
+    });
+    $("#end_date_edit").on('change',function(){
+        getDaysEdit();
+    });
+    function getDaysEdit() {
+        date1 = new Date( $("#start_date_edit").val());
+        date2 = new Date($("#end_date_edit").val());
+        $("#leave_applies_for_edit").val(0);
+        var milli_secs = date1.getTime() - date2.getTime();
+        var days = 0;
+        days = Math.round(Math.abs(milli_secs / (1000 * 3600 * 24)))+1;
+        // Convert the milli seconds to Days
+        if(days.toString()== "NaN")
+        {
+            days = 0;
+        }
+        $("#leave_applies_for_edit").val(Number(days));
+    }
+</script>
 @endpush
