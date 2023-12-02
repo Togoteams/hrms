@@ -98,8 +98,8 @@ class LeaveTimeApprovelController extends BaseController
             'user_id' => ['required', 'numeric', 'exists:users,id'],
             'request_date' => ['required', 'date'],
             'reason' => ['required', 'string'],
-            'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
-            'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap','after_or_equal:start_date'],
+            'start_date' => ['required', 'date','no_date_overlap'],
+            'end_date' => ['required', 'date','no_date_overlap','after_or_equal:start_date'],
             "document" => ["max:10000",'required'],
         ]);
         // $validator = Validator::make($request->all(), [
@@ -227,7 +227,7 @@ class LeaveTimeApprovelController extends BaseController
                $start_date = $validator->getData()['start_date'];
                $end_date = $validator->getData()['end_date'];
                $userId = $validator->getData()['user_id'] ?? "";
-               $overlappingRecord =true;
+               $overlappingRecord = true;
 
                $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
                    $query->where(function ($q1) use ($start_date, $end_date) {
