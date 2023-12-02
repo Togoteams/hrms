@@ -328,16 +328,13 @@
                                     <td style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <td style="text-align: right;">{{$value->value}}</td>
                                     @endif
-
                                 </tr>
                                 @endif
                                 @endforeach
-
                                 <tr>
                                     <th style="font-weight: 600; padding-left: 10%;">Total Deduction
                                     </th>
-                                    <th>{{$totalDeductionAmount}}</th>
-                                    <th></th>
+                                    <th style="text-align: right;">{{$totalDeductionAmount}}</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -354,8 +351,10 @@
                             <tr><th></th></tr>
                             <tr><th></th></tr>
                                 <tr>
-                                    <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total Deduction) : {{$data->net_take_home}} <span style="font-weight: 100;">($ {{convertNumberToWords($data->net_take_home)}} )</span></th>
-                                    <th style="padding-left: 1%;">Net Take Home (In Pula) (Gross Earning - Total Deduction) : {{$data->net_take_home/$pulaToUSDAmount}} <span style="font-weight: 100;">(P {{convertNumberToWords($data->net_take_home/$pulaToUSDAmount)}} )</span></th>
+                                    <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total Deduction) : $ {{$data->net_take_home}} <span style="font-weight: 100;">({{convertNumberToWords($data->net_take_home)}} )</span></th>
+                                </tr>
+                                <tr>
+                                    <th style="padding-left: 1%;">Net Take Home (In Pula) (Gross Earning - Total Deduction) : P {{number_format($data->net_take_home/$pulaToUSDAmount,2,'.',"")}} <span style="font-weight: 100;">({{convertNumberToWords(number_format($data->net_take_home/$pulaToUSDAmount,2,".",""))}} )</span></th>
                                 </tr>
                             </tbody>
                         </table>`

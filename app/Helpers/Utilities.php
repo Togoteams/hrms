@@ -211,6 +211,19 @@ if (!function_exists('formateDate')) {
         return  $formatData;
     }
 }
+if (!function_exists('getCurrencyValue')) {
+    function getCurrencyValue($from,$to)
+    {
+        $currencyValue = 1;
+        $currency = CurrencySetting::where('currency_name_from',$from)->where('currency_name_to',$to)->first();
+        if(!empty($currency))
+        {
+            $currencyValue = $currency->currency_amount_to;
+        }
+        return $currencyValue;
+    }
+}
+
 if (!function_exists('pulaToUsd')) {
     function pulaToUsd($amount)
     {

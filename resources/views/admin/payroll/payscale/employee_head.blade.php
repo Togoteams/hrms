@@ -16,7 +16,7 @@
     <div class="col-md-12">
         <h4>Earning</h4>
         @php
-        $readonlyArr = ['bomaid','pension','union_fee','tax','over_time'];
+        $readonlyArr = ['bomaid','pension','union_fee','tax','over_time','house_up_keep_allow','provident_fund'];
         $fixedHeadsArr = ['bomaid','over_time'];
         @endphp
     </div>

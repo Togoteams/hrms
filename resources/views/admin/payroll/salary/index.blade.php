@@ -45,7 +45,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Employee Id</th>
+                                <th>Salary Month</th>
                                 <th>Employee Code</th>
                                 <th>Employee Name</th>
                                 <th>Basic</th>
@@ -75,11 +75,9 @@
                                     orderable: false,
                                     searchable: false
                                 },
-
-                             
                                 {
-                                    data: 'employee.emp_id',
-                                    name: 'employee.emp_id'
+                                    data: 'pay_for_month_year',
+                                    name: 'pay_for_month_year'
                                 },
 
                                 {

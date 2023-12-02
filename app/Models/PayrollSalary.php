@@ -14,6 +14,7 @@ class PayrollSalary extends Model
         'pay_for_month_year',
         'status',
         'basic',
+        'employment_type',
         'total_working_days',
         'annual_balanced_leave',
         'no_of_persent_days',

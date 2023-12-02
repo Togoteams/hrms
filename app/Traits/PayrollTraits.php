@@ -5,6 +5,7 @@ namespace App\Traits;
 use App\Models\MedicalCard;
 use App\Models\PayrollTtumSalaryReport;
 use App\Models\TaxSlabSetting;
+use App\Models\Account;
 trait PayrollTraits
 {
     public function saveTtumData($data=[])
@@ -18,6 +19,15 @@ trait PayrollTraits
         $refrenceId = $data['refrence_id'];
         $refrenceTableType = $data['refrence_table_type'];
        return PayrollTtumSalaryReport::create($data);
+    }
+    public function getTTUMAccount($headName)
+    {
+        $empAccounts = Account::where('name',$headName)->first();
+        if(empty($empAccounts))
+        {
+            $empAccounts = Account::create(['name'=>$headName]);
+        }
+       return $empAccounts;
     }
     public function getTaxAmount($data)
     {

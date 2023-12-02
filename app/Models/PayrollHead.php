@@ -14,6 +14,7 @@ class PayrollHead extends Model
         'slug',
         'placeholder',
         'employment_type',
+        'is_ttum_component',
         'for',
         'is_dropdown',
         'head_type',

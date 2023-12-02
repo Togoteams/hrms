@@ -83,7 +83,7 @@ class PayrollSalaryController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'pay_for_month_year' => 'required|string',
@@ -107,6 +107,7 @@ class PayrollSalaryController extends Controller
                     'pay_for_month_year' =>  $request->pay_for_month_year,
                     'basic' =>  $request->basic,
                     'fixed_deductions' =>  $request->fixed_deductions,
+                    'employment_type' =>  $emp->employment_type,
                     'other_deductions' =>  $request->other_deductions,
                     'no_of_payable_days' =>  $request->no_of_payable_days,
                     'no_of_persent_days' =>  $request->no_of_persent_days,
@@ -121,36 +122,32 @@ class PayrollSalaryController extends Controller
                     'created_by' => auth()->user()->id
                 ]);
                 // echo $payroll;
-                if($accountId = Account::where('name','Salaries')->value('id'))
-                {
-                    $data['account_id'] = $accountId;
-                    $data['transaction_number'] =rand(1111111,9999999);
-                    $data['transaction_type'] = "debit";
-                    $data['transaction_amount'] = $payroll->total_deduction+$payroll->gross_earning;
-                    $data['transaction_currency'] ="BWP";
-                    $data['transaction_at'] = date('Y-m-d H:i:s');
-                    $data['refrence_id'] =$payroll->id;
-                    $data['refrence_table_type'] =get_class($payroll);
-                    $this->saveTtumData($data);
-                }
-                $empAccounts = Account::where('name',$emp->user->name)->first();
-                if(empty($empAccounts))
-                {
-                    $empAccounts = Account::create(['name'=>$emp->user->name,'opening_amount'=>0,'closing_amount'=>0]);
-                }
-                if($empAccounts)
-                {
-                    $data['account_id'] = $empAccounts->id;
+                    $currencyValue = 1;
+                    if($emp->employment_type=="expatriate")
+                    {
+                        $currencyValue = getCurrencyValue("usd","pula");
+                    }
+                    $data['account_id'] = $this->getTTUMAccount($emp->user->name)->id;
                     $data['transaction_number'] =rand(1111111,9999999);
                     $data['transaction_type'] = "credit";
-                    $data['transaction_amount'] = $payroll->total_deduction+$payroll->gross_earning;
+                    $data['transaction_amount'] = $payroll->net_take_home * $currencyValue;
                     $data['transaction_currency'] = "BWP";
                     $data['user_id'] = $payroll->user_id;
                     $data['transaction_at'] = date('Y-m-d H:i:s');
                     $data['refrence_id'] = $payroll->id;
                     $data['refrence_table_type'] = get_class($payroll);
                     $this->saveTtumData($data);
-                }
+
+                    $data['account_id'] = $this->getTTUMAccount("basic")->id;
+                    $data['transaction_number'] =rand(1111111,9999999);
+                    $data['transaction_type'] = "debit";
+                    $data['transaction_amount'] = $request->basic * $currencyValue;
+                    $data['transaction_currency'] = "BWP";
+                    $data['user_id'] = $payroll->user_id;
+                    $data['transaction_at'] = date('Y-m-d H:i:s');
+                    $data['refrence_id'] = $payroll->id;
+                    $data['refrence_table_type'] = get_class($payroll);
+                    $this->saveTtumData($data);
 
                 // dd($payroll);
                 foreach ($request->all() as $key => $value) {
@@ -159,9 +156,32 @@ class PayrollSalaryController extends Controller
                         PayrollSalaryHead::create([
                             'payroll_head_id' => $head->id,
                             'payroll_salary_id' => $payroll->id,
-                            'value' => $request->$key,
+                            'value' => $request->$key, 
                             'created_by' => auth()->user()->id
                         ]);
+                        if($request->$key >0)
+                        {
+                             $empAccounts = Account::where('name',$head->name)->first();
+                                if(empty($empAccounts))
+                                {
+                                    $empAccounts = Account::create(['name'=>$head->name,'account_type'=>"office"]);
+                                }
+                                $data['account_id'] = $empAccounts->id;
+                                $data['transaction_number'] =rand(1111111,9999999);
+                                $transaction_type  = "credit";
+                                if($head->head_type=="income")
+                                {
+                                 $transaction_type  = "debit";
+                                }
+                                $data['transaction_type'] = $transaction_type;
+                                $data['transaction_amount'] = $request->$key * $currencyValue;
+                                $data['transaction_currency'] ="BWP";
+                                $data['transaction_at'] = date('Y-m-d H:i:s');
+                                $data['refrence_id'] = $payroll->id;
+                                $data['refrence_table_type'] =get_class($payroll);
+                                $this->saveTtumData($data);
+                        }
+                        
                     }
                 }
 
