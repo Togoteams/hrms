@@ -29,14 +29,14 @@ class ReimbursementController extends BaseController
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
                     return $actionBtn;
-                })
+                })                 
                 ->editColumn('claim_date', function ($data) {
                     return \Carbon\Carbon::parse($data->claim_date)->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        $Employees = Employee::getActiveEmp()->where('employment_type','local')->get();
+        $employees = Employee::getActiveEmp()->where('employment_type','expatriate')->get();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
@@ -48,7 +48,7 @@ class ReimbursementController extends BaseController
         'reimbursementType' => $reimbursementType,
         'currencies' => $filteredCurrencySetting,
         'reimbursement' => $reimbursement,
-         'Employees' => $Employees]);
+         'Employees' => $employees]);
 
 
     }
@@ -240,7 +240,7 @@ class ReimbursementController extends BaseController
         // dd($request->all());
         $request->validate([
             'status' => ['required','string'],
-            'reimbursement_reason' => ['required','string'],
+            'reimbursement_reason' => ['nullable','string'],
             'reimbursement_currency' => 'required|string',
             'reimbursement_amount' => 'required|numeric|gt:0',
         ]);

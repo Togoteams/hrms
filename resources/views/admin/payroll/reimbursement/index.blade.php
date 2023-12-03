@@ -213,8 +213,6 @@
                         <div class="modal-body">
                             <input type="hidden" value="" id="status_id" name="payroll_id">
                             <div class="row">
-
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>

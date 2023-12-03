@@ -22,6 +22,21 @@ class LeaveApply extends Model
     }
     public function employee(){
         return $this->belongsTo(Employee::class);
+    }
+    
+    public function leaveDate(){
+        return $this->hasMany(LeaveDate::class);
+    }
 
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->uuid = (string) Uuid::generate(4);
+        });
+        static::deleting(function($model) {
+            $model->leaveDate()->delete();
+        });
+        
     }
 }

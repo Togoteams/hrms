@@ -17,13 +17,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use HasRolesAndPermissions;
 
-    public static function boot()
-    {
-        parent::boot();
-        self::creating(function ($model) {
-            $model->uuid = (string) Uuid::generate(4);
-        });
-    }
+
     /**
      * The accessors to append to the model's array form.
      *
@@ -160,5 +154,19 @@ class User extends Authenticatable
         return $this->morphOne('App\Models\Media', 'table')->where('deleted_at', null)->orderBy('id', 'DESC');
     }
 
+    public static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+            $model->uuid = (string) Uuid::generate(4);
+        });
+        static::deleting(function($model) {
+            $model->departmentHistory()->delete();
+        });
+        static::deleting(function($model) {
+            $model->employee()->delete();
+        });
+    }
+    
 
 }
