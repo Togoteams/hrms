@@ -91,6 +91,15 @@ class PayrollSalaryController extends Controller
         } else {
             try {
                 $emp = Employee::where('user_id', $request->user_id)->first();
+                $net_take_home_in_pula =  $request->net_take_home;
+                $currencyValue = 1;
+
+                if($emp->employment_type=="expatriate")
+                {
+                    $currencyValue = getCurrencyValue("usd","pula");
+                }
+                
+                $net_take_home_in_pula = $request->net_take_home * $currencyValue;
                 $payroll = PayrollSalary::create([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
@@ -105,6 +114,8 @@ class PayrollSalaryController extends Controller
                     'total_loss_of_pay' =>  $request->total_loss_of_pay,
                     'total_working_days' =>  $request->total_working_days,
                     'net_take_home' =>  $request->net_take_home,
+                    'net_take_home_in_pula' =>  $net_take_home_in_pula,
+                    'usd_pula_currency_amount' =>  $currencyValue,
                     'ctc' =>  $request->ctc,
                     'total_employer_contribution' =>  $request->total_employer_contribution,
                     'total_deduction' =>  $request->total_deduction,
@@ -112,11 +123,7 @@ class PayrollSalaryController extends Controller
                     'created_by' => auth()->user()->id
                 ]);
                 // echo $payroll;
-                    $currencyValue = 1;
-                    if($emp->employment_type=="expatriate")
-                    {
-                        $currencyValue = getCurrencyValue("usd","pula");
-                    }
+                    
                     $data['account_id'] = $this->getTTUMAccount($emp->user->name)->id;
                     $data['transaction_number'] =rand(1111111,9999999);
                     $data['transaction_type'] = "credit";
@@ -442,18 +449,25 @@ class PayrollSalaryController extends Controller
         {
             $pulaToUSDAmount = $currencySeeting->currency_amount_to;
         }
+
         $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
         $inrToUSDAmount = 1;
         if(!empty($currencySeetingInrUsd))
         {
             $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
         }
+        $currencySeetingUsdToPula = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->first();
+        $usdToPullAmount = 1;
+        if(!empty($currencySeetingUsdToPula))
+        {
+            $usdToPullAmount = $currencySeetingUsdToPula->currency_amount_to;
+        }
         if($data->employee->employment_type=="local")
         {
             return view('admin.payroll.salary.salary-slip-local', compact('data'));
         }else
         {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data','pulaToUSDAmount','inrToUSDAmount'));
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data','pulaToUSDAmount','inrToUSDAmount','usdToPullAmount'));
         }
     }
 
@@ -463,14 +477,16 @@ class PayrollSalaryController extends Controller
         $salaryMonth = $salary_month;
         $salaryStartDate = date("Y-m-d", strtotime("-1 months",strtotime($salaryMonth."-20")));
         $salaryEndDate = date("Y-m-d", strtotime($salaryMonth."-20"));
-        // while($holidayFound!=false)
-        // {
-            if(!isHolidayDate($salaryEndDate))
+        $holidayFound = false;
+        do{
+            if(isHolidayDate($salaryEndDate))
             {
+                $holidayFound = true;
+                $salaryEndDate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $salaryEndDate) ) ));
+            }else{
                 $holidayFound = false;
             }
-            $salaryEndDate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $salaryEndDate) ) ));
-        // }
+        }while($holidayFound);
 
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();

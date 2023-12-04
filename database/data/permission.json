@@ -232,7 +232,7 @@
             "name": "View Leave Apply","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Delete Leave Apply","module": "Leave Apply", "permissions_for":"admin,employee,hr_head"
+            "name": "Delete Leave Apply","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Change Status Leave Apply","module": "Leave Apply", "permissions_for":"admin,hr_head"

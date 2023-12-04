@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('start_amount');
-            $table->decimal('end_amount');
-            $table->decimal('late_fine_amount');
-            $table->string('late_fine_amount_type');
-            $table->integer('no_min_installment');
-            $table->integer('no_max_installment');
-            $table->decimal('max_installment_amount');
-            $table->decimal('min_installment_amount');
-            $table->integer('rate_of_interest');
-            $table->text('description');
+            // $table->decimal('start_amount');
+            // $table->decimal('end_amount');
+            // $table->decimal('late_fine_amount');
+            // $table->string('late_fine_amount_type');
+            // $table->integer('no_min_installment');
+            // $table->integer('no_max_installment');
+            // $table->decimal('max_installment_amount');
+            // $table->decimal('min_installment_amount');
+            // $table->integer('rate_of_interest');
+            $table->text('description')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->string('status')->default('active');
             $table->unsignedBigInteger('created_by');

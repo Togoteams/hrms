@@ -354,10 +354,10 @@
                                     <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total Deduction) : $ {{$data->net_take_home}} <span style="font-weight: 100;">({{convertNumberToWords($data->net_take_home)}} )</span></th>
                                 </tr>
                                 <tr>
-                                    <th style="padding-left: 1%;">Net Take Home (In Pula) (Gross Earning - Total Deduction) : P {{number_format($data->net_take_home/$pulaToUSDAmount,2,'.',"")}} <span style="font-weight: 100;">({{convertNumberToWords(number_format($data->net_take_home/$pulaToUSDAmount,2,".",""))}} )</span></th>
+                                    <th style="padding-left: 1%;">Net Take Home (In Pula) (Gross Earning - Total Deduction) : P {{number_format($data->net_take_home_in_pula,2,'.',"")}} <span style="font-weight: 100;">({{convertNumberToWords(number_format($data->net_take_home_in_pula,2,".",""))}} )</span></th>
                                 </tr>
                             </tbody>
-                        </table>`
+                        </table>
                     </div>
                 </div>
                 <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>

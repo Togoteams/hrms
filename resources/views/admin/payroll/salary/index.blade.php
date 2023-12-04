@@ -49,9 +49,9 @@
                                 <th>Employee Code</th>
                                 <th>Employee Name</th>
                                 <th>Basic</th>
-                                <th>Net Take Home</th>
-                                <th>Total Deduction</th>
                                 <th>Gross Earning</th>
+                                <th>Total Deduction</th>
+                                <th>Net Take Home</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -93,21 +93,20 @@
                                     name: 'basic'
                                 },
 
-                               
+                                {
+                                    data: 'gross_earning',
+                                    name: 'gross_earning'
+                                },
+                                {
+                                    data: 'total_deduction',
+                                    name: 'total_deduction'
+                                },
                                 {
                                     data: 'net_take_home',
                                     name: 'net_take_home'
                                 },
                                
                               
-                                {
-                                    data: 'total_deduction',
-                                    name: 'total_deduction'
-                                },
-                                {
-                                    data: 'gross_earning',
-                                    name: 'gross_earning'
-                                },
 
 
                                 {

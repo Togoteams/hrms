@@ -23,6 +23,8 @@ class PayrollSalary extends Model
         // 'fixed_deductions',
         // 'other_deductions',
         'net_take_home',
+        'net_take_home_in_pula',
+        'usd_pula_currency_amount',
         // 'ctc',
         // 'total_employer_contribution',
         'total_deduction',

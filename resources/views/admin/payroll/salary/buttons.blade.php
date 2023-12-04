@@ -17,9 +17,9 @@
 
     @if($enableEdit)
     @if(!isemplooye())
-    <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')" href="#"
+    {{-- <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')" href="#"
         data-bs-toggle="modal" data-bs-target="#modaledit" class="btn btn-edit btn-sm"><i
-            class="fas fa-edit"></i></button>
+            class="fas fa-edit"></i></button> --}}
     @endif
     @endif
     @csrf
