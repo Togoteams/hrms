@@ -610,25 +610,25 @@ if (!function_exists('getHeadValue')) {
         } elseif ($headSlug == "provident_fund") {
             $inrBasicAmount = $emp->basic_salary_for_india;
 
-            if($emp->salary_type=="npfs")
+            if($emp->salary_type=="npf")
             {
                 $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
             }
-            $inrToUsdAmount = 1;
+            $inrToPulaAmount = 1;
             $pulaToUSDAmount = 1;
-            $currencySeeting = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
+            $currencySeeting = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','pula')->first();
             if(!empty($currencySeeting))
             {
-                $inrToUsdAmount = $currencySeeting->currency_amount_to;
+                $inrToPulaAmount = $currencySeeting->currency_amount_to;
             }
-            // $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
-            // if(!empty($currencySeeting))
-            // {
-            //     $pulaToUSDAmount = $currencySeeting->currency_amount_to;
-            // }
+            $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+            if(!empty($currencySeeting))
+            {
+                $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+            }
             // if ($isPensionApplied == "yes") {
             $providentFound = ((($inrBasicAmount / 100)) * 10);
-            $providentFound = $providentFound ;
+            $providentFound = $providentFound * number_format($inrToPulaAmount * $pulaToUSDAmount,3,'.',"");
             return number_format($providentFound,2,'.',"");
             // }
         }elseif ($headSlug == "house_up_keep_allow") {
