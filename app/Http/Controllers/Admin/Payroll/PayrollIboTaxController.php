@@ -127,7 +127,7 @@ class PayrollIboTaxController extends Controller
         $emp = Employee::where('user_id', $user_id)->first();
         $salary = PayrollSalary::where('user_id', $user_id)->get();
         $usdToPulaAmount = 1;
-        $pulaToUsdAmount = 1;
+        $pulaToUSDAmount = 1;
         $reimbursements = Reimbursement::where('user_id', $user_id)->where('status','approved')->get();
         $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->first();
         if(!empty($currencySeeting))
@@ -137,7 +137,7 @@ class PayrollIboTaxController extends Controller
         $currencySeetingPulaToUsd = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
         if(!empty($currencySeetingPulaToUsd))
         {
-            $pulaToUsdAmount = $currencySeetingPulaToUsd->currency_amount_to;
+            $pulaToUSDAmount = $currencySeetingPulaToUsd->currency_amount_to;
         }
         $totalPaidSalary = $salary->sum('gross_earning');
         $reimbursementAmount = 0;
