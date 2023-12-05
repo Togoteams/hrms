@@ -104,7 +104,7 @@ class LeaveApplyController extends Controller
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
             })->whereNotIn('status',['reject'])->where('user_id',$userId)->orderBy('id','desc')->first();
-            $this->overLapsLeave = $overlappingRecord->leave_type->name;
+            $this->overLapsLeave = $overlappingRecord?->leave_type?->name;
             return !$overlappingRecord;
         });
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
