@@ -14,12 +14,12 @@ class Document extends Model
         'document',
         'status'];
 
-        public function user()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
     public function documentType()
-{
-    return $this->belongsTo(DocumentType::class, 'document_type');
-}
+    {
+        return $this->belongsTo(DocumentType::class, 'document_type');
+    }
 }

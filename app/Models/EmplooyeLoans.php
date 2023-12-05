@@ -18,10 +18,22 @@ class EmplooyeLoans extends Model
     {
         return $this->belongsTo(Loans::class);
     }
+    
     public function employee()
     {
         return $this->belongsTo(Employee::class);
     }
 
+    public function scopeGetList($query)
+    {
+        if(isemplooye())
+        {
+            return $query->where('user_id', auth()->user()->id);
+        }else
+        {
+            return $query;
+        }
+        // ->where('status', 'active');
+    }
 
 }

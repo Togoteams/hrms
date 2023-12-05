@@ -17,6 +17,5 @@ class DocumentType extends Model
     {
         return $query
         ->where('status', 'active');
-
     }
 }

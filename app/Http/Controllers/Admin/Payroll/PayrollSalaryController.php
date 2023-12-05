@@ -38,14 +38,8 @@ class PayrollSalaryController extends Controller
         }
 
         if ($request->ajax()) {
-            if(isemplooye())
-            {
-                $data = PayrollSalary::with('user', 'employee')
-                ->where('user_id',auth()->user()->id)->get();
-            }
-            else{
-                $data = PayrollSalary::with('user', 'employee')->get();
-            }
+           
+            $data = PayrollSalary::with('user', 'employee')->getList()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

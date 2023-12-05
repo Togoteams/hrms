@@ -29,7 +29,6 @@ class Reimbursement extends Model
     {
         return $query
         ->where('status', 'active');
-
     }
 
     public function user()
@@ -85,5 +84,15 @@ class Reimbursement extends Model
         return $monthNames[$this->attributes['claim_to_month']];
     }
 
+    public function scopeGetList($query)
+    {
+        if(isemplooye())
+        {
+            return $query->where('user_id', auth()->user()->id);
+        }else
+        {
+            return $query;
+        }
+    }
 
 }

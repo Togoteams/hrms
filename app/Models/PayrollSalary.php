@@ -55,4 +55,15 @@ class PayrollSalary extends Model
     public function payroll_payscale_head(){
         return $this->hasMany(PayrollPayscaleHead::class,'payroll_payscale_id');
     }
+    public function scopeGetList($query)
+    {
+        if(isemplooye())
+        {
+            return $query->where('user_id', auth()->user()->id);
+        }else
+        {
+            return $query;
+        }
+        // ->where('status', 'active');
+    }
 }

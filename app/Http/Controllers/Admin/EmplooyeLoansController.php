@@ -26,7 +26,7 @@ class EmplooyeLoansController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = EmplooyeLoans::with('user','loan','employee')->select('*');
+            $data = EmplooyeLoans::with('user','loan','employee')->getList()->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

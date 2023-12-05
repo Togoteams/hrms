@@ -11,4 +11,9 @@ class DocumentEmp extends Model
     protected $fillable = [
         'document_id',
         'emp_id'];
+
+    public function document()
+    {
+        return $this->belongsTo(Document::class,'document_id');
+    }
 }

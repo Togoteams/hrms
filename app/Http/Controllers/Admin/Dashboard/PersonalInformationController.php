@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Designation;
 use App\Models\Document;
+use App\Models\DocumentEmp;
 use App\Models\EmpAddress;
 use App\Models\Employee;
 use App\Models\EmpPassportOmang;
@@ -51,11 +52,12 @@ class PersonalInformationController extends Controller
     public function viewDocumentDetails()
     {
         $user = Auth::user();
-        $datas = DB::table('document_emps')
-            ->join('documents', 'document_emps.document_id', '=', 'documents.id')
-            ->where('document_emps.emp_id', $user->id)
-            ->select('documents.*')
-            ->get();
+        $datas = DocumentEmp::with('document','document.documentType')->get();
+        // $datas = DB::table('document_emps')
+        //     ->join('documents', 'document_emps.document_id', '=', 'documents.id')
+        //     ->where('document_emps.emp_id', $user->id)
+        //     ->select('documents.*')
+        //     ->get();
         //  dd($datas);
         return view('admin.dashboard.personal-information.document-details', ['datas' => $datas]);
     }

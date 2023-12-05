@@ -43,7 +43,7 @@
                                                                                 <div class="row text-dark">
                                                                                     <div class="pt-1 col-3 fw-semibold">Document Name:</div>
                                                                                     <div class="pt-1 col-3">
-                                                                                        {{ $data->document_name }}
+                                                                                        {{ $data->document->document_name }}
                                                                                     </div>
                 
                                                                                     
@@ -91,26 +91,26 @@
                                                                 <div class="row text-dark">
                                                                     <div class="pt-1 col-3 fw-semibold">Document Name:</div>
                                                                     <div class="pt-1 col-3">
-                                                                        {{ ucfirst($data->document_name) }}
+                                                                        {{ ucfirst($data->document->document_name) }}
                                                                     </div>
                                                                    
                                                                     <div class="pt-1 col-3 fw-semibold">Document Type:</div>
                                                                     <div class="pt-1 col-3">
-                                                                        {{ ucfirst($data->document_type) }}
+                                                                        {{ ucfirst($data->document->documentType->name) }}
                                                                     </div>                                                                                                                      
                                                                    
                                                                     <div class="pt-1 col-3 fw-semibold">Document:</div>
                                                                     <div class="pt-1 col-3">
-                                                                        <a href="{{ asset('assets/document/' . $data->document) }}" download>Download</a>
+                                                                        <a href="{{ asset('assets/document/' . $data->document->document) }}" download>Download</a>
                                                                     </div> 
 
                                                                     <div class="pt-1 col-3 fw-semibold">Document View</div>
                                                                     <div class="pt-1 col-3">
-                                                                        @if (in_array(pathinfo(asset('assets/document/'.$data->document), PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
-                                                                        <img src="{{ asset('assets/document/'.$data->document) }}" alt="image" width="70px" height="70px">
-                                                                    @elseif (in_array(pathinfo(asset('assets/document/'.$data->document), PATHINFO_EXTENSION), ['pdf']))
-                                                                        <a href="{{ asset('assets/document/'.$data->document) }}" target="_blank">
-                                                                            <img src="{{ asset('assets/document/') }}" alt="{{$data->document}}" width="70px" height="70px">
+                                                                        @if (in_array(pathinfo(asset('assets/document/'.$data->document->document), PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
+                                                                        <img src="{{ asset('assets/document/'.$data->document->document) }}" alt="image" width="70px" height="70px">
+                                                                    @elseif (in_array(pathinfo(asset('assets/document/'.$data->document->document), PATHINFO_EXTENSION), ['pdf']))
+                                                                        <a href="{{ asset('assets/document/'.$data->document->document) }}" target="_blank">
+                                                                            <img src="{{ asset('assets/document/') }}" alt="{{$data->document->document}}" width="70px" height="70px">
                                                                         </a>
                                                                     @endif                                                                    </div>
 
