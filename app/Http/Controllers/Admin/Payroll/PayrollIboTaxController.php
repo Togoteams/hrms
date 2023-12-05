@@ -126,11 +126,18 @@ class PayrollIboTaxController extends Controller
 
         $emp = Employee::where('user_id', $user_id)->first();
         $salary = PayrollSalary::where('user_id', $user_id)->get();
+        $usdToPulaAmount = 1;
+        $pulaToUsdAmount = 1;
         $reimbursements = Reimbursement::where('user_id', $user_id)->where('status','approved')->get();
-        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->first();
         if(!empty($currencySeeting))
         {
-            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
+            $usdToPulaAmount = $currencySeeting->currency_amount_to;
+        }
+        $currencySeetingPulaToUsd = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        if(!empty($currencySeetingPulaToUsd))
+        {
+            $pulaToUsdAmount = $currencySeetingPulaToUsd->currency_amount_to;
         }
         $totalPaidSalary = $salary->sum('gross_earning');
         $reimbursementAmount = 0;
@@ -138,13 +145,13 @@ class PayrollIboTaxController extends Controller
         {
             if($reimbursement->reimbursement_currency=="usd")
             {
-                $reimbursementAmount = ($reimbursementAmount + $reimbursement->reimbursement_amount)/$pulaToUSDAmount;
+                $reimbursementAmount = ($reimbursementAmount + $reimbursement->reimbursement_amount)/$usdToPulaAmount;
             }else
             {
                 $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
             }
         }
-        $totalPaidSalary = $salary->sum('gross_earning');
+        $totalPaidSalary = $salary->sum('gross_earning') * $usdToPulaAmount;
         $taxableAmount = $reimbursementAmount + $totalPaidSalary;
         $taxableAmountParam = $taxableAmount * 12;
         $empType = $emp->employment_type;
