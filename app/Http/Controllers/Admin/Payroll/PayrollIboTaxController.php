@@ -145,7 +145,7 @@ class PayrollIboTaxController extends Controller
         {
             if($reimbursement->reimbursement_currency=="usd")
             {
-                $reimbursementAmount = ($reimbursementAmount + $reimbursement->reimbursement_amount)/$usdToPulaAmount;
+                $reimbursementAmount = ($reimbursementAmount + $reimbursement->reimbursement_amount)*$usdToPulaAmount;
             }else
             {
                 $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
