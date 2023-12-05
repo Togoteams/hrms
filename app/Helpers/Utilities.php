@@ -610,7 +610,7 @@ if (!function_exists('getHeadValue')) {
         } elseif ($headSlug == "provident_fund") {
             $inrBasicAmount = $emp->basic_salary_for_india;
 
-            if($emp->salary_type=="npf")
+            if($emp->salary_type=="nps")
             {
                 $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
             }
