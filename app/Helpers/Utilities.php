@@ -616,7 +616,7 @@ if (!function_exists('getHeadValue')) {
             }
             $inrToPulaAmount = 1;
             $pulaToUSDAmount = 1;
-            $currencySeeting = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','pula')->first();
+            $currencySeeting = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
             if(!empty($currencySeeting))
             {
                 $inrToPulaAmount = $currencySeeting->currency_amount_to;
@@ -628,7 +628,7 @@ if (!function_exists('getHeadValue')) {
             }
             // if ($isPensionApplied == "yes") {
             $providentFound = ((($inrBasicAmount / 100)) * 10);
-            $providentFound = $providentFound * number_format($inrToPulaAmount * $pulaToUSDAmount,3,'.',"");
+            $providentFound = $providentFound * number_format($inrToPulaAmount,3,'.',"");
             return number_format($providentFound,2,'.',"");
             // }
         }elseif ($headSlug == "house_up_keep_allow") {
