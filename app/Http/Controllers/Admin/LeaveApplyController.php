@@ -21,6 +21,7 @@ class LeaveApplyController extends Controller
 {
     use LeaveTraits;
     public $page_name = "Apply Leave";
+    public $overLapsLeave = "";
     /**
      * Display a listing of the resource.
      */
@@ -91,7 +92,6 @@ class LeaveApplyController extends Controller
             $end_date = $validator->getData()['end_date'];
             $userId = $validator->getData()['user_id'] ?? auth()->user()->id;
             $overlappingRecord =true;
-
             $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
                 $query->where(function ($q1) use ($start_date, $end_date) {
                     $q1->whereBetween('start_date', array($start_date, $end_date));
@@ -103,13 +103,14 @@ class LeaveApplyController extends Controller
                 ->orWhere(function ($q3) use ($start_date, $end_date) {
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
-            })->whereNotIn('status',['reject'])->where('user_id',$userId)->first();
+            })->whereNotIn('status',['reject'])->where('user_id',$userId)->orderBy('id','desc')->first();
+            $this->overLapsLeave = $overlappingRecord->leave_type->name;
             return !$overlappingRecord;
         });
- 
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
             $value = Str::headline(Str::camel($attribute));
-            return "The $value date range overlaps with an existing record.";
+            $leaveName = $this->overLapsLeave;
+            return " $value   overlaps with  $leaveName .";
         });
 
         /**
@@ -276,13 +277,15 @@ class LeaveApplyController extends Controller
                 ->orWhere(function ($q3) use ($start_date, $end_date) {
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
-            })->whereNotIn('status',['reject'])->where('user_id',$userId)->whereNotIn('id',[$edit_id])->first();
+            })->whereNotIn('status',['reject'])->where('user_id',$userId)->orderBy('id','desc')->whereNotIn('id',[$edit_id])->first();
+            $this->overLapsLeave = $overlappingRecord->leave_type->name;
             return !$overlappingRecord;
         });
 
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
             $value = Str::headline(Str::camel($attribute));
-            return "The $value date range overlaps with an existing record.";
+            $leaveName = $this->overLapsLeave;
+            return " $value   overlaps with  $leaveName .";
         });
 
        

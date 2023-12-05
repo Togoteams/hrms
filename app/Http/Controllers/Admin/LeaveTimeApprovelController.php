@@ -20,6 +20,7 @@ class LeaveTimeApprovelController extends BaseController
      * Display a listing of the resource.
      */
     public $page_name = "Maternity leave Request";
+    public $overLapsLeave = "";
 
     public function index(Request $request)
     {
@@ -83,6 +84,7 @@ class LeaveTimeApprovelController extends BaseController
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
             })->whereNotIn('status',['reject'])->where('user_id',$userId)->first();
+            $this->overLapsLeave = $overlappingRecord->leave_type->name;
             return !$overlappingRecord;
         });
 
@@ -91,6 +93,7 @@ class LeaveTimeApprovelController extends BaseController
 
         Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
             $value = Str::headline(Str::camel($attribute));
+            $leaveName = $this->overLapsLeave;
             return "The $value date range overlaps with an existing record.";
         });
         $request->validate([
