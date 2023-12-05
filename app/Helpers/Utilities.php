@@ -628,7 +628,7 @@ if (!function_exists('getHeadValue')) {
             // }
             // if ($isPensionApplied == "yes") {
             $providentFound = ((($inrBasicAmount / 100)) * 10);
-            $providentFound = $providentFound * number_format($inrToUsdAmount,3,'.',"");
+            $providentFound = $providentFound ;
             return number_format($providentFound,2,'.',"");
             // }
         }elseif ($headSlug == "house_up_keep_allow") {
