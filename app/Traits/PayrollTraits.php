@@ -70,7 +70,9 @@ trait PayrollTraits
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'bomaid');
                     })->value('value');
-                    $amount = ($salaryHeadAmount) * $currencyValue;
+                    $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
+                    $amount = ($salaryHeadAmount - ($bomaid->amount/2)) ;
+                    
                     break;
                 case "bomaid_ibo":
                     $amount = 0;
@@ -84,17 +86,12 @@ trait PayrollTraits
                         $q->where('slug', 'pension_bank');
                     })->value('value');
                     $amount = ($salaryHeadAmount) * $currencyValue;
-
                     break;
                 case "sundry_dep_pension_eft":
-                    $pensionBank = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
-                        $q->where('slug', 'pension_bank');
-                    })->value('value');
-
                     $pensionOwn = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'pension_own');
                     })->value('value');
-                    $amount = ($pensionBank + $pensionOwn) * $currencyValue;
+                    $amount = $pensionOwn;
                     break;
                 case "B_B_E_U_Banker_Chq":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
@@ -113,10 +110,12 @@ trait PayrollTraits
                         $amount = $iboBomaidAmount;
                     }else
                     {
-                        $localBomaidAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        // This is Total Bomaid Fund Receive From Emp
+                        $bomaidAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'bomaid');
                         })->value('value');
-                        $amount = ($localBomaidAmount) + $localBomaidAmount;
+                        // This Bomaid Fund for emplyee i:e 50% of Bomain
+                        $amount = ($bomaidAmount);
                     }
                     break;
                 case "pf_contribution":

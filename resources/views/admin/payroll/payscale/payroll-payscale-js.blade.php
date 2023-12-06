@@ -16,7 +16,7 @@
 
         if(employmentType=="local")
         {
-            taxAbleAmount = (basicAmount + getValue('allowance') + getValue('pension_bank'))- (getValue('bomaid') + getValue('pension_own'));
+            taxAbleAmount = (basicAmount + getValue('allowance') + getValue('pension_bank')+getValue('bomaid_bank'))- (getValue('bomaid') + getValue('pension_own'));
         }else{
             taxAbleAmount = (basicAmount + getValue('entertainment_expenses') + getValue('house_up_keep_allow') + getValue('education_allowance'));
         } 
@@ -59,7 +59,7 @@
             var taxAmount = getValue('tax');
             var unionFee = getValue('union_fee');
 
-            totalEarning = basicAmount + getValue('allowance') + getValue('others_arrears')+ getValue('pension_bank');
+            totalEarning = basicAmount + getValue('allowance')+getValue('bomaid_bank') + getValue('others_arrears')+ getValue('pension_bank');
             totalDeduction = taxAmount + getValue('bomaid') + getValue('pension_own') + unionFee  + getValue('other_deductions');
             setId('union_fee', unionFee);
 

@@ -83,16 +83,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
-                                <div class="form-group">
-                                    <label class="required" for="is_ttum_component">Is TTUM Component</label>
-                                    <select required id="is_ttum_component" name="is_ttum_component"
-                                        class="form-control form-control-sm">
-                                        <option value="0">no</option>
-                                        <option value="1">yes</option>
-                                    </select>
-                                </div>
-                            </div>
+                          
 
                             {{-- <hr>
                             <h5>Validation</h5>

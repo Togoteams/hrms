@@ -70,17 +70,6 @@
                 </select>
             </div>
         </div>
-        <div class="mb-2 col-sm-4">
-            <div class="form-group">
-                <label class="required" for="is_ttum_component">Is TTUM Component</label>
-                <select required id="is_ttum_component" name="is_ttum_component"
-                    class="form-control form-control-sm">
-                    <option {{ $data->is_ttum_component=="0"? "selected" :""}} value="0">no</option>
-                    <option {{ $data->is_ttum_component=="1"? "selected" :""}} value="1">yes</option>
-                </select>
-            </div>
-        </div>
-
     </div>
     <hr>
     <div class="text-center ">

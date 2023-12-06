@@ -603,15 +603,29 @@ if (!function_exists('getHeadValue')) {
             if (!empty($bomaid)) {
                 $bomaidAmount = $bomaid->amount / 2;
             }
+            // Add Bank Bomaid deduction
+            $bankBomaidDeduction = $bomaid->amount/2;
+
+            return $bomaidAmount + $bankBomaidDeduction;
+        } elseif ($headSlug == "bomaid_bank") {
+            $bomaidAmount = 0;
+            $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
+            $bomaid = MedicalCard::find($bomaidTypeId);
+            if (!empty($bomaid)) {
+                $bomaidAmount = $bomaid->amount /2;
+            }
             return $bomaidAmount;
         } elseif ($headSlug == "pension_own") {
             $isPensionApplied = $emp->pension_contribution;
+            $bankPensionContributtion = 15;
+            $pensionAmount = 0;
             if ($isPensionApplied == "yes") {
-                $pensionAmount = ($basicAmout / 100) * $emp->pension_opt;
+                $pensionAmount = ($basicAmout / 100) * ($emp->pension_opt + $bankPensionContributtion);
                 return $pensionAmount;
             }
         } elseif ($headSlug == "pension_bank") {
-            $pensionAmount = ($basicAmout / 100) * 15;
+            $bankPensionContributtion = 15;
+            $pensionAmount = ($basicAmout / 100) * $bankPensionContributtion;
             return $pensionAmount;
         } elseif ($headSlug == "provident_fund") {
             $inrBasicAmount = $emp->basic_salary_for_india;
