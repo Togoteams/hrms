@@ -59,7 +59,7 @@
         <h4>Earning</h4>
     </div>
     @php
-    $readonlyArr = ['bomaid','pension','union_fee','tax','over_time','provident_fund'];
+    $readonlyArr = ['bomaid','pension_own','pension_bank','union_fee','tax','over_time','provident_fund'];
     $fixedHeadsArr = ['bomaid','over_time'];
     $inrCurrencyHead = ['provident_fund'];
     $pulaCurrencyHead = ['provident_fund'];
