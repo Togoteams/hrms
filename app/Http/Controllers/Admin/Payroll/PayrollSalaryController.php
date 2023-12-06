@@ -83,7 +83,7 @@ class PayrollSalaryController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            try {
+            // try {
                 $emp = Employee::where('user_id', $request->user_id)->first();
                 $net_take_home_in_pula =  $request->net_take_home;
                 $currencyValue = 1;
@@ -116,29 +116,6 @@ class PayrollSalaryController extends Controller
                     'gross_earning' =>  $request->gross_earning,
                     'created_by' => auth()->user()->id
                 ]);
-                // echo $payroll;
-                    
-                    $data['account_id'] = $this->getTTUMAccount($emp->user->name)->id;
-                    $data['transaction_number'] =rand(1111111,9999999);
-                    $data['transaction_type'] = "credit";
-                    $data['transaction_amount'] = $payroll->net_take_home * $currencyValue;
-                    $data['transaction_currency'] = "BWP";
-                    $data['user_id'] = $payroll->user_id;
-                    $data['transaction_at'] = date('Y-m-d H:i:s');
-                    $data['refrence_id'] = $payroll->id;
-                    $data['refrence_table_type'] = get_class($payroll);
-                    $this->saveTtumData($data);
-
-                    $data['account_id'] = $this->getTTUMAccount("basic")->id;
-                    $data['transaction_number'] =rand(1111111,9999999);
-                    $data['transaction_type'] = "debit";
-                    $data['transaction_amount'] = $request->basic * $currencyValue;
-                    $data['transaction_currency'] = "BWP";
-                    $data['user_id'] = $payroll->user_id;
-                    $data['transaction_at'] = date('Y-m-d H:i:s');
-                    $data['refrence_id'] = $payroll->id;
-                    $data['refrence_table_type'] = get_class($payroll);
-                    $this->saveTtumData($data);
 
                 // dd($payroll);
                 foreach ($request->all() as $key => $value) {
@@ -150,37 +127,14 @@ class PayrollSalaryController extends Controller
                             'value' => $request->$key, 
                             'created_by' => auth()->user()->id
                         ]);
-                        if($request->$key >0)
-                        {
-                            $empAccounts = Account::where('name',$head->name)->first();
-                            if(empty($empAccounts))
-                            {
-                                $empAccounts = Account::create(['name'=>$head->name,'account_type'=>"office"]);
-                            }
-                            $data['account_id'] = $empAccounts->id;
-                            $data['transaction_number'] =rand(1111111,9999999);
-                            $transaction_type  = "credit";
-                            if($head->head_type=="income")
-                            {
-                                $transaction_type  = "debit";
-                            }
-                            $data['transaction_type'] = $transaction_type;
-                            $data['transaction_amount'] = $request->$key * $currencyValue;
-                            $data['transaction_currency'] ="BWP";
-                            $data['transaction_at'] = date('Y-m-d H:i:s');
-                            $data['refrence_id'] = $payroll->id;
-                            $data['refrence_table_type'] =get_class($payroll);
-                            $this->saveTtumData($data);
-                        }
-                        
                     }
                 }
-
+                   $this->createTTum($payroll->id);
 
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
-            }
+            // } catch (Exception $e) {
+            //     return response()->json(['error' => $e->getMessage()]);
+            // }
         }
     }
 

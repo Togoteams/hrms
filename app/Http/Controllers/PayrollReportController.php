@@ -23,7 +23,6 @@ class PayrollReportController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->editColumn('transaction_at', function($data){ $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y'); return $formatedDate; })
                 ->make(true);
         }
         return view('admin.payroll.report.ttum',['page' => $this->page_name]);

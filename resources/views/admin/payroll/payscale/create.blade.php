@@ -36,8 +36,8 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="gender">Select Employees</label>
-                                    <select required  onchange="editForm('{{ route('admin.payroll.payscale.emp.head') }}/'+this.value, 'edit')"
-                                        id="gender" placeholder="Enter correct gender  " name="user_id"
+                                    <select required  onchange="callEditMethod()"
+                                        id="select_employee" placeholder="Enter correct gender  " name="user_id"
                                         class="form-control form-control-sm ">
                                         <option selected > - Select Employees- </option>
                                         @foreach ($all_users as $au)
@@ -66,16 +66,3 @@
 @push('custom-scripts')
 @include('admin.payroll.payscale.payroll-payscale-js')
 @endpush
-
-<script>
-    // window.addEventListener("DOMContentLoaded", (event) => {
-    //     const el = document.getElementById('gross_earning');
-    //     if (el) {
-    //         el.addEventListener('keyup', myFunction, false);
-    //     }
-    // });
-
-    // function myFunction() {
-    //     console.log("testing");
-    // }
-</script>

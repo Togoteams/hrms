@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('account_number')->nullable();
             $table->string('name')->nullable();
+            $table->string('slug')->nullable();
             $table->string('account_type')->nullable();
+            $table->string('is_credit')->nullable();
             $table->string('description')->nullable();
             $table->enum('status',["active","inactive"])->default('active');
             $table->timestamps();

@@ -14,14 +14,12 @@ return new class extends Migration
         Schema::create('payroll_ttum_salary_reports', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('account_id');
-            $table->bigInteger('transaction_number');
             $table->string('transaction_type')->comment('credit,debit');
             $table->bigInteger('transaction_amount');
             $table->string('transaction_currency');
-            $table->bigInteger('user_id')->nullable();
-            $table->timestamp('transaction_at');
-            $table->bigInteger('refrence_id');
-            $table->bigInteger('refrence_table_type');
+            $table->string('ttum_month');
+            $table->string('transaction_details');           
+             $table->bigInteger('refrence_id');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@
         <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
         <div class="form-group">
             <label for="basic">IBO Salary</label>
-            <input onkeyup="amount_cal(this)" value="{{$emp->basic_salary}}" readonly onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
+            <input onkeyup="amount_cal()" value="{{$emp->basic_salary}}" readonly onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
             <input  value="{{$pulaToUSDAmount}}"  id="pulaToUSDAmount" type="hidden" name="pulaToUSDAmount"  class="form-control form-control-sm">
         </div>
     </div>
@@ -38,7 +38,7 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif </label>
-            <input onkeyup="amount_cal(this)" @if(in_array($head->slug,$readonlyArr)) readonly @endif onblur="taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{$payscaleAmount}}" class="form-control form-control-sm {{$head->head_type}}">
+            <input onkeyup="amount_cal()" @if(in_array($head->slug,$readonlyArr)) readonly @endif onblur="taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{$payscaleAmount}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
@@ -66,7 +66,7 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif</label>
-            <input onkeyup="amount_cal(this)" @if(in_array($head->slug,$readonlyArr)) readonly @endif value="{{$payscaleDeductionAmount}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"     class="form-control form-control-sm {{$head->head_type}}">
+            <input onkeyup="amount_cal()" @if(in_array($head->slug,$readonlyArr)) readonly @endif value="{{$payscaleDeductionAmount}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"     class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
@@ -90,7 +90,7 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="net_take_home">net_take_home</label>
-            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ number_format(($grossEarning -  $totalDeduction),2,'.',"") }}" name="net_take_home" class="form-control form-control-sm ">
+            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal()" value="{{ number_format(($grossEarning -  $totalDeduction),2,'.',"") }}" name="net_take_home" class="form-control form-control-sm ">
         </div>
     </div>
 </div>

@@ -57,6 +57,7 @@
                                 <th>Account Number</th>
                                 <th>Account Name</th>
                                 <th>Account Type</th>
+                                <th>Cr/Dr</th>
                                 <th>Description</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -94,6 +95,10 @@
                                 {
                                     data: 'account_type',
                                     name: 'account_type'
+                                },
+                                {
+                                    data: 'is_credit',
+                                    name: 'is_credit'
                                 },
                                 {
                                     data: 'description',

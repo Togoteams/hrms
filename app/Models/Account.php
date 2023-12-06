@@ -12,6 +12,7 @@ class Account extends Model
         'account_number',
         'name',
         'account_type',
+        'is_credit',
         'description',
         'status'
     ];
@@ -20,5 +21,8 @@ class Account extends Model
     // {
     //     return ucfirst($showStatus);
     // }
-
+    public function scopeGetList($query)
+    {
+        return $query->where('status','active');
+    }
 }

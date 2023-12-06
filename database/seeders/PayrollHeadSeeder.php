@@ -16,7 +16,8 @@ class PayrollHeadSeeder extends Seeder
         $all_member = array(
             // for local all leaves
             ['name' => 'BoMaid', 'slug' => 'bomaid', 'placeholder' => 'BoMaid', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction",'is_ttum_component'=>1, 'created_by' => 1],
-            ['name' => 'Pension', 'slug' => 'pension', 'placeholder' => 'Pension', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'is_ttum_component'=>0,'created_by' => 1],
+            ['name' => 'Pension Own Contribution', 'slug' => 'pension_own', 'placeholder' => 'Pension Own contribution', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'is_ttum_component'=>1,'created_by' => 1],
+            ['name' => 'Pension', 'slug' => 'pension_bank', 'placeholder' => 'Pension Bank Contributtion', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'is_ttum_component'=>1,'created_by' => 1],
             ['name' => 'Union Fee', 'slug' => 'union_fee', 'placeholder' => 'Union Fee', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction",'is_ttum_component'=>0, 'created_by' => 1],
             ['name' => 'Other Deductions', 'slug' => 'other_deductions', 'placeholder' => 'Other deductions', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction",'is_ttum_component'=>1, 'created_by' => 1],
             ['name' => 'Tax', 'slug' => 'tax', 'placeholder' => 'Tax', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction",'is_ttum_component'=>1, 'created_by' => 1],

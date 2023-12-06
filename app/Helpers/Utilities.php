@@ -571,7 +571,13 @@ if (!function_exists('getLeavesSalary')) {
 if (!function_exists('getHeadValue')) {
     function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0,$salary_month="")
     {
-        $basicAmout = $basic;
+        if($basic!=0)
+        {
+            $basicAmout = $basic;
+        }else
+        {
+            $basicAmout =  $basicAmout = $emp->basic_salary;
+        }
         $startDate =date("Y-m-20", strtotime("-1 month"));
         $endDate = date("Y-m-20");
         /**
@@ -589,10 +595,7 @@ if (!function_exists('getHeadValue')) {
             $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->where('status','active')->first();
             $multipleValue = $currencySeeting->currency_amount_to;
         }
-        // if($basic==0)
-        // {
-        //     $basicAmout = $emp->basic_salary * $multipleValue;
-        // }
+     
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
@@ -601,12 +604,15 @@ if (!function_exists('getHeadValue')) {
                 $bomaidAmount = $bomaid->amount / 2;
             }
             return $bomaidAmount;
-        } elseif ($headSlug == "pension") {
+        } elseif ($headSlug == "pension_own") {
             $isPensionApplied = $emp->pension_contribution;
             if ($isPensionApplied == "yes") {
                 $pensionAmount = ($basicAmout / 100) * $emp->pension_opt;
                 return $pensionAmount;
             }
+        } elseif ($headSlug == "pension_bank") {
+            $pensionAmount = ($basicAmout / 100) * 15;
+            return $pensionAmount;
         } elseif ($headSlug == "provident_fund") {
             $inrBasicAmount = $emp->basic_salary_for_india;
 

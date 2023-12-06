@@ -31,8 +31,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             LeaveSettingSeeder::class,
             CountrySeeder::class,
-
-
+            AccountTableSeeder::class,
         ]);
     }
 }

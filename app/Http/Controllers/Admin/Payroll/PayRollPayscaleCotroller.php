@@ -19,7 +19,7 @@ use App\Traits\PayrollTraits;
 use App\Models\CurrencySetting;
 class PayRollPayscaleCotroller extends BaseController
 {
-    public  $page_name =   "Payroll PayScale";
+    public  $page_name =   "Payscale";
     use PayrollTraits;
 
     /**

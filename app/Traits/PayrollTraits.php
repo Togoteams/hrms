@@ -6,47 +6,187 @@ use App\Models\MedicalCard;
 use App\Models\PayrollTtumSalaryReport;
 use App\Models\TaxSlabSetting;
 use App\Models\Account;
+use App\Models\PayrollHead;
+use App\Models\PayrollSalaryHead;
+use App\Models\PayrollSalary;
+use App\Models\Employee;
+use Illuminate\Support\Str;
+
 trait PayrollTraits
 {
-    public function saveTtumData($data=[])
+    public function saveTtumData($data = [])
     {
-        $accounId = $data['account_id'];
-        $transactionNumber = $data['transaction_number'];
-        $transactionType = $data['transaction_type'];
-        $transactionAmount = $data['transaction_amount'];
-        $transactionCurrency = $data['transaction_currency'];
-        // $transactionAt = date('Y-m-d H:i:s');
-        $refrenceId = $data['refrence_id'];
-        $refrenceTableType = $data['refrence_table_type'];
-       return PayrollTtumSalaryReport::create($data);
+        $ttumMonth = $data['ttum_month'];
+        $accountId = $data['account_id'];
+        $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->first();
+        if(!empty($ttumExist))
+        {
+            $data['transaction_amount'] = $data['transaction_amount'] + $ttumExist->transaction_amount;
+        }
+        $account = Account::find($data['account_id']);
+    //    return  $account->name;
+        $data['transaction_details'] = $account->name . " for " . date('M-Y', strtotime($ttumMonth . '-20'));
+
+        return PayrollTtumSalaryReport::updateOrCreate(['id' => $ttumExist?->id ?? NULL], $data);
     }
+
+    public function createTTum($salaryId)
+    {
+        $salary = PayrollSalary::find($salaryId);
+        $accounts = Account::getList()->get();
+        $emp = Employee::where('user_id', $salary->user_id)->first();
+        $currencyValue = 1;
+        if ($emp->employment_type == "expatriate") {
+            $currencyValue = getCurrencyValue("usd", "pula");
+        }
+        foreach ($accounts as $key => $account) {
+            $accountName = $account->slug;
+            $amount = 0;
+            // return $accountName;
+            switch ($accountName) {
+                case "salaries":
+                    $amount = $salary->basic * $currencyValue;
+                    break;
+                case "entertainment":
+                    $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'entertainment_expenses');
+                    })->value('value');
+                    $amount = ($salaryHeadAmount) * $currencyValue;
+                    break;
+                case "education":
+                    $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'education_allowance');
+                    })->value('value');
+                    $currencyValueForUsd = getCurrencyValue("inr", "usd");
+                    $amount = ($salaryHeadAmount * $currencyValueForUsd) * $currencyValue;
+                    break;
+                case "house_up_keep":
+                    $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'house_up_keep_allow');
+                    })->value('value');
+                    $amount = ($salaryHeadAmount) * $currencyValue;
+                    break;
+                case "bomaid_local":
+                    $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'bomaid');
+                    })->value('value');
+                    $amount = ($salaryHeadAmount) * $currencyValue;
+                    break;
+                case "bomaid_ibo":
+                    $amount = 0;
+                    if ($emp->employment_type == "expatriate") {
+                        $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
+                        $amount = $bomaid->amount;
+                    }
+                    break;
+                case "banks_conti_to_pension":
+                    $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'pension_bank');
+                    })->value('value');
+                    $amount = ($salaryHeadAmount) * $currencyValue;
+
+                    break;
+                case "sundry_dep_pension_eft":
+                    $pensionBank = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'pension_bank');
+                    })->value('value');
+
+                    $pensionOwn = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'pension_own');
+                    })->value('value');
+                    $amount = ($pensionBank + $pensionOwn) * $currencyValue;
+                    break;
+                case "B_B_E_U_Banker_Chq":
+                    $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'union_fee');
+                    })->value('value');
+                    $amount = ($salaryHeadAmount);
+                    break;
+                case "eft_to_fnb_bank":
+                   
+                    if ($emp->employment_type == "expatriate") {
+                        $medicalCard = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
+                        $iboBomaidAmount = 0;
+                        if (!empty($medicalCard)) {
+                            $iboBomaidAmount = $medicalCard->amount;
+                        }
+                        $amount = $iboBomaidAmount;
+                    }else
+                    {
+                        $localBomaidAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                            $q->where('slug', 'bomaid');
+                        })->value('value');
+                        $amount = ($localBomaidAmount) + $localBomaidAmount;
+                    }
+                    break;
+                case "pf_contribution":
+                    $pfAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'provident_fund');
+                    })->value('value');
+                    $amount = ($pfAmount) * $currencyValue;
+                    break;
+                case "vehicle_expenses":
+                    $vehicleExpenses = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'recovery_for_car');
+                    })->value('value');
+                    $amount = ($vehicleExpenses) * $currencyValue;
+                    break;
+                case "income_tax":
+                    $incomeTax = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'tax');
+                    })->value('value');
+                    $amount = ($incomeTax);
+                    break;
+            }
+            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => $amount, 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+            $saveOfficeTTUM  = $this->saveTtumData($data);
+
+           
+        }
+
+        /**
+         * Create TTUM for Employee Account
+         */
+        $empName = $emp->user->name;
+        $empAccount = $this->getEmpAccount($empName, $emp->bank_account_number);
+        $netTakeAmountInPula = $salary->net_take_home_in_pula;
+        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => $netTakeAmountInPula, 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+        $saveEmpTTUM  =  $this->saveTtumData($data);
+    }
+    public function getEmpAccount($accountName, $accountNumber)
+    {
+        $account = Account::where('name', $accountName)->where('account_number', $accountNumber)->first();
+        if (empty($account)) {
+            $account =  Account::updateOrCreate(['name' => $accountName, 'slug' => Str::slug($accountName), 'account_number' => $accountNumber, 'account_type' => 'employee', 'is_credit' => 1, 'description' => "This is " . $accountName . " Salary Account "]);
+        }
+        return $account;
+    }
+
+
     public function getTTUMAccount($headName)
     {
-        $empAccounts = Account::where('name',$headName)->first();
-        if(empty($empAccounts))
-        {
-            $empAccounts = Account::create(['name'=>$headName]);
+        $empAccounts = Account::where('name', $headName)->first();
+        if (empty($empAccounts)) {
+            $empAccounts = Account::create(['name' => $headName]);
         }
-       return $empAccounts;
+        return $empAccounts;
     }
     public function getTaxAmount($data)
     {
         $taxableAmount = $data['taxable_amount'];
         $empType = $data['employment_type'];
-        $taxSlab = TaxSlabSetting::where('from','<=',$taxableAmount)->where('to','>=',$taxableAmount)->where('status', 'active')->first();
+        $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
         // echo $taxSlab;
-        if($empType=="expatriate")
-        {
-            $extraAmount = ((($taxableAmount - $taxSlab->from)/100)*$taxSlab->ibo_tax_per);
-            $taxAmount = ($taxSlab->additional_ibo_amount + $extraAmount)/12 ;
+        if ($empType == "expatriate") {
+            $extraAmount = ((($taxableAmount - $taxSlab->from) / 100) * $taxSlab->ibo_tax_per);
+            $taxAmount = ($taxSlab->additional_ibo_amount + $extraAmount) / 12;
             $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + $extraAmount);
-        }else{
+        } else {
 
-            $extraAmount = ((($taxableAmount - $taxSlab->from)/100) * $taxSlab->local_tax_per);
+            $extraAmount = ((($taxableAmount - $taxSlab->from) / 100) * $taxSlab->local_tax_per);
             $yearlyTaxAmount =  ($taxSlab->additional_local_amount + $extraAmount);
-            $taxAmount = ($taxSlab->additional_local_amount + $extraAmount)/12;
+            $taxAmount = ($taxSlab->additional_local_amount + $extraAmount) / 12;
         }
-        return ["tax_amount"=>round($taxAmount),'extraAmount'=>$extraAmount,'yearlyTaxAmount'=>$yearlyTaxAmount,'taxable_amount'=>$taxableAmount];
+        return ["tax_amount" => round($taxAmount), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount, 'taxable_amount' => $taxableAmount];
     }
-   
 }

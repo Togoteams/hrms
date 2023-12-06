@@ -13,9 +13,10 @@
         var taxCalcUrl ="{{route('admin.payroll.payscale.tax.cal')}}";
         var taxAbleAmount = 0;
 
+
         if(employmentType=="local")
         {
-            taxAbleAmount = (basicAmount + getValue('allowance'))- (getValue('bomaid') + getValue('pension'));
+            taxAbleAmount = (basicAmount + getValue('allowance') + getValue('pension_bank'))- (getValue('bomaid') + getValue('pension_own'));
         }else{
             taxAbleAmount = (basicAmount + getValue('entertainment_expenses') + getValue('house_up_keep_allow') + getValue('education_allowance'));
         } 
@@ -42,7 +43,7 @@
     }
 
 
-    function amount_cal(data, operator = null) {
+    function amount_cal() {
 
         
         var total_gross_amount = 0;
@@ -58,8 +59,8 @@
             var taxAmount = getValue('tax');
             var unionFee = getValue('union_fee');
 
-            totalEarning = basicAmount + getValue('allowance') + getValue('others_arrears');
-            totalDeduction = taxAmount + getValue('bomaid') + getValue('pension') + unionFee  + getValue('other_deductions');
+            totalEarning = basicAmount + getValue('allowance') + getValue('others_arrears')+ getValue('pension_bank');
+            totalDeduction = taxAmount + getValue('bomaid') + getValue('pension_own') + unionFee  + getValue('other_deductions');
             setId('union_fee', unionFee);
 
         }else
@@ -80,5 +81,26 @@
         setId('net_take_home',(totalEarning-totalDeduction).toFixed(2));
 
     }
-   
+    const editUrl="{{ route('admin.payroll.payscale.emp.head') }}/";
+
+    function callEditMethod()
+    {
+        var empId = $("#select_employee").val();
+        console.log(empId);
+        $(".err_message").removeClass("d-block").hide();
+        if(empId==null || empId=="" )
+        {
+            let empErrMessage ="Please Select Employee";
+            $("#select_employee").after("<p class='d-block text-danger err_message'>" + empErrMessage + "</p>");
+        }
+       
+
+        if(empId!=""){
+            editForm(editUrl+empId, 'edit');
+            // taxCalCalculation();
+            setTimeout(() => {
+                 taxCalCalculation(2);
+            }, 1500);
+        }
+    }
 </script>
