@@ -46,7 +46,17 @@ trait PayrollTraits
             // return $accountName;
             switch ($accountName) {
                 case "salaries":
-                    $amount = $salary->basic * $currencyValue;
+                    $basic = $salary->basic * $currencyValue;
+                    $allowanceAmoumt = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'allowance');
+                    })->value('value');
+                    $overTimeAmoumt = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'over_time');
+                    })->value('value');
+                    $othersArrearsAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'others_arrears');
+                    })->value('value');
+                    $amount = $basic +$allowanceAmoumt+$overTimeAmoumt+$othersArrearsAmount;
                     break;
                 case "entertainment":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
@@ -84,9 +94,9 @@ trait PayrollTraits
                 case "bomaid_ibo":
                     $amount = 0;
                     if ($emp->employment_type == "expatriate") {
+                        $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
                         if(!empty($bomaid))
                         {
-                            $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
                             $amount = $bomaid->amount;
                         }
                     }

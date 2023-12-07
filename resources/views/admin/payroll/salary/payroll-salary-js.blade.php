@@ -67,12 +67,14 @@
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
             var inrToUSDAmount = getValue('inrToUSDAmount');
+            var pulaToUSDAmount = getValue('pulaToUSDAmount');
             var educationAllowanceAmount = (educationAllowanceAmount * inrToUSDAmount);
-            var otherDeductions = (otherDeductions * inrToUSDAmount);
+            var otherDeductions = (otherDeductions * pulaToUSDAmount);
 
             totalEarning = (basicAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount);
             totalDeduction = (getValue('provident_fund') + otherDeductions + getValue('recovery_for_car'));
+            console.log("otherDeductions",otherDeductions);
         }
 
         setId('gross_earning', totalEarning);
