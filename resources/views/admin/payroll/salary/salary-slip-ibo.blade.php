@@ -169,8 +169,7 @@
 
                             <td>
                                 <h3 class="mb-2 text-left text-dark" style="font-weight: 800;
-                                color: #f94f00!important;
-                            }">Bank of Baroda Ltd.
+                                color: #f94f00!important;">Bank of Baroda Ltd.
                                     <br>
                                     <span>(Botswana)</span>
                                 </h3>

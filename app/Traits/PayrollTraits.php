@@ -128,14 +128,18 @@ trait PayrollTraits
                     }
                     break;
                 case "pf_contribution":
-                    $pfAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
-                        $q->where('slug', 'provident_fund');
-                    })->value('value');
+                    if ($emp->employment_type == "expatriate") {
+                     $pfAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                            $q->where('slug', 'provident_fund');
+                        })->value('value');
 
-                    $amount = ($pfAmount + $this->bankContributionOfPf($emp) ) * $currencyValue;
+                        $amount = ($pfAmount + $this->bankContributionOfPf($emp) ) * $currencyValue;
+                    }
                     break;
                 case "pf_bank_contribution":
+                    if ($emp->employment_type == "expatriate") {
                     $amount =  $this->bankContributionOfPf($emp) * $currencyValue;
+                    }
                     break;
                 case "vehicle_expenses":
                     $vehicleExpenses = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
