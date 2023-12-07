@@ -73,15 +73,27 @@ trait PayrollTraits
                             $q->where('slug', 'bomaid');
                         })->value('value');
                         $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
-                        $amount = ($salaryHeadAmount - ($bomaid->amount/2)) ;
+                        $amount = $salaryHeadAmount;
+                        if(!empty($bomaid))
+                        {
+                            $amount = $amount - ($bomaid->amount/2);
+                        }
                     }
                     
                     break;
                 case "bomaid_ibo":
                     $amount = 0;
                     if ($emp->employment_type == "expatriate") {
-                        $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
-                        $amount = $bomaid->amount;
+                        if(!empty($bomaid))
+                        {
+                            $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
+                            $amount = $bomaid->amount;
+                        }
+                    }
+                    break;
+                case "pf_bank_contribution":
+                    if ($emp->employment_type == "expatriate") {
+                    $amount =  $this->bankContributionOfPf($emp) * $currencyValue;
                     }
                     break;
                 case "banks_conti_to_pension":
@@ -136,11 +148,7 @@ trait PayrollTraits
                         $amount = ($pfAmount + $this->bankContributionOfPf($emp) ) * $currencyValue;
                     }
                     break;
-                case "pf_bank_contribution":
-                    if ($emp->employment_type == "expatriate") {
-                    $amount =  $this->bankContributionOfPf($emp) * $currencyValue;
-                    }
-                    break;
+                
                 case "vehicle_expenses":
                     $vehicleExpenses = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'recovery_for_car');

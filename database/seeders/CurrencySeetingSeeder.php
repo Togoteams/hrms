@@ -22,7 +22,7 @@ class CurrencySeetingSeeder extends Seeder
         foreach($currency as $key => $value)
         {
 
-            CurrencySetting::updateOrCreate(['currency_name_from'=>$value['currency_name_from']],$value);
+            CurrencySetting::updateOrCreate(['currency_name_from'=>$value['currency_name_from'],'currency_name_to'=>$value['currency_name_to']],$value);
         }
     }
 }
