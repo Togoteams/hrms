@@ -10,9 +10,15 @@
     </div>
 </div>
 @php
-    $grossEarning =$emp->basic_salary;
+    $grossEarning = $emp->basic_salary;
     $totalDeduction = 0;
-    $pulaInsertionArr = ['education_allowance','other_deductions'];
+    // $pulaInsertionArr = ['education_allowance','other_deductions'];
+    $readonlyArr = ['bomaid','pension_own','pension_bank','union_fee','tax','over_time','provident_fund'];
+    $fixedHeadsArr = ['bomaid','over_time'];
+    $inrCurrencyHead = ['provident_fund'];
+    $pulaCurrencyHead = ['provident_fund'];
+    $pulaInsertionArr =['other_deductions'];
+    $inrInsertionArr =['education_allowance'];
 @endphp
 <div class="row">
     <div class="col-md-12">
@@ -37,7 +43,7 @@
     @endphp
     <div class="mb-2 col-sm-4">
         <div class="form-group">
-            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif </label>
+            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif  @if(in_array($head->slug,$inrInsertionArr)) ({{"In INR"}}) @endif </label>
             <input onkeyup="amount_cal()" @if(in_array($head->slug,$readonlyArr)) readonly @endif onblur="taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{$payscaleAmount}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
@@ -65,7 +71,7 @@
     @endphp
     <div class="mb-2 col-sm-4">
         <div class="form-group">
-            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif</label>
+            <label class="required" for="{{ $head->slug }}">{{ $head->name }} @if(in_array($head->slug,$pulaInsertionArr)) ({{"In PULA"}}) @endif  @if(in_array($head->slug,$inrInsertionArr)) ({{"In INR"}}) @endif</label>
             <input onkeyup="amount_cal()" @if(in_array($head->slug,$readonlyArr)) readonly @endif value="{{$payscaleDeductionAmount}}" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}"     class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>

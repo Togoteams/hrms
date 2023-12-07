@@ -19,14 +19,15 @@ class AccountTableSeeder extends Seeder
             ['name'=>"House up keeep",'slug'=>"house_up_keep",'account_number'=>'95212352451010','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  House up keep Amount"],
             ['name'=>"Medical exp For Local",'slug'=>"bomaid_local",'account_number'=>'95212352471001','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Medical Expense of Local Amount"],
             ['name'=>"Medical exp For EXPATRIATE",'slug'=>"bomaid_ibo",'account_number'=>'95212352471003','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Medical Expense of EXPATRIATE Amount"],
+            ['name'=>"PF Bank Contribution",'slug'=>"pf_bank_contribution",'account_number'=>'test','account_type'=>"office",'is_credit'=>0,"description"=>"This Account is for  Pf Contribution"],
             ['name'=>"Bank's Conti to Pension",'slug'=>"banks_conti_to_pension",'account_number'=>'95212352461006','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account  is for Bank's Conti to Pension Amount"],
             ['name'=>"Sundry Dep-Pension EFT ",'slug'=>"sundry_dep_pension_eft",'account_number'=>'95212313201004','account_type'=>"office",'is_credit'=>1,"description"=>"This  Account is for  Sundry Dep-Pension{EFT}"],
             ['name'=>"B.B.E.U  {Banker Chq}",'slug'=>"B_B_E_U_Banker_Chq",'account_number'=>'95212315106004','account_type'=>"office",'is_credit'=>1,"description"=>"This  Account is for  B.B.E.U  {Banker Chq}"],
             ['name'=>"EFT to FNB Bank",'slug'=>"eft_to_fnb_bank",'account_number'=>'95212322203001','account_type'=>"office",'is_credit'=>1,"description"=>"This  Account  is for EFT to FNB Bank"],
             ['name'=>"Cont. PF",'slug'=>"pf_contribution",'account_number'=>'95212352461009','account_type'=>"office",'is_credit'=>1,"description"=>"This  Account  is for Pf Contribution"],
-            ['name'=>"PF Bank Contribution",'slug'=>"pf_bank_contribution",'account_number'=>'test','account_type'=>"office",'is_credit'=>0,"description"=>"This Account is for  Pf Contribution"],
             ['name'=>"Vehicle exp",'slug'=>"vehicle_expenses",'account_number'=>'95212354511016','account_type'=>"office",'is_credit'=>1,"description"=>"This  Account is for  Vehicle exp"],
             ['name'=>"Income tax",'slug'=>"income_tax",'account_number'=>'95212352451013','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Income tax"],
+            ['name'=>"SPECIAL ADVANCE TO STAFF",'slug'=>"special_advance_to_staff",'account_number'=>'95212326681010','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for SPECIAL ADVANCE TO STAFF"],
         ];
 
         foreach($accounts as $key => $value)

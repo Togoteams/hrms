@@ -161,6 +161,12 @@ trait PayrollTraits
                     })->value('value');
                     $amount = ($incomeTax);
                     break;
+                case "special_advance_to_staff":
+                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'other_deductions');
+                    })->value('value');
+                    $amount = ($amount);
+                    break;
             }
             $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => $amount, 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
             $saveOfficeTTUM  = $this->saveTtumData($data);
@@ -202,16 +208,15 @@ trait PayrollTraits
         $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
         // echo $taxSlab;
         if ($empType == "expatriate") {
-            $extraAmount = ((($taxableAmount - $taxSlab->from) / 100) * $taxSlab->ibo_tax_per);
-            $taxAmount = ($taxSlab->additional_ibo_amount + $extraAmount) / 12;
+            $extraAmount = ($taxableAmount - $taxSlab->from);
             $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + $extraAmount);
+            $taxAmount = (($yearlyTaxAmount * $taxSlab->ibo_tax_per )/100) / 12;
         } else {
-
-            $extraAmount = ((($taxableAmount - $taxSlab->from) / 100) * $taxSlab->local_tax_per);
+            $extraAmount = (($taxableAmount - $taxSlab->from));
             $yearlyTaxAmount =  ($taxSlab->additional_local_amount + $extraAmount);
-            $taxAmount = ($taxSlab->additional_local_amount + $extraAmount) / 12;
+            $taxAmount = (($yearlyTaxAmount * $taxSlab->local_tax_per )/100) / 12;
         }
-        return ["tax_amount" => round($taxAmount), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount, 'taxable_amount' => $taxableAmount];
+        return ["tax_amount" => round($taxAmount,3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount, 'taxable_amount' => $taxableAmount];
     }
     public function bankContributionOfPf($emp)
     {

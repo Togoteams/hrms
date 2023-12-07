@@ -16,7 +16,7 @@
 
         if(employmentType=="local")
         {
-            taxAbleAmount = (basicAmount + getValue('allowance') + getValue('others_arrears') + getValue('over_time'));
+            taxAbleAmount = (basicAmount + getValue('allowance') + getValue('others_arrears') + getValue('over_time') - (getValue('pension_own') - getValue('pension_bank')));
         }else{
             taxAbleAmount = (basicAmount + getValue('entertainment_expenses') + getValue('house_up_keep_allow') + getValue('education_allowance'));
         }
