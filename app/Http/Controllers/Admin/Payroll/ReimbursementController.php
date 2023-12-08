@@ -22,32 +22,35 @@ class ReimbursementController extends BaseController
     public $page_name = "Reimbursement";
     public function index(Request $request)
     {
-            if ($request->ajax()) {
-            $data = Reimbursement::with('reimbursementype','user','user.employee')->getList()->select('*');
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
-                    return $actionBtn;
-                })                 
-                ->editColumn('claim_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->claim_date)->isoFormat('DD.MM.YYYY');
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-            }
+        if ($request->ajax()) {
+        $data = Reimbursement::with('reimbursementype','user','user.employee')->getList()->select('*');
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
+                return $actionBtn;
+            })                 
+            ->editColumn('claim_date', function ($data) {
+                return \Carbon\Carbon::parse($data->claim_date)->isoFormat('DD.MM.YYYY');
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
         $employees = Employee::getActiveEmp()->where('employment_type','expatriate')->get();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
         // Filter currencies to include only 'pula' and 'usd'
         $allowedCurrencies = ['pula', 'usd'];
+        $allowedExpenseCurrencies = ['pula'];
         $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
+        $expenseCurrency = $currencies->whereIn('currency_name_from', $allowedExpenseCurrencies);
 
         return view('admin.payroll.reimbursement.index', ['page' => $this->page_name,
         'reimbursementType' => $reimbursementType,
         'currencies' => $filteredCurrencySetting,
         'reimbursement' => $reimbursement,
+        'expenseCurrency' => $expenseCurrency,
          'Employees' => $employees]);
 
 
@@ -75,7 +78,7 @@ class ReimbursementController extends BaseController
             'user_id' => 'required|numeric|exists:users,id',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
-            'financial_year' => 'required|numeric',
+            'financial_year' => 'required|string',
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'claim_from_month' => [
                 'required',
@@ -86,28 +89,27 @@ class ReimbursementController extends BaseController
                 'numeric',
             ],
             'reimbursement_notes' => 'required|string',
-
         ]);
         $userId = $request->user_id;
-        $validator->after(function ($validator) use ($request, $userId) {
-            $overlapExists = Reimbursement::where('user_id', $userId)
-                ->where(function ($query) use ($request) {
-                    $query->where(function ($query) use ($request) {
-                        $query->where('claim_from_month', '<=', $request->claim_to_month)
-                            ->where('claim_to_month', '>=', $request->claim_from_month);
-                    })
-                    ->orWhere(function ($query) use ($request) {
-                        $query->where('claim_from_month', '<=', $request->claim_to_month)
-                            ->where('claim_to_month', '>=', $request->claim_to_month);
-                    });
-                })
-                ->where('id', '!=', $request->id)
-                ->exists();
+        // $validator->after(function ($validator) use ($request, $userId) {
+        //     $overlapExists = Reimbursement::where('user_id', $userId)
+        //         ->where(function ($query) use ($request) {
+        //             $query->where(function ($query) use ($request) {
+        //                 $query->where('claim_from_month', '<=', $request->claim_to_month)
+        //                     ->where('claim_to_month', '>=', $request->claim_from_month);
+        //             })
+        //             ->orWhere(function ($query) use ($request) {
+        //                 $query->where('claim_from_month', '<=', $request->claim_to_month)
+        //                     ->where('claim_to_month', '>=', $request->claim_to_month);
+        //             });
+        //         })
+        //         ->where('id', '!=', $request->id)
+        //         ->exists();
 
-            if ($overlapExists) {
-                $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
-            }
-        });
+        //     if ($overlapExists) {
+        //         $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
+        //     }
+        // });
 
         if ($validator->fails()) {
             return $validator->errors();
@@ -178,7 +180,7 @@ class ReimbursementController extends BaseController
             'type_id' => 'required|numeric',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
-            'financial_year' => 'required|numeric',
+            'financial_year' => 'required|string',
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'claim_from_month' => [
                 'required',
@@ -191,27 +193,27 @@ class ReimbursementController extends BaseController
             'reimbursement_notes' => 'required|string',
         ]);
 
-        $validator->after(function ($validator) use ($request, $user, $id) {
-            $claim_to_month = $request->claim_to_month;
-            $claim_from_month = $request->claim_from_month;
-            $overlapExists = Reimbursement::where('user_id', $user->id)
-                ->where(function ($query) use ($request,$claim_from_month,$claim_to_month) {
-                    $query->where(function ($query) use ($request,$claim_from_month,$claim_to_month) {
-                        $query->where('claim_from_month', '<=', $claim_to_month)
-                            ->where('claim_to_month', '>=', $claim_from_month);
-                    })
-                    ->orWhere(function ($query2) use ($request,$claim_from_month,$claim_to_month) {
-                        $query2->where('claim_from_month', '<=', $claim_to_month)
-                            ->where('claim_to_month', '>=', $claim_to_month);
-                    });
-                })
-                ->where('id', '!=', $id)
-                ->exists();
+        // $validator->after(function ($validator) use ($request, $user, $id) {
+        //     $claim_to_month = $request->claim_to_month;
+        //     $claim_from_month = $request->claim_from_month;
+        //     $overlapExists = Reimbursement::where('user_id', $user->id)
+        //         ->where(function ($query) use ($request,$claim_from_month,$claim_to_month) {
+        //             $query->where(function ($query) use ($request,$claim_from_month,$claim_to_month) {
+        //                 $query->where('claim_from_month', '<=', $claim_to_month)
+        //                     ->where('claim_to_month', '>=', $claim_from_month);
+        //             })
+        //             ->orWhere(function ($query2) use ($request,$claim_from_month,$claim_to_month) {
+        //                 $query2->where('claim_from_month', '<=', $claim_to_month)
+        //                     ->where('claim_to_month', '>=', $claim_to_month);
+        //             });
+        //         })
+        //         ->where('id', '!=', $id)
+        //         ->exists();
 
-            if ($overlapExists) {
-                $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
-            }
-        });
+        //     if ($overlapExists) {
+        //         $validator->errors()->add('claim_to_month', 'The month range overlaps with an existing record.');
+        //     }
+        // });
 
         if ($validator->fails()) {
             return $validator->errors();

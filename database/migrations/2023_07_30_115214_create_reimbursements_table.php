@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('expenses_currency')->nullable();
+            $table->string('financial_year')->nullable();
             $table->decimal('expenses_amount', 10, 3)->nullable();
             $table->date('claim_date')->nullable();
             $table->string('claim_from_month')->nullable();

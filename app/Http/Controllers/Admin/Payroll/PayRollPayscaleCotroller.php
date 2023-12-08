@@ -148,17 +148,9 @@ class PayRollPayscaleCotroller extends BaseController
         $page = $this->page_name;
         $emp = Employee::where('user_id', $payscale->user_id)->getActiveEmp()->first();
         $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
-        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
-        if(!empty($currencySeeting))
-        {
-            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
-        }
-        $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
-        $inrToUSDAmount = 1;
-        if(!empty($currencySeetingInrUsd))
-        {
-            $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
-        }
+       
+        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
+        $inrToUSDAmount = getCurrencyValue("inr", "usd");
 
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)
         ->orWhere('employment_type', 'both')->where('status', 'active')
@@ -264,17 +256,10 @@ class PayRollPayscaleCotroller extends BaseController
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
-        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
-        if(!empty($currencySeeting))
-        {
-            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
-        }
-        $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
-        $inrToUSDAmount = 1;
-        if(!empty($currencySeetingInrUsd))
-        {
-            $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
-        }
+        
+        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
+        $inrToUSDAmount = getCurrencyValue("inr", "usd");
+
         $emp_head = PayrollHead::whereIn('employment_type', [$emp->employment_type,'both'])->where('status', 'active')->whereIn('for', ['payscale','both'])->where('deleted_at', null)->get();
         if($emp->employment_type=="expatriate")
         {

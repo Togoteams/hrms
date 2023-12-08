@@ -53,6 +53,7 @@
                             <th>Type</th>
                             <th>Empolyee Code</th>
                             <th>Empolyee Name</th>
+                            <th>Financial Year</th>
                             <th>Expense Currency</th>
                             <th>Expense Amount</th>
                             <th>Claim date</th>
@@ -96,6 +97,10 @@
                             {
                                 data: 'user.name',
                                 name: 'user.name'
+                            },
+                            {
+                                data: 'financial_year',
+                                name: 'financial_year'
                             },
 
                             {

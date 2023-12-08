@@ -51,7 +51,7 @@
                                 <select id="expenses_currency" placeholder="Select Currency"
                                     name="expenses_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select - </option>
-                                    @foreach ($currencies  as  $currency)
+                                    @foreach ($expenseCurrency  as  $currency)
                                     <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
                                 @endforeach
                                 </select>
@@ -77,8 +77,8 @@
                                         @php
                                             $currentYear = date('Y');
                                         @endphp 
-                                        <option value="{{$currentYear-1}}">{{$currentYear-1}}</option>
-                                        <option value="{{$currentYear}}">{{$currentYear}}</option>
+                                        <option value="{{$currentYear-1}}-{{$currentYear}}">{{$currentYear-1}}-{{$currentYear}}</option>
+                                        <option value="{{$currentYear}}-{{$currentYear+1}}">{{$currentYear}}-{{$currentYear+1}}</option>
                                        
                                     </select>
                                 </div>
@@ -88,18 +88,18 @@
                                     <label for="claim_from_month" class="required">Claim for period from month</label>
                                     <select name="claim_from_month" id="claim_from_month" class="form-control"  required>
                                         <option value="">Select From Month</option>
-                                        <option value="1">January</option>
-                                        <option value="2">February</option>
-                                        <option value="3">March</option>
-                                        <option value="4">April</option>
-                                        <option value="5">May</option>
-                                        <option value="6">June</option>
                                         <option value="7">July</option>
                                         <option value="8">August</option>
                                         <option value="9">September</option>
                                         <option value="10">October</option>
                                         <option value="11">November</option>
                                         <option value="12">December</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,18 +108,19 @@
                                     <label for="claim_to_month" class="required">Claim for period to month</label>
                                     <select name="claim_to_month" id="claim_to_month" class="form-control" required >
                                         <option value="">Select To Month</option>
-                                        <option value="1">January</option>
-                                        <option value="2">February</option>
-                                        <option value="3">March</option>
-                                        <option value="4">April</option>
-                                        <option value="5">May</option>
-                                        <option value="6">June</option>
+                                       
                                         <option value="7">July</option>
                                         <option value="8">August</option>
                                         <option value="9">September</option>
                                         <option value="10">October</option>
                                         <option value="11">November</option>
                                         <option value="12">December</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="4">April</option>
+                                        <option value="5">May</option>
+                                        <option value="6">June</option>
                                     </select>
                                 </div>
                             </div>

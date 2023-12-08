@@ -207,6 +207,7 @@ class PayrollSalaryController extends Controller
          * This is no of paid  leave who take unpaid , approved and pending leave
          */
 
+
         $noOfUnPaidLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
                 $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type',"");
@@ -269,19 +270,9 @@ class PayrollSalaryController extends Controller
 
         $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
 
-        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
-        $pulaToUSDAmount = 1;
-        if(!empty($currencySeeting))
-        {
-            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
-        }
-        
-        $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
-        $inrToUSDAmount = 1;
-        if(!empty($currencySeetingInrUsd))
-        {
-            $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
-        }
+
+        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
+        $inrToUSDAmount = getCurrencyValue("int", "usd");
 
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
         // echo $noOfUnPaidLeave;
@@ -391,25 +382,11 @@ class PayrollSalaryController extends Controller
     {
 
         $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
-        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
-        $pulaToUSDAmount=1;
-        if(!empty($currencySeeting))
-        {
-            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
-        }
+        
+        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
+        $inrToUSDAmount = getCurrencyValue("inr", "usd");
+        $usdToPullAmount = getCurrencyValue("usd", "pula");
 
-        $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
-        $inrToUSDAmount = 1;
-        if(!empty($currencySeetingInrUsd))
-        {
-            $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
-        }
-        $currencySeetingUsdToPula = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->first();
-        $usdToPullAmount = 1;
-        if(!empty($currencySeetingUsdToPula))
-        {
-            $usdToPullAmount = $currencySeetingUsdToPula->currency_amount_to;
-        }
         if($data->employee->employment_type=="local")
         {
             return view('admin.payroll.salary.salary-slip-local', compact('data'));
@@ -533,19 +510,8 @@ class PayrollSalaryController extends Controller
 
         $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
 
-        $currencySeeting = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
-        $pulaToUSDAmount = 1;
-        if(!empty($currencySeeting))
-        {
-            $pulaToUSDAmount = $currencySeeting->currency_amount_to;
-        }
-        
-        $currencySeetingInrUsd = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
-        $inrToUSDAmount = 1;
-        if(!empty($currencySeetingInrUsd))
-        {
-            $inrToUSDAmount = $currencySeetingInrUsd->currency_amount_to;
-        }
+        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
+        $inrToUSDAmount = getCurrencyValue("inr", "usd");
 
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
         // echo $noOfUnPaidLeave;
