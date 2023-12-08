@@ -219,12 +219,12 @@ trait PayrollTraits
         // echo $taxSlab;
         if ($empType == "expatriate") {
             $extraAmount = ($taxableAmount - $taxSlab->from);
-            $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + $extraAmount);
-            $taxAmount = (($yearlyTaxAmount * $taxSlab->ibo_tax_per )/100) / 12;
+            $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + (($extraAmount * $taxSlab->ibo_tax_per)/100));
+            $taxAmount = ($yearlyTaxAmount) / 12;
         } else {
             $extraAmount = (($taxableAmount - $taxSlab->from));
-            $yearlyTaxAmount =  ($taxSlab->additional_local_amount + $extraAmount);
-            $taxAmount = (($yearlyTaxAmount * $taxSlab->local_tax_per )/100) / 12;
+            $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per )/100));
+            $taxAmount = ($yearlyTaxAmount) / 12;
         }
         return ["tax_amount" => round($taxAmount,3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount, 'taxable_amount' => $taxableAmount];
     }

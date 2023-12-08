@@ -68,13 +68,15 @@
             var otherDeductions = getValue('other_deductions');
             var inrToUSDAmount = getValue('inrToUSDAmount');
             var pulaToUSDAmount = getValue('pulaToUSDAmount');
-            var educationAllowanceAmount = (educationAllowanceAmount * inrToUSDAmount);
-            var otherDeductions = (otherDeductions * pulaToUSDAmount);
-
-            totalEarning = (basicAmount + getValue('entertainment_expenses') +
-                getValue('house_up_keep_allow') + educationAllowanceAmount);
-            totalDeduction = (getValue('provident_fund') + otherDeductions + getValue('recovery_for_car'));
-            console.log("otherDeductions",otherDeductions);
+            var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) * inrToUSDAmount);
+            var otherDeductions = parseFloat(parseFloat(otherDeductions) * pulaToUSDAmount).toFixed(3);
+            
+            console.log("otherDeductions",(otherDeductions));
+            
+            totalEarning = parseFloat(basicAmount + getValue('entertainment_expenses') +
+                getValue('house_up_keep_allow') + educationAllowanceAmount).toFixed(3);
+            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('recovery_for_car')).toFixed(3);
+            console.log(Number(totalDeduction));
         }
 
         setId('gross_earning', totalEarning);

@@ -16,14 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('status')->default('active');
-            $table->double('basic');
+            $table->double('basic',8,3);
             // $table->double('fixed_deductions');
             // $table->double('other_deductions');
             $table->double('net_take_home');
             // $table->double('ctc');
             // $table->double('total_employer_contribution');
-            $table->double('total_deduction');
-            $table->double('gross_earning');
+            $table->double('total_deduction',8,3);
+            $table->double('gross_earning',8,3);
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->foreignId('created_by')->references('id')->on('users');

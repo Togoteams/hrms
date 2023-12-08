@@ -114,7 +114,7 @@
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <select name="std_code" id="std_code" class="form-control form-control-sm">
-                                                            <option value="">Code</option>
+                                                            <option value="">code</option>
                                                             @foreach ($countries as $country)
                                                                 <option value="{{ $country->std_code }}" @if($employee) @if($employee?->std_code==$country->std_code) selected @endif @endif>
                                                                     {{ $country->std_code }}</option>

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('financial_year');
             $table->bigInteger('user_id');
-            $table->decimal('gross_salary',8,2);
-            $table->decimal('reimbursement_amount',8,2);
-            $table->decimal('taxable_amount',8,2);
-            $table->decimal('tax_amount',8,2);
+            $table->decimal('gross_salary',8,3);
+            $table->decimal('reimbursement_amount',8,3);
+            $table->decimal('taxable_amount',8,3);
+            $table->decimal('tax_amount',8,3);
             $table->timestamp('calculated_at')->nullable();
             $table->bigInteger('calculated_by')->nullable();
             $table->bigInteger('created_by')->nullable();

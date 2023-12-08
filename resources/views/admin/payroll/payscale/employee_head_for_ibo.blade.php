@@ -6,6 +6,7 @@
             <label for="basic">IBO Salary</label>
             <input onkeyup="amount_cal()" value="{{$emp->basic_salary}}" readonly onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
             <input  value="{{$pulaToUSDAmount}}"  id="pulaToUSDAmount" type="hidden" name="pulaToUSDAmount"  class="form-control form-control-sm">
+            <input  value="{{$inrToUSDAmount}}"  id="inrToUSDAmount" type="hidden" name="inrToUSDAmount"  class="form-control form-control-sm">
         </div>
     </div>
 </div>

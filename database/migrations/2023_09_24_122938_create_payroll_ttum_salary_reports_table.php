@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('account_id');
             $table->string('transaction_type')->comment('credit,debit');
-            $table->bigInteger('transaction_amount');
+            $table->decimal('transaction_amount',10,3);
             $table->string('transaction_currency');
             $table->string('ttum_month');
             $table->string('transaction_details');           
-             $table->bigInteger('refrence_id');
+            $table->bigInteger('refrence_id');
             $table->timestamps();
         });
     }

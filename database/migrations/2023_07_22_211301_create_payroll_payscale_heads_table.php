@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('payroll_payscale_id');
             $table->unsignedBigInteger('payroll_head_id');
-            $table->double('value');
+            $table->double('value',10,3);
             $table->string('status')->default('active');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();

@@ -16,12 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('expenses_currency')->nullable();
-            $table->decimal('expenses_amount', 10, 2)->nullable();
+            $table->decimal('expenses_amount', 10, 3)->nullable();
             $table->date('claim_date')->nullable();
             $table->string('claim_from_month')->nullable();
             $table->string('claim_to_month')->nullable();
             $table->string('reimbursement_currency')->nullable();
-            $table->decimal('reimbursement_amount', 10, 2)->nullable();
+            $table->decimal('reimbursement_amount', 10, 3)->nullable();
             $table->string('reimbursement_notes', 200)->nullable();
             $table->string('reimbursement_reason')->nullable();
             $table->string('status')->default('pending');

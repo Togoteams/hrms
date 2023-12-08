@@ -25,11 +25,11 @@ return new class extends Migration
             $table->string('emergency_contact')->nullable();
             $table->string('id_number')->nullable();
             $table->string('contract_duration')->nullable();
-            $table->decimal('basic_salary')->nullable();
+            $table->decimal('basic_salary',10,3)->nullable();
             $table->string('salary_type')->nullable();
             $table->string('da')->nullable();
-            $table->decimal('basic_salary_for_india')->nullable();
-            $table->string('currency_salary_for_india')->default('inr');
+            $table->decimal('basic_salary_for_india',10,3)->nullable();
+            $table->string('currency_salary_for_india',10,3)->default('inr');
             $table->dateTime('date_of_current_basic')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('birth_country',100)->nullable();
