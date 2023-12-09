@@ -3,7 +3,7 @@
     <input type="hidden" name="_method" value="PUT">
 
     <div class="row">
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input required id="name" placeholder="Enter Name of Designation " type="text"
@@ -12,7 +12,7 @@
         </div>
 
 
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="description">Designation</label>
                 <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"

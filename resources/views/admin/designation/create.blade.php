@@ -11,25 +11,25 @@
                     <form id="form_data" action="{{ route('admin.designation.store') }}">
                         @csrf
                         <div class="row">
-                            <div class="col-sm-6 mb-2">
+                            <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input required id="name" placeholder="Enter Name of Designation "
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-6 mb-2">
+                            {{-- <div class="mb-2 col-sm-6"> 
                                 <div class="form-group">
                                     <label for="order">Select Order</label>
                                     <select id="order" name="order" class="form-control form-control-sm">
-                                        @foreach ($data as $designation)
                                         <option value="">Select Designation Order</option>
+                                        @foreach ($data as $designation)
                                             <option value="{{ $designation->id }}">{{ $designation->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-sm-12 mb-2">
+                            </div> --}}
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">Description</label>
                                     <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"
