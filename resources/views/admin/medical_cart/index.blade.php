@@ -55,6 +55,7 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Name</th>
+                                <th>Currency</th>
                                 <th>Amount</th>
                                 <th>Description</th>
                                 <th width="100px">Action</th>
@@ -86,6 +87,10 @@
                                 {
                                     data: 'name',
                                     name: 'name'
+                                },
+                                {
+                                    data: 'currency',
+                                    name: 'currency'
                                 },
                                 {
                                     data: 'amount',

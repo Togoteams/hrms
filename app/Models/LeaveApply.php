@@ -25,7 +25,7 @@ class LeaveApply extends Model
     }
     
     public function leaveDate(){
-        return $this->hasMany(LeaveDate::class);
+        return $this->hasMany(LeaveDate::class,'leave_id');
     }
 
     public static function boot()

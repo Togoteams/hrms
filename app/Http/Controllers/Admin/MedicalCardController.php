@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalCard;
 use Exception;
+use Faker\Provider\Medical;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -15,10 +16,10 @@ class MedicalCardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Bomaid Medical Card Type";
+    public $page_name = "Bomaid Card Type";
 
     public function index(Request $request)
-    {
+    { 
         if ($request->ajax()) {
             $data = MedicalCard::all();
             return DataTables::of($data)
@@ -30,7 +31,8 @@ class MedicalCardController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        return view('admin.medical_cart.index', ['page' => $this->page_name]);
+            $currencies =[['slug'=>"pula",'name'=>"Pula",'Symbol'=>"BWP"]];
+        return view('admin.medical_cart.index', ['page' => $this->page_name,'currencies'=>$currencies]);
 
     }
 
@@ -50,6 +52,7 @@ class MedicalCardController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:medical_cards,name',
             'amount'=>'required|numeric|gt:0',
+            'currency'=>'required',
             'description' => 'required|string',
 
            
@@ -78,7 +81,8 @@ class MedicalCardController extends Controller
     public function edit(string $id)
     {
         $medical = MedicalCard::find($id);
-        return view('admin.medical_cart.edit', ['medical' => $medical, 'page' => $this->page_name]);   
+        $currencies =[['slug'=>"pula",'name'=>"Pula",'Symbol'=>"BWP"]];
+        return view('admin.medical_cart.edit', ['medical' => $medical, 'page' => $this->page_name,'currencies'=>$currencies]);   
     }
 
     /**
@@ -89,7 +93,8 @@ class MedicalCardController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'amount'=>'required|numeric|gt:0',
-            'description' => 'required|string',           
+            'description' => 'required|string',  
+            'currency'=>'required',         
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -106,7 +111,9 @@ class MedicalCardController extends Controller
     public function destroy(string $id)
     {
         try {
-            MedicalCard::destroy($id);
+            $medicalCard = MedicalCard::find($id);
+           $emp = $medicalCard->empMedical()->delete();
+            $medicalCard->delete();
             return "Delete";
         } catch (Exception $e) {
             return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);

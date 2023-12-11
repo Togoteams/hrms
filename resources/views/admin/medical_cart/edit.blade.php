@@ -7,7 +7,7 @@
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="row">
-        <div class="mb-6 col-sm-6">
+        <div class="mb-12 col-sm-12">
             <div class="form-group">
                 <label class="required" for="name">Name</label>
                 <input type="text" name="name" id="name" class="form-control"
@@ -15,6 +15,17 @@
             </div>
         </div>
 
+        <div class="mb-6 col-sm-6">
+            <div class="form-group">
+                <label for="currency" class="required">Currency</label>
+                <select name="currency" id="currency" class="form-control">  
+                    <option value="" >--select--</option>   
+                    @foreach ($currencies as $currency)
+                        <option value="{{$currency['slug']}}" @if($medical->currency==$currency['slug']) {{"selected"}} @endif>{{$currency['name']}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <div class="mb-6 col-sm-6">
             <div class="form-group">
                 <label for="amount" class="required">Amount</label>

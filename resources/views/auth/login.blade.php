@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Bank of Baroda Ltd. (Botswana)</title>
+    <title>Bank of Baroda (Botswana) Ltd. </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Togoteams" name="author" />
     <!-- App favicon -->
@@ -22,17 +22,17 @@
 </head>
 
 <body>
-    <div class="account-pages my-5 pt-sm-5">
+    <div class="my-5 account-pages pt-sm-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
-                    <div class="card overflow-hidden">
+                    <div class="overflow-hidden card">
                         <div class="bg-primary bg-soft">
                             <div class="row">
                                 <div class="col-7">
-                                    <div class="text-primary p-4">
+                                    <div class="p-4 text-primary">
                                         <h5 class="text-primary">{{ __('Login') }}</h5>
-                                        <p>BANK OF BARODA LTD. (BOTSWANA)</p>
+                                        <p>BANK OF BARODA (Botswana) LTD.</p>
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
@@ -41,10 +41,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body pt-0">
+                        <div class="pt-0 card-body">
                             <div class="auth-logo">
                                 <a href="index.html" class="auth-logo-light">
-                                    <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="mb-4 avatar-md profile-user-wid">
                                         <span class="avatar-title rounded-circle bg-light">
                                             <img src="{{ asset('admin/assets/images/logo.webp') }}" alt=""
                                                 class="rounded-circle" height="34">
@@ -53,7 +53,7 @@
                                 </a>
 
                                 <a href="{{ asset('admin/assets/images/logo/logo.png') }}" class="auth-logo-dark">
-                                    <div class="avatar-md profile-user-wid mb-4">
+                                    <div class="mb-4 avatar-md profile-user-wid">
                                         <span class="avatar-title rounded-circle bg-light">
                                             <img src="{{ asset('admin/assets/images/logo/logo.png') }}" alt=""
                                                 class="rounded-circle" height="60">
@@ -123,7 +123,8 @@
                             <p>©
                                 {{ date('Y') }} Bank of Baroda Ltd. (Botswana) Crafted with <i
                                     class="mdi mdi-heart text-danger"></i>
-                                by <a href="https://togoteams.com">TogoTeams</a>
+                                by <a href="https://togoteams.com">TogoTeams 
+                                </a>Powered By <a href="https://www.adsparkwebtech.com/">Adspark Webtech Private Limited</a>
                             </p>
                         </div>
                     </div>

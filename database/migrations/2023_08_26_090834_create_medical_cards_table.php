@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('amount')->nullable();
+            $table->string('currency')->nullable();
             $table->text('description',)->nullable();
             $table->enum('status',["active","inactive"])->default('active');           
             $table->timestamps();

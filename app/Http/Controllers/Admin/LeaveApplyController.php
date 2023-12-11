@@ -155,9 +155,10 @@ class LeaveApplyController extends Controller
             return "The $value docuement is required.";
         });
 
+        $employee = Employee::where('user_id', $request->user_id)->first();
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'start_date' => ['required', 'date','no_date_overlap'],
+            'start_date' => ['required', 'date','no_date_overlap', 'after_or_equal:' . $employee->start_date],
             'end_date' => ['required', 'date','no_date_overlap', 'after_or_equal:start_date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],
             'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],
@@ -288,10 +289,10 @@ class LeaveApplyController extends Controller
             return " $value   overlaps with  $leaveName .";
         });
 
-       
+        $employee = Employee::where('user_id', $request->user_id)->first();
         $validator = Validator::make($request->all(), [
             'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
-            'start_date' => ['required', 'date','no_date_overlap'],
+            'start_date' => ['required', 'date','no_date_overlap', 'after_or_equal:' . $employee->start_date],
             'end_date' => ['required', 'date','no_date_overlap', 'after_or_equal:start_date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],
             'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],
@@ -355,7 +356,6 @@ class LeaveApplyController extends Controller
                     ]);
                 }
                 if ($request->status == "approved") {
-
                     // checking how many leave is remaining for a particular user
                     $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
                     $isIgnoreBalanced =0;
@@ -365,10 +365,12 @@ class LeaveApplyController extends Controller
                     }
                     if (($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id,'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
 
-
                         LeaveApply::where('id', $id)->update([
                             'status_remarks' => $request->status_remarks,
                             'status' => $request->status,
+                            'approved_at' => date('Y-m-d H:i:s'),
+                            'approved_by' => auth()->user()->id,
+                            'is_approved' => 1,
                             'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
                         ]);
                     } else {
@@ -388,8 +390,11 @@ class LeaveApplyController extends Controller
     public function destroy(string $id)
     {
         try {
-            $user =  LeaveApply::find($id);
-            LeaveApply::destroy($id);
+
+            $leave =  LeaveApply::find($id);
+            $leave->leaveDate()->delete();
+            $leave->delete();
+            // LeaveApply::destroy($id);
             // User::destroy($user->user_id);
             return "Delete";
         } catch (Exception $e) {

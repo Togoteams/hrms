@@ -13,13 +13,19 @@ class MedicalCard extends Model
     protected $fillable = [
         'name',
         'amount',
-         'description',
-         'status'];
+        'description',
+        'currency',
+        'status'
+    ];
 
-         public function scopeGetMedicalCard($query)
-         {
-             return $query
-             ->where('status', 'active');
-
-         }
+    public function scopeGetMedicalCard($query)
+    {
+        return $query
+            ->where('status', 'active');
+    }
+    
+    public function empMedical()
+    {
+        return $this->hasMany(MedicalCard::class, 'medical_card_id',);
+    }
 }

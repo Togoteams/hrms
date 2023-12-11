@@ -13,14 +13,24 @@
                     <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
                     <div class="row">
-                        <div class="mb-6 col-sm-6">
+                        <div class="mb-12 col-sm-12">
                             <div class="form-group">
                                 <label for="name" class="required">Name</label>
                                 <input type="text" required name="name" id="name" class="form-control"
                                     placeholder="Enter name ">
                             </div>
                         </div>
-
+                        <div class="mb-6 col-sm-6">
+                            <div class="form-group">
+                                <label for="currency" class="required">Currency</label>
+                                <select name="currency" id="currency" class="form-control">     
+                                    <option value="" >--select--</option>
+                                    @foreach ($currencies as $currency)
+                                        <option value="{{$currency['slug']}}" >{{$currency['name']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="mb-6 col-sm-6">
                             <div class="form-group">
                                 <label for="amount" class="required">Amount</label>
