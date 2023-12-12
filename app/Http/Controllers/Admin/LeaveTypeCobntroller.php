@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\LeaveSetting;
 use App\Models\LeaveType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,7 @@ class LeaveTypeCobntroller extends Controller
 
     public function index()
     {
-        $data =  LeaveType::orderByDesc('id')->get();
+        $data =  LeaveSetting::orderByDesc('id')->get();
         return view('admin.leave_type.index', ['page' => $this->page_name, 'data' => $data]);
     }
 
@@ -42,7 +43,7 @@ class LeaveTypeCobntroller extends Controller
             return $validator->errors();
         } else {
             $request->request->add(['created_by'=>auth()->user()->id]);
-            LeaveType::create($request->except('_token'));
+            LeaveSetting::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
     }
@@ -60,7 +61,7 @@ class LeaveTypeCobntroller extends Controller
      */
     public function edit(string $id)
     {
-        $data = LeaveType::find($id);
+        $data = LeaveSetting::find($id);
         return view('admin.leave_type.ediit', ['data' => $data, 'page' => $this->page_name]);
     }
 
@@ -78,18 +79,18 @@ class LeaveTypeCobntroller extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            LeaveType::where('id', $id)->update($request->except('_token', '_method'));
+            LeaveSetting::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
     }
 
     public function status($id)
     {
-        if (LeaveType::find($id)->status == "active") {
-            LeaveType::where('id', $id)->update(['status' => 'inactive']);
+        if (LeaveSetting::find($id)->status == "active") {
+            LeaveSetting::where('id', $id)->update(['status' => 'inactive']);
             return "InActive";
         } else {
-            LeaveType::where('id', $id)->update(['status' => 'active']);
+            LeaveSetting::where('id', $id)->update(['status' => 'active']);
             return "Active";
         }
     }
@@ -99,7 +100,7 @@ class LeaveTypeCobntroller extends Controller
     public function destroy(string $id)
     {
         try {
-            LeaveType::destroy($id);
+            LeaveSetting::destroy($id);
             return "Delete";
         } catch (Exception $e) {
             return response()->json(["error" => $this->page_name . "Can't Be Delete this May having some Employee"]);

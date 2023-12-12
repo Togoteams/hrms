@@ -4,7 +4,7 @@
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="row">
-        <div class="col-sm-6 mb-2">
+        <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="no_of_days">no_of_days..</label>
                 <input required id="no_of_days" placeholder="Enter correct no_of_days..   " type="text"
@@ -12,10 +12,10 @@
             </div>
         </div>
 
-        <div class="col-sm-12 mb-2">
+        <div class="mb-2 col-sm-12">
             <div class="form-group">
                 <label for="description">description</label>
-                <textarea rows="12" required id="description" placeholder="Enter correct description   " name="description"
+                <textarea rows="3" required id="description" placeholder="Enter correct description   " name="description"
                     class="form-control form-control-sm ">{{ $data->description }}</textarea>
             </div>
         </div>

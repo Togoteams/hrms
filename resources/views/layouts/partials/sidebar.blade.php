@@ -286,13 +286,13 @@
                                  </a>
                              @endcanany
 
-                             {{-- @canany(['add-leave-encashment', 'edit-leave-encashment', 'delete-leave-encashment',
+                             @canany(['add-leave-encashment', 'edit-leave-encashment', 'delete-leave-encashment',
                                  'view-leave-encashment'])
                                  <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_encashment.index' ? 'active' : '' }}"
                                      href="{{ route('admin.leave_encashment.index') }}" data-placement="left">
-                                     <span class="nav-link-title">LEAVE ENCASHMENT</span>
+                                     <span class="nav-link-title">Leave Encashment</span>
                                  </a>
-                             @endcanany --}}
+                             @endcanany
 
                              {{-- @canany(['add-leave-balance-report', 'edit-leave-balance-report',
                                  'delete-leave-balance-report', 'view-leave-balance-report'])

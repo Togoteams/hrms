@@ -25,8 +25,8 @@
                                             type="text" name="user_id" class="form-control form-control-sm ">
                                             <option selected disabled> -Select User - </option>
                                             @foreach ($all_user as $user)
-                                                <option value="{{ $user->user->id }}">{{ $user->user->name }} -
-                                                    {{ $user->user->email }}</option>
+                                                <option value="{{ $user->user_id }}">{{ $user->user->name }} -
+                                                    {{ $user->ec_number }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -42,11 +42,7 @@
                                         class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
                                         @foreach ($leave_type as $l_type)
-                                            @if (islocal() && $l_type->name == 'EARNED LEAVE' && $l_type->leave_for == 'local')
-                                                <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
-                                            @elseif ($l_type->name == 'PRIVILEGED LEAVE' && $l_type->leave_for != 'local')
-                                                <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
-                                            @endif
+                                            <option value="{{ $l_type->id }}">{{ $l_type->name }}</option>
                                         @endforeach
                                     </select>
 
@@ -55,7 +51,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="balance_leave1">balance_leave</label>
-                                    <input required id="balance_leave1" {{ isemplooye() ? 'readonly' : '' }}
+                                    <input required id="balance_leave1"  {{ isemplooye() ? 'readonly' : '' }}
                                         placeholder="Enter correct balance_leave" type="text" name="no_of_days"
                                         class="form-control form-control-sm ">
                                 </div>
@@ -64,7 +60,7 @@
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">description</label>
-                                    <textarea rows="12" required id="description" placeholder="Enter correct description   " name="description"
+                                    <textarea rows="3" required id="description" placeholder="Enter correct description   " name="description"
                                         class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>

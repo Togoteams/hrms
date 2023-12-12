@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Models\LeaveApply;
-use App\Models\LeaveType;
 use App\Models\Employee;
 use App\Models\LeaveEncashment;
 use App\Models\MedicalCard;
@@ -956,7 +955,7 @@ function balance_leave_by_typeForEmp($leave_type_id, $user_id = '', $action = ""
 function islocal()
 {
     $user_id = auth()->user()->id;
-    if (Employee::where('user_id', $user_id)->first()->employment_type == "local") {
+    if (Employee::where('user_id', $user_id)->first()?->employment_type == "local") {
         return true;
     } else {
         return  false;

@@ -31,7 +31,7 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                     @can('add-pay-scale')
+                    @can('add-pay-scale')
                     <a class="text-white btn btn-white" href="{{ route('admin.payroll.payscale.create') }}">
                         Add {{ $page }}
                     </a>

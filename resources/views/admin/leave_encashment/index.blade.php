@@ -6,31 +6,11 @@
         <!-- Content -->
         <div class="container-fluid">
             <!-- Page Header -->
-            <div class="mt-2 mb-2 border-bottom">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <h1 class="page-header-title">{{ $page }}</h1>
-                    </div>
-                    <!-- End Col -->
-                    <div class="col-auto">
-                        <a class="text-link">
-                            Home
-                        </a>/ {{ $page }}
-                    </div>
-                    <!-- End Col -->
-                </div>
-                <!-- Button trigger modal -->
-
-                <!-- End Row -->
-            </div>
+            
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="mt-2 mb-2 text-right col-sm-3 auto">
-                    @can('add-leave-encashment')
-                    <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        {{ $page }}
-                    </button>
-                    @endcan
+                   
 
 
                     @if (isemplooye())
@@ -55,20 +35,31 @@
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
 
-            
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="mb-2 col-sm mb-sm-0">
+                                <h2 class="page-header-title">{{ $page }}</h2>
+                            </div>
+                            <div class="col-sm-auto">
+                            @can('add-leave-encashment')
+                            <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                {{ $page }}
+                            </button>
+                            @endcan
+        
+                            </div>
+                        </div>
+                    </div>
                 <div class="p-2 mt-3 table-responsive">
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Employee name</th>
-                                <th>Employee ID</th>
-                                <th>Employee Phone</th>
                                 <th>Ec number</th>
                                 <th>Designation</th>
-                                <th>Join Date</th>
                                 <th>Apply Date</th>
-                                <th>No of Days</th>
+                                <th>Apply Days</th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -96,14 +87,7 @@
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
-                                }, {
-                                    data: 'employee.emp_id',
-                                    name: 'employee.emp_id'
-                                },
-                                {
-                                    data: 'user.mobile',
-                                    name: 'user.mobile'
-                                },
+                                }, 
 
                                 {
                                     data: 'employee.ec_number',
@@ -113,10 +97,7 @@
                                     data: 'employee.designation.name',
                                     name: 'employee.designation.name'
                                 },
-                                {
-                                    data: 'employee.start_date',
-                                    name: 'employee.start_date'
-                                },
+                               
                                 {
                                     data: 'apply_date',
                                     name: 'apply_date'

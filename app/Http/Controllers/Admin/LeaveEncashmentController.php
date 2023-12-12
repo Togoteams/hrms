@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LeaveEncashment;
+use App\Models\LeaveSetting;
 use App\Traits\LeaveTraits;
 
 class LeaveEncashmentController extends Controller
@@ -53,10 +54,12 @@ class LeaveEncashmentController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $leaveHideArr = ['privileged-leave'];
 
-        $leave_type = LeaveType::getLeaveType()->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
-        $all_users = Employee::getActiveEmp()->get();
-        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users, 'total_remaining_leave' => $this->total_remaining_leave()]);
+        $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
+        $all_users = Employee::getActiveEmp()->where('employment_type','expatriate')->get();
+
+        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
 
 
@@ -108,7 +111,9 @@ class LeaveEncashmentController extends Controller
      */
     public function show(string $id)
     {
-        $leave_type = LeaveType::getLeaveType()->get();
+        $leaveHideArr = ['privileged-leave'];
+
+        $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
 
         $data = LeaveEncashment::find($id);
         return view('admin.leave_encashment.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'total_remaining_leave' => $this->balance_leave_by_type($data->leave_type_id, $data->user_id)]);
@@ -121,14 +126,18 @@ class LeaveEncashmentController extends Controller
     {
 
         $data = LeaveEncashment::find($id);
-        $leave_type = LeaveType::getLeaveType()->where('leave_for', Employee::where('user_id', $data->user_id)->first()->employment_type ?? '')->getActiveEmp()->get();
+        $leaveHideArr = ['privileged-leave'];
+
+        $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
 
         return view('admin.leave_encashment.edit', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
     }
 
     public function status_modal($id)
     {
-        $leave_type = LeaveType::getLeaveType()->get();
+        $leaveHideArr = ['privileged-leave'];
+
+        $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
 
         $data = LeaveEncashment::find($id);
         return view('admin.leave_encashment.status', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type]);
@@ -205,13 +214,9 @@ class LeaveEncashmentController extends Controller
         $user_id = $request->user_id;
         $emploment_type = Employee::where('user_id', $user_id)->first()->employment_type ?? '';
         echo '<option> -Select Leave Type - </option>';
-        if ($emploment_type == "local") {
-            $leave_type = LeaveType::getLeaveType()->where('name', 'EARNED LEAVE')->first();
-            echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
-        } else {
-            $leave_type = LeaveType::getLeaveType()->where('name', 'PRIVILEGED LEAVE')->first();
-            echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
-        }
+        $leaveHideArr = ['privileged-leave'];
+        $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->first();
+        echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
     }
 
 
@@ -219,7 +224,7 @@ class LeaveEncashmentController extends Controller
     {
         $remaining_leave = 0;
 
-        $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id) / 2;
+        $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id) ;
 
         return $remaining_leave;
     }
