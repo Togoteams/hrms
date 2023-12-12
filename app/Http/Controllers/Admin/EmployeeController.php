@@ -202,17 +202,7 @@ class EmployeeController extends BaseController
             'designation_id'        => ['required', 'numeric'],
             'ec_number'             => ['required', 'string', 'unique:employees,ec_number,'.$employee->id],
             'id_number'             => ['nullable', 'numeric'],
-            'start_date'            => ['required','date',
-                function ($attribute, $value, $fail) {
-                    $minDate = now()->subYears(60);
-                    $maxDate = now();
-
-                    $date = \DateTime::createFromFormat('Y-m-d', $value);
-
-                    if ($date < $minDate || $date > $maxDate) {
-                        $fail('The ' . $attribute . ' must be between 18 and 60 years ago.');
-                    }
-                },   'after_or_equal:' . $forWork,
+            'start_date'            => ['required','date','after_or_equal:' . $forWork,
             ],
             'currency'              => ['nullable', 'string'],
             'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
@@ -262,14 +252,17 @@ class EmployeeController extends BaseController
     public function viewAddress($eid = null)
     {
         $countries = Country::getCountry()->get();
-        return view('admin.employees.emp-address', ['employee' => $this->getEmployee($eid), 'countries'=>$countries]);
+        $employee = $this->getEmployee($eid);
+        $empAddresses =EmpAddress::where('user_id',$employee->user_id)->get();
+        // return $empAddresses;
+        return view('admin.employees.emp-address', ['employee' => $this->getEmployee($eid),'empAddresses'=>$empAddresses, 'countries'=>$countries]);
     }
 
     public function postAddress(Request $request)
     {
         $request->validate([
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'numeric','digits_between:5,10'],
+            'post_box'       => ['nullable'],
             'city'      => ['required', 'string', 'regex:/^[a-zA-Z. ]+$/'],
             'state'     => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
             'country'   => ['required', 'string'],
@@ -293,6 +286,25 @@ class EmployeeController extends BaseController
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
+        }
+    }
+    public function deleteAddress(Request $request)
+    {
+        $request->validate([
+            'id' => ['required', 'numeric'],
+        ]);
+
+        try {
+            $empAddress = EmpAddress::find($request->id);
+            if ($empAddress) {
+                $empAddress->delete();
+                $message = "Record deleted Successfully";
+                return response()->json(['status' => true, 'message' => $message]);
+            } else {
+                return response()->json(['status' => false, 'error' => 'Record not found']);
+            }
+        } catch (Exception $e) {
+            return response()->json(['status' => false, 'error' => $e->getMessage()]);
         }
     }
 

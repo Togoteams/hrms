@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->string('address')->nullable();
-            $table->string('zip')->nullable();
+            $table->string('address_type')->nullable();
+            $table->string('post_box')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();

@@ -170,6 +170,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
     Route::get('employee/address/{eid?}', [EmployeeController::class, 'viewAddress'])->name('employee.address.form');
     Route::post('employee/address', [EmployeeController::class, 'postAddress'])->name('employee.address.post');
+    Route::post('employee/delete-address', [EmployeeController::class, 'deleteAddress'])->name('employee.address.delete');
 
     Route::get('employee/passport-omang/{eid?}', [EmployeeController::class, 'viewPassportOmang'])->name('employee.passportOmang.form');
     Route::post('employee/passport-omang', [EmployeeController::class, 'postPassportOmang'])->name('employee.passportOmang.post');

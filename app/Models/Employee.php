@@ -40,6 +40,12 @@ class Employee extends Model
         return $this->belongsTo(EmpAddress::class, 'user_id', 'user_id');
     }
 
+    public function addresses()
+    {
+        return $this->hasMany(EmpAddress::class, 'user_id');
+    }
+
+
     public function passportOmang()
     {
         return $this->belongsTo(EmpPassportOmang::class, 'user_id', 'user_id');

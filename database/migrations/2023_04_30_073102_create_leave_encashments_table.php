@@ -28,7 +28,6 @@ return new class extends Migration
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('employee_id')->references('id')->on('employees');
-            $table->foreign('leave_type_id')->references('id')->on('leave_types');
             $table->timestamps();
         });
     }

@@ -7,6 +7,11 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
+
+                    <!-- End Col -->
+                    <!-- End Page Header -->
+
+                    <!-- Stats -->
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
@@ -18,57 +23,150 @@
                             <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <form id="form_id" class="formsubmit" method="post"
-                                        action="{{ route('admin.employee.address.post') }}">
-                                        @csrf
-                                        <input type="hidden" name="id"
-                                            value="{{ !empty($employee) ? (!empty($employee->address) ? $employee->address->id : '') : '' }}">
-                                        <input type="hidden" name="user_id"
-                                            value="{{ !empty($employee) ? $employee->user_id : '' }}">
+                                    <div class="py-3 row">
+                                        <div class="text-left">
+                                            <button type="button" class="btn btn-white btn-sm" title="Add EmpAddress"
+                                                onclick="addEmpAddress({{ !empty($employee) ? $employee->user_id : '' }})">
+                                                Add Address
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row this-div">
+                                        @if (!empty($empAddresses))
+                                            @foreach ($empAddresses as $empAddress)
+                                                <div class="pb-4">
+                                                    <div class="p-3 card">
+                                                        <div class="row">
+                                                            <div class="col-9">
+                                                                <div class="row text-dark">
+                                                                    <div class="col-3 fw-semibold">Address Type</div>
+                                                                    <div class="col-3">{{ ucfirst($empAddress->address_type) }}
+                                                                    </div>
 
-                                        <div class="p-3 pb-4 row text-dark">
-                                            <div class="pt-3 col-3 fw-semibold">
-                                                <label for="address">Address<small class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-9">
-                                                <textarea id="address" placeholder="Enter Address" name="address" class="form-control">{{ $employee ? ($employee->address ? $employee->address->address : '') : '' }}</textarea>
-                                            </div>
+                                                                   
 
-                                            <div class="pt-3 col-3 fw-semibold">
-                                                <label for="zip">Zip<small class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-3">
-                                                <input id="zip" placeholder="Enter Zip"
-                                                    type="text" name="zip"
-                                                    pattern="[0-9]+"
-                                                    maxlength="10"
-                                                    minlength="5"
-                                                    class="form-control"
-                                                    value="{{ $employee ? ($employee->address ? $employee->address->zip : '') : '' }}">
-                                            </div>
+                                                                    <div class="col-3 fw-semibold">Post Box</div>
+                                                                    <div class="col-3">{{ ucfirst($empAddress->post_box) }}
+                                                                    </div>
+                                                                    <div class="col-3 fw-semibold">Address</div>
+                                                                    <div class="col-9">{{ ucfirst($empAddress->address) }}
+                                                                    </div>
+                                                                    <div class="col-3 fw-semibold">State</div>
+                                                                    <div class="col-3">{{ ucfirst($empAddress->state)}}
+                                                                    </div>
 
-                                            <div class="pt-3 col-3 fw-semibold">
+                                                                    <div class="col-3 fw-semibold">Country</div>
+                                                                    <div class="col-3">
+                                                                        {{ $empAddress->country }}
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3 text-end">
+                                                                <div class="right-div">
+                                                                    <!-- Your content for right div goes here -->
+                                                                    <button class="btn btn-edit btn-sm bt"
+                                                                        title="Edit" id="editButton"
+                                                                        data-id="{{ $empAddress->id }}"
+                                                                        data-user_id="{{ $employee->user_id }}"
+                                                                        data-address_type="{{ $empAddress->address_type }}"
+                                                                        data-address="{{ $empAddress->address }}"
+                                                                        data-post_box="{{ $empAddress->post_box }}"
+                                                                        data-city="{{ $empAddress->city }}"
+                                                                        data-state="{{ $empAddress->state }}"
+                                                                        data-country="{{ $empAddress->country }}">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+
+                                                                    <button class="btn btn-delete btn-sm bt deleteRecord"
+                                                                        title="Delete" data-id="{{ $empAddress->id }}"
+                                                                        data-token="{{ csrf_token() }}"
+                                                                        data-action="{{ route('admin.employee.address.delete') }}">
+                                                                        
+                                                                        <i class="fas fa-trash-alt"></i>
+                                                                    </button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End Stats -->
+                </div>
+
+                {{-- Add form model start --}}
+                <!-- Modal -->
+                <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content ">
+                            <div class="modal-header ">
+                                <h5 class="modal-title" id="modalTitle"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="add">
+                                <form id="form_id" class="formsubmit" method="post"
+                                    action="{{ route('admin.employee.address.post') }}">
+                                    @csrf
+                                    <input type="hidden" name="id" id="id">
+                                    <input type="hidden" name="user_id" id="user_id">
+
+                                    <div class="row">
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="address_type">Address Type<small class="required-field">*</small></label>
+                                                <select  id="address_type" placeholder="Enter Address Type"
+                                                type="text" name="address_type"
+                                                class="form-control" >
+                                                     <option disabled>--select--</option>
+                                                     <option value="present"  >Present</option>
+                                                     <option value="permanent" >Permanent</option>
+                                                 </select>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="post_box">Post Box</label>
+                                                <input id="post_box" placeholder="Enter Post Box"
+                                                    type="text" name="post_box" class="form-control form-control-sm"
+                                                    value="">
+                                            </div>
+                                        </div>
+                                        <div class="mb-2 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="address">address<small class="required-field">*</small></label>
+                                                <textarea id="address" placeholder="Enter Address" name="address" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">
                                                 <label for="city">City<small class="required-field">*</small></label>
+                                                <input id="city" placeholder="Enter city"
+                                                    type="text" name="city"
+                                                    class="form-control form-control-sm" value="">
                                             </div>
-                                            <div class="pt-2 col-3">
-                                                <input id="city" placeholder="Enter City"
-                                                    type="text" name="city" class="form-control"
-                                                    value="{{ $employee ? ($employee->address ? $employee->address->city : '') : '' }}">
-                                            </div>
-
-                                            <div class="pt-3 col-3 fw-semibold">
+                                        </div>
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">
                                                 <label for="state">State<small class="required-field">*</small></label>
+                                                <input id="state" placeholder="Enter state "
+                                                    type="text" name="state" class="form-control form-control-sm"
+                                                    value="">
                                             </div>
-                                            <div class="pt-2 col-3">
-                                                <input id="state" placeholder="Enter State"
-                                                    type="text" name="state" class="form-control"
-                                                    value="{{ $employee ? ($employee->address ? $employee->address->state : '') : '' }}">
-                                            </div>
-
-                                            <div class="pt-3 col-3 fw-semibold">
+                                        </div>
+                                        <div class="mb-2 col-sm-6">
+                                            <div class="form-group">
                                                 <label for="country">Country<small class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-3">
                                                 <select name="country" id="country" class="form-control form-control-sm" required>
                                                     <option value="">- Select -</option>
                                                     @foreach ($countries as $country)
@@ -79,20 +177,57 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-
-                                            <div class="pt-5 text-center">
-                                                <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
-                                            </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                    <hr>
+                                    <div class="text-center ">
+                                        <button type="submit" class="btn btn-white" id="btnSave">
+                                        </button>
+                                    </div>
+                                </form>
+
                             </div>
 
                         </div>
-                        <!-- End Stats -->
                     </div>
+                </div>
 
     </main>
 @endsection
 @push('custom-scripts')
+    <script>
+        function addEmpAddress(user_id) {
+            $('#form_id').trigger("reset");
+            $("#id").val("");
+            $('#formModal').modal('show');
+            $("#modalTitle").html("Add: EmpAddress");
+            $("#btnSave").html("CREATE");
+            $("#user_id").val(user_id);
+        }
+        $(document).ready(() => {
+            $(document).on("click", "#editButton", (event) => {
+                $('#form_id').trigger("reset");
+                $("#modalTitle").html("Edit: EmpAddress");
+                $("#btnSave").html("UPDATE");
+
+                let id = $(event.currentTarget).data("id");
+                let user_id = $(event.currentTarget).data("user_id");
+                let country = $(event.currentTarget).data("country");
+                let address = $(event.currentTarget).data("address");
+                let post_box = $(event.currentTarget).data("post_box");
+                let city = $(event.currentTarget).data("city");
+                let state = $(event.currentTarget).data("state");
+
+                $("#id").val(id);
+                $("#user_id").val(user_id);
+                $("#country").val(country);
+                $("#address").val(address);
+                $("#post_box").val(post_box);
+                $("#city").val(city);
+                $("#state").val(state);
+
+                $('#formModal').modal('show');
+            });
+        });
+    </script>
 @endpush
