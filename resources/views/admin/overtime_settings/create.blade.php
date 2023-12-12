@@ -16,10 +16,10 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="user_id" class="required">Employee Name</label>
-                                    <select name="user_id" class="form-control" id="user_id" placeholder="Employee Name">
+                                    <select name="user_id" class="form-control" id="user_id" required placeholder="Employee Name">
                                         <option value="">Select Option</option>
                                         @foreach ($all_users as $user)
-                                        <option value="{{ $user->user_id }}">{{ $user->user->name }}
+                                        <option value="{{ $user->user_id }}">{{ $user->user->name }}({{ $user->ec_number }})
                                         </option>
                                     @endforeach
                                     </select>
@@ -28,13 +28,13 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="date" class="required">Date</label>
-                                    <input type="date" name="date" id="date" class="form-control" placeholder="Enter date of overtime">
+                                    <input type="date" name="date" id="date" required class="form-control" placeholder="Enter date of overtime">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="working_hours" class="required">Working Hours</label>
-                                    <input type="number" name="working_hours" id="working_hours" class="form-control" placeholder="Enter working hours" min="0">
+                                    <input type="number" name="working_hours" required id="working_hours" class="form-control" placeholder="Enter working hours" min="0">
                                 </div>
                             </div>
                             {{-- <div class="mb-2 col-sm-6">
@@ -46,10 +46,10 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="overtime_type" class="required">Overtime Type</label>
-                                    <select name="overtime_type" class=" form-control" id="overtime_type" placeholder="Employee overtime type">
+                                    <select name="overtime_type" class=" form-control" required id="overtime_type" placeholder="Employee overtime type">
                                         <option value="">Select Option</option>
                                         <option value="holiday">Holiday</option>
-                                        <option value="over time">Over Time</option> 
+                                        <option value="extra_time">Extra Time</option> 
                                     </select>
                                 </div>
                             </div>

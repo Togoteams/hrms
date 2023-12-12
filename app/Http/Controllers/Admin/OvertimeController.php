@@ -16,7 +16,7 @@ class OvertimeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Overtime Setting";
+    public $page_name = "Overtimes";
 
     public function index(Request $request)
     {
@@ -58,7 +58,7 @@ class OvertimeController extends Controller
         // dd($request);
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
-            'date' => 'required|date',
+            'date' => 'required|date|before_or_equal:today',
             'working_hours' => 'required|numeric|gt:0',
             'working_min' => 'nullable|numeric|gt:0|max:59',
             'overtime_type' => 'required|string',
@@ -99,7 +99,7 @@ class OvertimeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
-            'date' => 'required|date',
+            'date' => 'required|date|before_or_equal:today',
             'working_hours' => 'required|numeric|gt:0',
             'working_min' => 'nullable|numeric|gt:0|max:59',
             'overtime_type' => 'required|string',

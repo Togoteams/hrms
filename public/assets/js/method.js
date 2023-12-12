@@ -291,6 +291,7 @@ function backEndValidate(responseData, target_id) {
         refreshPage(500);
     }
     else {
+        console.log(obj);
         for (let key in obj) {
             let value;
             // get the value

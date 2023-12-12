@@ -60,8 +60,8 @@
                                                                         {{ $qualification->year_of_passing }}
                                                                     </div>
 
-                                                                    <div class="col-3 fw-semibold">Marks</div>
-                                                                    <div class="col-3">{{ $qualification->marks }} %</div>
+                                                                    <div class="col-3 fw-semibold">Marks (%)/Grade</div>
+                                                                    <div class="col-3">{{ $qualification->marks }} </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 text-end">
@@ -163,9 +163,9 @@
                                         </div>
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="marks">Marks(%)<small class="required-field">*</small></label>
+                                                <label for="marks">Marks(%) / Grade<small class="required-field">*</small></label>
                                                 <input id="marks" placeholder="Enter marks in percentage"
-                                                    type="number" name="marks" class="form-control form-control-"
+                                                    type="text" name="marks" class="form-control form-control-"
                                                     value="">
                                             </div>
                                         </div>

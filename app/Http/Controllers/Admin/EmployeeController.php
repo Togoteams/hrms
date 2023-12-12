@@ -360,7 +360,7 @@ class EmployeeController extends BaseController
             'institute_name' => ['string', 'required'],
             'university' => ['string', 'required'],
             'year_of_passing' => ['numeric', 'required', 'digits:4', 'gt:1950', 'max:' . Date::now()->year],
-            'marks' => ['numeric', 'required', 'gt:0','between:0,100'],
+            'marks' => ['string', 'required'],
         ]);
 
         try {

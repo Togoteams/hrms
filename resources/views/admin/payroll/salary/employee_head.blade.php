@@ -3,7 +3,7 @@
     <div class="col-sm-3">
         <div class="form-group">
             <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
-            <label for="basic">Basic</label>
+            <label for="basic">Basic  ({{"In PULA"}})</label>
             @php
             $basic = round(($data->basic / $totalMonthDays) * $noOfPayableDays);
             @endphp
@@ -72,7 +72,7 @@
     @if($head->head_type=="income")
     <div class="col-sm-3">
         <div class="form-group">
-            <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
+            <label class="required" for="{{ $head->slug }}">{{ $head->name }}  ({{"In PULA"}})</label>
             @php
             if(!empty($head_data))
             {
@@ -108,7 +108,7 @@
     @if($head->head_type=="deduction")
     <div class="col-sm-3">
         <div class="form-group">
-            <label class="required" for="{{ $head->slug }}">{{ $head->name }}</label>
+            <label class="required" for="{{ $head->slug }}">{{ $head->name }}  ({{"In PULA"}})</label>
             @php  
             if(in_array($head->slug,$fixedHeadsArr))
                 {
@@ -128,19 +128,19 @@
 <div class="row">
     <div class="col-sm-3">
         <div class="form-group">
-            <label for="gross_earning">Gross Earning</label>
+            <label for="gross_earning">Gross Earning  ({{"In PULA"}})</label>
             <input required id="gross_earning"  readonly placeholder="Enter correct Gross Earning" type="text" value="{{ $data->gross_earning ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
-            <label for="total_deduction">Total Deduction</label>
+            <label for="total_deduction">Total Deduction  ({{"In PULA"}})</label>
             <input required id="total_deduction" readonly placeholder="Enter correct Total Deduction" type="text" value="{{ $data->total_deduction ?? '' }}" name="total_deduction" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
-            <label for="net_take_home">Net Take Home</label>
+            <label for="net_take_home">Net Take Home  ({{"In PULA"}})</label>
             <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ $data->net_take_home ?? '' }}" name="net_take_home" class="form-control form-control-sm ">
         </div>
     </div>
