@@ -29,7 +29,7 @@
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
+                            <div class="mx-3 border rounded col-xl-9 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <form id="form_id" class="formsubmit" method="post"
