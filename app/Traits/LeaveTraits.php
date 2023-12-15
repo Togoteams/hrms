@@ -37,9 +37,14 @@ trait LeaveTraits
     $emp = Employee::where('user_id', $user_id)->first();
 
     $totalNoOfLeaveInBucket = 0;
+    $total =0;
     $leaveSetting = LeaveSetting::find($leave_type_id);
-    $perYearLeave = $leaveSetting->total_leave_year;
-    $isProRata = $leaveSetting->is_pro_data;
+    $perYearLeave = $leaveSetting?->total_leave_year;
+    $isProRata = $leaveSetting?->is_pro_data;
+    if($emp)
+    {
+
+  
     $dateOfJoining = date("Y-m-d", strtotime($emp->start_date));
     $currentDate = date("Y-m-d");
 
@@ -50,7 +55,7 @@ trait LeaveTraits
     $months = floor(($diff - $years  * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
     $total_leave = 0;
 
-    switch ($leaveSetting->slug) {
+    switch ($leaveSetting?->slug) {
       case 'sick-leave':
 
         if($emp->employment_type=="expatriate")
@@ -166,6 +171,7 @@ trait LeaveTraits
     // echo $total_apply_leave;
     $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
     $total = $total_leave - $total_apply_leave -  $encash_leave;
+   }
     return $total;
   }
   public function only_encash_leave($user_id = '')

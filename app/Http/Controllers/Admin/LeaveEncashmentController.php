@@ -24,10 +24,6 @@ class LeaveEncashmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-
-
-
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -35,17 +31,16 @@ class LeaveEncashmentController extends Controller
             if (isemplooye()) {
                 $data = LeaveEncashment::with('user', 'leave_type', 'employee', 'employee.designation')->where('user_id', Auth::user()->id)->select('*');
             } else {
-
                 $data = LeaveEncashment::with('user', 'leave_type', 'employee', 'employee.designation')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
 
                 ->editColumn('employee.start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->employee->start_date)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->employee->start_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->addColumn('apply_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->created_at)->isoFormat('DD.MM.YYYY');
+                    return \Carbon\Carbon::parse($data->created_at)->isoFormat('DD-MM-YYY');
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_encashment.buttons', ['item' => $row, "route" => 'leave_encashment']);
@@ -54,10 +49,9 @@ class LeaveEncashmentController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $leaveHideArr = ['privileged-leave'];
-
+        $leaveHideArr = ['privileged-leave','earned-leave'];
         $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
-        $all_users = Employee::getActiveEmp()->where('employment_type','expatriate')->get();
+        $all_users = Employee::getActiveEmp()->get();
 
         return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
@@ -214,8 +208,8 @@ class LeaveEncashmentController extends Controller
         $user_id = $request->user_id;
         $emploment_type = Employee::where('user_id', $user_id)->first()->employment_type ?? '';
         echo '<option> -Select Leave Type - </option>';
-        $leaveHideArr = ['privileged-leave'];
-        $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->first();
+        $leaveHideArr = ['privileged-leave','earned-leave'];
+        $leave_type = LeaveSetting::where('emp_type',getEmpType($emploment_type))->whereIn('slug',$leaveHideArr)->first();
         echo '  <option value="' . $leave_type->id . '">' . $leave_type->name . '</option>';
     }
 
