@@ -280,7 +280,7 @@ class LeaveApplyController extends Controller
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
             })->whereNotIn('status',['reject'])->where('user_id',$userId)->orderBy('id','desc')->whereNotIn('id',[$edit_id])->first();
-            $this->overLapsLeave = $overlappingRecord->leave_type->name;
+            $this->overLapsLeave = $overlappingRecord?->leaveSetting?->name;
             return !$overlappingRecord;
         });
 
