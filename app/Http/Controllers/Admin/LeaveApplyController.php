@@ -157,7 +157,8 @@ class LeaveApplyController extends Controller
 
         $employee = Employee::where('user_id', $request->user_id)->first();
         $validator = Validator::make($request->all(), [
-            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+            
+            'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
             'start_date' => ['required', 'date','no_date_overlap', 'after_or_equal:' . $employee->start_date],
             'end_date' => ['required', 'date','no_date_overlap', 'after_or_equal:start_date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],
@@ -291,7 +292,7 @@ class LeaveApplyController extends Controller
 
         $employee = Employee::where('user_id', $request->user_id)->first();
         $validator = Validator::make($request->all(), [
-            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+            'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
             'start_date' => ['required', 'date','no_date_overlap', 'after_or_equal:' . $employee->start_date],
             'end_date' => ['required', 'date','no_date_overlap', 'after_or_equal:start_date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],

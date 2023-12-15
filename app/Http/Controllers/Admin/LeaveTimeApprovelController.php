@@ -97,7 +97,7 @@ class LeaveTimeApprovelController extends BaseController
             return "The $value date range overlaps with an existing record.";
         });
         $request->validate([
-            'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+            'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
             'user_id' => ['required', 'numeric', 'exists:users,id'],
             'request_date' => ['required', 'date'],
             'reason' => ['required', 'string'],
@@ -106,7 +106,7 @@ class LeaveTimeApprovelController extends BaseController
             "document" => ["max:10000",'required'],
         ]);
         // $validator = Validator::make($request->all(), [
-        //     'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+        //     'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
         //     'user_id' => ['required', 'numeric', 'exists:users,id'],
         //     'request_date' => ['required', 'date'],
         //     'reason' => ['required', 'date'],
@@ -260,7 +260,7 @@ class LeaveTimeApprovelController extends BaseController
             $request->merge(['pay_type'=>'half_pay']);
            }
            $request->validate([
-               'leave_type_id' => ['required', 'numeric', 'exists:leave_types,id'],
+               'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
                'start_date' => ['required', 'date','no_date_overlap'],
                'end_date' => ['required', 'date','no_date_overlap'],
                "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable'],
