@@ -24,7 +24,7 @@
                     <span class="name-title">Employee Form</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-2 border-1 border-color">
                                 @include('admin.employees.add-aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
