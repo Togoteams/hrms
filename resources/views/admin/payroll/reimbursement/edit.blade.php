@@ -3,7 +3,7 @@
 <form id="form_edit" action="{{ route('admin.payroll.reimbursement.update',$reimbursement->id) }}">
      @csrf
     <input type="hidden" name="_method" value="PUT">
-        <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
+        <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
         <div class="row">
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
@@ -51,10 +51,10 @@
                         <option selected disabled=""> - Select financial year- </option>
                         @php
                             $currentYear = date('Y');
-                        @endphp 
+                        @endphp
                         <option value="{{$currentYear-1}}-{{$currentYear}}" @if($reimbursement->financial_year== (($currentYear-1)."-".$currentYear)) selected @endif >{{$currentYear-1}}-{{$currentYear}}</option>
                         <option value="{{$currentYear}}-{{$currentYear+1}}" @if($reimbursement->financial_year== (($currentYear)."-".$currentYear+1)) selected @endif >{{$currentYear}}-{{$currentYear+1}}</option>
-                       
+
                     </select>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <label for="claim_from_month" class="required">Claim For Period From Month {{$reimbursement->claim_from_month}}</label>
                     <select name="claim_from_month" id="claim_from_month" class="form-control"  required>
                         <option value="">Select From Month</option>
-                        
+
                         <option value="7" {{$reimbursement->claim_from_month == 7 ? 'selected' : ''}}>July</option>
                         <option value="8" {{$reimbursement->claim_from_month == 8 ? 'selected' : ''}}>August</option>
                         <option value="9" {{$reimbursement->claim_from_month == 9 ? 'selected' : ''}}>September</option>

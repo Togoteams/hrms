@@ -25,6 +25,9 @@ return new class extends Migration
             $table->decimal('reimbursement_amount', 10, 3)->nullable();
             $table->string('reimbursement_notes', 200)->nullable();
             $table->string('reimbursement_reason')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            $table->string('branch_id')->nullable();
             $table->string('status')->default('pending');
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('rejected_at')->nullable();

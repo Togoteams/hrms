@@ -29,14 +29,14 @@ class ReimbursementController extends BaseController
             ->addColumn('action', function ($row) {
                 $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
                 return $actionBtn;
-            })                 
+            })
             ->editColumn('claim_date', function ($data) {
                 return \Carbon\Carbon::parse($data->claim_date)->isoFormat('DD.MM.YYYY');
             })
             ->rawColumns(['action'])
             ->make(true);
         }
-        $employees = Employee::getActiveEmp()->where('employment_type','expatriate')->get();
+        $employees = Employee::where('employment_type','expatriate')->getActiveEmp()->get();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
@@ -91,6 +91,8 @@ class ReimbursementController extends BaseController
             'reimbursement_notes' => 'required|string',
         ]);
         $userId = $request->user_id;
+        $employee = Employee::where('user_id', $userId)->first();
+
         // $validator->after(function ($validator) use ($request, $userId) {
         //     $overlapExists = Reimbursement::where('user_id', $userId)
         //         ->where(function ($query) use ($request) {
@@ -117,6 +119,8 @@ class ReimbursementController extends BaseController
             try {
                 $request->merge([
                     'user_id' => $userId,
+                    'branch_id' => $employee->branch_id,
+                    'created_by' => auth()->user()->id,
                     'status' => "pending",
                 ]);
                 Reimbursement::create($request->except(['_token', '_method']));
@@ -218,8 +222,23 @@ class ReimbursementController extends BaseController
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            Reimbursement::where('id', $id)->update($request->except(['_token', '_method']));
-            return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+            try {
+                Reimbursement::where('id', $id)->update([
+                    'type_id' => $request->type_id,
+                    'expenses_currency' => $request->expenses_currency,
+                    'expenses_amount' => $request->expenses_amount,
+                    'financial_year' => $request->financial_year,
+                    'claim_date' => $request->claim_date,
+                    'claim_from_month' => $request->claim_from_month,
+                    'claim_to_month' => $request->claim_to_month,
+                    'reimbursement_notes' => $request->reimbursement_notes,
+                    'updated_by' => $user->id,
+                ]);
+
+                return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
         }
     }
 

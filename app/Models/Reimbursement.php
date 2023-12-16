@@ -24,7 +24,11 @@ class Reimbursement extends Model
     'reimbursement_reason',
     'status',
     'approved_at',
-    'rejected_at'];
+    'rejected_at',
+    'branch_id',
+    'created_by',
+    'updated_by',
+];
 
     public function scopeGetReimbursement($query)
     {
