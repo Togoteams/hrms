@@ -217,6 +217,9 @@ class EmployeeController extends BaseController
             'bank_account_number'   => ['required', 'numeric','digits_between:12,16'],
             'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
             'currency_salary'       => ['required', 'string'],
+            'review_authority'              => ['nullable', 'string'],
+            'reporting_authority'              => ['nullable', 'string'],
+
 
 
         ]);

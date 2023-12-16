@@ -125,6 +125,27 @@
                                                     class="form-control form-control-sm">
                                             </div>
 
+                                            <div class="pt-3 col-2 fw-semibold">
+                                                <label for="review_authority">Review Authority<small
+                                                        class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-4">
+                                                <input id="review_authority" placeholder="Enter Review Authority" type="text"
+                                                    name="review_authority"
+                                                    value="{{ !empty($employee) ? $employee->review_authority : '' }}"
+                                                    class="form-control form-control-sm ">
+                                            </div>
+
+                                            <div class="pt-3 col-2 fw-semibold">
+                                                <label for="reporting_authority">Reporting Authority<small
+                                                        class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-4">
+                                                <input id="reporting_authority" placeholder="Enter Reporting Authority" type="text"
+                                                    name="reporting_authority"
+                                                    value="{{ !empty($employee) ? $employee->reporting_authority : '' }}"
+                                                    class="form-control form-control-sm ">
+                                            </div>
                                             {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="currency">Currency<small
                                                         class="required-field">*</small></label>

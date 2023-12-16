@@ -475,7 +475,7 @@
                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-for-ibo.report' ? 'active' : '' }}  "
                             href="{{ route('admin.payroll.tax-for-ibo.report') }}">Reports</a>
                         @endcanany
-                       
+
                         @canany(['calcualte-tax-for-ibo'])
                             <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-for-ibo.calculate' ? 'active' : '' }}"
                                 href="{{ route('admin.payroll.tax-for-ibo.calculate') }}" data-placement="left">
@@ -486,8 +486,8 @@
                     </div>
                 </div>
                 @endcanany
-             
-                
+
+
 
             </div>
 
