@@ -6,13 +6,9 @@
         <!-- Content -->
         <div class="container-fluid">
             <!-- Page Header -->
-            
             <div class="row">
                 <div class="col-sm-9"></div>
                 <div class="mt-2 mb-2 text-right col-sm-3 auto">
-                   
-
-
                     @if (isemplooye())
                         @php
                             $emp = DB::table('employees')
@@ -35,21 +31,22 @@
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
 
-                    <div class="page-header">
-                        <div class="row">
-                            <div class="mb-2 col-sm mb-sm-0">
-                                <h2 class="page-header-title">{{ $page }}</h2>
-                            </div>
-                            <div class="col-sm-auto">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="mb-2 col-sm mb-sm-0">
+                            <h2 class="page-header-title">{{ $page }}</h2>
+                        </div>
+                        <div class="col-sm-auto">
                             @can('add-leave-encashment')
-                            <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                {{ $page }}
-                            </button>
+                                <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    {{ $page }}
+                                </button>
                             @endcan
-        
-                            </div>
+
                         </div>
                     </div>
+                </div>
                 <div class="p-2 mt-3 table-responsive">
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
@@ -57,9 +54,11 @@
                                 <th>No</th>
                                 <th>Employee name</th>
                                 <th>Ec number</th>
-                                <th>Designation</th>
+                                <th>Leave Type</th>
+                                {{-- <th>Designation</th> --}}
                                 <th>Apply Date</th>
-                                <th>Apply Days</th>
+                                <th>Balance Leave</th>
+                                <th>Requested Leave </th>
                                 <th>status</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -87,25 +86,28 @@
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
-                                }, 
-
+                                },
                                 {
                                     data: 'employee.ec_number',
                                     name: 'employee.ec_number'
                                 },
                                 {
-                                    data: 'employee.designation.name',
-                                    name: 'employee.designation.name'
+                                    data: 'leave_settings.name',
+                                    name: 'leave_settings.name'
                                 },
-                               
+
                                 {
                                     data: 'apply_date',
                                     name: 'apply_date'
                                 },
 
                                 {
-                                    data: 'no_of_days',
-                                    name: 'no_of_days'
+                                    data: 'balance_leave',
+                                    name: 'balance_leave'
+                                },
+                                {
+                                    data: 'request_leave_for_encashement',
+                                    name: 'request_leave_for_encashement'
                                 },
 
                                 {

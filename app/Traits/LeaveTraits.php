@@ -169,7 +169,7 @@ trait LeaveTraits
     $total_apply_leave = $total_apply_leave + $noOfHalfPayLeave + ($noOfFullPayLeave *2);
 
     // echo $total_apply_leave;
-    $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
+    $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('request_leave_for_encashement');
     $total = $total_leave - $total_apply_leave -  $encash_leave;
    }
     return $total;

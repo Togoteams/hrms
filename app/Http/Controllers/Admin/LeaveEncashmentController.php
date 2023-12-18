@@ -29,9 +29,9 @@ class LeaveEncashmentController extends Controller
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
             if (isemplooye()) {
-                $data = LeaveEncashment::with('user', 'leave_type', 'employee', 'employee.designation')->where('user_id', Auth::user()->id)->select('*');
+                $data = LeaveEncashment::with('user', 'leave_settings', 'employee', 'employee.designation')->where('user_id', Auth::user()->id)->select('*');
             } else {
-                $data = LeaveEncashment::with('user', 'leave_type', 'employee', 'employee.designation')->select('*');
+                $data = LeaveEncashment::with('user', 'leave_settings', 'employee', 'employee.designation')->select('*');
             }
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -71,8 +71,11 @@ class LeaveEncashmentController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'no_of_days' => 'required|numeric|min:1',
-            'description' => ['required', 'string'],
+            'balance_leave' => 'required|numeric|min:1',
+            'available_leave_for_encashment' => 'required|numeric|min:1',
+            'request_leave_for_encashement' => 'required|numeric|lte:available_leave_for_encashment',
+            'leave_type_id' => 'required|numeric|exists:leave_settings,id',
+            'description' => ['nullable', 'string'],
 
         ]);
 
@@ -89,6 +92,7 @@ class LeaveEncashmentController extends Controller
                     'uuid' => $user->uuid,
                     'user_id' => $user->id,
                     'created_by' => Auth::user()->id,
+                    'requested_at' => currentDateTime(),
                     'employee_id' => Employee::where('user_id', $user->id)->first()->id,
 
                 ]);
@@ -142,8 +146,10 @@ class LeaveEncashmentController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'no_of_days' => 'required|numeric|min:1',
-            'description' => ['required', 'string'],
+            'balance_leave' => 'required|numeric|min:1',
+            'available_leave_for_encashment' => 'required|numeric|min:1',
+            'request_leave_for_encashement' => 'required|numeric|lte:available_leave_for_encashment',
+            'description' => ['nullable', 'string'],
 
         ]);
 
@@ -167,18 +173,22 @@ class LeaveEncashmentController extends Controller
         try {
             $leave_encashment = LeaveEncashment::find($id);
             if ($request->status == "approved") {
-                if ($this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) >= $leave_encashment->no_of_days) {
+                if ($this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) >= $leave_encashment->available_leave_for_encashment) {
 
                     LeaveEncashment::where('id', $id)->update([
                         'status' => $request->status,
+                        'approval_at' => currentDateTime(),
+                        'approved_by' =>auth()->user()->id,
                         'status_remarks' => $request->status_remarks,
                     ]);
                 } else {
-                    return response()->json(['error' => " Applied leave is " . $leave_encashment->no_of_days . " but  they have only " . $this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) . " leave"]);
+                    return response()->json(['error' => " Applied leave is " . $leave_encashment->available_leave_for_encashment . " but  they have only " . $this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) . " leave"]);
                 }
             } else if ($request->status != "approved") {
                 LeaveEncashment::where('id', $id)->update([
                     'status' => $request->status,
+                    'rejected_by' =>auth()->user()->id,
+                    'rejected_at' => currentDateTime(),
                     'status_remarks' => $request->status_remarks,
                 ]);
             }
@@ -217,9 +227,7 @@ class LeaveEncashmentController extends Controller
     public function get_balance_leave(Request $request)
     {
         $remaining_leave = 0;
-
         $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id) ;
-
-        return $remaining_leave;
+        return response()->json(['status' =>true,'data'=>['remaining_leave'=>$remaining_leave]]);
     }
 }

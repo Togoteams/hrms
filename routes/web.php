@@ -246,7 +246,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::put('leave_encashment/status/{id}', [LeaveEncashmentController::class, 'status'])->name('leave_encashment.status');
     Route::get('leave_encashment/status_modal/{id}', [LeaveEncashmentController::class, 'status_modal'])->name('leave_encashment.status_modal');
     Route::post('get_encash_leave/', [LeaveEncashmentController::class, 'get_encash_leave'])->name('leave_apply.get_encash_leave');
-    Route::post('get_balance_encash_leave/', [LeaveEncashmentController::class, 'get_balance_leave'])->name('leave_encashment.get_balance_encah_leave');
+    Route::get('get_balance_encash_leave/', [LeaveEncashmentController::class, 'get_balance_leave'])->name('leave_encashment.get_balance_encah_leave');
 
     // encashment end
 

@@ -36,8 +36,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types</label>
-                                    <select required id="leave_type_id"
-                                        onchange=" selectDrop('form_data','{{ route('admin.leave_encashment.get_balance_encah_leave') }}', 'balance_leave1')"
+                                    <select required id="leave_type_id" onchange="change_leave()"
                                         placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled> -Select Leave Types- </option>
@@ -50,17 +49,33 @@
                             </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
-                                    <label for="balance_leave1">balance_leave</label>
-                                    <input required id="balance_leave1"  {{ isemplooye() ? 'readonly' : '' }}
-                                        placeholder="Enter correct balance_leave" type="text" name="no_of_days"
+                                    <label for="balance_leave1">Total Balance Leave</label>
+                                    <input required id="balance_leave1" readonly
+                                        placeholder="Enter correct balance_leave" type="number" name="balance_leave"
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label for="available_leave_for_encashment">Available Leave For Encashment</label>
+                                    <input required id="available_leave_for_encashment" readonly
+                                        placeholder="Enter correct available_leave_for_encashment" type="number"
+                                        name="available_leave_for_encashment" class="form-control form-control-sm ">
+                                </div>
+                            </div>
 
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label for="request_leave_for_encashement">Request Leave for Encashement</label>
+                                    <input required id="request_leave_for_encashement"
+                                        placeholder="Enter correct request_leave_for_encashement" type="number"
+                                        name="request_leave_for_encashement" class="form-control form-control-sm ">
+                                </div>
+                            </div>
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">description</label>
-                                    <textarea rows="3" required id="description" placeholder="Enter correct description   " name="description"
+                                    <textarea rows="3" id="description" placeholder="Enter correct description   " name="description"
                                         class="form-control form-control-sm "></textarea>
                                 </div>
                             </div>
@@ -76,3 +91,38 @@
             </div>
         </div>
     </div>
+    @push('custom-scripts')
+        <script>
+            function change_leave() {
+                var getBalanceUrl = "{{ route('admin.leave_encashment.get_balance_encah_leave') }}";
+                var user_id = $("#user_id").val();
+                var leave_type_id = $("#leave_type_id").val();
+                $.ajax({
+                    url: getBalanceUrl,
+                    type: "get",
+                    data: {
+                        "user_id": user_id,
+                        'leave_type_id': leave_type_id
+                    },
+                    dataType: "json",
+                    success: function(result) {
+                        if (result.status == true) {
+                            var data = result.data;
+                            if (data.is_balance_leave_hide) {
+                                $("#balance_leave1").val(0);
+                                $("#available_leave_for_encashment").val(0);
+                            } else {
+                                $("#balance_leave1").val(data.remaining_leave);
+                                $("#available_leave_for_encashment").val(Math.round(Number(data.remaining_leave /
+                                    2)));
+                            }
+                        } else {
+                            $("#balance_leave1").val(0);
+                            $("#available_leave_for_encashment").val(0);
+                        }
+                        //    amount_cal(e);
+                    },
+                });
+            }
+        </script>
+    @endpush

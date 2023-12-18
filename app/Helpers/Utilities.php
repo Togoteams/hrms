@@ -29,6 +29,12 @@ if (!function_exists('isSluggable')) {
         return Str::slug($value);
     }
 }
+if (!function_exists('currentDateTime')) {
+    function currentDateTime()
+    {
+        return Carbon::now()->format('Y-m-d h:i:s');;
+    }
+}
 
 if (!function_exists('splitName')) {
     function splitName($name)
