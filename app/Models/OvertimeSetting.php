@@ -14,8 +14,11 @@ class OvertimeSetting extends Model
         'working_hours',
         'working_min',
         'overtime_type',
-        'status'];
-        
+        'status',
+        'branch_id',
+        'created_by',
+        'updated_by',];
+
         public function user()
         {
             return $this->belongsTo(User::class, 'user_id');

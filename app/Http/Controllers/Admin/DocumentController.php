@@ -154,6 +154,8 @@ class DocumentController extends Controller
                 $existingAssignments = DocumentEmp::where('document_id', $documentId)
                     ->get();
 
+                //  $employee = Employee::where('user_id', $empIds)->first();
+
                 // Delete assignments that are unchecked
                 foreach ($existingAssignments as $assignment) {
                     if (!in_array($assignment->emp_id, $empIds)) {
@@ -161,18 +163,51 @@ class DocumentController extends Controller
                     }
                 }
 
-                // Create new assignments for checked employees
-                foreach ($empIds as $empId) {
-                    $isAssigned = $existingAssignments->contains('emp_id', $empId);
+                // foreach ($empIds as $empId) {
+                //     $isAssigned = $existingAssignments->contains('emp_id', $empId);
 
-                    if (!$isAssigned) {
-                        DocumentEmp::create([
-                            'document_id' => $documentId,
-                            'emp_id' => $empId,
-                            'created_at' => now(),
+                //     if (!$isAssigned) {
+                //         DocumentEmp::create([
+                //             'document_id' => $documentId,
+                //             'emp_id' => $empId,
+                //             'branch_id' => $employee->branch_id,
+                //             'created_by' => auth()->user()->id,
+                //             'created_at' => now(),
+                //         ]);
+                //     }
+                // }
+
+                // Create new assignments for checked employees
+            foreach ($empIds as $empId) {
+                $employee = Employee::where('user_id', $empId)->first();
+
+                if (!$employee) {
+                    continue; // Skip if employee not found
+                }
+
+                $isAssigned = $existingAssignments->contains('emp_id', $empId);
+
+                if (!$isAssigned) {
+                    DocumentEmp::create([
+                        'document_id' => $documentId,
+                        'emp_id' => $empId,
+                        'branch_id' => $employee->branch_id,
+                        'created_by' => auth()->user()->id,
+                        'updated_by' => auth()->user()->id,
+                        'created_at' => now(),
+                    ]);
+                } else {
+                    // Update existing assignment (if needed)
+                    $existingAssignment = $existingAssignments->where('emp_id', $empId)->first();
+
+                    if ($existingAssignment) {
+                        $existingAssignment->update([
+                            'branch_id' => $employee->branch_id,
+                            'updated_by' => auth()->user()->id,
                         ]);
                     }
                 }
+            }
 
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {

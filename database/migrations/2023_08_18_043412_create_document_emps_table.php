@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('document_id')->nullable();
             $table->string('emp_id')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            $table->string('branch_id')->nullable();
             $table->timestamps();
 
             $table->foreign('document_id')->references('id')->on('documents');

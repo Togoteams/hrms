@@ -55,7 +55,6 @@ class OvertimeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'date' => 'required|date|before_or_equal:today',
@@ -63,16 +62,33 @@ class OvertimeController extends Controller
             'working_min' => 'nullable|numeric|gt:0|max:59',
             'overtime_type' => 'required|string',
         ]);
-        // dd($request->all());
+
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            // $request->request->add(['created_by'=>Auth::user()->id]);
-            $request->request->add(['status' =>"active"]);
-            OvertimeSetting::create($request->except('_token'));
-            return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            try {
+                $userId = $request->user_id;
+                $employee = Employee::where('user_id', $userId)->first();
+
+                if ($employee) {
+                    $request->merge([
+                        'status' => "active",
+                        'branch_id' => $employee->branch_id,
+                        'created_by' => auth()->user()->id,
+                    ]);
+
+                    OvertimeSetting::create($request->except('_token'));
+
+                    return response()->json(['success' => $this->page_name . " Added Successfully"]);
+                } else {
+                    return response()->json(['error' => 'Employee not found for the given user_id']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -108,8 +124,24 @@ class OvertimeController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            OvertimeSetting::where('id', $id)->update($request->except('_token', '_method'));
-            return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+            try {
+                $userId = $request->user_id;
+                $employee = Employee::where('user_id', $userId)->first();
+
+                if ($employee) {
+                    $request->merge([
+                        'updated_by' => auth()->user()->id,
+                    ]);
+
+                    OvertimeSetting::where('id', $id)->update($request->except('_token', '_method'));
+
+                    return response()->json(['success' => $this->page_name . " Updated Successfully"]);
+                } else {
+                    return response()->json(['error' => 'Employee not found for the given user_id']);
+                }
+            } catch (Exception $e) {
+                return response()->json(['error' => $e->getMessage()]);
+            }
         }
     }
 

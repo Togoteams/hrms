@@ -10,7 +10,10 @@ class DocumentEmp extends Model
     use HasFactory;
     protected $fillable = [
         'document_id',
-        'emp_id'];
+        'emp_id',
+        'branch_id',
+        'created_by',
+        'updated_by',];
 
     public function document()
     {

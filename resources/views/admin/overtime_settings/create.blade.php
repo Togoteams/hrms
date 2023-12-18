@@ -7,7 +7,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <h5 class="modal-title" id="staticBackdropLabel">{{ $page }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">  
+        <div class="modal-body">
              <form id="form_data" action="{{ route('admin.overtime-settings.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
@@ -49,7 +49,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <select name="overtime_type" class=" form-control" required id="overtime_type" placeholder="Employee overtime type">
                                         <option value="">Select Option</option>
                                         <option value="holiday">Holiday</option>
-                                        <option value="extra_time">Extra Time</option> 
+                                        <option value="over time">Over time</option>
                                     </select>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     {{ $page }}</button>
                             </div>
                         </div>
-                       
+
                     </div>
 
                 </div>
@@ -71,7 +71,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     document.getElementById('type_id').innerText = data + " amount"
                 } else {
                     document.getElementById('type_id').innerText = data
-    
+
                 }
             }
         </script>
