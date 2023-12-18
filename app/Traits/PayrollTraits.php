@@ -68,8 +68,8 @@ trait PayrollTraits
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'education_allowance');
                     })->value('value');
-                    $currencyValueForUsd = getCurrencyValue("inr", "usd");
-                    $amount = ($salaryHeadAmount * $currencyValueForUsd) * $currencyValue;
+                    $currencyValuePula = getCurrencyValue("pula", "inr");
+                    $amount = ($salaryHeadAmount / $currencyValuePula);
                     break;
                 case "house_up_keep":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
@@ -237,9 +237,9 @@ trait PayrollTraits
             $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
             $pfContibutionForBank = 14;
         }
-        $inrToUsdAmount = getCurrencyValue("inr", "usd");
+        $usdToInrAmount = getCurrencyValue("usd", "inr");
         $providentFound = ((($inrBasicAmount / 100)) * $pfContibutionForBank);
-        $providentFound = $providentFound * number_format($inrToUsdAmount,3,'.',"");
+        $providentFound = $providentFound / number_format($usdToInrAmount,3,'.',"");
         return  number_format($providentFound,2,'.',"");
 
     }

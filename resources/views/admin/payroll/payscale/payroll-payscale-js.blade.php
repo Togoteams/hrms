@@ -68,11 +68,11 @@
         {
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
-            var inrToUSDAmount = getValue('inrToUSDAmount');
+            var usdToInrAmount = getValue('usdToInrAmount');
 
-            var pulaToUSDAmount = getValue('pulaToUSDAmount');
-            var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) * inrToUSDAmount);
-            var otherDeductions = (parseFloat(otherDeductions) * pulaToUSDAmount);
+            var usdToPulaAmount = getValue('usdToPulaAmount');
+            var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) / usdToInrAmount);
+            var otherDeductions = (parseFloat(otherDeductions) / usdToPulaAmount);
 
             totalEarning = basicAmount + getValue('entertainment_expenses')+
              getValue('house_up_keep_allow')+  educationAllowanceAmount;

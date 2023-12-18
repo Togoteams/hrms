@@ -268,7 +268,7 @@
                                 $noOfIncome = $noOfIncome +1;
                                 if($value->payroll_head->slug=="education_allowance")
                                 {
-                                    $totalIncomeAmount = $totalIncomeAmount + ($value->value  * $inrToUSDAmount);
+                                    $totalIncomeAmount = $totalIncomeAmount + ($value->value  * $usdToInrAmount);
 
                                 }else {
                                     $totalIncomeAmount = $totalIncomeAmount + $value->value;
@@ -278,7 +278,7 @@
                                     @if($value->payroll_head->slug=="education_allowance")
                                     <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <!-- <td style="text-align: right;">{{$value->value}}</td> -->
-                                    <td style="text-align: right;">{{$value->value * $inrToUSDAmount}}</td>
+                                    <td style="text-align: right;">{{$value->value * $usdToInrAmount}}</td>
                                     @else
                                     <td style="font-weight: 600;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <!-- <td style="text-align: right;">{{$value->value}}</td> -->
@@ -314,7 +314,7 @@
                                 $noOfDescription = $noOfDescription +1;
                                 if($value->payroll_head->slug=="other_deductions")
                                 {
-                                    $totalDeductionAmount = $totalDeductionAmount + ($value->value * $pulaToUSDAmount);
+                                    $totalDeductionAmount = $totalDeductionAmount + ($value->value * $usdToPulaAmount);
                                 }else {
                                     $totalDeductionAmount = $totalDeductionAmount + $value->value;
                                 }
@@ -322,7 +322,7 @@
                                 <tr>
                                     @if($value->payroll_head->slug=="other_deductions")
                                     <td style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
-                                    <td style="text-align: right;">{{$value->value * $pulaToUSDAmount}}</td>
+                                    <td style="text-align: right;">{{$value->value * $usdToPulaAmount}}</td>
                                     @else
                                     <td style="font-weight: 600; padding-left: 10%;"><strong>{{$value->payroll_head->name}}</strong></td>
                                     <td style="text-align: right;">{{$value->value}}</td>

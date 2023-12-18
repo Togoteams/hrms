@@ -7,8 +7,8 @@
             @php
             $basic = round(($data->basic / $totalMonthDays) * $noOfPayableDays);
             @endphp
-            <input  value="{{$pulaToUSDAmount}}" readonly  id="pulaToUSDAmount" type="hidden" name="pulaToUSDAmount"  class="form-control form-control-sm">
-            <input  value="{{$inrToUSDAmount}}" readonly  id="inrToUSDAmount" type="hidden" name="inrToUSDAmount"  class="form-control form-control-sm">
+            <input  value="{{$usdToPulaAmount}}" readonly  id="usdToPulaAmount" type="hidden" name="usdToPulaAmount"  class="form-control form-control-sm">
+            <input  value="{{$usdToInrAmount}}" readonly  id="usdToInrAmount" type="hidden" name="usdToInrAmount"  class="form-control form-control-sm">
             <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
         </div>
     </div>

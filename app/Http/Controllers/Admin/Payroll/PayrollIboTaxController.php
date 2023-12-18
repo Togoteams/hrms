@@ -127,7 +127,7 @@ class PayrollIboTaxController extends Controller
         $emp = Employee::where('user_id', $user_id)->first();
         $salary = PayrollSalary::where('user_id', $user_id)->get();
         $usdToPulaAmount = 1;
-        $pulaToUSDAmount = 1;
+        $usdToPulaAmount = 1;
         $reimbursements = Reimbursement::where('user_id', $user_id)->where('status','approved')->get();
         $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->first();
         if(!empty($currencySeeting))
@@ -137,7 +137,7 @@ class PayrollIboTaxController extends Controller
         $currencySeetingPulaToUsd = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
         if(!empty($currencySeetingPulaToUsd))
         {
-            $pulaToUSDAmount = $currencySeetingPulaToUsd->currency_amount_to;
+            $usdToPulaAmount = $currencySeetingPulaToUsd->currency_amount_to;
         }
         $totalPaidSalary = $salary->sum('gross_earning');
         $reimbursementAmount = 0;
@@ -158,7 +158,7 @@ class PayrollIboTaxController extends Controller
 
         $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmountParam,'employment_type'=>$empType]);
         $tax_amount = $taxData['tax_amount'];
-        return view('admin.payroll.ibo-tax.ibo_tax_head', compact('taxableAmount', 'page', 'tax_amount','totalPaidSalary','reimbursementAmount','pulaToUSDAmount'));
+        return view('admin.payroll.ibo-tax.ibo_tax_head', compact('taxableAmount', 'page', 'tax_amount','totalPaidSalary','reimbursementAmount','usdToPulaAmount'));
     }
 
     /**

@@ -149,8 +149,8 @@ class PayRollPayscaleCotroller extends BaseController
         $emp = Employee::where('user_id', $payscale->user_id)->getActiveEmp()->first();
         $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
        
-        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
-        $inrToUSDAmount = getCurrencyValue("inr", "usd");
+        $usdToPulaAmount = getCurrencyValue("usd", "pula");
+        $usdToInrAmount = getCurrencyValue("usd", "inr");
 
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)
         ->orWhere('employment_type', 'both')->where('status', 'active')
@@ -158,7 +158,7 @@ class PayRollPayscaleCotroller extends BaseController
         ->where('deleted_at', null)->get();
         if($emp->employment_type=="expatriate")
         {
-            return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head','emp', 'page', 'data', 'edit','pulaToUSDAmount','inrToUSDAmount')), 'data' => $payscale]);
+            return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head','emp', 'page', 'data', 'edit','usdToPulaAmount','usdToInrAmount')), 'data' => $payscale]);
         }
         else{
             return view('admin.payroll.payscale.edit', ['html' => view('admin.payroll.payscale.employee_head', compact('emp_head','emp', 'page', 'data', 'edit')), 'data' => $payscale]);
@@ -257,13 +257,13 @@ class PayRollPayscaleCotroller extends BaseController
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
         
-        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
-        $inrToUSDAmount = getCurrencyValue("inr", "usd");
+        $usdToPulaAmount = getCurrencyValue("usd", "pula");
+        $usdToInrAmount = getCurrencyValue("usd", "inr");
 
         $emp_head = PayrollHead::whereIn('employment_type', [$emp->employment_type,'both'])->where('status', 'active')->whereIn('for', ['payscale','both'])->where('deleted_at', null)->get();
         if($emp->employment_type=="expatriate")
         {
-            return view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head', 'page', 'data','emp','pulaToUSDAmount','inrToUSDAmount'));
+            return view('admin.payroll.payscale.employee_head_for_ibo', compact('emp_head', 'page', 'data','emp','usdToPulaAmount','usdToInrAmount'));
         }else
         {
             return view('admin.payroll.payscale.employee_head', compact('emp_head', 'page', 'data','emp'));

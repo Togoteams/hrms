@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeKraController extends Controller
 {
-    public $page_name = "Employee Kra";
+    public $page_name = "Employee Performance";
     /**
      * Display a listing of the resource.
      */

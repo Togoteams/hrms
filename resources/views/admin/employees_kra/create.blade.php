@@ -61,7 +61,7 @@
                                         @foreach ($kra_attributes as $kra)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
-                                                <td style="max-width:220px;"> <b>{{ $kra->name }} - </b>
+                                                <td style="max-width:220px;"> <b>{{ $kra->name }} -  {{ $kra->description }}</b>
 
                                                     <input required type="hidden" name="attribute_name[]"
                                                         value="{{ $kra->name }}">

@@ -278,8 +278,8 @@ class PayrollSalaryController extends Controller
         $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
 
 
-        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
-        $inrToUSDAmount = getCurrencyValue("int", "usd");
+        $usdToPulaAmount = getCurrencyValue("usd", "pula");
+        $usdToInrAmount = getCurrencyValue("usd", "inr");
 
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
         // echo $noOfUnPaidLeave;
@@ -295,7 +295,7 @@ class PayrollSalaryController extends Controller
         $salary_month = $salaryMonth;
         if($emp->employment_type=="expatriate")
         {
-            $viewComponent = view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','edit','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','pulaToUSDAmount','inrToUSDAmount'));
+            $viewComponent = view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','edit','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','usdToPulaAmount','usdToInrAmount'));
         }else{
             $viewComponent =  view('admin.payroll.salary.employee_head', compact('emp_head','edit','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
         }
@@ -390,16 +390,16 @@ class PayrollSalaryController extends Controller
 
         $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
         
-        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
-        $inrToUSDAmount = getCurrencyValue("inr", "usd");
-        $usdToPullAmount = getCurrencyValue("usd", "pula");
+        $usdToPulaAmount = getCurrencyValue("usd", "pula");
+        $usdToInrAmount = getCurrencyValue("usd", "inr");
+        // $usdToPullAmount = getCurrencyValue("usd", "pula");
 
         if($data->employee->employment_type=="local")
         {
             return view('admin.payroll.salary.salary-slip-local', compact('data'));
         }else
         {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data','pulaToUSDAmount','inrToUSDAmount','usdToPullAmount'));
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data','usdToPulaAmount','usdToInrAmount'));
         }
     }
 
@@ -517,8 +517,8 @@ class PayrollSalaryController extends Controller
 
         $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
 
-        $pulaToUSDAmount = getCurrencyValue("pula", "usd");
-        $inrToUSDAmount = getCurrencyValue("inr", "usd");
+        $usdToPulaAmount = getCurrencyValue("usd", "pula");
+        $usdToInrAmount = getCurrencyValue("usd", "inr");
 
         $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
         // echo $noOfUnPaidLeave;
@@ -534,7 +534,7 @@ class PayrollSalaryController extends Controller
 
         if($emp->employment_type=="expatriate")
         {
-            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','pulaToUSDAmount','inrToUSDAmount'));
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','usdToPulaAmount','usdToInrAmount'));
         }else{
             return view('admin.payroll.salary.employee_head', compact('emp_head','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
 

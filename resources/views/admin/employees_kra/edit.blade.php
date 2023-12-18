@@ -4,7 +4,7 @@
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">
 
     <div class="table-responsive"  id="table_data">
-        <table class="table  table-bordered table-nowrap table-align-middle card-table">
+        <table class="table table-bordered table-nowrap table-align-middle card-table">
             <thead>
                 <tr>
                     <th>S.No</th>
@@ -21,10 +21,11 @@
          
                     <tr>
                         <td>{{ $loop->index + 1 }}</td>
-                        <td> <b>{{ $kra->name }} - </b> {{ $kra->description }}
-                            <input required type="hidden" name="attribute_name[]" value="{{ $kra->attribute_name }}">
+                        <td style="max-width:220px;"> <b>{{ $kra->name }} -  {{ $kra->description }}</b>
+                            <input required type="hidden" name="attribute_name[]"
+                                value="{{ $kra->name }}">
                             <input required type="hidden" name="attribute_description[]"
-                                value="{{ $kra->attribute_description }}">
+                                value="{{ $kra->description }}">
                         </td>
                         <td>
                             <textarea required type="text" class="form-control form-control-sm" name="commects[]">{{$kra->commects}}</textarea>

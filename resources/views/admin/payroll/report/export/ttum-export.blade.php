@@ -24,24 +24,34 @@
             <td>{{ $report->transaction_currency }}</td>
             <td>{{ $report->transaction_type }}</td>
             @if($report->transaction_type=="credit")
-            $creditAmount =  $creditAmount + $report->transaction_amount;
+            @php
+                $creditAmount =  $creditAmount + $report->transaction_amount;
+            @endphp
             @else
-            $debitAmount =  $debitAmount + $report->transaction_amount;
+            @php
+                $debitAmount =  $debitAmount + $report->transaction_amount;
+            @endphp
             @endif
-            <td>{{ $report->transaction_amount }}</td>
+            <td>
+                @if($report->transaction_amount=="0")
+                {{ 0.00 }}
+                @else
+                {{ number_format($report->transaction_amount,2) }}
+                @endif
+            </td>
         </tr>
     @endforeach
         <tr>
-            <td>Total Amount</td>
-            <td>{{$creditAmount}}</td>
+            <td colspan="6" style="text-align: center">Total Amount</td>
+            <td>{{number_format($creditAmount,2)}}</td>
         </tr>
         <tr>
-            <td>Total Debit Amount</td>
-            <td>{{$debitAmount}}</td>
+            <td colspan="6" style="text-align: center">Total Debit Amount</td>
+            <td>{{number_format($debitAmount,2)}}</td>
         </tr>
         <tr>
-            <td>Round Off</td>
-            <td>{{$creditAmount - $debitAmount}}</td>
+            <td colspan="6" style="text-align: center">Round Off</td>
+            <td>{{number_format($creditAmount - $debitAmount)}}</td>
         </tr>
     </tbody>
 </table>

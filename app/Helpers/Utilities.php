@@ -634,14 +634,9 @@ if (!function_exists('getHeadValue')) {
             {
                 $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
             }
-            $inrToPulaAmount = 1;
-            $currencySeeting = CurrencySetting::where('currency_name_from','inr')->where('currency_name_to','usd')->first();
-            if(!empty($currencySeeting))
-            {
-                $inrToPulaAmount = $currencySeeting->currency_amount_to;
-            }
+            $usdToInr = getCurrencyValue("usd","inr");
             $providentFound = ((($inrBasicAmount / 100)) * 10);
-            $providentFound = $providentFound * number_format($inrToPulaAmount,3,'.',"");
+            $providentFound = $providentFound / number_format($usdToInr,3,'.',"");
             return number_format($providentFound,2,'.',"");
         }elseif ($headSlug == "house_up_keep_allow") {
             $houseUpKeepAllow = 0;

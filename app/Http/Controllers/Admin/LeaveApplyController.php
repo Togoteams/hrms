@@ -159,7 +159,7 @@ class LeaveApplyController extends Controller
         $validator = Validator::make($request->all(), [
             
             'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
-            'start_date' => ['required', 'date','no_date_overlap', 'after_or_equal:' . $employee->start_date],
+            'start_date' => ['required', 'date','no_date_overlap'],
             'end_date' => ['required', 'date','no_date_overlap', 'after_or_equal:start_date'],
             "doc1" => ["mimetypes:application/pdf", "max:10000",'nullable','sick_leave_document'],
             'leave_applies_for' =>['nullable','numeric', Rule::when($leaveSlug == ('bereavement-leave') , 'max:3')],

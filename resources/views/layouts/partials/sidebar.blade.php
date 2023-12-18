@@ -230,7 +230,7 @@
                                      @canany(['add-employee-kra', 'edit-employee-kra', 'delete-employee-kra',
                                          'view-employee-kra', 'change-status-employee-kra', 'print-employee-kra'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-kra.index' ? 'active' : '' }}  "
-                                             href="{{ route('admin.employee-kra.index') }}"> Employee KRA</a>
+                                             href="{{ route('admin.employee-kra.index') }}"> Employee Performance</a>
                                      @endcanany
 
                                  </div>

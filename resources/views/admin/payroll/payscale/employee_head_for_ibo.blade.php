@@ -5,8 +5,8 @@
         <div class="form-group">
             <label for="basic">Basic ({{"In USD"}})</label>
             <input onkeyup="amount_cal()" value="{{$emp->basic_salary}}" readonly onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
-            <input  value="{{$pulaToUSDAmount}}"  id="pulaToUSDAmount" type="hidden" name="pulaToUSDAmount"  class="form-control form-control-sm">
-            <input  value="{{$inrToUSDAmount}}"  id="inrToUSDAmount" type="hidden" name="inrToUSDAmount"  class="form-control form-control-sm">
+            <input  value="{{$usdToPulaAmount}}"  id="usdToPulaAmount" type="hidden" name="usdToPulaAmount"  class="form-control form-control-sm">
+            <input  value="{{$usdToInrAmount}}"  id="usdToInrAmount" type="hidden" name="usdToInrAmount"  class="form-control form-control-sm">
         </div>
     </div>
 </div>
