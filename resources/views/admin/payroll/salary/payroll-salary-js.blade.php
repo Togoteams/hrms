@@ -79,8 +79,8 @@
             console.log(Number(totalDeduction));
         }
 
-        setId('gross_earning', totalEarning);
-        setId('total_deduction', totalDeduction);
+        setId('gross_earning', Number(totalEarning).toFixed(2));
+        setId('total_deduction', Number(totalDeduction).toFixed(2));
         setId('net_take_home', (Number(totalEarning - totalDeduction)).toFixed(2));
 
     }

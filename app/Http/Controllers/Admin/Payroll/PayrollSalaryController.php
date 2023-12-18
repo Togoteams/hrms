@@ -92,8 +92,10 @@ class PayrollSalaryController extends Controller
                 {
                     $currencyValue = getCurrencyValue("usd","pula");
                 }
-                
-                $net_take_home_in_pula = $request->net_take_home * $currencyValue;
+                $usdToInr = getCurrencyValue("usd","inr");
+                $pulaToInr = getCurrencyValue("pula","inr");
+
+                $net_take_home_in_pula = number_format($request->net_take_home * $currencyValue,2,'.','');
                 $payroll = PayrollSalary::create([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
@@ -110,6 +112,8 @@ class PayrollSalaryController extends Controller
                     'net_take_home' =>  $request->net_take_home,
                     'net_take_home_in_pula' =>  $net_take_home_in_pula,
                     'usd_pula_currency_amount' =>  $currencyValue,
+                    'usd_inr_currency_amount' =>  $usdToInr,
+                    'pula_inr_currency_amount' =>  $pulaToInr,
                     'ctc' =>  $request->ctc,
                     'total_employer_contribution' =>  $request->total_employer_contribution,
                     'total_deduction' =>  $request->total_deduction,
@@ -129,7 +133,10 @@ class PayrollSalaryController extends Controller
                         ]);
                     }
                 }
-                   $this->createTTum($payroll->id);
+                /**
+                 * This Creating TTUM Report of Each Account
+                 */
+                $this->createTTum($payroll->id);
 
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             // } catch (Exception $e) {

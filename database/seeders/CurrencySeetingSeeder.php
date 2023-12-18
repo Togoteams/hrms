@@ -14,14 +14,12 @@ class CurrencySeetingSeeder extends Seeder
     {
         //
         $currency = [
-            ['currency_name_from'=>"pula",'currency_name_to'=>'usd','currency_amount_from'=>"1",'currency_amount_to'=>"0.073"],
             ['currency_name_from'=>"usd",'currency_name_to'=>'pula','currency_amount_from'=>"1",'currency_amount_to'=>"13.73"],
-            ['currency_name_from'=>"inr",'currency_name_to'=>'pula','currency_amount_from'=>"1",'currency_amount_to'=>"0.16"],
-            ['currency_name_from'=>"inr",'currency_name_to'=>'usd','currency_amount_from'=>"1",'currency_amount_to'=>"0.012"],
+            ['currency_name_from'=>"usd",'currency_name_to'=>'inr','currency_amount_from'=>"1",'currency_amount_to'=>"83.01"],
+            ['currency_name_from'=>"pula",'currency_name_to'=>'inr','currency_amount_from'=>"1",'currency_amount_to'=>"6.19"],
         ];
         foreach($currency as $key => $value)
         {
-
             CurrencySetting::updateOrCreate(['currency_name_from'=>$value['currency_name_from'],'currency_name_to'=>$value['currency_name_to']],$value);
         }
     }

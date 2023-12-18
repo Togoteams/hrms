@@ -25,6 +25,8 @@ class PayrollSalary extends Model
         'net_take_home',
         'net_take_home_in_pula',
         'usd_pula_currency_amount',
+        'usd_inr_currency_amount',
+        'pula_inr_currency_amount',
         // 'ctc',
         // 'total_employer_contribution',
         'total_deduction',

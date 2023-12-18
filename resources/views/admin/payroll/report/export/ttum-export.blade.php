@@ -11,6 +11,10 @@
         </tr>
     </thead>
     <tbody>
+        @php 
+        $creditAmount = 0;
+        $debitAmount = 0;
+        @endphp
         @foreach($reports as $key => $report)
         <tr>
             <td>{{ $key+1 }}</td>
@@ -19,8 +23,25 @@
             <td>{{ $report->transaction_details }}</td>
             <td>{{ $report->transaction_currency }}</td>
             <td>{{ $report->transaction_type }}</td>
+            @if($report->transaction_type=="credit")
+            $creditAmount =  $creditAmount + $report->transaction_amount;
+            @else
+            $debitAmount =  $debitAmount + $report->transaction_amount;
+            @endif
             <td>{{ $report->transaction_amount }}</td>
         </tr>
     @endforeach
+        <tr>
+            <td>Total Amount</td>
+            <td>{{$creditAmount}}</td>
+        </tr>
+        <tr>
+            <td>Total Debit Amount</td>
+            <td>{{$debitAmount}}</td>
+        </tr>
+        <tr>
+            <td>Round Off</td>
+            <td>{{$creditAmount - $debitAmount}}</td>
+        </tr>
     </tbody>
 </table>

@@ -79,9 +79,9 @@
              totalDeduction = getValue('provident_fund') + otherDeductions + getValue('recovery_for_car') ;
         }
 
-        setId('gross_earning', totalEarning.toFixed(2));
-        setId('total_deduction', totalDeduction.toFixed(2));
-        setId('net_take_home',(totalEarning-totalDeduction).toFixed(2));
+        setId('gross_earning', Number(totalEarning).toFixed(2));
+        setId('total_deduction', Number(totalDeduction).toFixed(2));
+        setId('net_take_home',Number(totalEarning-totalDeduction).toFixed(2));
 
     }
     const editUrl="{{ route('admin.payroll.payscale.emp.head') }}/";

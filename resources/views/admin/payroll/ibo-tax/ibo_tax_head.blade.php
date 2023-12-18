@@ -2,19 +2,19 @@
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="basic">Total Gross Salary</label>
-            <input  value="{{number_format($totalPaidSalary,3,'.','')}}" readonly required id="gross_salary" placeholder="Enter correct Basic" type="text" name="gross_salary"  class="form-control form-control-sm">
+            <input  value="{{number_format($totalPaidSalary,2,'.','')}}" readonly required id="gross_salary" placeholder="Enter correct Basic" type="text" name="gross_salary"  class="form-control form-control-sm">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="reimbursement_amount">Total Reimbursement Amount</label>
-            <input  value="{{number_format($reimbursementAmount,3,'.','')}}"  required id="reimbursement_amount" placeholder="Enter correct Basic" type="text" name="reimbursement_amount"  class="form-control form-control-sm">
+            <input  value="{{number_format($reimbursementAmount,2,'.','')}}"  required id="reimbursement_amount" placeholder="Enter correct Basic" type="text" name="reimbursement_amount"  class="form-control form-control-sm">
         </div>
     </div>
     <div class="mb-2 col-sm-4">
         <div class="form-group">
             <label for="taxable_amount">Total Taxable Amount</label>
-            <input  value="{{number_format($taxableAmount,3,'.','')}}"  required id="taxable_amount" placeholder="Enter correct Basic" type="text" name="taxable_amount"  class="form-control form-control-sm">
+            <input  value="{{number_format($taxableAmount,2,'.','')}}"  required id="taxable_amount" placeholder="Enter correct Basic" type="text" name="taxable_amount"  class="form-control form-control-sm">
         </div>
     </div>
     <div class="mb-2 col-sm-4">

@@ -178,7 +178,7 @@ trait PayrollTraits
                     $amount = ($amount);
                     break;
             }
-            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => $amount, 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount,2,".",""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
             $saveOfficeTTUM  = $this->saveTtumData($data);
 
            
@@ -190,7 +190,7 @@ trait PayrollTraits
         $empName = $emp->user->name;
         $empAccount = $this->getEmpAccount($empName, $emp->bank_account_number);
         $netTakeAmountInPula = $salary->net_take_home_in_pula;
-        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => $netTakeAmountInPula, 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula,2,".",""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
         $saveEmpTTUM  =  $this->saveTtumData($data);
     }
     public function getEmpAccount($accountName, $accountNumber)
@@ -237,9 +237,9 @@ trait PayrollTraits
             $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
             $pfContibutionForBank = 14;
         }
-        $inrToPulaAmount = getCurrencyValue("inr", "usd");
+        $inrToUsdAmount = getCurrencyValue("inr", "usd");
         $providentFound = ((($inrBasicAmount / 100)) * $pfContibutionForBank);
-        $providentFound = $providentFound * number_format($inrToPulaAmount,3,'.',"");
+        $providentFound = $providentFound * number_format($inrToUsdAmount,3,'.',"");
         return  number_format($providentFound,2,'.',"");
 
     }
