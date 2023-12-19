@@ -79,10 +79,11 @@
             totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('recovery_for_car')).toFixed(3);
             console.log(Number(totalDeduction));
         }
-
-        setId('gross_earning', Number(totalEarning).toFixed(2));
+        var leaveEncashAmount = parseFloat(getValue("leave_encashment_amount"));
+        console.log("totalEarning",Number(totalEarning) + leaveEncashAmount);
+        setId('gross_earning', Number(Number(totalEarning) + (leaveEncashAmount)).toFixed(2));
         setId('total_deduction', Number(totalDeduction).toFixed(2));
-        setId('net_take_home', (Number(totalEarning - totalDeduction)).toFixed(2));
+        setId('net_take_home', (Number((Number(totalEarning)+ (leaveEncashAmount)) - totalDeduction)).toFixed(2));
 
     }
     // editForm('{{ route('admin.payroll.salary.emp.head') }}/'+this.value, 'edit')

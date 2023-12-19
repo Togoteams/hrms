@@ -6,10 +6,15 @@
             <label for="basic">Basic  ({{"In PULA"}})</label>
             @php
             $basic = round(($data->basic / $totalMonthDays) * $noOfPayableDays);
+            $perDaysAmount = round(($data->basic / $totalMonthDays));
+            $totalEnCashAmount = $perDaysAmount * $noOfEncashLeave;
             @endphp
+            <input  value="{{$totalEnCashAmount}}" readonly id="leave_encashment_amount"  type="hidden" class="form-control form-control-sm">
+
             <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
         </div>
     </div>
+    
     <div class="col-sm-3">
         <div class="form-group">
             <label for="total_working_days">Total Working Days</label>
@@ -44,6 +49,14 @@
             <input readonly  required max="2"  name="no_availed_leave"  type="number" value="{{$noOfAvailedLeaves ?? 0}}"  class="form-control form-control-sm ">
         </div>
     </div>
+    @if($noOfEncashLeave)
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="leave_encashment_days">Leave Encashment Days</label>
+            <input readonly required max="2" name="leave_encashment_days"   type="text"  value="{{ $noOfEncashLeave ?? 0 }}" class="form-control form-control-sm">
+        </div>
+    </div>
+    @endif
     <div class="col-sm-3">
         <div class="form-group">
             <label for="no_availed_leave">No. Loss Of Pay Leave :</label>
@@ -91,6 +104,14 @@
     </div>
     @endif
     @endforeach
+    @if($noOfEncashLeave)
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="leave_encashment_amount">Leave Encashment Amount</label>
+            <input readonly required  name="leave_encashment_amount"    type="text"  value="{{ $totalEnCashAmount ?? 0 }}" class="form-control form-control-sm leave_encashment_amount">
+        </div>
+    </div>
+    @endif
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -129,7 +150,7 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="gross_earning">Gross Earning  ({{"In PULA"}})</label>
-            <input required id="gross_earning"  readonly placeholder="Enter correct Gross Earning" type="text" value="{{ $data->gross_earning ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
+            <input required id="gross_earning"  readonly placeholder="Enter correct Gross Earning" type="text" value="{{ ($data->gross_earning + $totalEnCashAmount) ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
@@ -141,7 +162,7 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="net_take_home">Net Take Home  ({{"In PULA"}})</label>
-            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ $data->net_take_home ?? '' }}" name="net_take_home" class="form-control form-control-sm ">
+            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ ($data->net_take_home + $totalEnCashAmount) ?? '' }}" name="net_take_home" class="form-control form-control-sm ">
         </div>
     </div>
 </div>

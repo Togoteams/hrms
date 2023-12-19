@@ -56,7 +56,8 @@ trait PayrollTraits
                     $othersArrearsAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'others_arrears');
                     })->value('value');
-                    $amount = $basic +$allowanceAmoumt+$overTimeAmoumt+$othersArrearsAmount;
+                    $leaveEnCashAmount = $salary->leave_encashment_amount  * $currencyValue;
+                    $amount = $basic +$allowanceAmoumt + $overTimeAmoumt + $othersArrearsAmount + $leaveEnCashAmount;
                     break;
                 case "entertainment":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
@@ -127,7 +128,7 @@ trait PayrollTraits
                         $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'union_fee');
                         })->value('value');
-                        $amount = ($salaryHeadAmount);
+                        $amount = number_format($salaryHeadAmount,2,".","");
                     }
                     break;
                 case "eft_to_fnb_bank":
