@@ -38,7 +38,7 @@ class PayrollSalaryController extends Controller
         }
 
         if ($request->ajax()) {
-           
+
             $data = PayrollSalary::with('user', 'employee')->getList()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -118,7 +118,8 @@ class PayrollSalaryController extends Controller
                     'total_employer_contribution' =>  $request->total_employer_contribution,
                     'total_deduction' =>  $request->total_deduction,
                     'gross_earning' =>  $request->gross_earning,
-                    'created_by' => auth()->user()->id
+                    'created_by' => auth()->user()->id,
+                    'branch_id' => $emp->branch_id,
                 ]);
 
                 // dd($payroll);
@@ -128,7 +129,7 @@ class PayrollSalaryController extends Controller
                         PayrollSalaryHead::create([
                             'payroll_head_id' => $head->id,
                             'payroll_salary_id' => $payroll->id,
-                            'value' => $request->$key, 
+                            'value' => $request->$key,
                             'created_by' => auth()->user()->id
                         ]);
                     }
@@ -299,7 +300,7 @@ class PayrollSalaryController extends Controller
         }else{
             $viewComponent =  view('admin.payroll.salary.employee_head', compact('emp_head','edit','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
         }
-       
+
         return view('admin.payroll.salary.edit', ['html' => $viewComponent, 'data' => $payscale,'salary_month'=>$salaryMonth]);
     }
 
@@ -339,7 +340,7 @@ class PayrollSalaryController extends Controller
                     'total_employer_contribution' =>  $request->total_employer_contribution,
                     'total_deduction' =>  $request->total_deduction,
                     'gross_earning' =>  $request->gross_earning,
-                    'created_by' => auth()->user()->id
+                    'updated_by' => auth()->user()->id
                 ]);
                 foreach ($request->all() as $key => $value) {
                     $head =  PayrollHead::where('slug', $key)->first();
@@ -389,7 +390,7 @@ class PayrollSalaryController extends Controller
     {
 
         $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
-        
+
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
         // $usdToPullAmount = getCurrencyValue("usd", "pula");

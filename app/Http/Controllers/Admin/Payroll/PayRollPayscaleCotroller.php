@@ -68,7 +68,7 @@ class PayRollPayscaleCotroller extends BaseController
         // echo $taxableAmount;
         $empType = $request->employment_type;
         $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$empType]);
-        
+
         return $this->responseJson(true,200,"",$taxData);
     }
 
@@ -93,18 +93,24 @@ class PayRollPayscaleCotroller extends BaseController
             return $validator->errors();
         } else {
             try {
+                $employee = Employee::where('user_id', $request->user_id)->first();
+
+            if (!$employee) {
+                return response()->json(['error' => 'Employee not found for the given user_id']);
+            }
                 $payroll = PayRollPayscale::create([
-                    'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
+                    'employee_id' => $employee->id,
                     'user_id' => $request->user_id,
-                    'basic' =>  $request->basic,
-                    'fixed_deductions' =>  $request->fixed_deductions,
-                    'other_deductions' =>  $request->other_deductions,
-                    'net_take_home' =>  $request->net_take_home,
-                    'ctc' =>  $request->ctc,
-                    'total_employer_contribution' =>  $request->total_employer_contribution,
-                    'total_deduction' =>  $request->total_deduction,
-                    'gross_earning' =>  $request->gross_earning,
-                    'created_by' => auth()->user()->id
+                    'basic' => $request->basic,
+                    'fixed_deductions' => $request->fixed_deductions ?? 0,
+                    'other_deductions' => $request->other_deductions ?? 0,
+                    'net_take_home' => $request->net_take_home,
+                    'ctc' => $request->ctc ?? 0,
+                    'total_employer_contribution' => $request->total_employer_contribution ?? 0,
+                    'total_deduction' => $request->total_deduction,
+                    'gross_earning' => $request->gross_earning,
+                    'branch_id' => $employee->branch_id,
+                    'created_by' => auth()->user()->id,
 
                 ]);
                 foreach ($request->all() as $key => $value) {
@@ -148,7 +154,7 @@ class PayRollPayscaleCotroller extends BaseController
         $page = $this->page_name;
         $emp = Employee::where('user_id', $payscale->user_id)->getActiveEmp()->first();
         $data = PayRollPayscale::where('user_id', $payscale->user_id)->first();
-       
+
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
 
@@ -196,7 +202,9 @@ class PayRollPayscaleCotroller extends BaseController
                     // 'total_employer_contribution' =>  $request->total_employer_contribution,
                     'total_deduction' =>  $request->total_deduction,
                     'gross_earning' =>  $request->gross_earning,
-                    'created_by' => auth()->user()->id
+                    // 'created_by' => auth()->user()->id,
+                    'updated_by' => auth()->user()->id,
+
 
                 ]);
                 foreach ($request->all() as $key => $value) {
@@ -256,7 +264,7 @@ class PayRollPayscaleCotroller extends BaseController
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
-        
+
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
 
