@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\LeaveEncashment;
 use App\Models\LeaveSetting;
 use App\Traits\LeaveTraits;
+use Carbon\Carbon;
 
 class LeaveEncashmentController extends Controller
 {
@@ -51,9 +52,42 @@ class LeaveEncashmentController extends Controller
         }
         $leaveHideArr = ['privileged-leave','earned-leave'];
         $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
-        $all_users = Employee::getActiveEmp()->get();
+        $allowedEmp = [];
 
-        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users]);
+        $all_users = Employee::getActiveEmp()->with('leaveEncashments','user')->get();
+        foreach($all_users as $key => $value)
+        {
+                $employementType = $value->employment_type;
+                $leaveEncashments = $value->leaveEncashments;
+                $isApplicableForLeave = true;
+                $approvalData = "";
+                $newApprovalDate = "";
+                foreach($leaveEncashments as $leave_encashment)
+                {
+                    if($leave_encashment->approval_at!=""){
+                        $approvalData = $leave_encashment->approval_at;
+                        if($employementType=="local")
+                        {
+                            $approvalDate = Carbon::parse($approvalData);
+                            $newApprovalDate = $approvalDate->addYear(3);
+                        }else
+                        {
+                            $approvalDate = Carbon::parse($approvalData);
+                            $newApprovalDate = $approvalDate->addYear(2);
+                        }
+                    }
+                    $currentDateTime = currentDateTime();
+                    if($currentDateTime <= $newApprovalDate)
+                    {
+                        $isApplicableForLeave = false;
+                    }
+                }
+                if($isApplicableForLeave)
+                {
+                    $allowedEmp[] =$value; 
+                }
+        }
+        return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users,'allowedEmps'=>$allowedEmp]);
     }
 
 
@@ -170,6 +204,9 @@ class LeaveEncashmentController extends Controller
 
     public function status(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required',
+        ]);
         try {
             $leave_encashment = LeaveEncashment::find($id);
             if ($request->status == "approved") {

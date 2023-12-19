@@ -24,7 +24,7 @@
                                             required id="user_id" placeholder="Enter correct user_id   "
                                             type="text" name="user_id" class="form-control form-control-sm ">
                                             <option selected disabled> -Select User - </option>
-                                            @foreach ($all_user as $user)
+                                            @foreach ($allowedEmps as $user)
                                                 <option value="{{ $user->user_id }}">{{ $user->user->name }} -
                                                     {{ $user->ec_number }}</option>
                                             @endforeach

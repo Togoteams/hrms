@@ -30,6 +30,11 @@ class Employee extends Model
         return $this->belongsTo(Designation::class);
     }
 
+    public function leaveEncashments()
+    {
+        return $this->hasMany(LeaveEncashment::class,'employee_id');
+    }
+
     public function union()
     {
         return $this->belongsTo(Membership::class, 'union_membership_id', 'id');
