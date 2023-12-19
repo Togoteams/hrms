@@ -49,6 +49,7 @@ use App\Http\Controllers\Admin\Payroll\ReimbursementTypeController;
 use App\Http\Controllers\Admin\SalaryReportingController;
 use App\Http\Controllers\SalaryIncrementController;
 use App\Http\Controllers\Admin\Payroll\PayrollIboTaxController;
+use App\Http\Controllers\Admin\Payroll\SalarySettingController;
 use App\Http\Controllers\PayrollReportController;
 use App\Models\KraAttributes;
 use App\Models\LeaveSetting;
@@ -264,6 +265,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('employees_loans', EmplooyeLoansController::class);
     Route::get('employees_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('employees_loans.status');
 
+    Route::resource('employees_salary', EmployeeSalaryController::class);
+    Route::post('payscale/get/employees_salary/', [EmployeeSalaryController::class, 'getPayscale'])->name('employees_salary.getpayscale');
+    Route::resource('employees-payscale', EmployeePayScaleController::class);
+    Route::get('employees-payscale/status/{id}', [EmployeePayScaleController::class, 'status'])->name('employees-payscale.status');
+    Route::get('employees_salary/status/{id}', [EmployeeSalaryController::class, 'status'])->name('employees_salary.status');
+
 
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
@@ -273,7 +280,12 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
     // Payroll
     Route::prefix('payroll')->as('payroll.')->group(function () {
-    
+        Route::controller(PayscaleController::class)->as('pay-scale.')->prefix('pay-scale/')->group(function () {
+            Route::get('/', 'listPayscale')->name('list');
+            Route::get('add', 'addPayscalePage')->name('add');
+            Route::post('store', 'storePayscale')->name('store');
+            Route::get('get-payscale/{id}', 'getPayscale')->name('get');
+        });
         Route::controller(PayrollReportController::class)->as('reports.')->prefix('reports')->group(function () {
             Route::get('/ttum-view', 'ttumReport')->name('ttum.list');
             Route::post('/ttum-export', 'ttumReportExport')->name('ttum.exports');
@@ -312,6 +324,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         // Pay Roll ReimbursementController start
         Route::resource('reimbursement', ReimbursementController::class);
         Route::post('/admin/payroll/reimbursement', [ReimbursementController::class, 'status'])->name('status');
+
+        // payRoll salary setting
+        Route::resource('salary_setting', SalarySettingController::class);
+
         // Pay Roll ReimbursementController end
         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
         Route::resource('salary', PayrollSalaryController::class);

@@ -421,6 +421,11 @@
                                    href="{{ route('admin.payroll.reimbursement.index') }}">Reimbursement</a>
                            @endcanany
 
+                           @canany(['add-reimbursement', 'edit-reimbursement', 'delete-reimbursement',
+                           'view-reimbursement', 'change-status-reimbursement'])
+                           <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary_setting.index' ? 'active' : '' }}  "
+                               href="{{ route('admin.payroll.salary_setting.index') }}">Salary Setting</a>
+                           @endcanany
 
                        </div>
                    </div>
