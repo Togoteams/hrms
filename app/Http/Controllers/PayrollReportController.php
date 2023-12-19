@@ -30,6 +30,7 @@ class PayrollReportController extends Controller
     
     public function ttumReportExport(Request $request)
     {
-        return Excel::download(new PayrollTtumSalaryReportExport, 'ttumReport'.time().'.xlsx');
+        $ttumMonth = $request->transaction_at;
+        return Excel::download(new PayrollTtumSalaryReportExport(), 'ttumReport'.$ttumMonth.'.xlsx');
     }
 }

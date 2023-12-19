@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,27 +21,27 @@
 
                 <!-- End Row -->
             </div>
-           
+
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
-            <div class="page-header">
-                <div class="row">
-                    <div class="mb-2 col-sm mb-sm-0">
-                        <h2 class="page-header-title">{{ $page }}</h2>
-                    </div>
-                    <div class="col-sm-auto">
-                        @can('export-report-ttum-report')
-                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
-                            data-bs-target="#reportReport">
-                            Export Report
-                        </button>
-                        @endcan
+                <div class="page-header">
+                    <div class="row">
+                        <div class="mb-2 col-sm mb-sm-0">
+                            <h2 class="page-header-title">{{ $page }}</h2>
+                        </div>
+                        <div class="col-sm-auto">
+                            @can('export-report-ttum-report')
+                                <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                    data-bs-target="#reportReport">
+                                    Export Report
+                                </button>
+                            @endcan
 
 
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="p-2 mt-3 table-responsive">
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
@@ -53,7 +53,7 @@
                                 <th>Transacation Type</th>
                                 <th>Transacation Amount</th>
                                 <th>Transacation Currency</th>
-                               
+
                             </tr>
                         </thead>
                         <tbody>
@@ -75,7 +75,7 @@
                                     name: 'DT_RowIndex',
                                     orderable: false,
                                     searchable: false
-                                },                             
+                                },
                                 {
                                     data: 'ttum_month',
                                     name: 'ttum_month'
@@ -88,7 +88,7 @@
                                     data: 'account.account_number',
                                     name: 'account.account_number'
                                 },
-                               
+
                                 {
                                     data: 'transaction_type',
                                     name: 'transaction_type'
@@ -156,7 +156,7 @@
             <!-- Modal -->
             <div class="modal fade" id="reportReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog">
                     <div class="modal-content ">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Report {{ $page }}</h5>
@@ -164,16 +164,17 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <form id="form_data" method="post" action="{{ route('admin.payroll.reports.ttum.exports') }}">
+                                <form id="form_data" method="post"
+                                    action="{{ route('admin.payroll.reports.ttum.exports') }}">
                                     @csrf
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="gender">Report Date </label>
-                                            <input type="date" class="form-control" name="transaction_at" >  
+                                            <input type="month" class="form-control" name="transaction_at" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <button type="submit" name="export" >Export Report</button>
+                                    <div class="col-md-6">
+                                        <button type="submit" name="export">Export Report</button>
                                     </div>
                                 </form>
                             </div>

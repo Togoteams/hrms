@@ -26,10 +26,11 @@ return new class extends Migration
             $table->double('gross_earning',8,3);
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->unsignedBigInteger('branch_id')->nullable();
             $table->foreignId('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('deleted_by')->references('id')->on('users');
-            $table->foreign('branch_id')->references('id')->on('employees');
+            $table->foreign('branch_id')->references('id')->on('branches');
             $table->timestamps();
             $table->softDeletes();
         });
