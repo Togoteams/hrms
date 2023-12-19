@@ -67,9 +67,19 @@ class OvertimeController extends Controller
             return $validator->errors();
         } else {
             try {
+                //request user_id
                 $userId = $request->user_id;
-                $employee = Employee::where('user_id', $userId)->first();
 
+                // Check for overlap with existing entries
+                $overlapDate = OvertimeSetting::where('user_id', $userId)
+                ->where('date', $request->date)
+                ->exists();
+                if ($overlapDate) {
+                    return response()->json(['error' => 'Overlap with an existing record.']);
+                }
+
+                //employee details based on the user_id
+                $employee = Employee::where('user_id', $userId)->first();
                 if ($employee) {
                     $request->merge([
                         'status' => "active",
@@ -125,7 +135,18 @@ class OvertimeController extends Controller
             return $validator->errors();
         } else {
             try {
+                // request user_id
                 $userId = $request->user_id;
+                // Check for overlap with existing entries
+                $overlapExists = OvertimeSetting::where('user_id', $userId)
+                ->where('date', $request->date)
+                ->where('id', '!=', $id)
+                ->exists();
+
+                if ($overlapExists) {
+                    return response()->json(['error' => 'Overlap with an existing record.']);
+                }
+                //employee details based on the user_id
                 $employee = Employee::where('user_id', $userId)->first();
 
                 if ($employee) {
