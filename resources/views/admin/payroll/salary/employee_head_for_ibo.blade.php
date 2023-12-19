@@ -112,7 +112,7 @@
     @if($noOfEncashLeave)
     <div class="col-sm-3">
         <div class="form-group">
-            <label for="leave_encashment_amount">Leave Encashment Amount</label>
+            <label for="leave_encashment_amount">Leave Encashment Amount(In USD)</label>
             <input readonly required  name="leave_encashment_amount"     type="text"  value="{{ $noOfEncashLeave * $perDaysAmount ?? 0 }}" class="form-control form-control-sm leave_encashment_amount">
         </div>
     </div>

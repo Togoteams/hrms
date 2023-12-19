@@ -8,7 +8,7 @@
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="user_id" class="required">Employee Name</label>
-                <select name="user_id" class="form-control" required id="edit_user_id" placeholder="Employee Name">
+                <select name="user_id" class="form-control employees" required id="edit_user_id" placeholder="Employee Name">
                     <option value="">Select Option</option>
                     @foreach ($all_users as $user)
                     <option value="{{ $user->user_id }}" @if ($item->user_id == $user->user_id) selected @endif>

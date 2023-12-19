@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @push('styles')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 @section('content')
     <main id="content" role="main" class="main">
@@ -200,3 +201,11 @@
 
     </main>
 @endsection
+@push('custom-scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.employees').select2();
+    });
+</script>
+@endpush

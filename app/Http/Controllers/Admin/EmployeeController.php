@@ -169,7 +169,7 @@ class EmployeeController extends BaseController
 
     public function viewEmployeeDetails($eid = null)
     {
-       $designation = Designation::getDesignation()->get();
+        $designation = Designation::getDesignation()->get();
         $membership = Membership::get();
         $bomaind = MedicalCard::getMedicalCard()->get();
         $currencySetting = CurrencySetting::getCurrency()->get();
@@ -179,6 +179,7 @@ class EmployeeController extends BaseController
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
 
         $branch = Branch::getBranch()->get();
+        $authorities = Employee::get();
 
         return view('admin.employees.employee-details',[
                 'page'          => $this->page_name,
@@ -187,7 +188,8 @@ class EmployeeController extends BaseController
                 'branch'        => $branch,
                 'bomaind'       => $bomaind,
                 'currency_setting' =>$filteredCurrencySetting,
-                'employee'      => $this->getEmployee($eid)
+                'employee'      => $this->getEmployee($eid),
+                'authorities'      => $authorities,
             ]
         );
     }

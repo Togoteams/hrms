@@ -39,11 +39,7 @@ class Employeeseeders extends Seeder
             'union_membership_id' =>   1,
             'amount_payable_to_bomaind_each_year' =>  200,
             'currency' => 'INR',
-         
             'bank_account_number' => '7250634942',
-            
-            
-
         ],
         [
             'name' =>  'Amit Prajapati',

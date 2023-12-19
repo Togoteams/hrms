@@ -25,7 +25,7 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="py-3 row">
                                         <div class="text-left">
-                                            <button type="button" class="btn btn-white btn-sm" title="Add EmpAddress"
+                                            <button type="button" class="btn btn-white btn-sm" title="Add Emp Address"
                                                 onclick="addEmpAddress({{ !empty($employee) ? $employee->user_id : '' }})">
                                                 Add Address
                                             </button>
@@ -45,7 +45,7 @@
 
                                                                    
 
-                                                                    <div class="col-3 fw-semibold">Post Box</div>
+                                                                    <div class="col-3 fw-semibold">@if($empAddress->post_box=="postal_address")  Plot Number @else PO Box @endif</div>
                                                                     <div class="col-3">{{ ucfirst($empAddress->post_box) }}
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">Address</div>
@@ -126,18 +126,19 @@
                                                 <label for="address_type">Address Type<small class="required-field">*</small></label>
                                                 <select  id="address_type" placeholder="Enter Address Type"
                                                 type="text" name="address_type"
-                                                class="form-control" >
+                                                class="form-control form-control-sm" >
                                                      <option disabled>--select--</option>
                                                      <option value="present"  >Present</option>
                                                      <option value="permanent" >Permanent</option>
+                                                     <option value="postal_address" >Postal Address</option>
                                                  </select>
                                             </div>
                                         </div>
                                        
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="post_box">Post Box</label>
-                                                <input id="post_box" placeholder="Enter Post Box"
+                                                <label for="post_box"  id="po_box_lable"><span>Plot Number</span></label>
+                                                <input id="post_box" placeholder="Enter Plot Number"
                                                     type="text" name="post_box" class="form-control form-control-sm"
                                                     value="">
                                             </div>
@@ -145,7 +146,7 @@
                                         <div class="mb-2 col-sm-12">
                                             <div class="form-group">
                                                 <label for="address">address<small class="required-field">*</small></label>
-                                                <textarea id="address" placeholder="Enter Address" name="address" class="form-control"></textarea>
+                                                <textarea id="address" placeholder="Enter Address" name="address" class="form-control form-control-sm"></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-2 col-sm-6">
@@ -200,7 +201,7 @@
             $('#form_id').trigger("reset");
             $("#id").val("");
             $('#formModal').modal('show');
-            $("#modalTitle").html("Add: EmpAddress");
+            $("#modalTitle").html("Add: Address");
             $("#btnSave").html("CREATE");
             $("#user_id").val(user_id);
         }
@@ -227,6 +228,22 @@
                 $("#state").val(state);
 
                 $('#formModal').modal('show');
+            });
+            $(document).on("change", "#address_type", (event) => {
+               var addressType = $("#address_type").val();
+               console.log(addressType);
+               if(addressType=="postal_address")
+               {
+                console.log("PO");
+                $("#po_box_lable").text("PO Box");
+                $("#post_box").attr("placeholder", "Enter PO Box Number");
+               }else
+               {
+                console.log("Plot");
+                $("#po_box_lable").text("Plot Number");
+                $("#post_box").attr("placeholder", "Enter Plot Number");
+
+               }
             });
         });
     </script>

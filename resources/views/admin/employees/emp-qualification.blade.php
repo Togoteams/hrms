@@ -164,7 +164,7 @@
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="marks">Marks(%) / Grade<small class="required-field">*</small></label>
-                                                <input id="marks" placeholder="Enter marks in percentage"
+                                                <input id="marks" placeholder="Enter  Marks(%) / Grade"
                                                     type="text" name="marks" class="form-control form-control-"
                                                     value="">
                                             </div>

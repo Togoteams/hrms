@@ -16,7 +16,7 @@ class OvertimeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public $page_name = "Overtimes";
+    public $page_name = "Overtime";
 
     public function index(Request $request)
     {

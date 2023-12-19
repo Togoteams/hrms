@@ -20,7 +20,7 @@
                                     placeholder="Enter name ">
                             </div>
                         </div>
-                        <div class="mb-6 col-sm-6">
+                        <div class=" col-sm-6">
                             <div class="form-group">
                                 <label for="currency" class="required">Currency</label>
                                 <select name="currency" id="currency" class="form-control">     
@@ -31,7 +31,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-6 col-sm-6">
+                        <div class=" col-sm-6">
                             <div class="form-group">
                                 <label for="amount" class="required">Amount</label>
                                 <input type="text" maxlength="7" minlength="3" pattern="[0-9]+" required

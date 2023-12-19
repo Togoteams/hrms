@@ -29,13 +29,13 @@
                     <div class="overflow-hidden card">
                         <div class="bg-primary bg-soft">
                             <div class="row">
-                                <div class="col-7">
+                                <div class="col-8">
                                     <div class="p-4 text-primary">
                                         <h5 class="text-primary">{{ __('Login') }}</h5>
                                         <p>BANK OF BARODA (Botswana) LTD.</p>
                                     </div>
                                 </div>
-                                <div class="col-5 align-self-end">
+                                <div class="col-4 align-self-end">
                                     <img src="{{ asset('admin/assets/images/profile-img.png') }}" alt=""
                                         class="img-fluid">
                                 </div>

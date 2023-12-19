@@ -10,9 +10,7 @@
              <!-- End Logo -->
              <div class="pt-3 text-center">
 
-                 <i class="name-title">Bank of Baroda Ltd.
-
-                     (Botswana)</i>
+                 <i class="name-title">Bank of Baroda (Botswana) Ltd.</i>
              </div>
              <!-- Navbar Vertical Toggle -->
              <button type="button" class="js-navbar-vertical-aside-toggle-invoker navbar-aside-toggler">
@@ -368,21 +366,21 @@
                            @canany(['add-tax-slab-settings', 'edit-tax-slab-settings', 'delete-tax-slab-settings',
                                'view-tax-slab-settings'])
                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-slab-setting.index' ? 'active' : '' }}  "
-                                   href="{{ route('admin.payroll.tax-slab-setting.index') }}"> Tax Slab Settings</a>
+                                   href="{{ route('admin.payroll.tax-slab-setting.index') }}"> Tax Slab</a>
                            @endcanany
 
                            @canany(['add-salary-increment-settings', 'edit-salary-increment-settings',
                                'delete-salary-increment-settings', 'view-salary-increment-settings'])
                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-setting.index' ? 'active' : '' }}  "
                                    href="{{ route('admin.payroll.salary-increment-setting.index') }}"> Salary Increment
-                                   Settings</a>
+                                   </a>
                            @endcanany
                            @canany(['add-overtime-setting', 'edit-overtime-setting', 'view-overtime-setting',
                            'delete-overtime-setting'])
                               <div class="nav-item">
                                   <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.overtime-settings.list' ? 'active' : '' }}"
                                       href="{{ route('admin.overtime-settings.index') }}" data-placement="left">
-                                      <span class="nav-link-title">Overtime Setting</span>
+                                      <span class="nav-link-title">Overtime</span>
                                   </a>
                               </div>
                           @endcanany

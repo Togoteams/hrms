@@ -42,7 +42,7 @@
         </tr>
     @endforeach
         <tr>
-            <td colspan="6" style="text-align: center">Total Amount</td>
+            <td colspan="6" style="text-align: center">Total Credit Amount</td>
             <td>{{number_format($creditAmount,2)}}</td>
         </tr>
         <tr>
