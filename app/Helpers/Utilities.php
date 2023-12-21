@@ -22,6 +22,7 @@ use App\Models\LeaveSetting;
 use App\Models\EmplooyeLoans;
 use App\Models\Holiday;
 use App\Models\LeaveDate;
+use App\Models\User;
 
 if (!function_exists('isSluggable')) {
     function isSluggable($value)
@@ -217,12 +218,11 @@ if (!function_exists('formateDate')) {
     }
 }
 if (!function_exists('getCurrencyValue')) {
-    function getCurrencyValue($from,$to)
+    function getCurrencyValue($from, $to)
     {
         $currencyValue = 1;
-        $currency = CurrencySetting::where('currency_name_from',$from)->where('currency_name_to',$to)->first();
-        if(!empty($currency))
-        {
+        $currency = CurrencySetting::where('currency_name_from', $from)->where('currency_name_to', $to)->first();
+        if (!empty($currency)) {
             $currencyValue = $currency->currency_amount_to;
         }
         return $currencyValue;
@@ -543,15 +543,13 @@ if (!function_exists('safe_b64decode')) {
 if (!function_exists('getCurrencyIcon')) {
     function getCurrencyIcon($currency)
     {
-        $data =$currency;
-        if(strtolower($currency)=='usd')
-        {
-            $data ="$";
-        }elseif(strtolower($currency)=='inr'){
-            $data ='₹';
-        }else
-        {
-            $data ="P";
+        $data = $currency;
+        if (strtolower($currency) == 'usd') {
+            $data = "$";
+        } elseif (strtolower($currency) == 'inr') {
+            $data = '₹';
+        } else {
+            $data = "P";
         }
 
         return $data;
@@ -559,48 +557,43 @@ if (!function_exists('getCurrencyIcon')) {
 }
 
 if (!function_exists('getLeavesSalary')) {
-    function getLeavesSalary($emp,$salaryMonth)
+    function getLeavesSalary($emp, $salaryMonth)
     {
-        $salaryStartDate = date('Y-'.$salaryMonth.'-01');
-        $salaryEndDate = date('Y-'.$salaryMonth.'-31');
+        $salaryStartDate = date('Y-' . $salaryMonth . '-01');
+        $salaryEndDate = date('Y-' . $salaryMonth . '-31');
         $totalAvailLeave = 0;
-        $noOfPaidLeave = DB::table("leave_applies")->where('start_date',">=",$salaryStartDate)->where('end_date','<=',$salaryEndDate)->where(['user_id'=>$emp])->where('is_approved',1)->get();
-        $noOfUnpaidLeave = DB::table("leave_applies")->where('start_date',">=",$salaryStartDate)->where('end_date','<=',$salaryEndDate)->where(['user_id'=>$emp])->where('is_approved',1)->get();
-         //dd($leavebalance);
+        $noOfPaidLeave = DB::table("leave_applies")->where('start_date', ">=", $salaryStartDate)->where('end_date', '<=', $salaryEndDate)->where(['user_id' => $emp])->where('is_approved', 1)->get();
+        $noOfUnpaidLeave = DB::table("leave_applies")->where('start_date', ">=", $salaryStartDate)->where('end_date', '<=', $salaryEndDate)->where(['user_id' => $emp])->where('is_approved', 1)->get();
+        //dd($leavebalance);
         //  $noOfPaidLeave = 0;
         //  $noOfUnpaidLeave = 0;
-        return ['total_avail_leave_count'=>$totalAvailLeave,'no_of_paid_leave'=>$noOfPaidLeave,'no_of_unpaid_leave'=>$noOfUnpaidLeave];
-        
+        return ['total_avail_leave_count' => $totalAvailLeave, 'no_of_paid_leave' => $noOfPaidLeave, 'no_of_unpaid_leave' => $noOfUnpaidLeave];
     }
 }
 if (!function_exists('getHeadValue')) {
-    function getHeadValue($emp, $headSlug,$type="payscale",$basic=0,$orginalValue=0,$salary_month="")
+    function getHeadValue($emp, $headSlug, $type = "payscale", $basic = 0, $orginalValue = 0, $salary_month = "")
     {
-        if($basic!=0)
-        {
+        if ($basic != 0) {
             $basicAmout = $basic;
-        }else
-        {
+        } else {
             $basicAmout =  $basicAmout = $emp->basic_salary;
         }
-        $startDate =date("Y-m-20", strtotime("-1 month"));
+        $startDate = date("Y-m-20", strtotime("-1 month"));
         $endDate = date("Y-m-20");
         /**
          * If Salary Month is empty then salary will be make as for current month
          */
-        if(!empty($salary_month))
-        {
-            $startDate = date("Y-m-d", strtotime("-1 months",strtotime($salary_month."-20")));
-            $endDate = date("Y-m-d", strtotime($salary_month."-20"));
+        if (!empty($salary_month)) {
+            $startDate = date("Y-m-d", strtotime("-1 months", strtotime($salary_month . "-20")));
+            $endDate = date("Y-m-d", strtotime($salary_month . "-20"));
         }
-        $employmentType = $emp->employment_type ;
+        $employmentType = $emp->employment_type;
         $multipleValue = 1;
-        if($employmentType=="expatriate")
-        {
-            $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->where('status','active')->first();
+        if ($employmentType == "expatriate") {
+            $currencySeeting = CurrencySetting::where('currency_name_from', 'usd')->where('currency_name_to', 'pula')->where('status', 'active')->first();
             $multipleValue = $currencySeeting->currency_amount_to;
         }
-     
+
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bankBomaidDeduction = 0;
@@ -608,7 +601,7 @@ if (!function_exists('getHeadValue')) {
             $bomaid = MedicalCard::find($bomaidTypeId);
             if (!empty($bomaid)) {
                 $bomaidAmount = $bomaid->amount / 2;
-                $bankBomaidDeduction = $bomaid->amount/2;
+                $bankBomaidDeduction = $bomaid->amount / 2;
             }
             // Add Bank Bomaid deduction
 
@@ -618,7 +611,7 @@ if (!function_exists('getHeadValue')) {
             $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
             $bomaid = MedicalCard::find($bomaidTypeId);
             if (!empty($bomaid)) {
-                $bomaidAmount = $bomaid->amount /2;
+                $bomaidAmount = $bomaid->amount / 2;
             }
             return $bomaidAmount;
         } elseif ($headSlug == "pension_own") {
@@ -636,15 +629,14 @@ if (!function_exists('getHeadValue')) {
         } elseif ($headSlug == "provident_fund") {
             $inrBasicAmount = $emp->basic_salary_for_india;
 
-            if($emp->salary_type=="nps")
-            {
-                $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
+            if ($emp->salary_type == "nps") {
+                $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da);
             }
-            $usdToInr = getCurrencyValue("usd","inr");
+            $usdToInr = getCurrencyValue("usd", "inr");
             $providentFound = ((($inrBasicAmount / 100)) * 10);
-            $providentFound = $providentFound / number_format($usdToInr,3,'.',"");
-            return number_format($providentFound,2,'.',"");
-        }elseif ($headSlug == "house_up_keep_allow") {
+            $providentFound = $providentFound / number_format($usdToInr, 3, '.', "");
+            return number_format($providentFound, 2, '.', "");
+        } elseif ($headSlug == "house_up_keep_allow") {
             $houseUpKeepAllow = 0;
             $houseUpKeepAllow = ($basicAmout / 100) * 10;
             return $houseUpKeepAllow;
@@ -659,30 +651,25 @@ if (!function_exists('getHeadValue')) {
             $hoursInMonth = 192;
             $perHoursRate = $basicAmout / $hoursInMonth;
             $overTimeAmount = 0;
-            $overtimes = OvertimeSetting::where('date',">=",$startDate)->where('user_id',$emp->user_id)->where('date','<=',$endDate)->get();
-            foreach($overtimes  as $key => $overtime)
-            {
-                if($overtime->overtime_type=="holiday")
-                {
-                    $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate*2);  
-                }else
-                {
-                    $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate*1.5);  
+            $overtimes = OvertimeSetting::where('date', ">=", $startDate)->where('user_id', $emp->user_id)->where('date', '<=', $endDate)->get();
+            foreach ($overtimes  as $key => $overtime) {
+                if ($overtime->overtime_type == "holiday") {
+                    $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate * 2);
+                } else {
+                    $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate * 1.5);
                 }
             }
-            return number_format($overTimeAmount,2,'.',"");
+            return number_format($overTimeAmount, 2, '.', "");
             // return number_format($overTimeAmount,'.',"");
-        
+
         } elseif ($headSlug == "others_arrears") {
-           $currentYear = date('Y');
-           $currentMonth = date('m');
-           $arrearsAmount = 0;
-           $salaryIncrement = PayrollSalaryIncrement::where('financial_year',$currentYear)->
-           whereBetween('effective_from', array($startDate, $endDate))
-        //    ->where('effective_from','>=',date('Y-m-d'))->where('effective_to','<=',date('Y-m-d'))
-           ->where('employment_type',$emp->employment_type)->first();
-            if(!empty($salaryIncrement))
-            {
+            $currentYear = date('Y');
+            $currentMonth = date('m');
+            $arrearsAmount = 0;
+            $salaryIncrement = PayrollSalaryIncrement::where('financial_year', $currentYear)->whereBetween('effective_from', array($startDate, $endDate))
+                //    ->where('effective_from','>=',date('Y-m-d'))->where('effective_to','<=',date('Y-m-d'))
+                ->where('employment_type', $emp->employment_type)->first();
+            if (!empty($salaryIncrement)) {
                 // $noOfPendingMonth = $currentMonth;
                 $arrearsAmount = (($basicAmout / 100) * $salaryIncrement->increment_percentage) * $currentMonth;
             }
@@ -690,38 +677,34 @@ if (!function_exists('getHeadValue')) {
         } elseif ($headSlug == "reimbursement") {
             $reimbursementAmount = 0;
             $reimbursements = Reimbursement::whereBetween('claim_date', array($startDate, $endDate))
-            ->where('user_id',$emp->user_id)
-            ->where('status','approved')
-            ->get();
-            foreach($reimbursements as $reimbursement)
-            {
-                if($reimbursement->reimbursement_currency=="usd")
-                {
+                ->where('user_id', $emp->user_id)
+                ->where('status', 'approved')
+                ->get();
+            foreach ($reimbursements as $reimbursement) {
+                if ($reimbursement->reimbursement_currency == "usd") {
                     $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount * $multipleValue;
-                }else
-                {
+                } else {
                     $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
                 }
             }
             return $reimbursementAmount;
-         }elseif ($headSlug == "loan") {
+        } elseif ($headSlug == "loan") {
             $loanAmount = 0;
-            $loan = EmplooyeLoans::
-            where(function ($query) use ($startDate, $endDate) {
-                $query->where(function ($q1) use ($startDate, $endDate) {
-                    $q1->whereBetween('emi_start_date', array($startDate, $endDate));
-                })
-                ->orWhere(function ($q2) use ($startDate, $endDate) {
-                    $q2->where('emi_start_date', '<=', $startDate)
-                    ->where('emi_end_date', '>=', $endDate);
-                })
-                ->orWhere(function ($q3) use ($startDate, $endDate) {
-                    $q3->whereBetween('emi_end_date', array($startDate, $endDate));
-                });
-            })->where('user_id',$emp->user_id)->first();
+            $loan = EmplooyeLoans::where(function ($query) use ($startDate, $endDate) {
+                    $query->where(function ($q1) use ($startDate, $endDate) {
+                        $q1->whereBetween('emi_start_date', array($startDate, $endDate));
+                    })
+                        ->orWhere(function ($q2) use ($startDate, $endDate) {
+                            $q2->where('emi_start_date', '<=', $startDate)
+                                ->where('emi_end_date', '>=', $endDate);
+                        })
+                        ->orWhere(function ($q3) use ($startDate, $endDate) {
+                            $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+                        });
+                })->where('user_id', $emp->user_id)->first();
             $loanAmount = $loan->emi_amount ?? 0;
             return $loanAmount;
-         }
+        }
         return $orginalValue;
     }
 }
@@ -819,12 +802,12 @@ function total_remaining_leave($user_id = '')
         // for autheticated user
         $user_id = auth()->user()->id;
     }
-    $totalNoOfLeaveInBucket=0;
+    $totalNoOfLeaveInBucket = 0;
     $emp = Employee::where('user_id', $user_id)->first();
 
     $leaveSettings = LeaveSetting::where('emp_type', getEmpType($emp->employment_type))->get();
     foreach ($leaveSettings as $key => $leaveSetting) {
-      $totalNoOfLeaveInBucket = $totalNoOfLeaveInBucket + balance_leave_by_typeForEmp($leaveSetting->id,$user_id);
+        $totalNoOfLeaveInBucket = $totalNoOfLeaveInBucket + balance_leave_by_typeForEmp($leaveSetting->id, $user_id);
     }
     return $totalNoOfLeaveInBucket;
 }
@@ -832,120 +815,125 @@ function balance_leave_by_typeForEmp($leave_type_id, $user_id = '', $action = ""
 {
     if ($user_id == '') {
         $user_id = auth()->user()->id;
-      }
-      $total_apply_leave = 0;
-      $emp = Employee::where('user_id', $user_id)->first();
-  
-      $totalNoOfLeaveInBucket = 0;
-      $leaveSetting = LeaveSetting::find($leave_type_id);
-      $perYearLeave = $leaveSetting->total_leave_year;
-      $isProRata = $leaveSetting->is_pro_data;
-      $dateOfJoining = date("Y-m-d", strtotime($emp->start_date));
-      $currentDate = date("Y-m-d");
-  
-      $diff = abs(strtotime($dateOfJoining) - strtotime($currentDate));
-  
-      $years = floor($diff / (365 * 60 * 60 * 24));
-  
-      $months = floor(($diff - $years  * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
-      $total_leave = 0;
-  
-      switch ($leaveSetting->slug) {
+    }
+    $total_apply_leave = 0;
+    $emp = Employee::where('user_id', $user_id)->first();
+
+    $totalNoOfLeaveInBucket = 0;
+    $leaveSetting = LeaveSetting::find($leave_type_id);
+    $perYearLeave = $leaveSetting->total_leave_year;
+    $isProRata = $leaveSetting->is_pro_data;
+    $dateOfJoining = date("Y-m-d", strtotime($emp->start_date));
+    $currentDate = date("Y-m-d");
+
+    $diff = abs(strtotime($dateOfJoining) - strtotime($currentDate));
+
+    $years = floor($diff / (365 * 60 * 60 * 24));
+
+    $months = floor(($diff - $years  * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+    $total_leave = 0;
+
+    switch ($leaveSetting->slug) {
         case 'sick-leave':
-  
-          if($emp->employment_type=="expatriate")
-          {
-            $total_leave = $perYearLeave;
-            if($years>1)
-            {
-              $total_leave = $years * $perYearLeave;
-            }
-          }else
-          {
-            if($years>1)
-            {
-              $totalWorkingMonths = (date('m') -1);
-            }else
-            {
-              $totalWorkingMonths = ($months -1);
-            }
-            $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
-          }
-          break;
-        case "earned-leave":
-          if($years>=1)
-          {
-            $totalWorkingMonths  = $years * 12 + $months;
-            if ($emp->designation->slug == "tea_lady" || $emp->designation->slug == "messenger_driver") {
-              $maxEarnedLeave = 45;
-              $perYearLeave = 15; // if any change in default leave 
+
+            if ($emp->employment_type == "expatriate") {
+                $total_leave = $perYearLeave;
+                if ($years > 1) {
+                    $total_leave = $years * $perYearLeave;
+                }
             } else {
-              $maxEarnedLeave = 54;
+                if ($years > 1) {
+                    $totalWorkingMonths = (date('m') - 1);
+                } else {
+                    $totalWorkingMonths = ($months - 1);
+                }
+                $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
             }
-            $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
-            if ($total_leave >= $maxEarnedLeave) {
-              $total_leave = $maxEarnedLeave;
+            break;
+        case "earned-leave":
+            if ($years >= 1) {
+                $totalWorkingMonths  = $years * 12 + $months;
+                if ($emp->designation->slug == "tea_lady" || $emp->designation->slug == "messenger_driver") {
+                    $maxEarnedLeave = 45;
+                    $perYearLeave = 15; // if any change in default leave 
+                } else {
+                    $maxEarnedLeave = 54;
+                }
+                $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+                if ($total_leave >= $maxEarnedLeave) {
+                    $total_leave = $maxEarnedLeave;
+                }
             }
-          }
-          break;
+            break;
         case "maternity-leave":
-          $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->where('status','approved')->first();
-          if(!empty($isMaternityLeave))
-          {
-            $total_leave = $perYearLeave;
-          }
-          break;
-        case "casual-leave":
-          $totalWorkingMonths =( date('m') -1);
-          $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
-          break;
-        case "privileged-leave":
-          $maxEarnedLeave = 90;
-          
-          if($years>=1)
-          {
-            $totalWorkingMonths  = ($years-1) * 12 + $months;
-            // echo $totalWorkingMonths/12;
-            $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
-            if ($total_leave >= $maxEarnedLeave) {
-              $total_leave = $maxEarnedLeave;
+            $isMaternityLeave = LeaveTimeApprovel::where('leave_type_id', $leave_type_id)->where('user_id', $user_id)->where('status', 'approved')->first();
+            if (!empty($isMaternityLeave)) {
+                $total_leave = $perYearLeave;
             }
-          }
-         
-          break;
-        default:  
-        
-          $total_leave = $perYearLeave;
-      }
-  
-      $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
-      $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
-  
-      $ignoreLeaveIds = LeaveSetting::whereIn('slug',$balanceLeaveHideArr)->pluck('id')->toArray();
-  
-      if ($action == "update_status") {
+            break;
+        case "casual-leave":
+            $totalWorkingMonths = (date('m') - 1);
+            $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+            break;
+        case "privileged-leave":
+            $maxEarnedLeave = 90;
 
-        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
-          $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject','pending']);
+            if ($years >= 1) {
+                $totalWorkingMonths  = ($years - 1) * 12 + $months;
+                // echo $totalWorkingMonths/12;
+                $total_leave = ceil(($perYearLeave / 12) * $totalWorkingMonths);
+                if ($total_leave >= $maxEarnedLeave) {
+                    $total_leave = $maxEarnedLeave;
+                }
+            }
+
+            break;
+        default:
+
+            $total_leave = $perYearLeave;
+    }
+
+    $days = floor(($diff - $years * 365 * 60 * 60 * 24 - $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+    $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
+
+    $ignoreLeaveIds = LeaveSetting::whereIn('slug', $balanceLeaveHideArr)->pluck('id')->toArray();
+
+    if ($action == "update_status") {
+
+        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function ($q) use ($user_id, $leave_type_id, $ignoreLeaveIds) {
+            $q->where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id', $ignoreLeaveIds)->whereNotIn('status', ['reject', 'pending']);
         })->count();
-  
-      } else {
-        
-        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$leave_type_id,$ignoreLeaveIds) {
-          $q->where('user_id',$user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id',$ignoreLeaveIds)->whereNotIn('status',['reject']);
+    } else {
+
+        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function ($q) use ($user_id, $leave_type_id, $ignoreLeaveIds) {
+            $q->where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id', $ignoreLeaveIds)->whereNotIn('status', ['reject']);
         })->count();
-      }
-  
-  
+    }
 
-      $total_apply_leave = $total_apply_leave + 1;
 
-      // echo $total_apply_leave;
-      $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('request_leave_for_encashement');
-      $total = $total_leave - $total_apply_leave -  $encash_leave;
-      return $total;
+
+    $total_apply_leave = $total_apply_leave + 1;
+
+    // echo $total_apply_leave;
+    $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('request_leave_for_encashement');
+    $total = $total_leave - $total_apply_leave -  $encash_leave;
+    return $total;
 }
 
+
+function approvalBtnEnable($leaveId)
+{
+    $leave = LeaveApply::where('id', $leaveId)->first();
+    $leaveUser = $leave->user;
+    $authUser = User::find(auth()->user()->id);
+    $isLeaveApproval = false;
+    if (($leaveUser->hasRole('branch-head') || $leaveUser->hasRole('chief-manager-ho')) && $authUser->hasRole('managing-director')) {
+        $isLeaveApproval = true;
+    } elseif (($leaveUser->hasRole('employee') || $leaveUser->hasRole('branch-supervisor'))  && $authUser->hasRole('branch-head')) {
+        $isLeaveApproval = true;
+    }
+    return $isLeaveApproval;
+}
 function islocal()
 {
     $user_id = auth()->user()->id;
@@ -977,7 +965,7 @@ function getAllDates($startingDate, $endingDate)
 
     $startingDate = strtotime($startingDate);
     $endingDate = strtotime($endingDate);
-         
+
     for ($currentDate = $startingDate; $currentDate <= $endingDate; $currentDate += (86400)) {
         $date = date('Y-m-d', $currentDate);
         $datesArray[] = $date;
@@ -989,16 +977,14 @@ function getAllDates($startingDate, $endingDate)
 function isHolidayDate($date)
 {
     $isHoliday = false;
-    $holidayArray=['Sun','Sat'];
-    $dayName = date('D',strtotime($date));
-    $holiday = Holiday::where('date',$date)->first();
-    if(!empty($holiday))
-    {
-        $holidayName = date('D',strtotime($holiday->date));  
+    $holidayArray = ['Sun', 'Sat'];
+    $dayName = date('D', strtotime($date));
+    $holiday = Holiday::where('date', $date)->first();
+    if (!empty($holiday)) {
+        $holidayName = date('D', strtotime($holiday->date));
         $holidayArray[] = $holidayName;
     }
-    if(in_array($dayName,$holidayArray))
-    {
+    if (in_array($dayName, $holidayArray)) {
         $isHoliday = true;
     }
     return $isHoliday;
@@ -1007,20 +993,17 @@ function isHolidayDate($date)
 
 function getEmpType($type)
 {
-    $text =0;
-    if($type=="local")
-    {
-        $text =1;
+    $text = 0;
+    if ($type == "local") {
+        $text = 1;
     }
     return $text;
 }
 function getPaidString($type)
 {
-    $text ="paid";
-    if($type==1)
-    {
-        $text ="unpaid";
+    $text = "paid";
+    if ($type == 1) {
+        $text = "unpaid";
     }
     return $text;
 }
-

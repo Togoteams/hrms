@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $isAdminRole = Role::where('slug', 'admin')->first();
+        $isAdminRole = Role::where('slug', 'managing-director')->first();
         $user = new User();
         $user->uuid = $faker->uuid;
         $user->name = 'Admin';

@@ -26,7 +26,8 @@ class RolesTableSeeder extends Seeder
             Role::updateOrCreate([
                 'name'=> $value->name,
                 'short_code'=> $value->short_code,
-                'role_type'=> $value->role_type
+                'role_type'=> $value->role_type,
+                'is_system_define'=> 1,
             ]);
         }
         $role= Role::find(1);

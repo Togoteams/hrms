@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('emp_id')->unique();
             $table->unsignedBigInteger('user_id')->unique();
             $table->unsignedBigInteger('designation_id')->nullable();
-            // $table->unsignedBigInteger('tax_id')->nullable();
             $table->string('employment_type')->nullable();
             $table->string('ec_number')->nullable();
             $table->string('gender')->nullable();

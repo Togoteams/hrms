@@ -21,9 +21,6 @@ return new class extends Migration
             $table->double('additional_local_amount');
             $table->text('description');
             $table->string('status')->default('active');
-            $table->foreignId('created_by')->references('id')->on('users');
-            $table->foreignId('updated_by')->nullable()->references('id')->on('users');
-            $table->foreignId('deleted_by')->nullable()->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });

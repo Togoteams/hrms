@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             PermissionTableSeeder::class,
-            UserTableSeeder::class,
+            // UserTableSeeder::class,
             RolesTableSeeder::class,
             // LeaveTypes::class,
             RolePermissionSeeder::class,
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             TaxSlabSeeder::class,
             Membershipseeders::class,
             CurrencySeetingSeeder::class,
-            //Employeeseeders::class,
+            Employeeseeders::class,
             PayrollHeadSeeder::class,
             DepartmentSeeder::class,
             LeaveSettingSeeder::class,

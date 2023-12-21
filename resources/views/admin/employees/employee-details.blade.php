@@ -121,18 +121,20 @@
                                                     value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
                                                     name="bank_account_number" class="form-control form-control-sm">
                                             </div>
-
+                                            @if(!$employee->user->hasRole('managing-director'))
                                             <div class="pt-3 col-2 fw-semibold">
                                                 <label for="review_authority">Review Authority<small
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4">
                                                 <select id="review_authority" placeholder="Select Authority"
-                                                name="review_authority" class="form-control form-control-sm">
-                                                <option selected disabled> - Select  - </option>
-                                                @foreach ($authorities  as  $key => $review)
-                                                    <option  {{$review->user_id}}  @if($review->user_id==$employee->review_authority) {{'selected'}} @endif> {{$review->user->name}} </option>
-                                                @endforeach
+                                                    name="review_authority" class="form-control form-control-sm">
+                                                    <option selected disabled> - Select - </option>
+                                                    @foreach ($authorities as $key => $review)
+                                                        <option {{ $review->user_id }}
+                                                            @if ($review->user_id == $employee->review_authority) {{ 'selected' }} @endif>
+                                                            {{ $review->user->name }} </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
 
@@ -141,15 +143,18 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4">
-                                               
-                                                    <select id="reporting_authority" placeholder="Select Authority"
+
+                                                <select id="reporting_authority" placeholder="Select Authority"
                                                     name="reporting_authority" class="form-control form-control-sm">
-                                                    <option selected disabled> - Select  - </option>
-                                                    @foreach ($authorities  as  $key => $value)
-                                                        <option  {{$value->user_id}} @if($value->user_id==$employee->reporting_authority) {{'selected'}} @endif > {{$value->user->name}} </option>
+                                                    <option selected disabled> - Select - </option>
+                                                    @foreach ($authorities as $key => $value)
+                                                        <option {{ $value->user_id }}
+                                                            @if ($value->user_id == $employee->reporting_authority) {{ 'selected' }} @endif>
+                                                            {{ $value->user->name }} </option>
                                                     @endforeach
-                                                    </select>
+                                                </select>
                                             </div>
+                                            @endif
                                             {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="currency">Currency<small
                                                         class="required-field">*</small></label>

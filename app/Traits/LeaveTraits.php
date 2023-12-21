@@ -8,7 +8,7 @@ use App\Models\LeaveEncashment;
 use App\Models\LeaveSetting;
 use App\Models\LeaveDate;
 use App\Models\LeaveTimeApprovel;
-
+use App\Models\User;
 trait LeaveTraits
 {
   public function getTotalBalancedLeave($user_id)
@@ -181,4 +181,5 @@ trait LeaveTraits
       // $total_leave = LeaveType::find($leave_type_id);
     }
   }
+  
 }

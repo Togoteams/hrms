@@ -70,7 +70,7 @@ class EmployeeController extends BaseController
 
     public function viewUserDetails($eid = null)
     {
-        $roles = Role::getRoles()->where('status','active')->get();
+        $roles = Role::getRoles()->whereNotIn('slug',['managing-director'])->where('status','active')->get();
         $countries = Country::getCountry()->get();
         return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid),'roles'=>$roles,'countries'=>$countries]);
     }
@@ -179,6 +179,7 @@ class EmployeeController extends BaseController
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
 
         $branch = Branch::getBranch()->get();
+        
         $authorities = Employee::get();
 
         return view('admin.employees.employee-details',[
