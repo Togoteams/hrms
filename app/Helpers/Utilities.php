@@ -937,18 +937,11 @@ function balance_leave_by_typeForEmp($leave_type_id, $user_id = '', $action = ""
       }
   
   
-    //   if (count($total_apply_leaves) > 0) {
-    //     foreach ($total_apply_leaves as  $value) {
-  
-    //       $no_of_days = get_day($value->start_date, $value->end_date);
-    //       $total_apply_leave = $total_apply_leave + $no_of_days;
-    //     }
-    //     $total_apply_leave = $total_apply_leave + 1;
-    //   }
+
       $total_apply_leave = $total_apply_leave + 1;
 
       // echo $total_apply_leave;
-      $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('no_of_days');
+      $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('request_leave_for_encashement');
       $total = $total_leave - $total_apply_leave -  $encash_leave;
       return $total;
 }

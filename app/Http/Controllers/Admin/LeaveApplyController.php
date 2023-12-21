@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\LeaveTraits;
+use App\Traits\NotificationTraits;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class LeaveApplyController extends Controller
 {
     use LeaveTraits;
+    use NotificationTraits;
     public $page_name = "Apply Leave";
     public $overLapsLeave = "";
     /**
@@ -349,7 +351,7 @@ class LeaveApplyController extends Controller
             $leave_apply = LeaveApply::find($id);
 
 
-            try {
+            // try {
                 if ($request->status != "approved") {
 
                     LeaveApply::where('id', $id)->update([
@@ -359,6 +361,10 @@ class LeaveApplyController extends Controller
                         'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
 
                     ]);
+                    $leave = LeaveApply::where('id',$id)->first();
+                    $notifiMessage = "Dear ".$leave->user->name."Your ".$leave->leave_type->name." is Rejected On Date ".$leave->start_date." beetween ".$leave->end_date;
+                    $notificationData = ['reference_id'=>$id,'reference_type'=>get_class($leave),'notification_type'=>'leave_rejected','title'=>"Leave Rejected",'description'=>$notifiMessage];
+                    $this->saveNotification($notificationData);
                 }
                 if ($request->status == "approved") {
                     // checking how many leave is remaining for a particular user
@@ -378,14 +384,20 @@ class LeaveApplyController extends Controller
                             'is_approved' => 1,
                             'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
                         ]);
+                        $leave = LeaveApply::where('id',$id)->first();
+                        // echo $leave->leave_type->name;
+                        $notifiMessage = "Dear ".$leave->user->name."Your ".$leave->leave_type->name." is Approved On Date ".$leave->start_date." beetween ".$leave->end_date;
+                        $notificationData = ['reference_id'=>$id,'reference_type'=>get_class($leave),'notification_type'=>'leave_approval','title'=>"Leave Approved",'description'=>$notifiMessage];
+                        $this->saveNotification($notificationData);
+
                     } else {
                         return response()->json(['error' => " Applied leave is " . get_day($leave_apply->start_date, $leave_apply->end_date)+1 . " but  they have only " . $this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
                     }
                 }
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
-            } catch (Exception $e) {
-                return response()->json(['errors' => "Somthing wen Wrong"]);
-            }
+            // } catch (Exception $e) {
+            //     return response()->json(['errors' => "Somthing wen Wrong"]);
+            // }
         }
     }
 

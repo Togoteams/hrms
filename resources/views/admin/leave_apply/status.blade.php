@@ -48,14 +48,14 @@
             }
         @endphp 
         @if($isBalanceLeaveHide)
-        <div class="mb-2 col-sm-6">
+        {{-- <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="remaining_leave"> Balance Leave</label>
                 <input rows="12" required id="remaining_leave" placeholder="Enter correct remaining_leave   "
                     name="remaining_leave" type="text" readonly value="{{ $remaining_leave }}"
                     class="form-control form-control-sm ">
             </div>
-        </div>
+        </div> --}}
         @endif
 
         <div class="mb-2 col-sm-6">
