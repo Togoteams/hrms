@@ -32817,3 +32817,10 @@ a:hover .text-inherit {
 table.dataTable.no-footer {
     border-bottom: 1px solid rgb(151 151 151 / 30%)!important;
 }
+.notification-icon{
+    position: relative;
+    color: #FF5722;
+    background: #fff;
+    padding: 8px;
+    border-radius: 31px;
+}
