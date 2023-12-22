@@ -470,6 +470,12 @@ class PayrollSalaryController extends Controller
         })->whereHas('leaveApply', function($q) use ($user_id) {
             $q->where('user_id',$user_id)->where('is_paid','unpaid')->whereNotIn('status',['reject']);
         })->count();
+
+
+        $noOfReversalLeave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$salaryStartDate, $salaryEndDate) {
+            $q->where('user_id',$user_id)->where('is_reversal',1)->whereBetween('reversal_at', array($salaryStartDate, $salaryEndDate))->whereIn('status',['approved']);
+        })->count();
+        
         // return $noOfUnPaidLeave;
         /**
          * This is no of paid  leave who take paid and approved leave
@@ -543,9 +549,9 @@ class PayrollSalaryController extends Controller
 
         if($emp->employment_type=="expatriate")
         {
-            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','noOfEncashLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','usdToPulaAmount','usdToInrAmount'));
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','noOfReversalLeave','noOfEncashLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','usdToPulaAmount','usdToInrAmount'));
         }else{
-            return view('admin.payroll.salary.employee_head', compact('emp_head','noOfEncashLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
+            return view('admin.payroll.salary.employee_head', compact('emp_head','noOfEncashLeave','noOfReversalLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
 
         }
     }
