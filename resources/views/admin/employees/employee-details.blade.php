@@ -90,7 +90,7 @@
                                                     value="{{ !empty($employee) ? $employee->start_date : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
-                                            <div class="pt-3 col-2 fw-semibold">
+                                            {{-- <div class="pt-3 col-2 fw-semibold">
                                                 <label for="amount_payable_to_bomaind_each_year">
                                                     Bomaid Medical Card
                                                 </label>
@@ -110,7 +110,7 @@
                                                             value="{{ $item->id }}">{{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
                                             <div class="pt-3 col-2 fw-semibold">
                                                 <label for="bank_account_number">Bank Account No<small
                                                         class="required-field">*</small></label>

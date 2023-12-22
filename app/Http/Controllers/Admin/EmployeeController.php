@@ -431,9 +431,9 @@ class EmployeeController extends BaseController
     public function postMedicalInsuaranceBomaid(Request $request)
     {
         $request->validate([
-            'medical_card_id' => ['required', 'numeric'],
+            'amount' => ['required', 'numeric','gt:0'],
             'company_name' => ['required', 'string'],
-          'insurance_id' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
+            'insurance_id' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
         ]);
 
         try {
@@ -614,7 +614,7 @@ class EmployeeController extends BaseController
             'branch_id' => ['required', 'numeric'],
             'pension_contribution' => ['required', 'numeric'],
             'unique_membership_id' => ['required', 'numeric'],
-            'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
+            'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
             'currency' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric'],
             'bank_name' => ['required', 'string'],
@@ -686,7 +686,7 @@ class EmployeeController extends BaseController
             'branch_id' => ['required', 'numeric'],
             'pension_contribution' => ['required', 'numeric'],
             'unique_membership_id' => ['required', 'numeric'],
-            'amount_payable_to_bomaind_each_year' => ['required', 'numeric'],
+            'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
             'currency' => ['required', 'string'],
             'bank_account_number' => ['required', 'numeric'],
             // 'bank_name' => ['required', 'string'],

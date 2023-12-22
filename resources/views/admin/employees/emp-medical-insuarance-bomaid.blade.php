@@ -27,7 +27,7 @@
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 
                                         <div class="p-3 pb-4 row text-dark">
-                                            <div class="pt-3 col-3 fw-semibold">
+                                            {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="company_name">Insurance card Type<small class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
@@ -39,6 +39,15 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                            </div> --}}
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="amount">Insurance card Amount<small class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-3">
+                                                <input type="number" id="amount" name="amount"
+                                                    value="{{ $employee ? ($employee->medicalBomaid ? $employee->medicalBomaid->amount : '') : '' }}"
+                                                    placeholder="Enter"
+                                                    class="form-control form-control-sm">
                                             </div>
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="company_name">Insurance Company Name<small class="required-field">*</small></label>

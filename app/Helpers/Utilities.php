@@ -14,6 +14,7 @@ use App\Models\LeaveApply;
 use App\Models\Employee;
 use App\Models\LeaveEncashment;
 use App\Models\MedicalCard;
+use App\Models\EmpMedicalInsurance;
 use App\Models\LeaveTimeApprovel;
 use App\Models\OvertimeSetting;
 use App\Models\PayrollSalaryIncrement;
@@ -597,8 +598,7 @@ if (!function_exists('getHeadValue')) {
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bankBomaidDeduction = 0;
-            $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
-            $bomaid = MedicalCard::find($bomaidTypeId);
+            $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
             if (!empty($bomaid)) {
                 $bomaidAmount = $bomaid->amount / 2;
                 $bankBomaidDeduction = $bomaid->amount / 2;
@@ -608,8 +608,7 @@ if (!function_exists('getHeadValue')) {
             return $bomaidAmount + $bankBomaidDeduction;
         } elseif ($headSlug == "bomaid_bank") {
             $bomaidAmount = 0;
-            $bomaidTypeId = $emp->amount_payable_to_bomaind_each_year;
-            $bomaid = MedicalCard::find($bomaidTypeId);
+            $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
             if (!empty($bomaid)) {
                 $bomaidAmount = $bomaid->amount / 2;
             }

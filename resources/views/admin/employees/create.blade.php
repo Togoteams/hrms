@@ -104,14 +104,14 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 mb-2">
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="id_number">id number </label>
                                     <input required id="id_number" placeholder="Enter correct id number   "
                                         type="text" name="id_number" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-2" id="contractDiv">
+                            <div class="mb-2 col-sm-4" id="contractDiv">
                                 <div class="form-group">
                                     <label for="contract_duration">contract duration</label>
                                     <input id="contract_duration" value=""
@@ -119,7 +119,7 @@
                                         name="contract_duration" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="col-sm-4 mb-2">
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="basic_salary">basic salary</label>
                                     <input required id="basic_salary" placeholder="Enter correct basic salary   "
@@ -181,7 +181,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
+                            {{-- <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="amount_payable_to_bomaind_each_year">amount payable to bomaind each
                                         year
@@ -191,7 +191,7 @@
                                         type="text" name="amount payable to bomaind each year"
                                         class="form-control form-control-sm ">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="currency">currency</label>

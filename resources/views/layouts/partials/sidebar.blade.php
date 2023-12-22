@@ -496,13 +496,13 @@
 
            @canany(['add-medical-card-type', 'edit-medical-card-type', 'view-medical-card-type',
                'delete-medical-card-type'])
-               <div class="nav-item">
+               {{-- <div class="nav-item">
                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.medical-card.list' ? 'active' : '' }}"
                        href="{{ route('admin.medical-card.index') }}" data-placement="left">
                        <i class="fa fa-medkit nav-icon"></i>
                        <span class="nav-link-title">Bomaid Type</span>
                    </a>
-               </div>
+               </div> --}}
            @endcanany
 
 

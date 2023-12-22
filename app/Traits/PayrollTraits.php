@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Models\MedicalCard;
+use App\Models\EmpMedicalInsurance;
 use App\Models\PayrollTtumSalaryReport;
 use App\Models\TaxSlabSetting;
 use App\Models\Account;
@@ -83,7 +83,8 @@ trait PayrollTraits
                         $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'bomaid');
                         })->value('value');
-                        $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
+                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
+
                         $amount = $salaryHeadAmount;
                         if(!empty($bomaid))
                         {
@@ -95,7 +96,7 @@ trait PayrollTraits
                 case "bomaid_ibo":
                     $amount = 0;
                     if ($emp->employment_type == "expatriate") {
-                        $bomaid = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
+                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
                         if(!empty($bomaid))
                         {
                             $amount = $bomaid->amount;
@@ -134,7 +135,7 @@ trait PayrollTraits
                 case "eft_to_fnb_bank":
                    
                     if ($emp->employment_type == "expatriate") {
-                        $medicalCard = MedicalCard::find($emp->amount_payable_to_bomaind_each_year);
+                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
                         $iboBomaidAmount = 0;
                         if (!empty($medicalCard)) {
                             $iboBomaidAmount = $medicalCard->amount;
