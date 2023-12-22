@@ -39,21 +39,21 @@
                                     <div class="mb-3">
                                         <label for="bank_pension_contribution">Bank Pension Contribution<span class="text-danger">*</span></label>
                                         <input type="text" id="bank_pension_contribution" name="bank_pension_contribution" class="form-control"
-                                            placeholder="Enter Bank Pension Contribution " required value="{{$salarysetting->bank_pension_contribution}}">
+                                            placeholder="Enter Bank Pension Contribution " required value="{{$salarysetting?->bank_pension_contribution}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3 contact-name">
                                         <label for="bank_bomaid_contribution">Bank Bomaid Contribution<span class="text-danger">*</span></label>
                                         <input type="text" id="bank_bomaid_contribution" name="bank_bomaid_contribution" class="form-control"
-                                            placeholder="Enter Bank Bomaid Contribution " required value="{{$salarysetting->bank_bomaid_contribution}}">
+                                            placeholder="Enter Bank Bomaid Contribution " required value="{{$salarysetting?->bank_bomaid_contribution}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-3 contact-name">
                                         <label for="salary_date">Salary Date<span class="text-danger">*</span></label>
                                         <input type="date" id="salary_date" name="salary_date" class="form-control"
-                                            placeholder="Enter Salary Date " required value="{{$salarysetting->salary_date}}">
+                                            placeholder="Enter Salary Date " required value="{{$salarysetting?->salary_date}}">
                                     </div>
                                 </div>
 
