@@ -51,7 +51,7 @@
         </tr>
         <tr>
             <td colspan="6" style="text-align: center">Round Off</td>
-            <td>{{number_format($creditAmount - $debitAmount)}}</td>
+            <td>{{number_format($creditAmount - $debitAmount,2)}}</td>
         </tr>
     </tbody>
 </table>
