@@ -546,4 +546,17 @@ class LeaveApplyController extends Controller
         $all_users = Employee::where('status', 'active')->get();
         return view('admin.leave_apply.leave_request_rejected', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
+    public function reverseLeaveWithoutPay(Request $request)
+    {
+        $leaveId = $request->leave_id;
+        $updateData = [
+            'reversal_at'=>currentDateTime(),
+            'is_reversal'=>1,
+            'reversal_approved_by'=>auth()->user()->id
+        ];
+        LeaveApply::where('id',$leaveId)->update($updateData);
+        $leave = LeaveApply::find($leaveId);
+        return response()->json(['status' =>true,'data'=>['leave'=>$leave],'message'=>"This Leave is reversed Successfully"]);
+
+    }
 }

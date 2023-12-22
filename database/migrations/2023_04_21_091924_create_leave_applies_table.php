@@ -27,6 +27,9 @@ return new class extends Migration
             $table->string('is_leave_counted_on_holiday')->default(0);
             $table->string('leave_reason');
             $table->date('apply_date')->nullable();
+            $table->timestamp('reversal_at')->nullable();
+            $table->tinyInteger('is_reversal')->default(0)->nullable();
+            $table->bigInteger('reversal_approved_by')->default(0)->nullable();
             $table->integer('remaining_leave');
             $table->string('remark')->nullable();
             $table->string('status_remarks')->nullable();

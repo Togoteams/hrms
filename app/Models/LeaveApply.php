@@ -14,6 +14,10 @@ class LeaveApply extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function reversalBy()
+    {
+        return $this->belongsTo(User::class,'reversal_approved_by');
+    }
     function leave_type(){
         return $this->belongsTo(LeaveSetting::class);
     }

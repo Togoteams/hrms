@@ -247,6 +247,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('leave_apply/get/leave/', [LeaveApplyController::class, 'get_leave'])->name('leave_apply.get_leave');
     Route::get('get_balance_leave/', [LeaveApplyController::class, 'get_balance_leave'])->name('leave_apply.get_balance_leave');
     Route::get('rejected_leave/', [LeaveApplyController::class, 'get_rejected_leave'])->name('leave_apply.get_rejected_leave');
+    Route::get('reverse-leave-without-pay/', [LeaveApplyController::class, 'reverseLeaveWithoutPay'])->name('leave_apply.reverse_leave_without_pay');
     //Leave Settings start
     // Route::resource('leave_setting', LeaveSettingController::class);
     //   encashemnt start
