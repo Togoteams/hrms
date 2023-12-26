@@ -157,7 +157,7 @@ class LeaveApplyController extends Controller
             return "The $value docuement is required.";
         });
 
-        $employee = Employee::where('user_id', $request->user_id)->first();
+        $employee = Employee::where('user_id', $user->id)->first();
         $validator = Validator::make($request->all(), [
             
             'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
@@ -262,9 +262,10 @@ class LeaveApplyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $leaveType = LeaveSetting::find($request->leave_type_id);
+        $leaveApplies = LeaveApply::find($id);
+        $leaveType = LeaveSetting::find($leaveApplies->leave_type_id);
         $leaveSlug = $leaveType->slug;
-        $request->merge(['id'=>$id]);
+        $request->merge(['id'=>$id,'leave_type_id'=>$leaveApplies->leave_type_id,'remaining_leave'=>$leaveApplies->remaining_leave]);
         // return  $request->id;
         $user_id = $request->user_id;   
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
@@ -311,7 +312,7 @@ class LeaveApplyController extends Controller
         } else {
             try {
                 // return "dda";
-                $remainingLeave = (int)$this->balance_leave_by_type($request->leave_type_id, $user_id);
+                $remainingLeave = (int)$this->balance_leave_by_type($leaveApplies->leave_type_id, $user_id);
                 $balanceLeaveHideArr =['leave-without-pay','bereavement-leave'];
                 if(!in_array($leaveSlug,$balanceLeaveHideArr))
                 {
@@ -321,8 +322,8 @@ class LeaveApplyController extends Controller
                     
                 $request->request->add([
                     'updated_by' => Auth::user()->id,
-                    'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
-                    'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
+                    'is_paid' => getPaidString(LeaveSetting::find($leaveApplies->leave_type_id)->is_salary_deduction),
+                    'is_leave_counted_on_holiday' => (LeaveSetting::find($leaveApplies->leave_type_id)->is_count_holyday),
                     'remaining_leave' => $remainingLeave
                 ]);
                 LeaveApply::where('id', $id)->update($request->except(['_token',  '_method', 'doc1']));

@@ -7,7 +7,7 @@
 
     <div class="row">
 
-        <div class="mb-2 col-sm-4">
+        {{-- <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label for="leave_type_id">Leave Types</label>
                 <select required id="edit_leave_type_id" placeholder="Enter correct leave_type_id   " type="text"
@@ -20,7 +20,7 @@
                 </select>
 
             </div>
-        </div>
+        </div> --}}
 
         <div class="mb-2 col-sm-4 ibo-pay-type" style="display: none">
             <div class="form-group">
@@ -33,12 +33,12 @@
 
             </div>
         </div>
-        <div class="mb-2 col-sm-4 balance_leave_section" >
+        {{-- <div class="mb-2 col-sm-4 balance_leave_section" >
             <div class="form-group">
                 <label for="edit_balance_leave1">balance_leave</label>
                 <input readonly required id="edit_balance_leave1" value="{{ $data->remaining_leave }}" placeholder="Enter correct balance_leave" type="text" name="remaining_leave" class="form-control form-control-sm ">
             </div>
-        </div>
+        </div> --}}
         <div class="mb-2 col-sm-4">
             <div class="form-group">
                 <label for="start_date1">start_date</label>

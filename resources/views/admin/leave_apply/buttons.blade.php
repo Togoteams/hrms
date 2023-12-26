@@ -14,25 +14,26 @@
             </button>
         @endcan
     @endif
-    @if($item->status=='approved' && $item->is_reversal==0)
-        @if($item->leave_type->slug=="leave-without-pay")
-            <button type="button" onclick="reverseLeaveWithoutPay({{$item->id}})"
-            href="#" class="btn btn-edit btn-sm"><i class="fa fa-undo" aria-hidden="true"></i>
-        </button>
-        @endif
-    @endif
+    
     @csrf
 
-    @if (!isemplooye())
-        <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_method" value="DELETE">
 
-        @if ($item->status != 'approved')
-            <button type="button" id="delete{{ $item->id }}"
-                onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
-                class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
-            </button>
-        @endif
+    @if ($item->status != 'approved')
+        <button type="button" id="delete{{ $item->id }}"
+            onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
+            class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
+        </button>
+    @endif
+    @if (!isemplooye())
         @if (approvalBtnEnable($item->id) == 1)
+            @if($item->status=='approved' && $item->is_reversal==0 && $item->user->employment_type=="local")
+                @if($item->leave_type->slug=="leave-without-pay")
+                    <button type="button" onclick="reverseLeaveWithoutPay({{$item->id}})"
+                    href="#" class="btn btn-edit btn-sm"><i class="fa fa-undo" aria-hidden="true"></i>
+                </button>
+                @endif
+            @endif
             @can('change-status-leave-apply')
                 <button type="button"
                     @if ($item->status != 'approved') onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"

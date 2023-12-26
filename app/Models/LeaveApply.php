@@ -24,9 +24,7 @@ class LeaveApply extends Model
     function leaveSetting(){
         return $this->belongsTo(LeaveSetting::class);
     }
-    public function employee(){
-        return $this->belongsTo(Employee::class);
-    }
+   
     
     public function leaveDate(){
         return $this->hasMany(LeaveDate::class,'leave_id');

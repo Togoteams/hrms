@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('styles')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 @section('content')
     <main id="content" role="main" class="main">
@@ -9,7 +9,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -22,37 +22,37 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.overtime_settings.create')
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
-            <div class="page-header">
-                <div class="row">
-                    <div class="mb-2 col-sm mb-sm-0">
-                        <h2 class="page-header-title">{{ $page }}</h2>
-                    </div>
-                    {{-- <div class="col-sm-auto">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="mb-2 col-sm mb-sm-0">
+                            <h2 class="page-header-title">{{ $page }}</h2>
+                        </div>
+                        {{-- <div class="col-sm-auto">
                     <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement_type.create') }}">
                         Add {{ $page }}
                     </a>
 
                     </div> --}}
-                    <div class="col-sm-auto">
-                        @can('add-overtime-setting')
-                            <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                        <div class="col-sm-auto">
+                            @can('add-overtime-setting')
+                                <button type="button" class="btn btn-white" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop">
                                     Add {{ $page }}
-                            </button>
-                        @endcan
+                                </button>
+                            @endcan
                         </div>
 
+                    </div>
                 </div>
-             </div>
-              {{-- Table --}}
-              <div class="p-2 mt-3 table-responsive">
-                <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
-                    <thead>
+                {{-- Table --}}
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                        <thead>
                             <tr>
                                 <th>SI.</th>
                                 <th>Employee Name</th>
@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($data as $key =>$item) 
+                            {{-- @foreach ($data as $key => $item) 
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$item->type}}</td>
@@ -74,7 +74,7 @@
                                 <td>{{$item->overtime_type}}</td>
                                 <td>
                                     <div class="success-badges changeStatus" data-table="reimbursement_types" data-uuid="{{$item->id}}"
-                                        data-message="inactive" @if($item->status=="active") data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
+                                        data-message="inactive" @if ($item->status == 'active') data-value="inactive" @else data-value="active" @endif ><span class="legend-indicator bg-success">
                                         </span>{{ $item->status ?? 'Active' }}</div>
                                 </td>
                                 <td style="text-align:right;">
@@ -96,11 +96,11 @@
                              @endforeach   --}}
                         </tbody>
                     </table>
-                  
+
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-                  <script type="text/javascript">
+                <script type="text/javascript">
                     $(function() {
                         var i = 1;
                         var table = $('.data-table').DataTable({
@@ -115,7 +115,7 @@
                                     searchable: false
                                 },
 
-                             
+
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
@@ -133,7 +133,7 @@
                                     data: 'overtime_type',
                                     name: 'overtime_type'
                                 },
-                              
+
 
                                 // {
                                 //     data: 'status',
@@ -202,10 +202,10 @@
     </main>
 @endsection
 @push('custom-scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    // $(document).ready(function() {
-    //     $('.employees').select2();
-    // });
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // $(document).ready(function() {
+        //     $('.employees').select2();
+        // });
+    </script>
 @endpush
