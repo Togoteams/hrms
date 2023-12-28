@@ -179,8 +179,14 @@ class EmployeeController extends BaseController
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
 
         $branch = Branch::getBranch()->get();
-        
-        $authorities = Employee::get();
+        $allowedRoles = ['managing-directo','chief-manager-ho','branch-head'];
+        $authorities = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
+            $q->whereIn('slug',$allowedRoles);
+        })->get();
+        $allowedRoles = ['managing-directo','chief-manager-ho','branch-head'];
+        $authorities = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
+            $q->whereIn('slug',$allowedRoles);
+        })->get();
 
         return view('admin.employees.employee-details',[
                 'page'          => $this->page_name,

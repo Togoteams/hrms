@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('    ', function (Blueprint $table) {
             $table->id();
             $table->string('emp_id')->unique();
             $table->unsignedBigInteger('user_id')->unique();
@@ -43,8 +43,8 @@ return new class extends Migration
             $table->string('currency')->nullable();
             $table->string('bank_account_number')->nullable();
             $table->string('currency_salary')->nullable();
-            $table->string('review_authority')->nullable();
-            $table->string('reporting_authority')->nullable();
+            $table->bigInteger('review_authority')->nullable();
+            $table->bigInteger('reporting_authority')->nullable();
             // $table->string('bank_name');
             // $table->string('bank_holder_name');
             // $table->string('ifsc');

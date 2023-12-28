@@ -131,7 +131,7 @@
                                                     name="review_authority" class="form-control form-control-sm">
                                                     <option selected disabled> - Select - </option>
                                                     @foreach ($authorities as $key => $review)
-                                                        <option {{ $review->user_id }}
+                                                        <option value="{{ $review->user_id }}"
                                                             @if ($review->user_id == $employee->review_authority) {{ 'selected' }} @endif>
                                                             {{ $review->user->name }} </option>
                                                     @endforeach
@@ -148,7 +148,7 @@
                                                     name="reporting_authority" class="form-control form-control-sm">
                                                     <option selected disabled> - Select - </option>
                                                     @foreach ($authorities as $key => $value)
-                                                        <option {{ $value->user_id }}
+                                                        <option value="{{ $value->user_id }}"
                                                             @if ($value->user_id == $employee->reporting_authority) {{ 'selected' }} @endif>
                                                             {{ $value->user->name }} </option>
                                                     @endforeach
