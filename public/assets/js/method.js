@@ -238,14 +238,14 @@ function formValidate(el, form_id) {
     for (f = 0; f < el.length; f++) {
 
         if (el[f].required && el[f].value == '') {
-            setError(el[f], " is Required filed please Input", "red")
+            setError(el[f], " is Required", "red")
             flag = false;
         } else {
             setError(el[f], " ", "green")
         }
         if ('max' in el) {
             if (el[f].value <= el[f].max) {
-                setError(el[f], " is Required filed please Input", "red")
+                setError(el[f], " is Required", "red")
                 flag = false;
             } else {
                 setError(el[f], " ", "green")
@@ -498,7 +498,7 @@ function validateUrl(url_input) {
 
 function validateSelect(select_input) {
     if (select_input.required && select_input[select_input.selectedIndex].disabled) {
-        setError(select_input, " is Required filed please Input", "red")
+        setError(select_input, " is Required ", "red")
         return false
     } else {
         setError(select_input, " ", "green")

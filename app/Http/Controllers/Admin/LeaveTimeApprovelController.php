@@ -84,7 +84,7 @@ class LeaveTimeApprovelController extends BaseController
                     $q3->whereBetween('end_date', array($start_date, $end_date));
                 });
             })->whereNotIn('status',['reject'])->where('user_id',$userId)->first();
-            $this->overLapsLeave = $overlappingRecord->leave_type->name;
+            $this->overLapsLeave = $overlappingRecord?->leave_type?->name;
             return !$overlappingRecord;
         });
 

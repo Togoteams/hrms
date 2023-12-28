@@ -18,7 +18,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="user_id" class="required">Employee</label>
-                                <select name="user_id" id="user_id" class="form-control">
+                                <select name="user_id" id="user_id" class="form-control form-control-sm">
                                     <option value="">- Select -</option>
                                     @foreach ($Employees as $employee)
                                         <option value="{{ $employee->user_id }}"
@@ -33,7 +33,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="leave_type_id" class="required">Leave Type</label>
-                                <select name="leave_type_id" id="leave_type_id" class="form-control" >
+                                <select name="leave_type_id" id="leave_type_id" class="form-control form-control-sm" >
                                     <option value="">- Select -</option>
                                     @foreach ($leave_setting as $setting)
                                         <option value="{{ $setting->id }}"
@@ -48,33 +48,33 @@
                             <div class="form-group">
                                 <label for="start_date">From date</label>
                                 <input type="date" name="start_date" id="start_date"
-                                    class="form-control" value="">
+                                    class="form-control form-control-sm" value="">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="end_date">To date</label>
                                 <input type="date" name="end_date"  id="end_date"
-                                    class="form-control">
+                                    class="form-control form-control-sm">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="document">Document</label>
                                 <input type="file" accept="application/pdf" name="document"  id="document"
-                                    class="form-control" >
+                                    class="form-control form-control-sm" >
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="reason">Reason</label>
-                                <input type="text" name="reason" id="reason" class="form-control" placeholder="Enter Reason...">
+                                <input type="text" name="reason" id="reason" class="form-control form-control-sm" placeholder="Enter Reason...">
                             </div>
                         </div>
                         <div class="mb-12 col-sm-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea name="description" id="description" class="form-control" placeholder="Enter Description..."></textarea>
+                                <textarea name="description" id="description" class="form-control form-control-sm" placeholder="Enter Description..."></textarea>
                             </div>
                         </div>
 
