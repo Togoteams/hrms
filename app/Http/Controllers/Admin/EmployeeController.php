@@ -179,12 +179,12 @@ class EmployeeController extends BaseController
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
 
         $branch = Branch::getBranch()->get();
-        $allowedRoles = ['managing-directo','chief-manager-ho','branch-head'];
-        $authorities = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
+        $allowedRoles = ['managing-director','chief-manager-ho','branch-head'];
+        $reportingAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
         })->get();
-        $allowedRoles = ['managing-directo','chief-manager-ho','branch-head'];
-        $authorities = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
+        $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
+        $reviewAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
         })->get();
 
@@ -196,7 +196,8 @@ class EmployeeController extends BaseController
                 'bomaind'       => $bomaind,
                 'currency_setting' =>$filteredCurrencySetting,
                 'employee'      => $this->getEmployee($eid),
-                'authorities'      => $authorities,
+                'reportingAuthority'      => $reportingAuthority,
+                'reviewAuthority'      => $reviewAuthority,
             ]
         );
     }
