@@ -117,6 +117,11 @@ class User extends Authenticatable
         return $this->roles ? $this->roles?->first()?->name : "";
         // return Role::find($this->role_id)->name;
     }
+    public function getRoleSlugAttribute()
+    {
+        return $this->roles ? $this->roles?->first()?->slug : "";
+        // return Role::find($this->role_id)->name;
+    }
     public function payrollPayscale()
     {
         return $this->hasOne(PayRollPayscale::class,'user_id');

@@ -363,8 +363,8 @@ class LeaveApplyController extends Controller
 
                     ]);
                     $leave = LeaveApply::where('id',$id)->first();
-                    $notifiMessage = "Dear ".$leave->user->name."Your ".$leave->leave_type->name." is Rejected On Date ".$leave->start_date." beetween ".$leave->end_date;
-                    $notificationData = ['reference_id'=>$id,'reference_type'=>get_class($leave),'notification_type'=>'leave_rejected','title'=>"Leave Rejected",'description'=>$notifiMessage];
+                    $notifiMessage = "Dear ".$leave->user->name." Your ".$leave->leave_type->name." is Rejected On Date ".date("d-m-Y",strtotime($leave->start_date))." beetween ".date("d-m-Y",strtotime($leave->end_date));
+                    $notificationData = ['reference_id'=>$id,'user_id'=>$leave->user_id,'reference_type'=>get_class($leave),'notification_type'=>'leave_rejected','title'=>"Leave Rejected",'description'=>$notifiMessage];
                     $this->saveNotification($notificationData);
                 }
                 if ($request->status == "approved") {
@@ -387,8 +387,8 @@ class LeaveApplyController extends Controller
                         ]);
                         $leave = LeaveApply::where('id',$id)->first();
                         // echo $leave->leave_type->name;
-                        $notifiMessage = "Dear ".$leave->user->name."Your ".$leave->leave_type->name." is Approved On Date ".$leave->start_date." beetween ".$leave->end_date;
-                        $notificationData = ['reference_id'=>$id,'reference_type'=>get_class($leave),'notification_type'=>'leave_approval','title'=>"Leave Approved",'description'=>$notifiMessage];
+                        $notifiMessage = "Dear ".$leave->user->name." Your ".$leave->leave_type->name." is Approved On Date ".date("d-m-Y",strtotime($leave->start_date))." beetween ".date("d-m-Y",strtotime($leave->end_date));
+                        $notificationData = ['reference_id'=>$id,'reference_type'=>get_class($leave),'user_id'=>$leave->user_id,'notification_type'=>'leave_approval','title'=>"Leave Approved",'description'=>$notifiMessage];
                         $this->saveNotification($notificationData);
 
                     } else {
