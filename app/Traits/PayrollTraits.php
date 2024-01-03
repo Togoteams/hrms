@@ -83,12 +83,15 @@ trait PayrollTraits
                         $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'bomaid');
                         })->value('value');
-                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
+                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
 
                         $amount = $salaryHeadAmount;
                         if(!empty($bomaid))
                         {
-                            $amount = $amount - ($bomaid->amount/2);
+                            $bomaidAmount = $bomaid->amount;
+                            $localBankBomaidContribution = getSeetingValue()->local_bank_bomaid_contribution;
+                            $localBomaidAmount = ($bomaidAmount / 100) * $localBankBomaidContribution;
+                            $amount = $amount - ($localBomaidAmount);
                         }
                     }
                     
@@ -96,10 +99,13 @@ trait PayrollTraits
                 case "bomaid_ibo":
                     $amount = 0;
                     if ($emp->employment_type == "expatriate") {
-                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
+                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
                         if(!empty($bomaid))
                         {
-                            $amount = $bomaid->amount;
+                            $bomaidAmount = $bomaid->amount;
+                            $iboBankBomaidContribution = getSeetingValue()->ibo_bank_bomaid_contribution;
+                            $amount = ($bomaidAmount / 100) * $iboBankBomaidContribution;
+                            return $amount;
                         }
                     }
                     break;

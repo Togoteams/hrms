@@ -24,6 +24,7 @@ use App\Models\EmplooyeLoans;
 use App\Models\Holiday;
 use App\Models\LeaveDate;
 use App\Models\User;
+use App\Models\SalarySetting;
 
 if (!function_exists('isSluggable')) {
     function isSluggable($value)
@@ -615,15 +616,19 @@ if (!function_exists('getHeadValue')) {
             return $bomaidAmount;
         } elseif ($headSlug == "pension_own") {
             $isPensionApplied = $emp->pension_contribution;
-            $bankPensionContributtion = 15;
+            $bankPensionContributtion = getSeetingValue()->bank_pension_contribution;
             $pensionAmount = 0;
             if ($isPensionApplied == "yes") {
                 $pensionAmount = ($basicAmout / 100) * ($emp->pension_opt + $bankPensionContributtion);
                 return $pensionAmount;
             }
         } elseif ($headSlug == "pension_bank") {
-            $bankPensionContributtion = 15;
-            $pensionAmount = ($basicAmout / 100) * $bankPensionContributtion;
+            $isPensionApplied = $emp->pension_contribution;
+            $pensionAmount = 0;
+            $bankPensionContributtion = getSeetingValue()->bank_pension_contribution;
+            if ($isPensionApplied == "yes") {
+                $pensionAmount = ($basicAmout / 100) * $bankPensionContributtion;
+            }
             return $pensionAmount;
         } elseif ($headSlug == "provident_fund") {
             $inrBasicAmount = $emp->basic_salary_for_india;
@@ -779,6 +784,12 @@ function show($all_routes)
         }
     }
 }
+function getSeetingValue()
+{
+    // checking route is exits or not 
+    return SalarySetting::first();
+}
+
 
 function isemplooye()
 {
