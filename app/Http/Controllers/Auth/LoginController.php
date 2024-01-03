@@ -19,12 +19,24 @@ class LoginController extends Controller
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
                 'password' => ['required'],
-            ]);
-
+            ]);            
             if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-
-                return redirect()->intended('admin/dashboard');
+                // return auth()->user();
+                if(auth()->user()->is_active)
+                {
+                    $request->session()->regenerate();
+                    // $request->authenticate();
+    
+                    $request->session()->regenerate();
+            
+                    // return redirect()->intended(RouteServiceProvider::HOME);
+                    return redirect()->intended('admin/dashboard');
+                }else
+                {
+                    return back()->withErrors([
+                        'email' => 'You Account is deactived',
+                    ])->onlyInput('email');  
+                }
             }
 
             return back()->withErrors([

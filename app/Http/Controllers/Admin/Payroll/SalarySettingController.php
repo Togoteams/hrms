@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Payroll;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\SalarySetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class SalarySettingController extends Controller
+class SalarySettingController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -36,9 +37,10 @@ class SalarySettingController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'bank_pension_contribution' => 'required|string',
-            'bank_bomaid_contribution' => 'required|string',
-            'salary_date' => 'nullable|string',
+            'bank_pension_contribution' => 'required|numeric',
+            'local_bank_bomaid_contribution' => 'required|numeric',
+            'ibo_bank_bomaid_contribution' => 'required|numeric',
+            'salary_date' => 'required|numeric',
 
 
         ]);
@@ -46,12 +48,12 @@ class SalarySettingController extends Controller
             return $validator->errors();
         }
         else {
-            $Data = $request->except('_token', 'about_image');
+            $data = $request->except('_token');
+            $salarysetting = SalarySetting::where('id',1)->update($data);
+            return   $this->responseJson(true,200, 'Salary Setting Updated Successfully',$salarysetting);
+        // return response()->json(['success' => 'Added Successfully']);
 
-                SalarySetting::updateOrCreate([], $Data);
-        return response()->json(['success' => 'Added Successfully']);
-
-    }
+        }
 
     }
 

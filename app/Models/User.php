@@ -28,6 +28,8 @@ class User extends Authenticatable
         'last_name',
         'full_name',
         'role', // role -> name
+        'role_slug', // role -> name
+        'user_employee', // role -> name
     ];
     /**
      * The attributes that are mass assignable.
@@ -120,7 +122,10 @@ class User extends Authenticatable
     public function getRoleSlugAttribute()
     {
         return $this->roles ? $this->roles?->first()?->slug : "";
-        // return Role::find($this->role_id)->name;
+    }
+    public function getUserEmployeeAttribute()
+    {
+        return $this->employee;
     }
     public function payrollPayscale()
     {

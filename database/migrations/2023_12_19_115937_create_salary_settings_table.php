@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('salary_settings', function (Blueprint $table) {
             $table->id();
             $table->string('bank_pension_contribution')->nullable();
-            $table->string('bank_bomaid_contribution')->nullable();
+            $table->string('local_bank_bomaid_contribution')->nullable();
+            $table->string('ibo_bank_bomaid_contribution')->nullable();
             $table->string('salary_date')->nullable();
             $table->timestamps();
         });

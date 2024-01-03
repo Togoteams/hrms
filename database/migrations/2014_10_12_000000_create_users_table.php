@@ -28,12 +28,13 @@ return new class extends Migration
             $table->string('salutation',100)->nullable();
             $table->string('first_name',100)->nullable();
             $table->string('last_name',100)->nullable();
+            $table->tinyInteger('is_active')->default(1);
             // $table->bigInteger('department_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            // $table->bigInteger('created_by')->nullable();
-            // $table->foreignId('created_by')->references('id')->on('users')->nullable()->comment('used for created by user tracking');
-            // $table->foreignId('updated_by')->references('id')->on('users')->nullable()->comment('used for updated by user tracking');
+            $table->bigInteger('created_by')->nullable();
+            $table->foreignId('created_by')->references('id')->on('users')->nullable()->comment('used for created by user tracking');
+            $table->foreignId('updated_by')->references('id')->on('users')->nullable()->comment('used for updated by user tracking');
           });
     }
 
