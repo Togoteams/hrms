@@ -231,30 +231,8 @@ if (!function_exists('getCurrencyValue')) {
     }
 }
 
-if (!function_exists('pulaToUsd')) {
-    function pulaToUsd($amount)
-    {
-        $pula = 13.06;
-        $usd = $amount / $pula;
-        return $usd;
-    }
-}
-if (!function_exists('usdToPula')) {
-    function usdToPula($amount)
-    {
-        $usd = 13.06;
-        $pula = $amount * $usd;
-        return $pula;
-    }
-}
-if (!function_exists('inrToUsd')) {
-    function inrToUsd($amount)
-    {
-        $inr = 82.04;
-        $usd = $amount / $inr;
-        return $usd;
-    }
-}
+
+
 
 if (!function_exists('sidebar_open')) {
     function sidebar_open($routes = [])
@@ -570,6 +548,14 @@ if (!function_exists('getLeavesSalary')) {
         //  $noOfPaidLeave = 0;
         //  $noOfUnpaidLeave = 0;
         return ['total_avail_leave_count' => $totalAvailLeave, 'no_of_paid_leave' => $noOfPaidLeave, 'no_of_unpaid_leave' => $noOfUnpaidLeave];
+    }
+}
+function getEmployee($emp_id = null)
+{
+    if (!empty($emp_id)) {
+        return Employee::firstWhere('emp_id', $emp_id);
+    } else {
+        return '';
     }
 }
 if (!function_exists('getHeadValue')) {

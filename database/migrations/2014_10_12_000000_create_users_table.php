@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->uuid();
             $table->string('name');
-            // $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('mobile')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -29,7 +28,6 @@ return new class extends Migration
             $table->string('first_name',100)->nullable();
             $table->string('last_name',100)->nullable();
             $table->tinyInteger('is_active')->default(1);
-            // $table->bigInteger('department_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->bigInteger('created_by')->nullable();

@@ -258,10 +258,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-1 basic-salary-india-container" style="display: none">
-                                                <select name="currency_salary_for_india" id="currency_salary_for_india"
-                                                    name="currency_salary_for_india" class="form-control form-control-sm">
-                                                    <option value="inr">₹</option>
-                                                </select>
+                                               
                                             </div>
                                             <div class="pt-2 col-3 basic-salary-india-container" style="display: none">
                                                 <input id="basic_salary_for_india" placeholder="Enter " type="number"
