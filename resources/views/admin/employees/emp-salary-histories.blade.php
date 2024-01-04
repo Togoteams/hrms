@@ -127,7 +127,7 @@
                                                 </div>
                                             @empty
                                             <div class="pb-4">
-                                                <div class="p-3 card">Salary Is not Addedd</div>
+                                                <div class="p-3 card">Salary Is not Added</div>
                                             </div>
                                             @endforelse
                                         @endif

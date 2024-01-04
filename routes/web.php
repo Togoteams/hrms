@@ -195,6 +195,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
     Route::get('employee/medical-insuarance-bomaid/{eid?}', [EmployeeController::class, 'viewMedicalInsuaranceBomaid'])->name('employee.medicalInsuaranceBomaid.form');
     Route::post('employee/medical-insuarance-bomaid', [EmployeeController::class, 'postMedicalInsuaranceBomaid'])->name('employee.medicalInsuaranceBomaid.post');
+    Route::post('employee/delete-medical-insuarance-bomaid', [EmployeeController::class, 'deleteMedicalInsuarance'])->name('employee.medicalInsuaranceBomaid.delete');
 
     Route::get('employee/domicile/{eid?}', [EmployeeController::class, 'viewDomicile'])->name('employee.domicile.form');
     Route::post('employee/domicile', [EmployeeController::class, 'postDomicile'])->name('employee.domicile.post');

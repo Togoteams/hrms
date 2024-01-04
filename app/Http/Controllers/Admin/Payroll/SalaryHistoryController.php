@@ -60,7 +60,7 @@ class SalaryHistoryController extends BaseController
                 true,
                 200,
                 $message,
-                ["employee" => $employee,'redirect_url' => route('admin.employee.domicile.form', $employee->emp_id)]
+                ["employee" => $employee,'redirect_url' => route('admin.employee.address.form', $employee->emp_id)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

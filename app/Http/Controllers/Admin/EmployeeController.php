@@ -431,7 +431,9 @@ class EmployeeController extends BaseController
     public function viewMedicalInsuaranceBomaid($eid = null)
     {
         $cardType = MedicalCard::getMedicalCard()->get();
-        return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $this->getEmployee($eid),'cardType'=>$cardType]);
+        $emp= $this->getEmployee($eid);
+        $medicalInsuarances = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->get();
+        return view('admin.employees.emp-medical-insuarance-bomaid', ['employee' => $emp,'medicalInsuarances'=>$medicalInsuarances,'cardType'=>$cardType]);
     }
 
 
@@ -440,13 +442,16 @@ class EmployeeController extends BaseController
         $request->validate([
             'amount' => ['required', 'numeric','gt:0'],
             'company_name' => ['required', 'string'],
+            'medical_insurances_date' => ['required', 'date'],
             'insurance_id' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
         ]);
 
         try {
+            $emp_insurance_id = $request->id;
             if ($request->id == '') {
-                EmpMedicalInsurance::insertGetId($request->except(['_token', 'id']));
+               $emp_insurance_id = EmpMedicalInsurance::insertGetId($request->except(['_token', 'id']));
                 $message = "Record Created Successfully";
+                EmpMedicalInsurance::where('id','<>',$emp_insurance_id)->update(['status'=>'inactive']);
             } else {
                 EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
                 $message = "Record Updated Successfully";
@@ -463,6 +468,27 @@ class EmployeeController extends BaseController
             return response()->json(['error' => $e->getMessage()]);
         }
     }
+
+    public function deleteMedicalInsuarance(Request $request)
+    {
+        $request->validate([
+            'id' => ['required', 'numeric'],
+        ]);
+
+        try {
+            $medicalInsurance = EmpMedicalInsurance::find($request->id);
+            if ($medicalInsurance) {
+                $medicalInsurance->delete();
+                $message = "Record deleted Successfully";
+                return response()->json(['status' => true, 'message' => $message]);
+            } else {
+                return response()->json(['status' => false, 'error' => 'Record not found']);
+            }
+        } catch (Exception $e) {
+            return response()->json(['status' => false, 'error' => $e->getMessage()]);
+        }
+    }
+
 
     public function viewDomicile($eid = null)
     {
