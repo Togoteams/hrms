@@ -65,6 +65,15 @@ class Employee extends Model
     {
         return $this->hasMany(Qualification::class, 'user_id', 'user_id');
     }
+    public function salaryHistory()
+    {
+        return $this->hasMany(SalaryHistory::class, 'user_id', 'user_id');
+    }
+
+    public function getLatestSalary()
+    {
+        return $this->salaryHistory()->where('date_of_current_basic','<=',date('Y-m-d'))->orderBy('id','desc')->first();
+    }
 
     public function departmentHistory()
     {
@@ -80,6 +89,5 @@ class Employee extends Model
         if($userAuth->hasRole(''))
         return $query
         ->where('status', 'active');
-
     }
 }

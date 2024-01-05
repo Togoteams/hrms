@@ -4,12 +4,12 @@
         <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
         <div class="form-group">
             <label for="basic">basic ({{"In PULA"}})</label>
-            <input onkeyup="amount_cal()" value="{{$emp->basic_salary}}" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic  " type="text" name="basic" value="{{ $data->basic ?? '' }}" class="form-control form-control-sm ">
+            <input onkeyup="amount_cal()" value="{{$empSalary->basic_salary}}" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic  " type="text" name="basic" value="{{ $data->basic ?? '' }}" class="form-control form-control-sm ">
         </div>
     </div>
 </div>
 @php
-    $grossEarning =$emp->basic_salary;
+    $grossEarning =$empSalary->basic_salary;
     $totalDeduction =0;
 @endphp
 <div class="row">

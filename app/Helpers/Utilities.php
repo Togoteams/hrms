@@ -561,10 +561,11 @@ function getEmployee($emp_id = null)
 if (!function_exists('getHeadValue')) {
     function getHeadValue($emp, $headSlug, $type = "payscale", $basic = 0, $orginalValue = 0, $salary_month = "")
     {
+        $latestSalary = $emp->getLatestSalary();
         if ($basic != 0) {
             $basicAmout = $basic;
         } else {
-            $basicAmout =  $basicAmout = $emp->basic_salary;
+            $basicAmout = $latestSalary->basic_salary;
         }
         $startDate = date("Y-m-20", strtotime("-1 month"));
         $endDate = date("Y-m-20");
@@ -585,7 +586,7 @@ if (!function_exists('getHeadValue')) {
         if ($headSlug == "bomaid") {
             $bomaidAmount = 0;
             $bankBomaidDeduction = 0;
-            $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
+            $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
             if (!empty($bomaid)) {
                 $bomaidAmount = $bomaid->amount / 2;
                 $bankBomaidDeduction = $bomaid->amount / 2;
@@ -595,21 +596,21 @@ if (!function_exists('getHeadValue')) {
             return $bomaidAmount + $bankBomaidDeduction;
         } elseif ($headSlug == "bomaid_bank") {
             $bomaidAmount = 0;
-            $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
+            $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
             if (!empty($bomaid)) {
                 $bomaidAmount = $bomaid->amount / 2;
             }
             return $bomaidAmount;
         } elseif ($headSlug == "pension_own") {
-            $isPensionApplied = $emp->pension_contribution;
+            $isPensionApplied = $latestSalary->pension_contribution;
             $bankPensionContributtion = getSeetingValue()->bank_pension_contribution;
             $pensionAmount = 0;
             if ($isPensionApplied == "yes") {
-                $pensionAmount = ($basicAmout / 100) * ($emp->pension_opt + $bankPensionContributtion);
+                $pensionAmount = ($basicAmout / 100) * ($latestSalary->pension_opt + $bankPensionContributtion);
                 return $pensionAmount;
             }
         } elseif ($headSlug == "pension_bank") {
-            $isPensionApplied = $emp->pension_contribution;
+            $isPensionApplied = $latestSalary->pension_contribution;
             $pensionAmount = 0;
             $bankPensionContributtion = getSeetingValue()->bank_pension_contribution;
             if ($isPensionApplied == "yes") {
@@ -617,10 +618,10 @@ if (!function_exists('getHeadValue')) {
             }
             return $pensionAmount;
         } elseif ($headSlug == "provident_fund") {
-            $inrBasicAmount = $emp->basic_salary_for_india;
+            $inrBasicAmount = $latestSalary->basic_salary_for_india;
 
             if ($emp->salary_type == "nps") {
-                $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da);
+                $inrBasicAmount = $inrBasicAmount +  ((($inrBasicAmount / 100)) * $emp->da);
             }
             $usdToInr = getCurrencyValue("usd", "inr");
             $providentFound = ((($inrBasicAmount / 100)) * 10);
@@ -631,7 +632,7 @@ if (!function_exists('getHeadValue')) {
             $houseUpKeepAllow = ($basicAmout / 100) * 10;
             return $houseUpKeepAllow;
         } elseif ($headSlug == "union_fee") {
-            $isUnionFee = $emp->union_membership_id;
+            $isUnionFee = $latestSalary->union_membership_id;
             $unionFee = 0;
             if ($isUnionFee == "yes") {
                 $unionFee = ($basicAmout / 100);

@@ -4,14 +4,14 @@
         <input id="employment_type" placeholder="Enter correct employment_type" type="hidden" value="{{ $emp->employment_type ?? '' }}" name="employment_type">
         <div class="form-group">
             <label for="basic">Basic ({{"In USD"}})</label>
-            <input onkeyup="amount_cal()" value="{{$emp->basic_salary}}" readonly onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
+            <input onkeyup="amount_cal()" value="{{$empSalary->basic_salary}}" readonly onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct Basic" type="text" name="basic"  class="form-control form-control-sm">
             <input  value="{{$usdToPulaAmount}}"  id="usdToPulaAmount" type="hidden" name="usdToPulaAmount"  class="form-control form-control-sm">
             <input  value="{{$usdToInrAmount}}"  id="usdToInrAmount" type="hidden" name="usdToInrAmount"  class="form-control form-control-sm">
         </div>
     </div>
 </div>
 @php
-    $grossEarning = $emp->basic_salary;
+    $grossEarning = $empSalary->basic_salary;
     $totalDeduction = 0;
     // $pulaInsertionArr = ['education_allowance','other_deductions'];
     $usdInsertionArr =['house_up_keep_allow','entertainment_expenses','provident_fund','recovery_for_car'];
@@ -41,7 +41,7 @@
     @endphp
     @if($head->head_type=="income")
     @php
-        $payscaleAmount = getHeadValue($emp,$head->slug,"",$emp->basic_salary);
+        $payscaleAmount = getHeadValue($emp,$head->slug,"",$empSalary->basic_salary);
         $grossEarning = $grossEarning + $payscaleAmount;
     @endphp
     <div class="mb-2 col-sm-4">
@@ -69,7 +69,7 @@
     @endphp
     @if($head->head_type=="deduction")
     @php
-        $payscaleDeductionAmount = getHeadValue($emp,$head->slug,"payscale",$emp->basic_salary);
+        $payscaleDeductionAmount = getHeadValue($emp,$head->slug,"payscale",$empSalary->basic_salary);
         $totalDeduction = $totalDeduction + $payscaleDeductionAmount;
     @endphp
     <div class="mb-2 col-sm-4">

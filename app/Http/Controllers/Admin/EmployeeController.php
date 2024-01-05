@@ -451,7 +451,7 @@ class EmployeeController extends BaseController
             if ($request->id == '') {
                $emp_insurance_id = EmpMedicalInsurance::insertGetId($request->except(['_token', 'id']));
                 $message = "Record Created Successfully";
-                EmpMedicalInsurance::where('id','<>',$emp_insurance_id)->update(['status'=>'inactive']);
+                EmpMedicalInsurance::where('id','<>',$emp_insurance_id)->where('user_id',$request->user_id)->update(['status'=>'inactive']);
             } else {
                 EmpMedicalInsurance::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
                 $message = "Record Updated Successfully";

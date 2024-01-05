@@ -20,6 +20,7 @@ use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalaryIncrement;
 use App\Models\User;
 use App\Traits\PayrollTraits;
+use App\Models\SalaryHistory;
 use App\Traits\LeaveTraits;
 use App\Models\CurrencySetting;
 use App\Models\LeaveEncashment;
@@ -171,6 +172,7 @@ class PayrollSalaryController extends Controller
         $payscale = PayrollSalary::find($id);
         $page = $this->page_name;
         $emp = Employee::where('user_id', $payscale->user_id)->orderByDesc('id')->first();
+
         $data = PayrollSalary::where('user_id', $payscale->user_id)->first();
         // $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
 
