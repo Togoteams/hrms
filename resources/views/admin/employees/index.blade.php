@@ -50,6 +50,8 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Gender</th>
+                                <th>Employment Type</th>
+                                <th>Start Date</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -88,10 +90,18 @@
                                     data: 'user.mobile',
                                     name: 'user.mobile'
                                 },
-
                                 {
                                     data: 'gender',
                                     name: 'gender'
+                                },
+                                {
+                                    data: 'employment_type',
+                                    name: 'employment_type'
+                                },
+                                
+                                {
+                                    data: 'start_date',
+                                    name: 'start_date'
                                 },
                                 {
                                     data: 'action',

@@ -59,6 +59,9 @@ class EmployeeController extends BaseController
                     $actionBtn = view('admin.employees.buttons', ['item' => $row, "route" => 'employees']);
                     return $actionBtn;
                 })
+                ->editColumn('start_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD-MM-YYYY');
+                })
                 ->rawColumns(['action'])
                 ->make(true);
         }

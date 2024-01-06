@@ -270,6 +270,10 @@ class PayRollPayscaleCotroller extends BaseController
 
         $empSalary = SalaryHistory::where('user_id',$user_id)->where('date_of_current_basic','<=',date('Y-m-d'))->first();
         // return $empSalary;
+        if(empty($empSalary))
+        {
+             return response()->json("Employee Salary is  not defined");
+        }
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
 
