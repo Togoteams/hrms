@@ -569,7 +569,8 @@ $(document).ready(function (e) {
                     let update = $("#" + formModal)
                         .find('button[type="submit"]')
                         .html("Update");
-                    // $("#" + formModal).find('button[type="reset"]').attr('disabled', 'disabled');
+                    $("#" + formModal).find('.action_name').html('Edit');
+
                     $("#" + formModal)
                         .find('button[type="reset"]')
                         .html("Cancel");

@@ -16,8 +16,8 @@
                             <h2 class="page-header-title">Roles</h2>
                         </div>
                         <div class="col-sm-auto">
-                            <a class="btn btn-white g-popup addRole" href="javascript:;" data-bs-toggle="modal" data-action="add"
-                                data-bs-target="#addEditRoleModal">
+                            <a class="btn btn-white g-popup addRole" href="javascript:;" data-bs-toggle="modal"
+                                data-action="add" data-bs-target="#addEditRoleModal">
                                 <i class="bi-person-plus-fill me-1"></i> Add Role
                             </a>
                         </div>
@@ -30,31 +30,31 @@
                         class="table table-lg table-stripped table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
-                                <th class="table-column-pe-0">
+                                {{-- <th class="table-column-pe-0">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value=""
                                             id="datatableCheckAll">
                                         <!-- <label class="form-check-label" for="datatableCheckAll"></label> -->
                                     </div>
-                                </th>
+                                </th> --}}
                                 <th class="table-column-ps-0">Name</th>
                                 {{-- <th>Type</th> --}}
                                 {{-- <th>Description</th> --}}
                                 {{-- <th>Status</th> --}}
-                                <th >Action</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($roles as $key => $role)
                                 <tr>
-                                    <td class="table-column-pe-0">
+                                    {{-- <td class="table-column-pe-0">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="datatableCheckAll1">
                                             <label class="form-check-label" for="datatableCheckAll1"></label>
                                         </div>
-                                    </td>
+                                    </td> --}}
                                     <td class="table-column-ps-0">
                                         <span class="mb-0 d-block h5">{{ $role->name }}</span>
                                         <!-- <span class="d-block fs-5">Human resources</span> -->
@@ -105,37 +105,37 @@
 
                 <!-- Footer -->
                 <!-- <div class="card-footer">
-                        <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
-                            <div class="mb-2 col-sm mb-sm-0">
-                                <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                                    <span class="me-2">Showing:</span>
+                            <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+                                <div class="mb-2 col-sm mb-sm-0">
+                                    <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                                        <span class="me-2">Showing:</span>
 
-                                    <div class="tom-select-custom">
-                                        <select id="datatableEntries"
-                                            class="w-auto js-select form-select form-select-borderless" autocomplete="off"
-                                            data-hs-tom-select-options='{
+                                        <div class="tom-select-custom">
+                                            <select id="datatableEntries"
+                                                class="w-auto js-select form-select form-select-borderless" autocomplete="off"
+                                                data-hs-tom-select-options='{
                             "searchInDropdown": false,
                             "hideSearch": true
                           }'>
-                                            <option value="10">10</option>
-                                            <option value="15" selected>15</option>
-                                            <option value="20">20</option>
-                                        </select>
+                                                <option value="10">10</option>
+                                                <option value="15" selected>15</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        </div>
+
+                                        <span class="text-secondary me-2">of</span>
+
+                                        <span id="datatableWithPaginationInfoTotalQty"></span>
                                     </div>
+                                </div>
 
-                                    <span class="text-secondary me-2">of</span>
-
-                                    <span id="datatableWithPaginationInfoTotalQty"></span>
+                                <div class="col-sm-auto">
+                                    <div class="d-flex justify-content-center justify-content-sm-end">
+                                        <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-auto">
-                                <div class="d-flex justify-content-center justify-content-sm-end">
-                                    <nav id="datatablePagination" aria-label="Activity pagination"></nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                        </div> -->
                 <!-- End Footer -->
             </div>
             <!-- End Card -->
@@ -217,5 +217,11 @@
     </div>
 @endsection
 @push('custom-scripts')
-   
+    <script>
+        $(document).ready(function(e) {
+            $(".page-header").on("click", ".addRole", function(e) {
+                $("#addEditRoleModal").find('.action_name').html('Add');
+            })
+        });
+    </script>
 @endpush

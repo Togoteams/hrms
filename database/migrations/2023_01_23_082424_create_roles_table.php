@@ -23,7 +23,6 @@ return new class extends Migration
             $table->tinyInteger('is_system_define')->default(0)->nullable();
             $table->text('description')->nullable();
             $table->string('status', 30)->default('active')->nullable();
-            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
     }

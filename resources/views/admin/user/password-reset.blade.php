@@ -30,8 +30,8 @@
         }
     </style>
     <div class="container-fluid mr-2p">
-        <div class="row mx-auto justify-content-center">
-            <div class="col-6 bg-white form-div card">
+        <div class="mx-auto row justify-content-center">
+            <div class="bg-white col-6 form-div card">
                 <h3 class="text-center font-weight-bold txt-color mr-m-2p">Password Reset</h3>
 
                 <form action="{{ route('admin.password.reset') }}" method="post">
@@ -75,7 +75,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <center>
-                                        <button class="btn btn-sm btn-primary mb-3" id="formSubmit"
+                                        <button class="mb-3 btn btn-sm btn-primary" id="formSubmit"
                                             onclick="return formValidate();">
                                             Reset
                                         </button>

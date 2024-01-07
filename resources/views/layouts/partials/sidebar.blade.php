@@ -32,7 +32,7 @@
                          <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.dashboard' ? 'active-class' : '' }}"
                              href="{{ route('admin.dashboard') }}" data-placement="left">
                              <i class="bi bi-speedometer nav-icon"></i>
-                             <span class="nav-link-title">Dashboards</span>
+                             <span class="nav-link-title">Dashboard</span>
                          </a>
                      </div>
 
