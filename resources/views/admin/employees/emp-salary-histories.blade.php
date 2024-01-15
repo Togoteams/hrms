@@ -161,7 +161,8 @@
                                     <div class="row">
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="date_of_current_basic">Date Of Basic Salary</label>
+                                                <label for="date_of_current_basic">Date Of Basic Salary<small
+                                                    class="required-field">*</small></label>
                                                 <input id="date_of_current_basic" placeholder="Enter Basic Salary" type="date" name="date_of_current_basic"
                                                     class="form-control form-control-sm" value="">
                                             </div>
@@ -184,7 +185,8 @@
 
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="basic_salary">Basic Salary</label>
+                                                <label for="basic_salary">Basic Salary<small
+                                                    class="required-field">*</small></label>
                                                 <input id="basic_salary" placeholder="Enter Basic Salary" type="number"
                                                     min="1" max="10000" name="basic_salary"
                                                     class="form-control form-control-sm" value="">
@@ -206,7 +208,8 @@
                                       
                                         <div class="mb-2 col-sm-6 basic-salary-india-container">
                                             <div class="form-group">
-                                                <label for="basic_salary_for_india">Basic Salary For India</label>
+                                                <label for="basic_salary_for_india">Basic Salary For India<small
+                                                    class="required-field">*</small></label>
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <select name="currency_salary_for_india"
@@ -228,7 +231,8 @@
                                         </div>
                                         <div class="mb-2 col-sm-6 da-container">
                                             <div class="form-group">
-                                                <label for="da"><span>DA(%)</span></label>
+                                                <label for="da"><span>DA(%)</span><small
+                                                    class="required-field">*</small></label>
                                                 <input id="da" placeholder="Enter " type="number" name="da"
                                                     maxlength="3" minlength="1" min="1" max="99"
                                                     pattern="[0-9]+" class="form-control form-control-sm">

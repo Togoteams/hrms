@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             LeaveSettingSeeder::class,
             CountrySeeder::class,
             AccountTableSeeder::class,
+            SalarySettingSeeder::class,
         ]);
     }
 }

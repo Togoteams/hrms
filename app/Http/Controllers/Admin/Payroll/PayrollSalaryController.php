@@ -24,6 +24,7 @@ use App\Models\SalaryHistory;
 use App\Traits\LeaveTraits;
 use App\Models\CurrencySetting;
 use App\Models\LeaveEncashment;
+
 class PayrollSalaryController extends Controller
 {
     public  $page_name = "Payroll Salary";
@@ -86,65 +87,64 @@ class PayrollSalaryController extends Controller
             return $validator->errors();
         } else {
             // try {
-                $emp = Employee::where('user_id', $request->user_id)->first();
-                $net_take_home_in_pula =  $request->net_take_home;
-                $currencyValue = 1;
+            $emp = Employee::where('user_id', $request->user_id)->first();
+            $net_take_home_in_pula =  $request->net_take_home;
+            $currencyValue = 1;
 
-                if($emp->employment_type=="expatriate")
-                {
-                    $currencyValue = getCurrencyValue("usd","pula");
+            if ($emp->employment_type == "expatriate") {
+                $currencyValue = getCurrencyValue("usd", "pula");
+            }
+            $usdToInr = getCurrencyValue("usd", "inr");
+            $pulaToInr = getCurrencyValue("pula", "inr");
+
+            $net_take_home_in_pula = number_format($request->net_take_home * $currencyValue, 2, '.', '');
+            $payroll = PayrollSalary::create([
+                'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
+                'user_id' => $request->user_id,
+                'pay_for_month_year' =>  $request->pay_for_month_year,
+                'basic' =>  $request->basic,
+                'fixed_deductions' =>  $request->fixed_deductions,
+                'employment_type' =>  $emp->employment_type,
+                'other_deductions' =>  $request->other_deductions,
+                'no_of_payable_days' =>  $request->no_of_payable_days,
+                'no_of_persent_days' =>  $request->no_of_persent_days,
+                'annual_balanced_leave' =>  $request->annual_balanced_leave,
+                'total_loss_of_pay' =>  $request->total_loss_of_pay,
+                'total_working_days' =>  $request->total_working_days,
+                'net_take_home' =>  $request->net_take_home,
+                'leave_encashment_amount' =>  $request->leave_encashment_amount,
+                'leave_encashment_days' =>  $request->leave_encashment_days,
+                'net_take_home' =>  $request->net_take_home,
+                'net_take_home_in_pula' =>  $net_take_home_in_pula,
+                'usd_pula_currency_amount' =>  $currencyValue,
+                'usd_inr_currency_amount' =>  $usdToInr,
+                'pula_inr_currency_amount' =>  $pulaToInr,
+                'ctc' =>  $request->ctc,
+                'total_employer_contribution' =>  $request->total_employer_contribution,
+                'total_deduction' =>  $request->total_deduction,
+                'gross_earning' =>  $request->gross_earning,
+                'created_by' => auth()->user()->id,
+                'branch_id' => $emp->branch_id,
+            ]);
+
+            // dd($payroll);
+            foreach ($request->all() as $key => $value) {
+                $head =  PayrollHead::where('slug', $key)->first();
+                if ($head) {
+                    PayrollSalaryHead::create([
+                        'payroll_head_id' => $head->id,
+                        'payroll_salary_id' => $payroll->id,
+                        'value' => $request->$key,
+                        'created_by' => auth()->user()->id
+                    ]);
                 }
-                $usdToInr = getCurrencyValue("usd","inr");
-                $pulaToInr = getCurrencyValue("pula","inr");
+            }
+            /**
+             * This Creating TTUM Report of Each Account
+             */
+            $this->createTTum($payroll->id);
 
-                $net_take_home_in_pula = number_format($request->net_take_home * $currencyValue,2,'.','');
-                $payroll = PayrollSalary::create([
-                    'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
-                    'user_id' => $request->user_id,
-                    'pay_for_month_year' =>  $request->pay_for_month_year,
-                    'basic' =>  $request->basic,
-                    'fixed_deductions' =>  $request->fixed_deductions,
-                    'employment_type' =>  $emp->employment_type,
-                    'other_deductions' =>  $request->other_deductions,
-                    'no_of_payable_days' =>  $request->no_of_payable_days,
-                    'no_of_persent_days' =>  $request->no_of_persent_days,
-                    'annual_balanced_leave' =>  $request->annual_balanced_leave,
-                    'total_loss_of_pay' =>  $request->total_loss_of_pay,
-                    'total_working_days' =>  $request->total_working_days,
-                    'net_take_home' =>  $request->net_take_home,
-                    'leave_encashment_amount' =>  $request->leave_encashment_amount,
-                    'leave_encashment_days' =>  $request->leave_encashment_days,
-                    'net_take_home' =>  $request->net_take_home,
-                    'net_take_home_in_pula' =>  $net_take_home_in_pula,
-                    'usd_pula_currency_amount' =>  $currencyValue,
-                    'usd_inr_currency_amount' =>  $usdToInr,
-                    'pula_inr_currency_amount' =>  $pulaToInr,
-                    'ctc' =>  $request->ctc,
-                    'total_employer_contribution' =>  $request->total_employer_contribution,
-                    'total_deduction' =>  $request->total_deduction,
-                    'gross_earning' =>  $request->gross_earning,
-                    'created_by' => auth()->user()->id,
-                    'branch_id' => $emp->branch_id,
-                ]);
-
-                // dd($payroll);
-                foreach ($request->all() as $key => $value) {
-                    $head =  PayrollHead::where('slug', $key)->first();
-                    if ($head) {
-                        PayrollSalaryHead::create([
-                            'payroll_head_id' => $head->id,
-                            'payroll_salary_id' => $payroll->id,
-                            'value' => $request->$key,
-                            'created_by' => auth()->user()->id
-                        ]);
-                    }
-                }
-                /**
-                 * This Creating TTUM Report of Each Account
-                 */
-                $this->createTTum($payroll->id);
-
-                return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            return response()->json(['success' => $this->page_name . " Added Successfully"]);
             // } catch (Exception $e) {
             //     return response()->json(['error' => $e->getMessage()]);
             // }
@@ -177,30 +177,28 @@ class PayrollSalaryController extends Controller
         // $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('for', 'payscale')->orWhere('for', 'both')->where('deleted_at', null)->get();
 
         $salaryMonth = $payscale->pay_for_month_year;
-        $salaryStartDate = date("Y-m-d", strtotime("-1 months",strtotime($salaryMonth."-20")));
-        $salaryEndDate = date("Y-m-d", strtotime($salaryMonth."-20"));
+        $salaryStartDate = date("Y-m-d", strtotime("-1 months", strtotime($salaryMonth . "-20")));
+        $salaryEndDate = date("Y-m-d", strtotime($salaryMonth . "-20"));
         $user_id = $payscale->user_id;
         // while($holidayFound!=false)
         // {
-            if(!isHolidayDate($salaryEndDate))
-            {
-                $holidayFound = false;
-            }
-            $salaryEndDate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $salaryEndDate) ) ));
+        if (!isHolidayDate($salaryEndDate)) {
+            $holidayFound = false;
+        }
+        $salaryEndDate =  date('Y-m-d', (strtotime('-1 day', strtotime($salaryEndDate))));
         // }
-        if(empty($data))
-        {
-             return response()->json("Pay Scale not defined");
+        if (empty($data)) {
+            return response()->json("Pay Scale not defined");
         }
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('deleted_at', null)->get();
         // return $emp_head;
-        $arrears = PayrollSalaryIncrement::where('financial_year',date('Y'))->where('employment_type',$emp->employment_type)->where('effective_from','<=',date('Y-m-d h:i:s'))->where('effective_to','>=',date('Y-m-d h:i:s'))->first();
+        $arrears = PayrollSalaryIncrement::where('financial_year', date('Y'))->where('employment_type', $emp->employment_type)->where('effective_from', '<=', date('Y-m-d h:i:s'))->where('effective_to', '>=', date('Y-m-d h:i:s'))->first();
         $currentData = date('Y-m-d H:i:s');
         // return $currentData;
-        $arrearsNoOfMonth=0;
-        if($arrears){
+        $arrearsNoOfMonth = 0;
+        if ($arrears) {
             $effectiveFromData = $arrears->effective_from;
-            $arrearsNoOfMonth = diffInMonths($effectiveFromData,today());
+            $arrearsNoOfMonth = diffInMonths($effectiveFromData, today());
         }
 
         $totalBalancedLeave = $this->getTotalBalancedLeave($user_id);
@@ -208,13 +206,12 @@ class PayrollSalaryController extends Controller
         $noOfPayableDays = 0;
         $noOfAvailedLeaves = 0;
         $totalMonthDays = date('t');
-        if($emp->employment_type=="local")
-        {
+        if ($emp->employment_type == "local") {
             $totalMonthDays = 24;
         }
 
-        $noOfHoliday = Holiday::where('date','<=',$salaryStartDate)->where('date','>=',$salaryEndDate)
-        ->where('status','active')->count();
+        $noOfHoliday = Holiday::where('date', '<=', $salaryStartDate)->where('date', '>=', $salaryEndDate)
+            ->where('status', 'active')->count();
 
 
         /**
@@ -224,10 +221,10 @@ class PayrollSalaryController extends Controller
 
         $noOfUnPaidLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type',"");
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', "");
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','unpaid')->whereNotIn('status',['reject']);
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'unpaid')->whereNotIn('status', ['reject']);
         })->count();
         // return $noOfUnPaidLeave;
         /**
@@ -236,81 +233,79 @@ class PayrollSalaryController extends Controller
 
         $noOfPaidLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type',"");
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', "");
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'paid')
+                ->where('status', 'approved');
         })->count();
         // return $noOfPaidLeave;
 
         $fullPaySickLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','full_pay');
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', 'full_pay');
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'paid')
+                ->where('status', 'approved');
         })->count();
 
         $halfPayLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','half_pay');
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', 'half_pay');
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)
+                ->where('status', 'approved');
         })->count();
 
         $quarterPayLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','quarter_pay');
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', 'quarter_pay');
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)
+                ->where('status', 'approved');
         })->count();
         // return
 
         $noOfUnapprovedLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type',"");
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', "");
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')->whereNotIn('status',['approved','reject']);
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'paid')->whereNotIn('status', ['approved', 'reject']);
         })->count();
 
         $noOfDay = 0;
 
-        $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
+        $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave * 2) + $halfPayLeave + $quarterPayLeave;
 
 
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
 
-        $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
+        $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.75);
         // echo $noOfUnPaidLeave;
         // return $noOfUnapprovedLeave;
         // $noOfPayableDays
         $presentDay = intval($totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave + $quarterPayLeave));
-        if( $presentDay<0)
-        {
-            $presentDay =0;
+        if ($presentDay < 0) {
+            $presentDay = 0;
         }
         // return $presentDay;
-        $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave/2)+($quarterPayLeave * 0.25));
+        $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
         $salary_month = $salaryMonth;
 
-        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id',$user_id)->whereIn('status',['approved'])->sum('available_leave_for_encashment');
+        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
 
-        if($emp->employment_type=="expatriate")
-        {
-            $viewComponent = view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','edit','noOfEncashLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','usdToPulaAmount','usdToInrAmount'));
-        }else{
-            $viewComponent =  view('admin.payroll.salary.employee_head', compact('emp_head','edit','noOfEncashLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
+        if ($emp->employment_type == "expatriate") {
+            $viewComponent = view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'edit', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
+        } else {
+            $viewComponent =  view('admin.payroll.salary.employee_head', compact('emp_head', 'edit', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
         }
 
-        return view('admin.payroll.salary.edit', ['html' => $viewComponent, 'data' => $payscale,'salary_month'=>$salaryMonth]);
+        return view('admin.payroll.salary.edit', ['html' => $viewComponent, 'data' => $payscale, 'salary_month' => $salaryMonth]);
     }
 
     /**
@@ -331,7 +326,7 @@ class PayrollSalaryController extends Controller
         } else {
             try {
                 $emp = Employee::where('user_id', $request->user_id)->first();
-                $payroll = PayrollSalary::where('id',$id)->update([
+                $payroll = PayrollSalary::where('id', $id)->update([
                     'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                     'user_id' => $request->user_id,
                     'pay_for_month_year' =>  $request->pay_for_month_year,
@@ -398,53 +393,49 @@ class PayrollSalaryController extends Controller
     public function print($salaryId)
     {
 
-        $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation','department','payrollSalaryHead','payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
+        $data = PayrollSalary::with(['user', 'employee', 'employee.branch', 'employee.designation', 'department', 'payrollSalaryHead', 'payrollSalaryHead.payroll_head'])->where('id', $salaryId)->first();
 
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
         // $usdToPullAmount = getCurrencyValue("usd", "pula");
 
-        if($data->employee->employment_type=="local")
-        {
+        if ($data->employee->employment_type == "local") {
             return view('admin.payroll.salary.salary-slip-local', compact('data'));
-        }else
-        {
-            return view('admin.payroll.salary.salary-slip-ibo', compact('data','usdToPulaAmount','usdToInrAmount'));
+        } else {
+            return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'usdToPulaAmount', 'usdToInrAmount'));
         }
     }
 
-    public function get_employee_data($user_id = null,$salary_month = null)
+    public function get_employee_data($user_id = null, $salary_month = null)
     {
         $page = $this->page_name;
         $salaryMonth = $salary_month;
-        $salaryStartDate = date("Y-m-d", strtotime("-1 months",strtotime($salaryMonth."-20")));
-        $salaryEndDate = date("Y-m-d", strtotime($salaryMonth."-20"));
+        $salaryStartDate = date("Y-m-d", strtotime("-1 months", strtotime($salaryMonth . "-20")));
+        $salaryEndDate = date("Y-m-d", strtotime($salaryMonth . "-20"));
         $holidayFound = false;
-        do{
-            if(isHolidayDate($salaryEndDate))
-            {
+        do {
+            if (isHolidayDate($salaryEndDate)) {
                 $holidayFound = true;
-                $salaryEndDate =  date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $salaryEndDate) ) ));
-            }else{
+                $salaryEndDate =  date('Y-m-d', (strtotime('-1 day', strtotime($salaryEndDate))));
+            } else {
                 $holidayFound = false;
             }
-        }while($holidayFound);
+        } while ($holidayFound);
 
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
-        if(empty($data))
-        {
-             return response()->json("Pay Scale not defined");
+        if (empty($data)) {
+            return response()->json("Pay Scale not defined");
         }
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('deleted_at', null)->get();
         // return $emp_head;
-        $arrears = PayrollSalaryIncrement::where('financial_year',date('Y'))->where('employment_type',$emp->employment_type)->where('effective_from','<=',date('Y-m-d h:i:s'))->where('effective_to','>=',date('Y-m-d h:i:s'))->first();
+        $arrears = PayrollSalaryIncrement::where('financial_year', date('Y'))->where('employment_type', $emp->employment_type)->where('effective_from', '<=', date('Y-m-d h:i:s'))->where('effective_to', '>=', date('Y-m-d h:i:s'))->first();
         $currentData = date('Y-m-d H:i:s');
         // return $currentData;
-        $arrearsNoOfMonth=0;
-        if($arrears){
+        $arrearsNoOfMonth = 0;
+        if ($arrears) {
             $effectiveFromData = $arrears->effective_from;
-            $arrearsNoOfMonth = diffInMonths($effectiveFromData,today());
+            $arrearsNoOfMonth = diffInMonths($effectiveFromData, today());
         }
 
         $totalBalancedLeave = $this->getTotalBalancedLeave($user_id);
@@ -452,13 +443,12 @@ class PayrollSalaryController extends Controller
         $noOfPayableDays = 0;
         $noOfAvailedLeaves = 0;
         $totalMonthDays = date('t');
-        if($emp->employment_type=="local")
-        {
+        if ($emp->employment_type == "local") {
             $totalMonthDays = 24;
         }
 
-        $noOfHoliday = Holiday::where('date','<=',$salaryStartDate)->where('date','>=',$salaryEndDate)
-        ->where('status','active')->count();
+        $noOfHoliday = Holiday::where('date', '<=', $salaryStartDate)->where('date', '>=', $salaryEndDate)
+            ->where('status', 'active')->count();
 
 
         /**
@@ -467,17 +457,17 @@ class PayrollSalaryController extends Controller
 
         $noOfUnPaidLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type',"");
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', "");
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','unpaid')->whereNotIn('status',['reject']);
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'unpaid')->whereNotIn('status', ['reject']);
         })->count();
 
 
-        $noOfReversalLeave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function($q) use ($user_id,$salaryStartDate, $salaryEndDate) {
-            $q->where('user_id',$user_id)->where('is_reversal',1)->whereBetween('reversal_at', array($salaryStartDate, $salaryEndDate))->whereIn('status',['approved']);
+        $noOfReversalLeave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function ($q) use ($user_id, $salaryStartDate, $salaryEndDate) {
+            $q->where('user_id', $user_id)->where('is_reversal', 1)->whereBetween('reversal_at', array($salaryStartDate, $salaryEndDate))->whereIn('status', ['approved']);
         })->count();
-        
+
         // return $noOfUnPaidLeave;
         /**
          * This is no of paid  leave who take paid and approved leave
@@ -485,76 +475,73 @@ class PayrollSalaryController extends Controller
 
         $noOfPaidLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type',"");
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', "");
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'paid')
+                ->where('status', 'approved');
         })->count();
         // return $noOfPaidLeave;
 
         $fullPaySickLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','full_pay');
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', 'full_pay');
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'paid')
+                ->where('status', 'approved');
         })->count();
 
         $halfPayLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','half_pay');
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', 'half_pay');
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)
+                ->where('status', 'approved');
         })->count();
 
         $quarterPayLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type','quarter_pay');
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', 'quarter_pay');
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)
-            ->where('status','approved');
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)
+                ->where('status', 'approved');
         })->count();
         // return
 
         $noOfUnapprovedLeave = LeaveDate::with('leaveApply')->where(function ($query) use ($salaryStartDate, $salaryEndDate) {
             $query->where(function ($q1) use ($salaryStartDate, $salaryEndDate) {
-                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type',"");
+                $q1->whereBetween('leave_date', array($salaryStartDate, $salaryEndDate))->where('pay_type', "");
             });
-        })->whereHas('leaveApply', function($q) use ($user_id) {
-            $q->where('user_id',$user_id)->where('is_paid','paid')->whereNotIn('status',['approved','reject']);
+        })->whereHas('leaveApply', function ($q) use ($user_id) {
+            $q->where('user_id', $user_id)->where('is_paid', 'paid')->whereNotIn('status', ['approved', 'reject']);
         })->count();
 
         $noOfDay = 0;
 
-        $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave*2) + $halfPayLeave + $quarterPayLeave;
+        $noOfAvailedLeaves = $noOfPaidLeave + ($fullPaySickLeave * 2) + $halfPayLeave + $quarterPayLeave;
 
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
 
-        $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave/2) + ($quarterPayLeave * 0.75);
+        $totalLosOfPayLeave =  $noOfUnapprovedLeave + $noOfUnPaidLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.75);
         // echo $noOfUnPaidLeave;
         // return $noOfUnapprovedLeave;
         // $noOfPayableDays
         $presentDay = intval($totalMonthDays - $noOfHoliday - ($noOfAvailedLeaves + $noOfUnPaidLeave + $noOfUnapprovedLeave + $quarterPayLeave));
-        if( $presentDay<0)
-        {
-            $presentDay =0;
+        if ($presentDay < 0) {
+            $presentDay = 0;
         }
         // return $presentDay;
-        $noOfPayableDays = $totalMonthDays  - ($noOfHoliday+$noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave/2)+($quarterPayLeave * 0.25));
-        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id',$user_id)->whereIn('status',['approved'])->sum('available_leave_for_encashment');
+        $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
+        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
 
-        if($emp->employment_type=="expatriate")
-        {
-            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head','noOfReversalLeave','noOfEncashLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp','usdToPulaAmount','usdToInrAmount'));
-        }else{
-            return view('admin.payroll.salary.employee_head', compact('emp_head','noOfEncashLeave','noOfReversalLeave','salary_month','totalLosOfPayLeave' ,'noOfAvailedLeaves','page','noOfPayableDays','totalBalancedLeave', 'arrearsNoOfMonth','presentDay','noOfHoliday','totalMonthDays','data','emp'));
-
+        if ($emp->employment_type == "expatriate") {
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'noOfReversalLeave', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
+        } else {
+            return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfEncashLeave', 'noOfReversalLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
         }
     }
 }

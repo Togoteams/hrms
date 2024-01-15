@@ -27,20 +27,7 @@
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
 
                                         <div class="p-3 pb-4 row text-dark">
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="branch_id">Branch<small class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4">
-                                                <select id="branch_id" name="branch_id"
-                                                    class="form-control form-control-sm">
-                                                    <option selected disabled> - Select Branch - </option>
-                                                    @foreach ($branch as $br)
-                                                        <option
-                                                            {{ !empty($employee) ? ($br->id == $employee->branch_id ? 'selected' : '') : '' }}
-                                                            value="{{ $br->id }}">{{ $br->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            
 
                                             <div class="pt-3 col-2 fw-semibold">
                                                 <label for="designation_id">Designation<small
@@ -90,27 +77,7 @@
                                                     value="{{ !empty($employee) ? $employee->start_date : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
-                                            {{-- <div class="pt-3 col-2 fw-semibold">
-                                                <label for="amount_payable_to_bomaind_each_year">
-                                                    Bomaid Medical Card
-                                                </label>
-                                            </div>
-                                            <div class="pt-2 col-4">
-                                                <select id="amount_payable_to_bomaind_each_year"
-                                                    name="amount_payable_to_bomaind_each_year"
-                                                    class="form-control form-control-sm"
-                                                    placeholder="Select Bomaid Medical Card"
-                                                    value="{{ !empty($employee) ? $employee->amount_payable_to_bomaind_each_year : '' }}">
-                                                    <option
-                                                        {{ !empty($employee) ? ($employee->amount_payable_to_bomaind_each_year == '' ? 'selected' : '') : '' }}
-                                                        value=""> - Select - </option>
-                                                    @foreach ($bomaind as $item)
-                                                        <option
-                                                            {{ !empty($employee) ? ($item->id == $employee->amount_payable_to_bomaind_each_year ? 'selected' : '') : '' }}
-                                                            value="{{ $item->id }}">{{ $item->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div> --}}
+                                         
                                             <div class="pt-3 col-2 fw-semibold">
                                                 <label for="bank_account_number">Bank Account No<small
                                                         class="required-field">*</small></label>
@@ -121,39 +88,39 @@
                                                     value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
                                                     name="bank_account_number" class="form-control form-control-sm">
                                             </div>
-                                            @if(!$employee->user->hasRole('managing-director'))
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="review_authority">Review Authority<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4">
-                                                <select id="review_authority" placeholder="Select Authority"
-                                                    name="review_authority" class="form-control form-control-sm">
-                                                    <option selected disabled> - Select - </option>
-                                                    @foreach ($reviewAuthority as $key => $review)
-                                                        <option value="{{ $review->user_id }}"
-                                                            @if ($review->user_id == $employee->review_authority) {{ 'selected' }} @endif>
-                                                            {{ $review->user->name }} </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            @if (!$employee->user->hasRole('managing-director'))
+                                                <div class="pt-3 col-2 fw-semibold">
+                                                    <label for="review_authority">Review Authority<small
+                                                            class="required-field">*</small></label>
+                                                </div>
+                                                <div class="pt-2 col-4">
+                                                    <select id="review_authority" placeholder="Select Authority"
+                                                        name="review_authority" class="form-control form-control-sm">
+                                                        <option selected disabled> - Select - </option>
+                                                        @foreach ($reviewAuthority as $key => $review)
+                                                            <option value="{{ $review->user_id }}"
+                                                                @if ($review->user_id == $employee->review_authority) {{ 'selected' }} @endif>
+                                                                {{ $review->user->name }} </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
 
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="reporting_authority">Reporting Authority<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4">
+                                                <div class="pt-3 col-2 fw-semibold">
+                                                    <label for="reporting_authority">Reporting Authority<small
+                                                            class="required-field">*</small></label>
+                                                </div>
+                                                <div class="pt-2 col-4">
 
-                                                <select id="reporting_authority" placeholder="Select Authority"
-                                                    name="reporting_authority" class="form-control form-control-sm">
-                                                    <option selected disabled> - Select - </option>
-                                                    @foreach ($reportingAuthority as $key => $value)
-                                                        <option value="{{ $value->user_id }}"
-                                                            @if ($value->user_id == $employee->reporting_authority) {{ 'selected' }} @endif>
-                                                            {{ $value->user->name }} </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                                    <select id="reporting_authority" placeholder="Select Authority"
+                                                        name="reporting_authority" class="form-control form-control-sm">
+                                                        <option selected disabled> - Select - </option>
+                                                        @foreach ($reportingAuthority as $key => $value)
+                                                            <option value="{{ $value->user_id }}"
+                                                                @if ($value->user_id == $employee->reporting_authority) {{ 'selected' }} @endif>
+                                                                {{ $value->user->name }} </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             @endif
                                             {{-- <div class="pt-3 col-3 fw-semibold">
                                                 <label for="currency">Currency<small
@@ -207,155 +174,6 @@
                                                         value="local-contractual">Local-Contractual </option>
 
                                                 </select>
-                                            </div>
-
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="basic_salary">Basic Salary<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-1">
-                                                <select name="currency_salary" id="currency_salary"
-                                                    name="currency_salary" class="form-control form-control-sm">
-                                                    @foreach ($currency_setting as $currency)
-                                                        <option value="{{ $currency->currency_name_from }}"
-                                                            {{ $employee->currency_salary == $currency->currency_name_from ? 'selected' : '' }}>
-                                                            {{ getCurrencyIcon($currency->currency_name_from) }}</option>
-                                                    @endforeach
-
-                                                </select>
-                                            </div>
-                                            <div class="pt-2 col-3">
-                                                <input id="basic_salary" placeholder="Enter " type="number"
-                                                    name="basic_salary"
-                                                    value="{{ !empty($employee) ? $employee->basic_salary : '' }}"
-                                                    class="form-control form-control-sm ">
-                                            </div>
-
-                                            <div class="pt-3 col-2 fw-semibold salary-type-container "
-                                                style="display: none">
-                                                <label for="salary_type">Salary Type<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4 salary-type-container" style="display: none">
-                                                <select id="salary_type" placeholder="Enter Salary Type"
-                                                    name="salary_type"
-                                                    value="{{ !empty($employee) ? $employee->salary_type : '' }}"
-                                                    class="form-control form-control-sm">
-
-                                                    <option>- Select -</option>
-                                                    <option
-                                                        {{ !empty($employee) ? ($employee->salary_type == 'nps' ? 'selected' : '') : '' }}
-                                                        value="nps">NPS</option>
-                                                    <option
-                                                        {{ !empty($employee) ? ($employee->salary_type == 'pf' ? 'selected' : '') : '' }}
-                                                        value="pf">PF</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="pt-3 col-2 fw-semibold basic-salary-india-container"
-                                                style="display: none">
-                                                <label for="basic_salary_for_india">Basic Salary For India<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-1 basic-salary-india-container" style="display: none">
-                                               
-                                            </div>
-                                            <div class="pt-2 col-3 basic-salary-india-container" style="display: none">
-                                                <input id="basic_salary_for_india" placeholder="Enter " type="number"
-                                                    name="basic_salary_for_india"
-                                                    value="{{ !empty($employee) ? $employee->basic_salary_for_india : '' }}"
-                                                    class="form-control form-control-sm">
-                                            </div>
-                                            <div class="pt-3 col-2 fw-semibold da-container" style="display: none">
-                                                <label for="da">DA(%)</label>
-                                            </div>
-                                            <div class="pt-2 col-4 da-container" style="display: none">
-                                                <input id="da" placeholder="Enter " type="text" name="da"
-                                                    maxlength="3" minlength="1" pattern="[0-9]+"
-                                                    value="{{ !empty($employee) ? $employee->da : '' }}"
-                                                    class="form-control form-control-sm">
-                                            </div>
-
-
-
-                                            <div class="pt-3 col-2 fw-semibold contractDiv">
-                                                <label for="contract_duration">Contract Duration<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-3 contractDiv">
-                                                <input id="contract_duration" name="contract_duration"
-                                                    placeholder="Enter Months" type="number"
-                                                    value="{{ !empty($employee) ? $employee->contract_duration : '' }}"
-                                                    class="form-control form-control-sm ">
-                                            </div>
-                                            <div class="pt-3 col-1 contractDiv">
-                                                Month(s)
-                                            </div>
-
-
-
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="union_membership_id">Union Membership</label>
-                                            </div>
-                                            <div class="pt-3 col-4">
-                                                <input type="radio" id="radio1" name="union_membership_id"
-                                                    value="no" class="form-check-input" title="Select NO"
-                                                    {{ !empty($employee) && $employee->union_membership_id == 'no' ? 'checked' : '' }} />
-                                                <label class="form-check-label" title="Select NO"
-                                                    for="radio1">No</label>
-
-                                                <input type="radio" id="radio2" name="union_membership_id"
-                                                    value="yes" class="form-check-input" title="Select YES"
-                                                    style="margin-left: 20px"
-                                                    {{ !empty($employee) && $employee->union_membership_id == 'yes' ? 'checked' : '' }} />
-                                                <label class="form-check-label" title="Select YES"
-                                                    for="radio2">Yes</label>
-                                            </div>
-
-
-
-
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="pension_opt">Pension Contribution<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-3 col-4">
-                                                <input type="radio" id="pradio1" name="pension_contribution"
-                                                    value="no" class="form-check-input" title="Select NO"
-                                                    {{ !empty($employee) && $employee->pension_contribution == 'no' ? 'checked' : '' }} />
-                                                <label class="form-check-label" title="Select NO"
-                                                    for="radio1">No</label>
-
-                                                <input type="radio" id="pradio2" name="pension_contribution"
-                                                    value="yes" class="form-check-input" title="Select YES"
-                                                    style="margin-left: 20px"
-                                                    {{ !empty($employee) && $employee->pension_contribution == 'yes' ? 'checked' : '' }} />
-                                                <label class="form-check-label" title="Select YES"
-                                                    for="radio2">Yes</label>
-                                            </div>
-
-                                            <div id="pensionDropdown" style="display: none;"
-                                                class="pt-2 col-6 fw-semibold">
-                                                <div class="row">
-                                                    <div class="pt-2 col-md-4">
-                                                        <label for="pension_opt">Pension (%)<small
-                                                                class="required-field">*</small></label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <select name="pension_opt" id="pension_opt"
-                                                            class="form-control form-control-sm">
-                                                            <option value="">Choose %</option>
-                                                            <option value="4"
-                                                                {{ old('pension_opt', $employee->pension_opt) == '4' ? 'selected' : '' }}>
-                                                                4%</option>
-                                                            <option value="5"
-                                                                {{ old('pension_opt', $employee->pension_opt) == '5' ? 'selected' : '' }}>
-                                                                5%</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-
                                             </div>
 
                                             <div class="pt-5 text-center">

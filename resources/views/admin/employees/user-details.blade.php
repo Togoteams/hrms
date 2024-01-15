@@ -50,16 +50,20 @@
                                                     class="form-control form-control-sm">
                                             </div>
 
-                                            {{-- <div class="pt-3 col-3 fw-semibold">
-                                                <label for="username">User-Name <small
-                                                        class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
-                                            </div> --}}
-                                            {{-- <div class="pt-2 col-3">
-                                                <input id="username" placeholder="Enter User Name" type="text"
-                                                    name="username"
-                                                    value="{{ !empty($employee) ? $employee->user->username : '' }}"
-                                                    class="form-control form-control-sm" {{ isHideCheck($employee) }}>
-                                            </div> --}}
+                                            <div class="pt-3 col-3 fw-semibold">
+                                                <label for="branch_id">Branch<small class="required-field">*</small></label>
+                                            </div>
+                                            <div class="pt-2 col-3">
+                                                <select id="branch_id" name="branch_id"
+                                                    class="form-control form-control-sm">
+                                                    <option selected disabled> - Select Branch - </option>
+                                                    @foreach ($branch as $br)
+                                                        <option
+                                                            {{ !empty($employee) ? ($br->id == $employee->branch_id ? 'selected' : '') : '' }}
+                                                            value="{{ $br->id }}">{{ $br->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="role">Select Role<small
                                                         class="required-field">*</small></label>

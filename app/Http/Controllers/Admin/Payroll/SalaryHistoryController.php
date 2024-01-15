@@ -31,20 +31,19 @@ class SalaryHistoryController extends BaseController
 
     public function postSalaryHistory(Request $request)
     {
+        $employee = Employee::firstWhere('user_id', $request->user_id);
         $request->validate([
             'user_id'   => ['required', 'string'],
-            'currency_salary'   => ['required', 'string'],
-            'basic_salary'   => ['required', 'string'],
-            'date_of_current_basic'   => ['required', 'date'],
-            // 'salary_type'   => ['required', 'string'],
-            // 'da'   => ['required', 'string'],
-            // 'basic_salary_for_india'      => ['required', 'string'],
-            // 'currency_salary_for_india'     => ['required', 'string'],
-            // 'date_of_current_basic'   => ['required', 'string'],
-            'pension_contribution'   => ['required', 'string'],
-            'pension_opt'   => ['nullable','string','required_if:pension_contribution,yes',],
-            // 'status'   => ['required', 'string'],
-            'union_membership_id'   => ['required', 'string'],
+            'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
+            'basic_salary_for_india' => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
+            'currency_salary_for_india'  => ['nullable', 'string'],
+            'salary_type'  => ['nullable', 'string'],
+            'da' => ['nullable', 'numeric','between:1,100'],
+            'date_of_current_basic' => ['nullable', 'date'],
+            'currency_salary'       => ['required', 'string'],
+            'pension_opt'           => ['nullable', 'numeric'],
+            'pension_contribution'  => ['nullable', 'string'],
+            'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
         ]);
 
         try {
@@ -55,7 +54,7 @@ class SalaryHistoryController extends BaseController
                 SalaryHistory::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
                 $message = "Salary History Updated Successfully";
             }
-            $employee = Employee::firstWhere('user_id', $request->user_id);
+            
             return $this->responseJson(
                 true,
                 200,

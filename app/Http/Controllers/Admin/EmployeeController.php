@@ -75,7 +75,8 @@ class EmployeeController extends BaseController
     {
         $roles = Role::getRoles()->whereNotIn('slug',['managing-director'])->where('status','active')->get();
         $countries = Country::getCountry()->get();
-        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid),'roles'=>$roles,'countries'=>$countries]);
+        $branch = Branch::getBranch()->get();
+        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid), 'branch'=> $branch,'roles'=>$roles,'countries'=>$countries]);
     }
 
     public function postUserDetails(Request $request)
@@ -100,6 +101,7 @@ class EmployeeController extends BaseController
                     },
                 ],
                 'std_code' => ['required'],
+                'branch_id' => ['required'],
                 'emergency_contact' => ['nullable', 'numeric'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'confirmed', Password::defaults()]
@@ -124,6 +126,7 @@ class EmployeeController extends BaseController
                     },
                 ],
             'std_code' => ['required'],
+            'branch_id' => ['required'],
             'emergency_contact' => ['nullable', 'numeric'],
             ]);
         }
@@ -176,7 +179,7 @@ class EmployeeController extends BaseController
         $membership = Membership::get();
         $bomaind = MedicalCard::getMedicalCard()->get();
         $currencySetting = CurrencySetting::getCurrency()->get();
-
+        $employee = $this->getEmployee($eid);
         // Filter currencies to include only 'pula' and 'usd'
         $allowedCurrencies = ['pula', 'usd'];
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
@@ -185,11 +188,12 @@ class EmployeeController extends BaseController
         $allowedRoles = ['managing-director','chief-manager-ho','branch-head'];
         $reportingAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
-        })->get();
+        })->whereNotIn('user_id',[$employee->id])->get();
+
         $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
         $reviewAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
-        })->get();
+        })->whereNotIn('user_id',[$employee->id])->get();
 
         return view('admin.employees.employee-details',[
                 'page'          => $this->page_name,
@@ -198,7 +202,7 @@ class EmployeeController extends BaseController
                 'branch'        => $branch,
                 'bomaind'       => $bomaind,
                 'currency_setting' =>$filteredCurrencySetting,
-                'employee'      => $this->getEmployee($eid),
+                'employee'      => $employee,
                 'reportingAuthority'      => $reportingAuthority,
                 'reviewAuthority'      => $reviewAuthority,
             ]
@@ -211,25 +215,15 @@ class EmployeeController extends BaseController
         $employee = Employee::find($request->id);
         $forWork = date("Y-m-d", strtotime("+18 years",strtotime($employee->date_of_birth)));
         $request->validate([
-            'branch_id'             => ['required', 'numeric'],
+            // 'branch_id'             => ['required', 'numeric'],
             'designation_id'        => ['required', 'numeric'],
             'ec_number'             => ['required', 'string', 'unique:employees,ec_number,'.$employee->id],
             'id_number'             => ['nullable', 'numeric'],
-            'start_date'            => ['required','date','after_or_equal:' . $forWork,
-            ],
+            'start_date'            => ['required','date','after_or_equal:' . $forWork],
             'currency'              => ['nullable', 'string'],
-            'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
-            'basic_salary_for_india' => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
-            'currency_salary_for_india'  => ['nullable', 'string'],
-            'salary_type'  => ['nullable', 'string'],
-            'da' => ['nullable', 'numeric','between:1,100'],
-            'date_of_current_basic' => ['nullable', 'date'],
             'employment_type'       => ['required', 'string'],
-            'pension_opt'           => ['nullable', 'numeric'],
-            'pension_contribution'  => ['nullable', 'string'],
+            
             'bank_account_number'   => ['required', 'numeric','digits_between:12,16'],
-            'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
-            'currency_salary'       => ['required', 'string'],
             'review_authority'              => ['nullable', 'string'],
             'reporting_authority'              => ['nullable', 'string'],
 
@@ -257,7 +251,7 @@ class EmployeeController extends BaseController
                     true,
                     200,
                     $message,
-                    ["employee" => $employee,'redirect_url' => route('admin.employee.address.form', $employee->emp_id)]
+                    ["employee" => $employee,'redirect_url' => route('admin.employee.salary-history.list', $employee->emp_id)]
                 );
             }
         } catch (Exception $e) {

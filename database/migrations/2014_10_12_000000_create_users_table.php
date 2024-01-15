@@ -31,8 +31,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->bigInteger('created_by')->nullable();
-            $table->foreignId('created_by')->references('id')->on('users')->nullable()->comment('used for created by user tracking');
-            $table->foreignId('updated_by')->references('id')->on('users')->nullable()->comment('used for updated by user tracking');
+            $table->foreignId('updated_by')->nullable();
+            // $table->foreignId('created_by')->references('id')->on('users')->nullable()->comment('used for created by user tracking');
+            // $table->foreignId('updated_by')->references('id')->on('users')->nullable()->comment('used for updated by user tracking');
           });
     }
 
