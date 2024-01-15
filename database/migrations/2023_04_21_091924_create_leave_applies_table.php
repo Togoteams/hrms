@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('is_approved')->default(0);
             $table->string('approved_by')->nullable();
+            $table->bigInteger('approval_authority')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->string('is_paid')->default(0);
             $table->string('is_leave_counted_on_holiday')->default(0);

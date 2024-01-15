@@ -8,7 +8,7 @@
             $basic = round(($data->basic / $totalMonthDays) * $noOfPayableDays);
             $perDaysAmount = round(($data->basic / $totalMonthDays));
             $totalEnCashAmount = $perDaysAmount * $noOfEncashLeave;
-            $totalReversalAmount = $perDaysAmount * $noOfReversalLeave;
+            // $totalReversalAmount = $perDaysAmount * $noOfReversalLeave;
             @endphp
             <input  value="{{$totalEnCashAmount}}" readonly id="leave_encashment_amount"  type="hidden" class="form-control form-control-sm">
 

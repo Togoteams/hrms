@@ -464,10 +464,23 @@ class PayrollSalaryController extends Controller
         })->count();
 
 
-        $noOfReversalLeave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function ($q) use ($user_id, $salaryStartDate, $salaryEndDate) {
+        $reversalLeave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function ($q) use ($user_id, $salaryStartDate, $salaryEndDate) {
             $q->where('user_id', $user_id)->where('is_reversal', 1)->whereBetween('reversal_at', array($salaryStartDate, $salaryEndDate))->whereIn('status', ['approved']);
-        })->count();
-
+        })->get();
+        $totalReversalAmount = 0;
+        foreach($reversalLeave as $leaveDate)
+        {
+            $leaveStartDate = $leaveDate->leaveApply->start_date;
+            $leaveEndDate = $leaveDate->leaveApply->end_date;
+            $salaryHistory = SalaryHistory::where('date_of_current_basic','<=',($leaveStartDate))->orderBy('id','desc')->first();
+            if($salaryHistory)
+            {
+                $basicSalary = $salaryHistory->basic_salary;
+                $totalReversalAmount += $salaryHistory->basic_salary/$totalMonthDays;
+            }
+        }
+        // return  $totalReversalAmount;
+        $noOfReversalLeave = count($reversalLeave);
         // return $noOfUnPaidLeave;
         /**
          * This is no of paid  leave who take paid and approved leave
@@ -534,14 +547,14 @@ class PayrollSalaryController extends Controller
         if ($presentDay < 0) {
             $presentDay = 0;
         }
-        // return $presentDay;
+        // return $noOfReversalLeave;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
         $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
 
         if ($emp->employment_type == "expatriate") {
-            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'noOfReversalLeave', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'noOfReversalLeave','totalReversalAmount', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
         } else {
-            return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfEncashLeave', 'noOfReversalLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
+            return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfEncashLeave', 'noOfReversalLeave','totalReversalAmount', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
         }
     }
 }

@@ -57,7 +57,6 @@ trait LeaveTraits
 
       switch ($leaveSetting?->slug) {
         case 'sick-leave':
-
           if ($emp->employment_type == "expatriate") {
             $total_leave = $perYearLeave;
             if ($years >= 1) {
@@ -65,7 +64,7 @@ trait LeaveTraits
             }
           } else {
             if ($years >= 1) {
-              $totalWorkingMonths = (date('m') - 1);
+              $totalWorkingMonths = (($years*12 + $months) - 1);
             } else {
               $totalWorkingMonths = ($months>0  ? $months-1 : 0);
             }

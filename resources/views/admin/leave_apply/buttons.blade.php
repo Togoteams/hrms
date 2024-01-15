@@ -26,8 +26,8 @@
         </button>
     @endif
     @if (!isemplooye())
-        @if (approvalBtnEnable($item->id) == 1)
-            @if($item->status=='approved' && $item->is_reversal==0 && $item->user->employment_type=="local")
+        {{-- @if (approvalBtnEnable($item->id) == 1) --}}
+            @if($item->status=='approved' && $item->is_reversal==0 && $item->user?->employee?->employment_type=="local")
                 @if($item->leave_type->slug=="leave-without-pay")
                     <button type="button" onclick="reverseLeaveWithoutPay({{$item->id}})"
                     href="#" class="btn btn-edit btn-sm"><i class="fa fa-undo" aria-hidden="true"></i>
@@ -41,7 +41,7 @@
                     class="btn @if ($item->status == 'pending') btn-warning @elseif ($item->status == 'reject') btn-danger @elseif($item->status == 'approved') btn-success @else btn-secondary @endif btn-sm">
                     {{ ucfirst($item->status) }} </button>
             @endcan
-        @endif
+        {{-- @endif --}}
     @endif
 
 </form>

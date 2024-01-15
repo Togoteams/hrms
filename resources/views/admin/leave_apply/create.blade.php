@@ -19,7 +19,7 @@
                                         <select
                                             onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
                                             required id="user_id" placeholder="Enter correct user_id" type="text"
-                                            name="user_id" class="form-control form-control-sm ">
+                                            name="user_id" class="form-control form-control-sm user_id">
                                             <option selected disabled> -Select Employee - </option>
                                             @foreach ($all_user as $user)
                                                 <option value="{{ $user->user->id }}"
@@ -101,8 +101,19 @@
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>
-
-                            <div class="mb-2 col-sm-6">
+                            <div class="mb-2 col-sm-4">
+                                <div class="form-group">
+                                    <label for="Reason">Approval Authority</label>
+                                    <select id="approval_authority" placeholder="Select Authority"
+                                        name="approval_authority" required class="form-control form-control-sm approval_authority">
+                                        <option selected disabled> - Select - </option>
+                                        @foreach ($approvalAuthority as $key => $value)
+                                            <option value="{{ $value->user_id }}">{{ $value->user->name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason</label>
                                     <input required id="leave_reason"
@@ -110,6 +121,7 @@
                                         type="text" name="leave_reason" class="form-control form-control-sm ">
                                 </div>
                             </div>
+                           
 
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
@@ -201,7 +213,37 @@
             $("#end_date").on('change', function() {
                 getDays();
             });
-
+            $("#user_id").on('change', function() {
+                getApprovalAuthrity();
+            });
+            function getApprovalAuthrity()
+            {
+                var getAuthorityUrl = "{{ route('admin.leave_apply.get_approval_authority') }}";
+                var user_id = $(".user_id").val();
+                $.ajax({
+                    url: getAuthorityUrl,
+                    type: "get",
+                    data: {
+                        "user_id": user_id,
+                    },
+                    dataType: "json",
+                    success: function(result) {
+                        console.log(result);
+                        if (result.status == true) {
+                            var data = result.data;
+                            var obj = `<option value="">-Select-</option>`;
+                            $.each(data, function (key, val) {
+                                obj +=`<option value="${val.user_id}" >${val.user.name}</option>`;
+                            });
+                            console.log(obj);
+                            $(".approval_authority").html(obj);
+                        } else {
+                            
+                        }
+                        //    amount_cal(e);
+                    },
+                });   
+            }
             function getDays() {
                 date1 = new Date($("#start_date").val());
                 date2 = new Date($("#end_date").val());

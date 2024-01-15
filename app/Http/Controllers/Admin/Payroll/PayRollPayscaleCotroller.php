@@ -268,7 +268,7 @@ class PayRollPayscaleCotroller extends BaseController
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
 
-        $empSalary = SalaryHistory::where('user_id',$user_id)->where('date_of_current_basic','<=',date('Y-m-d'))->first();
+        $empSalary = SalaryHistory::where('user_id',$user_id)->orderBy('id','desc')->where('date_of_current_basic','<=',date('Y-m-d'))->first();
         // return $empSalary;
         if(empty($empSalary))
         {
