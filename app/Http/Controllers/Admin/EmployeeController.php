@@ -73,7 +73,7 @@ class EmployeeController extends BaseController
 
     public function viewUserDetails($eid = null)
     {
-        $roles = Role::getRoles()->whereNotIn('slug',['managing-director'])->where('status','active')->get();
+        $roles = Role::getRoles()->where('status','active')->get();
         $countries = Country::getCountry()->get();
         $branch = Branch::getBranch()->get();
         return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid), 'branch'=> $branch,'roles'=>$roles,'countries'=>$countries]);
@@ -188,12 +188,12 @@ class EmployeeController extends BaseController
         $allowedRoles = ['managing-director','chief-manager-ho','branch-head'];
         $reportingAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
-        })->whereNotIn('user_id',[$employee->id])->get();
+        })->whereNotIn('user_id',[$employee->user_id])->get();
 
         $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
         $reviewAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
-        })->whereNotIn('user_id',[$employee->id])->get();
+        })->whereNotIn('user_id',[$employee->user_id])->get();
 
         return view('admin.employees.employee-details',[
                 'page'          => $this->page_name,

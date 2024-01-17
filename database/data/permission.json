@@ -147,36 +147,7 @@
         {
             "name": "Delete Overtime Setting","module": "Overtime Setting", "permissions_for":"admin,hr_head,chief_manager,branch_supervisor"
         },
-        {
-            "name": "Add Loans Types","module": "Loans Types", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "Edit Loans Types","module": "Loans Types", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "View Loans Types","module": "Loans Types", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "Delete Loans Types","module": "Loans Types", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "Change Status Loans Types","module": "Loans Types", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "Add Apply Loans","module": "Apply Loans", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "Edit Apply Loans","module": "Apply Loans", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "View Apply Loans","module": "Apply Loans", "permissions_for":"admin,hr_head,chief_manager,employee"
-        },
-        {
-            "name": "Delete Apply Loans","module": "Apply Loans", "permissions_for":"admin,hr_head,chief_manager"
-        },
-        {
-            "name": "Change Status Apply Loans","module": "Apply Loans", "permissions_for":"admin,hr_head,chief_manager"
-        },
+       
         {
             "name": "Add Kra","module": "Kra", "permissions_for":"admin,hr_head,chief_manager"
         },

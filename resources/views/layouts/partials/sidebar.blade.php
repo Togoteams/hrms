@@ -133,7 +133,7 @@
                              <!-- End Collapse -->
                          @endcanany
                      </div>
-                     <div id="me">
+                     {{-- <div id="me">
                          @canany(['add-loans', 'edit-loans', 'view-loans', 'delete-loans', 'add-loans-types',
                              'edit-loans-types', 'view-loans-types', 'delete-loans-types', 'change-status-loans-types',
                              'add-apply-loans', 'edit-apply-loans', 'view-apply-loans', 'delete-apply-loans',
@@ -169,7 +169,7 @@
                                  </div>
                              </div>
                          @endcanany
-                     </div>
+                     </div> --}}
                      @canany(['add-users', 'edit-users', 'view-users', 'delete-users', 'add-roles', 'edit-roles',
                          'delete-roles', 'view-roles'])
                          {{-- <div id="navbarVerticalMenuPagesMenu">

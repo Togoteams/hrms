@@ -174,7 +174,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="submit" name="export">Export Report</button>
+                                        <button type="submit" class="btn btn-primary-outline btn-success" name="export">Export Report</button>
                                     </div>
                                 </form>
                             </div>
