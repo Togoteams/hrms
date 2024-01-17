@@ -105,7 +105,7 @@ trait PayrollTraits
                             $bomaidAmount = $bomaid->amount;
                             $iboBankBomaidContribution = getSeetingValue()->ibo_bank_bomaid_contribution;
                             $amount = ($bomaidAmount / 100) * $iboBankBomaidContribution;
-                            return $amount;
+                            // $amount;
                         }
                     }
                     break;
@@ -141,12 +141,15 @@ trait PayrollTraits
                 case "eft_to_fnb_bank":
                    
                     if ($emp->employment_type == "expatriate") {
-                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->first();
-                        $iboBomaidAmount = 0;
-                        if (!empty($medicalCard)) {
-                            $iboBomaidAmount = $medicalCard->amount;
+                        $amount = 5;
+                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
+                        if(!empty($bomaid))
+                        {
+                            $bomaidAmount = $bomaid->amount;
+                            $iboBankBomaidContribution = getSeetingValue()->ibo_bank_bomaid_contribution;
+                            $amount = ($bomaidAmount / 100) * $iboBankBomaidContribution;
+                            // $amount;
                         }
-                        $amount = $iboBomaidAmount;
                     }else
                     {
                         // This is Total Bomaid Fund Receive From Emp
@@ -199,7 +202,7 @@ trait PayrollTraits
         $empAccount = $this->getEmpAccount($empName, $emp->bank_account_number);
         $netTakeAmountInPula = $salary->net_take_home_in_pula;
         $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula,2,".",""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
-        $saveEmpTTUM  =  $this->saveTtumData($data);
+         $saveEmpTTUM  =  $this->saveTtumData($data);
     }
     public function getEmpAccount($accountName, $accountNumber)
     {

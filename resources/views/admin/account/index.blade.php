@@ -97,8 +97,8 @@
                                     name: 'account_type'
                                 },
                                 {
-                                    data: 'is_credit',
-                                    name: 'is_credit'
+                                    data: 'type_label',
+                                    name: 'type_label'
                                 },
                                 {
                                     data: 'description',

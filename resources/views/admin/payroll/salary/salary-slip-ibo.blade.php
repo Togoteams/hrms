@@ -273,22 +273,26 @@
                                     @if ($value->payroll_head->head_type == 'income')
                                         @php
                                             $noOfIncome = $noOfIncome + 1;
+                                            $edu_allow = $value->value;
                                             if ($value->payroll_head->slug == 'education_allowance') {
-                                                $totalIncomeAmount = $totalIncomeAmount + $value->value * $usdToInrAmount;
+                                                $edu_allow = number_format($value->value / $usdToInrAmount,2);
+                                                $totalIncomeAmount = $totalIncomeAmount + $edu_allow;
                                             } else {
-                                                $totalIncomeAmount = $totalIncomeAmount + $value->value;
+                                                $totalIncomeAmount = $totalIncomeAmount + $edu_allow;
                                             }
                                         @endphp
                                         <tr>
                                             @if ($value->payroll_head->slug == 'education_allowance')
                                                 <td style="font-weight: 600;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong></td>
+                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                </td>
                                                 <!-- <td style="text-align: right;">{{ $value->value }}</td> -->
-                                                <td style="text-align: right;">{{ $value->value * $usdToInrAmount }}
+                                                <td style="text-align: right;">{{ number_format($edu_allow,2) }}
                                                 </td>
                                             @else
                                                 <td style="font-weight: 600;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong></td>
+                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                </td>
                                                 <!-- <td style="text-align: right;">{{ $value->value }}</td> -->
                                                 <td style="text-align: right;">{{ $value->value }}</td>
                                             @endif
@@ -321,8 +325,10 @@
                                     @if ($value->payroll_head->head_type == 'deduction')
                                         @php
                                             $noOfDescription = $noOfDescription + 1;
+                                            $otherDeducation = 0;
                                             if ($value->payroll_head->slug == 'other_deductions') {
-                                                $totalDeductionAmount = $totalDeductionAmount + $value->value * $usdToPulaAmount;
+                                                $otherDeducation = number_format($value->value / $usdToPulaAmount,2);
+                                                $totalDeductionAmount = $totalDeductionAmount + $otherDeducation;
                                             } else {
                                                 $totalDeductionAmount = $totalDeductionAmount + $value->value;
                                             }
@@ -330,12 +336,14 @@
                                         <tr>
                                             @if ($value->payroll_head->slug == 'other_deductions')
                                                 <td style="font-weight: 600; padding-left: 10%;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong></td>
-                                                <td style="text-align: right;">{{ $value->value * $usdToPulaAmount }}
+                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                </td>
+                                                <td style="text-align: right;">{{ $otherDeducation }}
                                                 </td>
                                             @else
                                                 <td style="font-weight: 600; padding-left: 10%;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong></td>
+                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                </td>
                                                 <td style="text-align: right;">{{ $value->value }}</td>
                                             @endif
                                         </tr>
@@ -375,7 +383,8 @@
                                 </tr>
                                 <tr>
                                     <th style="padding-left: 1%;">Net Take Home (In Pula) (Gross Earning - Total
-                                        Deduction) : P {{ number_format($data->net_take_home_in_pula, 2, '.', '') }} <span
+                                        Deduction) : P {{ number_format($data->net_take_home_in_pula, 2, '.', '') }}
+                                        <span
                                             style="font-weight: 100;">({{ convertNumberToWords(number_format($data->net_take_home_in_pula, 2, '.', '')) }}
                                             )</span></th>
                                 </tr>
