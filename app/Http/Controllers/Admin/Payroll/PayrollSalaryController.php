@@ -111,6 +111,7 @@ class PayrollSalaryController extends Controller
                 'annual_balanced_leave' =>  $request->annual_balanced_leave,
                 'total_loss_of_pay' =>  $request->total_loss_of_pay,
                 'total_working_days' =>  $request->total_working_days,
+                'education_allowance_for_ind_in_pula' =>  $request->education_allowance_for_ind_in_pula,
                 'net_take_home' =>  $request->net_take_home,
                 'leave_encashment_amount' =>  $request->leave_encashment_amount,
                 'leave_encashment_days' =>  $request->leave_encashment_days,
@@ -296,13 +297,13 @@ class PayrollSalaryController extends Controller
         // return $presentDay;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
         $salary_month = $salaryMonth;
-
+        $pulaToInr = getCurrencyValue("pula", "inr");
         $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
 
         if ($emp->employment_type == "expatriate") {
-            $viewComponent = view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'edit', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
+            $viewComponent = view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'edit', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves','pulaToInr', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
         } else {
-            $viewComponent =  view('admin.payroll.salary.employee_head', compact('emp_head', 'edit', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
+            $viewComponent =  view('admin.payroll.salary.employee_head', compact('emp_head', 'edit', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves','pulaToInr', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
         }
 
         return view('admin.payroll.salary.edit', ['html' => $viewComponent, 'data' => $payscale, 'salary_month' => $salaryMonth]);
@@ -545,14 +546,15 @@ class PayrollSalaryController extends Controller
         if ($presentDay < 0) {
             $presentDay = 0;
         }
+        $pulaToInr = getCurrencyValue("pula", "inr");
         // return $noOfReversalLeave;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
         $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
 
         if ($emp->employment_type == "expatriate") {
-            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'noOfReversalLeave', 'totalReversalAmount', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'noOfReversalLeave','pulaToInr', 'totalReversalAmount', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
         } else {
-            return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfEncashLeave', 'noOfReversalLeave', 'totalReversalAmount', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
+            return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfEncashLeave','pulaToInr', 'noOfReversalLeave', 'totalReversalAmount', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
         }
     }
 }

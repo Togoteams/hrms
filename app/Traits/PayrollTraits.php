@@ -70,7 +70,9 @@ trait PayrollTraits
                         $q->where('slug', 'education_allowance');
                     })->value('value');
                     $currencyValuePula = getCurrencyValue("pula", "inr");
-                    $amount = ($salaryHeadAmount / $currencyValuePula);
+                    // $amount = ($salaryHeadAmount / $currencyValuePula);
+                    $amount = $salary->education_allowance_for_ind_in_pula;
+                    
                     break;
                 case "house_up_keep":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {

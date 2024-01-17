@@ -13,6 +13,8 @@
                 class="form-control form-control-sm">
             <input value="{{ $usdToInrAmount }}" readonly id="usdToInrAmount" type="hidden" name="usdToInrAmount"
                 class="form-control form-control-sm">
+            <input value="{{ $pulaToInr }}" readonly id="pulaToInr" type="hidden" name="pulaToInr"
+                class="form-control form-control-sm">
             <input value="{{ $totalEnCashAmount }}" readonly id="leave_encashment_amount" type="hidden"
                 class="form-control form-control-sm">
             <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic"
@@ -121,12 +123,17 @@
                             $value = 0;
                         }
                     @endphp
+                    @if(strtolower($head->slug)=="education_allowance")
+                    <input hidden required name="education_allowance_for_ind_in_pula" type="number"
+                    value="{{ (getHeadValue($emp, $head->slug, 'salary', $basic, $value, $salary_month)/$usdToInrAmount)*$usdToPulaAmount }}" id="education_allowance_for_ind_in_pula"
+                    class="form-control form-control-sm education_allowance_for_ind_in_pula">
+                    @endif
                     <input @if (in_array($head->slug, $readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required
                         id="{{ $head->slug }}"
                         placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}"
                         type="text" name="{{ strtolower($head->slug) }}"
                         @if(strtolower($head->slug)=="others_arrears")
-                        value="5"
+                        value="0"
                         @else
                         value="{{ getHeadValue($emp, $head->slug, 'salary', $basic, $value, $salary_month) }}"
                         @endif

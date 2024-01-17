@@ -67,13 +67,15 @@
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
             var usdToInrAmount = getValue('usdToInrAmount');
+            var pulaToInr = getValue('pulaToInr');
             var usdToPulaAmount = getValue('usdToPulaAmount');
             var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) / usdToInrAmount);
+            var educationAllowanceAmountInPula =  parseFloat(educationAllowanceAmount*usdToPulaAmount).toFixed(3);
             var otherDeductions = parseFloat(parseFloat(otherDeductions) / usdToPulaAmount).toFixed(3);
-            
             console.log("otherDeductions",(otherDeductions));
             console.log("usdToPulaAmount",(usdToPulaAmount));
-            
+            console.log("usdToPulaAmount",(usdToPulaAmount));
+            $("#education_allowance_for_ind_in_pula").val(educationAllowanceAmountInPula);
             totalEarning = parseFloat(basicAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount).toFixed(3);
             totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('recovery_for_car')).toFixed(3);
