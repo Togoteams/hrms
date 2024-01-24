@@ -57,7 +57,8 @@ trait PayrollTraits
                         $q->where('slug', 'others_arrears');
                     })->value('value');
                     $leaveEnCashAmount = $salary->leave_encashment_amount  * $currencyValue;
-                    $amount = $basic +$allowanceAmoumt + $overTimeAmoumt + $othersArrearsAmount + $leaveEnCashAmount;
+                    $emp13ChequeAmount = $salary->emp_13_cheque_amount  * $currencyValue;
+                    $amount = $basic +$allowanceAmoumt + $overTimeAmoumt + $othersArrearsAmount + $emp13ChequeAmount + $leaveEnCashAmount;
                     break;
                 case "entertainment":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {

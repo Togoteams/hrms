@@ -52,16 +52,12 @@
         var employmentType = document.getElementById('employment_type').value;
 
         var basicAmount = getValue('basic');
-        console.log(basicAmount);
+        var emp13ChequeAmount = getValue('emp_13_cheque_amount');
         if (employmentType == "local") {
             var unionFee = getValue('union_fee');
             var taxAmount = getValue('tax');
-            // if (basicAmount) {
-            //     unionFee = basicAmount / 100;
-            // }
-            totalEarning = (basicAmount + getValue('allowance') + getValue('bomaid_bank')+ getValue('others_arrears')+ getValue('pension_bank')+ getValue('over_time')).toFixed(2);
+            totalEarning = (basicAmount + getValue('allowance') + emp13ChequeAmount + getValue('bomaid_bank')+ getValue('others_arrears')+ getValue('pension_bank')+ getValue('over_time')).toFixed(2);
             totalDeduction = (taxAmount + getValue('bomaid') + getValue('pension_own') + unionFee + getValue('other_deductions')).toFixed(2);
-            // setId('union_fee', unionFee);
         } else {
 
             var educationAllowanceAmount = getValue('education_allowance');
@@ -72,17 +68,14 @@
             var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) / usdToInrAmount);
             var educationAllowanceAmountInPula =  parseFloat(educationAllowanceAmount*usdToPulaAmount).toFixed(3);
             var otherDeductions = parseFloat(parseFloat(otherDeductions) / usdToPulaAmount).toFixed(3);
-            console.log("otherDeductions",(otherDeductions));
-            console.log("usdToPulaAmount",(usdToPulaAmount));
-            console.log("usdToPulaAmount",(usdToPulaAmount));
+          
             $("#education_allowance_for_ind_in_pula").val(educationAllowanceAmountInPula);
-            totalEarning = parseFloat(basicAmount + getValue('entertainment_expenses') +
+            totalEarning = parseFloat(basicAmount + emp13ChequeAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount).toFixed(3);
             totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('recovery_for_car')).toFixed(3);
             console.log(Number(totalDeduction));
         }
         var leaveEncashAmount = parseFloat(getValue("leave_encashment_amount"));
-        console.log("totalEarning",Number(totalEarning) + leaveEncashAmount);
         setId('gross_earning', Number(Number(totalEarning) + (leaveEncashAmount)).toFixed(2));
         setId('total_deduction', Number(totalDeduction).toFixed(2));
         setId('net_take_home', (Number((Number(totalEarning)+ (leaveEncashAmount)) - totalDeduction)).toFixed(2));

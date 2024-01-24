@@ -412,6 +412,7 @@ class PayrollSalaryController extends Controller
         $page = $this->page_name;
         $salaryMonth = $salary_month;
         $salaryStartDate = date("Y-m-d", strtotime("-1 months", strtotime($salaryMonth . "-20")));
+        $month = date("m", strtotime($salaryMonth . "-20"));
         $salaryEndDate = date("Y-m-d", strtotime($salaryMonth . "-20"));
         $holidayFound = false;
         do {
@@ -550,11 +551,15 @@ class PayrollSalaryController extends Controller
         // return $noOfReversalLeave;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
         $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
-
+        $emp13thChequeAmount =0;
+        if($month==12)
+        {
+            $emp13thChequeAmount = $data->net_take_home;
+        }
         if ($emp->employment_type == "expatriate") {
-            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'noOfReversalLeave','pulaToInr', 'totalReversalAmount', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
+            return view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'noOfReversalLeave','emp13thChequeAmount','pulaToInr', 'totalReversalAmount', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
         } else {
-            return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfEncashLeave','pulaToInr', 'noOfReversalLeave', 'totalReversalAmount', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
+            return view('admin.payroll.salary.employee_head', compact('emp_head', 'noOfEncashLeave','pulaToInr', 'noOfReversalLeave','emp13thChequeAmount', 'totalReversalAmount', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp'));
         }
     }
 }

@@ -27,6 +27,7 @@ class PayrollSalary extends Model
         'usd_pula_currency_amount',
         'usd_inr_currency_amount',
         'pula_inr_currency_amount',
+        'emp_13_cheque_amount',
         'education_allowance_for_ind_in_pula',
         // 'ctc',
         // 'total_employer_contribution',

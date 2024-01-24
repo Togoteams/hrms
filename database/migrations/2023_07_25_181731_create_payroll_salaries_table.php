@@ -32,6 +32,7 @@ return new class extends Migration
             $table->double('pula_inr_currency_amount',10,2)->nullable();
             $table->double('total_deduction',10,2);
             $table->double('leave_encashment_amount',10,2)->default(0)->nullable();
+            $table->double('emp_13_cheque_amount',10,2)->default(0)->nullable();
             $table->bigInteger('leave_encashment_days')->nullable()->default(0);
             $table->double('gross_earning',10,2);
             $table->double('education_allowance_for_ind_in_pula',10,2)->nullable()->default(0);

@@ -52,6 +52,7 @@ use App\Http\Controllers\SalaryIncrementController;
 use App\Http\Controllers\Admin\Payroll\PayrollIboTaxController;
 use App\Http\Controllers\Admin\Payroll\SalarySettingController;
 use App\Http\Controllers\Admin\Payroll\SalaryHistoryController;
+use App\Http\Controllers\Admin\Payroll\Emp13thChequeController;
 use App\Http\Controllers\PayrollReportController;
 use App\Models\KraAttributes;
 use App\Models\LeaveSetting;
@@ -338,6 +339,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         // Pay Roll ReimbursementController end
         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
         Route::resource('salary', PayrollSalaryController::class);
+        Route::get('emp-13th-cheque', [Emp13thChequeController::class, 'index'])->name('emp-13th-cheque.index');
+
         Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');
         Route::get('tax-for-ibo/report', [PayrollIboTaxController::class, 'iboTaxReport'])->name('tax-for-ibo.report');
         Route::match(['get', 'post'], '/tax-for-ibo/calculate', [PayrollIboTaxController::class, 'iboTaxCalculate'])->name('tax-for-ibo.calculate');
@@ -348,15 +351,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
     });
 
-    // Salary
-    Route::prefix('salary')->as('salary.')->group(function () {
-        Route::controller(SalaryController::class)->group(function () {
-            Route::get('/', 'listSalary')->name('list');
-            Route::get('add', 'addSalaryPage')->name('add');
-            Route::post('store', 'storeSalary')->name('store');
-            Route::get('get-salary-print/{id}', 'printSalary')->name('print');
-        });
-    });
+
 });
 
 // this group only for update password and +

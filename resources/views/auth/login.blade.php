@@ -121,7 +121,7 @@
 
                         <div>
                             <p>©
-                                {{ date('Y') }} Bank of Baroda Ltd. (Botswana) Crafted with <i
+                                {{ date('Y') }} BANK OF BARODA (Botswana) LTD Crafted with <i
                                     class="mdi mdi-heart text-danger"></i>
                                 by <a href="https://togoteams.com">TogoTeams 
                                 </a>Powered By <a href="https://www.adsparkwebtech.com/">Adspark Webtech Private Limited</a>

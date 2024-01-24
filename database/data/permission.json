@@ -332,6 +332,9 @@
             "name": "Change Status Payroll Head","module": "Payroll Head", "permissions_for":"admin"
         },
         {
+            "name": "Salary Setting","module": "Payroll", "permissions_for":"admin"
+        },
+        {
             "name": "Report Tax For IBO","module": "Tax For IBO", "permissions_for":"admin"
         },
         {

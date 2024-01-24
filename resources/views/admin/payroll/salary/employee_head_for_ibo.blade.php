@@ -17,6 +17,8 @@
                 class="form-control form-control-sm">
             <input value="{{ $totalEnCashAmount }}" readonly id="leave_encashment_amount" type="hidden"
                 class="form-control form-control-sm">
+            <input value="{{ $emp13thChequeAmount }}" readonly id="emp_13_cheque_amount" type="hidden"
+                class="form-control form-control-sm">
             <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic"
                 placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}"
                 class="form-control form-control-sm ">
@@ -123,21 +125,19 @@
                             $value = 0;
                         }
                     @endphp
-                    @if(strtolower($head->slug)=="education_allowance")
-                    <input hidden required name="education_allowance_for_ind_in_pula" type="number"
-                    value="{{ (getHeadValue($emp, $head->slug, 'salary', $basic, $value, $salary_month)/$usdToInrAmount)*$usdToPulaAmount }}" id="education_allowance_for_ind_in_pula"
-                    class="form-control form-control-sm education_allowance_for_ind_in_pula">
+                    @if (strtolower($head->slug) == 'education_allowance')
+                        <input hidden required name="education_allowance_for_ind_in_pula" type="number"
+                            value="{{ (getHeadValue($emp, $head->slug, 'salary', $basic, $value, $salary_month) / $usdToInrAmount) * $usdToPulaAmount }}"
+                            id="education_allowance_for_ind_in_pula"
+                            class="form-control form-control-sm education_allowance_for_ind_in_pula">
                     @endif
                     <input @if (in_array($head->slug, $readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required
                         id="{{ $head->slug }}"
                         placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}"
                         type="text" name="{{ strtolower($head->slug) }}"
-                        @if(strtolower($head->slug)=="others_arrears")
-                        value="0"
+                        @if (strtolower($head->slug) == 'others_arrears') value="0"
                         @else
-                        value="{{ getHeadValue($emp, $head->slug, 'salary', $basic, $value, $salary_month) }}"
-                        @endif
-                        
+                        value="{{ getHeadValue($emp, $head->slug, 'salary', $basic, $value, $salary_month) }}" @endif
                         class="form-control form-control-sm {{ $head->head_type }}">
                 </div>
             </div>
@@ -152,6 +152,16 @@
                     class="form-control form-control-sm leave_encashment_amount">
             </div>
         </div>
+    @endif
+    @if ($emp13thChequeAmount)
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label for="emp_13_cheque_amount">13th Cheque (In USD)</label>
+            <input readonly required name="emp_13_cheque_amount" type="number"
+                value="{{ $emp13thChequeAmount }}"
+                class="form-control form-control-sm emp_13_cheque_amount">
+        </div>
+    </div>
     @endif
 </div>
 <div class="row">

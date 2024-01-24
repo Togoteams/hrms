@@ -40,7 +40,7 @@ class BaseController extends Controller
      * @param null $data
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function responseJson($status = true, $responseCode = 200, $message = [], $data = null)
+    protected function responseJson($status = true, $responseCode = 200, $message = "", $data = null)
     {
         return response()->json([
             'status'        =>  $status,
