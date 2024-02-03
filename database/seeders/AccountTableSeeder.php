@@ -16,7 +16,7 @@ class AccountTableSeeder extends Seeder
             ['name'=>"Salaries",'slug'=>"salaries",'account_number'=>'95212352401001','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Employee Basic Salary"],
             ['name'=>"Entertainment",'slug'=>"entertainment",'account_number'=>'95212352401010','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Entertainment Amount"],
             ['name'=>"Education",'slug'=>"education",'account_number'=>'95212352451009','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Education Amount"],
-            ['name'=>"House up keeep",'slug'=>"house_up_keep",'account_number'=>'95212352451010','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  House up keep Amount"],
+            ['name'=>"House up keep",'slug'=>"house_up_keep",'account_number'=>'95212352451010','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  House up keep Amount"],
             ['name'=>"Medical exp For Local",'slug'=>"bomaid_local",'account_number'=>'95212352471001','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Medical Expense of Local Amount"],
             ['name'=>"Medical exp For EXPATRIATE",'slug'=>"bomaid_ibo",'account_number'=>'95212352471003','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Medical Expense of EXPATRIATE Amount"],
             ['name'=>"PF Bank Contribution",'slug'=>"pf_bank_contribution",'account_number'=>'test','account_type'=>"office",'is_credit'=>0,"description"=>"This Account is for  Pf Contribution"],
