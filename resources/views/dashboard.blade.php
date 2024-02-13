@@ -8,11 +8,16 @@
             <div class="page-header">
                 <div class="row align-items-center">
 
+                    <div class="welcome-text">
+                        <h2 class="tit">Welcome back, Bank Of Baroda 👋</h2>
+                        <p class="des">Your progress this week is Awesome. let's keep it up and get a lot of points</p>
+                    </div>
+
                     <!-- End Col -->
                     <!-- End Page Header -->
 
                     <!-- Stats -->
-                    <div class="row">
+                    <div class="row card-sec-das">
                         <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.profile')}}">
@@ -22,7 +27,7 @@
                                     @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
                                         <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 65px; width: 70px;">
                                     @else
-                                        <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}" alt="Default Icon" style="height:70px; width: 70px;">
+                                        <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/prof.png') }}" alt="Default Icon" style="height:70px; width: 70px;">
                                     @endif
                                     </h6>
                                     <h2 class="text-white card-title">Profile</h2>
@@ -35,6 +40,7 @@
                                     </div>
                                     <!-- End Row -->
                                 </div>
+                                <img class="card-overlay-bg img-fluid" src="{{ asset('assets/img/card-bg-img.png') }}" alt="">
                             </a>
                             <!-- End Card -->
                         </div>
@@ -102,7 +108,7 @@
 
                                     <div class="row align-items-center gx-2">
 
-                                       
+
                                     </div>
                                 </div>
                             </a>
@@ -115,7 +121,7 @@
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{ url('/admin/leave_apply') }}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
-                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon4.png') }}" alt="">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/leav.png') }}" alt="">
 
                                     </h6>
                                     <h2 class="text-white card-title">Leave</h2>
@@ -128,6 +134,7 @@
                                     </div>
                                     <!-- End Row -->
                                 </div>
+                                <img class="card-overlay-bg img-fluid" src="{{ asset('assets/img/card-bg-img.png') }}" alt="">
                             </a>
                             <!-- End Card -->
                         </div>
@@ -137,7 +144,7 @@
                                 href="{{ route('admin.payroll.salary.index') }}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
-                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon5.png') }}" alt="">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/pay.png') }}" alt="">
 
                                     </h6>
                                     <h2 class="text-white card-title">Payroll</h2>
@@ -150,11 +157,12 @@
                                     </div>
                                     <!-- End Row -->
                                 </div>
+                                <img class="card-overlay-bg img-fluid" src="{{ asset('assets/img/card-bg-img.png') }}" alt="">
                             </a>
                             <!-- End Card -->
                         </div>
 
-                      
+
 
                         {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
@@ -183,7 +191,7 @@
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.payroll.reports.ttum.list')}}">
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
-                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon7.png') }}" alt="">
+                                    <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/repo.png') }}" alt="">
 
                                     </h6>
                                     <h2 class="text-white card-title">Reports</h2>
@@ -191,12 +199,13 @@
 
                                     <div class="row align-items-center gx-2">
 
-                                       
+
                                     </div>
-                                   
+
                                 </div>
+                                <img class="card-overlay-bg img-fluid" src="{{ asset('assets/img/card-bg-img.png') }}" alt="">
                             </a>
-                          
+
                         </div>
                         @endif
 

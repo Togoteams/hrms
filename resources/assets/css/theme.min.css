@@ -81,6 +81,11 @@
 
 }
 
+a.nav-link.active-class {
+    background: linear-gradient(90deg, #F85109 33.04%, rgba(255, 88, 16, 0) 105.71%, rgba(255, 121, 64, 0.00900024) 105.71%) !important;
+}
+
+
 body {
     margin: 0;
     font-family: var(--bs-body-font-family);
