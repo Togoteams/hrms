@@ -13,7 +13,7 @@
                 <div class="page-header">
                     <div class="row">
                         <div class="mb-2 col-sm mb-sm-0">
-                            <h2 class="page-header-title">Roles</h2>
+                        <h2 class="page-header-title">Roles</h2>
                         </div>
                         <div class="col-sm-auto">
                             <a class="btn btn-white g-popup addRole" href="javascript:;" data-bs-toggle="modal"
@@ -66,9 +66,9 @@
                                     {{-- <td>
                                         <div class="success-badges changeStatus" data-table="roles" data-uuid="{{$role->uuid}}"
                                          @if ($role->status == 'active') data-value="active" data-message="Inactive"
-                                         @else data-value="inactive"  data-message="Active"@endif ><span class="legend-indicator   
+                                         @else data-value="inactive"  data-message="Active"@endif ><span class="legend-indicator
                                          @if ($role->status == 'active') bg-success @else   bg-danger @endif"></span>{{ $role->status ?? 'Active' }}</div>
-                                        
+
                                     </td> --}}
 
                                     <td class="text-right">
@@ -114,9 +114,9 @@
                                             <select id="datatableEntries"
                                                 class="w-auto js-select form-select form-select-borderless" autocomplete="off"
                                                 data-hs-tom-select-options='{
-                            "searchInDropdown": false,
-                            "hideSearch": true
-                          }'>
+                                     "searchInDropdown": false,
+                                       "hideSearch": true
+                                     }'>
                                                 <option value="10">10</option>
                                                 <option value="15" selected>15</option>
                                                 <option value="20">20</option>
