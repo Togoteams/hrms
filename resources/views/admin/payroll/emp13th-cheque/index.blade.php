@@ -26,39 +26,27 @@
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
-            <div class="page-header">
-                <div class="row">
-                    <div class="mb-2 col-sm mb-sm-0">
-                        <h2 class="page-header-title">{{ $page }}</h2>
-                    </div>
-                    {{-- <div class="col-sm-auto">
-                    <a class="text-white btn btn-white" href="{{ route('admin.payroll.reimbursement_type.create') }}">
-                        Add {{ $page }}
-                    </a>
-
-                    </div> --}}
-                    <div class="col-sm-auto">
-                        @can('add-account')
-                        <button type="button" class="btn btn-white" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                Add {{ $page }}
-                            </button>
-                        @endcan
+                <div class="page-header">
+                    <div class="row">
+                        <div class="mb-2 col-sm mb-sm-0">
+                            <h2 class="page-header-title">{{ $page }}</h2>
                         </div>
+                       
 
+                    </div>
                 </div>
-             </div>
-              {{-- Table --}}
-              <div class="p-2 mt-3 table-responsive">
-                <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
-                    <thead>
+                {{-- Table --}}
+                <div class="p-2 mt-3 table-responsive">
+                    <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                        <thead>
                             <tr>
                                 <th>SI.</th>
-                                <th>User Name</th>
-                                <th>Amount</th>
+                                <th>Employee Name</th>
+                                <th>Employee Code</th>
+                                <th>13th Cheques Amount</th>
                                 <th>Cheques Month Year</th>
-                                <th>Status</th>
-                            
+                                {{-- <th>Status</th> --}}
+
                             </tr>
                         </thead>
                         <tbody>
@@ -68,7 +56,7 @@
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-                  <script type="text/javascript">
+                <script type="text/javascript">
                     $(function() {
                         var i = 1;
                         var table = $('.data-table').DataTable({
@@ -83,8 +71,12 @@
                                     searchable: false
                                 },
                                 {
-                                    data: 'user_id',
-                                    name: 'user_id'
+                                    data: 'user.name',
+                                    name: 'user.name'
+                                },
+                                {
+                                    data: 'user.employee.ec_number',
+                                    name: 'user.employee.ec_number'
                                 },
                                 {
                                     data: 'amount',
@@ -93,11 +85,12 @@
                                 {
                                     data: 'cheques_month_year',
                                     name: 'cheques_month_year'
-                                },
-                                {
-                                    data: 'status',
-                                    name: 'status'
                                 }
+                                // ,
+                                // {
+                                //     data: 'status',
+                                //     name: 'status'
+                                // }
                             ]
                         });
 

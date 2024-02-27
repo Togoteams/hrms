@@ -361,12 +361,12 @@
                                          href="{{ route('admin.payroll.tax-slab-setting.index') }}"> Tax Slab</a>
                                  @endcanany
 
-                                 @canany(['add-salary-increment-settings', 'edit-salary-increment-settings',
+                                 {{-- @canany(['add-salary-increment-settings', 'edit-salary-increment-settings',
                                      'delete-salary-increment-settings', 'view-salary-increment-settings'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-setting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary-increment-setting.index') }}"> Salary Increment
                                      </a>
-                                 @endcanany
+                                 @endcanany --}}
                                  @canany(['add-overtime-setting', 'edit-overtime-setting', 'view-overtime-setting',
                                      'delete-overtime-setting'])
                                      <div class="nav-item">

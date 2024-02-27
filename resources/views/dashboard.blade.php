@@ -8,10 +8,10 @@
             <div class="page-header">
                 <div class="row align-items-center">
 
-                    <div class="welcome-text">
+                    {{-- <div class="welcome-text">
                         <h2 class="tit">Welcome back, Bank Of Baroda 👋</h2>
                         <p class="des">Your progress this week is Awesome. let's keep it up and get a lot of points</p>
-                    </div>
+                    </div> --}}
 
                     <!-- End Col -->
                     <!-- End Page Header -->

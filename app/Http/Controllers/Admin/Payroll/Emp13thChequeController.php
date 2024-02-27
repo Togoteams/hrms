@@ -17,9 +17,12 @@ class Emp13thChequeController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Emp13thCheque::all();
+            $data = Emp13thCheque::with('user','user.employee');
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->editColumn('cheques_month_year', function ($data) {
+                    return \Carbon\Carbon::parse($data->cheques_month_year)->isoFormat('MM-YYYY');
+                })
                 ->make(true);
             }
         return view('admin.payroll.emp13th-cheque.index', ['page' => $this->page_name]);
