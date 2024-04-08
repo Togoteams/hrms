@@ -78,13 +78,7 @@
                         }'>
                         <thead class="thead-light">
                             <tr>
-                                <th class="table-column-pe-0">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="datatableCheckAll">
-                                        <label class="form-check-label" for="datatableCheckAll"></label>
-                                    </div>
-                                </th>
+                               
                                 <th class="table-column-ps-0">Name</th>
                                 <th>Date</th>
                                 <th>Description</th>
@@ -95,13 +89,7 @@
                         <tbody>
                             @foreach ($holidays as $key => $holiday)
                                 <tr>
-                                    <td class="table-column-pe-0">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="datatableCheckAll1">
-                                            <label class="form-check-label" for="datatableCheckAll1"></label>
-                                        </div>
-                                    </td>
+                                   
                                     <td class="table-column-ps-0">
                                         <span class="mb-0 d-block h5">{{ $holiday->name }}</span>
                                         <!-- <span class="d-block fs-5">Human resources</span> -->
