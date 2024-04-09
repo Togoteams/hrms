@@ -58,7 +58,7 @@
                                                                 <div class="col-3">{{ $data->ec_number }}</div>
 
                                                                 <div class="col-3 fw-semibold">Designation</div>
-                                                                <div class="col-3">{{ $data->designation->name }}</div>
+                                                                <div class="col-3">{{ !empty($data->designation) ? $data->designation->name : 'N/A' }}</div>
 
                                                                 {{-- <div class="col-3 fw-semibold">Basic Salary</div>
                                                                 <div class="col-3">{{ $data->basic_salary }}</div> --}}
@@ -170,7 +170,7 @@
                                                     </select>
                                             </div>
                                         </div>
-                                       
+
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="gender">Gender<small class="required-field">*</small></label>

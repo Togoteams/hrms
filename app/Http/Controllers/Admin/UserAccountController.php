@@ -151,17 +151,26 @@ class UserAccountController extends Controller
     {
         $validator =  $request->validate(
             [
+                'current_password' => 'required|string|min:8',
+            ],
+            [
                 'password' => 'required|min:8|confirmed',
             ],
             [
                 'password.confirmed' => 'Confirm Password And Password has to be same.',
             ]
         );
-        $profile = User::where('id', Auth::user()->id)->first();
-        $profile->password = Hash::make($request->password);
-        $profile->password_is_changed = 1;
+        $user = Auth::user();
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
+        if (Hash::check($request->password, $user->password)) {
+            return redirect()->back()->withErrors(['password' => 'New password must differ from current.']);
+        }
+        $user->password = Hash::make($request->password);
+        $user->password_is_changed = 1;
 
-        $profile->save();
+        $user->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Password has been changed successfully!');
     }

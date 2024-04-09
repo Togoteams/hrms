@@ -24,7 +24,7 @@
 
                 <!-- End Row -->
             </div>
-            
+
             @include('admin.designation.create')
 
 
@@ -47,7 +47,8 @@
                 </div>
             </div>
                 <!-- Table -->
-                <div class="table-responsive datatable-custom">
+                {{-- <div class="table-responsive datatable-custom"> --}}
+                    <div class="table-responsive">
                     <table id="datatable"
                         class="table table-stripped table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -63,22 +64,22 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td class="table-column-pe-0">
+                                    <td class="table-column-pe-0 padding-left" style="padding-left: 20px !important;">
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->description }}</td>
-                               
-                                    <td style="text-align:right;">
-                                        
-                                     
 
-                                            
+                                    <td style="text-align:right;">
+
+
+
+
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.designation.destroy', $item->id) }}">
                                             <button type="button" data-table="designations" data-uuid="{{$item->id}}"
                                                 @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  
+                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on
                                                 @else fa-toggle-off @endif" @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                             </button>
                                             @can('edit-designations')

@@ -30,7 +30,7 @@ class DepartmentController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-            }
+        }
         return view('admin.department.index', ['page' => $this->page_name]);
     }
 
@@ -49,14 +49,15 @@ class DepartmentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:departments,name',
-           
+        ], [
+            'name.unique' => 'has already been taken. Please choose a different :attribute.',
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
             // $request->request->add(['created_by'=>Auth::user()->id]);
-            $request->request->add(['status' =>"active"]);
-            $request->request->add(['slug' =>Str::slug($request->name,"_")]);
+            $request->request->add(['status' => "active"]);
+            $request->request->add(['slug' => Str::slug($request->name, "_")]);
             Department::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
@@ -76,7 +77,7 @@ class DepartmentController extends Controller
     public function edit(string $id)
     {
         $department = Department::find($id);
-        return view('admin.department.edit', ['department' => $department, 'page' => $this->page_name]);   
+        return view('admin.department.edit', ['department' => $department, 'page' => $this->page_name]);
     }
 
     /**
@@ -85,13 +86,13 @@ class DepartmentController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:departments,name,'.$id,
-           
+            'name' => 'required|string|unique:departments,name,' . $id,
+
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            $request->request->add(['slug' =>Str::slug($request->type,"_")]);
+            $request->request->add(['slug' => Str::slug($request->type, "_")]);
             // $request->request->add(['updated_by'=>Auth::user()->id]);
             Department::where('id', $id)->update($request->except('_token', '_method'));
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);

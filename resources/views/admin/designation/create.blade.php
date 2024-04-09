@@ -11,14 +11,14 @@
                     <form id="form_data" action="{{ route('admin.designation.store') }}">
                         @csrf
                         <div class="row">
-                            <div class="mb-2 col-sm-6">
+                            <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input required id="name" placeholder="Enter Name of Designation "
                                         type="text" name="name" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            {{-- <div class="mb-2 col-sm-6"> 
+                            {{-- <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="order">Select Order</label>
                                     <select id="order" name="order" class="form-control form-control-sm">
@@ -32,8 +32,8 @@
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea required id="description" placeholder="Enter Short Description of Designation   " type="text"
-                                        name="description" class="form-control form-control-sm "></textarea>
+                                    <textarea required id="description" placeholder="Enter Short Description of Designation" type="text"
+                                        name="description" class="form-control form-control-sm" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>

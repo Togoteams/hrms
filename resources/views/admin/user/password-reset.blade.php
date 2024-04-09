@@ -37,20 +37,48 @@
                 <form action="{{ route('admin.password.reset') }}" method="post">
                     @csrf()
 
-                    <!-- Password -->
+                    <!-- Current Password -->
                     <div class="form-group mr-bot">
 
                         <!-- Label -->
-                        <label class="" for="password" />
-                        Password<span style="color:red;">*</span>
+                        <label class="" for="current_password" />
+                        Current Password<span style="color:red;">*</span>
                         </label>
 
                         <!-- Input group -->
                         <div class="input-group">
                             <!-- Input -->
-                            <input class="form-control" type="text" id="password" placeholder="Enter New password"
-                                minlength="6" name="password" required autocomplete="new-password" />
+                            <input class="form-control" type="password" id="current_password"
+                                placeholder="Enter New password" minlength="8" name="current_password" required
+                                autocomplete="off" />
                             <p class="invalid-feedback" id="password_error"></p>
+                            @error('current_password')
+                                <span class="d-block invalid-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group mr-bot">
+
+                        <!-- Label -->
+                        <label class="" for="password" />
+                        New Password<span style="color:red;">*</span>
+                        </label>
+
+                        <!-- Input group -->
+                        <div class="input-group">
+                            <!-- Input -->
+                            <input class="form-control" type="password" id="password" placeholder="Enter New password"
+                                minlength="8" name="password" required autocomplete="off" />
+                            <p class="invalid-feedback" id="password_error"></p>
+                            @error('password')
+                                <span class="d-block invalid-feedback">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
                     </div>
 

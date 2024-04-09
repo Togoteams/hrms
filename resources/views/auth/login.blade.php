@@ -22,6 +22,25 @@
 </head>
 
 <body>
+    <style>
+        .login-btn {
+            border: 2px solid #f85109;
+            color: #f85109;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .login-btn:hover {
+            background-color: #f85109;
+            color: #fff;
+        }
+
+        .btn-eye {
+            border: 1px solid #ced4da;
+        }
+        .btn-eye:hover {
+            border: 1px solid #ced4da;
+        }
+    </style>
     <div class="my-5 account-pages pt-sm-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -89,7 +108,7 @@
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 name="password" required autocomplete="current-password"
                                                 placeholder="Enter Password">
-                                            <button class="btn btn-light " type="button" id="password-addon">
+                                            <button class="btn btn-light btn-eye" type="button" id="password-addon">
                                                 <i class="mdi mdi-eye-outline"></i>
                                             </button>
                                             @error('password')
@@ -107,11 +126,12 @@
                                             {{ __('Remember Me') }}
                                         </label>
                                     </div>
-
-                                    <div class="mt-3 d-grid">
-                                        <button class="btn btn-white waves-effect waves-light"
-                                            type="submit">{{ __('Login') }}</button>
-                                    </div>
+                                    <center>
+                                        <div class="mt-3">
+                                            <button class="btn btn-white waves-effect waves-light login-btn"
+                                                type="submit">{{ __('Login') }}</button>
+                                        </div>
+                                    </center>
                                 </form>
                             </div>
 
@@ -123,8 +143,9 @@
                             <p>©
                                 {{ date('Y') }} BANK OF BARODA (Botswana) LTD Crafted with <i
                                     class="mdi mdi-heart text-danger"></i>
-                                by <a href="https://togoteams.com">TogoTeams 
-                                </a>Powered By <a href="https://www.adsparkwebtech.com/">Adspark Webtech Private Limited</a>
+                                by <a href="https://togoteams.com">TogoTeams
+                                </a>Powered By <a href="https://www.adsparkwebtech.com/">Adspark Webtech Private
+                                    Limited</a>
                             </p>
                         </div>
                     </div>

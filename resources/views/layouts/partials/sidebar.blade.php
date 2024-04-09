@@ -361,8 +361,7 @@
                                          href="{{ route('admin.payroll.tax-slab-setting.index') }}"> Tax Slab</a>
                                  @endcanany
 
-                                 {{-- @canany(['add-salary-increment-settings', 'edit-salary-increment-settings',
-                                     'delete-salary-increment-settings', 'view-salary-increment-settings'])
+                                 {{-- @canany(['add-salary-increment-settings', 'edit-salary-increment-settings', 'delete-salary-increment-settings', 'view-salary-increment-settings'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary-increment-setting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary-increment-setting.index') }}"> Salary Increment
                                      </a>
@@ -410,12 +409,10 @@
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.reimbursement.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.reimbursement.index') }}">Reimbursement</a>
                                  @endcanany
-                                 @canany(['add-13-cheque', 'edit-13-cheque', 'delete-13-cheque',
-                                 'view-13-cheque'])
-                                   
-                                @endcanany
-                                <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.index' ? 'active' : '' }}  "
-                                    href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a>
+                                 @canany(['add-13-cheque', 'edit-13-cheque', 'delete-13-cheque', 'view-13-cheque'])
+                                 @endcanany
+                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.index' ? 'active' : '' }}  "
+                                     href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a>
                                  @canany(['salary-setting'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary_setting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary_setting.index') }}">Salary Setting</a>
@@ -522,8 +519,14 @@
 
 
                      <!-- End Collapse -->
-
-                     <span class="mt-4 dropdown-header">Master</span>
+                     @canany(['add-account', 'edit-account', 'view-account', 'delete-account', 'change-status-account',
+                         'add-currency-settings', 'edit-currency-settings', 'view-currency-settings',
+                         'delete-currency-settings', 'change-status-currency-settings', 'add-holidays', 'edit-holidays',
+                         'view-holidays', 'delete-holidays', 'add-ttum-report', 'edit-ttum-report', 'view-ttum-report',
+                         'delete-ttum-report', 'export-report-ttum-report', 'add-country', 'edit-country', 'view-country',
+                         'delete-country', 'change-status-country'])
+                         <span class="mt-4 dropdown-header">Master</span>
+                     @endcanany
                      <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                      @canany(['add-account', 'edit-account', 'view-account', 'delete-account', 'change-status-account'])

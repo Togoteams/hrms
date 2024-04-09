@@ -104,7 +104,7 @@
                                                     </div>
                                                     <div class="col-10">
                                                         <input id="mobile" maxlength="8" minlength="7" pattern="[0-9]+"
-                                                            placeholder="Enter Mobile No" type="text"
+                                                            placeholder="Enter Mobile No" type="number"
                                                             value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
                                                             name="mobile" class="form-control form-control-sm">
                                                     </div>

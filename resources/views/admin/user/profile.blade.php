@@ -105,16 +105,43 @@
 
                                     <!-- Label -->
                                     <label class="" for="password" />
-                                    Password<span style="color:red;">*</span>
+                                    Current Password<span style="color:red;">*</span>
                                     </label>
 
                                     <!-- Input group -->
                                     <div class="input-group">
                                         <!-- Input -->
-                                        <input class="form-control" type="text" id="password"
-                                            placeholder="Enter New password" minlength="6" name="password" required
-                                            autocomplete="new-password" />
+                                        <input class="form-control" type="password" id="current_password"
+                                            placeholder="Enter current password" minlength="8" name="current_password"
+                                            required autocomplete="off" />
                                         <p class="invalid-feedback" id="password_error"></p>
+                                        @error('current_password')
+                                            <span class="d-block invalid-feedback">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="mb-4 form-group">
+
+                                    <!-- Label -->
+                                    <label class="" for="password" />
+                                    New Password<span style="color:red;">*</span>
+                                    </label>
+
+                                    <!-- Input group -->
+                                    <div class="input-group">
+                                        <!-- Input -->
+                                        <input class="form-control" type="password" id="password"
+                                            placeholder="Enter New password" minlength="8" name="password" required
+                                            autocomplete="off" />
+                                        <p class="invalid-feedback" id="password_error"></p>
+                                        @error('password')
+                                            <span class="d-block invalid-feedback">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="form-group mr-bot">
@@ -128,7 +155,8 @@
                                     <div class="input-group">
                                         <!-- Input -->
                                         <input class="form-control" type="password" id="password_confirmation"
-                                            placeholder="Confirm Your Password" name="password_confirmation" required />
+                                            placeholder="Confirm Your Password" name="password_confirmation" required
+                                            autocomplete="off" />
                                         <p class="invalid-feedback" id="password_confirmation_error"></p>
                                     </div>
                                 </div>

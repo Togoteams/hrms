@@ -58,10 +58,9 @@
         <div class="mb-2 col-sm-6">
             <div class="form-group">
                 <label for="status">status</label>
-                <select required id="status" name="status" class="form-control form-control-"
-                    value="{{ $data->status }}">
-                    <option value="active">Active</option>
-                    <option value="inactive">InActive</option>
+                <select required id="status" name="status" class="form-control">
+                    <option {{ $data->status == 'active' ? 'selected' : '' }} value="active">Active</option>
+                    <option {{ $data->status == 'inactive' ? 'selected' : '' }} value="inactive">InActive</option>
                 </select>
             </div>
         </div>

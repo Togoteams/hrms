@@ -8,7 +8,7 @@
         <!-- Page Header -->
         <div class="mt-2 mb-2 border-bottom">
             <div class="row align-items-center">
-               
+
 
                 <div class="col-auto">
                     <a class="text-link">
@@ -21,7 +21,7 @@
 
             <!-- End Row -->
         </div>
-       
+
         @include('admin.branch.create')
 
 
@@ -76,7 +76,7 @@
                             <td>{{ $item->state }}</td>
                             <td>{{ $item->country }}</td>
                             <td>{{ $item->landmark }}</td>
-                            <td>{{ $item->description }}</td>
+                            <td>{!! Str::limit($item->description, '20', '<b>...</b>') !!}</td>
 
                             <td style="text-align:right;">
 
@@ -113,7 +113,7 @@
                                     </button> --}}
                                     <button type="button" data-table="branch" data-uuid="{{$item->id}}"
                                         @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                        class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                        class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif"
                                             @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                     </button>
                                     @endcan
