@@ -50,7 +50,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="p-4 text-primary">
-                                        <h5 class="text-primary">{{ __('Login') }}</h5>
+                                        <h5 class="text-primary">{{ __('Hrms Login') }}</h5>
                                         <p>BANK OF BARODA (Botswana) LTD.</p>
                                     </div>
                                 </div>
@@ -130,6 +130,9 @@
                                         <div class="mt-3">
                                             <button class="btn btn-white waves-effect waves-light login-btn"
                                                 type="submit">{{ __('Login') }}</button>
+                                        </div>
+                                        <div class="mt-1">
+                                            Version 1.1.0
                                         </div>
                                     </center>
                                 </form>
