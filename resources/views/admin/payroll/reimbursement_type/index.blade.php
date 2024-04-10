@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.payroll.reimbursement_type.create')
 
             <!-- Card -->
@@ -59,7 +59,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($reimbursement as $key =>$item) 
+                            {{-- @foreach ($reimbursement as $key =>$item)
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$item->type}}</td>
@@ -87,7 +87,7 @@
                              @endforeach   --}}
                         </tbody>
                     </table>
-                  
+
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -106,7 +106,7 @@
                                     searchable: false
                                 },
 
-                             
+
                                 {
                                     data: 'type',
                                     name: 'type'
@@ -115,7 +115,7 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]

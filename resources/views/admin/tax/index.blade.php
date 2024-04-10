@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class=" border-bottom mt-2 mb-2">
                 <div class="row align-items-center">
-                   
+
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -20,7 +20,7 @@
 
                 <!-- End Row -->
             </div>
-            
+
             @include('admin.tax.create')
 
 
@@ -43,7 +43,7 @@
                 </div>
             </div>
                 <!-- Table -->
-                <div class="table-responsive datatable-custom">
+                <div class="table-responsive">
                     <table id="datatable"
                         class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -61,7 +61,7 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td class="table-column-pe-0">
+                                    <td class="table-column-pe-0" style="padding-left: 20px !important;">
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>
@@ -80,7 +80,7 @@
                                             @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            
+
                                             <button type="button" id="delete{{ $item->id }}"
                                                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                                                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>

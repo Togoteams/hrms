@@ -26,7 +26,7 @@
         <!-- Card -->
         <div class="card">
             <!-- Table -->
-            <div class="table-responsive datatable-custom position-relative">
+            <div class="table-responsive position-relative">
                 <table id="datatable" class="table table-lg table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
                     <thead class="thead-light">
                         <tr>

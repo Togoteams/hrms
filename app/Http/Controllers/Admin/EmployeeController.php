@@ -222,7 +222,7 @@ class EmployeeController extends BaseController
             'start_date'            => ['required','date','after_or_equal:' . $forWork],
             'currency'              => ['nullable', 'string'],
             'employment_type'       => ['required', 'string'],
-            
+
             'bank_account_number'   => ['required', 'numeric','digits_between:12,16'],
             'review_authority'              => ['nullable', 'string'],
             'reporting_authority'              => ['nullable', 'string'],

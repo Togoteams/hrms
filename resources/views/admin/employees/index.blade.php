@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -20,26 +20,27 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.employees.create')
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
-            <div class="page-header">
-                <div class="row">
-                    <div class="mb-2 col-sm mb-sm-0">
-                        <h2 class="page-header-title">{{ $page }}</h2>
-                    </div>
-                    <div class="col-sm-auto">
-                    @can('add-employees')
-                        {{-- <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
-                        <a type="button" class="btn btn-white" href="{{route('admin.employee.userDetails.form')}}" title="Add Employee">
-                            Add {{ $page }}
-                        </a>
-                        {{-- </button> --}}
-                    @endcan
+                <div class="page-header">
+                    <div class="row">
+                        <div class="mb-2 col-sm mb-sm-0">
+                            <h2 class="page-header-title">{{ $page }}</h2>
+                        </div>
+                        <div class="col-sm-auto">
+                            @can('add-employees')
+                                {{-- <button type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> --}}
+                                <a type="button" class="btn btn-white" href="{{ route('admin.employee.userDetails.form') }}"
+                                    title="Add Employee">
+                                    Add {{ $page }}
+                                </a>
+                                {{-- </button> --}}
+                            @endcan
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="p-2 mt-3 table-responsive">
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
@@ -72,7 +73,7 @@
                             columns: [{
                                     "render": function() {
                                         return i++;
-                                    }
+                                    },
                                 },
 
                                 {
@@ -98,7 +99,7 @@
                                     data: 'employment_type',
                                     name: 'employment_type'
                                 },
-                                
+
                                 {
                                     data: 'start_date',
                                     name: 'start_date'
@@ -106,7 +107,7 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]
@@ -190,22 +191,21 @@
         //         $("#contractDivEdit").hide() && $("#contract_duration").val("");
         // });
 
-        function show_hide(input,data,id){
-          if(input.value==data){
-            document.getElementById(id).style.display="block";
-          }  else{
-            document.getElementById(id).style.display="none";
-          }
-          if(input.value=="yes"){
-            pention_contribution();
+        function show_hide(input, data, id) {
+            if (input.value == data) {
+                document.getElementById(id).style.display = "block";
+            } else {
+                document.getElementById(id).style.display = "none";
+            }
+            if (input.value == "yes") {
+                pention_contribution();
 
-          }
+            }
         }
 
-        function pention_contribution(){
-            var basic= document.getElementById('basic_salary').value;
-            document.getElementById('pension_contribution').value=Number(basic)*0.01;
+        function pention_contribution() {
+            var basic = document.getElementById('basic_salary').value;
+            document.getElementById('pension_contribution').value = Number(basic) * 0.01;
         }
-
     </script>
 @endpush

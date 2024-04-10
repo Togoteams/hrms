@@ -40,7 +40,7 @@ class BranchController extends Controller
             return $validator->errors();
         } else {
             Branch::create($request->except('_token'));
-            return response()->json(['success' => $this->page_name . " Added Successfully"]);
+            return response()->json(['success' => $this->page_name . "Added Successfully"]);
         }
     }
 

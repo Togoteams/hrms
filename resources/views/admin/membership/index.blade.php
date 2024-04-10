@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class=" border-bottom mt-2 mb-2">
                 <div class="row align-items-center">
-                 
+
 
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-         
+
             @include('admin.membership.create')
 
 
@@ -44,7 +44,7 @@
             </div>
 
                 <!-- Table -->
-                <div class="table-responsive datatable-custom">
+                <div class="table-responsive">
                     <table id="datatable"
                         class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -63,7 +63,7 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td >
+                                    <td style="padding-left: 20px !important;">
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>

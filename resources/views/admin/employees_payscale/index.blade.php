@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class=" border-bottom mt-2 mb-2">
                 <div class="row align-items-center">
-                   
+
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -20,7 +20,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.employees_payscale.create')
             <!-- Card -->
             <div class="card mb-3 mb-lg-5">
@@ -73,7 +73,7 @@
                                     data: 'DT_RowIndex',
                                     'orderable': false,
                                     'searchable': false
-                                }, 
+                                },
 
                                 {
                                     data: 'employee.emp_id',
@@ -85,7 +85,7 @@
                                 }, {
                                     data: 'user.email',
                                     name: 'user.email'
-                                }, 
+                                },
                                 {
                                     data: 'user.mobile',
                                     name: 'user.mobile'
@@ -110,11 +110,11 @@
                                     data: 'gross_earning',
                                     name: 'gross_earning'
                                 },
-                              
+
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]

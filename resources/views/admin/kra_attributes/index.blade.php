@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class=" border-bottom mt-2 mb-2">
                 <div class="row align-items-center">
-                
+
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -20,7 +20,7 @@
 
                 <!-- End Row -->
             </div>
-            
+
             @include('admin.kra_attributes.create')
 
 
@@ -43,19 +43,19 @@
                 </div>
             </div>
                 <!-- Table -->
-                <div class="table-responsive datatable-custom">
+                <div class="table-responsive">
                     <table id="datatable"
                         class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
                             <tr class="pl-2">
 
-                              
+
                                 <th>S.no</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Max Marks</th>
                                 <th>Min Marks</th>
-                             
+
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
@@ -63,14 +63,14 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>
+                                    <td style="padding-left: 20px !important;">
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->description }}</td>
                                     <td>{{ $item->max_marks }}</td>
                                     <td>{{ $item->min_marks }}</td>
-                      
+
                                     <td class="text-right">
 
 
@@ -105,7 +105,7 @@
                                             </button> --}}
                                             <button type="button" data-table="kra-attributes" data-uuid="{{$item->id}}"
                                                 @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif"
                                                     @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                             </button>
                                             @endcan

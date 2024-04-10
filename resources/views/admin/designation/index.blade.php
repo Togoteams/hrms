@@ -9,8 +9,8 @@
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                     <!-- <div class="col">
-                        <h1 class="page-header-title">{{ $page }}</h1>
-                    </div> -->
+                            <h1 class="page-header-title">{{ $page }}</h1>
+                        </div> -->
                     <!-- End Col -->
 
                     <div class="col-auto">
@@ -31,24 +31,23 @@
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
 
-            <div class="page-header">
-                <div class="row">
-                    <div class="mb-2 col-sm mb-sm-0">
-                        <h2 class="page-header-title">{{ $page }}</h2>
-                    </div>
-                    <div class="col-sm-auto">
-                        @can('add-designations')
-                       <button type="button" class="btn btn-white" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop">
-                            Add {{ $page }}
-                        </button>
-                        @endcan
+                <div class="page-header">
+                    <div class="row">
+                        <div class="mb-2 col-sm mb-sm-0">
+                            <h2 class="page-header-title">{{ $page }}</h2>
+                        </div>
+                        <div class="col-sm-auto">
+                            @can('add-designations')
+                                <button type="button" class="btn btn-white" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    Add {{ $page }}
+                                </button>
+                            @endcan
+                        </div>
                     </div>
                 </div>
-            </div>
                 <!-- Table -->
-                {{-- <div class="table-responsive datatable-custom"> --}}
-                    <div class="table-responsive">
+                <div class="table-responsive">
                     <table id="datatable"
                         class="table table-stripped table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -64,7 +63,7 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td class="table-column-pe-0 padding-left" style="padding-left: 20px !important;">
+                                    <td style="padding-left: 20px !important;">
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>
@@ -77,25 +76,30 @@
 
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.designation.destroy', $item->id) }}">
-                                            <button type="button" data-table="designations" data-uuid="{{$item->id}}"
-                                                @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on
-                                                @else fa-toggle-off @endif" @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
+                                            <button type="button" data-table="designations" data-uuid="{{ $item->id }}"
+                                                @if ($item->status == 'active') data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
+                                                class="btn btn-edit btn-sm changeStatus"><i
+                                                    class="fas  @if ($item->status == 'active') fa-toggle-on
+                                                @else fa-toggle-off @endif"
+                                                    @if ($item->status == 'active') title="Active"  @else title="Inactive" @endif
+                                                    data-bs-toggle="tooltip"></i>
                                             </button>
                                             @can('edit-designations')
-                                            <button type="button"
-                                                onclick="editForm('{{ route('admin.designation.edit', $item->id) }}', 'edit')"
-                                                href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
-                                                class="btn btn-edit btn-sm" ><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
-                                            </button>
+                                                <button type="button"
+                                                    onclick="editForm('{{ route('admin.designation.edit', $item->id) }}', 'edit')"
+                                                    href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
+                                                    class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top" title="Edit"></i>
+                                                </button>
                                             @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                             @can('delete-designations')
-                                            <button type="button" id="delete{{ $item->id }}"
-                                                onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
-                                                class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
-                                            </button>
+                                                <button type="button" id="delete{{ $item->id }}"
+                                                    onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
+                                                    class="btn btn-delete btn-sm" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
+                                                </button>
                                             @endcan
                                         </form>
                                         {{-- <button target="_blank" href="{{ route('admin.designation.edit', $item->id) }}"

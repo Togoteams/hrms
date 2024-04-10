@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                   
+
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -20,8 +20,8 @@
 
                 <!-- End Row -->
             </div>
-          
-         
+
+
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
             <div class="page-header">
@@ -80,13 +80,13 @@
                                     data: 'user.mobile',
                                     name: 'user.mobile'
                                 },
-                             
-                            
+
+
 
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]

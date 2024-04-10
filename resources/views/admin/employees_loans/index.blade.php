@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-          
+
             @include('admin.employees_loans.create')
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -81,7 +81,7 @@
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
-                                }, 
+                                },
                                 {
                                     data: 'employee.ec_number',
                                     name: 'employee.ec_number'
@@ -114,11 +114,11 @@
                                     data: 'last_emi_amount',
                                     name: 'last_emi_amount'
                                 },
-                            
+
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]

@@ -25,7 +25,7 @@
                 </div>
                 <!-- End Page Header -->
                 <!-- Table -->
-                <div class="table-responsive datatable-custom position-relative">
+                <div class="table-responsive position-relative">
                     <table id="datatable"
                         class="table table-lg table-stripped table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -37,6 +37,7 @@
                                         <!-- <label class="form-check-label" for="datatableCheckAll"></label> -->
                                     </div>
                                 </th> --}}
+                                <th>S.No.</th>
                                 <th class="table-column-ps-0">Name</th>
                                 {{-- <th>Type</th> --}}
                                 {{-- <th>Description</th> --}}
@@ -55,6 +56,9 @@
                                             <label class="form-check-label" for="datatableCheckAll1"></label>
                                         </div>
                                     </td> --}}
+                                    <td class="table-column-ps-0" style="padding-left: 20px !important;">
+                                        <span class="mb-0 d-block h5">{{ $key+1 }}</span>
+                                    </td>
                                     <td class="table-column-ps-0">
                                         <span class="mb-0 d-block h5">{{ $role->name }}</span>
                                         <!-- <span class="d-block fs-5">Human resources</span> -->

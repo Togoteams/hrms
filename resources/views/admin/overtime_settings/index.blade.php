@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($data as $key => $item) 
+                            {{-- @foreach ($data as $key => $item)
                             <tr>
                                 <td>{{++$key}}</td>
                                 <td>{{$item->type}}</td>
@@ -144,7 +144,7 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]

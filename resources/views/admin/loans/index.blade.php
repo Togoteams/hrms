@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
 
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.loans.create')
 
 
@@ -44,7 +44,7 @@
             </div>
 
                 <!-- Table -->
-                <div class="table-responsive datatable-custom">
+                <div class="table-responsive">
                     <table id="datatable"
                         class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -60,7 +60,7 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td class="table-column-pe-0">
+                                    <td class="table-column-pe-0" style="padding-left: 20px !important;">
                                         {{ $loop->index + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>
@@ -96,7 +96,7 @@
                                             </button> --}}
                                             <button type="button" data-table="loans" data-uuid="{{$item->id}}"
                                                 @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                                class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif"
                                                     @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                             </button>
                                             @endcan

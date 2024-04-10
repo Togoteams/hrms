@@ -5,7 +5,7 @@
     <main id="content" role="main" class="main">
         <!-- Content -->
         <div class="container-fluid">
-           
+
 
             <!-- Card -->
             <div class="card">
@@ -23,7 +23,7 @@
                 </div>
             </div>
                 <!-- Table -->
-                <div class="table-responsive datatable-custom position-relative">
+                <div class="table-responsive position-relative">
                     <table id="datatable"
                         class="table table-lg table-stripped table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -91,7 +91,7 @@
                                            <i class="fas fa-edit"></i></button>
                                            <button type="button" data-table="users" data-uuid="{{$user->uuid}}"
                                             @if($user->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
-                                            class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($user->status=="active") fa-toggle-on  @else fa-toggle-off @endif" 
+                                            class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($user->status=="active") fa-toggle-on  @else fa-toggle-off @endif"
                                                 @if($user->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                         </button>
                                     </td>
@@ -234,15 +234,15 @@
 
                             <div class="col-sm-9">
                                 <div class="input-group input-group-sm-vertical">
-                                   
+
                                         <input type="password" class="form-control" name="password" id="password"
                                         placeholder="Password" aria-label="Your login password">
-                                    
+
                                         <input type="password" class="form-control" name="confirm_password"
                                         id="confirm_password" placeholder="Confirm Password"
                                         aria-label="Confirm Password Should be similar as password">
-                                   
-                                    
+
+
                                 </div>
                             </div>
                         </div>

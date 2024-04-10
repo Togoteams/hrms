@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Table -->
-                <div class="table-responsive datatable-custom">
+                <div class="table-responsive">
                     <table id="datatable"
                         class="table table-strippedtable-thead-bordered table-nowrap table-align-middle card-table">
                         <thead class="thead-light">
@@ -62,7 +62,7 @@
                         <tbody>
                             @foreach ($data as $key => $item)
                                 <tr>
-                                    <td class="table-column-pe-0">
+                                    <td class="table-column-pe-0" style="padding-left: 20px !important;">
                                         {{ $key + 1 }}
                                     </td>
                                     <td>{{ $item->name }}</td>

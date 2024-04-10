@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                   
+
                     <div class="col-auto">
                         <a class="text-link">
                             Home
@@ -20,7 +20,7 @@
 
                 <!-- End Row -->
             </div>
-            
+
              @include('admin.payroll.salary_increment_setting.create')
 
 
@@ -88,7 +88,7 @@
                                         </button>
                                     </form>
                                 </td>
-                              </tr>   
+                              </tr>
                               @endforeach --}}
                         </tbody>
                     </table>
@@ -139,7 +139,7 @@
                               {
                                   data: 'action',
                                   name: 'action',
-                                  orderable: true,
+                                  orderable: false,
                                   searchable: true
                               },
                           ]

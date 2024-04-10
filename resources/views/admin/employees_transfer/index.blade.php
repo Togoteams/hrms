@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -56,7 +56,7 @@
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
-                        <tbody> 
+                        <tbody>
                         </tbody>
                     </table>
                 </div>
@@ -77,7 +77,7 @@
                                     searchable: false
                                 },
 
-                             
+
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
@@ -90,7 +90,7 @@
                                     data: 'transfer_reason',
                                     name: 'transfer_reason'
                                 },
-                               
+
                                 {
                                     data: 'status',
                                     name: 'status'
@@ -100,7 +100,7 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]
@@ -161,7 +161,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form class="formSubmit" action="{{ route('admin.status') }}" method="POST">
-                            @csrf  
+                            @csrf
                         <div class="modal-body">
                         <input type="hidden" value="" id="status_id" name="emp_id">
                         <div class="mb-2 col-md-6">
@@ -180,7 +180,7 @@
                                     </span>
                             </div>
                         </div>
-                        </div>  
+                        </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
@@ -203,7 +203,7 @@
         // e.preventDefault();
         var stat_id = $(this).val();
         // alert(stat_id);
-        // $("#input").val(text); 
+        // $("#input").val(text);
         $('#status_id').val(stat_id);
         $('#statusModal').modal('show');
       });

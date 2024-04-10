@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -75,7 +75,7 @@
                                     searchable: false
                                 },
 
-                             
+
 
                                 {
                                     data: 'employee.ec_number',
@@ -97,7 +97,7 @@
                                     data: 'total_deduction',
                                     name: 'total_deduction'
                                 },
-                                
+
                                 {
                                     data: 'net_take_home',
                                     name: 'net_take_home'
@@ -107,7 +107,7 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]

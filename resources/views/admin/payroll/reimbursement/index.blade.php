@@ -155,7 +155,7 @@
                             {
                                 data: 'action',
                                 name: 'action',
-                                orderable: true,
+                                orderable: false,
                                 searchable: true
                             },
                         ]

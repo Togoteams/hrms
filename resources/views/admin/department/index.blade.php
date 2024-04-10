@@ -8,7 +8,7 @@
             <!-- Page Header -->
             <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
-                  
+
                     <!-- End Col -->
                     <div class="col-auto">
                         <a class="text-link">
@@ -21,7 +21,7 @@
 
                 <!-- End Row -->
             </div>
-           
+
             @include('admin.department.create')
 
             <!-- Card -->
@@ -61,7 +61,7 @@
                         <tbody>
                         </tbody>
                     </table>
-                  
+
                 </div>
                 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
@@ -80,7 +80,7 @@
                                     searchable: false
                                 },
 
-                             
+
                                 {
                                     data: 'name',
                                     name: 'name'
@@ -89,7 +89,7 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]

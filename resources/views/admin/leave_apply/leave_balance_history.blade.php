@@ -63,7 +63,7 @@
                                         return i++;
                                     }
                                 },
-                               
+
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
@@ -100,7 +100,7 @@
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    orderable: true,
+                                    orderable: false,
                                     searchable: true
                                 },
                             ]
