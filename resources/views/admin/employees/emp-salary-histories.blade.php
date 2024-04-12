@@ -30,7 +30,7 @@
                                             <button type="button" class="btn btn-white btn-sm"
                                                 title="Add Emp Salary History"
                                                 onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
-                                                Add Salary History 
+                                                Add Salary Revisions 
                                             </button>
                                         </div>
                                     </div>
