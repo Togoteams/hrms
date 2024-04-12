@@ -25,17 +25,18 @@
                                 <div class="tab-content" id="v-pills-tabContent">
                                     <div class="py-3 row">
                                         <div class="text-left">
-                                            <input type="hidden"  value="{{$employee->employment_type}}" id="employment_type">
-                                            <input type="hidden" value="{{$currencies[0]}}"  id="currency_salary">
+                                            <input type="hidden" value="{{ $employee->employment_type }}"
+                                                id="employment_type">
+                                            <input type="hidden" value="{{ $currencies[0] }}" id="currency_salary">
                                             <button type="button" class="btn btn-white btn-sm"
                                                 title="Add Emp Salary History"
                                                 onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
-                                                Add Salary History 
+                                                Add Salary History
                                             </button>
                                         </div>
                                     </div>
                                     <div class="row this-div">
-                                        
+
                                         @if (!empty($salaryHistories))
                                             @forelse  ($salaryHistories as $salaryhistory)
                                                 <div class="pb-4">
@@ -46,27 +47,28 @@
                                                                     <div class="col-3 fw-semibold">Date Of Basic Salary
                                                                     </div>
                                                                     <div class="col-3">
-                                                                        {{ date("d-m-Y",strtotime($salaryhistory->date_of_current_basic)) }}
+                                                                        {{ date('d-m-Y', strtotime($salaryhistory->date_of_current_basic)) }}
                                                                     </div>
 
                                                                     <div class="col-3 fw-semibold">Basic Salary</div>
                                                                     <div class="col-3">
-                                                                        {{ ($salaryhistory->currency_salary=='pulla' ? "P" : "$" ) }}
+                                                                        {{ $salaryhistory->currency_salary == 'pula' ? 'P' : "$" }}
                                                                         {{ ucfirst($salaryhistory->basic_salary) }}
                                                                     </div>
-                                                                    @if($salaryhistory->salary_type)
-                                                                    <div class="col-3 fw-semibold">Salary Type</div>
-                                                                    <div class="col-3">
-                                                                        {{ ucfirst($salaryhistory->salary_type) }}
-                                                                    </div>
+                                                                    @if ($salaryhistory->salary_type)
+                                                                        <div class="col-3 fw-semibold">Salary Type</div>
+                                                                        <div class="col-3">
+                                                                            {{ ucfirst($salaryhistory->salary_type) }}
+                                                                        </div>
                                                                     @endif
-                                                                    @if($salaryhistory->basic_salary_for_india >1)
-                                                                    <div class="col-3 fw-semibold">Basic Salary For India
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        {{ ucfirst($salaryhistory->currency_salary_for_india) }}
-                                                                         {{ $salaryhistory->basic_salary_for_india }}
-                                                                    </div>
+                                                                    @if ($salaryhistory->basic_salary_for_india > 1)
+                                                                        <div class="col-3 fw-semibold">Basic Salary For
+                                                                            India
+                                                                        </div>
+                                                                        <div class="col-3">
+                                                                            {{ ucfirst($salaryhistory->currency_salary_for_india) }}
+                                                                            {{ $salaryhistory->basic_salary_for_india }}
+                                                                        </div>
                                                                     @endif
 
                                                                     <div class="col-3 fw-semibold">Pension Contribution
@@ -126,9 +128,9 @@
                                                     </div>
                                                 </div>
                                             @empty
-                                            <div class="pb-4">
-                                                <div class="p-3 card">Salary Is not Added</div>
-                                            </div>
+                                                <div class="pb-4">
+                                                    <div class="p-3 card">Salary Is not Added</div>
+                                                </div>
                                             @endforelse
                                         @endif
                                     </div>
@@ -162,8 +164,9 @@
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="date_of_current_basic">Date Of Basic Salary<small
-                                                    class="required-field">*</small></label>
-                                                <input id="date_of_current_basic" placeholder="Enter Basic Salary" type="date" name="date_of_current_basic"
+                                                        class="required-field">*</small></label>
+                                                <input id="date_of_current_basic" placeholder="Enter Basic Salary"
+                                                    type="date" name="date_of_current_basic"
                                                     class="form-control form-control-sm" value="">
                                             </div>
                                         </div>
@@ -186,58 +189,59 @@
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="basic_salary">Basic Salary<small
-                                                    class="required-field">*</small></label>
+                                                        class="required-field">*</small></label>
                                                 <input id="basic_salary" placeholder="Enter Basic Salary" type="number"
-                                                    min="1" max="10000" name="basic_salary"
+                                                    min="1" max="{{ $employee->employment_type == 'expatriate' ? '10000' : "150000" }}" name="basic_salary"
                                                     class="form-control form-control-sm" value="">
                                             </div>
                                         </div>
-                                        @if($is_expatriate)
-                                        <div class="mb-2 col-sm-6 salary-type-container">
-                                            <div class="form-group">
-                                                <label for="salary_type">Salary Type<small
-                                                        class="required-field">*</small></label>
-                                                <select id="salary_type" placeholder="Enter Salary Type"
-                                                    name="salary_type" class="form-control form-control-sm">
-                                                    <option value="">- Select -</option>
-                                                    <option value="nps">NPS</option>
-                                                    <option value="pf">PF</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                      
-                                        <div class="mb-2 col-sm-6 basic-salary-india-container">
-                                            <div class="form-group">
-                                                <label for="basic_salary_for_india">Basic Salary For India<small
-                                                    class="required-field">*</small></label>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <select name="currency_salary_for_india"
-                                                            id="currency_salary_for_india"
-                                                            name="currency_salary_for_india"
-                                                            class="form-control form-control-sm">
-                                                            <option value="inr">₹</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="pl-0 col-md-9">
-                                                        <input id="basic_salary_for_india" placeholder="Enter "
-                                                            type="number" name="basic_salary_for_india"
-                                                            class="form-control form-control-sm">
-                                                    </div>
+                                        @if ($is_expatriate)
+                                            <div class="mb-2 col-sm-6 salary-type-container">
+                                                <div class="form-group">
+                                                    <label for="salary_type">Salary Type<small
+                                                            class="required-field">*</small></label>
+                                                    <select id="salary_type" placeholder="Enter Salary Type"
+                                                        name="salary_type" class="form-control form-control-sm">
+                                                        <option value="">- Select -</option>
+                                                        <option value="nps">NPS</option>
+                                                        <option value="pf">PF</option>
+                                                    </select>
                                                 </div>
+                                            </div>
+
+                                            <div class="mb-2 col-sm-6 basic-salary-india-container">
+                                                <div class="form-group">
+                                                    <label for="basic_salary_for_india">Basic Salary For India<small
+                                                            class="required-field">*</small></label>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <select name="currency_salary_for_india"
+                                                                id="currency_salary_for_india"
+                                                                name="currency_salary_for_india"
+                                                                class="form-control form-control-sm">
+                                                                <option value="inr">₹</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="pl-0 col-md-9">
+                                                            <input id="basic_salary_for_india" placeholder="Enter "
+                                                                type="number" name="basic_salary_for_india"
+                                                                class="form-control form-control-sm">
+                                                        </div>
+                                                    </div>
 
 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="mb-2 col-sm-6 da-container">
-                                            <div class="form-group">
-                                                <label for="da"><span>DA(%)</span><small
-                                                    class="required-field">*</small></label>
-                                                <input id="da" placeholder="Enter " type="number" name="da"
-                                                    maxlength="3" minlength="1" min="1" max="99"
-                                                    pattern="[0-9]+" class="form-control form-control-sm">
+                                            <div class="mb-2 col-sm-6 da-container">
+                                                <div class="form-group">
+                                                    <label for="da"><span>DA(%)</span><small
+                                                            class="required-field">*</small></label>
+                                                    <input id="da" placeholder="Enter " type="number"
+                                                        name="da" maxlength="3" minlength="1" min="1"
+                                                        max="99" pattern="[0-9]+"
+                                                        class="form-control form-control-sm">
+                                                </div>
                                             </div>
-                                        </div>
                                         @endif
                                         <div class="mt-2 mb-2 col-sm-6">
                                             <div class="form-group">
@@ -289,7 +293,7 @@
 
                                     </div>
                                     <hr>
-                                    <div class="text-center ">
+                                    <div class="text-center">
                                         <button type="submit" class="btn btn-white" id="btnSave">
                                         </button>
                                     </div>
@@ -337,8 +341,7 @@
                 $("#user_id").val(user_id);
                 $("#currency_salary").val(currency_salary);
                 $("#basic_salary").val(basic_salary);
-                if(salary_type)
-                {
+                if (salary_type) {
                     if (salary_type === 'nps') {
                         $('.basic-salary-india-container').show();
                         $('.da-container').show();
@@ -353,20 +356,16 @@
                 $("#currency_salary_for_india").val(currency_salary_for_india);
                 $("#da").val(da);
                 console.log(union_membership_id);
-                if(union_membership_id=="yes")
-                {
+                if (union_membership_id == "yes") {
                     $('#radio2').prop('checked', true);
-                }else
-                {
+                } else {
                     $('#radio1').prop('checked', true);
                 }
-                
-                if(pension_contribution=="yes")
-                {
+
+                if (pension_contribution == "yes") {
                     $('#pradio2').prop('checked', true);
-                    $("#pensionDropdown").css('display',"");
-                }else
-                {
+                    $("#pensionDropdown").css('display', "");
+                } else {
                     $('#pradio1').prop('checked', true);
                 }
 

@@ -162,12 +162,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::post('/edit', 'edit')->name('edit');
         Route::get('/delete', 'delete')->name('delete');
     });
-    Route::controller(LeaveSettingController::class)->as('leavesettings.')->prefix('leavesettings/')->group(function () {
-        Route::get('/list', 'index')->name('list');
-        Route::post('/add', 'store')->name('add');
-        Route::post('/edit', 'edit')->name('edit');
-        Route::get('/delete', 'delete')->name('delete');
-    });
     Route::resource('employees', EmployeeController::class);
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
@@ -226,7 +220,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/employee-kra/{user_id}', [EmployeeKraController::class, 'create'])->name('employee.employee-kra.create');
     Route::get('employee/print/employee-kra/print/{user_id}', [EmployeeKraController::class, 'print'])->name('employee-kra.print');
 
-    Route::resource('document_type', DocumentTypeController::class);
+    Route::resource('document-type', DocumentTypeController::class);
+    Route::get('document-type/status/{id}', [DocumentTypeController::class, 'status'])->name('document-type.status');
 
     Route::resource('document', DocumentController::class);
     Route::post('document/asign', [DocumentController::class, 'asign'])->name('document.asign');
@@ -243,8 +238,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     // leave route start
     Route::resource('leave_apply', LeaveApplyController::class);
 
-    Route::resource('leave_time_approved', LeaveTimeApprovelController::class);
-    Route::post('/admin/leave_time_approved',[LeaveTimeApprovelController::class,'status'])->name('leave_approval.status');
+    Route::resource('leave-time-approved', LeaveTimeApprovelController::class);
+    Route::post('/admin/leave-time-approved', [LeaveTimeApprovelController::class, 'status'])->name('leave_approval.status');
 
     Route::get('leave_balance_history/', [LeaveApplyController::class, 'balance_history'])->name('leave_apply.balance_history');
     Route::get('leave_request_history/', [LeaveApplyController::class, 'request_history'])->name('leave_apply.request_history');
@@ -283,7 +278,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('employees_loans', EmplooyeLoansController::class);
     Route::get('employees_loans/status/{id}', [EmplooyeLoansController::class, 'status'])->name('employees_loans.status');
 
-    
+
 
     Route::get('account-profile', [UserAccountController::class, 'viewProfile'])->name('profile');
     Route::post('profile-update', [UserAccountController::class, 'profileUpdate'])->name('profile.update');
@@ -293,7 +288,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
     // Payroll
     Route::prefix('payroll')->as('payroll.')->group(function () {
-        
+
         Route::controller(PayrollReportController::class)->as('reports.')->prefix('reports')->group(function () {
             Route::get('/ttum-view', 'ttumReport')->name('ttum.list');
             Route::post('/ttum-export', 'ttumReportExport')->name('ttum.exports');
@@ -350,8 +345,6 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('salary/get-emp-head/{user_id?}/{salary_month?}', [PayrollSalaryController::class, 'get_employee_data'])->name('salary.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
     });
-
-
 });
 
 // this group only for update password and +

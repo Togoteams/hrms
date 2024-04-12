@@ -55,7 +55,9 @@
                                 <th>Max leave at time</th>
                                 <th>Starting Date</th>
                                 <th>Is Certificate</th>
-                                <th class="text-right">Action</th>
+                                @canany(['edit-leave-type', 'delete-leave-type', 'view-leave-type'])
+                                    <th class="text-right">Action</th>
+                                @endcanany
                             </tr>
                         </thead>
 
@@ -71,25 +73,28 @@
                                     <td>{{ $item->max_leave_at_time }}</td>
                                     <td>{{ $item->starting_date == '1' ? 'DOJ' : 'From January' }}</td>
                                     <td>{{ $item->is_certificate == '1' ? 'Yes' : 'No' }}</td>
-                                    <td>
-                                        @can('edit-leave-type')
-                                        <a href="javascript:void(0)" data-value="{{ json_encode($item) }}"
-                                            class="btn btn-edit btn-sm edit_leave_setting_btn">
-                                            <i class="fas fa-edit" title="Edit"></i>
-                                        </a>
-                                        @endcan
-                                        @can('delete-leave-type')
-                                        <a class="btn btn-delete btn-sm delete_leave_setting_btn"
-                                            data-value="{{ $item->id }}">
-                                            <i class="fas fa-trash-alt" title="Delete"></i>
-                                        </a>
-                                        @endcan
-                                        @can('view-leave-type')
-                                        <a class="btn btn-sm btn-info view_leave_setting_btn" data-value="{{ json_encode($item) }}">
-                                            <i class="fas fa-eye" style="color:#fff;"></i>
-                                        </a>
-                                        @endcan
-                                    </td>
+                                    @canany(['edit-leave-type', 'delete-leave-type', 'view-leave-type'])
+                                        <td>
+                                            @can('edit-leave-type')
+                                                <a href="javascript:void(0)" data-value="{{ json_encode($item) }}"
+                                                    class="btn btn-edit btn-sm edit_leave_setting_btn">
+                                                    <i class="fas fa-edit" title="Edit"></i>
+                                                </a>
+                                            @endcan
+                                            @can('delete-leave-type')
+                                                <a class="btn btn-delete btn-sm delete_leave_setting_btn"
+                                                    data-value="{{ $item->id }}">
+                                                    <i class="fas fa-trash-alt" title="Delete"></i>
+                                                </a>
+                                            @endcan
+                                            @can('view-leave-type')
+                                                <a class="btn btn-sm btn-info view_leave_setting_btn"
+                                                    data-value="{{ json_encode($item) }}">
+                                                    <i class="fas fa-eye" style="color:#fff;"></i>
+                                                </a>
+                                            @endcan
+                                        </td>
+                                    @endcanany
                                 </tr>
                             @endforeach
                         </tbody>
@@ -179,7 +184,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Salary Deduction (%) In Extends</label>
-                                            <input type="text" name="extended_leaves_deduction_per" class="form-control"
+                                            <input type="text" name="extended_leaves_deduction_per"
+                                                class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
@@ -315,7 +321,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label> Extended Leave In Year</label>
-                                            <input type="text" name="extended_leaves_year"  id="extended_leaves_year" class="form-control"
+                                            <input type="text" name="extended_leaves_year" id="extended_leaves_year"
+                                                class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
@@ -332,7 +339,8 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Is Salary Deduction</label>
-                                            <select name="is_salary_deduction"  id="is_salary_deduction" class="form-control">
+                                            <select name="is_salary_deduction" id="is_salary_deduction"
+                                                class="form-control">
                                                 <option value="">---Select---</option>
                                                 <option value=1>Yes</option>
                                                 <option value=0>No</option>
@@ -342,14 +350,16 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Salary Deduction (%)</label>
-                                            <input type="text" name="salary_deduction_per"  id="salary_deduction_per" class="form-control"
+                                            <input type="text" name="salary_deduction_per" id="salary_deduction_per"
+                                                class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Salary Deduction (%) In Extends</label>
-                                            <input type="text" name="extended_leaves_deduction_per"  id="extended_leaves_deduction_per" class="form-control"
+                                            <input type="text" name="extended_leaves_deduction_per"
+                                                id="extended_leaves_deduction_per" class="form-control"
                                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                         </div>
                                     </div>
@@ -458,124 +468,124 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Leave Type</label>
-                                            <input type="text" name="name" id="leave_setting_name_view"
-                                                class="form-control">
-                                        </div>
-                                        <input type="hidden" name="id" id="leave_setting_id_view">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Leave Type</label>
+                                        <input type="text" name="name" id="leave_setting_name_view"
+                                            class="form-control">
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Employee type</label>
-                                            <select name="emp_type" class="form-control" id="leave_setting_emp_type_view">
-                                                <option value="">---Select---</option>
-                                                <option value=1>Local</option>
-                                                <option value=0>IBO</option>
-                                            </select>
-                                        </div>
+                                    <input type="hidden" name="id" id="leave_setting_id_view">
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Employee type</label>
+                                        <select name="emp_type" class="form-control" id="leave_setting_emp_type_view">
+                                            <option value="">---Select---</option>
+                                            <option value=1>Local</option>
+                                            <option value=0>IBO</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Total Leave In Year</label>
-                                            <input type="text" name="total_leave_year"
-                                                id="leave_setting_total_leave_year_view" class="form-control"
-                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Max leave at time</label>
-                                            <input type="text" name="max_leave_at_time"
-                                                id="leave_setting_max_leave_at_time_view" class="form-control"
-                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Total Leave In Year</label>
+                                        <input type="text" name="total_leave_year"
+                                            id="leave_setting_total_leave_year_view" class="form-control"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Is Accumulated</label>
-                                            <select name="is_accumulated" class="form-control"
-                                                id="leave_setting_is_accumulated_view">
-                                                <option value="">---Select---</option>
-                                                <option value=1>Yes</option>
-                                                <option value=0>No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Is Accumulated Max Value</label>
-                                            <input type="text" name="is_accumulated_max_value"
-                                                id="leave_setting_is_accumulated_max_value_view" class="form-control"
-                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Max leave at time</label>
+                                        <input type="text" name="max_leave_at_time"
+                                            id="leave_setting_max_leave_at_time_view" class="form-control"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Is Pro Data</label>
-                                            <select name="is_pro_data" id="leave_setting_is_pro_data_view"
-                                                class="form-control">
-                                                <option value="">---Select---</option>
-                                                <option value=1>Yes</option>
-                                                <option value=0>No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Starting Date</label>
-                                            <select name="starting_date" id="leave_setting_starting_date_view"
-                                                class="form-control">
-                                                <option value="">---Select---</option>
-                                                <option value=1>Date of joining</option>
-                                                <option value=0>Other Date</option>
-                                            </select>
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Is Accumulated</label>
+                                        <select name="is_accumulated" class="form-control"
+                                            id="leave_setting_is_accumulated_view">
+                                            <option value="">---Select---</option>
+                                            <option value=1>Yes</option>
+                                            <option value=0>No</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Is Count Holyday</label>
-                                            <select name="is_count_holyday" id="leave_setting_is_count_holyday_view"
-                                                class="form-control">
-                                                <option value="">---Select---</option>
-                                                <option value=1>Yes</option>
-                                                <option value=0>No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Is Leave Encash</label>
-                                            <select name="is_leave_encash" id="leave_setting_is_leave_encash_view"
-                                                class="form-control">
-                                                <option value="">---Select---</option>
-                                                <option value=1>Yes</option>
-                                                <option value=0>No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Is Certificate</label>
-                                            <select name="is_certificate" id="leave_setting_is_certificate_view"
-                                                class="form-control">
-                                                <option value="">---Select---</option>
-                                                <option value=1>Yes</option>
-                                                <option value=0>No</option>
-                                            </select>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Is Accumulated Max Value</label>
+                                        <input type="text" name="is_accumulated_max_value"
+                                            id="leave_setting_is_accumulated_max_value_view" class="form-control"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Is Pro Data</label>
+                                        <select name="is_pro_data" id="leave_setting_is_pro_data_view"
+                                            class="form-control">
+                                            <option value="">---Select---</option>
+                                            <option value=1>Yes</option>
+                                            <option value=0>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Starting Date</label>
+                                        <select name="starting_date" id="leave_setting_starting_date_view"
+                                            class="form-control">
+                                            <option value="">---Select---</option>
+                                            <option value=1>Date of joining</option>
+                                            <option value=0>Other Date</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Is Count Holyday</label>
+                                        <select name="is_count_holyday" id="leave_setting_is_count_holyday_view"
+                                            class="form-control">
+                                            <option value="">---Select---</option>
+                                            <option value=1>Yes</option>
+                                            <option value=0>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Is Leave Encash</label>
+                                        <select name="is_leave_encash" id="leave_setting_is_leave_encash_view"
+                                            class="form-control">
+                                            <option value="">---Select---</option>
+                                            <option value=1>Yes</option>
+                                            <option value=0>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Is Certificate</label>
+                                        <select name="is_certificate" id="leave_setting_is_certificate_view"
+                                            class="form-control">
+                                            <option value="">---Select---</option>
+                                            <option value=1>Yes</option>
+                                            <option value=0>No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

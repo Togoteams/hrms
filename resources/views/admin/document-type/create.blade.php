@@ -7,8 +7,8 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <h5 class="modal-title" id="staticBackdropLabel">{{ $page }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">  
-             <form id="form_data" action="{{ route('admin.document_type.store') }}">
+        <div class="modal-body">
+             <form id="form_data" action="{{ route('admin.document-type.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
@@ -33,7 +33,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     {{ $page }}</button>
                             </div>
                         </div>
-                       
+
                     </div>
 
                 </div>
@@ -45,7 +45,7 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     document.getElementById('type_id').innerText = data + " amount"
                 } else {
                     document.getElementById('type_id').innerText = data
-    
+
                 }
             }
         </script>

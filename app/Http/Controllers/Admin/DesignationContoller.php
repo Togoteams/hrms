@@ -32,10 +32,18 @@ class DesignationContoller extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:designations,name',
-            'description' => 'string|required'
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => ['string', 'required', 'unique:designations,name', 'regex:/^[^\d]*$/'],
+                'description' => 'string|required'
+            ],
+            [
+                'name.string' => 'field Must Be A String.',
+                'description.string' => 'field Must Be A String.',
+                'name.regex' => 'field must not contain numeric values.'
+            ]
+        );
         if ($validator->fails()) {
             return $validator->errors();
         } else {
@@ -68,7 +76,7 @@ class DesignationContoller extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required|unique:designations,name,'.$id,
+            'name' => 'string|required|unique:designations,name,' . $id,
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {

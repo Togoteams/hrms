@@ -20,6 +20,7 @@ use App\Models\CurrencySetting;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Document;
+use App\Models\DocumentType;
 use App\Models\EmplooyeLoans;
 use App\Models\Employee;
 use App\Models\EmployeeKra;
@@ -69,7 +70,7 @@ class AjaxController extends BaseController
                     $user= $this->userService->findUser($id);
                     $data = new UserResource($user);
                     $message='User data fetched';
-                    break; 
+                    break;
                 case 'roles':
                     $id = uuidtoid($request->uuid, $table);
                     $role= $this->roleService->findRole($id);
@@ -156,7 +157,15 @@ class AjaxController extends BaseController
                     ]);
                     $message='Designation Status updated';
                     break;
-               
+
+                    case 'document-type':
+                        $id = $request->uuid;
+                        $data= DocumentType::where('id',$id)->update([
+                            "status"=>$request->value
+                        ]);
+                        $message='Document type status updated';
+                        break;
+
                 case 'reimbursement_types':
                     $id = $request->uuid;
                     $data= ReimbursementType::where('id',$id)->update([
@@ -164,7 +173,7 @@ class AjaxController extends BaseController
                     ]);
                     $message='Reimbursement Status updated';
                     break;
-                
+
                 case 'department':
                     $id = $request->uuid;
                     $data= Department::where('id',$id)->update([

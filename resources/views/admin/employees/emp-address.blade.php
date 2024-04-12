@@ -40,19 +40,26 @@
                                                             <div class="col-9">
                                                                 <div class="row text-dark">
                                                                     <div class="col-3 fw-semibold">Address Type</div>
-                                                                    <div class="col-3">{{ ucfirst($empAddress->address_type) }}
+                                                                    <div class="col-3">
+                                                                        {{ ucfirst($empAddress->address_type) }}
                                                                     </div>
 
-                                                                   
 
-                                                                    <div class="col-3 fw-semibold">@if($empAddress->post_box=="postal_address")  Plot Number @else PO Box @endif</div>
+
+                                                                    <div class="col-3 fw-semibold">
+                                                                        @if ($empAddress->post_box == 'postal_address')
+                                                                            Plot Number
+                                                                        @else
+                                                                            PO Box
+                                                                        @endif
+                                                                    </div>
                                                                     <div class="col-3">{{ ucfirst($empAddress->post_box) }}
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">Address</div>
                                                                     <div class="col-9">{{ ucfirst($empAddress->address) }}
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">State</div>
-                                                                    <div class="col-3">{{ ucfirst($empAddress->state)}}
+                                                                    <div class="col-3">{{ ucfirst($empAddress->state) }}
                                                                     </div>
 
                                                                     <div class="col-3 fw-semibold">Country</div>
@@ -65,9 +72,8 @@
                                                             <div class="col-3 text-end">
                                                                 <div class="right-div">
                                                                     <!-- Your content for right div goes here -->
-                                                                    <button class="btn btn-edit btn-sm bt"
-                                                                        title="Edit" id="editButton"
-                                                                        data-id="{{ $empAddress->id }}"
+                                                                    <button class="btn btn-edit btn-sm bt" title="Edit"
+                                                                        id="editButton" data-id="{{ $empAddress->id }}"
                                                                         data-user_id="{{ $employee->user_id }}"
                                                                         data-address_type="{{ $empAddress->address_type }}"
                                                                         data-address="{{ $empAddress->address }}"
@@ -82,7 +88,7 @@
                                                                         title="Delete" data-id="{{ $empAddress->id }}"
                                                                         data-token="{{ csrf_token() }}"
                                                                         data-action="{{ route('admin.employee.address.delete') }}">
-                                                                        
+
                                                                         <i class="fas fa-trash-alt"></i>
                                                                     </button>
 
@@ -123,52 +129,52 @@
                                     <div class="row">
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="address_type">Address Type<small class="required-field">*</small></label>
-                                                <select  id="address_type" placeholder="Enter Address Type"
-                                                type="text" name="address_type"
-                                                class="form-control form-control-sm" >
-                                                     <option disabled>--select--</option>
-                                                     <option value="present"  >Present</option>
-                                                     <option value="permanent" >Permanent</option>
-                                                     <option value="postal_address" >Postal Address</option>
-                                                 </select>
+                                                <label for="address_type">Address Type<small
+                                                        class="required-field">*</small></label>
+                                                <select id="address_type" placeholder="Enter Address Type" type="text"
+                                                    name="address_type" class="form-control form-control-sm">
+                                                    <option disabled>--select--</option>
+                                                    <option value="present">Present</option>
+                                                    <option value="permanent">Permanent</option>
+                                                    <option value="postal_address">Postal Address</option>
+                                                </select>
                                             </div>
                                         </div>
-                                       
+
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="post_box"  id="po_box_lable"><span>Plot Number</span></label>
-                                                <input id="post_box" placeholder="Enter Plot Number"
-                                                    type="text" name="post_box" class="form-control form-control-sm"
-                                                    value="">
+                                                <label for="post_box" id="po_box_lable"><span>Plot Number</span></label>
+                                                <input id="post_box" placeholder="Enter Plot Number" type="text"
+                                                    name="post_box" class="form-control form-control-sm" value="">
                                             </div>
                                         </div>
                                         <div class="mb-2 col-sm-12">
                                             <div class="form-group">
-                                                <label for="address">address<small class="required-field">*</small></label>
+                                                <label for="address">address<small
+                                                        class="required-field">*</small></label>
                                                 <textarea id="address" placeholder="Enter Address" name="address" class="form-control form-control-sm"></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="city">City<small class="required-field">*</small></label>
-                                                <input id="city" placeholder="Enter city"
-                                                    type="text" name="city"
-                                                    class="form-control form-control-sm" value="">
+                                                <input id="city" placeholder="Enter city" type="text"
+                                                    name="city" class="form-control form-control-sm" value="">
                                             </div>
                                         </div>
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="state">State<small class="required-field">*</small></label>
-                                                <input id="state" placeholder="Enter state "
-                                                    type="text" name="state" class="form-control form-control-sm"
-                                                    value="">
+                                                <input id="state" placeholder="Enter state " type="text"
+                                                    name="state" class="form-control form-control-sm" value="">
                                             </div>
                                         </div>
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="country">Country<small class="required-field">*</small></label>
-                                                <select name="country" id="country" class="form-control form-control-sm" required>
+                                                <label for="country">Country<small
+                                                        class="required-field">*</small></label>
+                                                <select name="country" id="country"
+                                                    class="form-control form-control-sm" required>
                                                     <option value="">- Select -</option>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->name }}"
@@ -230,20 +236,18 @@
                 $('#formModal').modal('show');
             });
             $(document).on("change", "#address_type", (event) => {
-               var addressType = $("#address_type").val();
-               console.log(addressType);
-               if(addressType=="postal_address")
-               {
-                console.log("PO");
-                $("#po_box_lable").text("PO Box");
-                $("#post_box").attr("placeholder", "Enter PO Box Number");
-               }else
-               {
-                console.log("Plot");
-                $("#po_box_lable").text("Plot Number");
-                $("#post_box").attr("placeholder", "Enter Plot Number");
+                var addressType = $("#address_type").val();
+                console.log(addressType);
+                if (addressType == "postal_address") {
+                    console.log("PO");
+                    $("#po_box_lable").text("PO Box");
+                    $("#post_box").attr("placeholder", "Enter PO Box Number");
+                } else {
+                    console.log("Plot");
+                    $("#po_box_lable").text("Plot Number");
+                    $("#post_box").attr("placeholder", "Enter Plot Number");
 
-               }
+                }
             });
         });
     </script>

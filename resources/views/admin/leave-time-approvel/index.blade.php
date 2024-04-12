@@ -22,7 +22,7 @@
                 <!-- End Row -->
             </div>
 
-            @include('admin.leave_time_approvel.create')
+            @include('admin.leave-time-approvel.create')
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -76,7 +76,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.leave_time_approved.index') }}",
+                            ajax: "{{ route('admin.leave-time-approved.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',

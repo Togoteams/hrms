@@ -1,10 +1,11 @@
 @extends('layouts.app')
 @push('styles')
-<style>
-    .table-nowrap td, .table-nowrap th {
-        white-space: normal !important;
-    }
-</style>
+    <style>
+        .table-nowrap td,
+        .table-nowrap th {
+            white-space: normal !important;
+        }
+    </style>
 @endpush
 @section('content')
     <main id="content" role="main" class="main card ">
@@ -61,7 +62,8 @@
                                         @foreach ($kra_attributes as $kra)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
-                                                <td style="max-width:220px;"> <b>{{ $kra->name }} -  {{ $kra->description }}</b>
+                                                <td style="max-width:220px;"> <b>{{ $kra->name }} -
+                                                        {{ $kra->description }}</b>
 
                                                     <input required type="hidden" name="attribute_name[]"
                                                         value="{{ $kra->name }}">
@@ -89,8 +91,15 @@
                         </div>
                         <hr>
                         <div class="text-center " style="display: none" id="table_data_btn">
-                            <button type="button" onclick="ajaxCall('form_data')" class="btn btn-white">Add
-                                {{ $page }}</button>
+                            @if (count($kra_attributes) <= 0)
+                                <a href="{{ route('admin.kra-attributes.index') }}"
+                                    class="text-danger errormax_marks">Go to: Create KRA->Attribute(s) first</a>
+                            @else
+                                <button type="button" onclick="ajaxCall('form_data')" class="btn btn-white"
+                                    {{ count($kra_attributes) > 0 ? '' : 'disabled' }}>
+                                    Add {{ $page }}
+                                </button>
+                            @endif
                         </div>
                     </form>
                 </div>

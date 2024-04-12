@@ -28,9 +28,8 @@ class DocumentTypeController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-            }
+        }
         return view('admin.document-type.index', ['page' => $this->page_name]);
-
     }
 
     /**
@@ -50,12 +49,12 @@ class DocumentTypeController extends Controller
             'name' => 'required|string|unique:document_types,name',
             'description' => 'nullable|string',
 
-           
+
         ]);
         if ($validator->fails()) {
             return $validator->errors();
         } else {
-            $request->request->add(['status' =>"active"]);
+            $request->request->add(['status' => "active"]);
             DocumentType::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
         }
@@ -75,7 +74,7 @@ class DocumentTypeController extends Controller
     public function edit(string $id)
     {
         $documentType = DocumentType::find($id);
-        return view('admin.medical_cart.edit', ['documentType' => $documentType, 'page' => $this->page_name]);   
+        return view('admin.medical_cart.edit', ['documentType' => $documentType, 'page' => $this->page_name]);
     }
 
     /**
@@ -85,7 +84,7 @@ class DocumentTypeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:document_types,name',
-            'description' => 'nullable|string',        
+            'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
             return $validator->errors();

@@ -38,7 +38,7 @@ class EmployeeKraController extends Controller
                 ->where('created_at', 'LIKE', '%' . $year . '%')->groupBy('user_id')
                 ->get();
             }
-            
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

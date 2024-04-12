@@ -65,7 +65,6 @@ $(document).ready(function (e) {
         });
     })();
 
-   
     function iformat(icon, badge) {
         var originalOption = icon.element;
         var originalOptionBadge = $(originalOption).data("badge");
@@ -179,6 +178,10 @@ $(document).ready(function (e) {
     $("form.formsubmit").on("submit", function (e) {
         e.preventDefault();
         var $this = $(this);
+        var $button = $(this).find('button[type="submit"]');
+        var orgButtonHtml = $button.html();
+        $button.prop('disabled', true); // Button Disabled after submission the form
+        $button.html('<span class="spinner-border spinner-border-sm" style="color: #ff5722" role="status" aria-hidden="true"></span><span style="color: #ff5722"> Processing...</span>'); // Loader Enabled
         /* console.table($this); */
         var formActionUrl = $this.prop("action");
         if ($($this).hasClass("fileupload")) {
@@ -241,6 +244,8 @@ $(document).ready(function (e) {
                 }
             },
             error: function (response) {
+                $button.prop('disabled', false); // Loader Disabled
+                $button.html(orgButtonHtml);
                 console.log(response);
                 let responseJSON = response.responseJSON;
                 $(".err_message").removeClass("d-block").hide();
@@ -569,7 +574,9 @@ $(document).ready(function (e) {
                     let update = $("#" + formModal)
                         .find('button[type="submit"]')
                         .html("Update");
-                    $("#" + formModal).find('.action_name').html('Edit');
+                    $("#" + formModal)
+                        .find(".action_name")
+                        .html("Edit");
 
                     $("#" + formModal)
                         .find('button[type="reset"]')
@@ -1162,17 +1169,16 @@ function showToast(type, title, message) {
         position: "bottom-right",
     });
 }
-function getAjaxData(data,url){
-
-        $.ajax({
-            url: url,
-            type: "get",
-            data:data,
-            dataType: "json",
-            success: function (result) {
-               return  result;
-            },
-        });
+function getAjaxData(data, url) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: data,
+        dataType: "json",
+        success: function (result) {
+            return result;
+        },
+    });
 }
 
 function makeArray(params) {

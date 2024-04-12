@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leave_time_approvels', function (Blueprint $table) {
+        Schema::create('leave-time-approvels', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('leave_type_id')->nullable();
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leave_time_approvels');
+        Schema::dropIfExists('leave-time-approvels');
     }
 };

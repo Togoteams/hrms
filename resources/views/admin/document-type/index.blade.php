@@ -72,7 +72,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.document_type.index') }}",
+                            ajax: "{{ route('admin.document-type.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',

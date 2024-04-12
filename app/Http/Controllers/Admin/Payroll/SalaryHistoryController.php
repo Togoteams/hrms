@@ -12,8 +12,8 @@ use Exception;
 
 class SalaryHistoryController extends BaseController
 {
-   
-   
+
+
     public function viewSalaryHistory($eid = null)
     {
         $employee = getEmployee($eid);
@@ -22,7 +22,7 @@ class SalaryHistoryController extends BaseController
         $isExpatriate = 0 ;
         if($employee->employment_type=="expatriate")
         {
-            $currencies =['usd'];   
+            $currencies =['usd'];
             $isExpatriate = 1;
         }
 
@@ -54,7 +54,7 @@ class SalaryHistoryController extends BaseController
                 SalaryHistory::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
                 $message = "Salary History Updated Successfully";
             }
-            
+
             return $this->responseJson(
                 true,
                 200,

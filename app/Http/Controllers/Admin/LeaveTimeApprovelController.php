@@ -29,7 +29,7 @@ class LeaveTimeApprovelController extends BaseController
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.leave_time_approvel.buttons', ['item' => $row, "route" => 'leave_time_approved']);
+                    $actionBtn = view('admin.leave-time-approvel.buttons', ['item' => $row, "route" => 'leave-time-approved']);
                     return $actionBtn;
                 })
                 ->editColumn('request_date', function ($data) {
@@ -48,7 +48,7 @@ class LeaveTimeApprovelController extends BaseController
             $query->where('gender', 'female');
         })->getActiveEmp()->get();
         $maternityLeaveTypes = LeaveSetting::where('name', 'MATERNITY LEAVE')->get();
-        return view('admin.leave_time_approvel.index', ['page' => $this->page_name, 'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees]);
+        return view('admin.leave-time-approvel.index', ['page' => $this->page_name, 'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees]);
 
     }
 
@@ -145,7 +145,7 @@ class LeaveTimeApprovelController extends BaseController
         })->getActiveEmp()->get();
         $maternityLeaveTypes = LeaveSetting::where('name', 'MATERNITY LEAVE')->get();
         $data = LeaveTimeApprovel::find($id);
-        return view('admin.leave_time_approvel.show', ['data' => $data,'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees, 'page' => $this->page_name]);
+        return view('admin.leave-time-approvel.show', ['data' => $data,'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees, 'page' => $this->page_name]);
     }
 
     /**
@@ -158,7 +158,7 @@ class LeaveTimeApprovelController extends BaseController
         })->getActiveEmp()->get();
         $maternityLeaveTypes = LeaveSetting::where('name', 'MATERNITY LEAVE')->get();
         $leave = LeaveTimeApprovel::find($id);
-        return view('admin.leave_time_approvel.edit', ['leave' => $leave,'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees, 'page' => $this->page_name]);
+        return view('admin.leave-time-approvel.edit', ['leave' => $leave,'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees, 'page' => $this->page_name]);
     }
 
     /**

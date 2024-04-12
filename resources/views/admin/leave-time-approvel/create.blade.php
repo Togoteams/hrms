@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form  class="formsubmit fileupload" action="{{ route('admin.leave_time_approved.store') }}" id="leave_store">
+                <form  class="formsubmit fileupload" action="{{ route('admin.leave-time-approved.store') }}" id="leave_store">
                     @csrf
                     {{-- <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}"> --}}
                     <input type="hidden" name="request_date" readonly id="request_date"

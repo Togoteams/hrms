@@ -251,7 +251,7 @@
                              </a>
 
                              <div id="leave"
-                                 class="nav-collapse collapse {{ show(['leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave']) }} "
+                                 class="nav-collapse collapse {{ show(['leavesettings.list', 'leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave', 'leave-time-approved.index']) }} "
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                  {{-- @canany(['add-leave-types', 'edit-leave-types', 'delete-leave-types', 'view-leave-types', 'change-status-leave-types'])
@@ -318,8 +318,8 @@
                                  @canany(['add-leave-type-approval', 'edit-leave-type-approval',
                                      'delete-leave-type-approval', 'view-leave-type-approval',
                                      'change-status-leave-type-approval'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_time_approved.index' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave_time_approved.index') }}" data-placement="left">
+                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave-time-approved.index' ? 'active' : '' }}"
+                                         href="{{ route('admin.leave-time-approved.index') }}" data-placement="left">
                                          <span class="nav-link-title">Maternity leave Request</span>
                                      </a>
                                  @endcanany
@@ -434,13 +434,13 @@
                                      <span class="nav-link-title">Documents</span>
                                  </a>
                                  <div id="documents"
-                                     class="nav-collapse collapse {{ show(['document.index', 'document_type.index']) }} "
+                                     class="nav-collapse collapse {{ show(['document.index', 'document-type.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                      @canany(['add-document-type', 'edit-document-type', 'view-document-type',
                                          'delete-document-type', 'change-status-document-type'])
-                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document_type.index' ? 'active' : '' }}  "
-                                             href="{{ route('admin.document_type.index') }}">Document Type</a>
+                                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document-type.index' ? 'active' : '' }}  "
+                                             href="{{ route('admin.document-type.index') }}">Document Type</a>
                                      @endcanany
                                      @canany(['add-document-management', 'edit-document-management',
                                          'view-document-management', 'delete-document-management'])
