@@ -16,7 +16,7 @@
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/salary-history*') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ route('admin.employee.salary-history.list', $empId) }}';"
         {{ empty($empId) ? 'disabled' : '' }}>
-        Salary  Histories
+        Salary Revisions
     </button>
 
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/address*') ? 'active-class' : '' }}"
