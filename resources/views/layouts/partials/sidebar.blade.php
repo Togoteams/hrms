@@ -581,6 +581,16 @@
                          </div>
                      @endcanany
 
+                     {{-- @canany(['aaaa']) --}}
+                     <div class="nav-item">
+                         <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.backups.index' ? 'active' : '' }}"
+                             href="{{ route('admin.backups.index') }}" data-placement="left">
+                             <i class="fas fa-cloud-download-alt nav-icon"></i>
+                             <span class="nav-link-title">Backup</span>
+                         </a>
+                     </div>
+                     {{-- @endcanany --}}
+
 
 
                      {{-- @canany(['add-leave-settings', 'edit-leave-settings', 'view-leave-settings', 'delete-leave-settings', 'add-leave-type', 'edit-leave-type', 'delete-leave-type', 'view-leave-type'])

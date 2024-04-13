@@ -92,8 +92,10 @@
                         <hr>
                         <div class="text-center " style="display: none" id="table_data_btn">
                             @if (count($kra_attributes) <= 0)
+                                Go to ->
                                 <a href="{{ route('admin.kra-attributes.index') }}"
-                                    class="text-danger errormax_marks">Go to: Create KRA->Attribute(s) first</a>
+                                    class="text-danger errormax_marks fw-bolder"><u> Create KRA </u></a>
+                                Attribute(s) first
                             @else
                                 <button type="button" onclick="ajaxCall('form_data')" class="btn btn-white"
                                     {{ count($kra_attributes) > 0 ? '' : 'disabled' }}>

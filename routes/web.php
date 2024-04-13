@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AjaxController;
+use App\Http\Controllers\Admin\Backup\BackupController;
 use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CurrencyController;
@@ -345,6 +346,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('salary/get-emp-head/{user_id?}/{salary_month?}', [PayrollSalaryController::class, 'get_employee_data'])->name('salary.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
     });
+
+    // Database Backup
+    Route::resource('backups', BackupController::class);
 });
 
 // this group only for update password and +
