@@ -19,6 +19,12 @@
         Salary Revisions
     </button>
 
+    <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/current-leaves*') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ route('admin.employee.current-leaves.list', $empId) }}';"
+        {{ empty($empId) ? 'disabled' : '' }}>
+        Current Leaves
+    </button>
+
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/address*') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ route('admin.employee.address.form', $empId) }}';"
         {{ empty($empId) ? 'disabled' : '' }}>

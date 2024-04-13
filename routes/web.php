@@ -53,6 +53,7 @@ use App\Http\Controllers\SalaryIncrementController;
 use App\Http\Controllers\Admin\Payroll\PayrollIboTaxController;
 use App\Http\Controllers\Admin\Payroll\SalarySettingController;
 use App\Http\Controllers\Admin\Payroll\SalaryHistoryController;
+use App\Http\Controllers\Admin\CurrentLeaveController;
 use App\Http\Controllers\Admin\Payroll\Emp13thChequeController;
 use App\Http\Controllers\PayrollReportController;
 use App\Models\KraAttributes;
@@ -181,6 +182,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/salary-history/{eid?}', [SalaryHistoryController::class, 'viewSalaryHistory'])->name('employee.salary-history.list');
     Route::post('employee/salary-history', [SalaryHistoryController::class, 'postSalaryHistory'])->name('employee.salary-history.post');
     Route::post('employee/delete-salary-history', [SalaryHistoryController::class, 'deleteSalaryHistory'])->name('employee.salary-history.delete');
+
+    Route::get('employee/current-leaves/{eid?}', [CurrentLeaveController::class, 'viewCurrentLeaves'])->name('employee.current-leaves.list');
+    Route::post('employee/current-leaves', [CurrentLeaveController::class, 'postCurrentLeaves'])->name('employee.current-leaves.post');
 
     Route::get('employee/passport-omang/{eid?}', [EmployeeController::class, 'viewPassportOmang'])->name('employee.passportOmang.form');
     Route::post('employee/passport-omang', [EmployeeController::class, 'postPassportOmang'])->name('employee.passportOmang.post');

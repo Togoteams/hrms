@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Webpatser\Uuid\Uuid;
 
 class LeaveApply extends Model
 {
@@ -24,8 +25,8 @@ class LeaveApply extends Model
     function leaveSetting(){
         return $this->belongsTo(LeaveSetting::class);
     }
-   
-    
+
+
     public function leaveDate(){
         return $this->hasMany(LeaveDate::class,'leave_id');
     }
@@ -39,6 +40,5 @@ class LeaveApply extends Model
         static::deleting(function($model) {
             $model->leaveDate()->delete();
         });
-        
     }
 }
