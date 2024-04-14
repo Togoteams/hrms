@@ -34,7 +34,7 @@
                 </button>
                 @endif
             @endif
-            @if($item->approval_authority==auth()->user()->id)
+            {{-- @if($item->approval_authority==auth()->user()->id) --}}
             @can('change-status-leave-apply')
                 <button type="button"
                     @if ($item->status != 'approved') onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"
@@ -42,7 +42,7 @@
                     class="btn @if ($item->status == 'pending') btn-warning @elseif ($item->status == 'reject') btn-danger @elseif($item->status == 'approved') btn-success @else btn-secondary @endif btn-sm">
                     {{ ucfirst($item->status) }} </button>
             @endcan
-            @endif 
+            {{-- @endif  --}}
         {{-- @endif --}}
     @endif
 
