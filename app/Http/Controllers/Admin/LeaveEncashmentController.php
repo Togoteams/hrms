@@ -84,7 +84,7 @@ class LeaveEncashmentController extends Controller
                 }
                 if($isApplicableForLeave)
                 {
-                    $allowedEmp[] =$value; 
+                    $allowedEmp[] =$value;
                 }
         }
         return view('admin.leave_encashment.index', ['page' => $this->page_name, 'leave_type' => $leave_type, 'all_user' => $all_users,'allowedEmps'=>$allowedEmp]);
@@ -111,6 +111,10 @@ class LeaveEncashmentController extends Controller
             'leave_type_id' => 'required|numeric|exists:leave_settings,id',
             'description' => ['nullable', 'string'],
 
+        ], [
+            'balance_leave.min' => 'Field Must Be At Least 1',
+            'available_leave_for_encashment.min' => 'Field Must Be At Least 1',
+            'request_leave_for_encashement.lte' => 'Field Must Be Less Than Or Equal To 0',
         ]);
 
         if ($validator->fails()) {
@@ -185,6 +189,10 @@ class LeaveEncashmentController extends Controller
             'request_leave_for_encashement' => 'required|numeric|lte:available_leave_for_encashment',
             'description' => ['nullable', 'string'],
 
+        ], [
+            'balance_leave.min' => 'Field Must Be At Least 1',
+            'available_leave_for_encashment.min' => 'Field Must Be At Least 1',
+            'request_leave_for_encashement.lte' => 'Field Must Be Less Than Or Equal To 0',
         ]);
 
         if ($validator->fails()) {

@@ -163,8 +163,8 @@
                                     <div class="row">
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="date_of_current_basic">Date Of Basic Salary<small
-                                                        class="required-field">*</small></label>
+                                                <label for="date_of_current_basic">Date Of Basic Salary</label>
+                                                <small class="required-field">*</small>
                                                 <input id="date_of_current_basic" placeholder="Enter Basic Salary"
                                                     type="date" name="date_of_current_basic"
                                                     class="form-control form-control-sm" value="">
@@ -172,8 +172,8 @@
                                         </div>
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="currency_salary">Currency <small
-                                                        class="required-field">*</small></label>
+                                                <label for="currency_salary">Currency</label>
+                                                <small class="required-field">*</small>
                                                 <select id="currency_salary" placeholder="Enter Salary Currency"
                                                     type="text" name="currency_salary"
                                                     class="form-control form-control-sm">
@@ -188,18 +188,20 @@
 
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="basic_salary">Basic Salary<small
-                                                        class="required-field">*</small></label>
+                                                <label for="basic_salary">Basic Salary</label>
+                                                <small class="required-field">*</small>
                                                 <input id="basic_salary" placeholder="Enter Basic Salary" type="number"
-                                                    min="1" max="{{ $employee->employment_type == 'expatriate' ? '10000' : "150000" }}" name="basic_salary"
-                                                    class="form-control form-control-sm" value="">
+                                                    min="{{ $employee->employment_type == 'expatriate' ? '2000' : '1000' }}"
+                                                    max="{{ $employee->employment_type == 'expatriate' ? '10000' : '150000' }}"
+                                                    name="basic_salary" class="form-control form-control-sm"
+                                                    value="">
                                             </div>
                                         </div>
                                         @if ($is_expatriate)
                                             <div class="mb-2 col-sm-6 salary-type-container">
                                                 <div class="form-group">
-                                                    <label for="salary_type">Salary Type<small
-                                                            class="required-field">*</small></label>
+                                                    <label for="salary_type">Salary Type</label>
+                                                    <small class="required-field">*</small>
                                                     <select id="salary_type" placeholder="Enter Salary Type"
                                                         name="salary_type" class="form-control form-control-sm">
                                                         <option value="">- Select -</option>
@@ -211,8 +213,8 @@
 
                                             <div class="mb-2 col-sm-6 basic-salary-india-container">
                                                 <div class="form-group">
-                                                    <label for="basic_salary_for_india">Basic Salary For India<small
-                                                            class="required-field">*</small></label>
+                                                    <label for="basic_salary_for_india">Basic Salary For India</label>
+                                                    <small class="required-field">*</small>
                                                     <div class="row">
                                                         <div class="col-md-3">
                                                             <select name="currency_salary_for_india"
@@ -234,8 +236,8 @@
                                             </div>
                                             <div class="mb-2 col-sm-6 da-container">
                                                 <div class="form-group">
-                                                    <label for="da"><span>DA(%)</span><small
-                                                            class="required-field">*</small></label>
+                                                    <label for="da"><span>DA(%)</span></label>
+                                                    <small class="required-field">*</small>
                                                     <input id="da" placeholder="Enter " type="number"
                                                         name="da" maxlength="3" minlength="1" min="1"
                                                         max="99" pattern="[0-9]+"
@@ -261,8 +263,8 @@
                                         </div>
                                         <div class="mt-2 mb-2 col-sm-6">
                                             <div class="form-group">
-                                                <label for="pension_opt">Pension Contribution<small
-                                                        class="required-field">*</small></label>
+                                                <label for="pension_opt">Pension Contribution</label>
+                                                <small class="required-field">*</small>
                                                 <br>
                                                 <input type="radio" id="pradio1" name="pension_contribution"
                                                     value="no" class="form-check-input" title="Select NO" />
@@ -278,8 +280,8 @@
                                         </div>
                                         <div class="mb-2 col-sm-6" id="pensionDropdown" style="display: none;">
                                             <div class="form-group">
-                                                <label for="pension_opt">Pension (%)<small
-                                                        class="required-field">*</small></label>
+                                                <label for="pension_opt">Pension (%)</label>
+                                                <small class="required-field">*</small>
                                                 <select name="pension_opt" id="pension_opt"
                                                     class="form-control form-control-sm">
                                                     <option value="">Choose %</option>

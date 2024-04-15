@@ -34,15 +34,15 @@ class SalaryHistoryController extends BaseController
         $employee = Employee::firstWhere('user_id', $request->user_id);
         $request->validate([
             'user_id'   => ['required', 'string'],
-            'basic_salary'          => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
+            'basic_salary'          => ['required', 'numeric', 'min:1000', 'max:1000000'],
             'basic_salary_for_india' => ['nullable', 'numeric', 'min:2000', 'max:1000000'],
             'currency_salary_for_india'  => ['nullable', 'string'],
             'salary_type'  => ['nullable', 'string'],
             'da' => ['nullable', 'numeric','between:1,100'],
-            'date_of_current_basic' => ['nullable', 'date'],
+            'date_of_current_basic' => ['required', 'date'],
             'currency_salary'       => ['required', 'string'],
             'pension_opt'           => ['nullable', 'numeric'],
-            'pension_contribution'  => ['nullable', 'string'],
+            'pension_contribution'  => ['required', 'string'],
             'amount_payable_to_bomaind_each_year' => ['nullable', 'numeric'],
         ]);
 
@@ -59,7 +59,7 @@ class SalaryHistoryController extends BaseController
                 true,
                 200,
                 $message,
-                ["employee" => $employee,'redirect_url' => route('admin.employee.address.form', $employee->emp_id)]
+                ["employee" => $employee,'redirect_url' => route('admin.employee.current-leaves.list', $employee->emp_id)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
