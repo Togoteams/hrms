@@ -270,7 +270,7 @@ class PersonProfileController extends BaseController
         $request->validate([
             'medical_card_id' => ['required', 'numeric'],
             'company_name' => ['required', 'string'],
-            'insurance_id' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
+            'insurance_id' => ['nullable', 'regex:/^[a-zA-Z0-9]+$/'],
 
         ]);
         try {

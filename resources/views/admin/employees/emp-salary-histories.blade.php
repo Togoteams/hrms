@@ -52,7 +52,7 @@
 
                                                                     <div class="col-3 fw-semibold">Basic Salary</div>
                                                                     <div class="col-3">
-                                                                        {{ $salaryhistory->currency_salary == 'pula' ? 'P' : "$" }}
+                                                                        {{ $salaryhistory->currency_salary == 'pula' ? 'BWP' : "USD" }}
                                                                         {{ ucfirst($salaryhistory->basic_salary) }}
                                                                     </div>
                                                                     @if ($salaryhistory->salary_type)
@@ -108,6 +108,7 @@
                                                                         data-pension_contribution="{{ $salaryhistory->pension_contribution }}"
                                                                         data-pension_opt="{{ $salaryhistory->pension_opt }}"
                                                                         data-union_membership_id="{{ $salaryhistory->union_membership_id }}"
+                                                                        data-is_medical_insuarance="{{ $salaryhistory->is_medical_insuarance }}"
                                                                         data-status="{{ $salaryhistory->status }}"
                                                                         data-da="{{ $salaryhistory->da }}"
                                                                         data-currency_salary_for_india="{{ $salaryhistory->currency_salary_for_india }}">
@@ -263,6 +264,22 @@
                                         </div>
                                         <div class="mt-2 mb-2 col-sm-6">
                                             <div class="form-group">
+                                                <label for="is_medical_insuarance">Is Bomaid / Medical Insuarance</label>
+                                                <br>
+                                                <input type="radio" id="bomaid_radio" name="is_medical_insuarance"
+                                                    value="0" class="form-check-input" title="Select NO" />
+                                                <label class="form-check-label" title="Select NO"
+                                                    for="bomaid_radio">No</label>
+
+                                                <input type="radio" id="bomaid_radio_2" name="is_medical_insuarance"
+                                                    value="1" class="form-check-input" title="Select YES"
+                                                    style="margin-left: 20px" />
+                                                <label class="form-check-label" title="Select YES"
+                                                    for="bomaid_radio_2">Yes</label>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 mb-2 col-sm-6">
+                                            <div class="form-group">
                                                 <label for="pension_opt">Pension Contribution</label>
                                                 <small class="required-field">*</small>
                                                 <br>
@@ -337,6 +354,7 @@
                 let pension_opt = $(event.currentTarget).data("pension_opt");
                 let da = $(event.currentTarget).data("da");
                 let union_membership_id = $(event.currentTarget).data("union_membership_id");
+                let is_medical_insuarance = $(event.currentTarget).data("is_medical_insuarance");
                 let status = $(event.currentTarget).data("status");
 
                 $("#id").val(id);
@@ -357,11 +375,16 @@
                 $("#date_of_current_basic").val(date_of_current_basic);
                 $("#currency_salary_for_india").val(currency_salary_for_india);
                 $("#da").val(da);
-                console.log(union_membership_id);
+                console.log(is_medical_insuarance);
                 if (union_membership_id == "yes") {
                     $('#radio2').prop('checked', true);
                 } else {
                     $('#radio1').prop('checked', true);
+                }
+                if (is_medical_insuarance == "1") {
+                    $('#bomaid_radio_2').prop('checked', true);
+                } else {
+                    $('#bomaid_radio').prop('checked', true);
                 }
 
                 if (pension_contribution == "yes") {

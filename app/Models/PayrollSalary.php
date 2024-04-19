@@ -73,4 +73,21 @@ class PayrollSalary extends Model
         }
         // ->where('status', 'active');
     }
+     /**
+     * Boot method
+    **/
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(function ($model) {
+
+        });
+
+        self::updating(function ($model) {
+        });
+
+        self::deleted(function ($model) {
+            $model->payrollSalaryHead();
+        });
+    }
 }

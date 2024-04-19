@@ -25,7 +25,6 @@ return new class extends Migration
             $table->boolean('is_salary_deduction')->default(0)->comment('1=>yes, 0=>no');
             $table->boolean('salary_deduction_per')->default(0)->comment('1=>yes, 0=>no');
             $table->boolean('extended_leaves_deduction_per')->default(0)->comment('1=>yes, 0=>no');
-
             $table->boolean('starting_date')->default(0)->comment('1=>DOJ, 0=>Other Date');
             $table->boolean('is_count_holyday')->default(0)->comment('1=>yes, 0=>no');
             $table->boolean('is_leave_encash')->default(0)->comment('1=>yes, 0=>no');

@@ -29,11 +29,12 @@ class CurrentLeaveController extends BaseController
         $request->validate([
             'user_id'           => ['required'],
             'employee_id'       => ['required'],
+            'employee_type'       => ['required'],
             'sick_leave'        => ['required', 'integer'],
             'earned_leave'      => [!empty($request->is_local) ? 'required' : 'nullable', 'integer'],
             'maternity_leave'   => ['required', 'integer'],
             'bereavement_leave' => [!empty($request->is_local) ? 'required' : 'nullable', 'integer'],
-            'leave_without_pay' => ['required', 'integer'],
+            // 'leave_without_pay' => ['required', 'integer'],
             'casual_leave'      => [empty($request->is_local) ? 'required' : 'nullable', 'integer'],
             'privileged_leave'  => [empty($request->is_local) ? 'required' : 'nullable', 'integer'],
         ]);

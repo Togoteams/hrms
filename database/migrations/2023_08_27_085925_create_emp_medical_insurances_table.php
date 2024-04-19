@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('amount')->nullable();
             $table->date('medical_insurances_date')->nullable();
             $table->string('company_name');
-            $table->string('insurance_id');
+            $table->string('insurance_id')->nullable();
             $table->string('status')->default('active')->nullable();
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();

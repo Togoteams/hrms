@@ -7,7 +7,7 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
-                    <span class="name-title">Employee Form</span>
+                    <span class="name-title">Employee Form Of {{ !empty($employee) ? $employee->user->name : '' }}{{ !empty($employee) ? ($employee->ec_number) : '' }}</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
                             <div class="py-4 border rounded col-xxl-2 col-xl-2 border-1 border-color">
@@ -165,7 +165,7 @@
                                                     <option disabled> - Select - </option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->employment_type == 'local' ? 'selected' : '') : '' }}
-                                                        value="local">Local</option>
+                                                        value="local">Local Confirmed</option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->employment_type == 'expatriate' ? 'selected' : '') : '' }}
                                                         value="expatriate">Expatriate</option>

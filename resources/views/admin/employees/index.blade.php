@@ -52,7 +52,7 @@
                                 <th>Phone</th>
                                 <th>Gender</th>
                                 <th>Employment Type</th>
-                                <th>Start Date</th>
+                                <th>DOJ</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>

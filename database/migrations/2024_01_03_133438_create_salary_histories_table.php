@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('currency_salary_for_india')->default('inr');
             $table->date('date_of_current_basic')->nullable();
             $table->string('pension_contribution')->nullable();
+            $table->tinyInteger('is_medical_insuarance')->nullable()->default(0);
             $table->string('pension_opt')->nullable();
             $table->string('status')->nullable()->default("active");
             $table->enum('union_membership_id',["yes","no"])->nullable();

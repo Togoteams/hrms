@@ -1,5 +1,6 @@
 @php
     $empId = !empty($employee) ? $employee->emp_id : '';
+    $isBomaid = !empty($employee) ? $employee->getLatestSalary()?->is_medical_insuarance ?? 0 : '';
 @endphp
 
 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -48,7 +49,7 @@
         {{ empty($empId) ? 'disabled' : '' }}>
         Qualification
     </button>
-
+    @if($isBomaid)
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/employee/medical-insuarance-bomaid*') ? 'active-class' : '' }}"
         type="button"
@@ -56,6 +57,7 @@
         {{ empty($empId) ? 'disabled' : '' }}>
         Medical Insurance / Bomaid
     </button>
+    @endif
 
     <button
         class="nav-link text-left mb-2 {{ Request::is('admin/employee/department-history*') ? 'active-class' : '' }}"

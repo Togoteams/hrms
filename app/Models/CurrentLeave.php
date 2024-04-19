@@ -14,6 +14,7 @@ class CurrentLeave extends Model
         'user_id',
         'employee_id',
         'sick_leave',
+        'employee_type',
         'earned_leave',
         'maternity_leave',
         'bereavement_leave',

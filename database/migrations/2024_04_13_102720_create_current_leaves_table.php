@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('employee_id')->nullable();
+            $table->string('employee_type')->nullable();
             $table->integer('sick_leave')->nullable();          // For Both
             $table->integer('earned_leave')->nullable();        // For Local
             $table->integer('maternity_leave')->nullable();     // For Both

@@ -26,7 +26,9 @@
                                         <input type="hidden" name="user_id"
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
                                         <input type="hidden" name="employee_id"
-                                            value="{{ !empty($employee) ? $employee->emp_id : '' }}">
+                                            value="{{ !empty($employee) ? $employee->id : '' }}">
+                                        <input type="hidden" name="employee_type"
+                                        value="{{$employee->employment_type }}">
                                         <input type="hidden" name="is_local"
                                             value="{{ !empty($employee) ? ($employee->employment_type == 'local' ? true : false) : false }}">
 
@@ -37,7 +39,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4">
-                                                <input id="sick_leave" placeholder="Enter Sick Leave" type="number"
+                                                <input id="sick_leave" placeholder="Enter Sick Leave" max="100" type="number"
                                                     name="sick_leave" required
                                                     value="{{ !empty($leaves) ? $leaves->sick_leave : '' }}"
                                                     class="form-control form-control-sm">
@@ -48,29 +50,20 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4">
-                                                <input id="maternity_leave" placeholder="Enter Maternity Leave"
+                                                <input id="maternity_leave" placeholder="Enter Maternity Leave"  max="100"
                                                     type="number" name="maternity_leave" required
                                                     value="{{ !empty($leaves) ? $leaves->maternity_leave : '' }}"
                                                     class="form-control form-control-sm ">
                                             </div>
 
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="leave_without_pay">Leave Without Pay<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4">
-                                                <input id="leave_without_pay" placeholder="Enter Leave Without Pay"
-                                                    type="number" name="leave_without_pay" required
-                                                    value="{{ !empty($leaves) ? $leaves->leave_without_pay : '' }}"
-                                                    class="form-control form-control-sm ">
-                                            </div>
+                                            
 
                                             <div class="pt-3 col-2 fw-semibold local d-none">
                                                 <label for="earned_leave">Earned Leave<small
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4 local d-none">
-                                                <input id="earned_leave" placeholder="Enter Earned Leave" type="number"
+                                                <input id="earned_leave" placeholder="Enter Earned Leave"  max="100" type="number"
                                                     name="earned_leave"
                                                     value="{{ !empty($leaves) ? $leaves->earned_leave : '' }}"
                                                     class="form-control form-control-sm local-input">
@@ -81,7 +74,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4 local d-none">
-                                                <input id="bereavement_leave" placeholder="Enter Bereavement Leave"
+                                                <input id="bereavement_leave"  max="100" placeholder="Enter Bereavement Leave"
                                                     type="number" name="bereavement_leave"
                                                     value="{{ !empty($leaves) ? $leaves->bereavement_leave : '' }}"
                                                     class="form-control form-control-sm local-input">
@@ -92,7 +85,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4 ibo d-none">
-                                                <input id="casual_leave" placeholder="Enter Casual Leave" type="number"
+                                                <input id="casual_leave"  max="100" placeholder="Enter Casual Leave" type="number"
                                                     name="casual_leave"
                                                     value="{{ !empty($leaves) ? $leaves->casual_leave : '' }}"
                                                     class="form-control form-control-sm ibo-input">
@@ -103,7 +96,7 @@
                                                         class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-4 ibo d-none">
-                                                <input id="privileged_leave" placeholder="Enter Privileged Leave"
+                                                <input id="privileged_leave"  max="100" placeholder="Enter Privileged Leave"
                                                     type="number" name="privileged_leave"
                                                     value="{{ !empty($leaves) ? $leaves->privileged_leave : '' }}"
                                                     class="form-control form-control-sm ibo-input">
@@ -136,6 +129,7 @@
     @endif
     <script>
         $(document).ready(function() {
+            console.log(isLocal);
             if (!isLocal) {
                 $(".ibo").removeClass("d-none");
                 $(".ibo-input").prop("required", true);

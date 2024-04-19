@@ -78,6 +78,12 @@ class EmployeeController extends BaseController
         $branch = Branch::getBranch()->get();
         return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid), 'branch'=> $branch,'roles'=>$roles,'countries'=>$countries]);
     }
+    public function getBranchWiseRole(Request $request)
+    {
+        $branch = $request->branch_id;
+            
+
+    }
 
     public function postUserDetails(Request $request)
     {
@@ -440,7 +446,7 @@ class EmployeeController extends BaseController
             'amount' => ['required', 'numeric','gt:0'],
             'company_name' => ['required', 'string'],
             'medical_insurances_date' => ['required', 'date'],
-            'insurance_id' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
+            'insurance_id' => ['nullable', 'regex:/^[a-zA-Z0-9]+$/'],
         ]);
 
         try {
@@ -535,7 +541,7 @@ class EmployeeController extends BaseController
             $overlappingRecord =  true;
 
             $overlappingRecord = EmpDepartmentHistory::where(function ($query) use ($start_date, $end_date,$id,$userId) {
-                $query->where('start_date', '<=', $end_date)->where('user_id',$userId);
+                $query->where('start_date', '<', $end_date)->where('user_id',$userId);
                 if(!empty($end_date))
                 {
                     $query->where('end_date', '>=', $start_date);
@@ -567,7 +573,7 @@ class EmployeeController extends BaseController
             'start_date' => [
                 'required',
                 'date','no_date_overlap',
-                'after:' . $employee->start_date,
+                'after_or_equal:' . $employee->start_date,
             ],
             'end_date' => ['sometimes','nullable', 'date', 'after:start_date','no_date_overlap', 'before_or_equal:' . now()->format('Y-m-d')],            // 'end_date' => ['nullable', 'date', 'after:start_date', 'before_or_equal:' . now()->format('Y-m-d')],
         ]);

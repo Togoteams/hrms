@@ -23,11 +23,11 @@
     @endif
     @endif
     @csrf
-    {{-- <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_method" value="DELETE">
     <button type="button" id="delete{{ $item->id }}"
         onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')" class="btn btn-delete btn-sm"><i
             class="fas fa-trash-alt"></i>
-    </button> --}}
+    </button>
 
     {{-- <button type="button"
         onclick="changeStatus('{{ route('admin.' . $route . '.status', $item->id) }}','status{{ $item->id }}')"

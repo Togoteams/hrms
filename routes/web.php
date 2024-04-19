@@ -56,8 +56,7 @@ use App\Http\Controllers\Admin\Payroll\SalaryHistoryController;
 use App\Http\Controllers\Admin\CurrentLeaveController;
 use App\Http\Controllers\Admin\Payroll\Emp13thChequeController;
 use App\Http\Controllers\PayrollReportController;
-use App\Models\KraAttributes;
-use App\Models\LeaveSetting;
+
 
 Route::get('/', [LoginController::class, 'authentication']);
 Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->group(function () {

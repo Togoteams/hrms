@@ -382,9 +382,10 @@ class PayrollSalaryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $user =  PayrollSalary::find($id);
-            PayrollSalary::destroy($id);
-            User::destroy($user->user_id);
+            $payrollSalary =  PayrollSalary::find($id);
+            $payrollSalary->payrollSalaryHead()->delete();
+            $payrollSalary->delete();
+            // PayrollSalary::where('id',$id)->delete();
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];

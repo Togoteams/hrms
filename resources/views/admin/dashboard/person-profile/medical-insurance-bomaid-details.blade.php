@@ -54,7 +54,7 @@
                                                                 <div class="row showData">
                                                                     <div class="pt-3 col-3 fw-semibold">Insurance ID</div>
                                                                     <div class="pt-3 col-3">
-                                                                        {{ $data->insurance_id }}
+                                                                        {{ $data->insurance_id ?? "N/A" }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="row showData">
@@ -80,7 +80,7 @@
                                                             </div>
                                                             <div class="row addInputDiv d-none">
                                                                 <div class="pt-3 col-3 fw-semibold">
-                                                                    Insurance ID<small class="required-field">*</small>
+                                                                    Insurance ID
                                                                 </div>
                                                                 <div class="pt-2 col-3 margin-style">
                                                                     <input type="number" name="insurance_id"

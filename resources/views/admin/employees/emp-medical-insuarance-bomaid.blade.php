@@ -53,7 +53,7 @@
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">Insurance ID</div>
                                                                     <div class="col-3">
-                                                                        {{ $medicalInsuarance->insurance_id }}
+                                                                        {{ $medicalInsuarance->insurance_id ?? "N/A" }}
                                                                     </div>
 
 
@@ -163,7 +163,7 @@
                             </div>
 
                             <div class="pt-3 col-3 fw-semibold">
-                                <label for="insurance_id">Insurance ID<small class="required-field">*</small></label>
+                                <label for="insurance_id">Insurance ID</label>
                             </div>
                             <div class="pt-2 col-3">
                                 <input type="text" id="insurance_id" name="insurance_id"

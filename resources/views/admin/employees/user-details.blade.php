@@ -103,10 +103,16 @@
                                                         <label for="mobile" class="pt-2">+267</label>
                                                     </div>
                                                     <div class="col-10">
-                                                        <input id="mobile" maxlength="8" minlength="7" pattern="[0-9]+"
-                                                            placeholder="Enter Mobile No" type="number"
-                                                            value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
-                                                            name="mobile" class="form-control form-control-sm">
+                                                        {{-- <label for="mobile">Mobile Number:</label> --}}
+                                                        <input id="mobile" 
+                                                               type="number" 
+                                                               pattern="[0-9]{7,8}" 
+                                                               placeholder="Enter Mobile No" 
+                                                               name="mobile" 
+                                                               class="form-control form-control-sm"
+                                                               value="{{ !empty($employee) ? $employee->user->mobile : '' }}"
+                                                               required>
+                                                        <small class="text-muted">Please enter a valid 7 or 8-digit mobile number.</small>
                                                     </div>
                                                 </div>
                                             </div>

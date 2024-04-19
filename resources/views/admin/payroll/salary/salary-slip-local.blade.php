@@ -339,7 +339,7 @@
 
                                             <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total
                                                 Deduction) : {{ $data->net_take_home }} <span
-                                                    style="font-weight: 100;">(Rupees
+                                                    style="font-weight: 100;">(PULA
                                                     {{ convertNumberToWords($data->net_take_home) }} )</span></th>
                                         </tr>
                                     </tbody>
