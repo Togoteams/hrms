@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\CurrencySetting;
+use App\Models\EmpCurrentLeave;
 use App\Models\Role;
 use App\Models\UsersRoles;
 use Illuminate\Support\Str;
@@ -807,6 +808,32 @@ function total_remaining_leave($user_id = '')
         $totalNoOfLeaveInBucket = $totalNoOfLeaveInBucket + balance_leave_by_typeForEmp($leaveSetting->id, $user_id);
     }
     return $totalNoOfLeaveInBucket;
+}
+function getAvailableLeaveCount($leave_type_id, $user_id = '', $action = "")
+{
+    $total_leave =  EmpCurrentLeave::where('user_id',$user_id)->where('leave_type_id',$leave_type_id)->value('leave_count') ?? 0;
+    $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
+
+    $ignoreLeaveIds = LeaveSetting::whereIn('slug', $balanceLeaveHideArr)->pluck('id')->toArray();
+
+    if ($action == "update_status") {
+
+        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function ($q) use ($user_id, $leave_type_id, $ignoreLeaveIds) {
+            $q->where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id', $ignoreLeaveIds)->whereNotIn('status', ['reject', 'pending']);
+        })->count();
+    } else {
+
+        $total_apply_leave = LeaveDate::with('leaveApply')->whereHas('leaveApply', function ($q) use ($user_id, $leave_type_id, $ignoreLeaveIds) {
+            $q->where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('leave_type_id', $ignoreLeaveIds)->whereNotIn('status', ['reject']);
+        })->count();
+    }
+
+
+    // echo $total_apply_leave;
+    $encash_leave = LeaveEncashment::where('user_id', $user_id)->where('leave_type_id', $leave_type_id)->whereNotIn('status', ['reject'])->sum('request_leave_for_encashement');
+    $total = $total_leave - $total_apply_leave -  $encash_leave;
+    return $total;
+
 }
 function balance_leave_by_typeForEmp($leave_type_id, $user_id = '', $action = "")
 {

@@ -89,6 +89,6 @@ class LeaveReportsController extends Controller
 
     public function get_balance_leave(Request $request)
     {
-        return  $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
+        return  getAvailableLeaveCount($request->leave_type_id, $request->user_id);
     }
 }

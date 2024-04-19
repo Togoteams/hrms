@@ -152,7 +152,7 @@ class LeaveEncashmentController extends Controller
         $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
 
         $data = LeaveEncashment::find($id);
-        return view('admin.leave_encashment.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'total_remaining_leave' => $this->balance_leave_by_type($data->leave_type_id, $data->user_id)]);
+        return view('admin.leave_encashment.show', ['data' => $data, 'page' => $this->page_name, 'leave_type' => $leave_type, 'total_remaining_leave' => getAvailableLeaveCount($data->leave_type_id, $data->user_id)]);
     }
 
     /**
@@ -218,7 +218,7 @@ class LeaveEncashmentController extends Controller
         try {
             $leave_encashment = LeaveEncashment::find($id);
             if ($request->status == "approved") {
-                if ($this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) >= $leave_encashment->available_leave_for_encashment) {
+                if (getAvailableLeaveCount($leave_encashment->leave_type_id, $leave_encashment->user_id) >= $leave_encashment->available_leave_for_encashment) {
 
                     LeaveEncashment::where('id', $id)->update([
                         'status' => $request->status,
@@ -227,7 +227,7 @@ class LeaveEncashmentController extends Controller
                         'status_remarks' => $request->status_remarks,
                     ]);
                 } else {
-                    return response()->json(['error' => " Applied leave is " . $leave_encashment->available_leave_for_encashment . " but  they have only " . $this->balance_leave_by_type($leave_encashment->leave_type_id, $leave_encashment->user_id) . " leave"]);
+                    return response()->json(['error' => " Applied leave is " . $leave_encashment->available_leave_for_encashment . " but  they have only " . getAvailableLeaveCount($leave_encashment->leave_type_id, $leave_encashment->user_id) . " leave"]);
                 }
             } else if ($request->status != "approved") {
                 LeaveEncashment::where('id', $id)->update([
@@ -272,7 +272,7 @@ class LeaveEncashmentController extends Controller
     public function get_balance_leave(Request $request)
     {
         $remaining_leave = 0;
-        $remaining_leave =  $this->balance_leave_by_type($request->leave_type_id, $request->user_id) ;
+        $remaining_leave =  getAvailableLeaveCount($request->leave_type_id, $request->user_id) ;
         return response()->json(['status' =>true,'data'=>['remaining_leave'=>$remaining_leave]]);
     }
 }

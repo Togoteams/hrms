@@ -33,8 +33,21 @@
                                             value="{{ !empty($employee) ? ($employee->employment_type == 'local' ? true : false) : false }}">
 
                                         <div class="p-3 pb-4 row text-dark">
-
-                                            <div class="pt-3 col-2 fw-semibold">
+                                            @foreach ($empLeaveTypes as $key=>  $empLeaveType)
+                                                <div class="pt-3 col-2 fw-semibold">
+                                                    <label for="{{$empLeaveType->slug}}">{{$empLeaveType->name}}<small
+                                                            class="required-field">*</small></label>
+                                                </div>
+                                                <input type="hidden" name="emp_leave_component[{{$key}}][leave_type_id]"
+                                                value="{{$empLeaveType->id }}">
+                                                <div class="pt-2 col-4">
+                                                    <input id="{{$empLeaveType->slug}}" placeholder="Enter {{$empLeaveType->name}}" max="100" type="number"
+                                                        name="emp_leave_component[{{$key}}][leave_count]" required
+                                                        value="{{ $empLeaveType->leave_count }}"
+                                                        class="form-control form-control-sm">
+                                                </div>
+                                            @endforeach
+                                            {{-- <div class="pt-3 col-2 fw-semibold">
                                                 <label for="sick_leave">Sick Leave<small
                                                         class="required-field">*</small></label>
                                             </div>
@@ -100,7 +113,7 @@
                                                     type="number" name="privileged_leave"
                                                     value="{{ !empty($leaves) ? $leaves->privileged_leave : '' }}"
                                                     class="form-control form-control-sm ibo-input">
-                                            </div>
+                                            </div> --}}
 
                                             <div class="pt-5 text-center">
                                                 <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
@@ -117,28 +130,6 @@
     </main>
 @endsection
 @push('custom-scripts')
-    <script>
-        let isLocal = false;
-    </script>
-
-
-    @if (!empty($employee) ? ($employee->employment_type == 'local' ? true : false) : false)
-        <script>
-            isLocal = true;
-        </script>
-    @endif
-    <script>
-        $(document).ready(function() {
-            console.log(isLocal);
-            if (!isLocal) {
-                $(".ibo").removeClass("d-none");
-                $(".ibo-input").prop("required", true);
-            } else {
-                $(".local").removeClass("d-none");
-                $(".local-input").prop("required", true);
-            }
-        });
-    </script>
-
+   
 
 @endpush

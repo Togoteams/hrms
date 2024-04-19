@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmpCurrentLeave;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Employee;
@@ -179,13 +180,13 @@ class LeaveApplyController extends Controller
             ]
         );
 
-        if (($this->balance_leave_by_type($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leaveSlug == "leave-without-pay" || $leaveSlug == "maternity-leave" || $leaveSlug == "bereavement-leave") {
+        if ((getAvailableLeaveCount($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leaveSlug == "leave-without-pay" || $leaveSlug == "maternity-leave" || $leaveSlug == "bereavement-leave") {
             if ($validator->fails()) {
                 return $validator->errors();
             } else {
                 try {
                     // return response()->json(['error' => "Something wrong heppend"]);
-                    $remainingLeave = (int)$this->balance_leave_by_type($request->leave_type_id, $user->id);
+                    $remainingLeave = (int)getAvailableLeaveCount($request->leave_type_id, $user->id);
                     $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
 
                     if (!in_array($leaveSlug, $balanceLeaveHideArr)) {
@@ -261,7 +262,7 @@ class LeaveApplyController extends Controller
             ->where('status', 'approved')
             ->get();
 
-        $remaining_leave =  $this->balance_leave_by_type($data->leave_type_id, $data->user_id);
+        $remaining_leave =  getAvailableLeaveCount($data->leave_type_id, $data->user_id);
         // echo $data->leave_type_id."echo ";
         // echo $data->user_id."echo ";
         // return $remaining_leave;
@@ -322,7 +323,7 @@ class LeaveApplyController extends Controller
         } else {
             try {
                 // return "dda";
-                $remainingLeave = (int)$this->balance_leave_by_type($leaveApplies->leave_type_id, $user_id);
+                $remainingLeave = (int)getAvailableLeaveCount($leaveApplies->leave_type_id, $user_id);
                 $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
                 if (!in_array($leaveSlug, $balanceLeaveHideArr)) {
                     $remainingLeave = $remainingLeave -  $request->leave_applies_for;
@@ -368,7 +369,7 @@ class LeaveApplyController extends Controller
                     'status' => $request->status,
 
                     'status_remarks' => $request->status_remarks,
-                    'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
+                    'remaining_leave' =>   (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
 
                 ]);
                 $leave = LeaveApply::where('id', $id)->first();
@@ -383,7 +384,7 @@ class LeaveApplyController extends Controller
                 if (in_array($leaveSlug, $balanceLeaveHideArr)) {
                     $isIgnoreBalanced = 1;
                 }
-                if (($this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id, 'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
+                if ((getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id, 'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
 
                     LeaveApply::where('id', $id)->update([
                         'status_remarks' => $request->status_remarks,
@@ -391,7 +392,7 @@ class LeaveApplyController extends Controller
                         'approved_at' => date('Y-m-d H:i:s'),
                         'approved_by' => auth()->user()->id,
                         'is_approved' => 1,
-                        'remaining_leave' =>   (int)$this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id),
+                        'remaining_leave' =>   (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
                     ]);
                     $leave = LeaveApply::where('id', $id)->first();
                     // echo $leave->leave_type->name;
@@ -399,7 +400,7 @@ class LeaveApplyController extends Controller
                     $notificationData = ['reference_id' => $id, 'reference_type' => get_class($leave), 'user_id' => $leave->user_id, 'notification_type' => 'leave_approval', 'title' => "Leave Approved", 'description' => $notifiMessage];
                     $this->saveNotification($notificationData);
                 } else {
-                    return response()->json(['error' => " Applied leave is " . get_day($leave_apply->start_date, $leave_apply->end_date) + 1 . " but  they have only " . $this->balance_leave_by_type($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
+                    return response()->json(['error' => " Applied leave is " . get_day($leave_apply->start_date, $leave_apply->end_date) + 1 . " but  they have only " . getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
                 }
             }
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
@@ -460,8 +461,7 @@ class LeaveApplyController extends Controller
     public function get_balance_leave(Request $request)
     {
         $remaining_leave = 0;
-
-        $remaining_leave = $this->balance_leave_by_type($request->leave_type_id, $request->user_id);
+        $remaining_leave = EmpCurrentLeave::where('user_id',$request->user_id)->where('leave_type_id',$request->leave_type_id)->value('leave_count') ?? 0;
         $leave_type = LeaveSetting::find($request->leave_type_id);
         $leave_type_slug = $leave_type->slug;
         $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
