@@ -2,6 +2,7 @@
 
 use App\Models\CurrencySetting;
 use App\Models\EmpCurrentLeave;
+use App\Models\EmpLoanHistory;
 use App\Models\Role;
 use App\Models\UsersRoles;
 use Illuminate\Support\Str;
@@ -682,19 +683,32 @@ if (!function_exists('getHeadValue')) {
             return $reimbursementAmount;
         } elseif ($headSlug == "loan") {
             $loanAmount = 0;
-            $loan = EmplooyeLoans::where(function ($query) use ($startDate, $endDate) {
+             $loan = EmpLoanHistory::where(function ($query) use ($startDate, $endDate) {
                     $query->where(function ($q1) use ($startDate, $endDate) {
                         $q1->whereBetween('emi_start_date', array($startDate, $endDate));
                     })
-                        ->orWhere(function ($q2) use ($startDate, $endDate) {
-                            $q2->where('emi_start_date', '<=', $startDate)
-                                ->where('emi_end_date', '>=', $endDate);
-                        })
-                        ->orWhere(function ($q3) use ($startDate, $endDate) {
-                            $q3->whereBetween('emi_end_date', array($startDate, $endDate));
-                        });
+                    ->orWhere(function ($q2) use ($startDate, $endDate) {
+                        $q2->where('emi_start_date', '<=', $startDate)
+                            ->where('emi_end_date', '>=', $endDate);
+                    })
+                    ->orWhere(function ($q3) use ($startDate, $endDate) {
+                        $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+                    });
                 })->where('user_id', $emp->user_id)->first();
             $loanAmount = $loan->emi_amount ?? 0;
+            // $loan = EmplooyeLoans::where(function ($query) use ($startDate, $endDate) {
+            //         $query->where(function ($q1) use ($startDate, $endDate) {
+            //             $q1->whereBetween('emi_start_date', array($startDate, $endDate));
+            //         })
+            //             ->orWhere(function ($q2) use ($startDate, $endDate) {
+            //                 $q2->where('emi_start_date', '<=', $startDate)
+            //                     ->where('emi_end_date', '>=', $endDate);
+            //             })
+            //             ->orWhere(function ($q3) use ($startDate, $endDate) {
+            //                 $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+            //             });
+            //     })->where('user_id', $emp->user_id)->first();
+            // $loanAmount = $loan->emi_amount ?? 0;
             return $loanAmount;
         }
         return $orginalValue;

@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('emplooye_loans', function (Blueprint $table) {
+        Schema::create('emp_loan_histories', function (Blueprint $table) {
             $table->id();
             $table->uuid();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('employee_id');
             $table->string('loan_types');
             $table->string('loan_account_no');
-            $table->string('loan_amount');
-            $table->string('emi_amount');
-            $table->date('emi_start_date');
-            $table->date('emi_end_date');
+            $table->double('loan_amount');
+            $table->double('emi_amount');
+            $table->date('emi_start_date')->nullable();
+            $table->date('emi_end_date')->nullable();
             // $table->integer('tenure');
             // $table->string('last_emi_amount');
             $table->string('description')->nullable();
@@ -29,10 +29,6 @@ return new class extends Migration
             $table->string('status')->default('active')->comment('active,completed,in-progress');
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
-            $table->foreign('created_by')->references('id')->on('users');
-            $table->foreign('updated_by')->references('id')->on('users');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('employee_id')->references('id')->on('employees');
             $table->timestamps();
         });
     }
@@ -42,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('emplooye_loans');
+        Schema::dropIfExists('emp_loan_histories');
     }
 };

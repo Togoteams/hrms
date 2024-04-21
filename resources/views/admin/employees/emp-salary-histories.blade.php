@@ -332,14 +332,14 @@
             $('#form_id').trigger("reset");
             $("#id").val("");
             $('#formModal').modal('show');
-            $("#modalTitle").html("Add: Salary History");
+            $("#modalTitle").html("Add: Salary Revisions");
             $("#btnSave").html("CREATE");
             $("#user_id").val(user_id);
         }
         $(document).ready(() => {
             $(document).on("click", "#editButton", (event) => {
                 $('#form_id').trigger("reset");
-                $("#modalTitle").html("Edit: Salary History");
+                $("#modalTitle").html("Edit: Salary Revisions");
                 $("#btnSave").html("UPDATE");
 
                 let id = $(event.currentTarget).data("id");

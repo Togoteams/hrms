@@ -54,6 +54,7 @@ use App\Http\Controllers\Admin\Payroll\PayrollIboTaxController;
 use App\Http\Controllers\Admin\Payroll\SalarySettingController;
 use App\Http\Controllers\Admin\Payroll\SalaryHistoryController;
 use App\Http\Controllers\Admin\CurrentLeaveController;
+use App\Http\Controllers\Admin\EmpLoanHistoryController;
 use App\Http\Controllers\Admin\Payroll\Emp13thChequeController;
 use App\Http\Controllers\PayrollReportController;
 
@@ -181,6 +182,10 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::get('employee/salary-history/{eid?}', [SalaryHistoryController::class, 'viewSalaryHistory'])->name('employee.salary-history.list');
     Route::post('employee/salary-history', [SalaryHistoryController::class, 'postSalaryHistory'])->name('employee.salary-history.post');
     Route::post('employee/delete-salary-history', [SalaryHistoryController::class, 'deleteSalaryHistory'])->name('employee.salary-history.delete');
+
+    Route::get('employee/loan-history/{eid?}', [EmpLoanHistoryController::class, 'viewEmpLoanHistory'])->name('employee.loan-history.list');
+    Route::post('employee/loan-history', [EmpLoanHistoryController::class, 'postEmpLoanHistory'])->name('employee.loan-history.post');
+    Route::post('employee/delete-loan-history', [EmpLoanHistoryController::class, 'deleteEmpLoanHistory'])->name('employee.loan-history.delete');
 
     Route::get('employee/current-leaves/{eid?}', [CurrentLeaveController::class, 'viewCurrentLeaves'])->name('employee.current-leaves.list');
     Route::post('employee/current-leaves', [CurrentLeaveController::class, 'postCurrentLeaves'])->name('employee.current-leaves.post');

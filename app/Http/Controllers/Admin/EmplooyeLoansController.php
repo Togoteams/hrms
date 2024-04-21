@@ -77,10 +77,7 @@ class EmplooyeLoansController extends Controller
         $validator->addExtension('date_range_not_overlap', function ($attribute, $value, $parameters,$validator) use ($request) {
             $start = \Carbon\Carbon::parse($validator->getData()['emi_start_date']);
             $end = \Carbon\Carbon::parse($validator->getData()['emi_end_date']);
-            // $start_date = $validator->getData()['start_date'];
-            // $end_date = $validator->getData()['end_date'];
-            // Perform the date range overlap check here
-            // Replace this with your actual logic
+          
             if ($start < $end) {
                 return true;
             } else {
