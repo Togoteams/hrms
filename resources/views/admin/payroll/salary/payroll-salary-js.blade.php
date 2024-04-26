@@ -57,7 +57,7 @@
             var unionFee = getValue('union_fee');
             var taxAmount = getValue('tax');
             totalEarning = (basicAmount + getValue('allowance') + emp13ChequeAmount + getValue('bomaid_bank')+ getValue('others_arrears')+ getValue('pension_bank')+ getValue('over_time')).toFixed(2);
-            totalDeduction = (taxAmount + getValue('bomaid') + getValue('pension_own') + unionFee + getValue('other_deductions')).toFixed(2);
+            totalDeduction = (taxAmount + getValue('bomaid')+getValue('salary_advance')+getValue('mortgage_loan')+getValue('car_loan')+getValue('personal_loan') + getValue('pension_own') + unionFee + getValue('other_deductions')).toFixed(2);
         } else {
 
             var educationAllowanceAmount = getValue('education_allowance');
@@ -72,7 +72,7 @@
             $("#education_allowance_for_ind_in_pula").val(educationAllowanceAmountInPula);
             totalEarning = parseFloat(basicAmount + emp13ChequeAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount).toFixed(3);
-            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('recovery_for_car')).toFixed(3);
+            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+getValue('salary_advance') +get('mortgage_loan')+ getValue('car_loan') + getValue('personal_loan') +  getValue('recovery_for_car')).toFixed(3);
             console.log(Number(totalDeduction));
         }
         var leaveEncashAmount = parseFloat(getValue("leave_encashment_amount"));

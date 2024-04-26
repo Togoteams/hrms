@@ -20,6 +20,10 @@ class EmpLoanHistory extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
     public static function boot()
     {
         parent::boot();

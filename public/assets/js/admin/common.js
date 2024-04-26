@@ -465,7 +465,7 @@ $(document).ready(function (e) {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
         }).then(function (value) {
-            if (value) {
+            if (value.isConfirmed) {
                 $.ajax({
                     url: actionUrl,
                     method: "POST",

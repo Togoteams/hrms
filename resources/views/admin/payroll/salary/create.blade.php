@@ -8,7 +8,7 @@
 </style>
 @endpush
 @section('content')
-<main id="content" role="main" class="main card ">
+<main id="content" role="main" class="main card">
     <!-- Content -->
     <div class="container-fluid">
         <!-- Page Header -->
@@ -41,7 +41,7 @@
                         <div class="mb-2 col-sm-4">
                             <div class="form-group">
                                 <label for="gender">Select Employees</label>
-                                <select required  id="select_employee" placeholder="Enter correct Employee  " name="user_id" class="form-control form-control-sm ">
+                                <select required  id="select_employee" placeholder="Enter correct Employee" name="user_id" class="form-control form-control-sm ">
                                     <option selected disabled> - Select Employees- </option>
                                     @foreach ($all_users as $au)
                                     <option value="{{ $au->user->id }}">{{ $au->user->name }} -

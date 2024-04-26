@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use App\Models\Account;
 use App\Models\EmpLoanHistory;
 use App\Models\Employee;
 use Exception;
@@ -16,6 +17,7 @@ class EmpLoanHistoryController extends BaseController
     {
         $employee = getEmployee($eid);
         $empLoanHistories= EmpLoanHistory::where('user_id',$employee->user_id)->get();
+        $loanAccounts = Account::whereIn('slug',['personal_loan','mortgage_loan','car_loan','salary_advance'])->get();
         // return $empLoanHistories;
         $currencies = ['pula'];
         $isExpatriate = 0 ;
@@ -25,7 +27,7 @@ class EmpLoanHistoryController extends BaseController
             $isExpatriate = 1;
         }
 
-        return view('admin.employees.emp-loan-histories', ['employee' => $employee,'currencies'=>$currencies,'empLoanHistories'=>$empLoanHistories]);
+        return view('admin.employees.emp-loan-histories', ['employee' => $employee,'currencies'=>$currencies,'empLoanHistories'=>$empLoanHistories,'loanAccounts'=>$loanAccounts]);
     }
 
     public function postEmpLoanHistory(Request $request)
@@ -36,7 +38,7 @@ class EmpLoanHistoryController extends BaseController
             'user_id' => 'required|numeric',
             'employee_id' => 'required|numeric',
             'loan_types' => 'string|required',
-            'loan_account_no' => 'required|numeric',
+            'account_id' => 'required|numeric',
             'loan_amount' => 'required|numeric',
             'loan_amount' => 'required|numeric',
             'emi_amount' => 'required|numeric',
@@ -53,6 +55,7 @@ class EmpLoanHistoryController extends BaseController
         try {
             if ($request->id == '') {
                 $request->merge(['created_by'=>auth()->user()->id,'updated_by'=>auth()->user()->id]);
+                // if(Account)
                 EmpLoanHistory::create($request->except(['_token', 'id']));
                 $message = "Loan History Created Successfully";
             } else {

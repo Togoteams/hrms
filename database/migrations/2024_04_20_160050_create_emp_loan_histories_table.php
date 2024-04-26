@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->string('loan_types');
             $table->string('loan_account_no');
+            $table->string('account_id');
             $table->double('loan_amount');
             $table->double('emi_amount');
             $table->date('emi_start_date')->nullable();

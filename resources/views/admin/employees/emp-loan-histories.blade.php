@@ -68,7 +68,7 @@
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">Loan Account No</div>
                                                                     <div class="col-3">
-                                                                        {{ ($empLoanHistory->loan_account_no) }}
+                                                                        {{ ($empLoanHistory?->account?->account_number) }}
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">Status</div>
                                                                     <div class="col-3">
@@ -85,7 +85,7 @@
                                                                     <button class="btn btn-edit btn-sm bt" title="Edit"
                                                                         id="editButton" data-id="{{ $empLoanHistory->id }}"
                                                                         data-loan_types="{{ $empLoanHistory->loan_types }}"
-                                                                        data-loan_account_no="{{ $empLoanHistory->loan_account_no }}"
+                                                                        data-account_id="{{ $empLoanHistory->account_id }}"
                                                                         data-loan_amount="{{ $empLoanHistory->loan_amount }}"
                                                                         data-emi_amount="{{ $empLoanHistory->emi_amount }}"
                                                                         data-emi_start_date="{{ $empLoanHistory->emi_start_date }}"
@@ -114,7 +114,7 @@
                                                 </div>
                                             @empty
                                                 <div class="pb-4">
-                                                    <div class="p-3 card">Salary Is not Added</div>
+                                                    <div class="p-3 card">Loan Not found</div>
                                                 </div>
                                             @endforelse
                                         @endif
@@ -154,7 +154,7 @@
                                                 <select required id="loan_types" name="loan_types"
                                                     class="form-control form-control-sm ">
                                                     <option selected disabled> - Select Loans- </option>
-                                                    <option value="personal_loan">Personal Loan Inst. </option>
+                                                    <option value="personal_loan">Personal Loan </option>
                                                     <option value="car_loan">Car Loan </option>
                                                     <option value="mortgage_loan">Mortgage Loan</option>
                                                     <option value="salary_advance">Salary advance</option>
@@ -180,12 +180,24 @@
                                             </div>
                                         </div>
                                        
-                                        <div class="mb-2 col-sm-4">
+                                        {{-- <div class="mb-2 col-sm-4">
                                             <div class="form-group">
                                                 <label for="loan_account_no">Loan Account No </label>
                                                 <input required id="loan_account_no" placeholder="Enter loan_account_no  "
                                                     type="text" name="loan_account_no" maxlength="16" minlength="11"
                                                     pattern="[0-9]+" class="form-control form-control-sm ">
+                                            </div>
+                                        </div> --}}
+                                        <div class="mb-2 col-sm-4">
+                                            <div class="form-group">
+                                                <label for="account_id">Loan Account No </label>
+                                                <select name="account_id" id="account_id" class="form-control form-control-sm " >
+                                                    <option value="">--select--</option>
+                                                    @foreach ($loanAccounts as  $key => $value)
+                                                        <option value="{{$value->id}}">{{$value->name}}({{$value->account_number}})</option>
+                                                    @endforeach
+                                                </select>
+                                                
                                             </div>
                                         </div>
                                         <div class="mb-2 col-sm-4">
@@ -245,17 +257,16 @@
                 let id = $(event.currentTarget).data("id");
                 let user_id = $(event.currentTarget).data("user_id");
                 let loan_types = $(event.currentTarget).data("loan_types");
-                let loan_account_no = $(event.currentTarget).data("loan_account_no");
+                let account_id = $(event.currentTarget).data("account_id");
                 let loan_amount = $(event.currentTarget).data("loan_amount");
                 let emi_amount = $(event.currentTarget).data("emi_amount");
                 let emi_start_date = $(event.currentTarget).data("emi_start_date");
                 let emi_end_date = $(event.currentTarget).data("emi_end_date");
                 let description = $(event.currentTarget).data("description");
                 let status = $(event.currentTarget).data("status");
-                console.log(loan_account_no);
 
                 $("#id").val(id);
-                $("#loan_account_no").val(loan_account_no);
+                $("#account_id").val(account_id);
                
                 $("#loan_amount").val(loan_amount);
                 $("#emi_start_date").val(emi_start_date);
@@ -329,25 +340,5 @@
         });
     </script>
     <!-- Include jQuery -->
-    <script>
-        $(document).ready(function() {
-            var employmentTypeSelect = $("#employment_type");
-            var currencySelect = $("#loan_account_no");
-
-            employmentTypeSelect.change(function() {
-                var selectedEmploymentType = employmentTypeSelect.val();
-                if (selectedEmploymentType === "local" || selectedEmploymentType === "local-contractual") {
-                    currencySelect.val("pula");
-                    // currencySelect.prop("disabled", false);
-                } else if (selectedEmploymentType === "expatriate") {
-                    currencySelect.val("usd");
-                    // currencySelect.prop("disabled", true);
-                } else {
-                    currencySelect.val("");
-                    // currencySelect.prop("disabled", false);
-                }
-            });
-            employmentTypeSelect.trigger("change");
-        });
-    </script>
+   
 @endpush

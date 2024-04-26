@@ -51,6 +51,7 @@ class ReimbursementController extends BaseController
         'currencies' => $filteredCurrencySetting,
         'reimbursement' => $reimbursement,
         'expenseCurrency' => $expenseCurrency,
+        'allowedCurrencies' => $allowedCurrencies,
          'Employees' => $employees]);
 
 

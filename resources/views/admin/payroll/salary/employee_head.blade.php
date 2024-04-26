@@ -13,21 +13,21 @@
             <input  value="{{$totalEnCashAmount}}" readonly id="leave_encashment_amount"  type="hidden" class="form-control form-control-sm">
             <input value="{{ $emp13thChequeAmount }}" readonly id="emp_13_cheque_amount" type="hidden"
             class="form-control form-control-sm">
-            <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="text" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
+            <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic" placeholder="Enter correct basic " type="number" name="basic" value="{{ $basic ?? '' }}" class="form-control form-control-sm ">
         </div>
     </div>
     
     <div class="col-sm-3">
         <div class="form-group">
             <label for="total_working_days">Total Working Days</label>
-            <input readonly required max="2" name="total_working_days"   type="text"  value="{{ $totalMonthDays ?? 0 }}" class="form-control form-control-sm">
+            <input readonly required max="2" name="total_working_days"   type="number"  value="{{ $totalMonthDays ?? 0 }}" class="form-control form-control-sm">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
             <label for="annual_balanced_leave">Total Balanced Leave</label>
             
-            <input readonly  required max="3"  name="annual_balanced_leave"  type="text"  value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
+            <input readonly  required max="3"  name="annual_balanced_leave"  type="number"  value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
@@ -55,7 +55,7 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="leave_encashment_days">Leave Encashment Days</label>
-            <input readonly required max="2" name="leave_encashment_days"   type="text"  value="{{ $noOfEncashLeave ?? 0 }}" class="form-control form-control-sm">
+            <input readonly required max="2" name="leave_encashment_days"   type="number"  value="{{ $noOfEncashLeave ?? 0 }}" class="form-control form-control-sm">
         </div>
     </div>
     @endif
@@ -101,7 +101,7 @@
                 $value = 0;
             }
             @endphp
-            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this),taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" 
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this),taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="number" name="{{ strtolower($head->slug) }}" 
              
              @if(strtolower($head->slug)=="others_arrears")
              value="{{ $totalReversalAmount ?? 0 }}"
@@ -117,7 +117,7 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="leave_encashment_amount">Leave Encashment Amount ({{"In PULA"}})</label>
-            <input readonly required  name="leave_encashment_amount"    type="text"  value="{{ $totalEnCashAmount ?? 0 }}" class="form-control form-control-sm leave_encashment_amount">
+            <input readonly required  name="leave_encashment_amount"    type="number"  value="{{ $totalEnCashAmount ?? 0 }}" class="form-control form-control-sm leave_encashment_amount">
         </div>
     </div>
     @endif
@@ -157,7 +157,7 @@
                     $value = round(($head_data?->value / $totalMonthDays) * $noOfPayableDays);  
                 }  
             @endphp
-            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="text" name="{{ strtolower($head->slug) }}" value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value,$salary_month)}}" class="form-control form-control-sm {{$head->head_type}}">
+            <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="number" name="{{ strtolower($head->slug) }}" value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value,$salary_month)}}" class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>
     @endif
@@ -169,19 +169,19 @@
     <div class="col-sm-3">
         <div class="form-group">
             <label for="gross_earning">Gross Earning  ({{"In PULA"}})</label>
-            <input required id="gross_earning"  readonly placeholder="Enter correct Gross Earning" type="text" value="{{ ($data->gross_earning + $totalEnCashAmount + $totalReversalAmount) ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
+            <input required id="gross_earning"  readonly placeholder="Enter correct Gross Earning" type="number" value="{{ ($data->gross_earning + $totalEnCashAmount + $totalReversalAmount) ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
             <label for="total_deduction">Total Deduction  ({{"In PULA"}})</label>
-            <input required id="total_deduction" readonly placeholder="Enter correct Total Deduction" type="text" value="{{ $data->total_deduction ?? '' }}" name="total_deduction" class="form-control form-control-sm ">
+            <input required id="total_deduction" readonly placeholder="Enter correct Total Deduction" type="number" value="{{ $data->total_deduction ?? '' }}" name="total_deduction" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
             <label for="net_take_home">Net Take Home  ({{"In PULA"}})</label>
-            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="text" onkeyup="amount_cal(this)" value="{{ ($data->net_take_home + $totalEnCashAmount +$totalReversalAmount) ?? '' }}" name="net_take_home" class="form-control form-control-sm ">
+            <input required id="net_take_home" readonly placeholder="Enter correct Net Take Home" type="number" onkeyup="amount_cal(this)" value="{{ ($data->net_take_home + $totalEnCashAmount +$totalReversalAmount) ?? '' }}" name="net_take_home" class="form-control form-control-sm ">
         </div>
     </div>
 </div>

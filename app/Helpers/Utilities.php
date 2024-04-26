@@ -681,7 +681,79 @@ if (!function_exists('getHeadValue')) {
                 }
             }
             return $reimbursementAmount;
-        } elseif ($headSlug == "loan") {
+        }
+        elseif($headSlug == "personal_loan") {
+            $loanAmount = 0;
+             $loan = EmpLoanHistory::where(function ($query) use ($startDate, $endDate) {
+                    $query->where(function ($q1) use ($startDate, $endDate) {
+                        $q1->whereBetween('emi_start_date', array($startDate, $endDate));
+                    })
+                    ->orWhere(function ($q2) use ($startDate, $endDate) {
+                        $q2->where('emi_start_date', '<=', $startDate)
+                            ->where('emi_end_date', '>=', $endDate);
+                    })
+                    ->orWhere(function ($q3) use ($startDate, $endDate) {
+                        $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+                    });
+                })->where('user_id', $emp->user_id)->where('loan_types','personal_loan')->first();
+            $loanAmount = $loan->emi_amount ?? 0;
+            return $loanAmount;
+        } 
+        elseif($headSlug == "car_loan") {
+            $loanAmount = 0;
+             $loan = EmpLoanHistory::
+             where(function ($query) use ($startDate, $endDate) {
+                    $query->where(function ($q1) use ($startDate, $endDate) {
+                        $q1->whereBetween('emi_start_date', array($startDate, $endDate));
+                    })
+                    ->orWhere(function ($q2) use ($startDate, $endDate) {
+                        $q2->where('emi_start_date', '<=', $startDate)
+                            ->where('emi_end_date', '>=', $endDate);
+                    })
+                    ->orWhere(function ($q3) use ($startDate, $endDate) {
+                        $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+                    });
+                })
+                ->
+                where('user_id', $emp->user_id)->where('loan_types','car_loan')->first();
+            $loanAmount = $loan->emi_amount ?? 0;
+            return $loanAmount;
+        } 
+        elseif($headSlug == "mortgage_loan") {
+            $loanAmount = 0;
+             $loan = EmpLoanHistory::where(function ($query) use ($startDate, $endDate) {
+                    $query->where(function ($q1) use ($startDate, $endDate) {
+                        $q1->whereBetween('emi_start_date', array($startDate, $endDate));
+                    })
+                    ->orWhere(function ($q2) use ($startDate, $endDate) {
+                        $q2->where('emi_start_date', '<=', $startDate)
+                            ->where('emi_end_date', '>=', $endDate);
+                    })
+                    ->orWhere(function ($q3) use ($startDate, $endDate) {
+                        $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+                    });
+                })->where('user_id', $emp->user_id)->where('loan_types','mortgage_loan')->first();
+            $loanAmount = $loan->emi_amount ?? 0;
+            return $loanAmount;
+        } 
+        elseif($headSlug == "salary_advance") {
+            $loanAmount = 0;
+             $loan = EmpLoanHistory::where(function ($query) use ($startDate, $endDate) {
+                    $query->where(function ($q1) use ($startDate, $endDate) {
+                        $q1->whereBetween('emi_start_date', array($startDate, $endDate));
+                    })
+                    ->orWhere(function ($q2) use ($startDate, $endDate) {
+                        $q2->where('emi_start_date', '<=', $startDate)
+                            ->where('emi_end_date', '>=', $endDate);
+                    })
+                    ->orWhere(function ($q3) use ($startDate, $endDate) {
+                        $q3->whereBetween('emi_end_date', array($startDate, $endDate));
+                    });
+                })->where('user_id', $emp->user_id)->where('loan_types','salary_advance')->first();
+            $loanAmount = $loan->emi_amount ?? 0;
+            return $loanAmount;
+        } 
+        elseif ($headSlug == "loan") {
             $loanAmount = 0;
              $loan = EmpLoanHistory::where(function ($query) use ($startDate, $endDate) {
                     $query->where(function ($q1) use ($startDate, $endDate) {

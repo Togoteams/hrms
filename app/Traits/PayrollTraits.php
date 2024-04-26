@@ -191,6 +191,30 @@ trait PayrollTraits
                     })->value('value');
                     $amount = ($amount);
                     break;
+                case "personal_loan":
+                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'personal_loan');
+                    })->value('value');
+                    $amount = ($amount);
+                    break;
+                case "car_loan":
+                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'car_loan');
+                    })->value('value');
+                    $amount = ($amount);
+                    break;
+                case "salary_advance":
+                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'salary_advance');
+                    })->value('value');
+                    $amount = ($amount);
+                    break;
+                case "mortgage_loan":
+                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'mortgage_loan');
+                    })->value('value');
+                    $amount = ($amount);
+                    break;
             }
             $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount,2,".",""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
             $saveOfficeTTUM  = $this->saveTtumData($data);
