@@ -53,7 +53,7 @@
                                                 <input id="ec_number" placeholder="Enter EC number" type="text"
                                                     name="ec_number"
                                                     value="{{ !empty($employee) ? $employee->ec_number : '' }}"
-                                                    class="form-control form-control-sm ">
+                                                    class="form-control form-control-sm number-input ">
                                             </div>
 
                                             {{-- <div class="pt-3 col-3 fw-semibold">
@@ -84,9 +84,9 @@
                                             </div>
                                             <div class="pt-2 col-4">
                                                 <input id="bank_account_number" placeholder="Enter ." type="text"
-                                                    pattern="[0-9]+" maxlength="16" minlength="12"
-                                                    value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
-                                                    name="bank_account_number" class="form-control form-control-sm">
+                                                pattern="[0-9]+" maxlength="16" minlength="12"
+                                                value="{{ !empty($employee) ? $employee->bank_account_number : '' }}"
+                                                name="bank_account_number" class="form-control form-control-sm number-input" required>
                                             </div>
                                             @if (!$employee->user->hasRole('managing-director'))
                                                 <div class="pt-3 col-2 fw-semibold">
@@ -204,6 +204,7 @@
     <script>
         $(document).ready(function() {
             //For Creation Time
+           
             if (!isLocalContractual) {
                 $(".contractDiv").hide();
             }

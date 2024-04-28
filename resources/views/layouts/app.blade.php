@@ -64,8 +64,55 @@
     <script src="{{ asset('assets/js/admin/common.js') }}"></script>
     <!-- End Style Switcher JS -->
     <script src="{{ asset('assets/js/method.js') }}"></script>
-
+    <script>
+         $(document).ready(function() {
+            $('.number-input').on('input', function() {
+            // Remove non-numeric characters
+                var numericValue = $(this).val().replace(/[^0-9]/g, '');
+                // Update the input field with the numeric value
+                $(this).val(numericValue);
+            });
+        });
+    </script>
     @stack('custom-scripts')
+    @if (session()->get('success') != '')
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+                title: "Success!",
+                text: "{{ session()->get('success') }}",
+                icon: "success",
+            });
+        });
+    </script>
+    <?php session()->forget('success'); ?>
+    @endif
+    @if (session()->get('danger') != '')
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+                title: "Error Occured!",
+                text: "{{ session()->get('danger') }}",
+                icon: "error",
+            });
+        });
+    </script>
+    <?php session()->forget('danger'); ?>
+    @endif
+    @if ($errors != '')
+    @foreach ($errors->all() as $message)
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+                title: "Validation error!",
+                text: "{{ $message }}",
+                icon: "error",
+            });
+        });
+    </script>
+    @endforeach
+    @endif
+
     <script type="text/javascript" src="{{ URL::asset('assets/js/admin/role.js') }}"></script>
 </body>
 

@@ -84,13 +84,13 @@
 
                                             <div class="pt-3 col-3 fw-semibold">
                                                 <label for="email">Email<small
-                                                        class="required-field {{ isHideCheck($employee) ? 'd-none' : '' }}">*</small></label>
+                                                        class="required-field">*</small></label>
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <input type="email" name="email" id="email"
-                                                    placeholder="Enter email"
+                                                    placeholder="Enter email" autocomplete="off" autofocus="off"
                                                     value="{{ !empty($employee) ? $employee->user->email : '' }}"
-                                                    class="form-control form-control-sm" {{ isHideCheck($employee) }}>
+                                                    class="form-control form-control-sm" >
                                             </div>
 
                                             <div class="pt-3 col-3 fw-semibold">
@@ -106,6 +106,7 @@
                                                         {{-- <label for="mobile">Mobile Number:</label> --}}
                                                         <input id="mobile" 
                                                                type="number" 
+                                                               autocomplete="off" autofocus="off"
                                                                pattern="[0-9]{7,8}" 
                                                                placeholder="Enter Mobile No" 
                                                                name="mobile" 
@@ -135,7 +136,7 @@
                                                         <input id="emergency_contact" placeholder="Enter ." pattern="[0-9]+"
                                                             maxlength="8" minlength="7"
                                                             value="{{ !empty($employee) ? $employee->emergency_contact : '' }}"
-                                                            name="emergency_contact" class="form-control form-control-sm ">
+                                                            name="emergency_contact" class="form-control form-control-sm number-input">
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,7 +215,7 @@
                                                             class="required-field">*</small></label>
                                                 </div>
                                                 <div class="pt-2 col-3">
-                                                    <input id="password" placeholder="Enter password" type="password"
+                                                    <input id="password" autocomplete="off" autofocus="off" placeholder="Enter password" type="password"
                                                         name="password" class="form-control form-control-sm ">
                                                 </div>
 
@@ -224,7 +225,7 @@
                                                 </div>
                                                 <div class="pt-2 col-3">
                                                     <input id="password_confirmation"
-                                                        placeholder="Enter password confirmation" type="password"
+                                                        placeholder="Enter password confirmation" autocomplete="off" autofocus="off" type="password"
                                                         name="password_confirmation"
                                                         class="form-control form-control-sm ">
                                                 </div>

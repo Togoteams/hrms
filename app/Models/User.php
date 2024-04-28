@@ -28,6 +28,7 @@ class User extends Authenticatable
         'last_name',
         'full_name',
         'role', // role -> name
+        'role_id', // role -> name
         'role_slug', // role -> name
         'user_employee', // role -> name
     ];
@@ -117,6 +118,11 @@ class User extends Authenticatable
     public function getRoleAttribute()
     {
         return $this->roles ? $this->roles?->first()?->name : "";
+        // return Role::find($this->role_id)->name;
+    }
+    public function getRoleIdAttribute()
+    {
+        return $this->roles ? $this->roles?->first()?->id : "";
         // return Role::find($this->role_id)->name;
     }
     public function getRoleSlugAttribute()

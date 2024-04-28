@@ -133,17 +133,21 @@ class EmployeeController extends BaseController
                 ],
             'std_code' => ['required'],
             'branch_id' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$request->user_id],
             'emergency_contact' => ['nullable', 'numeric'],
             ]);
         }
         if ($request->user_id == '') {
             $user = new User();
             // $user->username = $request->username;
-            $user->email = $request->email;
+           
             $user->password = Hash::make($request->password);
         } else {
             $user = User::find($request->user_id);
+            // return $user->role_id;
+            $user->roles()->detach($user->role_id);
         }
+        $user->email = $request->email;
         $user->name = $request->name;
         $user->mobile = $request->mobile;
         $user->save();
@@ -157,7 +161,8 @@ class EmployeeController extends BaseController
                 $user->roles()->sync($role_id);
             } else {
                 $employee = Employee::where('id', $request->id)->update($request->except(['_token', 'name', 'email','role_id', 'mobile',  'password', 'password_confirmation', 'id', 'user_id']));
-
+                $role_id =$request->role_id;
+                $user->roles()->sync($role_id);
             }
 
             $employee = Employee::firstWhere('user_id', $user->id);

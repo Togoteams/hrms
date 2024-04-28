@@ -31,9 +31,6 @@ label {
 #datatable_wrapper{
     padding: 10px;
 }
-td{
-    text-transform: capitalize;
-}
 .card-dashboard {
     background-color:#fff !important;
     /* border: 2px solid rgb(244, 74, 12) !important; */
@@ -111,6 +108,11 @@ td{
 .active-class{
     background:  #f85109 !important;
     color: #fff !important;
+}
+select {
+    word-wrap: normal;
+    font-size: 11px !important;
+    padding: 6px !important;
 }
 .select2-container {
 

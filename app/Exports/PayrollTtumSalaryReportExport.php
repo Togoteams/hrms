@@ -23,12 +23,16 @@ class PayrollTtumSalaryReportExport implements FromView
     //         'TRAN_AMT' 
     //     ];
     // } 
+    public $ttumMonth;
+
+    public function __construct($ttumMonth)
+    {
+        $this->ttumMonth = $ttumMonth;
+    }
     public function view():view
     {
-        // return view('exports.invoices', [
-        //     'invoices' => Invoice::all()
-        // ]);
-        return view('admin.payroll.report.export.ttum-export',['reports'=>PayrollTtumSalaryReport::all()]);
+        $reports = PayrollTtumSalaryReport::where('ttum_month', $this->ttumMonth)->get();
+        return view('admin.payroll.report.export.ttum-export',['reports'=>$reports]);
     }
 
     // public function collection()

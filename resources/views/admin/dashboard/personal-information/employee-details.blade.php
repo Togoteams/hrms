@@ -62,13 +62,14 @@
 
                                                                 {{-- <div class="col-3 fw-semibold">Basic Salary</div>
                                                                 <div class="col-3">{{ $data->basic_salary }}</div> --}}
-
+                                                                @if($data->start_date)
                                                                 <div class="col-3 fw-semibold">Date of Birth</div>
                                                                 <div class="col-3">{{ date('d-m-Y', strtotime($data->date_of_birth)) }}</div>
-
+                                                                @endif
+                                                                @if($data->start_date)
                                                                 <div class="col-3 fw-semibold">Date of joining</div>
                                                                 <div class="col-3">{{ date('d-m-Y', strtotime($data->start_date)) }}</div>
-
+                                                                @endif
 
                                                                 <div class="col-3 fw-semibold">Age</div>
                                                                 <div class="col-3">
@@ -82,8 +83,8 @@
 
                                                                 <div class="col-3 fw-semibold">Blood Group</div>
                                                                 <div class="col-3">{{ $data->blood_group ?? "N/A" }}</div>
-                                                                <div class="col-3 fw-semibold">Basic Salary</div>
-                                                                <div class="col-3">{{getCurrencyIcon($data->currency_salary)}}  {{ $data->basic_salary }}</div>
+                                                                {{-- <div class="col-3 fw-semibold">Basic Salary</div>
+                                                                <div class="col-3">{{getCurrencyIcon($data->currency_salary)}}  {{ $data->basic_salary }}</div> --}}
                                                             </div>
                                                         </div>
                                                     @else
@@ -160,7 +161,7 @@
                                                 {{-- <input required id="birth_country" placeholder="Enter Birth Country of Employee "
                                                     type="text" name="birth_country" class="form-control form-control-"
                                                     value="{{ $data->birth_country }}"> --}}
-                                                    <select required id="birth_country" name="birth_country" class="form-control form-control">
+                                                    <select required id="birth_country" name="birth_country" class="form-control">
                                                         <option value="">- Select Birth Country -</option>
                                                         @foreach ($countries as $country)
                                                             <option value="{{ $country->name }}" {{ $country->name == $data->birth_country ? 'selected' : '' }}>

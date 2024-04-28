@@ -8,6 +8,8 @@ use App\Models\PayrollTtumSalaryReport;
 use Carbon\Carbon;
 use Excel;
 use App\Exports\PayrollTtumSalaryReportExport;
+use Illuminate\Support\Facades\Validator;
+
 class PayrollReportController extends Controller
 {
     /**
@@ -15,6 +17,8 @@ class PayrollReportController extends Controller
      */
     public $page_name = "Salary TTUM Report";
     //
+    private $salaryMonth;
+
     public function ttumReport(Request $request)
     {
         if ($request->ajax()) {
@@ -31,6 +35,10 @@ class PayrollReportController extends Controller
     public function ttumReportExport(Request $request)
     {
         $ttumMonth = $request->transaction_at;
-        return Excel::download(new PayrollTtumSalaryReportExport(), 'ttumReport'.$ttumMonth.'.xlsx');
+       
+        $request->validate([
+            'transaction_at' => 'required|date_format:Y-m',
+        ]);
+        return Excel::download(new PayrollTtumSalaryReportExport($ttumMonth), 'ttumReport'.$ttumMonth.'.xlsx');
     }
 }

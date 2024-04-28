@@ -43,13 +43,16 @@
                                 <h5 class="card-title fw-semibold">Change Profile</h5>
                                 <p class="mb-4 card-subtitle">Change your profile picture from here</p>
                                 <div class="form-group" id="image_preview_section">
-                                    @if (!empty(Auth::user()->media))
-                                        <img class="img-profile rounded-circle" id="user_img" style="height: 75px;"
-                                            src="{{ Auth::user()->media->getUrl() }}">
-                                    @else
-                                        <img class="img-profile rounded-circle" id="user_img" style="height: 75px;"
-                                            src="">
-                                    @endif
+                                    @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
+                                    <img class="dashboard-icon img-profile rounded-circle"
+                                        src="{{ asset('assets/profile/' . $data->image) }}"
+                                        alt="Profile Image" id="user_img" style="height: 75px; width: 75px;">
+                                @else
+                                    <img class="dashboard-icon img-profile rounded-circle"
+                                        src="{{ asset('assets/profile/profileImage.png') }}"
+                                        alt="Default Icon"  id="user_img" style="height: 75px; width: 75px;">
+                                @endif
+                                  
                                 </div>
                                 <div class="text-center">
                                     <div class="form-group mr-bot d-flex">
@@ -63,15 +66,7 @@
                                         </div>
                                         <div class="col-md-5">
                                             <h6 class="card-subtitle">
-                                                @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
-                                                    <img class="dashboard-icon"
-                                                        src="{{ asset('assets/profile/' . $data->image) }}"
-                                                        alt="Profile Image" style="height: 75px; width: 75px;">
-                                                @else
-                                                    <img class="dashboard-icon"
-                                                        src="{{ asset('assets/profile/profileImage.png') }}"
-                                                        alt="Default Icon" style="height: 75px; width: 75px;">
-                                                @endif
+                                               
                                             </h6>
                                         </div>
                                     </div>
