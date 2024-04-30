@@ -60,10 +60,10 @@ class BaseController extends Controller
      */
     protected function responseRedirect($route, $message, $type = 'info', $error = false, $withOldInputWhenError = false)
     {
-        if ($type != 'noFlash') {
-            $this->setFlashMessage($message, $type);
-            $this->showFlashMessages();
-        }
+        // if ($type != 'noFlash') {
+        //     $this->setFlashMessage($message, $type);
+        //     $this->showFlashMessages();
+        // }
 
         if ($error && $withOldInputWhenError) {
             return redirect()->back()->withInput();
