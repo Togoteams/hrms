@@ -171,13 +171,13 @@
                                     placeholder="Name" aria-label="name">
                             </div>
                         </div>
-                        <div class="mb-4 row">
+                        {{-- <div class="mb-4 row">
                             <label for="name" class="col-sm-3 col-form-label form-label">Short Code</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" rows="4" cols="50"
                                     name="short_code" id="short_code" placeholder="Short Code" aria-label="Short Code">
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- End Form -->
                         {{-- <div class="mb-4 row">
                             <label for="description" class="col-sm-3 col-form-label form-label">Role Type</label>

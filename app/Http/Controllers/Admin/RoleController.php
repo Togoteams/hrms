@@ -30,14 +30,14 @@ class RoleController extends BaseController
         if (!empty($roleId)) {
             $request->validate([
                 'name'     =>  'required|string|unique:roles,name,'.$roleId,
-                'short_code' => 'required|min:2|string',
+                // 'short_code' => 'required|min:2|string',
                 // 'role_type' => 'required|min:3|string',
             ]);
             $message = "Role  Updated Successfully";
         } else {
             $request->validate([
                 'name'     =>  'required|string|unique:roles,name',
-                'short_code' => 'required|min:2|string',
+                // 'short_code' => 'required|min:2|string',
                 // 'role_type' => 'required|min:3|string',
             ]);
             $message = "Role Created Successfully";
@@ -55,7 +55,7 @@ class RoleController extends BaseController
         // ];
         $isRoleCreated= $this->roleService->createOrUpdateRole($request->except('_token'),$roleId);
         if ($isRoleCreated) {
-            return   $this->responseJson($isRoleCreated, $message);
+            return   $this->responseJson(true,200,$message,$isRoleCreated);
         }
     }
 

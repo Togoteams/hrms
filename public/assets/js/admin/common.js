@@ -527,14 +527,14 @@ $(document).ready(function (e) {
                     // $("#" + formModal)
                     //     .find('button[type="reset"]')
                     //     .addClass("reload");
-                    $("#" + formModal)
-                        .find('.form-section')
-                        .html(response.data.html_view);
+                    // $("#" + formModal)
+                    //     .find('.form-section')
+                    //     .html(response.data.html_view);
                     $("#" + formModal).modal('show');
-                    // $.each(response.data, function (index, valueMessage) {
-                    //     // console.log(index);
-                    //     $("#" + index).val(valueMessage);
-                    // });
+                    $.each(response.data, function (index, valueMessage) {
+                        // console.log(index);
+                        $("#" + index).val(valueMessage);
+                    });
                  
                 } else {
                     Swal.fire({
