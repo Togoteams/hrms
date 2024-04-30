@@ -48,8 +48,6 @@ class DocumentTypeController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:document_types,name',
             'description' => 'nullable|string',
-
-
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -74,7 +72,7 @@ class DocumentTypeController extends Controller
     public function edit(string $id)
     {
         $documentType = DocumentType::find($id);
-        return view('admin.medical_cart.edit', ['documentType' => $documentType, 'page' => $this->page_name]);
+        return view('admin.document-type.edit', ['documentType' => $documentType, 'page' => $this->page_name]);
     }
 
     /**
@@ -83,7 +81,7 @@ class DocumentTypeController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:document_types,name',
+            'name' => 'required|string|unique:document_types,name,'. $id,
             'description' => 'nullable|string',
         ]);
         if ($validator->fails()) {
