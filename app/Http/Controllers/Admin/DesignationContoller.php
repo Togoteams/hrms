@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Models\Designation;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class DesignationContoller extends Controller
+class DesignationContoller extends BaseController
 {
     public $page_name = "Designation";
 
@@ -50,6 +50,9 @@ class DesignationContoller extends Controller
             // $request->merge('slug'=>"")
             Designation::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
+
+            // return   $this->responseJson(true,200,$this->page_name . " Added Successfully","");
+
         }
     }
 
