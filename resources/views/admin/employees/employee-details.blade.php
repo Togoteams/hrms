@@ -53,7 +53,7 @@
                                                 <input id="ec_number" placeholder="Enter EC number" type="text"
                                                     name="ec_number"
                                                     value="{{ !empty($employee) ? $employee->ec_number : '' }}"
-                                                    class="form-control form-control-sm number-input ">
+                                                    class="form-control form-control-sm">
                                             </div>
 
                                             {{-- <div class="pt-3 col-3 fw-semibold">
