@@ -156,7 +156,7 @@ $(document).ready(function (e) {
                 } else {
                     Swal.fire({
                         icon: "error",
-                        title: "We are facing some technical issue now.",
+                        title: response.message || "We are facing some technical issue now.",
                         showConfirmButton: false,
                         timer: 1500,
                     });

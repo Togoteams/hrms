@@ -8,7 +8,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_data" action="{{ route('admin.leave_apply.store') }}" enctype="multipart/form-data">
+                    <form id="form_data" action="{{ route('admin.leave_apply.store') }}" class="formsubmit"  enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
                         <div class="row">
@@ -16,11 +16,10 @@
                                 <div class="mb-2 col-sm-4">
                                     <div class="form-group">
                                         <label for="user_id">Employee</label>
-                                        <select
-                                            onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
-                                            required id="user_id" placeholder="Enter correct user_id" type="text"
+                                        <select onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
+                                             id="user_id" placeholder="Enter correct user_id"
                                             name="user_id" class="form-control form-control-sm user_id">
-                                            <option selected disabled> -Select Employee - </option>
+                                            <option selected disabled value=""> -Select Employee - </option>
                                             @foreach ($all_user as $user)
                                                 <option value="{{ $user->user->id }}"
                                                     data-employment_type="{{ $user->employment_type }}">
@@ -36,10 +35,10 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types</label>
-                                    <select required id="leave_type_id" onchange="change_leave()"
+                                    <select  id="leave_type_id" onchange="change_leave()"
                                         placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
                                         class="form-control form-control-sm ">
-                                        <option selected disabled> -Select Leave Types- </option>
+                                        <option selected disabled value=""> -Select Leave Types- </option>
                                         @foreach ($leave_type as $l_type)
                                             <option value="{{ $l_type->id }}" data-leave_slug="{{ $l_type->slug }}">
                                                 {{ $l_type->name }}</option>
@@ -53,7 +52,7 @@
                                     <label for="pay_type">Pay Type</label>
                                     <select id="pay_type" placeholder="Enter correct pay_type " type="text"
                                         name="pay_type" class="form-control form-control-sm ">
-                                        <option selected disabled> -Select Types- </option>
+                                        <option selected disabled value=""> -Select Types- </option>
                                         <option value="half_pay">Half Pay</option>
                                         <option value="full_pay">Full Pay</option>
                                     </select>
@@ -62,8 +61,8 @@
                             </div>
                             <div class="mb-2 col-sm-4 balance_leave_section">
                                 <div class="form-group">
-                                    <label for="balance_leave1">balance_leave</label>
-                                    <input readonly required id="balance_leave1"
+                                    <label for="remaining_leave">balance_leave</label>
+                                    <input readonly required id="remaining_leave"
                                         placeholder="Enter correct balance_leave" type="text" name="remaining_leave"
                                         class="form-control form-control-sm ">
                                 </div>
@@ -72,7 +71,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="start_date">start_date</label>
-                                    <input required id="start_date" placeholder="Enter correct start_date   "
+                                    <input  id="start_date" placeholder="Enter correct start_date   "
                                         onchange="change_leave()" type="date" name="start_date"
                                         class="form-control form-control-sm ">
                                 </div>
@@ -80,7 +79,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="end_date">end_date</label>
-                                    <input required id="end_date" placeholder="Enter correct end_date   "
+                                    <input  id="end_date" placeholder="Enter correct end_date   "
                                         type="date" onchange="change_leave()" name="end_date"
                                         class="form-control form-control-sm ">
                                 </div>
@@ -88,7 +87,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="leave_applies_for">leave_applies_for</label>
-                                    <input required readonly id="leave_applies_for"
+                                    <input  readonly id="leave_applies_for"
                                         placeholder="Enter correct leave_applies_for " value="0" type="text"
                                         name="leave_applies_for" class="form-control form-control-sm ">
                                 </div>
@@ -101,11 +100,11 @@
                                         class="form-control form-control-sm ">
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-4">
+                            <div class="mb-2 col-sm-4 approval-authority-section">
                                 <div class="form-group">
                                     <label for="Reason">Approval Authority</label>
                                     <select id="approval_authority" placeholder="Select Authority"
-                                        name="approval_authority" required class="form-control form-control-sm approval_authority">
+                                        name="approval_authority" class="form-control form-control-sm approval_authority">
                                         <option selected disabled> - Select - </option>
                                         @foreach ($approvalAuthority as $key => $value)
                                             <option value="{{ $value->user_id }}">{{ $value->user->name }} </option>
@@ -116,7 +115,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason</label>
-                                    <input required id="leave_reason"
+                                    <input  id="leave_reason"
                                         placeholder="eg:- i want to 2 days leave for my sister marriage  "
                                         type="text" name="leave_reason" class="form-control form-control-sm ">
                                 </div>
@@ -132,7 +131,7 @@
                             </div>
                         </div>
                         <div class="text-center ">
-                            <button type="button" onclick="ajaxCall('form_data'),change_leave(this)"
+                            <button type="submit"
                                 class="btn btn-white submit">
                                 {{ $page }}</button>
                         </div>
@@ -174,10 +173,10 @@
                         if (result.status == true) {
                             var data = result.data;
                             if (data.is_balance_leave_hide) {
-                                $("#balance_leave1").val(0);
+                                $("#remaining_leave").val(0);
                                 $(".balance_leave_section").css('display', 'none');
                             } else {
-                                $("#balance_leave1").val(data.remaining_leave);
+                                $("#remaining_leave").val(data.remaining_leave);
                                 $(".balance_leave_section").css('display', '');
                             }
 
@@ -188,7 +187,7 @@
                             }
 
                         } else {
-                            $("#balance_leave1").val(0);
+                            $("#remaining_leave").val(0);
                         }
                         //    amount_cal(e);
                     },
@@ -238,7 +237,7 @@
                             console.log(obj);
                             $(".approval_authority").html(obj);
                         } else {
-                            
+                            $(".approval-authority-section").css("display","none");
                         }
                         //    amount_cal(e);
                     },

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\CurrentLeave;
 use App\Models\EmpCurrentLeave;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -19,7 +21,7 @@ use App\Traits\NotificationTraits;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
-class LeaveApplyController extends Controller
+class LeaveApplyController extends BaseController
 {
     use LeaveTraits;
     use NotificationTraits;
@@ -64,10 +66,10 @@ class LeaveApplyController extends Controller
         }
 
         $all_users = Employee::getActiveEmp()->get();
-        $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
+        $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'branch-supervisor'];
 
-        $approvalAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
-            $q->whereIn('slug',$allowedRoles);
+        $approvalAuthority = Employee::whereHas('user.roles', function ($q) use ($allowedRoles) {
+            $q->whereIn('slug', $allowedRoles);
         })->get();
         // return $leave_type;
         return view('admin.leave_apply.index', [
@@ -94,34 +96,7 @@ class LeaveApplyController extends Controller
      */
     public function store(Request $request)
     {
-        $leaveType = LeaveSetting::find($request->leave_type_id);
-        $leaveSlug = $leaveType->slug;
-        Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
-            $start_date = $validator->getData()['start_date'];
-            $end_date = $validator->getData()['end_date'];
-            $userId = $validator->getData()['user_id'] ?? auth()->user()->id;
-            $overlappingRecord = true;
-            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
-                $query->where(function ($q1) use ($start_date, $end_date) {
-                    $q1->whereBetween('start_date', array($start_date, $end_date));
-                })
-                    ->orWhere(function ($q2) use ($start_date, $end_date) {
-                        $q2->where('start_date', '<=', $start_date)
-                            ->where('end_date', '>=', $end_date);
-                    })
-                    ->orWhere(function ($q3) use ($start_date, $end_date) {
-                        $q3->whereBetween('end_date', array($start_date, $end_date));
-                    });
-            })->whereNotIn('status', ['reject'])->where('user_id', $userId)->orderBy('id', 'desc')->first();
-            $this->overLapsLeave = $overlappingRecord?->leave_type?->name;
-            return !$overlappingRecord;
-        });
-        Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
-            $value = Str::headline(Str::camel($attribute));
-            $leaveName = $this->overLapsLeave;
-            return " $value   overlaps with  $leaveName .";
-        });
-
+        // return $request->all();
         /**
          * Vaidation for specail leave like, maternity-leave,bereavement-leave
          */
@@ -130,6 +105,45 @@ class LeaveApplyController extends Controller
         } else {
             $user = Auth::user();
         }
+        $leaveType = LeaveSetting::find($request->leave_type_id);
+        $leaveSlug = $leaveType?->slug;
+        $employee = Employee::where('user_id', $user->id)->first();
+        $roleSlug = $employee?->user?->role_slug;
+        Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
+            $data = $validator->getData();
+            $start_date = $data['start_date'];
+            $end_date = $data['end_date'];
+            $userId = $data['user_id'] ?? auth()->id();
+        
+            // Query for overlapping leave records
+            $overlappingRecord = LeaveApply::where('user_id', $userId)
+                ->where(function ($query) use ($start_date, $end_date) {
+                    $query->where(function ($q) use ($start_date, $end_date) {
+                        $q->whereBetween('start_date', [$start_date, $end_date])
+                            ->orWhereBetween('end_date', [$start_date, $end_date]);
+                    })
+                    ->orWhere(function ($q) use ($start_date, $end_date) {
+                        $q->where('start_date', '<=', $start_date)
+                            ->where('end_date', '>=', $end_date);
+                    });
+                })
+                ->whereNotIn('status', ['reject'])
+                ->orderByDesc('id')
+                ->first();
+        
+            // Set overlapping leave name for reference
+            $this->overLapsLeave = optional($overlappingRecord?->leave_type)->name;
+        
+            // Return validation result
+            return !$overlappingRecord;
+        });
+        Validator::replacer('no_date_overlap', function ($message, $attribute, $rule, $parameters) {
+            $value = Str::headline(Str::camel($attribute));
+            $leaveName = $this->overLapsLeave;
+            return " $value   overlaps with  $leaveName .";
+        });
+
+        
 
         Validator::extend('sick_leave_document', function ($attribute, $value, $parameters, $validator) {
             $userId = $validator->getData()['user_id'] ?? "";
@@ -162,28 +176,30 @@ class LeaveApplyController extends Controller
             return "The $value docuement is required.";
         });
 
-        $employee = Employee::where('user_id', $user->id)->first();
-        $validator = Validator::make(
-            $request->all(),
-            [
-
+        $request->validate([
                 'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
-                'start_date' => ['required', 'date', 'no_date_overlap', 'after_or_equal:' . $employee->start_date],
+                'user_id' => ['required', 'numeric', 'exists:users,id'],
+                'leave_reason' => ['required', 'string'],
+                'start_date' => ['required', 'date', 'no_date_overlap', 'after_or_equal:' . $employee?->start_date],
                 'end_date' => ['required', 'date', 'no_date_overlap', 'after_or_equal:start_date'],
-                'approval_authority' => ['required', 'numeric','exists:employees,user_id'],
+                'approval_authority' => [ Rule::when($roleSlug != ('managing-director'), 'required'),'numeric', 'exists:employees,user_id'],
                 "doc1" => ["mimetypes:application/pdf", "max:10000", 'nullable', 'sick_leave_document'],
-                'leave_applies_for' => ['nullable', 'numeric', Rule::when($leaveSlug == ('bereavement-leave'), 'max:3')],
+                'leave_applies_for' => ['required', 'numeric', Rule::when($leaveSlug == ('bereavement-leave'), 'max:3')],
                 'remaining_leave' => ['required', 'numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave'), 'min:1')]
             ],
             [
                 'start_date.after_or_equal' => 'You cannot apply for leave before the date of joining.'
             ]
         );
+      
+        // if ($validator->fails()) {
+        //     return $validator->errors();
+        // }
 
         if ((getAvailableLeaveCount($request->leave_type_id, $user->id) >= $request->leave_applies_for)  || $leaveSlug == "leave-without-pay" || $leaveSlug == "maternity-leave" || $leaveSlug == "bereavement-leave") {
-            if ($validator->fails()) {
-                return $validator->errors();
-            } else {
+            // if ($validator->fails()) {
+            //     return $validator->errors();
+            // } else {
                 try {
                     // return response()->json(['error' => "Something wrong heppend"]);
                     $remainingLeave = (int)getAvailableLeaveCount($request->leave_type_id, $user->id);
@@ -210,13 +226,18 @@ class LeaveApplyController extends Controller
                         $payType = $request->pay_type ?? "";
                         $leaveDate = LeaveDate::create(['leave_id' => $leaveId, 'leave_date' => $date, 'is_holiday' => $isHoliday, 'pay_type' => $payType]);
                     }
-                    return response()->json(['success' => $this->page_name . " Added Successfully", 'status' => true]);
+                    return $this->responseJson(true,200,$this->page_name . " Added Successfully",$leaveDate);
+                    // return response()->json(['success' => $this->page_name . " Added Successfully", 'status' => true]);
                 } catch (Exception $e) {
-                    return response()->json(['error' => $e->getMessage()]);
+                    return $this->responseJson(false,200,$e->getMessage());
+
+                    // return response()->json(['error' => $e->getMessage()]);
                 }
-            }
+            // }
         } else {
-            return response()->json(['error' => "You have Applied Maximum number of leave"]);
+            return $this->responseJson(false,200,"You have Applied Maximum number of leave",[]);
+
+            // return response()->json(['error' => "You have Applied Maximum number of leave"]);
         }
     }
     /**
@@ -236,16 +257,16 @@ class LeaveApplyController extends Controller
     public function edit(string $id)
     {
 
-        $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
+        $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'branch-supervisor'];
 
-        $approvalAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
-            $q->whereIn('slug',$allowedRoles);
+        $approvalAuthority = Employee::whereHas('user.roles', function ($q) use ($allowedRoles) {
+            $q->whereIn('slug', $allowedRoles);
         })->get();
         $data = LeaveApply::find($id);
         $leaveHideArr = ['maternity-leave'];
         $leave_type = LeaveSetting::where('emp_type', getEmpType(Employee::where('user_id', $data->user_id)->first()->employment_type) ?? '')->whereNotIn('slug', $leaveHideArr)->get();
         // ret
-        return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name,'approvalAuthority'=>$approvalAuthority, 'leave_type' => $leave_type]);
+        return view('admin.leave_apply.edit', ['data' => $data, 'page' => $this->page_name, 'approvalAuthority' => $approvalAuthority, 'leave_type' => $leave_type]);
     }
 
     public function status_modal($id)
@@ -280,25 +301,33 @@ class LeaveApplyController extends Controller
         // return  $request->id;
         $user_id = $request->user_id;
         Validator::extend('no_date_overlap', function ($attribute, $value, $parameters, $validator) {
-            $start_date = $validator->getData()['start_date'];
-            $end_date = $validator->getData()['end_date'];
-            $edit_id = $validator->getData()['id'];
-            $userId = $validator->getData()['user_id'] ?? auth()->user()->id;
-            $overlappingRecord = true;
-
-            $overlappingRecord = LeaveApply::where(function ($query) use ($start_date, $end_date) {
-                $query->where(function ($q1) use ($start_date, $end_date) {
-                    $q1->whereBetween('start_date', array($start_date, $end_date));
+            $data = $validator->getData();
+            $start_date = $data['start_date'];
+            $end_date = $data['end_date'];
+            $edit_id = $data['id'] ?? null;
+            $userId = $data['user_id'] ?? auth()->id();
+        
+            // Query for overlapping leave records
+            $overlappingRecord = LeaveApply::where('user_id', $userId)
+                ->where(function ($query) use ($start_date, $end_date) {
+                    $query->whereBetween('start_date', [$start_date, $end_date])
+                        ->orWhereBetween('end_date', [$start_date, $end_date])
+                        ->orWhere(function ($q) use ($start_date, $end_date) {
+                            $q->where('start_date', '<=', $start_date)
+                                ->where('end_date', '>=', $end_date);
+                        });
                 })
-                    ->orWhere(function ($q2) use ($start_date, $end_date) {
-                        $q2->where('start_date', '<=', $start_date)
-                            ->where('end_date', '>=', $end_date);
-                    })
-                    ->orWhere(function ($q3) use ($start_date, $end_date) {
-                        $q3->whereBetween('end_date', array($start_date, $end_date));
-                    });
-            })->whereNotIn('status', ['reject'])->where('user_id', $userId)->orderBy('id', 'desc')->whereNotIn('id', [$edit_id])->first();
-            $this->overLapsLeave = $overlappingRecord?->leaveSetting?->name;
+                ->whereNotIn('status', ['reject'])
+                ->orderByDesc('id')
+                ->when($edit_id, function ($query) use ($edit_id) {
+                    $query->where('id', '!=', $edit_id);
+                })
+                ->first();
+        
+            // Set overlapping leave name for reference
+            $this->overLapsLeave = optional($overlappingRecord->leaveSetting)->name;
+        
+            // Return validation result
             return !$overlappingRecord;
         });
 
@@ -351,63 +380,76 @@ class LeaveApplyController extends Controller
         $leaveSlug = $leaveType->slug;
 
         $validator = Validator::make($request->all(), [
-            'remaining_leave' => ['numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave'), 'required', 'min:1')],
+            // 'remaining_leave' => ['numeric', Rule::when($leaveSlug != 'leave-without-pay' && $leaveSlug != 'bereavement-leave', 'required', 'min:1')],
             'status' => ['required', 'string'],
             'status_remarks' => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
             return $validator->errors();
-        } else {
-            $leave_apply = LeaveApply::find($id);
-
-
-            // try {
-            if ($request->status != "approved") {
-
-                LeaveApply::where('id', $id)->update([
-                    'status' => $request->status,
-
-                    'status_remarks' => $request->status_remarks,
-                    'remaining_leave' =>   (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
-
-                ]);
-                $leave = LeaveApply::where('id', $id)->first();
-                $notifiMessage = "Dear " . $leave->user->name . " Your " . $leave->leave_type->name . " is Rejected On Date " . date("d-m-Y", strtotime($leave->start_date)) . " beetween " . date("d-m-Y", strtotime($leave->end_date));
-                $notificationData = ['reference_id' => $id, 'user_id' => $leave->user_id, 'reference_type' => get_class($leave), 'notification_type' => 'leave_rejected', 'title' => "Leave Rejected", 'description' => $notifiMessage];
-                $this->saveNotification($notificationData);
-            }
-            if ($request->status == "approved") {
-                // checking how many leave is remaining for a particular user
-                $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
-                $isIgnoreBalanced = 0;
-                if (in_array($leaveSlug, $balanceLeaveHideArr)) {
-                    $isIgnoreBalanced = 1;
-                }
-                if ((getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id, 'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
-
-                    LeaveApply::where('id', $id)->update([
-                        'status_remarks' => $request->status_remarks,
-                        'status' => $request->status,
-                        'approved_at' => date('Y-m-d H:i:s'),
-                        'approved_by' => auth()->user()->id,
-                        'is_approved' => 1,
-                        'remaining_leave' =>   (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
-                    ]);
-                    $leave = LeaveApply::where('id', $id)->first();
-                    // echo $leave->leave_type->name;
-                    $notifiMessage = "Dear " . $leave->user->name . " Your " . $leave->leave_type->name . " is Approved On Date " . date("d-m-Y", strtotime($leave->start_date)) . " beetween " . date("d-m-Y", strtotime($leave->end_date));
-                    $notificationData = ['reference_id' => $id, 'reference_type' => get_class($leave), 'user_id' => $leave->user_id, 'notification_type' => 'leave_approval', 'title' => "Leave Approved", 'description' => $notifiMessage];
-                    $this->saveNotification($notificationData);
-                } else {
-                    return response()->json(['error' => " Applied leave is " . get_day($leave_apply->start_date, $leave_apply->end_date) + 1 . " but  they have only " . getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
-                }
-            }
-            return response()->json(['success' => $this->page_name . " Updated Successfully"]);
-            // } catch (Exception $e) {
-            //     return response()->json(['errors' => "Somthing wen Wrong"]);
-            // }
         }
+
+        $leave_apply = LeaveApply::find($id);
+
+        if ($request->status != "approved") {
+            LeaveApply::where('id', $id)->update([
+                'status' => $request->status,
+                'status_remarks' => $request->status_remarks,
+                'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
+            ]);
+            $this->saveNotification([
+                'reference_id' => $id,
+                'user_id' => $leave_apply->user_id,
+                'reference_type' => get_class($leave_apply),
+                'notification_type' => 'leave_rejected',
+                'title' => "Leave Rejected",
+                'description' => "Dear " . $leave_apply->user->name . " Your " . $leave_apply->leave_type->name . " is Rejected On Date " . date("d-m-Y", strtotime($leave_apply->start_date)) . " between " . date("d-m-Y", strtotime($leave_apply->end_date)),
+            ]);
+        }
+
+        if ($request->status == "approved") {
+            $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
+            $isIgnoreBalanced = in_array($leaveSlug, $balanceLeaveHideArr) ? 1 : 0;
+            
+            if ((getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id, 'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
+                
+                LeaveApply::where('id', $id)->update([
+                    'status_remarks' => $request->status_remarks,
+                    'status' => $request->status,
+                    'approved_at' => now(),
+                    'approved_by' => auth()->id(),
+                    'is_approved' => 1,
+                    'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
+                ]);
+                $currentLeave = EmpCurrentLeave::where('user_id',$leave_apply->user_id)->where('leave_type_id',$leave_apply->leave_type_id)->first();
+                $currentLeaveCount = $currentLeave->leave_count;
+                $appliedLeaveCount = $leave_apply->leaveDate()->count();
+                
+                if($currentLeaveCount >=$appliedLeaveCount)
+                {
+                    $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
+
+                    $currentLeave->update(['leave_count'=>$remaining_leave]);
+                }else
+                {
+                    return response()->json([
+                        'error' => "Leave Approval Failed: Insufficient Leave Balance. You currently have ".$currentLeaveCount." leave remaining."
+                    ]);      
+                }
+                $this->saveNotification([
+                    'reference_id' => $id,
+                    'reference_type' => get_class($leave_apply),
+                    'user_id' => $leave_apply->user_id,
+                    'notification_type' => 'leave_approval',
+                    'title' => "Leave Approved",
+                    'description' => "Dear " . $leave_apply->user->name . " Your " . $leave_apply->leave_type->name . " is Approved On Date " . date("d-m-Y", strtotime($leave_apply->start_date)) . " between " . date("d-m-Y", strtotime($leave_apply->end_date)),
+                ]);
+            } else {
+                return response()->json(['error' => "Applied leave is " . (get_day($leave_apply->start_date, $leave_apply->end_date) + 1) . " but they have only " . getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
+            }
+        }
+
+        return response()->json(['success' => $this->page_name . " Updated Successfully"]);
     }
 
     /**
@@ -443,25 +485,28 @@ class LeaveApplyController extends Controller
     public function get_approval_authority(Request $request)
     {
         $user_id = $request->user_id;
-       
-        $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
 
-        $approvalAuthority = Employee::with('user')->whereHas('user.roles',function($q)use ($allowedRoles){
-            $q->whereIn('slug',$allowedRoles);
-        })->whereNotIn('user_id',[$user_id])->get();
+        $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'branch-supervisor'];
+        $employee =  Employee::where('user_id', $user_id)->first();
+        if($employee->user->role_slug=="managing-director")
+        {
+            return response()->json(['status' => false, 'data' => []]);
+        }
+        $approvalAuthority = Employee::with('user')->whereHas('user.roles', function ($q) use ($allowedRoles) {
+            $q->whereIn('slug', $allowedRoles);
+        })->whereNotIn('user_id', [$user_id])->get();
         // return $leave_type;
         // $data = '<option> -Select Leave Type - </option>';
         // foreach ($approvalAuthority as $l_type) {
         //     $data .= '  <option value="' . $l_type->user_id . '" >' . $l_type->user->name . '</option>';
         // }
-        return response()->json(['status' => true, 'data' =>$approvalAuthority]);
-
+        return response()->json(['status' => true, 'data' => $approvalAuthority]);
     }
 
     public function get_balance_leave(Request $request)
     {
         $remaining_leave = 0;
-        $remaining_leave = EmpCurrentLeave::where('user_id',$request->user_id)->where('leave_type_id',$request->leave_type_id)->value('leave_count') ?? 0;
+        $remaining_leave = EmpCurrentLeave::where('user_id', $request->user_id)->where('leave_type_id', $request->leave_type_id)->value('leave_count') ?? 0;
         $leave_type = LeaveSetting::find($request->leave_type_id);
         $leave_type_slug = $leave_type->slug;
         $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];

@@ -407,7 +407,12 @@ class PayrollSalaryController extends Controller
             return view('admin.payroll.salary.salary-slip-ibo', compact('data', 'usdToPulaAmount', 'usdToInrAmount'));
         }
     }
-
+    function adjustEndDate($salaryEndDate) {
+        if (isHolidayDate($salaryEndDate)) {
+            return $this->adjustEndDate(date('Y-m-d', strtotime('-1 day', strtotime($salaryEndDate))));
+        }
+        return $salaryEndDate;
+    }
     public function get_employee_data($user_id = null, $salary_month = null)
     {
         $page = $this->page_name;
@@ -415,15 +420,18 @@ class PayrollSalaryController extends Controller
         $salaryStartDate = date("Y-m-d", strtotime("-1 months", strtotime($salaryMonth . "-20")));
         $month = date("m", strtotime($salaryMonth . "-20"));
         $salaryEndDate = date("Y-m-d", strtotime($salaryMonth . "-20"));
-        $holidayFound = false;
-        do {
-            if (isHolidayDate($salaryEndDate)) {
-                $holidayFound = true;
-                $salaryEndDate =  date('Y-m-d', (strtotime('-1 day', strtotime($salaryEndDate))));
-            } else {
-                $holidayFound = false;
-            }
-        } while ($holidayFound);
+        // $holidayFound = false;
+        // do {
+        //     if (isHolidayDate($salaryEndDate)) {
+        //         $holidayFound = true;
+        //         $salaryEndDate =  date('Y-m-d', (strtotime('-1 day', strtotime($salaryEndDate))));
+        //     } else {
+        //         $holidayFound = false;
+        //     }
+        // } while ($holidayFound);
+
+        $salaryEndDate = $this->adjustEndDate($salaryEndDate);
+
 
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();

@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamp('reversal_at')->nullable();
             $table->tinyInteger('is_reversal')->default(0)->nullable();
             $table->bigInteger('reversal_approved_by')->default(0)->nullable();
-            $table->integer('remaining_leave');
+            $table->integer('remaining_leave')->nullable();
             $table->string('remark')->nullable();
             $table->string('status_remarks')->nullable();
             $table->string('status')->default('pending');
