@@ -35,7 +35,7 @@ class EmployeeTransferControler extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        $all_users = Employee::get();
+        $all_users = Employee::getActiveEmp()->get();
         $department = Department::getDepartment()->get();
         $branch = Branch::getBranch()->get();
         // dd($all_users);
@@ -108,7 +108,7 @@ class EmployeeTransferControler extends Controller
     public function edit(string $id)
     {
         $item = EmployeeTransfer::find($id);
-        $all_users = Employee::get();
+        $all_users = Employee::getActiveEmp()->get();
         $department = Department::getDepartment()->get();
         $branch = Branch::getBranch()->get();
         return view('admin.employees_transfer.edit', ['item'=>$item,'all_users'=>$all_users,'department'=>$department,'branch'=>$branch, 'page' => $this->page_name]);

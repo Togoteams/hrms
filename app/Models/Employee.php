@@ -85,9 +85,8 @@ class Employee extends Model
 
     public function scopeGetActiveEmp($query)
     {
-        $userAuth = auth()->user();
-        if($userAuth->hasRole(''))
-        return $query
-        ->where('status', 'active');
+        // $userAuth = auth()->user();
+        // if($userAuth->hasRole(''))
+        return $query->where('status', 'active');
     }
 }

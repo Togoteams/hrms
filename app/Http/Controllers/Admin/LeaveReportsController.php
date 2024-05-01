@@ -54,7 +54,7 @@ class LeaveReportsController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        $all_users = Employee::where('status', 'active')->get();
+        $all_users = Employee::getActiveEmp()->get();
         if (isemplooye()) {
             $leave_type = LeaveType::where('status', 'active')->where('leave_for', Employee::where('user_id', Auth::user()->id)->first()->employment_type ?? '')->get();
         } else {

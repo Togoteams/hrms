@@ -62,9 +62,9 @@ class PayrollSalaryController extends Controller
     public function create($user_id = null)
     {
         if ($user_id != null) {
-            $all_users = Employee::where('status', 'active')->where('id', $user_id)->get();
+            $all_users = Employee::getActiveEmp()->where('id', $user_id)->get();
         } else {
-            $all_users = Employee::where('status', 'active')->get();
+            $all_users = Employee::getActiveEmp()->get();
         }
         $page = $this->page_name;
         return view('admin.payroll.salary.create', ['page' => $this->page_name, 'all_users' => $all_users]);
@@ -157,7 +157,7 @@ class PayrollSalaryController extends Controller
      */
     public function show(string $id)
     {
-        $all_users = Employee::get();
+        $all_users = Employee::getActiveEmp()->get();
         $loans = Loans::where('status', 'active')->get();
         $data = PayrollSalary::find($id);
 

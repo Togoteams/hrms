@@ -37,9 +37,6 @@
             "name": "View Employees","module": "Employees", "permissions_for":"admin,branch_supervisor,hr_head,chief_manager"
         },
         {
-            "name": "Delete Employees","module": "Employees", "permissions_for":"admin,hr_head"
-        },
-        {
             "name": "Change Employees Status ","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {

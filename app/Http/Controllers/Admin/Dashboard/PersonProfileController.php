@@ -89,7 +89,7 @@ class PersonProfileController extends BaseController
 
     public function viewPlaceOfDomicile()
     {
-        $data = Employee::where('user_id', Auth::user()->id)->get();
+        $data = Employee::getActiveEmp()->where('user_id', Auth::user()->id)->get();
         return view('admin.dashboard.person-profile.place-of-domicile', ['data' => $data[0]]);
     }
 

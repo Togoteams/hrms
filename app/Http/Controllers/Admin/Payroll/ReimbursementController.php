@@ -140,7 +140,7 @@ class ReimbursementController extends BaseController
     public function show(string $id)
     {
         $data = Reimbursement::find($id);
-        $employee = Employee::where('status','active')->where('employment_type','local')->get();
+        $employee = Employee::getActiveEmp()->where('employment_type','local')->get();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
 

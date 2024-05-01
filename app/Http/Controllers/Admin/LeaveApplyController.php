@@ -68,7 +68,7 @@ class LeaveApplyController extends BaseController
         $all_users = Employee::getActiveEmp()->get();
         $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'branch-supervisor'];
 
-        $approvalAuthority = Employee::whereHas('user.roles', function ($q) use ($allowedRoles) {
+        $approvalAuthority = Employee::getActiveEmp()->whereHas('user.roles', function ($q) use ($allowedRoles) {
             $q->whereIn('slug', $allowedRoles);
         })->get();
         // return $leave_type;
@@ -259,7 +259,7 @@ class LeaveApplyController extends BaseController
 
         $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'branch-supervisor'];
 
-        $approvalAuthority = Employee::whereHas('user.roles', function ($q) use ($allowedRoles) {
+        $approvalAuthority = Employee::getActiveEmp()->whereHas('user.roles', function ($q) use ($allowedRoles) {
             $q->whereIn('slug', $allowedRoles);
         })->get();
         $data = LeaveApply::find($id);
@@ -492,7 +492,7 @@ class LeaveApplyController extends BaseController
         {
             return response()->json(['status' => false, 'data' => []]);
         }
-        $approvalAuthority = Employee::with('user')->whereHas('user.roles', function ($q) use ($allowedRoles) {
+        $approvalAuthority = Employee::getActiveEmp()->with('user')->whereHas('user.roles', function ($q) use ($allowedRoles) {
             $q->whereIn('slug', $allowedRoles);
         })->whereNotIn('user_id', [$user_id])->get();
         // return $leave_type;
@@ -552,7 +552,7 @@ class LeaveApplyController extends BaseController
                 ->make(true);
         }
         $leave_type = LeaveSetting::get();
-        $all_users = Employee::where('status', 'active')->get();
+        $all_users = Employee::getActiveEmp()->get();
         return view('admin.leave_apply.leave_balance_history', ['page' => 'Balance Reports', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
 
@@ -582,7 +582,7 @@ class LeaveApplyController extends BaseController
                 ->make(true);
         }
         $leave_type = LeaveSetting::get();
-        $all_users = Employee::where('status', 'active')->get();
+        $all_users = Employee::getActiveEmp()->get();
         return view('admin.leave_apply.leave_request_history', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
 
@@ -611,7 +611,7 @@ class LeaveApplyController extends BaseController
                 ->make(true);
         }
         $leave_type = LeaveSetting::get();
-        $all_users = Employee::where('status', 'active')->get();
+        $all_users = Employee::getActiveEmp()->get();
         return view('admin.leave_apply.leave_request_rejected', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
     public function reverseLeaveWithoutPay(Request $request)

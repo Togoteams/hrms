@@ -197,12 +197,12 @@ class EmployeeController extends BaseController
 
         $branch = Branch::getBranch()->get();
         $allowedRoles = ['managing-director','chief-manager-ho','branch-head'];
-        $reportingAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
+        $reportingAuthority = Employee::getActiveEmp()->whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
         })->whereNotIn('user_id',[$employee->user_id])->get();
 
         $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
-        $reviewAuthority = Employee::whereHas('user.roles',function($q)use ($allowedRoles){
+        $reviewAuthority = Employee::getActiveEmp()->whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
         })->whereNotIn('user_id',[$employee->user_id])->get();
 
