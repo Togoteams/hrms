@@ -15,19 +15,19 @@
                     <span class="name-title">Personal Information</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.personal-information.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xxl-9 col-xl-8 border border-1 border-color rounded  mx-3">
+                            <div class="mx-3 border rounded col-xxl-9 col-xl-8 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
 
-                                    <div class=" ">
+                                    <div class="">
                                         <div class="container mt-2 mb-2 ms-1">
                                             <div class="row">
-                                                <div class="col-md-10 py-4">
+                                                <div class="py-4 col-md-10">
                                                     @if (!empty($data))
                                                         <div class="row left-div text-dark">
                                                             <div class="col-2 fw-semibold">City</div>
@@ -90,13 +90,13 @@
                                     <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                     <input type="hidden" id="id" name="id" value="{{ $data->id ?? '' }}">
                                     <div class="row">
-                                        <div class="col-md-12 mb-2">
+                                        <div class="mb-2 col-md-12">
                                             <div class="form-group">
                                                 <label for="address">Address<small class="required-field">*</small></label>
                                                 <textarea required id="address" placeholder="Enter Address" name="address" class="form-control">{{ $data ? $data->address : '' }}</textarea>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="zip">Zip<small class="required-field">*</small></label>
                                                 <input required id="zip" placeholder="Enter Name of Zip"
@@ -107,7 +107,7 @@
                                                     value="{{ $data ? $data->zip : '' }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="city">City<small class="required-field">*</small></label>
                                                 <input required id="city" placeholder="Enter Name of City"
@@ -115,7 +115,7 @@
                                                     value="{{ $data ? $data->city : '' }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="state">State<small class="required-field">*</small></label>
                                                 <input required id="state" placeholder="Enter Name of State"
@@ -123,7 +123,7 @@
                                                     value="{{ $data ? $data->state : '' }}">
                                             </div>
                                         </div>
-                                        <div class="col-md-6 mb-2">
+                                        <div class="mb-2 col-md-6">
                                             <div class="form-group">
                                                 <label for="country">Country<small class="required-field">*</small></label>
                                                 <select name="country" id="country" class="form-control" required>

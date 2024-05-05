@@ -94,7 +94,7 @@
                             </div>
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
-                                    <label for="doc">Required Document</label>
+                                    <label for="doc">Document</label>
                                     <input accept="application/pdf" id="doc"
                                         placeholder="Enter correct Document   " type="file" name="doc1"
                                         class="form-control form-control-sm ">

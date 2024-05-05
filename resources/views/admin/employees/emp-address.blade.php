@@ -55,9 +55,7 @@
                                                                     </div>
                                                                     <div class="col-3">{{ ucfirst($empAddress->post_box) }}
                                                                     </div>
-                                                                    <div class="col-3 fw-semibold">Address</div>
-                                                                    <div class="col-9">{{ ucfirst($empAddress->address) }}
-                                                                    </div>
+                                                                   
                                                                     <div class="col-3 fw-semibold">State</div>
                                                                     <div class="col-3">{{ ucfirst($empAddress->state) }}
                                                                     </div>
@@ -66,7 +64,9 @@
                                                                     <div class="col-3">
                                                                         {{ $empAddress->country }}
                                                                     </div>
-
+                                                                    <div class="col-3 fw-semibold">Address</div>
+                                                                    <div class="col-9">{{ ucfirst($empAddress->address) }}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 text-end">
@@ -148,13 +148,7 @@
                                                     name="post_box" class="form-control form-control-sm" value="">
                                             </div>
                                         </div>
-                                        <div class="mb-2 col-sm-12">
-                                            <div class="form-group">
-                                                <label for="address">address<small
-                                                        class="required-field">*</small></label>
-                                                <textarea id="address" placeholder="Enter Address" name="address" class="form-control form-control-sm"></textarea>
-                                            </div>
-                                        </div>
+                                       
                                         <div class="mb-2 col-sm-6">
                                             <div class="form-group">
                                                 <label for="city">City<small class="required-field">*</small></label>
@@ -183,6 +177,13 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-2 col-sm-12">
+                                            <div class="form-group">
+                                                <label for="address">address<small
+                                                        class="required-field">*</small></label>
+                                                <textarea id="address" placeholder="Enter Address" name="address" class="form-control form-control-sm"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -214,7 +215,7 @@
         $(document).ready(() => {
             $(document).on("click", "#editButton", (event) => {
                 $('#form_id').trigger("reset");
-                $("#modalTitle").html("Edit: EmpAddress");
+                $("#modalTitle").html("Edit: Emp Address");
                 $("#btnSave").html("UPDATE");
 
                 let id = $(event.currentTarget).data("id");

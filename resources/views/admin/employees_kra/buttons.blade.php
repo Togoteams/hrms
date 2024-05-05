@@ -2,15 +2,15 @@
 
     @can('print-employee-kra')
     <a target="_blank" href="{{ route('admin.employee-kra.print', $item->user_id) }}"
-        class="btn btn-success text-white btn-sm"><i class="fas fa-print"></i></a>
+        class="text-white btn btn-success btn-sm"><i class="fas fa-print"></i></a>
     @endcan
 
-    @can('view-employee-kra')
+    {{-- @can('view-employee-kra')
     <button type="button" onclick="editForm('{{ route('admin.' . $route . '.show', $item->id) }}', 'show')"
         href="#" data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i
             class="fas fa-eye"></i>
     </button>
-    @endcan
+    @endcan --}}
 
     @can('edit-employee-kra')
     <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')" href="#"
