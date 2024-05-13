@@ -8,12 +8,12 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-end">
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <div class="mb-2 col-sm mb-sm-0">
                             <h1 class="page-header-title">Allow Permission of ({{$roleData->name}})</h1>
                         </div>
                     </div>
-                    <div class="text-right col-md-6">
+                    <div class="text-right col-md-2">
                         <a class="align-right btn btn-white g-popup" href="{{route('admin.role.list')}}">
                             <i class="bi bi-backspace me-1"></i> Back
                         </a>

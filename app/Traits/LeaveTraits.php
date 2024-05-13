@@ -2,8 +2,10 @@
 
 namespace App\Traits;
 
+use App\Models\EmpCurrentLeave;
 use App\Models\Employee;
 use App\Models\LeaveApply;
+use Illuminate\Support\Carbon;
 use App\Models\LeaveEncashment;
 use App\Models\LeaveSetting;
 use App\Models\LeaveDate;
@@ -28,6 +30,8 @@ trait LeaveTraits
     }
     return $totalNoOfLeaveInBucket;
   }
+
+
   // Get total leave apply by user id for per leave type
   public function balance_leave_by_type($leave_type_id, $user_id = '', $action = "")
   {

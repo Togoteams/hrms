@@ -9,14 +9,17 @@ use App\Models\Employee;
 use App\Models\LeaveSetting;
 use Exception;
 use Illuminate\Http\Request;
+use App\Traits\GolobalTraits;
 
 class CurrentLeaveController extends BaseController
 {
     public $page_name = "Employees";
+    use GolobalTraits;
 
     public function viewCurrentLeaves($eid = null)
     {
         $employee = getEmployee($eid);
+        // $result = $this->updateCurrentLeaveOfEachEmployee();
         $leaves = CurrentLeave::where('user_id', $employee->user_id)->first();
         $empLeaveTypes = LeaveSetting::where('emp_type',getEmpType($employee->employment_type))->where('salary_deduction_per','<>',100)->get(['id','name','slug']);
         // return $empLeaveType;
@@ -62,7 +65,10 @@ class CurrentLeaveController extends BaseController
                     $saveData[$key]['employee_type'] = $request->employee_type;
                     $saveData[$key]['leave_type_id'] = $value['leave_type_id'];
                     $saveData[$key]['leave_count'] = $value['leave_count'];
+                    $saveData[$key]['leave_count_decimal'] = $value['leave_count'];
                     $saveData[$key]['created_by'] = auth()->user()->id;
+                    $saveData[$key]['updated_at'] = date('Y-m-d H:i:s');
+                    $saveData[$key]['created_at'] = date('Y-m-d H:i:s');
                     $saveData[$key]['updated_by'] = auth()->user()->id;
             }
             $empCurrentLeave = EmpCurrentLeave::insert($saveData);

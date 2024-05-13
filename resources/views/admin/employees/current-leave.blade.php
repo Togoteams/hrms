@@ -35,7 +35,7 @@
                                         <div class="p-3 pb-4 row text-dark">
                                             @foreach ($empLeaveTypes as $key=>  $empLeaveType)
                                                 <div class="pt-3 col-2 fw-semibold">
-                                                    <label for="{{$empLeaveType->slug}}">{{$empLeaveType->name}}<small
+                                                    <label for="{{$empLeaveType->slug}}">{{$empLeaveType->name}} <small
                                                             class="required-field">*</small></label>
                                                 </div>
                                                 <input type="hidden" name="emp_leave_component[{{$key}}][leave_type_id]"

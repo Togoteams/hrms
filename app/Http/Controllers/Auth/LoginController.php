@@ -34,7 +34,7 @@ class LoginController extends Controller
                         ])->onlyInput('email');
                     }
                 } else {
-                    if ($user->employee->status == 'active') { // For checking employee's status is active or not
+                    if ($user?->employee?->status == 'active') { // For checking employee's status is active or not
                         if (Auth::attempt($credentials)) {
                             $request->session()->regenerate();
                             return redirect()->intended('admin/dashboard');

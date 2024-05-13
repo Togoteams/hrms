@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('employee_type')->nullable();
             $table->integer('leave_type_id')->nullable();          // For Both
             $table->integer('leave_count')->nullable();
+            $table->double('leave_count_decimal')->nullable();
+            $table->double('leave_rounded_value')->default(0)->nullable();
             $table->string('status')->nullable()->default('active');
             $table->timestamps();
             $table->bigInteger('created_by')->nullable();
