@@ -72,7 +72,7 @@
             $("#education_allowance_for_ind_in_pula").val(educationAllowanceAmountInPula);
             totalEarning = parseFloat(basicAmount + emp13ChequeAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount).toFixed(3);
-            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+getValue('salary_advance') +get('mortgage_loan')+ getValue('car_loan') + getValue('personal_loan') +  getValue('recovery_for_car')).toFixed(3);
+            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('salary_advance') + getValue('mortgage_loan') + getValue('car_loan') + getValue('personal_loan') +  getValue('recovery_for_car')).toFixed(3);
             console.log(Number(totalDeduction));
         }
         var leaveEncashAmount = parseFloat(getValue("leave_encashment_amount"));
