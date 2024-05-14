@@ -105,6 +105,7 @@ class LeaveApplyController extends BaseController
         } else {
             $user = Auth::user();
         }
+        $request->merge(['user_id'=>$user->id]);
         $leaveType = LeaveSetting::find($request->leave_type_id);
         $leaveSlug = $leaveType?->slug;
         $employee = Employee::where('user_id', $user->id)->first();
