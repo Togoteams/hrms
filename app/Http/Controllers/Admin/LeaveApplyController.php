@@ -506,7 +506,8 @@ class LeaveApplyController extends BaseController
     public function get_balance_leave(Request $request)
     {
         $remaining_leave = 0;
-        $remaining_leave = EmpCurrentLeave::where('user_id', $request->user_id)->where('leave_type_id', $request->leave_type_id)->value('leave_count') ?? 0;
+        $userId = $request->user_id ?? auth()->user()->id;
+        $remaining_leave = EmpCurrentLeave::where('user_id', $userId)->where('leave_type_id', $request->leave_type_id)->value('leave_count') ?? 0;
         $leave_type = LeaveSetting::find($request->leave_type_id);
         $leave_type_slug = $leave_type->slug;
         $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
