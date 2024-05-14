@@ -410,7 +410,7 @@ $(document).ready(function (e) {
             if (result.isConfirmed) {
                 $.ajax({
                     type: "get",
-                    url: baseUrl + "admin/ajax/delete",
+                    url: baseUrl + "admin/ajax/delete" ?? actionUrl,
                     data: { uuid: uuid, find: find },
                     cache: false,
                     dataType: "json",

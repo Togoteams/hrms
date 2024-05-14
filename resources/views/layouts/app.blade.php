@@ -2,6 +2,7 @@
 <html lang="en">
 
 @include('layouts.partials.header')
+
 <style>
     .pointer {
         cursor: pointer;
@@ -33,6 +34,7 @@
 </style>
 
 @stack('styles')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
 
 <body class="has-navbar-vertical-aside navbar-vertical-aside-show-xl footer-offset">
 
@@ -64,6 +66,8 @@
     <script src="{{ asset('assets/js/admin/common.js') }}"></script>
     <!-- End Style Switcher JS -->
     <script src="{{ asset('assets/js/method.js') }}"></script>
+
+   
     <script>
          $(document).ready(function() {
             $('.number-input').on('input', function() {
@@ -75,6 +79,12 @@
         });
     </script>
     @stack('custom-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
     @if (session()->get('success') != '')
     <script>
         $(document).ready(function() {

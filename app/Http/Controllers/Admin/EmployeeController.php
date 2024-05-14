@@ -52,7 +52,7 @@ class EmployeeController extends BaseController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Employee::with('user')->select('*');
+            $data = Employee::with('user')->getList()->select('*');
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -73,10 +73,18 @@ class EmployeeController extends BaseController
 
     public function viewUserDetails($eid = null)
     {
-        $roles = Role::getRoles()->where('status','active')->get();
+        $employee = $this->getEmployee($eid);
+        // if($employee->user())
+        if(!empty($eid))
+        {
+            $roles = Role::getRoles()->where('status','active')->get();
+        }else
+        {
+            $roles = Role::getRoles()->excludeRoles()->where('status','active')->get();
+        }
         $countries = Country::getCountry()->get();
         $branch = Branch::getBranch()->get();
-        return view('admin.employees.user-details', ['employee' => $this->getEmployee($eid), 'branch'=> $branch,'roles'=>$roles,'countries'=>$countries]);
+        return view('admin.employees.user-details', ['employee' =>$employee , 'branch'=> $branch,'roles'=>$roles,'countries'=>$countries]);
     }
     public function getBranchWiseRole(Request $request)
     {

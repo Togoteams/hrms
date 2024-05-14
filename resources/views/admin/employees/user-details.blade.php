@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <select id="branch_id" name="branch_id"
-                                                    class="form-control form-control-sm">
+                                                    class="form-control select2 form-control-sm">
                                                     <option selected disabled> - Select Branch - </option>
                                                     @foreach ($branch as $br)
                                                         <option
@@ -70,7 +70,7 @@
                                             </div>
                                             <div class="pt-2 col-3">
                                                 <select id="role_id" placeholder="Select role" name="role_id"
-                                                    class="form-control form-control-sm">
+                                                    class="form-control select2 form-control-sm">
                                                     <option selected disabled> - Select role - </option>
 
                                                     @foreach ($roles as $key => $value)

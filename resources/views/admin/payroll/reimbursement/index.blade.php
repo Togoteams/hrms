@@ -241,9 +241,9 @@
                                 <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
                                     name="reimbursement_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select Currency - </option>
-                                    @foreach ($currencies  as  $currency)
-                                    <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
-                                @endforeach
+                                    <option value="usd">$ </option>
+                                    <option value="pula">P </option>
+                               
 
                                 </select>
                             </div>

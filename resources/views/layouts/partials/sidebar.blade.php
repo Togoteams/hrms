@@ -118,11 +118,11 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
                                              href="{{ route('admin.employees.index') }}">Employees</a>
                                      @endcanany
-                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
-                                        href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
+                                    
                                      @canany(['add-employees-transfer', 'edit-employees-transfer',
                                          'view-employees-transfer', 'delete-employees-transfer'])
-                                         
+                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
+                                            href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
                                      @endcanany
                                      @canany(['add-department', 'edit-department', 'view-department', 'delete-department'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.department.index' ? 'active' : '' }} "
@@ -414,10 +414,10 @@
                                  @endcanany
                                  <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.index' ? 'active' : '' }}  "
                                      href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a>
-                                 @canany(['salary-setting'])
+                                 {{-- @canany(['salary-setting'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary_setting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary_setting.index') }}">Salary Setting</a>
-                                 @endcanany
+                                 @endcanany --}}
 
                              </div>
                          </div>

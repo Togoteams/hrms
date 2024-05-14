@@ -82,11 +82,23 @@ class Employee extends Model
     public function branch(){
         return $this->belongsTo(Branch::class);
     }
+    public function scopeGetList($query)
+    {
+        if(auth()->user()->role_slug=='branch-head')
+        {
+            $query->where('branch_id', auth()->user()->employee->branch_id)->whereHas('user.usersRoles',function($q){
+                $q->where('role_id','!=','1');
+            });
+        }
+        return $query;
+    }
 
     public function scopeGetActiveEmp($query)
     {
-        // $userAuth = auth()->user();
-        // if($userAuth->hasRole(''))
+        if(auth()->user()->role_slug=='branch-head')
+        {
+            $query->where('branch_id', auth()->user()->employee->branch_id);
+        }
         return $query->where('status', 'active');
     }
 }

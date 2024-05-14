@@ -8,9 +8,9 @@
         <meta name="viewport" content="width=device-width" />
         <meta charset="UTF-8">
         <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
-
+{{-- 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> --}}
         <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet" />
@@ -24,7 +24,12 @@
                 color: #3f3f3f;
                 font-size: 14px;
             }
-
+            thead, tbody, tfoot, tr, td, th
+            {
+                border-color: inherit !important;
+                border-style:none !important;
+                font-size: 12px !important;
+            }
 
             page {
                 background: #fff;
@@ -76,7 +81,6 @@
             .payslipcard th {
                 font-weight: 800;
                 color: #000;
-                background: #f2f0f8;
                 text-align: left;
             }
 
@@ -118,28 +122,12 @@
             }
 
             .page-layout {
-                width: 210mm;
                 height: 297mm;
                 background: #fff;
                 padding: 25px;
             }
 
-            button {
-                background-color: black;
-                width: 245px;
-                border: none;
-                outline: 0;
-                color: #fff;
-                font-family: 'Public Sans';
-                font-size: 16px;
-                font-weight: bold;
-                padding: 8px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                margin: 0px 550px;
-                cursor: pointer;
-            }
+            
 
             @media print {
 
@@ -149,14 +137,7 @@
                 }
             }
 
-            #button {
-                width: 210mm;
-                height: 40px;
-                position: fixed;
-                z-index: 10;
-                background: #bae2ff;
-                top: 0px;
-            }
+           
         </style>
     </head>
 
@@ -258,9 +239,34 @@
                                             $noOfIncome = 0;
                                             $totalIncomeAmount = $data->basic;
                                         @endphp
-                                        <tr>
+                                     
+                                        @php
+                                            $noOfIncome=0;
+                                            $noOfDeduction=0;
+                                            foreach($data['payrollSalaryHead'] as $key => $value)
+                                            {
+                                                if ($value->payroll_head->head_type == 'income')
+                                                {  
+                                                    $noOfIncome++;
+                                                }
+                                                if ($value->payroll_head->head_type == 'deduction')
+                                                {
+                                                    $noOfDeduction++;
+                                                }
+                                            }
+                                            $extraIncomes = 0;
+                                            $extraDeduction = 0;
+                                            if($noOfIncome > $noOfDeduction)
+                                            {
+                                                $extraDeduction =  $noOfIncome -  $noOfDeduction;
+                                            }else {
+                                                # code...
+                                                $extraIncomes =  $noOfDeduction -  $noOfIncome;
+                                            }
+                                        @endphp
+                                           <tr>
                                             <td style="font-weight: 600;"><strong>Basic</strong></td>
-                                            <td style="text-align: right;">{{ $data->basic }}</td>
+                                            <td style="text-align: right;">{{ $data->basic }} </td>
                                         </tr>
                                         @foreach ($data['payrollSalaryHead'] as $key => $value)
                                             @if ($value->payroll_head->head_type == 'income')
@@ -276,6 +282,14 @@
                                                 </tr>
                                             @endif
                                         @endforeach
+                                        @for ($j = 0; $j < $extraIncomes-1; $j++)
+                                        <tr>
+                                            <td style="font-weight: 600;">
+                                                <strong>&nbsp; &nbsp;</strong>
+                                            </td>
+                                            <td style="text-align: right;">&nbsp; &nbsp;</td>
+                                        </tr>
+                                        @endfor
                                         <tr>
                                             <th style="font-weight: 600;"><strong>Gross Earning</strong></th>
                                             <!-- <th style="text-align: right;">{{ $totalIncomeAmount }}</th> -->
@@ -309,6 +323,14 @@
                                             </tr>
                                         @endif
                                     @endforeach
+                                    @for ($i = 0; $i < $extraDeduction; $i++)
+                                        <tr>
+                                            <td style="font-weight: 600;">
+                                                <strong> &nbsp; &nbsp;</strong>
+                                            </td>
+                                            <td style="text-align: right;">&nbsp; &nbsp;</td>
+                                        </tr>
+                                    @endfor
 
                                     <tr>
                                         <th style="font-weight: 600;">Total Deduction

@@ -1,0 +1,215 @@
+<style type="text/css">
+    html {
+        font-family: Calibri, Arial, Helvetica, sans-serif;
+        font-size: 11pt;
+        background-color: white
+    }
+
+    a.comment-indicator:hover+div.comment {
+        background: #ffd;
+        position: absolute;
+        display: block;
+        border: 1px solid black;
+        padding: 0.5em
+    }
+
+    a.comment-indicator {
+        background: red;
+        display: inline-block;
+        border: 1px solid black;
+        width: 0.5em;
+        height: 0.5em
+    }
+
+    div.comment {
+        display: none
+    }
+
+    table {
+        border-collapse: collapse;
+        padding: 2px;
+    }
+
+    table td {
+        padding: 1px
+    }
+
+    .company-name {
+        font-size: 20px;
+        font-weight: 900;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    .salary-slip-heading {
+        font-size: 16px;
+        font-weight: 900;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+    }
+</style>
+@foreach ($salaries as $salary )
+</br>
+</br>
+</br>
+</br>
+<table border="1" width="100%" cellpadding="0" cellspacing="0" id="sheet0" class="sheet0 gridlines">
+
+    <tbody>
+        <tr class="row0">
+            <td class="column0 style1 s style3 company-name" colspan="6"> {{ $salary?->company->name }}</td>
+        </tr>
+        <tr class="row1">
+            <td class="column0 style4 s style6 salary-slip-heading" colspan="6">Pay Slip for the Month of
+                {{ date('M Y', strtotime($salary->Year . '-' . $salary->Month . '-01')) }}</td>
+
+        </tr>
+        <tr class="row2">
+            <td class="column0 style9 s style10">Name</td>
+            <td class="column2 style11 ">{{ $salary->employee->EmpName }}</td>
+
+            <td class="column7 style13 s style10">Days of Worked</td>
+            <td class="column9 style11 n">{{ $salary->DaysPresent }}</td>
+            <td class="column12 style11 s">Balance</td>
+            <td class="column9 style11 n">0</td>
+        </tr>
+        <tr class="row3">
+            <td class="column0 style15 s style16">Card No.</td>
+            <td class="column2 style17 s">{{ $salary->employee->member_id }}</td>
+
+            <td class="column7 style19 s style16">Days of layOff</td>
+            <td class="column2 style17 s"></td>
+            <td class="column11 style17 s">E.L.</td>
+            <td class="column12 style17 n">{{ $salary->CL }}</td>
+        </tr>
+        <tr class="row4">
+            <td class="column0 style15 s style16">Basic (Rs.)</td>
+            <td class="column2 style17 n">{{ $salary->BasicAmt }}</td>
+
+            <td class="column7 style19 s style16">F. Holiday</td>
+            <td class="column2 style17 n"></td>
+            <td class="column11 style17 s">C.L.</td>
+            <td class="column12 style17 n">{{ $salary->CL }}</td>
+        </tr>
+        <tr class="row5">
+            <td class="column0 style15 s style16">VDA (Rs)</td>
+            <td class="column12 style17 n"></td>
+
+            <td class="column7 style19 s style16">Extr.Day Gross</td>
+            <td class="column12 style17 n"></td>
+            <td class="column11 style17 s">Total Days</td>
+            <td class="column12 style17 n">{{ $salary->TotalDays }}</td>
+        </tr>
+
+        <tr class="row7">
+            <td class="column0 style24 s style26" colspan="2"><strong>Earning</strong> </td>
+            <td class="column7 style24 s style26" colspan="4"><strong>Deduction</strong></td>
+        </tr>
+        <tr class="row8">
+            <td class="column0 style15 s style16">Wages/Salary</td>
+            <td class="column3 style17 n">{{ $salary->BasicEarn }}</td>
+            <td class="column7 style15 s style16">PF</td>
+            <td class="column10 style17 n">{{ $salary->PFamount }}</td>
+            <td class="column11 style18 null"></td>
+            <td class="column12 style18 null"></td>
+
+        </tr>
+        <tr class="row9">
+            <td class="column0 style27 s">LayOff W/S</td>
+            <td class="column2 style18 null"></td>
+
+            <td class="column7 style27 s">ESIC</td>
+
+            <td class="column10 style17 n">{{ $salary->ESIamount }}</td>
+            <td class="column7 style27 s"></td>
+            <td class="column12 style18 null"></td>
+        </tr>
+        <tr class="row10">
+            <td class="column0 style15 s style16">Performance Bonus</td>
+            <td class="column3 style17 n">{{ $salary->PerformanceBonus }}</td>
+
+            <td class="column7 style28 null style16"></td>
+            <td class="column9 style18 null"></td>
+            <td class="column7 style28 null style16"></td>
+            <td class="column11 style18 null"></td>
+
+        </tr>
+        <tr class="row11">
+            <td class="column0 style15 s style16">House Rent</td>
+            <td class="column3 style17 n">{{ $salary->HRAallowance }}</td>
+
+            <td class="column7 style15 s style16">Adv. Deducted</td>
+            <td class="column10 style17 n">{{ $salary->AdvAmount }}</td>
+            <td class="column11 style18 null"></td>
+            <td class="column12 style18 null"></td>
+        </tr>
+        <tr class="row12">
+            <td class="column0 style29 s style16">Extr.+V.A.+Attre+ Oth</td>
+            <td class="column3 style17 n">{{ $salary->ExtraAmount + $salary->AttierAllowance }}</td>
+
+            <td class="column7 style28 null style16"></td>
+            <td class="column9 style18 null"></td>
+            <td class="column7 style28 null style16"></td>
+            <td class="column11 style18 null"></td>
+
+        </tr>
+        <tr class="row13">
+            <td class="column0 style15 s style16">Vehicle Allowance</td>
+            <td class="column3 style17 n">{{ $salary->VehicleAllownace }}</td>
+
+            <td class="column7 style28 null style16"></td>
+            <td class="column9 style18 null"></td>
+            <td class="column7 style28 null style16"></td>
+            <td class="column11 style18 null"></td>
+
+        </tr>
+        <tr class="row14">
+            <td class="column0 style15 s style16">Special Allow</td>
+            <td class="column3 style17 n">{{ $salary->SpecialAmount }}</td>
+
+            <td class="column7 style28 null style16"></td>
+            <td class="column9 style18 null"></td>
+            <td class="column7 style28 null style16"></td>
+            <td class="column11 style18 null"></td>
+
+        </tr>
+
+        <tr class="row16">
+            <td class="column0 style9 s style10">Gross Amount</td>
+            <td class="column3 style32 n">{{ $salary->GrossEarn }}</td>
+
+            <td class="column7 style33 s">Total Deduction</td>
+            <td class="column10 style32 n">{{ $salary->TotalDeduction }}</td>
+            <td class="column7 style33 s"></td>
+            <td class="column11 style12 null"></td>
+
+        </tr>
+
+        <tr class="row18">
+            <td class="column0 style9 s style10">Net payment Rs.</td>
+            <td class="column3 style32 n">{{ $salary->NetPayment }}</td>
+
+            <td class="column3 style32 n"></td>
+            <td class="column11 style12 null"></td>
+            <td class="column3 style32 n"></td>
+            <td class="column13 style14 null"></td>
+        </tr>
+
+        <tr class="row20">
+            <td class="column0 style34 s style35">ESI No. :</td>
+            <td class="column3 style36 null">{{ $salary->employee->ESICNo }}</td>
+
+            <td class="column7 style37 s style35">UAN No. :</td>
+            <td class="column10 style36 null">{{ $salary->employee->UAN }}</td>
+            <td class="column7 style37 s style35"></td>
+            <td class="column13 style38 null"></td>
+        </tr>
+    </tbody>
+</table>
+</br>
+</br>
+</br>
+@endforeach

@@ -40,6 +40,7 @@ class ReimbursementController extends BaseController
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
+        // return $currencies;
         // Filter currencies to include only 'pula' and 'usd'
         $allowedCurrencies = ['pula', 'usd'];
         $allowedExpenseCurrencies = ['pula'];

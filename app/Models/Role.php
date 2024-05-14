@@ -41,6 +41,16 @@ class Role extends Model
     {
         return $query->whereNotIn('slug',['admin']);
     }
+    public function scopeExcludeRoles($query)
+    {
+        $roleIds = Employee::with('user.roles')->pluck('id')->toArray();
+        // dd($roleIds);
+         if(in_array(1,$roleIds))
+         {
+            $query->whereNotIn('id',[1]);
+         }
+        return $query;
+    }
  
 
     public function permissions() {
