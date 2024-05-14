@@ -87,6 +87,7 @@ class PayrollSalaryController extends Controller
             return $validator->errors();
         } else {
             // try {
+               
             $emp = Employee::where('user_id', $request->user_id)->first();
             $net_take_home_in_pula =  $request->net_take_home;
             $currencyValue = 1;
@@ -435,8 +436,12 @@ class PayrollSalaryController extends Controller
 
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
+        $isSalaryFind = PayrollSalary::where('user_id',$user_id)->where('pay_for_month_year',$salaryMonth)->first();
         if (empty($data)) {
             return response()->json("Pay Scale not defined");
+        }elseif(!empty($isSalaryFind))
+        {
+            return response()->json("Already Salary has Created for ".date("M-Y",strtotime($salaryMonth)));
         }
         $emp_head = PayrollHead::where('employment_type', $emp->employment_type)->orWhere('employment_type', 'both')->where('status', 'active')->where('deleted_at', null)->get();
         // return $emp_head;
