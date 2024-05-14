@@ -37,7 +37,7 @@
                                     <label for="name">Select Employees</label>
                                     <select required onchange="show_user()" id="gender"
                                         placeholder="Enter correct gender   " name="user_id"
-                                        class="form-control form-control-sm ">
+                                        class="form-control form-control-sm select2 ">
                                         <option selected disabled> - Select Employees- </option>
                                         @foreach ($all_users as $au)
                                             <option value="{{ $au->user->id }}">{{ $au->user->name }} -

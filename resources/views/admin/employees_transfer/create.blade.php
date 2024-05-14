@@ -16,7 +16,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="emp_id" class="required">Employee Name</label>
-                                    <select name="emp_id" class="form-control" id="emp_id" placeholder="Employee Name">
+                                    <select name="emp_id" class="form-control select2" id="emp_id" placeholder="Employee Name">
                                         <option value="">Select Option</option>
                                         @foreach ($all_users as $user)
                                         <option value="{{ $user->user->id }}">{{ $user->user->name }}

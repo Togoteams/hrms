@@ -423,7 +423,7 @@ class LeaveApplyController extends BaseController
                     'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
                 ]);
                 $currentLeave = EmpCurrentLeave::where('user_id',$leave_apply->user_id)->where('leave_type_id',$leave_apply->leave_type_id)->first();
-                $currentLeaveCount = $currentLeave->leave_count;
+                $currentLeaveCount = $currentLeave?->leave_count ?? 0;
                 $appliedLeaveCount = $leave_apply->leaveDate()->count();
                 
                 if($currentLeaveCount >=$appliedLeaveCount)

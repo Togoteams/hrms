@@ -16,7 +16,7 @@
                         <div class="mb-2 col-sm-6">
                             <div class="form-group">
                                 <label for="user_id" class="required">Employee Name</label>
-                                <select name="user_id" class="form-control employees" id="user_id" required
+                                <select name="user_id" class="form-control select2 employees" id="user_id" required
                                     placeholder="Employee Name">
                                     <option value="">Select Option</option>
                                     @foreach ($all_users as $user)

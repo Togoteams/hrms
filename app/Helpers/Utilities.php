@@ -886,13 +886,9 @@ function total_remaining_leave($user_id = '')
         // for autheticated user
         $user_id = auth()->user()->id;
     }
-    $totalNoOfLeaveInBucket = 0;
-    $emp = Employee::where('user_id', $user_id)->first();
-
-    $leaveSettings = LeaveSetting::where('emp_type', getEmpType($emp->employment_type))->get();
-    foreach ($leaveSettings as $key => $leaveSetting) {
-        $totalNoOfLeaveInBucket = $totalNoOfLeaveInBucket + balance_leave_by_typeForEmp($leaveSetting->id, $user_id);
-    }
+    $totalNoOfLeaveInBucket = EmpCurrentLeave::where('user_id',$user_id)->value('leave_count');
+   
+   
     return $totalNoOfLeaveInBucket;
 }
 function getAvailableLeaveCount($leave_type_id, $user_id = '', $action = "")

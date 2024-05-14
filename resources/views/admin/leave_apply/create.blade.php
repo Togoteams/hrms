@@ -18,7 +18,7 @@
                                         <label for="user_id">Employee</label>
                                         <select onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
                                              id="user_id" placeholder="Enter correct user_id"
-                                            name="user_id" class="form-control form-control-sm user_id">
+                                            name="user_id" class="form-control select2 form-control-sm user_id">
                                             <option selected disabled value=""> -Select Employee - </option>
                                             @foreach ($all_user as $user)
                                                 <option value="{{ $user->user->id }}"

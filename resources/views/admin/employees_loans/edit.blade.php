@@ -8,7 +8,7 @@
             <div class="form-group">
                 <label for="name">Employees Name</label>
                 <select required id="gender" placeholder="Enter correct gender   " name="user_id"
-                    class="form-control form-control-sm ">
+                    class="form-control form-control-sm select2 ">
                     <option disabled> - Select Employees- </option>
                     @foreach ($all_users as $au)
                         <option {{ $data->user_id == $au->user->id ? 'selected' : '' }} value="{{ $au->user->id }}">
