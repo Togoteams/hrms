@@ -95,7 +95,7 @@
                                                 </div>
                                                 <div class="pt-2 col-4">
                                                     <select id="review_authority" placeholder="Select Authority"
-                                                        name="review_authority" class="form-control form-control-sm">
+                                                        name="review_authority" class="form-control form-control-sm select2">
                                                         <option selected disabled> - Select - </option>
                                                         @foreach ($reviewAuthority as $key => $review)
                                                             <option value="{{ $review->user_id }}"
