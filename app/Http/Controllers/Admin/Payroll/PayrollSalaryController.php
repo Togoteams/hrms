@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Payroll;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Models\PayRollPayscale;
 use Illuminate\Support\Facades\Validator;
@@ -18,11 +17,9 @@ use App\Models\LeaveDate;
 use App\Models\PayrollSalary;
 use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalaryIncrement;
-use App\Models\User;
 use App\Traits\PayrollTraits;
 use App\Models\SalaryHistory;
 use App\Traits\LeaveTraits;
-use App\Models\CurrencySetting;
 use App\Models\LeaveEncashment;
 
 class PayrollSalaryController extends Controller
@@ -62,9 +59,9 @@ class PayrollSalaryController extends Controller
     public function create($user_id = null)
     {
         if ($user_id != null) {
-            $all_users = Employee::getActiveEmp()->where('id', $user_id)->get();
+            $all_users = Employee::getActiveEmp()->whereHas('empPayscale')->where('id', $user_id)->get();
         } else {
-            $all_users = Employee::getActiveEmp()->get();
+            $all_users = Employee::getActiveEmp()->whereHas('empPayscale')->get();
         }
         $page = $this->page_name;
         return view('admin.payroll.salary.create', ['page' => $this->page_name, 'all_users' => $all_users]);
@@ -158,7 +155,7 @@ class PayrollSalaryController extends Controller
      */
     public function show(string $id)
     {
-        $all_users = Employee::getActiveEmp()->get();
+        $all_users = Employee::getActiveEmp()->whereHas('empPayscale')->get();
         $loans = Loans::where('status', 'active')->get();
         $data = PayrollSalary::find($id);
 

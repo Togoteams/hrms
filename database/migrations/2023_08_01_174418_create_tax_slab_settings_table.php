@@ -21,6 +21,8 @@ return new class extends Migration
             $table->double('additional_local_amount');
             $table->text('description');
             $table->string('status')->default('active');
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

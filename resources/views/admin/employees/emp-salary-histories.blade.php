@@ -191,7 +191,7 @@
                                             <div class="form-group">
                                                 <label for="basic_salary">Basic Salary</label>
                                                 <small class="required-field">*</small>
-                                                <input id="basic_salary" placeholder="Enter Basic Salary" type="number"
+                                                <input id="basic_salary" placeholder="Enter Basic Salary" step="0.01" type="number"
                                                     min="{{ $employee->employment_type == 'expatriate' ? '2000' : '1000' }}"
                                                     max="{{ $employee->employment_type == 'expatriate' ? '10000' : '150000' }}"
                                                     name="basic_salary" class="form-control form-control-sm"

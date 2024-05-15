@@ -41,13 +41,13 @@
                                                                 <div class="row text-dark">
                                                                     <div class="col-3 fw-semibold">Address Type</div>
                                                                     <div class="col-3">
-                                                                        {{ ucfirst($empAddress->address_type) }}
+                                                                        {{ ucwords(str_replace('_', ' ', $empAddress->address_type)) }}
                                                                     </div>
 
 
 
                                                                     <div class="col-3 fw-semibold">
-                                                                        @if ($empAddress->post_box == 'postal_address')
+                                                                        @if ($empAddress->address_type == 'postal_address' || $empAddress->address_type == 'permanent')
                                                                             Plot Number
                                                                         @else
                                                                             PO Box

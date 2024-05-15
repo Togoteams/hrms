@@ -9,6 +9,14 @@ label {
 .form-group{
     margin-bottom: 2px;
 }
+.select2-container
+{
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    min-height: calc(1.1em + 1.15rem);
+    margin: 0.2rem 0.1rem 0rem !important;
+}
 .btn-sm{
     padding: 6px  10px!important;
 

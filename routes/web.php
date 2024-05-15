@@ -16,7 +16,6 @@ use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EmplooyeLoansController;
 use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\Admin\EmployeeSalaryController;
 use App\Http\Controllers\Admin\LeaveApplyController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\LeaveController;

@@ -11,7 +11,6 @@ use App\Models\Employee;
 use App\Models\EmploymentHistory;
 use App\Models\EmpMedicalCard;
 use App\Models\EmpMedicalInsurance;
-use App\Models\EmpPayscale;
 use App\Models\MedicalCard;
 use App\Models\PayRollPayscale;
 use App\Models\PayrollSalaryHead;

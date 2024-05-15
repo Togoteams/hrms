@@ -49,12 +49,17 @@ class Employee extends Model
     {
         return $this->hasMany(EmpAddress::class, 'user_id');
     }
+    public function empPayscale()
+    {
+        return $this->hasMany(PayRollPayscale::class, 'employee_id');
+    }
 
 
     public function passportOmang()
     {
         return $this->belongsTo(EmpPassportOmang::class, 'user_id', 'user_id');
     }
+
 
     public function medicalBomaid()
     {

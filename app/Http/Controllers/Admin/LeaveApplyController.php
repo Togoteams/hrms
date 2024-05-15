@@ -425,17 +425,19 @@ class LeaveApplyController extends BaseController
                 $currentLeave = EmpCurrentLeave::where('user_id',$leave_apply->user_id)->where('leave_type_id',$leave_apply->leave_type_id)->first();
                 $currentLeaveCount = $currentLeave?->leave_count ?? 0;
                 $appliedLeaveCount = $leave_apply->leaveDate()->count();
-                
-                if($currentLeaveCount >=$appliedLeaveCount)
+                if(!empty($currentLeave))
                 {
-                    $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
-
-                    $currentLeave->update(['leave_count'=>$remaining_leave]);
-                }else
-                {
-                    return response()->json([
-                        'error' => "Leave Approval Failed: Insufficient Leave Balance. You currently have ".$currentLeaveCount." leave remaining."
-                    ]);      
+                    if($currentLeaveCount >=$appliedLeaveCount)
+                    {
+                        $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
+    
+                        $currentLeave->update(['leave_count'=>$remaining_leave]);
+                    }else
+                    {
+                        return response()->json([
+                            'error' => "Leave Approval Failed: Insufficient Leave Balance. You currently have ".$currentLeaveCount." leave remaining."
+                        ]);      
+                    }
                 }
                 $this->saveNotification([
                     'reference_id' => $id,

@@ -409,7 +409,7 @@
                         free.</li>
                     <li>3. Promotion will be granted on the weight of both examination. To pass the monthly test is also
                         compulsary.</li> --}}
-                    <li>1. This is computer generated pay slip.</li>
+                    <li>This is computer generated pay slip.</li>
                 </ul>
             </div>
         </page>
