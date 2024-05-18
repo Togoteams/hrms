@@ -179,13 +179,15 @@ class PayrollSalaryController extends Controller
         $salaryStartDate = date("Y-m-d", strtotime("-1 months", strtotime($salaryMonth . "-20")));
         $salaryEndDate = date("Y-m-d", strtotime($salaryMonth . "-20"));
         $user_id = $payscale->user_id;
+        // $holidayFound = true;
         // while($holidayFound!=false)
         // {
-        if (!isHolidayDate($salaryEndDate)) {
-            $holidayFound = false;
-        }
-        $salaryEndDate =  date('Y-m-d', (strtotime('-1 day', strtotime($salaryEndDate))));
+        //     if (!isHolidayDate($salaryEndDate)) {
+        //         $holidayFound = false;
+        //     }
+        //     $salaryEndDate =  date('Y-m-d', (strtotime('-1 day', strtotime($salaryEndDate))));
         // }
+        $salaryEndDate = $this->adjustEndDate($salaryEndDate);
         if (empty($data)) {
             return response()->json("Pay Scale not defined");
         }

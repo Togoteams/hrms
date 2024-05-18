@@ -105,17 +105,21 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
+                            autoWidth: false,
                             ajax: "{{ route('admin.leave_apply.index') }}",
                             columns: [{
                                     data: 'DT_RowIndex',
                                     name: 'DT_RowIndex',
                                     orderable: false,
+                                    width:'8%'
                                     searchable: false
                                 },
                                 {
                                     data: 'user.name',
-                                    name: 'user.name'
-                                }, {
+                                    name: 'user.name',
+                                    width:'8%'
+                                }, 
+                                {
                                     data: 'user.employee.ec_number',
                                     name: 'user.employee.ec_number'
                                 },
