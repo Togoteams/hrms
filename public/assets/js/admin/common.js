@@ -588,6 +588,83 @@ $(document).ready(function (e) {
             },
         });
     });
+    $(".formsubmit").on("sumit", ".getReport", function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        /* console.table($this); */
+        var formActionUrl = $this.prop("action");
+            var fd = $($this).serialize();
+        var $button = $(this).find('button[type="submit"]');
+        var orgButtonHtml = $button.html();
+        $button.prop('disabled', true); // Button Disabled after submission the form
+        $button.html('<span class="spinner-border spinner-border-sm" style="color: #ff5722" role="status" aria-hidden="true"></span><span style="color: #ff5722"> Processing...</span>');
+        // console.log(formActionUrl);
+        let commonOption = {
+            type: "post",
+            url: formActionUrl,
+            data: fd,
+            dataType: "json",
+        };      
+        $.ajax({
+            ...commonOption,
+            beforeSend: function () {},
+            success: function (response) {
+                $button.prop('disabled', false); // Loader Disabled
+                $button.html(orgButtonHtml);
+                if (response.status) {
+                    $("#" + formModal)
+                    .find('.form-section')
+                    .html(response.data.html_view);
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: response.message || "We are facing some technical issue now.",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+            },
+            statusCode: {
+                404: function() {
+                  // Handle 404 error (Not Found)
+                  console.log("404 error - Resource not found");
+                  Swal.fire({
+                        icon: 'error',
+                        title: 'We are facing some technical issue now. Please try again after some time',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                },
+                500: function() {
+                  // Handle 500 error (Internal Server Error)
+                //   console.log("500 error - Internal Server Error");
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'We are facing some technical issue now. Please try again after some time',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                // Add more status codes and corresponding functions as needed
+              },
+            error: function (response) {
+                console.log(response);
+                $button.prop('disabled', false); // Loader Disabled
+                $button.html(orgButtonHtml);
+                let responseJSON = response.responseJSON;
+                $(".err_message").removeClass("d-block").hide();
+                $("form .form-control").removeClass("is-invalid");
+                $.each(responseJSON.errors, function (index, valueMessage) {
+                    $("#" + index).addClass("is-invalid");
+                    $("#" + index).after(
+                        "<p class='d-block text-danger err_message'>" +
+                            valueMessage +
+                            "</p>"
+                    );
+                });
+            }
+        });
+    });
     $(".card-table").on("click", ".viewStatus", function (e) {
         var $this = $(this);
         var uuid = $this.data("uuid");

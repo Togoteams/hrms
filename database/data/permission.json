@@ -491,6 +491,18 @@
             "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
         },
         {
+            "name": "Report","module": "Report", "permissions_for":"admin,chief_manager,hr_head,branch_head"
+        },
+        {
+            "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
+        },
+        {
+            "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
+        },
+        {
+            "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
+        },
+        {
             "name": "Change Status Country","module": "Country", "permissions_for":"admin,chief_manager"
         }
 

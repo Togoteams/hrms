@@ -517,7 +517,21 @@
                              </div>
                          </div>
                      </div> --}}
-
+                     <div id="navbarReportMenu">
+                        <div class="nav-item">
+                            <a class="nav-link dropdown-toggle " href="#report" role="button"
+                                data-bs-toggle="collapse" data-bs-target="#report" aria-expanded="false"
+                                aria-controls="report">
+                                <i class="fa fa-folder nav-icon"></i>
+                                <span class="nav-link-title">Report</span>
+                            </a>
+                            <div id="report" class="nav-collapse collapse {{ show(['salary-report']) }} "
+                                data-bs-parent="#navbarReportMenu">
+                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.salary' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.salary') }}">Salary Report</a>
+                            </div>
+                        </div>
+                     </div>
 
                      <!-- End Collapse -->
                      @canany(['add-account', 'edit-account', 'view-account', 'delete-account', 'change-status-account',

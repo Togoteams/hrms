@@ -54,6 +54,24 @@ class PayrollSalary extends Model
     return $this->hasOne(EmpDepartmentHistory::class,'user_id','user_id');
 
     }
+    public function scopeFilter($q)
+    {
+       
+        // if(!empty(request('company_id')))
+        // {
+        //      $q->where('company_id', request('company_id'));
+        // }
+        if(!empty(request('pay_for_month_year')))
+        {
+             $q->where('pay_for_month_year', request('pay_for_month_year'));
+        }
+        if(!empty(request('user_id')))
+        {
+             $q->where('user_id', request('user_id'));
+        }
+       
+        return $q;
+    }
 
     public function payrollSalaryHead(){
         return $this->hasMany(PayrollSalaryHead::class,'payroll_salary_id');
