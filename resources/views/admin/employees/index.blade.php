@@ -38,6 +38,8 @@
                                 </a>
                                 {{-- </button> --}}
                             @endcan
+                            <button class="btn btn-primary btn-sm " data-bs-toggle="modal" data-action="add"
+                                data-bs-target="#importEmployeeModal">Import</button>
                         </div>
                     </div>
                 </div>
@@ -161,35 +163,54 @@
             {{-- edit form model end  --}}
 
         </div>
+         {{-- Import Employee  --}}
+         <div class="modal" id="importEmployeeModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title">Import Employee <span class="action_name"></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="row">
+                            <form action="{{ route('admin.employees.import') }}" class="formsubmit fileupload"
+                                id="employee_form" method="POST" enctype="multipart/form-data">
+                                @csrf()
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="fileUploadPassbook">Import Excel Sheet <i class="text-danger">*</i></label>
+                                        <input type="file" name="import_employee" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="{{ asset('admin/assets/excel-formate/Hrms-Data-Master-Format.xlsx') }}"
+                                            for="fileUploadPassbook">Download Execel Formate</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12"> 
+                                    <button type="submit" class="btn btn-primary btn-icon-split">
+                                        <span class="text">Import & Proceed</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+    
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+    
 
     </main>
 @endsection
 @push('custom-scripts')
     <script>
-        // $(document).ready(function() {
-        //     //For Creation Time
-        //     $("#contractDiv").hide();
-
-        //     //For Edit Time
-        //     $("#employment_type_edit").val() == "local-contractual" ?
-        //         $("#contractDivEdit").show() && $("#contract_duration_edit").prop("required", true) :
-        //         $("#contractDivEdit").hide() && $("#contract_duration").val("");
-        // });
-
-        // //For Creation Time
-        // $("#employment_type").change(() => {
-        //     $("#employment_type").val() == "local-contractual" ?
-        //         $("#contractDiv").show() && $("#contract_duration").prop("required", true) :
-        //         $("#contractDiv").hide() && $("#contract_duration").val("") &&
-        //         $("#contract_duration").removeAttr("required");
-        // });
-
-        // //For Edit Time
-        // $("#employment_type_edit").change(() => {
-        //     $("#employment_type_edit").val() == "local-contractual" ?
-        //         $("#contractDivEdit").show() :
-        //         $("#contractDivEdit").hide() && $("#contract_duration").val("");
-        // });
+      
 
         function show_hide(input, data, id) {
             if (input.value == data) {

@@ -3,10 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Traits\GolobalTraits;
+use App\Traits\GlobalTraits;
 class MonthlyTask extends Command
 {
-    use GolobalTraits;
+    use GlobalTraits;
     /**
      * The name and signature of the console command.
      *

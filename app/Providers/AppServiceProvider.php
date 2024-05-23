@@ -3,10 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Traits\GolobalTraits;
+use App\Traits\GlobalTraits;
 class AppServiceProvider extends ServiceProvider
 {
-    use GolobalTraits;
+    use GlobalTraits;
     /**
      * Register any application services.
      */

@@ -12,7 +12,7 @@ use App\Models\LeaveDate;
 use App\Models\LeaveTimeApprovel;
 use App\Models\User;
 
-trait GolobalTraits
+trait GlobalTraits
 {
     public function updateCurrentLeaveOfEachEmployee()
     {

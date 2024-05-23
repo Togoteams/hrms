@@ -111,7 +111,7 @@
                                     data: 'DT_RowIndex',
                                     name: 'DT_RowIndex',
                                     orderable: false,
-                                    width:'8%'
+                                    width:'8%',
                                     searchable: false
                                 },
                                 {

@@ -164,6 +164,8 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('/delete', 'delete')->name('delete');
     });
     Route::resource('employees', EmployeeController::class);
+    Route::post('employees/import', [EmployeeController::class, 'importEmployee'])->name('employees.import');
+
     Route::get('employees/list', [EmployeeController::class, 'list'])->name('employees.list');
     Route::get('employees/status/{id}', [EmployeeController::class, 'status'])->name('employees.status');
 

@@ -9,12 +9,12 @@ use App\Models\Employee;
 use App\Models\LeaveSetting;
 use Exception;
 use Illuminate\Http\Request;
-use App\Traits\GolobalTraits;
+use App\Traits\GlobalTraits;
 
 class CurrentLeaveController extends BaseController
 {
     public $page_name = "Employees";
-    use GolobalTraits;
+    use GlobalTraits;
 
     public function viewCurrentLeaves($eid = null)
     {
