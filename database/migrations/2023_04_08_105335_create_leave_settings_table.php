@@ -29,6 +29,7 @@ return new class extends Migration
             $table->boolean('is_count_holyday')->default(0)->comment('1=>yes, 0=>no');
             $table->boolean('is_leave_encash')->default(0)->comment('1=>yes, 0=>no');
             $table->boolean('is_certificate')->default(0)->comment('1=>yes, 0=>no');
+            $table->string('expiry_date_message')->nullable();
             $table->timestamps();
         });
     }

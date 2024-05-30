@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\EmpCurrentLeave;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\PayrollSalary;
 use App\Models\LeaveApply;
+use App\Models\LeaveDate;
+use App\Models\LeaveSetting;
 use App\Models\LeaveType;
+use App\Models\PayrollHead;
 use Exception;
 use Yajra\DataTables\DataTables;
 class ReportController extends Controller
@@ -44,11 +48,40 @@ class ReportController extends Controller
         $from_date = $request->from_date;
         $pay_for_month_year = $request->pay_for_month_year;
         $to_date = $request->to_date;
+        $employee_data="";
+        $leaveReportArr = [];
         $employees = Employee::getList()->get();
+        if($employee_id && $from_date && $to_date)
+        {
+            $employee_data = Employee::find($employee_id);
+            $excludeArray = [];
+            if($employee_data->gender=="male")
+            {
+                $excludeArray = ['maternity-leave'];
+            }
+            $user_id = $employee_data->user_id;
+            $leave_data = LeaveSetting::where('emp_type',getEmpType($employee_data->employment_type))->whereNotIn('slug',$excludeArray)->get();
+            foreach($leave_data as $key => $leave)
+            {
+                $leave_type_id = $leave->id;
+                $leaveReportArr[$key]['leave_type_name'] = $leave->name;
+                $leaveReportArr[$key]['opening_balance'] = 0;
+                $leaveReportArr[$key]['accural'] = 0;
+                $leaveReportArr[$key]['adjustment'] = 0;
+                $leaveReportArr[$key]['leave_availed'] = LeaveDate::where('leave_date',"<=",$from_date)->where('leave_date',">=",$to_date)->whereHas('leaveApply',function($q) use ($user_id,$leave_type_id){
+                    $q->where('user_id',$user_id)->where('leave_type_id',$leave_type_id);
+                })->count();
+                $leaveReportArr[$key]['leave_balance'] = EmpCurrentLeave::where('leave_type_id',$leave_type_id)->where('employee_id',$employee_data->id)->value('leave_count') ?? 0;
+                $leaveReportArr[$key]['expiry_date_message'] = $leave?->expiry_date_message;
+            }
+        }
+       
         return view('admin.reports.leave-report',[
             'employees' => $employees,
             'employee_id' => $employee_id,
             'search_type' => $search_type,
+            'employee_data' => $employee_data,
+            'leaveReportArr' => $leaveReportArr,
             'pay_for_month_year' => $pay_for_month_year,
             'to_date' => $to_date,
             'from_date' => $from_date,
@@ -90,7 +123,14 @@ class ReportController extends Controller
                 $empAnnualPayReport[$key]['month_lable'] = $month['month']['lable'];
             }
         }
-        $employee_data = Employee::find($employee_id);
+        $deductionHead = "";
+        $earningHead = "";
+        if($employee_id)
+        {
+            $employee_data = Employee::find($employee_id);
+            $deductionHead= PayrollHead::whereIn('employment_type',[$employee_data->employment_type,'both'])->where('head_type','deduction')->get();
+            $earningHead = PayrollHead::whereIn('employment_type',[$employee_data->employment_type,'both'])->where('head_type','income')->get();
+        }
         // return $empAnnualPayReport[];
         $to_date = $request->to_date;
         $employees = Employee::getList()->get();
@@ -99,6 +139,8 @@ class ReportController extends Controller
             'employees' => $employees,
             'employee_data' => $employee_data,
             'employee_id' => $employee_id,
+            'deductionHead' => $deductionHead,
+            'earningHead' => $earningHead,
             'search_type' => $search_type,
             'pay_for_month_year' => $pay_for_month_year,
             'to_date' => $to_date,

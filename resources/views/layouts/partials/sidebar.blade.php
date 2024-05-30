@@ -310,10 +310,10 @@
 
                                  @canany(['add-leave-report', 'edit-leave-report', 'delete-leave-report',
                                      'view-leave-report'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
+                                     {{-- <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave_reports.index' ? 'active' : '' }}"
                                          href="{{ route('admin.leave_reports.index') }}" data-placement="left">
                                          <span class="nav-link-title">Leave Reports</span>
-                                     </a>
+                                     </a> --}}
                                  @endcanany
 
                                  @canany(['add-leave-type-approval', 'edit-leave-type-approval',
@@ -527,8 +527,8 @@
                             </a>
                             <div id="report" class="nav-collapse collapse {{ show(['salary-report']) }} "
                                 data-bs-parent="#navbarReportMenu">
-                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.salary' ? 'active' : '' }}  "
-                                        href="{{ route('admin.reports.salary') }}">Salary Report</a>
+                                    {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.salary' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.salary') }}">Salary Report</a> --}}
                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.annual-pay-report' ? 'active' : '' }}  "
                                         href="{{ route('admin.reports.annual-pay-report') }}">Annual Pay Report</a>
                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.annula-tax-deduction' ? 'active' : '' }}  "

@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @push('styles')
+<style>
+    table, th, td {
+  border: 1px solid black;
+}
+</style>
 @endpush
 @section('content')
     <main id="content" role="main" class="main">
@@ -33,7 +38,7 @@
                         <div>
                             <form action="{{ route('admin.reports.leave-report') }}" method="get">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">From Date</label>
                                             </br>
@@ -41,7 +46,7 @@
                                                 value="{{ $from_date }}" id="from_date">
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">To Date</label>
                                             </br>
@@ -56,26 +61,16 @@
                                                 required>
                                                 <option value="">--select--</option>
                                                 @foreach ($employees as $key => $employee)
-                                                    <option value="{{ $employee->user_id }}">{{ $employee?->user?->name }}
+                                                    <option value="{{ $employee->id }}" @if($employee_id==$employee->id) {{'selected'}} @endif>{{ $employee?->user?->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    {{-- <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Report Type</label>
-                                            </br>
-                                            <select name="search_type" id="search_type"  class="form-control select2 form-control-user">
-                                                <option value="">--select--</option>
-                                                <option value="available-leave-report" @if($search_type=="available-leave-report") {{'selected'}} @endif>Avaiable-Leave</option>
-                                                <option value="full-report" @if($search_type=="export-excel") {{'selected'}} @endif>Full Report</option>
-                                            </select>
-                                        </div>
-                                    </div> --}}
+                                    
                                     <div class="col-md-2">
-                                        <div class="mt-2 form-group">
-                                            <button type="submit" class="btn btn-primary btn-icon-split">
+                                        <div class="mt-3 form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary btn-icon-split">
                                                 <span class="text">Search</span>
                                             </button>
                                         </div>
@@ -84,6 +79,60 @@
                                 </div>
                             </form>
                         </div>
+                        @if($employee_id && $from_date && $to_date)
+                        <div class="report-display-section">
+                            <table >
+                                <tr>
+                                    <th colspan="7">
+                                        LEAVE REPORT
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        Name of The Employee : {{$employee_data?->user?->name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        EC No :  {{$employee_data?->ec_number}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        Branch :{{$employee_data?->branch?->name}}
+                                    </td> 
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        Leave report as on {{date("d-m-Y",strtotime($from_date))}} to {{date("d-m-Y",strtotime($to_date))}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    LOCAL EMPLOYEES
+                                </tr>
+                                <tr>
+                                    <td>Leave Type</td>
+                                    <td>Opening Balance</td>
+                                    <td>Accural</td>
+                                    <td>Adjustment</td>
+                                    <td>Leave Availed</td>
+                                    <td>Leave Balance</td>
+                                    <td>Expiry Date</td>
+                                </tr>
+                                @foreach($leaveReportArr as $leave)
+                                <tr>
+                                    <td>{{$leave['leave_type_name']}}</td>
+                                    <td>{{$leave['opening_balance']}}</td>
+                                    <td>{{$leave['accural']}}</td>
+                                    <td>{{$leave['adjustment']}}</td>
+                                    <td>{{$leave['leave_availed']}}</td>
+                                    <td>{{$leave['leave_balance']}}</td>
+                                    <td>{{$leave['expiry_date_message']}}</td>
+                                </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                        @endif
                         
                     </div>
                 </div>

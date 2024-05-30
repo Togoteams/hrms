@@ -69,6 +69,7 @@
                                 </div>
                             </form>
                         </div>
+                        @if($financial_year)
                         <div class="report-display-section">
                             @if ($employees)
                             <table>
@@ -87,7 +88,7 @@
                                     <td> Average</td>
                                     <td> I.Tax</td>
                                     <td> Net payable</td>
-                                    <td> Acount No.</td>
+                                    <td> Account No.</td>
                                     
                                 </tr>
                                 @foreach($emp13ChequeReport as $key => $employe)
@@ -110,7 +111,7 @@
                             @endif
                            
                         </div>
-
+                        @endif
                     </div>
                 </div>
             </div>

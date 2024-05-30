@@ -68,8 +68,8 @@
                                     </div>
                                     
                                     <div class="col-md-2">
-                                        <div class="mt-2 form-group">
-                                            <button type="submit" class="btn btn-primary btn-icon-split">
+                                        <div class="mt-3 form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary btn-icon-split">
                                                 <span class="text">Search</span>
                                             </button>
                                         </div>
@@ -78,6 +78,7 @@
                                 </div>
                             </form>
                         </div>
+                        @if($financial_year && $employee_id)
                         <div class="report-display-section">
                             <table >
                                 <tr>
@@ -101,8 +102,8 @@
                                     </td> 
                                 </tr>
                                 <tr>
-                                    <td colspan="8">Earning</td>
-                                    <td colspan="7">Deduction</td>
+                                    <td colspan="{{count($earningHead)+3}}">Earning</td>
+                                    <td colspan="{{count($deductionHead)+2}}">Deduction</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -111,40 +112,19 @@
                                     <td>
                                         Basic
                                     </td>
+                                    @foreach ($earningHead as  $earning)
                                     <td>
-                                        Bomaid contribution by Bank 50%
+                                        {{$earning->name}}
                                     </td>
-                                    <td>
-                                        Penstion contribution by Bank i.e.
-                                        15% of Basic
-                                    </td>
-                                    <td>
-                                        Other allowance
-                                    </td>
-                                    <td>
-                                        Other Arrears
-                                    </td>
-                                    <td>
-                                        Over time
-                                    </td>
+                                    @endforeach
                                     <td>
                                         Gross Earning
                                     </td>
+                                    @foreach ($deductionHead as  $deduction)
                                     <td>
-                                        Bomain contribution by employee 50%
+                                        {{$deduction->name}}
                                     </td>
-                                    <td>
-                                        Penstion contribution by employee 5%
-                                    </td>
-                                    <td>
-                                        Union Fee
-                                    </td>
-                                    <td>
-                                        TAX
-                                    </td>
-                                    <td>
-                                        Other Deduction
-                                    </td>
+                                    @endforeach
                                     <td>
                                         Total Deduction
                                     </td>
@@ -158,67 +138,43 @@
                                        {{$salary['month_lable']}}
                                     </td>
                                     <td>
-                                       {{$salary['data']?->basic}}
+                                       {{$salary['data']?->basic ?? 0}}
                                     </td>
                                     @if(!empty($salary['data']) && !empty($salary['data']->payrollSalaryHead))
                                         @foreach ($salary['data']->payrollSalaryHead as $key => $value)
-                                            @if ($value->payroll_head->head_type == 'income')
-                                            <td style="text-align: right;">1
-                                                @if ($value->payroll_head->slug == 'bomaid_bank')
-                                                     {{ $value->value }}
-                                                @endif
-                                                @if ($value->payroll_head->slug == 'pension_bank')
-                                                     {{ $value->value }}
-                                                @endif
-                                                 @if ($value->payroll_head->slug == 'allowance')
-                                                    {{ $value->value }}
-                                                @endif
-                                                 @if ($value->payroll_head->slug == 'others_arrears')
-                                                   {{ $value->value }}
-                                                @endif
-                                                 @if ($value->payroll_head->slug == 'over_time')
-                                                     {{ $value->value }}
-                                                @endif
-                                                income
+                                            @if ($value->payroll_head->head_type  == 'income')
+                                            <td style="text-align: right;">  {{ $value->value ?? 0 }}
                                             </td>
                                             @endif
                                         @endforeach
+                                    @else
+                                    @foreach ($earningHead as  $earning)
+                                    <td style="text-align: right;"> 0
+                                    </td>
+                                    @endforeach
+                                    
                                     @endif
                                     <td>
                                         {{$salary['data']?->gross_earning}}
                                     </td>
-                                    <td>
                                         @if(!empty($salary['data']) && !empty($salary['data']->payrollSalaryHead))
-                                        @foreach ($salary['data']->payrollSalaryHead as $key => $value)
-                                            @if ($value->payroll_head->head_type == 'deduction')
-                                            <td style="text-align: right;">ddd
-                                                @if ($value->payroll_head->slug == 'bomaid')
-                                                    {{ $value->value }}
-                                                
-                                                @endif
-                                                @if ($value->payroll_head->slug == 'pension_own')
-                                                    {{ $value->value }}
-                                                
-                                                @endif
-                                                @if ($value->payroll_head->slug == 'union_fee')
-                                                    {{ $value->value }}
-                                                
-                                                @endif
-                                                @if ($value->payroll_head->slug == 'tax')
-                                                    {{ $value->value }}
-                                                
-                                                @endif
-                                                @if ($value->payroll_head->slug == 'other_deductions')
-                                                   {{ $value->value }}</td>
-                                                
-                                                @endif
+                                        @foreach ($salary['data']->payrollSalaryHead as $keyd => $valued)
+                                            @if ($valued->payroll_head->head_type == 'deduction')
+                                            <td style="text-align: right;">  {{ $valued->value ?? 0 }}
                                                 </td>
                                             @endif
                                         @endforeach
-                                    @endif
+                                        @else
+                                        @foreach ($deductionHead as  $deduction)
+                                        <td style="text-align: right;"> 0
+                                        </td>
+                                        @endforeach
+                                        @endif
+                                    <td>
+                                        {{$salary['data']?->total_deduction ?? 0}}
                                     </td>
                                     <td>
-                                        {{$salary['data']?->net_take_home}}
+                                        {{$salary['data']?->net_take_home ?? 0}}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -226,6 +182,7 @@
                                 
                             </table>
                         </div>
+                        @endif
                         
                     </div>
                 </div>

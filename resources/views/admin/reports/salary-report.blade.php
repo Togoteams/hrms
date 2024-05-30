@@ -36,23 +36,23 @@
                                     <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="pay_for_month_year" class="required">Salary For Month</label>
-                                        <input type="month" class="form-control form-control-sm" name="pay_for_month_year" id="pay_for_month_year" required>
+                                        <input type="month" class="form-control form-control-sm" value="{{ $pay_for_month_year }}" name="pay_for_month_year" id="pay_for_month_year">
                                     </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="fileUploadPassbook">Employee <i class="text-danger">*</i> </label>
                                             <select class="form-control select2" name="employee_id" id="employee_id"
-                                                required>
+                                                >
                                                 <option value="">--select--</option>
                                                 @foreach ($employees as $key => $employee)
-                                                    <option value="{{ $employee->user_id }}">{{ $employee?->user?->name }}
-                                                    </option>
+                                                <option value="{{ $employee->id }}" @if($employee_id==$employee->id) {{'selected'}} @endif>{{ $employee?->user?->name }}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    {{-- <div class="col-md-3">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Search Type</label>
                                             </br>
@@ -62,10 +62,10 @@
                                                 <option value="export-excel" @if($search_type=="export-excel") {{'selected'}} @endif>Export Excel</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-2">
-                                        <div class="mt-2 form-group">
-                                            <button type="submit" class="btn btn-primary btn-icon-split">
+                                        <div class="mt-3 form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary btn-icon-split">
                                                 <span class="text">Search</span>
                                             </button>
                                         </div>

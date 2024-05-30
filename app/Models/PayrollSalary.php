@@ -65,9 +65,9 @@ class PayrollSalary extends Model
         {
              $q->where('pay_for_month_year', request('pay_for_month_year'));
         }
-        if(!empty(request('user_id')))
+        if(!empty(request('employee_id')))
         {
-             $q->where('user_id', request('user_id'));
+             $q->where('employee_id', request('employee_id'));
         }
        
         return $q;

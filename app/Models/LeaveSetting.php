@@ -9,5 +9,5 @@ class LeaveSetting extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['name', 'emp_type','total_leave_year','max_leave_at_time','is_accumulated','is_accumulated_max_value','is_pro_data','starting_date','is_count_holyday','is_leave_encash','is_certificate'];
+    protected $fillable = ['name', 'emp_type','total_leave_year','max_leave_at_time','is_accumulated','is_accumulated_max_value','is_pro_data','starting_date','is_count_holyday','is_leave_encash','is_certificate','expiry_date_message'];
 }
