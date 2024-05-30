@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Imports\EmployeeImport;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\Membership;
@@ -31,6 +32,7 @@ use Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat\Wizard\Currency;
 
 
@@ -89,8 +91,16 @@ class EmployeeController extends BaseController
     public function getBranchWiseRole(Request $request)
     {
         $branch = $request->branch_id;
-            
-
+    }
+    public function importEmployee(Request $request)
+    {
+        $request->validate([
+            'import_employee' => 'required',
+        ]);
+        Excel::import(new EmployeeImport(), request()->file('import_employee'));
+        $redirectUrl = route('admin.employees.index');
+        $message = "Employee Import was successfully";
+        return $this->responseJson(true, 200, $message, ['redirect_url' => $redirectUrl]);
     }
 
     public function postUserDetails(Request $request)

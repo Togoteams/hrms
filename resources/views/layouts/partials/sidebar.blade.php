@@ -529,6 +529,16 @@
                                 data-bs-parent="#navbarReportMenu">
                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.salary' ? 'active' : '' }}  "
                                         href="{{ route('admin.reports.salary') }}">Salary Report</a>
+                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.annual-pay-report' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.annual-pay-report') }}">Annual Pay Report</a>
+                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.annula-tax-deduction' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.annula-tax-deduction') }}">Annual tax deduction report</a>
+                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.thirteen-cheque-report' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.thirteen-cheque-report') }}">13 Cheque Report </a>
+                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.branch-wise-employee-report' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.branch-wise-employee-report') }}">Employees branch wise report</a>
+                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.leave-report' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.leave-report') }}">Leave report</a>
                             </div>
                         </div>
                      </div>

@@ -31,7 +31,7 @@
                             <h2 class="page-header-title">Leave Report</h2>
                         </div>
                         <div>
-                            <form action="{{ route('admin.reports.leave') }}" method="get">
+                            <form action="{{ route('admin.reports.leave-report') }}" method="get">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
