@@ -78,9 +78,10 @@
                             ajax: "{{ route('admin.leave_encashment.index') }}",
 
                             columns: [{
-                                    "render": function() {
-                                        return i++;
-                                    }
+                                    data: 'DT_RowIndex',
+                                    name: 'DT_RowIndex',
+                                    orderable: false,
+                                    searchable: false
                                 },
 
                                 {

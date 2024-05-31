@@ -40,7 +40,7 @@ class LeaveApplyController extends BaseController
             } else {
                 $data = LeaveApply::with('user', 'user.employee', 'leave_type')->select('*');
             }
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
@@ -540,7 +540,7 @@ class LeaveApplyController extends BaseController
             } else {
                 $data = LeaveApply::with('user', 'user.employee', 'leave_type')->where('leave_applies.status', 'approved')->select('*');
             }
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
@@ -570,7 +570,7 @@ class LeaveApplyController extends BaseController
             } else {
                 $data = LeaveApply::with('user', 'leave_type', 'user.employee')->where('status', 'pending')->get();
             }
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);
@@ -599,7 +599,7 @@ class LeaveApplyController extends BaseController
             } else {
                 $data = LeaveApply::with('user', 'leave_type')->where('status', 'reject')->get();
             }
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_apply.buttons', ['item' => $row, "route" => 'leave_apply']);

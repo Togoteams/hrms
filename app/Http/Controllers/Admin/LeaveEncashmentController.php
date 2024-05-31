@@ -34,7 +34,7 @@ class LeaveEncashmentController extends Controller
             } else {
                 $data = LeaveEncashment::with('user', 'leave_settings', 'employee', 'employee.designation')->select('*');
             }
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
 
                 ->editColumn('employee.start_date', function ($data) {

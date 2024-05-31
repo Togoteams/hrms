@@ -249,7 +249,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::resource('leave_apply', LeaveApplyController::class);
 
     Route::resource('leave-time-approved', LeaveTimeApprovelController::class);
-    Route::post('/admin/leave-time-approved', [LeaveTimeApprovelController::class, 'status'])->name('leave_approval.status');
+    Route::post('/status/leave-time-approved', [LeaveTimeApprovelController::class, 'status'])->name('leave_approval.status');
 
     Route::get('leave_balance_history/', [LeaveApplyController::class, 'balance_history'])->name('leave_apply.balance_history');
     Route::get('leave_request_history/', [LeaveApplyController::class, 'request_history'])->name('leave_apply.request_history');

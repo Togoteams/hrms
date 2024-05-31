@@ -23,7 +23,7 @@ class PayrollIboTaxController extends Controller
     {
         if ($request->ajax()) {
             $data = PayrollIboTax::with('user','user.employee')->select('*');
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->make(true);
         }

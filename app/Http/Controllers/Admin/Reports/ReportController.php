@@ -34,7 +34,7 @@ class ReportController extends Controller
         $to_date = $request->to_date;
         if ($request->ajax()) {
             $data = PayrollSalary::filter()->with('user', 'employee')->getList()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->make(true);
         }

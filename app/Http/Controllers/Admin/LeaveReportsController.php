@@ -39,7 +39,7 @@ class LeaveReportsController extends Controller
                 $data = LeaveApply::with('user', 'leave_type')->select('*');
             }
 
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_reports.buttons', ['item' => $row, "route" => 'leave_reports']);

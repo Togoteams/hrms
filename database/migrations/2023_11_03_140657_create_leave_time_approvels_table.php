@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('leave_time_approvels', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('leave_type_id')->nullable();
+            $table->unsignedBigInteger('approval_authority')->nullable();
             $table->string('request_date',)->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();

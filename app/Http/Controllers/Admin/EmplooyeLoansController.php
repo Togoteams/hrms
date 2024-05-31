@@ -27,7 +27,7 @@ class EmplooyeLoansController extends Controller
     {
         if ($request->ajax()) {
             $data = EmplooyeLoans::with('user','loan','employee')->getList()->select('*');
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.employees_loans.buttons', ['item' => $row, "route" => 'employees_loans']);

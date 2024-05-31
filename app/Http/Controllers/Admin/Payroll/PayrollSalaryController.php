@@ -40,7 +40,7 @@ class PayrollSalaryController extends Controller
         if ($request->ajax()) {
 
             $data = PayrollSalary::with('user', 'employee')->getList()->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.payroll.salary.buttons', ['item' => $row, "route" => 'payroll.salary']);

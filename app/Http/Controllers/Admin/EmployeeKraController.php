@@ -39,7 +39,7 @@ class EmployeeKraController extends Controller
                 ->get();
             }
 
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.employees_kra.buttons', ['item' => $row, "route" => 'employee-kra']);

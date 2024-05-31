@@ -21,7 +21,6 @@
                 <!-- End Row -->
             </div>
 
-            @include('admin.employees.create')
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
                 <div class="page-header">
@@ -71,13 +70,12 @@
                             processing: true,
                             serverSide: true,
                             ajax: "{{ route('admin.employees.index') }}",
-
                             columns: [{
-                                    "render": function() {
-                                        return i++;
-                                    },
+                                    data: 'DT_RowIndex',
+                                    name: 'DT_RowIndex',
+                                    orderable: false,
+                                    searchable: false
                                 },
-
                                 {
                                     data: 'ec_number',
                                     name: 'ec_number'

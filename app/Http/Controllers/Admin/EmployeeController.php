@@ -55,7 +55,7 @@ class EmployeeController extends BaseController
     {
         if ($request->ajax()) {
             $data = Employee::with('user')->getList()->select('*');
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.employees.buttons', ['item' => $row, "route" => 'employees']);
@@ -66,9 +66,10 @@ class EmployeeController extends BaseController
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        }
-        $designation = Designation::all();
-        $membership = Membership::all();
+            }
+           
+        $designation = Designation::getDesignation();
+        $membership = "";
         $branch = Branch::where('status', 'active')->get();
         return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
     }

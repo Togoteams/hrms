@@ -69,9 +69,10 @@
                             ajax: "{{ route('admin.employees_salary.index') }}",
 
                             columns: [{
-                                    "render": function() {
-                                        return i++;
-                                    }
+                                    data: 'DT_RowIndex',
+                                    name: 'DT_RowIndex',
+                                    orderable: false,
+                                    searchable: false
                                 },
 
                                 {

@@ -36,7 +36,7 @@ class PayRollPayscaleCotroller extends BaseController
 
         if ($request->ajax()) {
             $data = PayRollPayscale::with('user', 'employee')->get();
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.payroll.payscale.buttons', ['item' => $row, "route" => 'payroll.payscale']);

@@ -16,6 +16,7 @@ class LeaveTimeApprovel extends Model
         'end_date',
         'document',
         'reason',
+        'approval_authority',
         'description',
         'status',
         'description_reason',

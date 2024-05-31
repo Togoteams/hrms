@@ -58,6 +58,18 @@
                                     class="form-control form-control-sm">
                             </div>
                         </div>
+                        <div class="mb-2 col-sm-4 approval-authority-section">
+                            <div class="form-group">
+                                <label for="Reason">Approval Authority</label>
+                                <select id="approval_authority" placeholder="Select Authority"
+                                    name="approval_authority" class="form-control form-control-sm approval_authority">
+                                    <option selected disabled> - Select - </option>
+                                    @foreach ($approvalAuthority as $key => $value)
+                                        <option value="{{ $value->user_id }}">{{ $value->user->name }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="document">Document</label>

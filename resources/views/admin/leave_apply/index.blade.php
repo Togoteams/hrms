@@ -85,7 +85,7 @@
                                 <th>Employee name</th>
                                 <th>EC Number</th>
                                 <th>leave type</th>
-                                <th>Apply for</th>
+                                {{-- <th>Apply for</th> --}}
                                 <th>From </th>
                                 <th>To</th>
                                 <th>Paid/Unpaid</th>
@@ -111,47 +111,52 @@
                                     data: 'DT_RowIndex',
                                     name: 'DT_RowIndex',
                                     orderable: false,
-                                    width:'8%',
+                                    width:'4%',
                                     searchable: false
                                 },
                                 {
                                     data: 'user.name',
                                     name: 'user.name',
-                                    width:'8%'
+                                    width:'13%'
                                 }, 
                                 {
                                     data: 'user.employee.ec_number',
+                                    width:'10%',
                                     name: 'user.employee.ec_number'
                                 },
                                 {
                                     data: 'leave_type.name',
+                                    width:'14%',
+                                    // className: 'dt-left',
                                     name: 'leave_type.name'
                                 },
                                 {
-                                    data: 'leave_applies_for',
-                                    name: 'leave_applies_for'
-                                },
-
-                                {
                                     data: 'start_date',
+                                    className: 'dt-left',
+                                    width:'10%',
                                     name: 'start_date'
                                 },
                                 {
                                     data: 'end_date',
+                                    className: 'dt-left',
+                                    width:'10%',
                                     name: 'end_date'
                                 },
                                 {
                                     data: 'is_paid',
+                                    width:'10%',
                                     name: 'is_paid'
                                 },
                                 {
                                     data: 'status',
+                                    width:'10%',
                                     name: 'status'
                                 },
 
                                 {
                                     data: 'action',
                                     name: 'action',
+                                    width:'20%',
                                     orderable: false,
                                     searchable: false
                                 },

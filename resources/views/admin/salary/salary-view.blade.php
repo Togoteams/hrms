@@ -64,10 +64,11 @@
                                 ajax: "{{ route('admin.salary.list') }}",
 
                                 columns: [{
-                                        "render": function() {
-                                            return i++;
-                                        }
-                                    },
+                                    data: 'DT_RowIndex',
+                                    name: 'DT_RowIndex',
+                                    orderable: false,
+                                    searchable: false
+                                },
                                     {
                                         data: 'user.name',
                                         name: 'user.name'

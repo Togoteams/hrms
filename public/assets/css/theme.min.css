@@ -21499,7 +21499,7 @@ fieldset:disabled .btn {
     font-weight: 500;
     font-size: 14px;
     text-transform: capitalize;
-
+    padding: 10px 5px 10px 0px;
 }
 
 .card-sm>.card-footer,
