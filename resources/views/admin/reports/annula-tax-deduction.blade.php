@@ -72,6 +72,7 @@
                                 </div>
                             </form>
                         </div>
+                        @if($financial_year)
                         <div class="report-display-section">
                             <table>
                                 <tr>
@@ -102,6 +103,7 @@
                                 @endforeach
                             </table>
                         </div>
+                        @endif
 
                     </div>
                 </div>

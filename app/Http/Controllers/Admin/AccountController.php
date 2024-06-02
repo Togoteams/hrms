@@ -45,8 +45,9 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $validator = Validator::make($request->all(), [
-            'account_number' => 'required|string|digits_between:12,16|unique:accounts,account_number',
+            'account_number' => 'required|string|digits_between:12,16',
             'name' => 'required|string|regex:/^[a-zA-Z. ]+$/',
             'account_type' => 'required|string',
             'description' => 'required|string',
@@ -83,7 +84,7 @@ class AccountController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'account_number' => 'required|string|digits_between:12,16|unique:accounts,account_number'.$id,
+            'account_number' => 'required|string|digits_between:12,16',
             'name' => 'required|string',
             'account_type' => 'required|string',
             'description' => 'required|string',

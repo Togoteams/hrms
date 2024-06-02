@@ -68,7 +68,7 @@
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">Loan Account No</div>
                                                                     <div class="col-3">
-                                                                        {{ ($empLoanHistory?->account?->account_number) }}
+                                                                        {{ ($empLoanHistory->loan_account_no) }}
                                                                     </div>
                                                                     <div class="col-3 fw-semibold">Status</div>
                                                                     <div class="col-3">
@@ -180,15 +180,15 @@
                                             </div>
                                         </div>
                                        
-                                        {{-- <div class="mb-2 col-sm-4">
+                                        <div class="mb-2 col-sm-4">
                                             <div class="form-group">
                                                 <label for="loan_account_no">Loan Account No </label>
                                                 <input required id="loan_account_no" placeholder="Enter loan_account_no  "
                                                     type="text" name="loan_account_no" maxlength="16" minlength="11"
                                                     pattern="[0-9]+" class="form-control form-control-sm ">
                                             </div>
-                                        </div> --}}
-                                        <div class="mb-2 col-sm-4">
+                                        </div>
+                                        {{-- <div class="mb-2 col-sm-4">
                                             <div class="form-group">
                                                 <label for="account_id">Loan Account No </label>
                                                 <select name="account_id" id="account_id" class="form-control form-control-sm " >
@@ -199,7 +199,7 @@
                                                 </select>
                                                 
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-2 col-sm-4">
                                             <div class="form-group">
                                                 <label for="emi_start_date">EMI Start Date</label>

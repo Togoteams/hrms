@@ -51,7 +51,7 @@
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th>SL</th>
                                 <th>Employee name</th>
                                 <th>Ec number</th>
                                 <th>Leave Type</th>

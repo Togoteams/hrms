@@ -62,17 +62,28 @@
 
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
-            var usdToInrAmount = getValue('usdToInrAmount');
+            var salaryAdvance = getValue('salary_advance');
+            var mortgageLon = Number(getValue('mortgage_loan'));
+            var carLoan = Number(getValue('car_loan'));
+            var personalLoan = Number(getValue('personal_loan'));
+            var usdToInrAmount = Number(getValue('usdToInrAmount'));
             var pulaToInr = getValue('pulaToInr');
             var usdToPulaAmount = getValue('usdToPulaAmount');
             var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) / usdToInrAmount);
             var educationAllowanceAmountInPula =  parseFloat(educationAllowanceAmount*usdToPulaAmount).toFixed(3);
             var otherDeductions = parseFloat(parseFloat(otherDeductions) / usdToPulaAmount).toFixed(3);
-          
+             var   mortgageLonc = parseFloat(parseFloat(mortgageLon) / usdToPulaAmount).toFixed(3);
+               var salaryAdvancec = parseFloat(parseFloat(salaryAdvance) / usdToPulaAmount).toFixed(3);
+            var    carLoanc = parseFloat(parseFloat(carLoan) / usdToPulaAmount).toFixed(3);
+             var   personalLoanc = parseFloat(parseFloat(personalLoan) / usdToPulaAmount).toFixed(3);
+                console.log(personalLoanc);
+                console.log(mortgageLonc);
+                console.log(salaryAdvancec);
+                console.log(carLoanc);
             $("#education_allowance_for_ind_in_pula").val(educationAllowanceAmountInPula);
             totalEarning = parseFloat(basicAmount + emp13ChequeAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount).toFixed(3);
-            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('salary_advance') + getValue('mortgage_loan') + getValue('car_loan') + getValue('personal_loan') +  getValue('recovery_for_car')).toFixed(3);
+            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('salary_advance') + getValue('mortgage_loan')  + getValue('personal_loan') +  getValue('recovery_for_car')).toFixed(3);
             console.log(Number(totalDeduction));
         }
         var leaveEncashAmount = parseFloat(getValue("leave_encashment_amount"));

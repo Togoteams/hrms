@@ -103,11 +103,9 @@
             @endphp
             <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this),taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="number" name="{{ strtolower($head->slug) }}" 
              
-             @if(strtolower($head->slug)=="others_arrears")
-             value="{{ $totalReversalAmount ?? 0 }}"
-             @else
+             
              value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value,$salary_month)}}"
-             @endif
+          
              class="form-control form-control-sm {{$head->head_type}}">
         </div>
     </div>

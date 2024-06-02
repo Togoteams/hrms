@@ -46,7 +46,7 @@
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th>SL</th>
                                 <th>TTUM Month</th>
                                 <th>Account Name</th>
                                 <th>Account Number No.</th>

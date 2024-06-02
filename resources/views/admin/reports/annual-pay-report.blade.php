@@ -46,7 +46,7 @@
                                                 required>
                                                 <option value="">--select--</option>
                                                 @foreach ($employees as $key => $employee)
-                                                    <option value="{{ $employee->user_id }}" @if($employee_id==$employee->user_id) {{'selected'}} @endif>{{ $employee?->user?->name }}
+                                                    <option value="{{ $employee->id }}" @if($employee_id==$employee->id) {{'selected'}} @endif>{{ $employee?->user?->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -88,22 +88,22 @@
                                 </tr>
                                 <tr>
                                     <td colspan="15">
-                                        Name of The Employee : {{$employee_data?->user?->name}}
+                                        Name of The Employee : <b>{{$employee_data?->user?->name}}</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="15">
-                                        EC No :  {{$employee_data?->ec_number}}
+                                        EC No :  <b>{{$employee_data?->ec_number}}</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="15">
-                                        Branch :{{$employee_data?->branch?->name}}
+                                        Branch :  <b>{{$employee_data?->branch?->name}}</b>
                                     </td> 
                                 </tr>
                                 <tr>
-                                    <td colspan="{{count($earningHead)+3}}">Earning</td>
-                                    <td colspan="{{count($deductionHead)+2}}">Deduction</td>
+                                    <td colspan="{{count($earningHead)+3}}" style="background-color: #fcd7aa;text-align:center;font-size:16px;"><b>Earning</b></td>
+                                    <td colspan="{{count($deductionHead)+2}}" style="background-color: #fcd7aa;text-align:center;font-size:16px;"><b>Deduction</b></td>
                                 </tr>
                                 <tr>
                                     <td>

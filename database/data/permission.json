@@ -203,6 +203,9 @@
             "name": "Delete Leave Apply","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
+            "name": "Leave Approval","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+        },
+        {
             "name": "Change Status Leave Apply","module": "Leave Apply", "permissions_for":"admin,hr_head"
         },
         {

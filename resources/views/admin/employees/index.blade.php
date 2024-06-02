@@ -46,13 +46,13 @@
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th>SL</th>
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Gender</th>
-                                <th>Employment Type</th>
+                                <th>Emp. Type</th>
                                 <th>DOJ</th>
                                 <th width="100px">Action</th>
                             </tr>
@@ -69,19 +69,24 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
+                            autowidth:false,
                             ajax: "{{ route('admin.employees.index') }}",
                             columns: [{
                                     data: 'DT_RowIndex',
                                     name: 'DT_RowIndex',
                                     orderable: false,
+                                    width:'12%',
                                     searchable: false
                                 },
                                 {
                                     data: 'ec_number',
+                                    width:'12%',
                                     name: 'ec_number'
+
                                 },
                                 {
                                     data: 'user.name',
+                                    width:'13%',
                                     name: 'user.name'
                                 }, {
                                     data: 'user.email',

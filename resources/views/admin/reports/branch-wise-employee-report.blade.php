@@ -88,7 +88,7 @@
                                         Yes/No</td>
                                     <td>Is Bomaid/ Medical insurance 
                                         Yes/ No</td>
-                                    <td>IBO/Local</td>
+                                    {{-- <td>IBO/Local</td> --}}
                                 </tr>
                                 @foreach($employees as $key => $employe)
                                     <tr>
@@ -102,7 +102,7 @@
                                         <td>{{ $employe?->salaryHistory?->first()?->union_membership_id}}</td>
                                         <td>{{ $employe?->salaryHistory?->first()?->pension_opt}}</td>
                                         <td>{{ $employe?->salaryHistory?->first()?->is_medical_insuarance ? "Yes":"No"}}</td>
-                                        <td>{{ $employe?->ec_number}}</td>
+                                        {{-- <td>{{ $employe?->employment_type}}</td> --}}
 
                                     </tr>
                                 @endforeach

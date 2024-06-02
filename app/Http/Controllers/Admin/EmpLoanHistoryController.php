@@ -38,7 +38,7 @@ class EmpLoanHistoryController extends BaseController
             'user_id' => 'required|numeric',
             'employee_id' => 'required|numeric',
             'loan_types' => 'string|required',
-            'account_id' => 'required|numeric',
+            'loan_account_no' => 'required|numeric',
             'loan_amount' => 'required|numeric',
             'loan_amount' => 'required|numeric',
             'emi_amount' => 'required|numeric',
