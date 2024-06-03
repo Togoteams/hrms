@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\CurrencySetting;
 use App\Models\EmpCurrentLeave;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -13,11 +14,15 @@ use App\Models\LeaveDate;
 use App\Models\LeaveSetting;
 use App\Models\LeaveType;
 use App\Models\PayrollHead;
+use App\Models\PayrollSalaryHead;
+use App\Models\Reimbursement;
 use Exception;
 use Yajra\DataTables\DataTables;
+use App\Traits\PayrollTraits;
 class ReportController extends Controller
 {
     //
+    use PayrollTraits;
     public $search_text,$employee_id,$search_type,$from_date,$pay_for_month_year,$to_date;
     public function reportsType()
     {
@@ -131,7 +136,7 @@ class ReportController extends Controller
             $deductionHead= PayrollHead::whereIn('employment_type',[$employee_data->employment_type,'both'])->where('head_type','deduction')->get();
             $earningHead = PayrollHead::whereIn('employment_type',[$employee_data->employment_type,'both'])->where('head_type','income')->get();
         }
-        // return $empAnnualPayReport[];
+        // return $empAnnualPayReport;
         $to_date = $request->to_date;
         $employees = Employee::getList()->get();
         // $empSalary = PayrollSalary::where('employee_id',$employee_id)->
@@ -164,16 +169,33 @@ class ReportController extends Controller
         if($financial_year)
         {
             $financialYears = explode("-",$financial_year);
+            $fromDate = date("Y-m-d",strtotime($financialYears[0]."-07-01"));
+            $toDate = date("Y-m-d",strtotime($financialYears[1]."-06-30"));
             foreach($employees as $key => $value)
             {
                 $empAnnualTaxReport[$key]['emp_name']=$value->user->name;
                 $empAnnualTaxReport[$key]['ec_number']=$value->ec_number;
                 $empAnnualTaxReport[$key]['name_of_branch']=$value?->branch?->name;
-                $empAnnualTaxReport[$key]['gross_earning']=PayrollSalary::where('employee_id',$value->id)->sum('gross_earning');
-                $empAnnualTaxReport[$key]['tax_deduction']=0;
-                $empAnnualTaxReport[$key]['net_earning']=PayrollSalary::where('employee_id',$value->id)->sum('net_take_home');;
+                $empAnnualTaxReport[$key]['gross_earning'] = PayrollSalary::where('employee_id',$value->id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->sum('gross_earning');
+                // Employee Id
+                $emplooyeId = $value->id;
+                $taxAmount=0;
+                if($value->employment_type=="expatriate")
+                {
+                    $taxAmount =$this->calulateIBOTax(['user_id'=>$value->user_id,'financial_year'=>$financial_year,'from_date'=>$fromDate,'to_date'=>$toDate]);
+                }else
+                {
+                   $taxAmount= PayrollSalaryHead::whereHas('payroll_head',function($q){ $q->where('slug','tax');
+                    })->whereHas('payrollSalary',function($q)use($emplooyeId,$fromDate,$toDate){
+                        $q->where('employee_id',$emplooyeId)->whereBetween('salary_date_pay_for',[$fromDate,$toDate]);
+                    })->sum('value');
+                }
+
+                $empAnnualTaxReport[$key]['tax_deduction'] =$taxAmount;
+                $empAnnualTaxReport[$key]['net_earning'] = PayrollSalary::where('employee_id',$value->id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->sum('net_take_home');;
             }   
         }
+        // return $empAnnualTaxReport;
         return view('admin.reports.annula-tax-deduction',[
             'employees' => $employees,
             'employee_id' => $employee_id,
@@ -185,6 +207,45 @@ class ReportController extends Controller
             'emp_annual_tax_report' => $empAnnualTaxReport,
             'search_text' => $search_text
         ]);
+    }
+    public function calulateIBOTax($data)
+    {
+        $user_id = $data['user_id'];
+        $financialYear = $data['financial_year'];
+        $fromDate = $data['from_date'];
+        $toDate = $data['to_date'];
+        $salary = PayrollSalary::where('user_id', $user_id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->get();
+        $usdToPulaAmount = 1;
+        $usdToPulaAmount = 1;
+        $reimbursements = Reimbursement::where('user_id', $user_id)->where('financial_year',$financialYear)->where('status','approved')->get();
+        $currencySeeting = CurrencySetting::where('currency_name_from','usd')->where('currency_name_to','pula')->first();
+        if(!empty($currencySeeting))
+        {
+            $usdToPulaAmount = $currencySeeting->currency_amount_to;
+        }
+        $currencySeetingPulaToUsd = CurrencySetting::where('currency_name_from','pula')->where('currency_name_to','usd')->first();
+        if(!empty($currencySeetingPulaToUsd))
+        {
+            $usdToPulaAmount = $currencySeetingPulaToUsd->currency_amount_to;
+        }
+        $totalPaidSalary = $salary->sum('gross_earning');
+        $reimbursementAmount = 0;
+        foreach($reimbursements as $reimbursement)
+        {
+            if($reimbursement->reimbursement_currency=="usd")
+            {
+                $reimbursementAmount = ($reimbursementAmount + $reimbursement->reimbursement_amount)*$usdToPulaAmount;
+            }else
+            {
+                $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
+            }
+        }
+        $totalPaidSalary = $salary->sum('gross_earning') * $usdToPulaAmount;
+        $taxableAmount = $reimbursementAmount + $totalPaidSalary;
+        $taxableAmountParam = $taxableAmount;
+        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmountParam,'employment_type'=>'expatriate']);
+        $tax_amount = $taxData['tax_amount'];
+        return $tax_amount;
     }
     public function thirteenChequeReport(Request $request)
     {

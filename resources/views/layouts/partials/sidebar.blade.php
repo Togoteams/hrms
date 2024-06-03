@@ -525,7 +525,7 @@
                                 <i class="fa fa-folder nav-icon"></i>
                                 <span class="nav-link-title">Report</span>
                             </a>
-                            <div id="report" class="nav-collapse collapse {{ show(['salary-report']) }} "
+                            <div id="report" class="nav-collapse collapse {{ show(['reports.annual-pay-report','reports.annula-tax-deduction','reports.thirteen-cheque-report','reports.branch-wise-employee-report','reports.leave-report']) }} "
                                 data-bs-parent="#navbarReportMenu">
                                     {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.salary' ? 'active' : '' }}  "
                                         href="{{ route('admin.reports.salary') }}">Salary Report</a> --}}

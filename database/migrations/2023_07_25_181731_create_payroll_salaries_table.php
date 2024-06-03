@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('employment_type')->nullable();
             $table->string('status')->default('active');
             $table->string('pay_for_month_year')->nullable();
+            $table->date('salary_date_pay_for')->nullable();
             $table->double('basic',10,2);
             $table->double('total_working_days')->default(0);
             $table->double('no_of_payable_days')->default(0);

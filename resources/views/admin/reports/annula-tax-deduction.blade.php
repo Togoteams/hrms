@@ -62,8 +62,8 @@
                                     </div>
 
                                     <div class="col-md-2">
-                                        <div class="mt-2 form-group">
-                                            <button type="submit" class="btn btn-primary btn-icon-split">
+                                        <div class="mt-3 form-group">
+                                            <button type="submit" class="btn btn-sm btn-primary btn-icon-split">
                                                 <span class="text">Search</span>
                                             </button>
                                         </div>
@@ -83,12 +83,15 @@
                                     <td> Name of Employee</td>
                                     <td> EC Number</td>
                                     <td> Name of Branch</td>
+                                    @php
+                                    $financialYears = explode("-",$financial_year);
+                                    @endphp
                                     <td> Gross Earning
-                                        from 01.07.2023 to 30.06.2024</td>
+                                        from 01.07.{{$financialYears[0]}} to 30.06.{{$financialYears[1]}}</td>
                                     <td> Tax Deducted
-                                        from 01.07.2023 to 30.06.2024</td>
+                                        from 01.07.{{$financialYears[0]}} to 30.06.{{$financialYears[1]}}</td>
                                     <td> Net Earning
-                                        from 01.07.2023 to 30.06.2024</td>
+                                        from 01.07.{{$financialYears[0]}} to 30.06.{{$financialYears[1]}}</td>
                                 </tr>
                                 @foreach ($emp_annual_tax_report as $key => $report)
                                     <tr>

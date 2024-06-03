@@ -39,7 +39,7 @@ class PayrollSalaryController extends Controller
 
         if ($request->ajax()) {
 
-            $data = PayrollSalary::with('user', 'employee')->getList()->get();
+            $data = PayrollSalary::with('user', 'employee')->getList()->orderBy('id','desc')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -94,12 +94,13 @@ class PayrollSalaryController extends Controller
             }
             $usdToInr = getCurrencyValue("usd", "inr");
             $pulaToInr = getCurrencyValue("pula", "inr");
-
+            //  dd(date("Y-m-d",strtotime($request->pay_for_month_year."-".date('d'))));
             $net_take_home_in_pula = number_format($request->net_take_home * $currencyValue, 2, '.', '');
             $payroll = PayrollSalary::create([
                 'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                 'user_id' => $request->user_id,
                 'pay_for_month_year' =>  $request->pay_for_month_year,
+                'salary_date_pay_for' =>  date("Y-m-d",strtotime($request->pay_for_month_year."-".date('d'))),
                 'basic' =>  $request->basic,
                 'fixed_deductions' =>  $request->fixed_deductions,
                 'employment_type' =>  $emp->employment_type,

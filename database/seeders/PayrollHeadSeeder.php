@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\PayrollHead;
-
+use DB;
 class PayrollHeadSeeder extends Seeder
 {
     /**
@@ -13,7 +13,7 @@ class PayrollHeadSeeder extends Seeder
      */
     public function run(): void
     {
-        $all_member = array(
+        $allPayrollHeads = array(
             // for local all leaves
             ['name' => 'BoMaid', 'slug' => 'bomaid_bank', 'placeholder' => 'Bomaid Bank Contributtion', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1],
             ['name' => 'BoMaid Fund', 'slug' => 'bomaid', 'placeholder' => 'BoMaid', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
@@ -23,7 +23,7 @@ class PayrollHeadSeeder extends Seeder
             ['name' => 'Other Deductions', 'slug' => 'other_deductions', 'placeholder' => 'Other deductions', 'employment_type' => 'both', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
             ['name' => 'Tax', 'slug' => 'tax', 'placeholder' => 'Tax', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
             ['name' => 'Allowance', 'slug' => 'allowance', 'placeholder' => 'Allowance', 'employment_type' => 'local', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1],
-            ['name' => 'Loan', 'slug' => 'loan', 'placeholder' => 'Loan', 'employment_type' => 'expatriate', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
+            // ['name' => 'Loan', 'slug' => 'loan', 'placeholder' => 'Loan', 'employment_type' => 'expatriate', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
             ['name' => 'Personal Loan', 'slug' => 'personal_loan', 'placeholder' => 'Personal Loan', 'employment_type' => 'both', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
             ['name' => 'Car Loan', 'slug' => 'car_loan', 'placeholder' => 'Car Loan', 'employment_type' => 'both', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
             ['name' => 'Mortgage Loan', 'slug' => 'mortgage_loan', 'placeholder' => 'Mortgage Loan', 'employment_type' => 'both', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
@@ -37,7 +37,8 @@ class PayrollHeadSeeder extends Seeder
             ['name' => 'Recovery for Car', 'slug' => 'recovery_for_car', 'placeholder' => 'Recovery for Car', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
 
         );
-        foreach ($all_member as $am) {
+        $head = \DB::table('payroll_heads')->delete();
+        foreach ($allPayrollHeads as $am) {
             PayrollHead::updateOrCreate(['slug'=>$am['slug']],$am);
         }
 

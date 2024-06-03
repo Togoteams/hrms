@@ -24,4 +24,7 @@ class PayrollSalaryHead extends Model
     public function payroll_head(){
         return $this->belongsTo(PayrollHead::class,'payroll_head_id');
     }
+    public function payrollSalary(){
+        return $this->belongsTo(PayrollSalary::class,'payroll_salary_id');
+    }
 }

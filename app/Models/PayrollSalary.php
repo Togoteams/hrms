@@ -12,6 +12,7 @@ class PayrollSalary extends Model
         'employee_id',
         'user_id',
         'pay_for_month_year',
+        'salary_date_pay_for',
         'status',
         'basic',
         'employment_type',
