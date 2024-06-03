@@ -97,7 +97,7 @@
                                                             <div class="col-2 text-end">
                                                                 <div class="right-div">
                                                                     <!-- Your content for right div goes here -->
-                                                                    <button class="btn btn-edit btn-sm bt" title="Edit"
+                                                                    {{-- <button class="btn btn-edit btn-sm bt" title="Edit"
                                                                         id="editButton" data-id="{{ $salaryhistory->id }}"
                                                                         data-user_id="{{ $employee->user_id }}"
                                                                         data-basic_salary="{{ $salaryhistory->basic_salary }}"
@@ -113,7 +113,7 @@
                                                                         data-da="{{ $salaryhistory->da }}"
                                                                         data-currency_salary_for_india="{{ $salaryhistory->currency_salary_for_india }}">
                                                                         <i class="fas fa-edit"></i>
-                                                                    </button>
+                                                                    </button> --}}
 
                                                                     <button class="btn btn-delete btn-sm bt deleteRecord"
                                                                         title="Delete" data-id="{{ $salaryhistory->id }}"

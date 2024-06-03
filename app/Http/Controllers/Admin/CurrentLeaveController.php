@@ -20,7 +20,6 @@ class CurrentLeaveController extends BaseController
     {
         $employee = getEmployee($eid);
         // $result = $this->updateCurrentLeaveOfEachEmployee();
-        $leaves = CurrentLeave::where('user_id', $employee->user_id)->first();
         $empLeaveTypes = LeaveSetting::where('emp_type',getEmpType($employee->employment_type))->where('salary_deduction_per','<>',100)->get(['id','name','slug']);
         // return $empLeaveType;
         foreach($empLeaveTypes as $key => $value)
@@ -31,7 +30,6 @@ class CurrentLeaveController extends BaseController
             'page'          => $this->page_name,
             'employee'   => $employee,
             'empLeaveTypes'   => $empLeaveTypes,
-            'leaves'   => $leaves,
         ]);
     }
 

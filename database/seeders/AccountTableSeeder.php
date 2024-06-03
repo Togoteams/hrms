@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Account;
+use Illuminate\Support\Facades\DB;
+
 class AccountTableSeeder extends Seeder
 {
     /**
@@ -27,13 +29,13 @@ class AccountTableSeeder extends Seeder
             ['name'=>"Cont. PF",'slug'=>"pf_contribution",'account_number'=>'95212352461009','account_type'=>"office",'is_credit'=>1,"description"=>"This  Account  is for Pf Contribution"],
             ['name'=>"Vehicle exp",'slug'=>"vehicle_expenses",'account_number'=>'95212354511016','account_type'=>"office",'is_credit'=>1,"description"=>"This  Account is for  Vehicle exp"],
             ['name'=>"Income tax",'slug'=>"income_tax",'account_number'=>'95212352451013','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Income tax"],
-            ['name'=>"Personal Loan",'slug'=>"personal_loan",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Personal Loan Account"],
-            ['name'=>"Mortgage Loan",'slug'=>"mortgage_loan",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Mortagege Loan Account"],
-            ['name'=>"Car Loan",'slug'=>"car_loan",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Mortagege Loan Account"],
-            ['name'=>"Salary Advance",'slug'=>"salary_advance",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Mortagege Loan Account"],
+            // ['name'=>"Personal Loan",'slug'=>"personal_loan",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Personal Loan Account"],
+            // ['name'=>"Mortgage Loan",'slug'=>"mortgage_loan",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Mortagege Loan Account"],
+            // ['name'=>"Car Loan",'slug'=>"car_loan",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Mortagege Loan Account"],
+            // ['name'=>"Salary Advance",'slug'=>"salary_advance",'account_number'=>'NA','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Mortagege Loan Account"],
             ['name'=>"SPECIAL ADVANCE TO STAFF",'slug'=>"special_advance_to_staff",'account_number'=>'95212326681010','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for SPECIAL ADVANCE TO STAFF"],
         ];
-
+        DB::table('accounts')->delete();
         foreach($accounts as $key => $value)
         {
             Account::updateOrCreate(['slug'=>$value['slug']],$value);

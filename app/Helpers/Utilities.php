@@ -35,9 +35,9 @@ if (!function_exists('isSluggable')) {
     }
 }
 if (!function_exists('currentDateTime')) {
-    function currentDateTime()
+    function currentDateTime($format='Y-m-d h:i:s')
     {
-        return Carbon::now()->format('Y-m-d h:i:s');;
+        return Carbon::now()->format($format);
     }
 }
 

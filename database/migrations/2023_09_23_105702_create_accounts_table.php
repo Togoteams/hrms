@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('account_type')->nullable();
             $table->string('is_credit')->nullable();
             $table->string('description')->nullable();
+            $table->bigInteger('user_id')->nullable();
             $table->enum('status',["active","inactive"])->default('active');
             $table->timestamps();
         });

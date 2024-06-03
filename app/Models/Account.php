@@ -18,8 +18,10 @@ class Account extends Model
     protected $fillable = [
         'account_number',
         'name',
+        'slug',
         'account_type',
         'is_credit',
+        'user_id',
         'description',
         'status'
     ];

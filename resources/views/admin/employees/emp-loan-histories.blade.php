@@ -62,7 +62,7 @@
                                                                     <div class="col-3">
                                                                         {{ ($empLoanHistory->loan_amount) }}
                                                                     </div>
-                                                                    <div class="col-3 fw-semibold">EMI Amount</div>
+                                                                    <div class="col-3 fw-semibold">EMI Amount(In PULA)</div>
                                                                     <div class="col-3">
                                                                         {{ ($empLoanHistory->emi_amount) }}
                                                                     </div>
@@ -87,6 +87,7 @@
                                                                         data-loan_types="{{ $empLoanHistory->loan_types }}"
                                                                         data-account_id="{{ $empLoanHistory->account_id }}"
                                                                         data-loan_amount="{{ $empLoanHistory->loan_amount }}"
+                                                                        data-loan_account_no="{{ $empLoanHistory->loan_account_no }}"
                                                                         data-emi_amount="{{ $empLoanHistory->emi_amount }}"
                                                                         data-emi_start_date="{{ $empLoanHistory->emi_start_date }}"
                                                                         data-emi_end_date="{{ $empLoanHistory->emi_end_date }}"
@@ -165,7 +166,7 @@
             
                                         <div class="mb-2 col-sm-4">
                                             <div class="form-group">
-                                                <label for="loan_amount">Loan Amount</label>
+                                                <label for="loan_amount">Loan Amount (In PULA)</label>
                                                 <input required id="loan_amount" placeholder="Enter loan_amount" type="text"
                                                     name="loan_amount" maxlength="7" minlength="3" pattern="[0-9]+"
                                                     class="form-control form-control-sm ">
@@ -173,7 +174,7 @@
                                         </div>
                                         <div class="mb-2 col-sm-4">
                                             <div class="form-group">
-                                                <label for="emi_amount">EMI Amount</label>
+                                                <label for="emi_amount">EMI Amount (In PULA)</label>
                                                 <input required id="emi_amount" placeholder="Enter emi_amount   " type="text"
                                                     name="emi_amount" maxlength="7" minlength="3" pattern="[0-9]+"
                                                     class="form-control form-control-sm ">
@@ -258,6 +259,7 @@
                 let user_id = $(event.currentTarget).data("user_id");
                 let loan_types = $(event.currentTarget).data("loan_types");
                 let account_id = $(event.currentTarget).data("account_id");
+                let loan_account_no = $(event.currentTarget).data("loan_account_no");
                 let loan_amount = $(event.currentTarget).data("loan_amount");
                 let emi_amount = $(event.currentTarget).data("emi_amount");
                 let emi_start_date = $(event.currentTarget).data("emi_start_date");
@@ -269,6 +271,7 @@
                 $("#account_id").val(account_id);
                
                 $("#loan_amount").val(loan_amount);
+                $("#loan_account_no").val(loan_account_no);
                 $("#emi_start_date").val(emi_start_date);
                 $("#emi_end_date").val(emi_end_date);
                 $("#loan_types").val(loan_types);

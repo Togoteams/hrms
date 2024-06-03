@@ -77,7 +77,7 @@ class Employee extends Model
 
     public function getLatestSalary()
     {
-        return $this->salaryHistory()->where('date_of_current_basic','<=',date('Y-m-d'))->orderBy('id','desc')->first();
+        return $this->salaryHistory()->where('date_of_current_basic','<=',currentDateTime('Y-m-d'))->orderBy('id','desc')->first();
     }
 
     public function departmentHistory()

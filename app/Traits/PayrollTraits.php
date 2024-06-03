@@ -10,6 +10,7 @@ use App\Models\PayrollHead;
 use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalary;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 trait PayrollTraits
@@ -19,13 +20,16 @@ trait PayrollTraits
         $ttumMonth = $data['ttum_month'];
         $accountId = $data['account_id'];
         $data['transaction_amount'] = $data['transaction_amount'] ?? 0;
+        Log::info("account_id-" . $accountId);
         $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->first();
-        if(!empty($ttumExist))
-        {
+
+        if (!empty($ttumExist)) {
             $data['transaction_amount'] = $data['transaction_amount'] + $ttumExist->transaction_amount;
         }
+
+        Log::info("transaction_amount" . $data['transaction_amount']);
         $account = Account::find($data['account_id']);
-    //    return  $account->name;
+        //    return  $account->name;
         $data['transaction_details'] = $account->name . " for " . date('M-Y', strtotime($ttumMonth . '-20'));
 
         return PayrollTtumSalaryReport::updateOrCreate(['id' => $ttumExist?->id ?? NULL], $data);
@@ -43,6 +47,7 @@ trait PayrollTraits
         foreach ($accounts as $key => $account) {
             $accountName = $account->slug;
             $amount = 0;
+            $isAmountAdd = 1;
             // return $accountName;
             switch ($accountName) {
                 case "salaries":
@@ -58,7 +63,7 @@ trait PayrollTraits
                     })->value('value');
                     $leaveEnCashAmount = $salary->leave_encashment_amount  * $currencyValue;
                     $emp13ChequeAmount = $salary->emp_13_cheque_amount  * $currencyValue;
-                    $amount = $basic +$allowanceAmoumt + $overTimeAmoumt + $othersArrearsAmount + $emp13ChequeAmount + $leaveEnCashAmount;
+                    $amount = $basic + $allowanceAmoumt + $overTimeAmoumt + $othersArrearsAmount + $emp13ChequeAmount + $leaveEnCashAmount;
                     break;
                 case "entertainment":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
@@ -73,7 +78,7 @@ trait PayrollTraits
                     $currencyValuePula = getCurrencyValue("pula", "inr");
                     // $amount = ($salaryHeadAmount / $currencyValuePula);
                     $amount = $salary->education_allowance_for_ind_in_pula;
-                    
+
                     break;
                 case "house_up_keep":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
@@ -86,25 +91,23 @@ trait PayrollTraits
                         $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'bomaid');
                         })->value('value');
-                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
+                        $bomaid = EmpMedicalInsurance::where('user_id', $emp->user_id)->orderBy('id', 'desc')->first();
 
                         $amount = $salaryHeadAmount;
-                        if(!empty($bomaid))
-                        {
+                        if (!empty($bomaid)) {
                             $bomaidAmount = $bomaid->amount;
                             $localBankBomaidContribution = getSeetingValue()->local_bank_bomaid_contribution;
                             $localBomaidAmount = ($bomaidAmount / 100) * $localBankBomaidContribution;
                             $amount = $amount - ($localBomaidAmount);
                         }
                     }
-                    
+
                     break;
                 case "bomaid_ibo":
                     $amount = 0;
                     if ($emp->employment_type == "expatriate") {
-                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
-                        if(!empty($bomaid))
-                        {
+                        $bomaid = EmpMedicalInsurance::where('user_id', $emp->user_id)->orderBy('id', 'desc')->first();
+                        if (!empty($bomaid)) {
                             $bomaidAmount = $bomaid->amount;
                             $iboBankBomaidContribution = getSeetingValue()->ibo_bank_bomaid_contribution;
                             $amount = ($bomaidAmount / 100) * $iboBankBomaidContribution;
@@ -114,7 +117,7 @@ trait PayrollTraits
                     break;
                 case "pf_bank_contribution":
                     if ($emp->employment_type == "expatriate") {
-                    $amount =  $this->bankContributionOfPf($emp) * $currencyValue;
+                        $amount =  $this->bankContributionOfPf($emp) * $currencyValue;
                     }
                     break;
                 case "banks_conti_to_pension":
@@ -138,23 +141,21 @@ trait PayrollTraits
                         $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'union_fee');
                         })->value('value');
-                        $amount = number_format($salaryHeadAmount,2,".","");
+                        $amount = number_format($salaryHeadAmount, 2, ".", "");
                     }
                     break;
                 case "eft_to_fnb_bank":
-                   
+
                     if ($emp->employment_type == "expatriate") {
                         $amount = 5;
-                        $bomaid = EmpMedicalInsurance::where('user_id',$emp->user_id)->orderBy('id','desc')->first();
-                        if(!empty($bomaid))
-                        {
+                        $bomaid = EmpMedicalInsurance::where('user_id', $emp->user_id)->orderBy('id', 'desc')->first();
+                        if (!empty($bomaid)) {
                             $bomaidAmount = $bomaid->amount;
                             $iboBankBomaidContribution = getSeetingValue()->ibo_bank_bomaid_contribution;
                             $amount = ($bomaidAmount / 100) * $iboBankBomaidContribution;
                             // $amount;
                         }
-                    }else
-                    {
+                    } else {
                         // This is Total Bomaid Fund Receive From Emp
                         $bomaidAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'bomaid');
@@ -165,14 +166,14 @@ trait PayrollTraits
                     break;
                 case "pf_contribution":
                     if ($emp->employment_type == "expatriate") {
-                     $pfAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $pfAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                             $q->where('slug', 'provident_fund');
                         })->value('value');
 
-                        $amount = ($pfAmount + $this->bankContributionOfPf($emp) ) * $currencyValue;
+                        $amount = ($pfAmount + $this->bankContributionOfPf($emp)) * $currencyValue;
                     }
                     break;
-                
+
                 case "vehicle_expenses":
                     $vehicleExpenses = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'recovery_for_car');
@@ -192,34 +193,42 @@ trait PayrollTraits
                     $amount = ($amount);
                     break;
                 case "personal_loan":
-                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
-                        $q->where('slug', 'personal_loan');
-                    })->value('value');
-                    $amount = ($amount);
+                    if ($emp->user_id == $account->user_id) {
+                        $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                            $q->where('slug', 'personal_loan');
+                        })->value('value');
+                        $amount = ($amount);
+                    }
+                    Log::info("Personal_account_id" . $account->id);
                     break;
                 case "car_loan":
-                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
-                        $q->where('slug', 'car_loan');
-                    })->value('value');
+                    if ($emp->user_id == $account->user_id) {
+                        $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                            $q->where('slug', 'car_loan');
+                        })->value('value');
+                    }
                     $amount = ($amount);
                     break;
                 case "salary_advance":
-                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
-                        $q->where('slug', 'salary_advance');
-                    })->value('value');
-                    $amount = ($amount);
+                    if ($emp->user_id == $account->user_id) {
+                        $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                            $q->where('slug', 'salary_advance');
+                        })->value('value');
+                        $amount = ($amount);
+                    }
                     break;
                 case "mortgage_loan":
-                    $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
-                        $q->where('slug', 'mortgage_loan');
-                    })->value('value');
-                    $amount = ($amount);
+                    if ($emp->user_id == $account->user_id) {
+                        $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                            $q->where('slug', 'mortgage_loan');
+                        })->value('value');
+                        $amount = ($amount);
+                    }
                     break;
             }
-            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount,2,".",""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
             $saveOfficeTTUM  = $this->saveTtumData($data);
-
-           
+            Log::info("Personal_account_id" . json_encode($saveOfficeTTUM));
         }
 
         /**
@@ -228,8 +237,8 @@ trait PayrollTraits
         $empName = $emp->user->name;
         $empAccount = $this->getEmpAccount($empName, $emp->bank_account_number);
         $netTakeAmountInPula = $salary->net_take_home_in_pula;
-        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula,2,".",""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
-         $saveEmpTTUM  =  $this->saveTtumData($data);
+        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula, 2, ".", ""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+        $saveEmpTTUM  =  $this->saveTtumData($data);
     }
     public function getEmpAccount($accountName, $accountNumber)
     {
@@ -257,28 +266,26 @@ trait PayrollTraits
         // echo $taxSlab;
         if ($empType == "expatriate") {
             $extraAmount = ($taxableAmount - $taxSlab->from);
-            $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + (($extraAmount * $taxSlab->ibo_tax_per)/100));
+            $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + (($extraAmount * $taxSlab->ibo_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;
         } else {
             $extraAmount = (($taxableAmount - $taxSlab->from));
-            $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per )/100));
+            $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;
         }
-        return ["tax_amount" => round($taxAmount,3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount, 'taxable_amount' => $taxableAmount];
+        return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount, 'taxable_amount' => $taxableAmount];
     }
     public function bankContributionOfPf($emp)
     {
         $inrBasicAmount = $emp->basic_salary_for_india;
         $pfContibutionForBank = 10;
-        if($emp->salary_type=="nps")
-        {
-            $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da) ;
+        if ($emp->salary_type == "nps") {
+            $inrBasicAmount = $emp->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $emp->da);
             $pfContibutionForBank = 14;
         }
         $usdToInrAmount = getCurrencyValue("usd", "inr");
         $providentFound = ((($inrBasicAmount / 100)) * $pfContibutionForBank);
-        $providentFound = $providentFound / number_format($usdToInrAmount,3,'.',"");
-        return  number_format($providentFound,2,'.',"");
-
+        $providentFound = $providentFound / number_format($usdToInrAmount, 3, '.', "");
+        return  number_format($providentFound, 2, '.', "");
     }
 }
