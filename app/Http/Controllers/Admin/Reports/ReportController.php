@@ -270,12 +270,12 @@ class ReportController extends Controller
                 ["month"=>["key"=>"01","lable"=>"January"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-01'],
                 ["month"=>["key"=>"02","lable"=>"February"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-02'],
                 ["month"=>["key"=>"03","lable"=>"March"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-03'],
-                ["month"=>["key"=>"4","lable"=>"April"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-04'],
-                ["month"=>["key"=>"5","lable"=>"May"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-05'],
-                ["month"=>["key"=>"6","lable"=>"June"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-06'],
-                ["month"=>["key"=>"7","lable"=>"July"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-07'],
-                ["month"=>["key"=>"8","lable"=>"August"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-08'],
-                ["month"=>["key"=>"9","lable"=>"September"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-09'],
+                ["month"=>["key"=>"04","lable"=>"April"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-04'],
+                ["month"=>["key"=>"05","lable"=>"May"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-05'],
+                ["month"=>["key"=>"06","lable"=>"June"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-06'],
+                ["month"=>["key"=>"07","lable"=>"July"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-07'],
+                ["month"=>["key"=>"08","lable"=>"August"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-08'],
+                ["month"=>["key"=>"09","lable"=>"September"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-09'],
                 ["month"=>["key"=>"10","lable"=>"October"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-10'],
                 ["month"=>["key"=>"11","lable"=>"November"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-11'],
             ];
@@ -288,13 +288,23 @@ class ReportController extends Controller
                 $totalBasicAmount = 0;
                 $totalITaxAmount = 0;
                 foreach($months as $key => $month)
-                {
+                {   $basicAmount =0;
                     $basicAmount = PayrollSalary::with('payrollSalaryHead','payrollSalaryHead.payroll_head')->where('pay_for_month_year',$month['year']."-".$month['month']['key'])->where('employee_id',$employe->id)->value('basic') ?? 0;
-                    $totalBasicAmount +=$basicAmount; 
+                    $totalBasicAmount +=$basicAmount;
+                    // $year = $month['year']; 
+                    // $month = $month['month']['key']; 
+                    // $emplooyeId = $employe->id; 
+                    // $taxAmount= PayrollSalaryHead::whereHas('payroll_head',function($q){ $q->where('slug','tax');
+                    // })->whereHas('payrollSalary',function($q)use($emplooyeId,$year,$month){
+                    //     $q->where('employee_id',$emplooyeId)->where('pay_for_month_year',$year."-".$month);
+                    // })->value('value');
+                    // $totalITaxAmount +=$taxAmount;
+
                     $emp13ChequeReport[$ekey]['months'][$key]['basic'] = $basicAmount;
                 }
                 $emp13ChequeReport[$ekey]['total_amount'] = $totalBasicAmount;
                 $emp13ChequeReport[$ekey]['average_amount'] = number_format($totalBasicAmount/12,2);
+                $totalITaxAmount = $this->getTaxAmount(['taxable_amount'=>$totalBasicAmount,'employment_type'=>$employe->employment_type])['tax_amount'];
                 $emp13ChequeReport[$ekey]['total_i_tax_amount'] = $totalITaxAmount;
                 $emp13ChequeReport[$ekey]['net_payable_amount'] = number_format($totalBasicAmount/12-$totalITaxAmount);
             }

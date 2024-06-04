@@ -29,6 +29,9 @@ class ReimbursementController extends BaseController
             ->addColumn('action', function ($row) {
                 $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
                 return $actionBtn;
+            })->addColumn('claim_details', function ($row) {
+                $claimData = view('admin.payroll.reimbursement.index-claim-date', ['item' => $row]);
+                return $claimData;
             })
             ->editColumn('claim_date', function ($data) {
                 return \Carbon\Carbon::parse($data->claim_date)->isoFormat('DD.MM.YYYY');
@@ -169,7 +172,6 @@ class ReimbursementController extends BaseController
          // Filter currencies to include only 'pula' and 'usd'
          $allowedCurrencies = ['pula', 'usd'];
          $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
-
         return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$filteredCurrencySetting, 'page' => $this->page_name]);
     }
 
@@ -283,7 +285,7 @@ class ReimbursementController extends BaseController
         }
         $reimbursement->save();
         // return redirect("admin/payroll/reimbursement")->with('status','Add Reimbursement  successfully');
-        return $this->responseJson(true,200,'status created successfully',$reimbursement);
+        return $this->responseJson(true,200,ucfirst($request->status).' successfully',$reimbursement);
 
         // Reimbursement::create($request->all());
 

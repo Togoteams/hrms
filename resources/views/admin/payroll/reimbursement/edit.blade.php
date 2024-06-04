@@ -60,7 +60,7 @@
             </div>
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
-                    <label for="claim_from_month" class="required">Claim For Period From Month {{$reimbursement->claim_from_month}}</label>
+                    <label for="claim_from_month" class="required">Claim For Period From Month</label>
                     <select name="claim_from_month" id="claim_from_month" class="form-control"  required>
                         <option value="">Select From Month</option>
 

@@ -57,10 +57,8 @@
                             <th>Expense Currency</th>
                             <th>Expense Amount</th>
                             <th>Claim date</th>
-                            <th>From month</th>
-                            <th>To month</th>
-                            {{-- <th>Reimbursement Currency</th>
-                            <th>Reimbursement Amount</th> --}}
+                            <th>Claim month</th>
+                         
                             <th>Notes</th>
                             <th>Status</th>
                             <th width="100px">Action</th>
@@ -117,29 +115,11 @@
                                 name: 'claim_date'
                             },
                             {
-                                data: 'claim_from_month',
-                                name: 'claim_from_month',
-                                // render: function(data, type, full, meta) {
-                                //     var months = [
-                                //         'January', 'February', 'March', 'April',
-                                //         'May', 'June', 'July', 'August',
-                                //         'September', 'October', 'November', 'December'
-                                //     ];
-                                //     return months[data - 1];
-                                // }
+                                data: 'claim_details',
+                                name: 'claim_details',
+                               
                             },
-                            {
-                                data: 'claim_to_month',
-                                name: 'claim_to_month',
-                                // render: function(data, type, full, meta) {
-                                //     var months = [
-                                //         'January', 'February', 'March', 'April',
-                                //         'May', 'June', 'July', 'August',
-                                //         'September', 'October', 'November', 'December'
-                                //     ];
-                                //     return months[data - 1];
-                                // }
-                            },
+                           
                             {
                                 data: 'reimbursement_notes',
                                 name: 'reimbursement_notes'
