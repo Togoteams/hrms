@@ -189,6 +189,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
     Route::post('employee/delete-loan-history', [EmpLoanHistoryController::class, 'deleteEmpLoanHistory'])->name('employee.loan-history.delete');
 
     Route::get('employee/current-leaves/{eid?}', [CurrentLeaveController::class, 'viewCurrentLeaves'])->name('employee.current-leaves.list');
+    Route::get('employee/current-leaves-log', [CurrentLeaveController::class, 'leaveActivityLogList'])->name('employee.current-leaves-log.list');
     Route::post('employee/current-leaves', [CurrentLeaveController::class, 'postCurrentLeaves'])->name('employee.current-leaves.post');
     Route::post('employee/current-leaves-credit', [CurrentLeaveController::class, 'creditCurrentLeaves'])->name('employee.credit-leaves.post');
 

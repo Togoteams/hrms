@@ -18,10 +18,12 @@
                             <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
+                                    @if ($isCurrentLeaveFound)
                                     <button type="button" class="btn btn-white btn-sm" title="Add Emp Salary History"
                                         onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
                                         Creadit Leave
                                     </button>
+                                    @endif
                                     <form id="form_id" class="formsubmit" method="post"
                                         action="{{ route('admin.employee.current-leaves.post') }}">
                                         @csrf
@@ -62,7 +64,77 @@
                                         </div>
                                     </form>
                                 </div>
+                                @if ($isCurrentLeaveFound)
+                                <div class="p-2 mt-3 table-responsive">
+                                    <div>
+                                        <h3> Leave Log  of {{$employee?->user?->name}}  </h3>
+                                    </div>
+                                    <table
+                                        class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th>Leave</th>
+                                                <th>Count</th>
+                                                <th>Transaction Type</th>
+                                                <th>Date</th>
+                                                {{-- <th>Description</th> --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    
+                                <script type="text/javascript">
+                                    $(function() {
+                                        var i = 1;
+                                        var table = $('.data-table').DataTable({
+                                            processing: true,
+                                            serverSide: true,
+                                            autowidth: false,
+                                            ajax: {
+                                                "url": "{{ route('admin.employee.current-leaves-log.list') }}",
+                                                "type": "get",
+                                                "data": function(d) {
+                                                    // Add your parameters here
+                                                    d.employee_id = "{{ $employee->id }}"
+                                                    d.user_id = "{{ $employee->user_id }}"
+    
+                                                    // Add more parameters as needed
+                                                }
+                                            },
+                                            columns: [
+                                                {
+                                                    data: 'leave_type.name',
+                                                    width: '12%',
+                                                    name: 'leave_type.name'
+                                                },
+                                                {
+                                                    data: 'leave_count',
+                                                    width: '12%',
+                                                    name: 'leave_count'
+                                                },
+                                                {
+                                                    data: 'leave_transaction_type',
+                                                    width: '12%',
+                                                    name: 'leave_transaction_type'
+                                                },
+                                                {
+                                                    data: 'activity_at',
+                                                    width: '12%',
+                                                    name: 'activity_at'
+                                                },
+                                               
+                                            ]
+                                        });
+    
+                                    });
+                                </script>
+                                @endif
                             </div>
+                           
 
                         </div>
                         <!-- End Stats -->

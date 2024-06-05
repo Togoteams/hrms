@@ -77,7 +77,9 @@ class ReportController extends Controller
                 $leaveReportArr[$key]['leave_type_name'] = $leave->name;
                 $leaveReportArr[$key]['opening_balance'] = EmpCurrentLeave::where('leave_type_id',$leave_type_id)->where('created_at',"<=",$from_date)->where('employee_id',$employee_data->id)->value('leave_count') ?? 0;;
                 $leaveReportArr[$key]['accural'] = LeaveActivityLog::where('activity_at',">=",$from_date)->where('activity_at',"<=",$to_date)->where('is_credit',1)->where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->sum('leave_count') ?? 0;
-                $leaveReportArr[$key]['adjustment'] = 0;
+                $leaveReportArr[$key]['adjustment'] = LeaveActivityLog::where('activity_at',">=",$from_date)->where('activity_at',"<=",$to_date)->where('is_adjustment',1)->where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->sum('leave_count') ?? 0;;
+
+
                 $leaveReportArr[$key]['leave_availed'] = LeaveDate::where('leave_date',">=",$from_date)->where('leave_date',"<=",$to_date)->whereHas('leaveApply',function($q) use ($user_id,$leave_type_id){
                     $q->where('user_id',$user_id)->where('leave_type_id',$leave_type_id);
                 })->count();

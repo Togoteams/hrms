@@ -191,6 +191,7 @@ trait LeaveTraits
       'user_id'=>$userId,
       'leave_type_id'=>$leaveTypeId,
       'is_credit'=>$isCredit,
+      'is_adjustment'=>$isAdjustment,
       'leave_count'=>$leaveCount,
       'activity_at'=>$activityAt,
       'description'=>$description

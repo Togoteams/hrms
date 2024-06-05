@@ -21,6 +21,7 @@ class CurrentLeaveController extends BaseController
     public function viewCurrentLeaves(Request $request, $eid = null)
     {
         $employee = getEmployee($eid);
+        // return $request;
         $empLeaveTypes = LeaveSetting::where('emp_type',getEmpType($employee->employment_type))->where('salary_deduction_per','<>',100)->get(['id','name','slug']);
         // return $empLeaveType;
         $isCurrentLeaveFound = 0 ;
@@ -42,12 +43,40 @@ class CurrentLeaveController extends BaseController
             'empLeaveTypes'   => $empLeaveTypes,
         ]);
     }
+    public function leaveActivityLogList(Request $request)
+    {
+        $employee = getEmployee($request->employee_id);
+
+        if ($request->ajax()) {
+            $data = LeaveActivityLog::with('user','leave_type')->where('user_id', $request->user_id)->get();
+            return DataTables::of($data)
+                ->addColumn('leave_transaction_type', function ($row) {
+                  if($row->is_credit)
+                  {
+                    return "Leave credited";
+                  }elseif($row->is_adjustment)
+                  {
+                    return "Leave adjusted";
+                  }else
+                  {
+                    return "Leave Availed";
+                  }
+                })
+                ->editColumn('activity_at', function ($data) {
+                    return \Carbon\Carbon::parse($data->activity_at)->isoFormat('DD-MM-YYYY');
+                })
+                ->rawColumns(['leave_transaction_type'])
+                ->make(true);
+            }
+    }
     public function creditCurrentLeaves(Request $request){
+       
+        // return $isAdjustment;
         $request->validate([
             'user_id'           => ['required'],
             'employee_id'       => ['required'],
             'employee_type'       => ['required'],
-            'employee_type'       => ['required'],
+            'leave_credit_type'       => ['required'],
         ]);
    
         try {

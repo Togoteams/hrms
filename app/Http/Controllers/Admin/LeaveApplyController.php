@@ -398,12 +398,7 @@ class LeaveApplyController extends BaseController
                 'status_remarks' => $request->status_remarks,
                 'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
             ]);
-             $this->leaveActivityLog([
-                    'user_id'=>$leave_apply->user_id,
-                    'leave_type_id'=>$leave_apply->leave_type_id,
-                    'is_credit'=>0,
-                    'leave_count'=>count($leave_apply->leaveDate),
-                  ]);
+            
             $this->saveNotification([
                 'reference_id' => $id,
                 'user_id' => $leave_apply->user_id,
@@ -428,6 +423,7 @@ class LeaveApplyController extends BaseController
                     'is_approved' => 1,
                     'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
                 ]);
+               
                 $currentLeave = EmpCurrentLeave::where('user_id',$leave_apply->user_id)->where('leave_type_id',$leave_apply->leave_type_id)->first();
                 $currentLeaveCount = $currentLeave?->leave_count ?? 0;
                 $appliedLeaveCount = $leave_apply->leaveDate()->count();
@@ -436,8 +432,13 @@ class LeaveApplyController extends BaseController
                     if($currentLeaveCount >=$appliedLeaveCount)
                     {
                         $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
-    
                         $currentLeave->update(['leave_count'=>$remaining_leave]);
+                        $this->leaveActivityLog([
+                            'user_id'=>$leave_apply->user_id,
+                            'leave_type_id'=>$leave_apply->leave_type_id,
+                            'is_credit'=>0,
+                            'leave_count'=>count($leave_apply->leaveDate),
+                          ]);
                     }else
                     {
                         return response()->json([
