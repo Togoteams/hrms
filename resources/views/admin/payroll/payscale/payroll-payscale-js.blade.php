@@ -88,18 +88,25 @@
 
     function callEditMethod()
     {
+       
         var empId = $("#select_employee").val();
+        // var empId = $("#employee").val();
         console.log(empId);
         $(".err_message").removeClass("d-block").hide();
+        var payscale_date = $("#payscale_date").val();
         if(empId==null || empId=="" )
         {
             let empErrMessage ="Please Select Employee";
             $("#select_employee").after("<p class='d-block text-danger err_message'>" + empErrMessage + "</p>");
         }
-       
+        if(payscale_date=="")
+        {
+            let valueMessage="Please Select salary Month";
+            $("#payscale_date").after("<p class='d-block text-danger err_message'>" +valueMessage +"</p>");
+        }
 
         if(empId!=""){
-            editForm(editUrl+empId, 'edit');
+            editForm(editUrl+empId+"/"+payscale_date, 'edit');
             // taxCalCalculation();
             setTimeout(() => {
                  taxCalCalculation(2);

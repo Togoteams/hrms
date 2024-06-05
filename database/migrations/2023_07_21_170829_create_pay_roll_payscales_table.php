@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('status')->default('active');
             $table->double('basic',8,3);
+            $table->date('payscale_date')->nullable();
             // $table->double('fixed_deductions');
             // $table->double('other_deductions');
             $table->double('net_take_home');

@@ -29,10 +29,15 @@
                 <div class="p-5 card">
                     <form id="form_data" action="{{ route('admin.payroll.payscale.store') }}">
                         @csrf
-                        <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
-
+                        <input type="hidden" name="created_at" value="{{ date('Y-m-d H:s:i') }}">
                         <div class="row">
 
+                            <div class="mb-2 col-sm-4">
+                                <div class="form-group">
+                                    <label for="gender">Payscale Date</label>
+                                    <input type="date" name="payscale_date"  id="payscale_date" class="form-control form-control-sm "  value="{{ currentDateTime('Y-m-d') }}">
+                                </div>
+                            </div>
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="gender">Select Employees</label>
@@ -64,5 +69,12 @@
     </main>
 @endsection
 @push('custom-scripts')
+<script>
+     // Get the input element
+  var inputDate = document.getElementById('payscale_date');
+
+// Set the min attribute to today's date
+inputDate.min = new Date().toISOString().split('T')[0];
+</script>
 @include('admin.payroll.payscale.payroll-payscale-js')
 @endpush

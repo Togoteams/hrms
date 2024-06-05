@@ -104,6 +104,7 @@ class PayRollPayscaleCotroller extends BaseController
                     'employee_id' => $employee->id,
                     'user_id' => $request->user_id,
                     'basic' => $request->basic,
+                    'payscale_date' => $request->payscale_date,
                     'fixed_deductions' => $request->fixed_deductions ?? 0,
                     'other_deductions' => $request->other_deductions ?? 0,
                     'net_take_home' => $request->net_take_home,
@@ -113,7 +114,6 @@ class PayRollPayscaleCotroller extends BaseController
                     'gross_earning' => $request->gross_earning,
                     'branch_id' => $employee->branch_id,
                     'created_by' => auth()->user()->id,
-
                 ]);
                 foreach ($request->all() as $key => $value) {
                     $head =  PayrollHead::where('slug', $key)->first();
@@ -262,13 +262,13 @@ class PayRollPayscaleCotroller extends BaseController
         return view('admin.payroll.payscale.kra_print', compact('data'));
     }
 
-    public function get_employee_data($user_id = null)
+    public function get_employee_data($user_id = null, $payscale_date = null)
     {
         $page = $this->page_name;
         $emp = Employee::where('user_id', $user_id)->first();
         $data = PayRollPayscale::where('user_id', $user_id)->first();
 
-        $empSalary = SalaryHistory::where('user_id',$user_id)->orderBy('id','desc')->first();
+        $empSalary = SalaryHistory::where('user_id',$user_id)->where('date_of_current_basic',"<=",$payscale_date)->orderBy('id','desc')->first();
         // return $empSalary;
         if(empty($empSalary))
         {

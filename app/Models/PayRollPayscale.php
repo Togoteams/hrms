@@ -14,6 +14,7 @@ class PayRollPayscale extends Model
         'user_id',
         'status',
         'basic',
+        'payscale_date',
         // 'fixed_deductions',
         // 'other_deductions',
         'net_take_home',

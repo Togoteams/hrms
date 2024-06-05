@@ -180,15 +180,10 @@ class PayrollSalaryController extends Controller
         $salaryStartDate = date("Y-m-d", strtotime("-1 months", strtotime($salaryMonth . "-20")));
         $salaryEndDate = date("Y-m-d", strtotime($salaryMonth . "-20"));
         $user_id = $payscale->user_id;
-        // $holidayFound = true;
-        // while($holidayFound!=false)
-        // {
-        //     if (!isHolidayDate($salaryEndDate)) {
-        //         $holidayFound = false;
-        //     }
-        //     $salaryEndDate =  date('Y-m-d', (strtotime('-1 day', strtotime($salaryEndDate))));
-        // }
         $salaryEndDate = $this->adjustEndDate($salaryEndDate);
+
+        $data = PayrollSalary::where('user_id', $payscale->user_id)->where('payscale_date',"<=",$salaryStartDate)->orderBy('id','desc')->first();
+       
         if (empty($data)) {
             return response()->json("Pay Scale not defined");
         }
@@ -435,7 +430,7 @@ class PayrollSalaryController extends Controller
 
 
         $emp = Employee::where('user_id', $user_id)->first();
-        $data = PayRollPayscale::where('user_id', $user_id)->orderByDesc('id')->first();
+        $data = PayrollSalary::where('user_id', $user_id)->where('payscale_date',"<=",$salaryStartDate)->orderBy('id','desc')->first();
         $isSalaryFind = PayrollSalary::where('user_id',$user_id)->where('pay_for_month_year',$salaryMonth)->first();
         if (empty($data)) {
             return response()->json("Pay Scale not defined");
