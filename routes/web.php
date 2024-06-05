@@ -329,7 +329,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::resource('payscale', PayRollPayscaleCotroller::class);
         Route::get('payscale/status/{id}', [PayRollPayscaleCotroller::class, 'status'])->name('payscale.status');
         Route::get('payscale/tax/cal', [PayRollPayscaleCotroller::class, 'payscaleTaxCal'])->name('payscale.tax.cal');
-        Route::get('payscale/get-emp-head/{user_id?}/{payscale_date}', [PayRollPayscaleCotroller::class, 'get_employee_data'])->name('payscale.emp.head');
+        Route::get('payscale/get-emp-head/{user_id?}/{payscale_date?}', [PayRollPayscaleCotroller::class, 'get_employee_data'])->name('payscale.emp.head');
         /*--------------------------------------------- Pay Roll Payscal Crud End---------------------------------------------------------------*/
 
         // Pay Roll ReimbursementTypeController start

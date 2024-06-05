@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('increment_percentage')->nullable();
             $table->string('employment_type', 200)->nullable();
+            $table->date('salary_increment_date')->nullable();
             $table->date('effective_from')->nullable();
             $table->date('effective_to')->nullable();
             $table->text('financial_year')->nullable();

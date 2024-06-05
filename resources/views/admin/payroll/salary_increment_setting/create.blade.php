@@ -33,7 +33,13 @@
                                     </select>
                                 </div>
                             </div>
-                           
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label class="required" for="salary_increment_date">Salary Increment Date</label>
+                                    <input required id="salary_increment_date" placeholder="Enter salary Increment Date" value="{{currentDateTime('Y-m-d')}}" type="date"
+                                        name="salary_increment_date" class="form-control form-control-sm ">
+                                </div>
+                            </div>
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label class="required" for="effective_from">Effective From</label>
@@ -53,16 +59,17 @@
                                 <div class="form-group">
                                     <label class="required" for="financial_year">Financial year</label>
                                     <select required id="financial_year" name="financial_year"
-                                        class="form-control form-control-sm">
+                                                class="form-control form-control-sm">
                                         <option selected disabled=""> - Select financial year- </option>
                                         @php
                                             $currentYear = date('Y');
-                                        @endphp 
-                                        <option value="{{$currentYear-2}}">{{$currentYear-2}}</option>
-                                        <option value="{{$currentYear-1}}">{{$currentYear-1}}</option>
-                                        <option value="{{$currentYear}}">{{$currentYear}}</option>
-                                        <option value="{{$currentYear+1}}">{{$currentYear+1}}</option>
-                                        <option value="{{$currentYear+2}}">{{$currentYear+2}}</option>
+                                        @endphp
+                                        <option value="{{ $currentYear - 1 }}-{{ $currentYear }}"
+                                            >
+                                            {{ $currentYear - 1 }}-{{ $currentYear }}</option>
+                                        <option value="{{ $currentYear }}-{{ $currentYear + 1 }}"
+                                            >
+                                            {{ $currentYear }}-{{ $currentYear + 1 }}</option>
                                     </select>
                                 </div>
                             </div>

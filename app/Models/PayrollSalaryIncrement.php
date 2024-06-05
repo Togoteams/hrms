@@ -12,6 +12,7 @@ class PayrollSalaryIncrement extends Model
     protected $fillable =[
         'increment_percentage',
         'employment_type',
+        'salary_increment_date',
         'effective_from',
         'effective_to',
         'financial_year',

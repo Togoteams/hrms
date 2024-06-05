@@ -16,6 +16,7 @@ use App\Models\LeaveSetting;
 use App\Models\LeaveType;
 use App\Models\PayrollHead;
 use App\Models\PayrollSalaryHead;
+use App\Models\PayrollSalaryIncrement;
 use App\Models\Reimbursement;
 use Exception;
 use Yajra\DataTables\DataTables;
@@ -57,8 +58,31 @@ class ReportController extends Controller
         $from_date = $request->from_date;
         $pay_for_month_year = $request->pay_for_month_year;
         $to_date = $request->to_date;
-        $empData = Employee::find($employee_id);        
-        return view('admin.reports.employee-arrear-report',compact('employees','financial_year','empData','employee_id','search_type','pay_for_month_year','to_date','search_text'));
+        $reportArray = [];
+        $deductionHead = "";
+        $earningHead = "";
+    
+        $empData = Employee::find($employee_id);
+        if($employee_id && $financial_year)
+        {
+            $salaryIncrementSetting = PayrollSalaryIncrement::where('employment_type',$empData->employment_type)->where('financial_year',$financial_year)->first();
+            if(!empty($salaryIncrementSetting))
+            {
+                $monthArray = generateMonthArray($salaryIncrementSetting->effective_from,$salaryIncrementSetting->effective_to);
+                foreach($monthArray as $key => $month)
+                {
+                    $reportArray[$key]['month']=$month;
+                    $reportArray[$key]['increament_per'] = $salaryIncrementSetting->increment_percentage;
+                    $reportArray[$key]['data'] = PayrollSalary::with('payrollSalaryHead','payrollSalaryHead.payroll_head')->where('employee_id',$employee_id)->where('pay_for_month_year',date("Y-m",strtotime($month)))->first();;
+                    // $reportArray[$key]['month']=$month;
+                }   
+            }
+         
+                $deductionHead= PayrollHead::whereIn('employment_type',[$empData->employment_type,'both'])->where('head_type','deduction')->get();
+                $earningHead = PayrollHead::whereIn('employment_type',[$empData->employment_type,'both'])->where('head_type','income')->get();
+        }
+        // return  $salaryIncrementSetting;
+        return view('admin.reports.employee-arrear-report',compact('employees','deductionHead','earningHead','reportArray','financial_year','empData','employee_id','search_type','pay_for_month_year','to_date','search_text'));
     }
     public function leaveReport(Request $request)
     {
@@ -144,7 +168,6 @@ class ReportController extends Controller
                 ["month"=>["key"=>"03","lable"=>"March"],"year"=>$financialYears[1],'pay_for_month_year'=>$financialYears[1].'-03'],
             ];
             
-            // return $months;
             foreach($months as $key => $month)
             {
                 $empAnnualPayReport[$key]['data'] = PayrollSalary::with('payrollSalaryHead','payrollSalaryHead.payroll_head')->where('employee_id',$employee_id)->where('pay_for_month_year',$month['pay_for_month_year'])->first();

@@ -50,6 +50,7 @@
                                 <th>S.no</th>
                                 <th>Increment %</th>
                                 <th>Employment Type</th>
+                                <th>Salary Increment Date</th>
                                 <th>Effective From</th>
                                 <th>Effective to</th>
                                 <th>Financial Year</th>
@@ -116,6 +117,10 @@
                               {
                                   data: 'employment_type',
                                   name: 'employment_type'
+                              },
+                              {
+                                  data: 'salary_increment_date',
+                                  name: 'salary_increment_date'
                               },
                               {
                                   data: 'effective_from',

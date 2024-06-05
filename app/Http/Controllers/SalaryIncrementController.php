@@ -24,6 +24,12 @@ class SalaryIncrementController extends Controller
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.payroll.salary_increment_setting.buttons', ['item' => $row, "route" => 'payroll.salary_increment_setting']);
                     return $actionBtn;
+                })->editColumn('salary_increment_date', function ($data) {
+                    return \Carbon\Carbon::parse($data->salary_increment_date)->isoFormat('DD.MM.YYYY');
+                })->editColumn('effective_from', function ($data) {
+                    return \Carbon\Carbon::parse($data->effective_from)->isoFormat('DD.MM.YYYY');
+                })->editColumn('effective_to', function ($data) {
+                    return \Carbon\Carbon::parse($data->effective_to)->isoFormat('DD.MM.YYYY');
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -50,7 +56,7 @@ class SalaryIncrementController extends Controller
             'employment_type' => 'required|string',
             'effective_from' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'effective_to' => 'required|date|after:effective_from',
-            'financial_year' => 'required|numeric'
+            'financial_year' => 'required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
@@ -89,7 +95,7 @@ class SalaryIncrementController extends Controller
             'employment_type' => 'required|string',
             'effective_from' => 'required|date||before_or_equal:' . now()->format('Y-m-d'),
             'effective_to' => 'required|date|after:effective_from',
-            'financial_year' => 'required|numeric'
+            'financial_year' => 'required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();

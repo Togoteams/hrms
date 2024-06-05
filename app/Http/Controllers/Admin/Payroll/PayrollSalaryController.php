@@ -430,7 +430,7 @@ class PayrollSalaryController extends Controller
 
 
         $emp = Employee::where('user_id', $user_id)->first();
-        $data = PayrollSalary::where('user_id', $user_id)->where('payscale_date',"<=",$salaryStartDate)->orderBy('id','desc')->first();
+        $data = PayRollPayscale::where('user_id', $user_id)->where('payscale_date',"<=",$salaryStartDate)->orderBy('id','desc')->first();
         $isSalaryFind = PayrollSalary::where('user_id',$user_id)->where('pay_for_month_year',$salaryMonth)->first();
         if (empty($data)) {
             return response()->json("Pay Scale not defined");

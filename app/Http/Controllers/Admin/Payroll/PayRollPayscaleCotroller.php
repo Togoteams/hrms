@@ -41,10 +41,12 @@ class PayRollPayscaleCotroller extends BaseController
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.payroll.payscale.buttons', ['item' => $row, "route" => 'payroll.payscale']);
                     return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+                    })->editColumn('payscale_date', function ($data) {
+                        return \Carbon\Carbon::parse($data->payscale_date)->isoFormat('DD.MM.YYYY');
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
         return view('admin.payroll.payscale.index', ['page' => $this->page_name]);
     }
 

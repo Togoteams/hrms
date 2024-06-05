@@ -47,6 +47,7 @@
                                 <th>SI.</th>
                                 <th>Employee Code</th>
                                 <th>Employee Name</th>
+                                <th>Payscale Date</th>
                                 <th>Basic</th>
                                 <th>Gross Earning</th>
                                 <th>Total Deduction</th>
@@ -74,9 +75,6 @@
                                     orderable: false,
                                     searchable: false
                                 },
-
-
-
                                 {
                                     data: 'employee.ec_number',
                                     name: 'employee.ec_number'
@@ -84,6 +82,10 @@
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
+                                },
+                                {
+                                    data: 'payscale_date',
+                                    name: 'payscale_date'
                                 },
                                 {
                                     data: 'basic',

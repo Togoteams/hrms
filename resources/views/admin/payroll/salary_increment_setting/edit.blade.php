@@ -45,11 +45,15 @@
                 <select required id="financial_year" name="financial_year" value="local"
                     class="form-control form-control-sm">
                     <option selected disabled=""> - Select financial year- </option>
-                    <option {{ $data->financial_year=="2021"? "selected" :""}} value="2021">2021</option>
-                    <option {{ $data->financial_year=="2022"? "selected" :""}} value="2022">2022</option>
-                    <option {{ $data->financial_year=="2023"? "selected" :""}} value="2023">2023</option>
-                    <option {{ $data->financial_year=="2024"? "selected" :""}} value="2024">2024</option>
-                    <option {{ $data->financial_year=="2025"? "selected" :""}} value="2025">2025</option>
+                    @php
+                        $currentYear = date('Y');
+                    @endphp
+                    <option value="{{ $currentYear - 1 }}-{{ $currentYear }}"
+                        @if ($data->financial_year == $currentYear - 1 . '-' . $currentYear) {{ 'selected' }} @endif>
+                        {{ $currentYear - 1 }}-{{ $currentYear }}</option>
+                    <option value="{{ $currentYear }}-{{ $currentYear + 1 }}"
+                        @if ($data->financial_year == $currentYear . '-' . $currentYear + 1) {{ 'selected' }} @endif>
+                        {{ $currentYear }}-{{ $currentYear + 1 }}</option>
                 </select>
             </div>
         </div>

@@ -219,6 +219,25 @@ if (!function_exists('diffInMonths')) {
         // return (int) round($months);
     }
 }
+function generateMonthArray($start_date, $end_date) {
+    // Convert the start and end dates to DateTime objects
+    $start = new DateTime($start_date);
+    $end = new DateTime($end_date);
+
+    // Initialize an empty array to store the months
+    $months = array();
+
+    // Loop through each month between the start and end dates
+    while ($start <= $end) {
+        // Add the formatted month to the array
+        $months[] = $start->format('F Y');
+        
+        // Move to the next month
+        $start->modify('first day of next month');
+    }
+
+    return $months;
+}
 
 if (!function_exists('isMobileDevice')) {
     function isMobileDevice()
@@ -678,19 +697,19 @@ if (!function_exists('getHeadValue')) {
             $currentMonth = date('m');
             $arrearsAmount = 0;
             
-            $salaryIncrement = PayrollSalaryIncrement::where('financial_year', $currentYear)
-                //    ->where('effective_from','>=',date('Y-m-d'))->where('effective_to','<=',date('Y-m-d'))
-                ->where('employment_type', $emp->employment_type)->first();
-            if (!empty($salaryIncrement)) {
-                // $noOfPendingMonth = $currentMonth;
-                $dateOfJoining = date("Y-m-d", strtotime($salaryIncrement->effective_from));
-                $currentDate =date("Y-m-d", strtotime($salaryIncrement->effective_to));
+            // $salaryIncrement = PayrollSalaryIncrement::where('financial_year', $currentYear)
+            //     //    ->where('effective_from','>=',date('Y-m-d'))->where('effective_to','<=',date('Y-m-d'))
+            //     ->where('employment_type', $emp->employment_type)->first();
+            // if (!empty($salaryIncrement)) {
+            //     // $noOfPendingMonth = $currentMonth;
+            //     $dateOfJoining = date("Y-m-d", strtotime($salaryIncrement->effective_from));
+            //     $currentDate =date("Y-m-d", strtotime($salaryIncrement->effective_to));
 
-                $diff = abs(strtotime($dateOfJoining) - strtotime($currentDate));
-                $years = floor($diff / (365 * 60 * 60 * 24));
-                $months = floor(($diff - $years  * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
-                $arrearsAmount = ((($basicAmout / 100)) * $salaryIncrement->increment_percentage) * $months;
-            }
+            //     $diff = abs(strtotime($dateOfJoining) - strtotime($currentDate));
+            //     $years = floor($diff / (365 * 60 * 60 * 24));
+            //     $months = floor(($diff - $years  * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
+            //     $arrearsAmount = ((($basicAmout / 100)) * $salaryIncrement->increment_percentage) * $months;
+            // }
             return $arrearsAmount;
         } elseif ($headSlug == "reimbursement") {
             $reimbursementAmount = 0;
