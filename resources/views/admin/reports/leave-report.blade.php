@@ -40,18 +40,16 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="bmd-label-floating">From Date</label>
-                                            </br>
-                                            <input type="date" class="form-control" name="from_date"
-                                                value="{{ $from_date }}" id="from_date">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">To Date</label>
-                                            </br>
-                                            <input type="date" class="form-control" name="to_date"
-                                                value="{{ $to_date }}" id="to_date">
+                                            <label class="required" for="financial_year">Financial year</label>
+                                            <select required id="financial_year" name="financial_year"
+                                                class="form-control form-control-sm">
+                                                <option selected disabled=""> - Select financial year- </option>
+                                                @php
+                                                    $currentYear = date('Y');
+                                                @endphp 
+                                                <option value="{{$currentYear-1}}-{{$currentYear}}" @if($financial_year==(($currentYear-1)."-".$currentYear)) {{'selected'}} @endif>{{$currentYear-1}}-{{$currentYear}}</option>
+                                                <option value="{{$currentYear}}-{{$currentYear+1}}"  @if($financial_year==(($currentYear)."-".$currentYear+1)) {{'selected'}} @endif>{{$currentYear}}-{{$currentYear+1}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -79,7 +77,7 @@
                                 </div>
                             </form>
                         </div>
-                        @if($employee_id && $from_date && $to_date)
+                        @if($employee_id && $financial_year)
                         <div class="report-display-section">
                             <table >
                                 <tr>

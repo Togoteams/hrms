@@ -6,32 +6,92 @@ use App\Http\Controllers\BaseController;
 use App\Models\CurrentLeave;
 use App\Models\EmpCurrentLeave;
 use App\Models\Employee;
+use App\Models\LeaveActivityLog;
 use App\Models\LeaveSetting;
 use Exception;
 use Illuminate\Http\Request;
 use App\Traits\GlobalTraits;
+use Yajra\DataTables\Facades\DataTables;
 
 class CurrentLeaveController extends BaseController
 {
     public $page_name = "Employees";
     use GlobalTraits;
 
-    public function viewCurrentLeaves($eid = null)
+    public function viewCurrentLeaves(Request $request, $eid = null)
     {
         $employee = getEmployee($eid);
-        // $result = $this->updateCurrentLeaveOfEachEmployee();
         $empLeaveTypes = LeaveSetting::where('emp_type',getEmpType($employee->employment_type))->where('salary_deduction_per','<>',100)->get(['id','name','slug']);
         // return $empLeaveType;
+        $isCurrentLeaveFound = 0 ;
         foreach($empLeaveTypes as $key => $value)
         {
             $value['leave_count'] =  EmpCurrentLeave::where('user_id', $employee->user_id)->where('employee_id',$employee->id)->where('leave_type_id',$value->id)->value('leave_count') ?? 0;
         }
+        $isCurrentLeaveFound= EmpCurrentLeave::where('user_id', $employee->user_id)->where('employee_id',$employee->id)->exists();
+        if ($request->ajax()) {
+            $data = LeaveActivityLog::where('user_id', $employee->user_id)->where('employee_id',$employee->id)->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->make(true);
+            }
         return view('admin.employees.current-leave', [
             'page'          => $this->page_name,
             'employee'   => $employee,
+            'isCurrentLeaveFound'   => $isCurrentLeaveFound,
             'empLeaveTypes'   => $empLeaveTypes,
         ]);
     }
+    public function creditCurrentLeaves(Request $request){
+        $request->validate([
+            'user_id'           => ['required'],
+            'employee_id'       => ['required'],
+            'employee_type'       => ['required'],
+            'employee_type'       => ['required'],
+        ]);
+   
+        try {
+            $saveData = [];
+            $userId = $request->user_id;
+            $employeeId = $request->employee_id;
+            $leaveTypeId = $request->leave_type_id;
+            $employee = Employee::where('user_id', $request->user_id)->first();
+            $currentLeave = EmpCurrentLeave::where('user_id', $userId)->where('employee_id',$employeeId)->where('leave_type_id',$leaveTypeId)->first();
+            if(!empty($currentLeave))
+            {
+                $currentLeave->leave_count = $currentLeave->leave_count + $request->leave_count;
+                $currentLeave->action_date = date('Y-m-d');
+                $currentLeave->save();
+                if($request->leave_credit_type=='adjustment')
+                {
+
+                    $isAdjustment =1;
+                    $isCredit =0;
+                }else
+                {
+                    $isCredit =1;
+                    $isAdjustment =0;
+                }
+                $this->leaveActivityLog([
+                    'user_id'=>$request->user_id,
+                    'leave_type_id'=>$leaveTypeId,
+                    'is_credit'=>$isCredit,
+                    'is_adjustment'=>$isAdjustment,
+                    'leave_count'=>  $request->leave_count,
+                    'leave_update_reason'=>  $request->credit_reason,
+                  ]);
+            }
+            $message = "Current Leave Updated Successfully";
+            return $this->responseJson(
+                true,
+                200,
+                $message,
+                ["employee" => $employee, 'redirect_url' => route('admin.employee.current-leaves.list', $employee->emp_id)]
+            );
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
+    }   
 
     public function postCurrentLeaves(Request $request)
     {
@@ -39,15 +99,7 @@ class CurrentLeaveController extends BaseController
             'user_id'           => ['required'],
             'employee_id'       => ['required'],
             'employee_type'       => ['required'],
-            // 'emp_leave_component.*.leave_type_id'       => ['required'],
-            // 'emp_leave_component.*.leave_count'       => ['required'],
-            // 'sick_leave'        => ['required', 'integer'],
-            // 'earned_leave'      => [!empty($request->is_local) ? 'required' : 'nullable', 'integer'],
-            // 'maternity_leave'   => ['required', 'integer'],
-            // 'bereavement_leave' => [!empty($request->is_local) ? 'required' : 'nullable', 'integer'],
-            // // 'leave_without_pay' => ['required', 'integer'],
-            // 'casual_leave'      => [empty($request->is_local) ? 'required' : 'nullable', 'integer'],
-            // 'privileged_leave'  => [empty($request->is_local) ? 'required' : 'nullable', 'integer'],
+          
         ]);
         // return $request->all();
        
@@ -65,9 +117,16 @@ class CurrentLeaveController extends BaseController
                     $saveData[$key]['leave_count'] = $value['leave_count'];
                     $saveData[$key]['leave_count_decimal'] = $value['leave_count'];
                     $saveData[$key]['created_by'] = auth()->user()->id;
-                    $saveData[$key]['updated_at'] = date('Y-m-d H:i:s');
-                    $saveData[$key]['created_at'] = date('Y-m-d H:i:s');
+                    $saveData[$key]['updated_at'] = currentDateTime();
+                    $saveData[$key]['created_at'] = currentDateTime();
+                    $saveData[$key]['action_date'] = currentDateTime('Y-m-d');
                     $saveData[$key]['updated_by'] = auth()->user()->id;
+                    $this->leaveActivityLog([
+                        'user_id'=>$request->user_id,
+                        'leave_type_id'=>$value['leave_type_id'],
+                        'is_credit'=>1,
+                        'leave_count'=> $value['leave_count'],
+                      ]);
             }
             $empCurrentLeave = EmpCurrentLeave::insert($saveData);
             $message = "Current Leave Updated Successfully";

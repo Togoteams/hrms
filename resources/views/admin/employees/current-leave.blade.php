@@ -18,6 +18,10 @@
                             <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
+                                    <button type="button" class="btn btn-white btn-sm" title="Add Emp Salary History"
+                                        onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
+                                        Creadit Leave
+                                    </button>
                                     <form id="form_id" class="formsubmit" method="post"
                                         action="{{ route('admin.employee.current-leaves.post') }}">
                                         @csrf
@@ -27,97 +31,34 @@
                                             value="{{ !empty($employee) ? $employee->user_id : '' }}">
                                         <input type="hidden" name="employee_id"
                                             value="{{ !empty($employee) ? $employee->id : '' }}">
-                                        <input type="hidden" name="employee_type"
-                                        value="{{$employee->employment_type }}">
+                                        <input type="hidden" name="employee_type" value="{{ $employee->employment_type }}">
                                         <input type="hidden" name="is_local"
                                             value="{{ !empty($employee) ? ($employee->employment_type == 'local' ? true : false) : false }}">
 
                                         <div class="p-3 pb-4 row text-dark">
-                                            @foreach ($empLeaveTypes as $key=>  $empLeaveType)
+                                            @foreach ($empLeaveTypes as $key => $empLeaveType)
                                                 <div class="pt-3 col-2 fw-semibold">
-                                                    <label for="{{$empLeaveType->slug}}">{{$empLeaveType->name}} <small
+                                                    <label for="{{ $empLeaveType->slug }}">{{ $empLeaveType->name }} <small
                                                             class="required-field">*</small></label>
                                                 </div>
-                                                <input type="hidden" name="emp_leave_component[{{$key}}][leave_type_id]"
-                                                value="{{$empLeaveType->id }}">
+                                                <input type="hidden"
+                                                    name="emp_leave_component[{{ $key }}][leave_type_id]"
+                                                    value="{{ $empLeaveType->id }}">
                                                 <div class="pt-2 col-4">
-                                                    <input id="{{$empLeaveType->slug}}" placeholder="Enter {{$empLeaveType->name}}" max="100" type="number"
-                                                        name="emp_leave_component[{{$key}}][leave_count]" required
-                                                        value="{{ $empLeaveType->leave_count }}"
+                                                    <input id="{{ $empLeaveType->slug }}"
+                                                        placeholder="Enter {{ $empLeaveType->name }}" max="100"
+                                                        type="number"
+                                                        name="emp_leave_component[{{ $key }}][leave_count]"
+                                                        required value="{{ $empLeaveType->leave_count }}"
                                                         class="form-control form-control-sm">
                                                 </div>
                                             @endforeach
-                                            {{-- <div class="pt-3 col-2 fw-semibold">
-                                                <label for="sick_leave">Sick Leave<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4">
-                                                <input id="sick_leave" placeholder="Enter Sick Leave" max="100" type="number"
-                                                    name="sick_leave" required
-                                                    value="{{ !empty($leaves) ? $leaves->sick_leave : '' }}"
-                                                    class="form-control form-control-sm">
-                                            </div>
 
-                                            <div class="pt-3 col-2 fw-semibold">
-                                                <label for="maternity_leave">Maternity Leave<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4">
-                                                <input id="maternity_leave" placeholder="Enter Maternity Leave"  max="100"
-                                                    type="number" name="maternity_leave" required
-                                                    value="{{ !empty($leaves) ? $leaves->maternity_leave : '' }}"
-                                                    class="form-control form-control-sm ">
-                                            </div>
-
-                                            
-
-                                            <div class="pt-3 col-2 fw-semibold local d-none">
-                                                <label for="earned_leave">Earned Leave<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4 local d-none">
-                                                <input id="earned_leave" placeholder="Enter Earned Leave"  max="100" type="number"
-                                                    name="earned_leave"
-                                                    value="{{ !empty($leaves) ? $leaves->earned_leave : '' }}"
-                                                    class="form-control form-control-sm local-input">
-                                            </div>
-
-                                            <div class="pt-3 col-2 fw-semibold local d-none">
-                                                <label for="bereavement_leave">Bereavement Leave<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4 local d-none">
-                                                <input id="bereavement_leave"  max="100" placeholder="Enter Bereavement Leave"
-                                                    type="number" name="bereavement_leave"
-                                                    value="{{ !empty($leaves) ? $leaves->bereavement_leave : '' }}"
-                                                    class="form-control form-control-sm local-input">
-                                            </div>
-
-                                            <div class="pt-3 col-2 fw-semibold ibo d-none">
-                                                <label for="casual_leave">Casual Leave<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4 ibo d-none">
-                                                <input id="casual_leave"  max="100" placeholder="Enter Casual Leave" type="number"
-                                                    name="casual_leave"
-                                                    value="{{ !empty($leaves) ? $leaves->casual_leave : '' }}"
-                                                    class="form-control form-control-sm ibo-input">
-                                            </div>
-
-                                            <div class="pt-3 col-2 fw-semibold ibo d-none">
-                                                <label for="privileged_leave">Privileged Leave<small
-                                                        class="required-field">*</small></label>
-                                            </div>
-                                            <div class="pt-2 col-4 ibo d-none">
-                                                <input id="privileged_leave"  max="100" placeholder="Enter Privileged Leave"
-                                                    type="number" name="privileged_leave"
-                                                    value="{{ !empty($leaves) ? $leaves->privileged_leave : '' }}"
-                                                    class="form-control form-control-sm ibo-input">
-                                            </div> --}}
-
-                                            <div class="pt-5 text-center">
-                                                <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
-                                            </div>
+                                            @if ($isCurrentLeaveFound == 0)
+                                                <div class="pt-5 text-center">
+                                                    <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
+                                                </div>
+                                            @endif
                                         </div>
                                     </form>
                                 </div>
@@ -127,9 +68,96 @@
                         <!-- End Stats -->
                     </div>
 
+
+                    {{-- Add form model start --}}
+                    <!-- Modal -->
+                    <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content ">
+                                <div class="modal-header ">
+                                    <h5 class="modal-title" id="modalTitle"></h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="add">
+                                    <form id="form_id" class="formsubmit" method="post"
+                                        action="{{ route('admin.employee.credit-leaves.post') }}">
+                                        @csrf
+                                        <input type="hidden" name="user_id"
+                                            value="{{ !empty($employee) ? $employee->user_id : '' }}">
+                                        <input type="hidden" name="employee_id"
+                                            value="{{ !empty($employee) ? $employee->id : '' }}">
+                                        <input type="hidden" name="employee_type"
+                                            value="{{ $employee->employment_type }}">
+                                        <div class="row">
+                                            <div class="mb-2 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="leave_type_id">Leave Type</label>
+                                                    <small class="required-field">*</small>
+                                                    <select name="leave_type_id" class="form-control">
+                                                        @foreach ($empLeaveTypes as $leaveType)
+                                                            <option value="{{ $leaveType->id }}">{{ $leaveType->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="date_of_current_basic">Credit Type</label>
+                                                    <small class="required-field">*</small>
+                                                    <select name="leave_credit_type" id="leave_credit_type"
+                                                        class="form-control">
+                                                        <option value="credit">Credit</option>
+                                                        <option value="adjustment">Adjustment</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="date_of_current_basic">Leave Count</label>
+                                                    <small class="required-field">*</small>
+                                                    <input type="number" name="leave_count" id="leave_count"
+                                                        class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="date_of_current_basic">Credit Reason </label>
+                                                    <small class="required-field">*</small>
+                                                    <input type="text" name="credit_reason" id="credit_reason"
+                                                        class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-white" id="btnSave">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
     </main>
 @endsection
 @push('custom-scripts')
-   
-
+    <script>
+        function addSalaryhistory(user_id) {
+            $('#form_id').trigger("reset");
+            $("#id").val("");
+            $('#formModal').modal('show');
+            $("#modalTitle").html("Leave Credit");
+            $("#btnSave").html("Submit");
+            $("#user_id").val(user_id);
+        }
+    </script>
 @endpush

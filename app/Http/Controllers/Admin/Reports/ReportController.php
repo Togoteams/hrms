@@ -7,6 +7,7 @@ use App\Models\Branch;
 use App\Models\CurrencySetting;
 use App\Models\EmpCurrentLeave;
 use App\Models\Employee;
+use App\Models\LeaveActivityLog;
 use Illuminate\Http\Request;
 use App\Models\PayrollSalary;
 use App\Models\LeaveApply;
@@ -50,13 +51,14 @@ class ReportController extends Controller
         $search_text = $request->search_text;
         $employee_id = $request->employee_id;
         $search_type = $request->search_type;
+        $financial_year = $request->financial_year;
         $from_date = $request->from_date;
         $pay_for_month_year = $request->pay_for_month_year;
         $to_date = $request->to_date;
         $employee_data="";
         $leaveReportArr = [];
         $employees = Employee::getList()->get();
-        if($employee_id && $from_date && $to_date)
+        if($employee_id && $financial_year)
         {
             $employee_data = Employee::find($employee_id);
             $excludeArray = [];
@@ -65,26 +67,31 @@ class ReportController extends Controller
                 $excludeArray = ['maternity-leave'];
             }
             $user_id = $employee_data->user_id;
+            $financialYears = explode("-",$financial_year);
+            $from_date = date("Y-m-d",strtotime($financialYears[0]."-01-01"));
+            $to_date = date("Y-m-d",strtotime($financialYears[0]."-12-31"));
             $leave_data = LeaveSetting::where('emp_type',getEmpType($employee_data->employment_type))->whereNotIn('slug',$excludeArray)->get();
             foreach($leave_data as $key => $leave)
             {
                 $leave_type_id = $leave->id;
                 $leaveReportArr[$key]['leave_type_name'] = $leave->name;
-                $leaveReportArr[$key]['opening_balance'] = 0;
-                $leaveReportArr[$key]['accural'] = 0;
+                $leaveReportArr[$key]['opening_balance'] = EmpCurrentLeave::where('leave_type_id',$leave_type_id)->where('created_at',"<=",$from_date)->where('employee_id',$employee_data->id)->value('leave_count') ?? 0;;
+                $leaveReportArr[$key]['accural'] = LeaveActivityLog::where('activity_at',">=",$from_date)->where('activity_at',"<=",$to_date)->where('is_credit',1)->where('leave_type_id',$leave_type_id)->where('user_id',$user_id)->sum('leave_count') ?? 0;
                 $leaveReportArr[$key]['adjustment'] = 0;
-                $leaveReportArr[$key]['leave_availed'] = LeaveDate::where('leave_date',"<=",$from_date)->where('leave_date',">=",$to_date)->whereHas('leaveApply',function($q) use ($user_id,$leave_type_id){
+                $leaveReportArr[$key]['leave_availed'] = LeaveDate::where('leave_date',">=",$from_date)->where('leave_date',"<=",$to_date)->whereHas('leaveApply',function($q) use ($user_id,$leave_type_id){
                     $q->where('user_id',$user_id)->where('leave_type_id',$leave_type_id);
                 })->count();
                 $leaveReportArr[$key]['leave_balance'] = EmpCurrentLeave::where('leave_type_id',$leave_type_id)->where('employee_id',$employee_data->id)->value('leave_count') ?? 0;
                 $leaveReportArr[$key]['expiry_date_message'] = $leave?->expiry_date_message;
             }
         }
+        // return $leaveReportArr;
        
         return view('admin.reports.leave-report',[
             'employees' => $employees,
             'employee_id' => $employee_id,
             'search_type' => $search_type,
+            'financial_year' => $financial_year,
             'employee_data' => $employee_data,
             'leaveReportArr' => $leaveReportArr,
             'pay_for_month_year' => $pay_for_month_year,

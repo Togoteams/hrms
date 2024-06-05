@@ -11,9 +11,10 @@ use App\Models\LeaveSetting;
 use App\Models\LeaveDate;
 use App\Models\LeaveTimeApprovel;
 use App\Models\User;
-
+use App\Traits\LeaveTraits;
 trait GlobalTraits
 {
+    use LeaveTraits;
     public function updateCurrentLeaveOfEachEmployee()
     {
         $employees = Employee::get();
@@ -91,6 +92,12 @@ trait GlobalTraits
                         $leave->save();
                 //     }
                 // }
+                $this->leaveActivityLog([
+                    'user_id'=>$employee->user_id,
+                    'leave_type_id'=>$leave->leave_type_id,
+                    'is_credit'=>1,
+                    'leave_count'=>$currentLeaveCount,
+                  ]);
             }
         }
     }

@@ -190,6 +190,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
     Route::get('employee/current-leaves/{eid?}', [CurrentLeaveController::class, 'viewCurrentLeaves'])->name('employee.current-leaves.list');
     Route::post('employee/current-leaves', [CurrentLeaveController::class, 'postCurrentLeaves'])->name('employee.current-leaves.post');
+    Route::post('employee/current-leaves-credit', [CurrentLeaveController::class, 'creditCurrentLeaves'])->name('employee.credit-leaves.post');
 
     Route::get('employee/passport-omang/{eid?}', [EmployeeController::class, 'viewPassportOmang'])->name('employee.passportOmang.form');
     Route::post('employee/passport-omang', [EmployeeController::class, 'postPassportOmang'])->name('employee.passportOmang.post');

@@ -398,6 +398,12 @@ class LeaveApplyController extends BaseController
                 'status_remarks' => $request->status_remarks,
                 'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
             ]);
+             $this->leaveActivityLog([
+                    'user_id'=>$leave_apply->user_id,
+                    'leave_type_id'=>$leave_apply->leave_type_id,
+                    'is_credit'=>0,
+                    'leave_count'=>count($leave_apply->leaveDate),
+                  ]);
             $this->saveNotification([
                 'reference_id' => $id,
                 'user_id' => $leave_apply->user_id,

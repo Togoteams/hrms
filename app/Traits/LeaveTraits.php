@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Models\EmpCurrentLeave;
 use App\Models\Employee;
+use App\Models\LeaveActivityLog;
 use App\Models\LeaveApply;
 use Illuminate\Support\Carbon;
 use App\Models\LeaveEncashment;
@@ -165,5 +166,35 @@ trait LeaveTraits
       $user_id = auth()->user()->id;
       // $total_leave = LeaveType::find($leave_type_id);
     }
+  }
+  public function leaveActivityLog($data)
+  {
+    $userId = $data['user_id'];
+    $leaveTypeId = $data['leave_type_id'];
+    $isCredit = $data['is_credit'] ?? 0;
+    $isAdjustment = $data['is_adjustment'] ?? 0;
+    $leaveCount = $data['leave_count'];
+    $activityAt = currentDateTime('Y-m-d');
+    $user = User::find($userId);
+    $leaveSetting = LeaveSetting::find($leaveTypeId);
+    if($isCredit)
+    {
+      $description =$user->name." ".$leaveCount." ".$leaveSetting->name." Leave is credited on ". currentDateTime('d-m-Y');
+    }elseif($isAdjustment)
+    {
+      $description =$user->name." ".$leaveCount." ".$leaveSetting->name." Leave is adjusted on ". currentDateTime('d-m-Y');
+    }else
+    {
+      $description =$user->name." is avail ".$leaveCount." ".$leaveSetting->name." Leave on ". currentDateTime('d-m-Y');
+    }
+    $leaveActivityLog = LeaveActivityLog::create([
+      'user_id'=>$userId,
+      'leave_type_id'=>$leaveTypeId,
+      'is_credit'=>$isCredit,
+      'leave_count'=>$leaveCount,
+      'activity_at'=>$activityAt,
+      'description'=>$description
+    ]);
+    return $leaveActivityLog;
   }
 }
