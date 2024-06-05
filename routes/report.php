@@ -13,6 +13,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         Route::get('/annula-tax-deduction', [ReportController::class, 'annulaTaxDeduction'])->name('annula-tax-deduction');
         Route::get('/thirteen-cheque-report', [ReportController::class, 'thirteenChequeReport'])->name('thirteen-cheque-report');
         Route::get('/branch-wise-employee-report', [ReportController::class, 'branchWiseEmployeeReport'])->name('branch-wise-employee-report');
+        Route::get('/employee-arrear-report', [ReportController::class, 'employeeArrearReport'])->name('employee-arrear-report');
         Route::get('/leave-report', [ReportController::class, 'leaveReport'])->name('leave-report');
     });
 });

@@ -107,7 +107,8 @@
                                         name="approval_authority" class="form-control form-control-sm approval_authority">
                                         <option selected disabled> - Select - </option>
                                         @foreach ($approvalAuthority as $key => $value)
-                                            <option value="{{ $value->user_id }}">{{ $value->user->name }} </option>
+                                            <option value="{{ $value->user_id }}">{{ $value->user->name }}  -
+                                                {{ $value->ec_number }} </option>
                                         @endforeach
                                     </select>
                                 </div>

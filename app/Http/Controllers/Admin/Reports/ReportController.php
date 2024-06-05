@@ -46,6 +46,20 @@ class ReportController extends Controller
         }
         return view('admin.reports.salary-report',compact('employees','employee_id','search_type','pay_for_month_year','to_date','search_text'));  
     }
+    public function employeeArrearReport(Request $request)
+    {
+        $employees = Employee::getList()->get();
+        $search_text = $request->search_text;
+        $employee_id = $request->employee_id;
+        $financial_year = $request->financial_year;
+
+        $search_type = $request->search_type;
+        $from_date = $request->from_date;
+        $pay_for_month_year = $request->pay_for_month_year;
+        $to_date = $request->to_date;
+        $empData = Employee::find($employee_id);        
+        return view('admin.reports.employee-arrear-report',compact('employees','financial_year','empData','employee_id','search_type','pay_for_month_year','to_date','search_text'));
+    }
     public function leaveReport(Request $request)
     {
         $search_text = $request->search_text;
