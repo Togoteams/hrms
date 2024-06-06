@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="mb-2 col-sm-4">
                             <div class="form-group">
-                                <label for="pay_for_month_year" class="required">Pay For Month</label>
+                                <label for="pay_for_month_year" class="required">Salary Month</label>
                                 <input type="month" class="form-control form-control-sm" name="pay_for_month_year" id="pay_for_month_year" required>
                             </div>
                         </div>

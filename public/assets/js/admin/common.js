@@ -655,12 +655,18 @@ $(document).ready(function (e) {
                 $(".err_message").removeClass("d-block").hide();
                 $("form .form-control").removeClass("is-invalid");
                 $.each(responseJSON.errors, function (index, valueMessage) {
-                    $("#" + index).addClass("is-invalid");
-                    $("#" + index).after(
-                        "<p class='d-block text-danger err_message'>" +
-                            valueMessage +
-                            "</p>"
-                    );
+                   
+                    $.each(valueMessage, function(index2, message) {
+                        // Convert the field name to a valid jQuery selector
+                        var fieldName = index.replace('.', '_');
+                        var messageDisplay =message.replace(/_/g, ' ').replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+                        $("#" + fieldName).addClass("is-invalid");
+                        $("#" + fieldName).after(
+                            "<p class='d-block text-danger err_message'>" +
+                            messageDisplay +
+                                "</p>"
+                        );
+                    });
                 });
             }
         });

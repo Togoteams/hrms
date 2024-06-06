@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
-class EmployeeKraController extends Controller
+class EmployeeKraController extends BaseController
 {
     public $page_name = "Employee Performance";
     /**
@@ -73,19 +74,21 @@ class EmployeeKraController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'user_id' => 'required|numeric',
-            'attribute_name' => 'required|array|min:1',
-            'attribute_description' => 'required|array|min:1',
-            'commects' => 'required|array|min:1',
-            'max_marks' => 'required|array|min:1',
-            // 'min_marks' => 'required|array|min:1',
-            'marks_by_reporting_autheority' => 'required|array|min:1',
-            'marks_by_review_autheority' => 'required|array|min:1',
+            'marks_by_reporting_autheority' => 'required|array',
+            'marks_by_reporting_autheority.*' => 'required|numeric|lt:max_marks.*',
+            'marks_by_review_autheority' => 'required|array',
+            'marks_by_review_autheority.*' => 'required|numeric|lt:max_marks.*',
+        ],[
+            'marks_by_reporting_autheority.*.required' => 'Marks By Reporting authority marks is required',
+            'marks_by_reporting_autheority.*.lt' => 'Marks By Reporting authority marks should be less than max marks',
+            'marks_by_review_autheority.*.required' => 'Marks By Review authority marks is required',
+            'marks_by_review_autheority.*.lt' => 'Marks By Review authority marks should be less than max marks',
         ]);
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
+        // if ($validator->fails()) {
+        //     return $validator->errors();
+        // } else {
             try {
                 if (isset($request->marks_by_reporting_autheority) && count($request->marks_by_reporting_autheority) > 0) {
 
@@ -114,11 +117,12 @@ class EmployeeKraController extends Controller
                         EmployeeKra::create($data);
                     }
                 }
+                return $this->responseJson(true,200,$this->page_name . " Added Successfully");
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
                 return response()->json(['error' => $e->getMessage()]);
             }
-        }
+        // }
     }
 
     /**

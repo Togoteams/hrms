@@ -27,7 +27,7 @@
                 </div>
                 <!-- Button trigger modal -->
                 <div class="p-5 card">
-                    <form id="form_data" action="{{ route('admin.employee-kra.store') }}">
+                    <form id="form_data" class="formsubmit" action="{{ route('admin.employee-kra.store') }}">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
@@ -59,7 +59,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($kra_attributes as $kra)
+                                        @foreach ($kra_attributes as $key=> $kra)
                                             <tr>
                                                 <td>{{ $loop->index + 1 }}</td>
                                                 <td style="max-width:220px;"> <b>{{ $kra->name }} -
@@ -77,11 +77,11 @@
                                                     <input required type="hidden" name="max_marks[]"
                                                         value="{{ $kra->max_marks }}">
                                                 </td>
-                                                <td><input required type="number" maxlength="2"
-                                                        class="form-control form-control-sm"
+                                                <td><input required type="number"  max="{{$kra->max_marks}}"
+                                                        class="form-control form-control-sm" id="marks_by_reporting_autheority{{$key}}"
                                                         name="marks_by_reporting_autheority[]"></td>
-                                                <td><input required type="number" maxlength="2"
-                                                        class="form-control form-control-sm"
+                                                <td><input required type="number"  max="{{$kra->max_marks}}"
+                                                        class="form-control form-control-sm" id="marks_by_review_authority_{{$key}}"
                                                         name="marks_by_review_autheority[]"> </td>
                                             </tr>
                                         @endforeach
@@ -97,7 +97,7 @@
                                     class="text-danger errormax_marks fw-bolder"><u> Create KRA </u></a>
                                 Attribute(s) first
                             @else
-                                <button type="button" onclick="ajaxCall('form_data')" class="btn btn-white"
+                                <button type="submit" class="btn btn-white"
                                     {{ count($kra_attributes) > 0 ? '' : 'disabled' }}>
                                     Add {{ $page }}
                                 </button>

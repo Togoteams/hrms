@@ -176,9 +176,6 @@
             "name": "Add Employee Kra","module": "Employee Kra", "permissions_for":"admin,branch_supervisor"
         },
         {
-            "name": "Edit Employee Kra","module": "Employee Kra", "permissions_for":"admin,branch_supervisor"
-        },
-        {
             "name": "View Employee Kra","module": "Employee Kra", "permissions_for":"admin,employee"
         },
         {

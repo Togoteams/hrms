@@ -12,12 +12,12 @@
     </button>
     @endcan --}}
 
-    @can('edit-employee-kra')
+    {{-- @can('edit-employee-kra')
     <button type="button" onclick="editForm('{{ route('admin.' . $route . '.edit', $item->id) }}', 'edit')" href="#"
         data-bs-toggle="modal" data-bs-target="#modaledit" class="btn btn-edit btn-sm"><i
             class="fas fa-edit"></i>
     </button>
-    @endcan
+    @endcan --}}
     @csrf
     <input type="hidden" name="_method" value="DELETE">
     @can('delete-employee-kra')

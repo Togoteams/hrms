@@ -74,10 +74,10 @@
                                         <thead>
                                             <tr>
                                                 
+                                                <th>Date</th>
                                                 <th>Leave</th>
                                                 <th>Count</th>
                                                 <th>Transaction Type</th>
-                                                <th>Date</th>
                                                 {{-- <th>Description</th> --}}
                                             </tr>
                                         </thead>
@@ -107,6 +107,11 @@
                                             },
                                             columns: [
                                                 {
+                                                    data: 'activity_at',
+                                                    width: '12%',
+                                                    name: 'activity_at'
+                                                },
+                                                {
                                                     data: 'leave_type.name',
                                                     width: '12%',
                                                     name: 'leave_type.name'
@@ -121,11 +126,7 @@
                                                     width: '12%',
                                                     name: 'leave_transaction_type'
                                                 },
-                                                {
-                                                    data: 'activity_at',
-                                                    width: '12%',
-                                                    name: 'activity_at'
-                                                },
+                                                
                                                
                                             ]
                                         });

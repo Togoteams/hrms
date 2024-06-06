@@ -480,7 +480,7 @@
                                             @php
                                                $all_total= ($total_max_marks + $total_marks_by_reporting_autheority + $total_marks_by_review_autheority)/3
                                             @endphp
-                                            {{ ($all_total) }}
+                                            {{ (number_format($all_total,2)) }}
                                         </td>
                                     </tr>
                                 </tbody>
