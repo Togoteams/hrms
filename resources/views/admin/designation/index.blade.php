@@ -69,13 +69,14 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->description }}</td>
 
-                                    <td style="text-align:right;">
+                                    <td style="text-align:right;padding-right:10px">
 
 
 
 
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.designation.destroy', $item->id) }}">
+                                            @can('change-status-designations')
                                             <button type="button" data-table="designations" data-uuid="{{ $item->id }}"
                                                 @if ($item->status == 'active') data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
                                                 class="btn btn-edit btn-sm changeStatus"><i
@@ -84,6 +85,7 @@
                                                     @if ($item->status == 'active') title="Active"  @else title="Inactive" @endif
                                                     data-bs-toggle="tooltip"></i>
                                             </button>
+                                            @endcan
                                             @can('edit-designations')
                                                 <button type="button"
                                                     onclick="editForm('{{ route('admin.designation.edit', $item->id) }}', 'edit')"

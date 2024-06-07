@@ -46,10 +46,16 @@
             "name": "Delete Employees","module": "Employees", "permissions_for":"admin,branch_head,hr_head,chief_manager"
         },
         {
-            "name": "Change Employees Status ","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Change Employees Status","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "List Employee Salary Revision ","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "List Employee Salary Revision","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Employee Login Details","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Employee Details","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
             "name": "Add Employee Salary","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
@@ -64,7 +70,7 @@
             "name": "Add Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": ":Edit Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Edit Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
             "name": "Delete Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
@@ -77,6 +83,9 @@
         },
         {
             "name": "Employee Current Leave","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Employee Credit Current Leave","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
             "name": "List Employee Address","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
@@ -156,6 +165,9 @@
         },
         {
             "name": "Delete Designations","module": "Designations", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Change Status Designations","module": "Designations", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
             "name": "Profile Update","module": "Profile Update", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"

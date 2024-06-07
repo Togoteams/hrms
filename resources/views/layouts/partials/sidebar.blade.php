@@ -97,7 +97,7 @@
                                      <span class="nav-link-title">Employees</span>
                                  </a>
                                  <div id="employees"
-                                     class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index', 'tax.index']) }}  "
+                                     class="nav-collapse collapse {{ show(['designation.index', 'membership.index', 'branch.index', 'employees.index', 'department.index']) }}  "
                                      data-bs-parent="#employee">
                                      @canany(['add-designations', 'edit-designations', 'view-designations',
                                          'delete-designations'])

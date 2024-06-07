@@ -28,11 +28,14 @@
                                             <input type="hidden" value="{{ $employee->employment_type }}"
                                                 id="employment_type">
                                             <input type="hidden" value="{{ $currencies[0] }}" id="currency_salary">
-                                            <button type="button" class="btn btn-white btn-sm"
-                                                title="Add Emp Salary History"
-                                                onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
-                                                Add Salary Revisions
-                                            </button>
+                                            @can('add-employee-salary')
+                                                <button type="button" class="btn btn-white btn-sm"
+                                                    title="Add Emp Salary History"
+                                                    onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
+                                                    Add Salary Revisions
+                                                </button>
+                                            @endcan
+                                            
                                         </div>
                                     </div>
                                     <div class="row this-div">
@@ -114,14 +117,15 @@
                                                                         data-currency_salary_for_india="{{ $salaryhistory->currency_salary_for_india }}">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button> --}}
+                                                                    @can('delete-employee-salary')
+                                                                        <button class="btn btn-delete btn-sm bt deleteRecord"
+                                                                            title="Delete" data-id="{{ $salaryhistory->id }}"
+                                                                            data-token="{{ csrf_token() }}"
+                                                                            data-action="{{ route('admin.employee.salary-history.delete') }}">
 
-                                                                    <button class="btn btn-delete btn-sm bt deleteRecord"
-                                                                        title="Delete" data-id="{{ $salaryhistory->id }}"
-                                                                        data-token="{{ csrf_token() }}"
-                                                                        data-action="{{ route('admin.employee.salary-history.delete') }}">
-
-                                                                        <i class="fas fa-trash-alt"></i>
-                                                                    </button>
+                                                                            <i class="fas fa-trash-alt"></i>
+                                                                        </button>
+                                                                    @endcan
 
                                                                 </div>
                                                             </div>
@@ -145,6 +149,7 @@
 
                 {{-- Add form model start --}}
                 <!-- Modal -->
+                @can('add-employee-salary')
                 <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -323,6 +328,7 @@
                         </div>
                     </div>
                 </div>
+                @endcan
 
     </main>
 @endsection
