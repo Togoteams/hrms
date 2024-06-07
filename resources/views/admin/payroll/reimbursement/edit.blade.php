@@ -25,7 +25,7 @@
                     name="expenses_currency" class="form-control form-control-sm" required>
                     <option selected disabled> - Select - </option>
                     @foreach ($currencies  as  $currency)
-                    <option value="{{$currency->currency_name_from}}" {{ $reimbursement->expenses_currency == $currency->currency_name_from ? 'selected' : '' }}>{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                    <option value="{{$currency->currency_name_from}}" {{ $reimbursement->expenses_currency == $currency->currency_name_from ? 'selected' : '' }}>{{ucfirst($currency->currency_name_from)}}</option>
                     @endforeach
                     {{-- <option value="pula" {{ !empty($employee) && $employee->expenses_currency == 'pula' ? 'selected' : '' }}>Pula( P )</option>
                     <option value="dollar" {{ !empty($employee) && $employee->expenses_currency == 'dollar' ? 'selected' : '' }}>Dollar( $ )</option> --}}

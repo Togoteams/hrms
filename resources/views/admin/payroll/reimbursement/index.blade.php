@@ -221,8 +221,8 @@
                                 <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
                                     name="reimbursement_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select Currency - </option>
-                                    <option value="usd">$ </option>
-                                    <option value="pula">P </option>
+                                    <option value="usd">USD</option>
+                                    <option value="pula">PULL</option>
                                
 
                                 </select>

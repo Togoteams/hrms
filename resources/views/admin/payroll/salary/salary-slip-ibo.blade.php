@@ -23,8 +23,8 @@
             }
             thead, tbody, tfoot, tr, td, th
             {
-                border-color: inherit !important;
-                border-style:none !important;
+                /* border-color: inherit !important;
+                border-style:none !important; */
                 font-size: 12px !important;
             }
 
@@ -70,8 +70,8 @@
             tr,
             td,
             th {
-                border-color: inherit;
-                border-style: solid;
+                /* border-color: inherit;
+                border-style: solid; */
                 font-size: 12px;
             }
 
@@ -218,9 +218,9 @@
                         <tr>
 
 
-                            <td class="payslip">Loss Of Pay :</td>
+                            <td class="payslip" width="50%">Loss Of Pay :</td>
                             <td class="payslip">{{ $data->total_loss_of_pay }}</td>
-
+                            {{-- <td class="payslip">    </td> --}}
                             {{-- <td class="payslip">Total Absent : </td>
                             <td class="payslip">0</td> --}}
                             {{-- <td class="payslip">No. Availed Leave :</td>
@@ -254,8 +254,8 @@
             @endphp
                 <table width="100%">
                     <tr>
-                        <td>
-                            <table class="payslipcard" width="100%" border="0"
+                        <td width="50%">
+                            <table class="payslipcard" width="100%" border="1"
                             style="font-size: 18px;font-weight: bold;">
                             <tbody>
                                 <tr>
@@ -319,7 +319,7 @@
                         </table>
                         </td>
                         <td>
-                            <table class="payslipcard" width="100%" border="0"
+                            <table class="payslipcard" width="100%" border="1"
                             style="font-size: 18px;font-weight: bold;">
                             <tbody>
                                 <tr>

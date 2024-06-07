@@ -52,7 +52,7 @@
                                     name="expenses_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select - </option>
                                     @foreach ($expenseCurrency  as  $currency)
-                                    <option value="{{$currency->currency_name_from}}">{{getCurrencyIcon($currency->currency_name_from)}}</option>
+                                    <option value="{{$currency->currency_name_from}}">{{(ucfirst($currency->currency_name_from))}}</option>
                                 @endforeach
                                 </select>
                             </div>

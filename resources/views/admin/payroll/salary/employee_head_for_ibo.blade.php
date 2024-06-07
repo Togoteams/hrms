@@ -90,7 +90,7 @@
         $fixedHeadsArr = ['bomaid', 'over_time'];
         $inrCurrencyHead = ['provident_fund'];
         $pulaCurrencyHead = ['provident_fund'];
-        $pulaInsertionArr = ['other_deductions'];
+        $pulaInsertionArr = ['other_deductions','personal_loan','car_loan','mortgage_loan','salary_advance'];
         $usdInsertionArr = ['house_up_keep_allow', 'entertainment_expenses', 'provident_fund', 'recovery_for_car'];
         $inrInsertionArr = ['education_allowance'];
     @endphp

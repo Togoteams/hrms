@@ -72,18 +72,18 @@
             var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) / usdToInrAmount);
             var educationAllowanceAmountInPula =  parseFloat(educationAllowanceAmount*usdToPulaAmount).toFixed(3);
             var otherDeductions = parseFloat(parseFloat(otherDeductions) / usdToPulaAmount).toFixed(3);
-             var   mortgageLonc = parseFloat(parseFloat(mortgageLon) / usdToPulaAmount).toFixed(3);
-               var salaryAdvancec = parseFloat(parseFloat(salaryAdvance) / usdToPulaAmount).toFixed(3);
-            var    carLoanc = parseFloat(parseFloat(carLoan) / usdToPulaAmount).toFixed(3);
-             var   personalLoanc = parseFloat(parseFloat(personalLoan) / usdToPulaAmount).toFixed(3);
-                console.log(personalLoanc);
-                console.log(mortgageLonc);
-                console.log(salaryAdvancec);
-                console.log(carLoanc);
+             var   mortgageLoanUsd = parseFloat(parseFloat(mortgageLon) / usdToPulaAmount).toFixed(3);
+               var salaryAdvanceLoanUSD = parseFloat(parseFloat(salaryAdvance) / usdToPulaAmount).toFixed(3);
+            var    carLoanUSD = parseFloat(parseFloat(carLoan) / usdToPulaAmount).toFixed(3);
+             var   personalLoanUSD = parseFloat(parseFloat(personalLoan) / usdToPulaAmount).toFixed(3);
+                console.log(personalLoanUSD);
+                console.log(mortgageLoanUsd);
+                console.log(salaryAdvanceLoanUSD);
+                console.log(carLoanUSD);
             $("#education_allowance_for_ind_in_pula").val(educationAllowanceAmountInPula);
             totalEarning = parseFloat(basicAmount + emp13ChequeAmount + getValue('entertainment_expenses') +
                 getValue('house_up_keep_allow') + educationAllowanceAmount).toFixed(3);
-            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ getValue('salary_advance') + getValue('mortgage_loan')  + getValue('personal_loan') +  getValue('recovery_for_car')).toFixed(3);
+            totalDeduction = Number(getValue('provident_fund') + Number(otherDeductions)+ Number(salaryAdvanceLoanUSD) + Number(mortgageLoanUsd) + Number(carLoanUSD)  +  Number(personalLoanUSD) +  getValue('recovery_for_car')).toFixed(3);
             console.log(Number(totalDeduction));
         }
         var leaveEncashAmount = parseFloat(getValue("leave_encashment_amount"));
@@ -92,6 +92,7 @@
         setId('net_take_home', (Number((Number(totalEarning)+ (leaveEncashAmount)) - totalDeduction)).toFixed(2));
 
     }
+    
     // editForm('{{ route('admin.payroll.salary.emp.head') }}/'+this.value, 'edit')
     const editUrl="{{ route('admin.payroll.salary.emp.head') }}/";
     function callEditMethod()
@@ -113,8 +114,9 @@
         }
 
         if(pay_for_month_year!="" && empId!=""){
-            editForm(editUrl+empId+"/"+pay_for_month_year, 'edit');
+           var returndata = editForm(editUrl+empId+"/"+pay_for_month_year, 'edit');
             // taxCalCalculation();
+            console.log(returndata);
             setTimeout(() => {
                  taxCalCalculation(2);
             }, 1500);
@@ -122,6 +124,8 @@
     }
 
     $(document).ready(function() {
-        // taxCalCalculation("e");
+        $("#pay_for_month_year,#select_employee").change(function(){
+            callEditMethod();
+        });
     });
 </script>

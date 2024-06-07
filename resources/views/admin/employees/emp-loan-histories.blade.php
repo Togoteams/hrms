@@ -184,9 +184,9 @@
                                         <div class="mb-2 col-sm-4">
                                             <div class="form-group">
                                                 <label for="loan_account_no">Loan Account No </label>
-                                                <input required id="loan_account_no" placeholder="Enter loan_account_no  "
-                                                    type="text" name="loan_account_no" maxlength="16" minlength="11"
-                                                    pattern="[0-9]+" class="form-control form-control-sm ">
+                                                <input required id="loan_account_no" placeholder="Enter Loan Account Number  "
+                                                    type="text" name="loan_account_no" maxlength="16" minlength="14"
+                                                    pattern="[0-9]+" class="form-control form-control-sm number-input ">
                                             </div>
                                         </div>
                                         {{-- <div class="mb-2 col-sm-4">
