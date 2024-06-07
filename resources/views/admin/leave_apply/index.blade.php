@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @push('styles')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" />
+
 @endpush
 @section('content')
     <main id="content" role="main" class="main">
@@ -111,52 +113,52 @@
                                     data: 'DT_RowIndex',
                                     name: 'DT_RowIndex',
                                     orderable: false,
-                                    width:'4%',
+                                    width: '4%',
                                     searchable: false
                                 },
                                 {
                                     data: 'user.name',
                                     name: 'user.name',
-                                    width:'13%'
-                                }, 
+                                    width: '13%'
+                                },
                                 {
                                     data: 'user.employee.ec_number',
-                                    width:'10%',
+                                    width: '10%',
                                     name: 'user.employee.ec_number'
                                 },
                                 {
                                     data: 'leave_type.name',
-                                    width:'14%',
+                                    width: '14%',
                                     // className: 'dt-left',
                                     name: 'leave_type.name'
                                 },
                                 {
                                     data: 'start_date',
                                     className: 'dt-left',
-                                    width:'10%',
+                                    width: '10%',
                                     name: 'start_date'
                                 },
                                 {
                                     data: 'end_date',
                                     className: 'dt-left',
-                                    width:'10%',
+                                    width: '10%',
                                     name: 'end_date'
                                 },
                                 {
                                     data: 'is_paid',
-                                    width:'10%',
+                                    width: '10%',
                                     name: 'is_paid'
                                 },
                                 {
                                     data: 'status',
-                                    width:'10%',
+                                    width: '10%',
                                     name: 'status'
                                 },
 
                                 {
                                     data: 'action',
                                     name: 'action',
-                                    width:'20%',
+                                    width: '20%',
                                     orderable: false,
                                     searchable: false
                                 },
@@ -368,4 +370,11 @@
 
         }
     </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+      ></script>
+      <script>
+          $(document).ready(function() {
+              $(".select-search").selectize({ sortField: 'text' });
+          });
+      </script>
 @endpush

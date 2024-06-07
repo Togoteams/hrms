@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
                    
                     <div class="col-auto">
@@ -25,7 +25,7 @@
 
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
 
             <div class="page-header">
                 <div class="row">

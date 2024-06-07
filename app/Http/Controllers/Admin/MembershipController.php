@@ -59,7 +59,7 @@ class MembershipController extends Controller
     public function edit(string $id)
     {
         $data = Membership::find($id);
-        return view('admin.membership.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.membership.edit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**

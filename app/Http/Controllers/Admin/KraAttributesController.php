@@ -58,7 +58,7 @@ class KraAttributesController extends Controller
     public function edit(string $id)
     {
         $data = KraAttributes::find($id);
-        return view('admin.kra_attributes.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.kra_attributes.edit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**

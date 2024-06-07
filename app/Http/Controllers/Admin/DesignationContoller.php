@@ -70,7 +70,7 @@ class DesignationContoller extends BaseController
     public function edit(string $id)
     {
         $data = Designation::find($id);
-        return view('admin.designation.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.designation.edit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**

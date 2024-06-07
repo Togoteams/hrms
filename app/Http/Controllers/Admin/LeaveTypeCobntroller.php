@@ -62,7 +62,7 @@ class LeaveTypeCobntroller extends Controller
     public function edit(string $id)
     {
         $data = LeaveSetting::find($id);
-        return view('admin.leave_type.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.leave_type.edit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**

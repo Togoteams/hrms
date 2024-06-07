@@ -16,6 +16,12 @@
             "name": "View Roles","module": "Roles", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
+            "name": "Change Status Roles","module": "Roles", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Assign Permission","module": "Roles", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
             "name": "Add Holidays","module": "Holidays", "permissions_for":"admin,hr_head,branch_head"
         },
         {
@@ -35,6 +41,91 @@
         },
         {
             "name": "View Employees","module": "Employees", "permissions_for":"admin,branch_supervisor,hr_head,chief_manager"
+        },
+        {
+            "name": "Delete Employees","module": "Employees", "permissions_for":"admin,branch_head,hr_head,chief_manager"
+        },
+        {
+            "name": "Change Employees Status ","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "List Employee Salary Revision ","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Add Employee Salary","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Delete Employee Salary","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "List Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Add Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": ":Edit Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Delete Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Change Status Employee Loan","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Employee Leave Activity","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Employee Current Leave","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "List Employee Address","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Add Employee Address","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Edit Employee Address","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Delete Employee Address","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Update Employee Passport Omang","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "List Employee Qualification","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Add Employee Qualification","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Edit Employee Qualification","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Delete Employee Qualification","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Add Employee Medical Insuarance","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Edit Employee Medical Insuarance","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "List Employee Medical Insuarance","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Delete Employee Medical Insuarance","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        
+        {
+            "name": "Employee Add Department History","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Employee Edit Department History","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Employee Delete Department History","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
             "name": "Change Employees Status ","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
@@ -97,6 +188,9 @@
             "name": "Delete Department","module": "Department", "permissions_for":"admin,chief_manager"
         },
         {
+            "name": "Status Change Department","module": "Department", "permissions_for":"admin,chief_manager"
+        },
+        {
             "name": "Add Employee Transfer","module": "Employee Transfer", "permissions_for":"admin,hr_head"
         },
         {
@@ -109,16 +203,25 @@
             "name": "Delete Employee Transfer","module": "Employee Transfer", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Add Document Management","module": "Document Management", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Add Document","module": "Documents", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "Edit Document Management","module": "Document Management", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Edit Document","module": "Documents", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "View Document Management","module": "Document Management", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+            "name": "View Document","module": "Documents", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Delete Document Management","module": "Document Management", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Delete Document","module": "Documents", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Change Status Document","module": "Documents", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Assign  Document","module": "Documents", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
+            "name": "Download  Document","module": "Documents", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
             "name": "Add Medical card Type","module": "Medical card Type", "permissions_for":"admin,hr_head,chief_manager"
@@ -146,46 +249,31 @@
         },
        
         {
-            "name": "Add Kra","module": "Kra", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Add Kra Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Edit Kra","module": "Kra", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Edit Kra Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "View Kra","module": "Kra", "permissions_for":"admin,hr_head,chief_manager,employee"
+            "name": "View Kra Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Delete Kra","module": "Kra", "permissions_for":"admin,hr_head,chief_manager"
+            "name": "Delete Kra Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Add Attributes","module": "Kra Attributes", "permissions_for":"admin"
+            "name": "Change Status Kra Attributes","module": "Kra Attributes", "permissions_for":"admin"
         },
         {
-            "name": "Edit Attributes","module": "Kra Attributes", "permissions_for":"admin"
+            "name": "Add Employee Performance","module": "Employee Performance", "permissions_for":"admin,branch_head"
         },
         {
-            "name": "View Attributes","module": " Kra Attributes", "permissions_for":"admin"
+            "name": "View Employee Performance","module": "Employee Performance", "permissions_for":"admin,branch_head,employee"
         },
         {
-            "name": "Delete Attributes","module": " Kra Attributes", "permissions_for":"admin"
+            "name": "Delete Employee Performance","module": "Employee Performance", "permissions_for":"admin,branch_head"
         },
         {
-            "name": "Change Status Attributes","module": "Kra Attributes", "permissions_for":"admin"
-        },
-        {
-            "name": "Add Employee Kra","module": "Employee Kra", "permissions_for":"admin,branch_supervisor"
-        },
-        {
-            "name": "View Employee Kra","module": "Employee Kra", "permissions_for":"admin,employee"
-        },
-        {
-            "name": "Delete Employee Kra","module": "Employee Kra", "permissions_for":"admin"
-        },
-        {
-            "name": "Change Status Employee Kra","module": "Employee Kra", "permissions_for":"admin"
-        },
-        {
-            "name": "Print Employee Kra","module": "Employee Kra", "permissions_for":"admin,branch_supervisor,hr_head,chief_manager"
+            "name": "Print Employee Performance","module": "Employee Performance", "permissions_for":"admin,branch_supervisor,hr_head,chief_manager"
         },
         {
             "name": "Add Leave Apply","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
@@ -203,7 +291,19 @@
             "name": "Leave Approval","module": "Leave Apply", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Change Status Leave Apply","module": "Leave Apply", "permissions_for":"admin,hr_head"
+            "name": "Add Maternity Leave Apply","module": "Maternity Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+        },
+        {
+            "name": "Edit Maternity Leave Apply","module": "Maternity Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+        },
+        {
+            "name": "View Maternity Leave Apply","module": "Maternity Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+        },
+        {
+            "name": "Delete Maternity Leave Apply","module": "Maternity Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+        },
+        {
+            "name": "Leave Maternity Approval","module": "Maternity Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Add Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
@@ -215,67 +315,19 @@
             "name": "View Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
+            "name": "Approval Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+        },
+        {
             "name": "Delete Leave Encashment","module": "Leave Encashment", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
-        },
-        {
-            "name": "Add Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin,employee,hr_head"
-        },
-        {
-            "name": "Edit Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin"
-        },
-        {
-            "name": "View Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin"
-        },
-        {
-            "name": "Delete Leave Balance Report","module": "Leave Balance Report", "permissions_for":"admin"
-        },
-        {
-            "name": "Add Leave Request History","module": "Leave Request History", "permissions_for":"admin"
-        },
-        {
-            "name": "Edit Leave Request History","module": "Leave Request History", "permissions_for":"admin"
         },
         {
             "name": "View Leave Request History","module": "Leave Request History", "permissions_for":"admin"
         },
         {
-            "name": "Delete Leave Request History","module": "Leave Request History", "permissions_for":"admin"
-        },
-        {
-            "name": "Add Leave Request Rejected","module": "Leave Request Rejected", "permissions_for":"admin"
-        },
-        {
-            "name": "Edit Leave Request Rejected","module": "Leave Request Rejected", "permissions_for":"admin"
-        },
-        {
             "name": "View Leave Request Rejected","module": "Leave Request Rejected", "permissions_for":"admin"
         },
         {
-            "name": "Delete Leave Request Rejected","module": "Leave Request Rejected", "permissions_for":"admin"
-        },
-        {
-            "name": "Add Leave Reports","module": "Leave Reports", "permissions_for":"admin"
-        },
-        {
-            "name": "Edit Leave Reports","module": "Leave Reports", "permissions_for":"admin"
-        },
-        {
-            "name": "View Leave Reports","module": "Leave Reports", "permissions_for":"admin"
-        },
-        {
-            "name": "Delete Leave Reports","module": "Leave Reports", "permissions_for":"admin"
-        },
-        {
-            "name": "Add Leave Settings","module": "Leave Settings", "permissions_for":"admin"
-        },
-        {
-            "name": "Edit Leave Settings","module": "Leave Settings", "permissions_for":"admin"
-        },
-        {
             "name": "View Leave Settings","module": "Leave Settings", "permissions_for":"admin"
-        },
-        {
-            "name": "Delete Leave Settings","module": "Leave Settings", "permissions_for":"admin"
         },
         {
             "name": "Add Tax Slab Settings","module": "Tax Slab Settings", "permissions_for":"admin"
@@ -285,9 +337,6 @@
         },
         {
             "name": "View Tax Slab Settings","module": "Tax Slab Settings", "permissions_for":"admin"
-        },
-        {
-            "name": "Delete Tax Slab Settings","module": "Tax Slab Settings", "permissions_for":"admin"
         },
         {
             "name": "Add Salary Increment Settings","module": "Salary Increment Settings", "permissions_for":"admin"
@@ -314,9 +363,6 @@
             "name": "Delete Salary Increment Reporting","module": "Salary Increment Reporting", "permissions_for":"admin"
         },
         {
-            "name": "Add Payroll Head","module": "Payroll Head", "permissions_for":"admin"
-        },
-        {
             "name": "Edit Payroll Head","module": "Payroll Head", "permissions_for":"admin"
         },
         {
@@ -329,25 +375,19 @@
             "name": "Change Status Payroll Head","module": "Payroll Head", "permissions_for":"admin"
         },
         {
-            "name": "Salary Setting","module": "Payroll", "permissions_for":"admin"
+            "name": "Add Payscale","module": "Payscale", "permissions_for":"admin"
         },
         {
-            "name": "Add Pay Scale","module": "Payscale", "permissions_for":"admin"
+            "name": "View Payscale","module": "Payscale", "permissions_for":"admin"
         },
         {
-            "name": "Edit Pay Scale","module": "Payscale", "permissions_for":"admin"
+            "name": "Delete Payscale","module": "Payscale", "permissions_for":"admin"
         },
         {
-            "name": "View Pay Scale","module": "Payscale", "permissions_for":"admin"
+            "name": "Change Status Payscale","module": "Payscale", "permissions_for":"admin"
         },
         {
-            "name": "Delete Pay Scale","module": "Payscale", "permissions_for":"admin"
-        },
-        {
-            "name": "Add Salary","module": "Salary", "permissions_for":"admin"
-        },
-        {
-            "name": "Edit Salary","module": "Salary", "permissions_for":"admin"
+            "name": "Add Salary","module": "Salary", "permissions_for":"admin,branch_head,hr_head"
         },
         {
             "name": "View Salary","module": "Salary", "permissions_for":"admin,employee"
@@ -371,10 +411,10 @@
             "name": "Delete Reimbursement Type","module": "Reimbursement Type", "permissions_for":"admin,hr_head"
         },
         {
-            "name": "Add Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee"
+            "name": "Add Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee,branch_head"
         },
         {
-            "name": "Edit Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee"
+            "name": "Edit Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee,branch_head"
         },
         {
             "name": "View Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee"
@@ -383,8 +423,9 @@
             "name": "Delete Reimbursement","module": "Reimbursement", "permissions_for":"admin,chief_manager,hr_head,employee"
         },
         {
-            "name": "Change Status Reimbursement","module": "Reimbursement", "permissions_for":"admin,hr_head"
+            "name": "Approval Reimbursement","module": "Reimbursement", "permissions_for":"admin,hr_head,branch_head"
         },
+       
         {
             "name": "Add Manage Tax","module": "Manage Tax", "permissions_for":"admin,chief_manager"
         },
@@ -428,16 +469,28 @@
             "name": "Change Status Currency Settings","module": "Currency Settings", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "Add TTUM Report","module": "TTUM Report", "permissions_for":"admin"
-        },
-        {
-            "name": "Edit TTUM Report","module": "TTUM Report", "permissions_for":"admin"
-        },
-        {
             "name": "View TTUM Report","module": "TTUM Report", "permissions_for":"admin"
         },
         {
-            "name": "Delete TTUM Report","module": "TTUM Report", "permissions_for":"admin"
+            "name": "Thirteen cheque Report","module": "Reports", "permissions_for":"admin,hr_head,branch_head"
+        },
+        {
+            "name": "Annual Pay Report","module": "Reports", "permissions_for":"admin,hr_head,branch_head"
+        },
+        {
+            "name": "Annual Tax Deduction","module": "Reports", "permissions_for":"admin,hr_head,branch_head"
+        },
+        {
+            "name": "Thirteen  cheque Genration Report","module": "Reports", "permissions_for":"admin,hr_head,branch_head"
+        },
+        {
+            "name": "Branch Wise Employee Report","module": "Reports", "permissions_for":"admin,hr_head,branch_head"
+        },
+        {
+            "name": "Leave Report","module": "Reports", "permissions_for":"admin,hr_head,branch_head"
+        },
+        {
+            "name": "Employee Arrear Report","module": "Reports", "permissions_for":"admin,hr_head,branch_head"
         },
         {
             "name": " Export Report TTUM Report","module": "TTUM Report", "permissions_for":"admin"
@@ -485,20 +538,13 @@
             "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
         },
         {
-            "name": "Report","module": "Report", "permissions_for":"admin,chief_manager,hr_head,branch_head"
-        },
-        {
-            "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
-        },
-        {
-            "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
-        },
-        {
-            "name": "Delete Country","module": "Country", "permissions_for":"admin,chief_manager"
-        },
-        {
             "name": "Change Status Country","module": "Country", "permissions_for":"admin,chief_manager"
+        },
+        {
+            "name": "View Backup","module": "Backup", "permissions_for":"admin,branch_head"
+        },
+        {
+            "name": "Download Backup","module": "Backup", "permissions_for":"admin"
         }
-
     ]
 }

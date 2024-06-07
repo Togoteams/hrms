@@ -58,7 +58,7 @@ class BranchController extends Controller
     public function edit(string $id)
     {
         $data = Branch::find($id);
-        return view('admin.branch.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.branch.edit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**

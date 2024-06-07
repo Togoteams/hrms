@@ -172,6 +172,7 @@ trait LeaveTraits
     $userId = $data['user_id'];
     $leaveTypeId = $data['leave_type_id'];
     $isCredit = $data['is_credit'] ?? 0;
+    $isDelete = @$data['is_delete'] ?? 0;
     $isAdjustment = $data['is_adjustment'] ?? 0;
     $leaveCount = $data['leave_count'];
     $activityAt = currentDateTime('Y-m-d');
@@ -180,6 +181,10 @@ trait LeaveTraits
     if($isCredit)
     {
       $description =$user->name." ".$leaveCount." ".$leaveSetting->name." Leave is credited on ". currentDateTime('d-m-Y');
+      if($isDelete)
+      {
+        $description =$user->name." ".$leaveCount." ".$leaveSetting->name." Leave is credited on ". currentDateTime('d-m-Y')."After Deletion Of Applied Leave";
+      }
     }elseif($isAdjustment)
     {
       $description =$user->name." ".$leaveCount." ".$leaveSetting->name." Leave is adjusted on ". currentDateTime('d-m-Y');

@@ -57,7 +57,7 @@ class LoansController extends Controller
     public function edit(string $id)
     {
         $data = Loans::find($id);
-        return view('admin.loans.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.loans.edit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**

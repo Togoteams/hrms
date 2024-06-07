@@ -8,7 +8,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form_data" action="{{ route('admin.leave_apply.store') }}" class="formsubmit"  enctype="multipart/form-data">
+                    <form id="form_data" action="{{ route('admin.leave_apply.store') }}" class="formsubmit fileupload"
+                        enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
                         <div class="row">
@@ -16,9 +17,10 @@
                                 <div class="mb-2 col-sm-4">
                                     <div class="form-group">
                                         <label for="user_id">Employee</label>
-                                        <select onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
-                                             id="user_id" placeholder="Enter correct user_id"
-                                            name="user_id" class="form-control select2 form-control-sm user_id">
+                                        <select
+                                            onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
+                                            id="user_id" placeholder="Enter correct User name" name="user_id"
+                                            class=" user_id">
                                             <option selected disabled value=""> -Select Employee - </option>
                                             @foreach ($all_user as $user)
                                                 <option value="{{ $user->user->id }}"
@@ -35,8 +37,8 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="leave_type_id">Leave Types</label>
-                                    <select  id="leave_type_id" onchange="change_leave()"
-                                        placeholder="Enter correct leave_type_id   " type="text" name="leave_type_id"
+                                    <select id="leave_type_id" onchange="change_leave()"
+                                        placeholder="Enter correct leave_type_id" type="text" name="leave_type_id"
                                         class="form-control form-control-sm ">
                                         <option selected disabled value=""> -Select Leave Types- </option>
                                         @foreach ($leave_type as $l_type)
@@ -50,8 +52,9 @@
                             <div class="mb-2 col-sm-4 ibo-pay-type" style="display: none">
                                 <div class="form-group">
                                     <label for="pay_type">Pay Type</label>
-                                    <select id="pay_type" placeholder="Enter correct pay_type " type="text"
-                                        name="pay_type" class="form-control form-control-sm ">
+                                    <select id="pay_type" onchange="change_leave()"
+                                        placeholder="Enter correct pay_type " type="text" name="pay_type"
+                                        class="form-control form-control-sm ">
                                         <option selected disabled value=""> -Select Types- </option>
                                         <option value="half_pay">Half Pay</option>
                                         <option value="full_pay">Full Pay</option>
@@ -71,7 +74,7 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="start_date">start_date</label>
-                                    <input  id="start_date" placeholder="Enter correct start_date   "
+                                    <input id="start_date" placeholder="Enter correct start_date   "
                                         onchange="change_leave()" type="date" name="start_date"
                                         class="form-control form-control-sm ">
                                 </div>
@@ -79,15 +82,14 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="end_date">end_date</label>
-                                    <input  id="end_date" placeholder="Enter correct end_date   "
-                                        type="date" onchange="change_leave()" name="end_date"
-                                        class="form-control form-control-sm ">
+                                    <input id="end_date" placeholder="Enter correct end_date   " type="date"
+                                        onchange="change_leave()" name="end_date" class="form-control form-control-sm ">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="leave_applies_for">leave_applies_for</label>
-                                    <input  readonly id="leave_applies_for"
+                                    <input readonly id="leave_applies_for"
                                         placeholder="Enter correct leave_applies_for " value="0" type="text"
                                         name="leave_applies_for" class="form-control form-control-sm ">
                                 </div>
@@ -104,10 +106,11 @@
                                 <div class="form-group">
                                     <label for="Reason">Approval Authority</label>
                                     <select id="approval_authority" placeholder="Select Authority"
-                                        name="approval_authority" class="form-control form-control-sm approval_authority">
+                                        name="approval_authority"
+                                        class="form-control form-control-sm approval_authority">
                                         <option selected disabled> - Select - </option>
                                         @foreach ($approvalAuthority as $key => $value)
-                                            <option value="{{ $value->user_id }}">{{ $value->user->name }}  -
+                                            <option value="{{ $value->user_id }}">{{ $value->user->name }} -
                                                 {{ $value->ec_number }} </option>
                                         @endforeach
                                     </select>
@@ -116,12 +119,12 @@
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
                                     <label for="Reason">leave_reason</label>
-                                    <input  id="leave_reason"
+                                    <input id="leave_reason"
                                         placeholder="eg:- i want to 2 days leave for my sister marriage  "
                                         type="text" name="leave_reason" class="form-control form-control-sm ">
                                 </div>
                             </div>
-                           
+
 
                             <div class="mb-2 col-sm-12">
                                 <div class="form-group">
@@ -132,8 +135,7 @@
                             </div>
                         </div>
                         <div class="text-center ">
-                            <button type="submit"
-                                class="btn btn-white submit">
+                            <button type="submit" class="btn btn-white submit">
                                 {{ $page }}</button>
                         </div>
                     </form>
@@ -162,12 +164,14 @@
                 var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}";
                 var user_id = $("#user_id").val();
                 var leave_type_id = $("#leave_type_id").val();
+                var pay_type = $("#pay_type").val();
                 $.ajax({
                     url: getBalanceUrl,
                     type: "get",
                     data: {
                         "user_id": user_id,
-                        'leave_type_id': leave_type_id
+                        'leave_type_id': leave_type_id,
+                        'pay_type': pay_type
                     },
                     dataType: "json",
                     success: function(result) {
@@ -194,7 +198,7 @@
                     },
                 });
             }
-
+           
             $("#start_date").on('change', function() {
                 dt = new Date($(this).val());
                 dt.setDate(dt.getDate() + 1);
@@ -216,8 +220,8 @@
             $("#user_id").on('change', function() {
                 getApprovalAuthrity();
             });
-            function getApprovalAuthrity()
-            {
+
+            function getApprovalAuthrity() {
                 var getAuthorityUrl = "{{ route('admin.leave_apply.get_approval_authority') }}";
                 var user_id = $(".user_id").val();
                 $.ajax({
@@ -230,20 +234,22 @@
                     success: function(result) {
                         console.log(result);
                         if (result.status == true) {
+                            $(".approval-authority-section").css("display", "");
                             var data = result.data;
                             var obj = `<option value="">-Select-</option>`;
-                            $.each(data, function (key, val) {
-                                obj +=`<option value="${val.user_id}" >${val.user.name}</option>`;
+                            $.each(data, function(key, val) {
+                                obj += `<option value="${val.user_id}" >${val.user.name}</option>`;
                             });
                             console.log(obj);
                             $(".approval_authority").html(obj);
                         } else {
-                            $(".approval-authority-section").css("display","none");
+                            $(".approval-authority-section").css("display", "none");
                         }
                         //    amount_cal(e);
                     },
-                });   
+                });
             }
+
             function getDays() {
                 date1 = new Date($("#start_date").val());
                 date2 = new Date($("#end_date").val());
@@ -257,5 +263,16 @@
                 }
                 $("#leave_applies_for").val(Number(days));
             }
+            $(document).ready(function() {
+                $('#user_id').selectize({
+                    onChange: function(value) {
+                        getApprovalAuthrity();
+                        // Your event handling code here
+                    }
+                });
+                // $('#company_id_import').change(function() {
+
+                // });
+            });
         </script>
     @endpush

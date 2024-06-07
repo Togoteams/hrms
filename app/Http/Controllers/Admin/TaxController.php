@@ -61,7 +61,7 @@ class TaxController extends Controller
     public function edit(string $id)
     {
         $data = Tax::find($id);
-        return view('admin.tax.ediit', ['data' => $data, 'page' => $this->page_name]);
+        return view('admin.tax.edit', ['data' => $data, 'page' => $this->page_name]);
     }
 
     /**

@@ -16,10 +16,13 @@
                         <h2 class="page-header-title">Roles</h2>
                         </div>
                         <div class="col-sm-auto">
+                            @can('add-roles')
                             <a class="btn btn-white g-popup addRole" href="javascript:;" data-bs-toggle="modal"
                                 data-action="add" data-bs-target="#addEditRoleModal">
                                 <i class="bi-person-plus-fill me-1"></i> Add Role
                             </a>
+                            @endcan
+                           
                         </div>
                     </div>
                 </div>
@@ -76,22 +79,29 @@
                                     </td> --}}
 
                                     <td class="text-right">
-
-                                        <a type="button" class="btn btn-success-check btn-sm"
+                                        @can('assign-permission')
+                                            <a type="button" class="btn btn-success-check btn-sm"
                                             href="{{ route('admin.role.attach.permission', $role->id) }}"><i
                                                 class="fa fa-check" data-bs-toggle="tooltip" data-bs-placement="top"
                                                 title="Permission"></i> </a>
+                                        @endcan
+                                       
+                                        @can('edit-roles')
                                         <button type="button" data-table="roles" data-form-modal="addEditRoleModal"
                                             data-message="inactive" data-uuid="{{ $role->uuid }}"
                                             class="btn btn-edit btn-sm editData" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Edit">
                                             <i class="fas fa-pencil"></i>
                                         </button>
+                                        @endcan
+                                        @can('delete-roles')
                                         <button type="button" data-table="roles" data-message="inactive"
                                             data-uuid="{{ $role->uuid }}" class="btn btn-delete btn-sm deleteData"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
+                                        @endcan
+                                        @can('change-status-roles')
                                         <button type="button" data-table="roles" data-uuid="{{ $role->uuid }}"
                                             @if ($role->status == 'active') data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
                                             class="btn btn-edit btn-sm changeStatus"><i
@@ -99,6 +109,7 @@
                                                 @if ($role->status == 'active') title="Active"  @else title="Inactive" @endif
                                                 data-bs-toggle="tooltip"></i>
                                         </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
