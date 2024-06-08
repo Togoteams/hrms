@@ -341,7 +341,7 @@
                          'add-salary-increment-reporting', 'edit-salary-increment-reporting',
                          'delete-salary-increment-reporting', 'view-salary-increment-reporting', 'add-payroll-head',
                          'edit-payroll-head', 'delete-payroll-head', 'view-payroll-head', 'change-status-payroll-head',
-                         'add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale', 'add-salary',
+                         'add-payscale', 'edit-payscale', 'delete-payscale', 'view-payscale', 'add-salary',
                          'edit-salary', 'delete-salary', 'view-salary', 'print-salary', 'add-reimbursement-type',
                          'edit-reimbursement-type', 'delete-reimbursement-type', 'view-reimbursement-type',
                          'add-reimbursement', 'edit-reimbursement', 'delete-reimbursement', 'view-reimbursement',
@@ -391,7 +391,7 @@
                                          href="{{ route('admin.payroll.head.index') }}"> Payroll Heads</a>
                                  @endcanany
 
-                                 @canany(['add-pay-scale', 'edit-pay-scale', 'delete-pay-scale', 'view-pay-scale'])
+                                 @canany(['add-payscale', 'edit-payscale', 'delete-payscale', 'view-payscale'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.payscale.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.payscale.index') }}"> Payscale</a>
                                  @endcanany
