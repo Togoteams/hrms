@@ -36,49 +36,6 @@
 
             </div>
             <div class="mb-3 card mb-lg-5">
-                {{-- <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="flex accordion-header col-lg-3 filters">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Advanced Filters
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="py-5 row">
-                                <div class="col-3">
-                                    <select class="px-2 py-2 filter" width="full">
-                                        <option>
-                                            Filter 1
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
-                                    <select class="px-2 py-2 filter" width="full">
-                                        <option>
-                                            Filter 2
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
-                                    <select class="px-2 py-2 filter" width="full">
-                                        <option>
-                                            Filter 3
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
-                                    <select class="px-2 py-2 filter" width="full">
-                                        <option>
-                                            Filter 4
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
                 <div class="p-2 mt-3 table-responsive">
                     <table class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
                         <thead>

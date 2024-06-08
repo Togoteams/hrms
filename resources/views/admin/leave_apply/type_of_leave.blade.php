@@ -89,9 +89,3 @@
     
     
 </div>
-{{-- <div class="row">
-    <div class="m-2 text-danger col-md-12">
-        <strong>** NOTE:</strong> <small> These Leaves count in days</small>
-    </div>
-   
- </div> --}}

@@ -176,18 +176,6 @@
             "name": "Change Password","module": "Change Password", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Add Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
-        },
-        {
-            "name": "Edit Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
-        },
-        {
-            "name": "View Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
-        },
-        {
-            "name": "Delete Leave","module": "Leave", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
-        },
-        {
             "name": "Add Department","module": "Department", "permissions_for":"admin,chief_manager"
         },
         {

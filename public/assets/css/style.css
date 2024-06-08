@@ -56,8 +56,8 @@ label {
     background-color:#fff !important;
     border: 2px solid rgb(244, 127, 10) !important;
     color: #000 !important;
-    padding-top: 5px !important;
-    padding: 0 auto !important;
+    
+    padding: 1rem !important;
     border-radius: 7px !important;
     cursor: pointer;
     font-size: 2px !important;

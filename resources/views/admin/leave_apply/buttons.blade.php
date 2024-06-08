@@ -18,13 +18,16 @@
     @csrf
 
     <input type="hidden" name="_method" value="DELETE">
-
+        
+    @can('delete-leave-apply')
     @if ($item->status != 'approved')
         <button type="button" id="delete{{ $item->id }}"
             onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
             class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
         </button>
     @endif
+    @endcan
+    
     @if (!isemplooye())
         {{-- @if (approvalBtnEnable($item->id) == 1) --}}
             @if($item->status=='approved' && $item->is_reversal==0 && $item->user?->employee?->employment_type=="local" )
