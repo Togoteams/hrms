@@ -199,10 +199,9 @@
                      @endcanany
 
 
-                     @canany(['add-kra', 'edit-kra', 'view-kra', 'delete-kra', 'add-attributes', 'edit-attributes',
-                         'delete-attributes', 'view-attributes', 'change-status-attributes', 'add-employee-kra',
-                         'edit-employee-kra', 'delete-employee-kra', 'view-employee-kra', 'change-status-employee-kra',
-                         'print-employee-kra'])
+                     @canany(['add-kra-attributes', 'edit-kra-attributes', 'view-kra-attributes', 'delete-kra-attributes','change-status-kra-attributes', 'add-employee-performance',
+                         'edit-employee-performance', 'delete-employee-performance', 'view-employee-performance', 'change-status-employee-performance',
+                         'print-employee-performance'])
                          <div id="navbarVerticalMenuPagesMenu">
                              <!-- Collapse -->
 
@@ -414,8 +413,8 @@
                                  @endcanany
                                  @canany(['add-13-cheque', 'edit-13-cheque', 'delete-13-cheque', 'view-13-cheque'])
                                  @endcanany
-                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.index' ? 'active' : '' }}  "
-                                     href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a>
+                                 {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.index' ? 'active' : '' }}  "
+                                     href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a> --}}
                                  {{-- @canany(['salary-setting'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary_setting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary_setting.index') }}">Salary Setting</a>
@@ -427,8 +426,8 @@
                      <div id="navbarVerticalMenuPagesMenu">
                          <!-- Collapse -->
                          @canany(['add-document-type', 'edit-document-type', 'view-document-type',
-                             'delete-document-type', 'change-status-document-type', 'add-document-management',
-                             'edit-document-management', 'view-document-management', 'delete-document-management'])
+                             'delete-document-type', 'change-status-document-type', 'add-document',
+                             'edit-document', 'view-document', 'delete-document'])
                              <div class="nav-item">
                                  <a class="nav-link dropdown-toggle " href="#documents" role="button"
                                      data-bs-toggle="collapse" data-bs-target="#documents" aria-expanded="false"

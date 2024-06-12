@@ -39,7 +39,7 @@ class SalaryHistoryController extends BaseController
             'currency_salary_for_india'  => ['nullable', 'string'],
             'salary_type'  => ['nullable', 'string'],
             'da' => ['nullable', 'numeric','between:1,100'],
-            'date_of_current_basic' => ['required', 'date'],
+            'date_of_current_basic' => ['required', 'date','after_or_equal:'.$employee->start_date],
             'currency_salary'       => ['required', 'string'],
             'pension_opt'           => ['nullable', 'numeric'],
             'pension_contribution'  => ['required', 'string'],

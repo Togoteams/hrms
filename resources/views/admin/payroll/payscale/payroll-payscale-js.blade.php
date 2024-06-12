@@ -68,13 +68,15 @@
         {
             var educationAllowanceAmount = getValue('education_allowance');
             var otherDeductions = getValue('other_deductions');
+            var othersArrears = getValue('others_arrears');
             var usdToInrAmount = getValue('usdToInrAmount');
-
+            var reimbursement = Number(getValue('reimbursement'));
             var usdToPulaAmount = getValue('usdToPulaAmount');
             var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) / usdToInrAmount);
             var otherDeductions = (parseFloat(otherDeductions) / usdToPulaAmount);
+             reimbursement = (parseFloat(reimbursement) / usdToPulaAmount);
 
-            totalEarning = basicAmount + getValue('entertainment_expenses')+
+            totalEarning = basicAmount + getValue('entertainment_expenses')+ Number(othersArrears) + Number(reimbursement)
              getValue('house_up_keep_allow')+  educationAllowanceAmount;
              totalDeduction = getValue('provident_fund') + otherDeductions + getValue('recovery_for_car') ;
         }

@@ -25,13 +25,6 @@
     </div>
     <div class="col-sm-3">
         <div class="form-group">
-            <label for="annual_balanced_leave">Total Balanced Leave</label>
-            
-            <input readonly  required max="3"  name="annual_balanced_leave"  type="number"  value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="form-group">
             <label for="basic">No. Of Persent Days</label>
             
             <input readonly onkeyup="amount_cal(this)" name="no_of_persent_days" onblur="taxCalCalculation()" required max="2"   type="number"  value="{{ $presentDay ?? 0 }}" class="form-control form-control-sm ">
@@ -72,7 +65,7 @@
         <h4>Earning</h4>
     </div>
     @php
-    $readonlyArr = ['bomaid','pension_bank','pension_own','union_fee','over_time'];
+    $readonlyArr = ['bomaid','pension_bank','pension_own','union_fee','over_time','tax','bomaid_bank'];
     $fixedHeadsArr = ['bomaid','over_time'];
     @endphp
     @foreach ($emp_head as $head)

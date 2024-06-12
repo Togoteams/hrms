@@ -262,13 +262,15 @@ trait PayrollTraits
     {
         $taxableAmount = $data['taxable_amount'];
         $empType = $data['employment_type'];
-        $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
         // echo $taxSlab;
         if ($empType == "expatriate") {
+           
+            $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
             $extraAmount = ($taxableAmount - $taxSlab->from);
             $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + (($extraAmount * $taxSlab->ibo_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;
         } else {
+            $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
             $extraAmount = (($taxableAmount - $taxSlab->from));
             $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;

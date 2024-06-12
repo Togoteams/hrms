@@ -31,14 +31,14 @@
                 value="{{ $totalMonthDays ?? 0 }}" class="form-control form-control-sm">
         </div>
     </div>
-    <div class="col-sm-3">
+    {{-- <div class="col-sm-3">
         <div class="form-group">
             <label for="annual_balanced_leave">Total Balanced Leave</label>
 
             <input readonly required max="3" name="annual_balanced_leave" type="number"
                 value="{{ $totalBalancedLeave ?? 0 }}" class="form-control form-control-sm ">
         </div>
-    </div>
+    </div> --}}
     <div class="col-sm-3">
         <div class="form-group">
             <label for="basic">No. Of Persent Days</label>
@@ -86,12 +86,12 @@
         <h4>Earning</h4>
     </div>
     @php
-        $readonlyArr = ['bomaid', 'pension_own', 'pension_bank', 'union_fee', 'tax', 'over_time', 'provident_fund'];
+        $readonlyArr = ['bomaid', 'pension_own', 'pension_bank','house_up_keep_allow', 'union_fee', 'tax', 'over_time', 'provident_fund','personal_loan','car_loan','mortgage_loan','salary_advance'];
         $fixedHeadsArr = ['bomaid', 'over_time'];
         $inrCurrencyHead = ['provident_fund'];
         $pulaCurrencyHead = ['provident_fund'];
-        $pulaInsertionArr = ['other_deductions','personal_loan','car_loan','mortgage_loan','salary_advance'];
-        $usdInsertionArr = ['house_up_keep_allow', 'entertainment_expenses', 'provident_fund', 'recovery_for_car'];
+        $pulaInsertionArr = ['other_deductions','personal_loan','car_loan','mortgage_loan','salary_advance','reimbursement'];
+        $usdInsertionArr = ['house_up_keep_allow', 'entertainment_expenses', 'provident_fund', 'recovery_for_car','others_arrears'];
         $inrInsertionArr = ['education_allowance'];
     @endphp
     @foreach ($emp_head as $head)

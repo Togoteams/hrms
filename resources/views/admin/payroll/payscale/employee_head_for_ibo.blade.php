@@ -20,7 +20,7 @@
     $fixedHeadsArr = ['bomaid','over_time'];
     $inrCurrencyHead = ['provident_fund'];
     $pulaCurrencyHead = ['provident_fund'];
-    $pulaInsertionArr =['other_deductions'];
+    $pulaInsertionArr =['other_deductions','reimbursement','others_arrears'];
     $inrInsertionArr =['education_allowance'];
 @endphp
 <div class="row">

@@ -19,7 +19,7 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     @if ($isCurrentLeaveFound)
-                                    <button type="button" class="btn btn-white btn-sm" title="Add Emp Salary History"
+                                    <button type="button" class="btn btn-white btn-sm" title="Add Emp Leave"
                                         onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
                                         Creadit Leave
                                     </button>

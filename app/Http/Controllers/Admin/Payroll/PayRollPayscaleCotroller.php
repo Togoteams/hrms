@@ -68,10 +68,24 @@ class PayRollPayscaleCotroller extends BaseController
 
     public function payscaleTaxCal(Request $request){
 
-        $taxableAmount = $request->taxable_amount * 12;
-        // echo $taxableAmount;
-        $empType = $request->employment_type;
-        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$empType]);
+        $taxableAmount = $request->taxable_amount;
+        $salary_head = $request->salary_head;
+        // return $salary_head['basicAmount'];
+        $employment_type = $request->employment_type;
+        if($employment_type!="expatriate")
+        {
+            $monthlyAmount = ($salary_head['basicAmount'] +$salary_head['allowance'] - ($salary_head['pension_own']-$salary_head['pension_bank'])) * 12;
+            $taxableAmount = $monthlyAmount + $salary_head['others_arrears'] + $salary_head['over_time'];
+        }else
+        {
+            $usdToPulaAmount = getCurrencyValue("usd", "pula");
+            $usdToInrAmount = getCurrencyValue("usd", "inr");
+            $monthlyAmountInPula = (($salary_head['basicAmount'] +$salary_head['house_up_keep_allow']) * 12)* $usdToPulaAmount;
+            $extraAmount =  ($salary_head['others_arrears'] + $salary_head['entertainment_expenses'])*$usdToPulaAmount;
+            $education_allowance =  (($salary_head['education_allowance'])/$usdToInrAmount) * $usdToPulaAmount;
+            $taxableAmount = $monthlyAmountInPula + $extraAmount + $education_allowance;
+        }
+        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$employment_type]);
 
         return $this->responseJson(true,200,"",$taxData);
     }
@@ -82,6 +96,7 @@ class PayRollPayscaleCotroller extends BaseController
     public function store(Request $request)
     {
 
+        $salaryHistory = SalaryHistory::where('user_id', $request?->user_id)->orderBy('id','desc')->first();
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'basic' => 'required|numeric',
@@ -92,6 +107,7 @@ class PayRollPayscaleCotroller extends BaseController
             // 'total_employer_contribution' => 'required|numeric',
             'total_deduction' => 'required|numeric',
             'gross_earning' => 'required|numeric',
+            'payscale_date' => 'required|date|after_or_equal:'.$salaryHistory?->date_of_current_basic,
         ]);
         if ($validator->fails()) {
             return $validator->errors();
