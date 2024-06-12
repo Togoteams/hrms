@@ -275,7 +275,7 @@ trait PayrollTraits
             $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;
         }
-        return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount, 'taxable_amount' => $taxableAmount];
+        return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount,'monthly_taxable_amount'=>$taxableAmount/12, 'taxable_amount' => $taxableAmount];
     }
     public function bankContributionOfPf($emp)
     {

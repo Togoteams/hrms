@@ -10,6 +10,10 @@
             $totalEnCashAmount = $perDaysAmount * $noOfEncashLeave;
             // $totalReversalAmount = $perDaysAmount * $noOfReversalLeave;
             @endphp
+             <input  readonly id="taxable_amount_in_pula" name="taxable_amount_in_pula" type="hidden"
+             class="form-control form-control-sm">
+            <input  readonly id="tax_amount_in_pula" name="tax_amount_in_pula" type="hidden"
+                class="form-control form-control-sm">
             <input  value="{{$totalEnCashAmount}}" readonly id="leave_encashment_amount"  type="hidden" class="form-control form-control-sm">
             <input value="{{ $emp13thChequeAmount }}" readonly id="emp_13_cheque_amount" type="hidden"
             class="form-control form-control-sm">

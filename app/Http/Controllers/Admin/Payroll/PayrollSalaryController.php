@@ -111,6 +111,8 @@ class PayrollSalaryController extends Controller
                 'total_loss_of_pay' =>  $request->total_loss_of_pay,
                 'total_working_days' =>  $request->total_working_days,
                 'education_allowance_for_ind_in_pula' =>  $request->education_allowance_for_ind_in_pula,
+                'taxable_amount_in_pula' =>  $request->taxable_amount_in_pula,
+                'tax_amount_in_pula' =>  $request->tax_amount_in_pula,
                 'net_take_home' =>  $request->net_take_home,
                 'leave_encashment_amount' =>  $request->leave_encashment_amount,
                 'leave_encashment_days' =>  $request->leave_encashment_days,

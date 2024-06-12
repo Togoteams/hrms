@@ -222,7 +222,15 @@ class ReportController extends Controller
                 $empAnnualTaxReport[$key]['emp_name']=$value->user->name;
                 $empAnnualTaxReport[$key]['ec_number']=$value->ec_number;
                 $empAnnualTaxReport[$key]['name_of_branch']=$value?->branch?->name;
-                $empAnnualTaxReport[$key]['gross_earning'] = PayrollSalary::where('employee_id',$value->id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->sum('gross_earning');
+                $totalGrossEarning =  PayrollSalary::where('employee_id',$value->id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->sum('gross_earning');
+                $empAnnualTaxReport[$key]['gross_earning'] = $totalGrossEarning;
+                $empAnnualTaxReport[$key]['gross_earning_in_pula'] =$totalGrossEarning;
+
+                if($value->employment_type=="expatriate")
+                {
+                    $usdToPulaAmount = getCurrencyValue("usd", "pula");
+                    $empAnnualTaxReport[$key]['gross_earning_in_pula'] = $totalGrossEarning * $usdToPulaAmount ;
+                }
                 // Employee Id
                 $emplooyeId = $value->id;
                 $taxAmount=0;
@@ -237,8 +245,9 @@ class ReportController extends Controller
                     })->sum('value');
                 }
 
-                $empAnnualTaxReport[$key]['tax_deduction'] =$taxAmount;
+                $empAnnualTaxReport[$key]['tax_deduction'] =PayrollSalary::where('employee_id',$value->id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->sum('tax_amount_in_pula');
                 $empAnnualTaxReport[$key]['net_earning'] = PayrollSalary::where('employee_id',$value->id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->sum('net_take_home');;
+                $empAnnualTaxReport[$key]['net_earning_in_pula'] = PayrollSalary::where('employee_id',$value->id)->whereBetween('salary_date_pay_for',[$fromDate,$toDate])->sum('net_take_home_in_pula');;
             }   
         }
         // return $empAnnualTaxReport;
@@ -335,8 +344,10 @@ class ReportController extends Controller
                 $totalITaxAmount = 0;
                 foreach($months as $key => $month)
                 {   $basicAmount =0;
-                    $basicAmount = PayrollSalary::with('payrollSalaryHead','payrollSalaryHead.payroll_head')->where('pay_for_month_year',$month['year']."-".$month['month']['key'])->where('employee_id',$employe->id)->value('basic') ?? 0;
+                    $basicAmount = PayrollSalary::where('pay_for_month_year',$month['year']."-".$month['month']['key'])->where('employee_id',$employe->id)->value('basic') ?? 0;
+                    $taxAmount = PayrollSalary::where('pay_for_month_year',$month['year']."-".$month['month']['key'])->where('employee_id',$employe->id)->value('tax_amount_in_pula') ?? 0;
                     $totalBasicAmount +=$basicAmount;
+                    $totalITaxAmount +=$taxAmount;
                     // $year = $month['year']; 
                     // $month = $month['month']['key']; 
                     // $emplooyeId = $employe->id; 
@@ -350,7 +361,7 @@ class ReportController extends Controller
                 }
                 $emp13ChequeReport[$ekey]['total_amount'] = $totalBasicAmount;
                 $emp13ChequeReport[$ekey]['average_amount'] = number_format($totalBasicAmount/12,2);
-                $totalITaxAmount = $this->getTaxAmount(['taxable_amount'=>$totalBasicAmount,'employment_type'=>$employe->employment_type])['tax_amount'];
+                // $totalITaxAmount = $this->getTaxAmount(['taxable_amount'=>$totalBasicAmount,'employment_type'=>$employe->employment_type])['tax_amount'];
                 $emp13ChequeReport[$ekey]['total_i_tax_amount'] = $totalITaxAmount;
                 $emp13ChequeReport[$ekey]['net_payable_amount'] = number_format($totalBasicAmount/12-$totalITaxAmount);
             }

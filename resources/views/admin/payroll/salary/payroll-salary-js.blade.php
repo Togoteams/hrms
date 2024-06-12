@@ -54,6 +54,8 @@
                 if (result.status == true) {
                     var data = result.data;
                     $("#tax").val(data.tax_amount);
+                    $("#taxable_amount_in_pula").val(data.monthly_taxable_amount);
+                    $("#tax_amount_in_pula").val(data.tax_amount);
                     console.log(data.tax_amount);
                 } else {
                     $("#tax").val(0);

@@ -98,9 +98,9 @@
                                         <td>{{ $report['emp_name'] }}</td>
                                         <td>{{ $report['ec_number'] }}</td>
                                         <td>{{ $report['name_of_branch'] }}</td>
-                                        <td>{{ $report['gross_earning'] }}</td>
-                                        <td>{{ $report['tax_deduction'] }}</td>
-                                        <td>{{ $report['net_earning'] }}</td>
+                                        <td>{{ $report['gross_earning_in_pula'] }}  PULA</td>
+                                        <td>{{ $report['tax_deduction'] }} PULA</td>
+                                        <td>{{ $report['net_earning_in_pula'] }}  PULA</td>
 
                                     </tr>
                                 @endforeach

@@ -19,6 +19,11 @@
                 class="form-control form-control-sm">
             <input value="{{ $emp13thChequeAmount }}" readonly id="emp_13_cheque_amount" type="hidden"
                 class="form-control form-control-sm">
+       
+            <input  readonly id="taxable_amount_in_pula" name="taxable_amount_in_pula" type="hidden"
+                class="form-control form-control-sm">
+            <input  readonly id="tax_amount_in_pula" name="tax_amount_in_pula" type="hidden"
+                class="form-control form-control-sm">
             <input readonly onkeyup="amount_cal(this)" onblur="taxCalCalculation()" required id="basic"
                 placeholder="Enter correct basic " type="number" name="basic" value="{{ $basic ?? '' }}"
                 class="form-control form-control-sm ">
