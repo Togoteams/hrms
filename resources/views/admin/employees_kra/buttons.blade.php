@@ -1,6 +1,6 @@
 <form id="edit{{ $item->id }}" action="{{ route('admin.' . $route . '.destroy', $item->id) }}">
 
-    @can('print-employee-kra')
+    @can('print-employee-performance')
     <a target="_blank" href="{{ route('admin.employee-kra.print', $item->user_id) }}"
         class="text-white btn btn-success btn-sm"><i class="fas fa-print"></i></a>
     @endcan
@@ -20,14 +20,14 @@
     @endcan --}}
     @csrf
     <input type="hidden" name="_method" value="DELETE">
-    @can('delete-employee-kra')
+    @can('delete-employee-performance')
     <button type="button" id="delete{{ $item->id }}"
         onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')" class="btn btn-delete btn-sm"><i
             class="fas fa-trash-alt"></i>
     </button>
     @endcan
 
-    @can('change-status-employee-kra')
+    @can('change-status-employee-performance')
     {{-- <button type="button"
         onclick="changeStatus('{{ route('admin.' . $route . '.status', $item->id) }}','status{{ $item->id }}')"
         id="status{{ $item->id }}"

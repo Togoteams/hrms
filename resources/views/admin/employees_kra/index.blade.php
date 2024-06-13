@@ -30,7 +30,7 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    @can('add-employee-kra')
+                    @can('add-employee-performance')
                     <a class="btn btn-white"  href="{{ route('admin.employee-kra.create') }}"  >
                      Add {{ $page }}
                     </a>

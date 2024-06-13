@@ -6,7 +6,7 @@
         <!-- Content -->
         <div class="container-fluid">
             <!-- Page Header -->
-            <div class=" border-bottom mt-2 mb-2">
+            <div class="mt-2 mb-2 border-bottom">
                 <div class="row align-items-center">
 
                     <div class="col-auto">
@@ -25,7 +25,7 @@
 
 
             <!-- Card -->
-            <div class="card mb-3 mb-lg-5">
+            <div class="mb-3 card mb-lg-5">
 
             <div class="page-header">
                 <div class="row">
@@ -33,7 +33,7 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                        @can('add-attributes')
+                        @can('add-kra-attributes')
                         <button type="button" class="btn btn-white" data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
                                 Add {{ $page }}
@@ -76,7 +76,7 @@
 
                                         <form id="edit{{ $item->id }}"
                                             action="{{ route('admin.kra-attributes.destroy', $item->id) }}">
-                                            @can('edit-attributes')
+                                            @can('edit-kra-attributes')
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.kra-attributes.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
@@ -85,14 +85,14 @@
                                             @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            @can('delete-attributes')
+                                            @can('delete-kra-attributes')
                                             <button type="button" id="delete{{ $item->id }}"
                                                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                                                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"></i>
                                             </button>
                                             @endcan
 
-                                            @can('change-status-attributes')
+                                            @can('change-status-kra-attributes')
                                             {{-- <button type="button"
                                                 onclick="changeStatus('{{ route('admin.kra-attributes.status', $item->id) }}','status{{ $item->id }}')"
                                                 id="status{{ $item->id }}"
