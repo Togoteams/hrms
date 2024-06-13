@@ -38,6 +38,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
     }
     public function model(array $row)
     {
+        set_time_limit(0);
         // dd($row['basic_salary']);
           // Check if all values in the row are empty
           if (empty(array_filter($row))) {
