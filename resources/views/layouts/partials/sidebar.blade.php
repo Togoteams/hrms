@@ -221,8 +221,8 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.kra-attributes.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.kra-attributes.index') }}"> Attributes</a>
                                      @endcanany
-                                     @canany(['add-delete-employee-performance', 'edit-delete-employee-performance', 'delete-delete-employee-performance',
-                                         'view-delete-employee-performance', 'change-status-delete-employee-performance', 'print-delete-employee-performance'])
+                                     @canany(['add-employee-performance', 'edit-employee-performance', 'delete-employee-performance',
+                                         'view-employee-performance', 'change-status-employee-performance', 'print-employee-performance'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-kra.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.employee-kra.index') }}"> Employee Performance</a>
                                      @endcanany
