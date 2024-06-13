@@ -116,7 +116,7 @@ class PayRollPayscaleCotroller extends BaseController
                 $employee = Employee::where('user_id', $request->user_id)->first();
 
             if (!$employee) {
-                return response()->json(['error' => 'Employee not found for the given user_id']);
+                return response()->json(['error' => 'Employee not found for the given user']);
             }
                 $payroll = PayRollPayscale::create([
                     'employee_id' => $employee->id,

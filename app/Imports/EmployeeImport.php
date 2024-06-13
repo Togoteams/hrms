@@ -39,7 +39,12 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
     public function model(array $row)
     {
         // dd($row['basic_salary']);
-       
+          // Check if all values in the row are empty
+          if (empty(array_filter($row))) {
+            return null; // Skip this row if all values are empty
+        }
+        if($row['employee_name'] && $row['email'] && $row['mobile_no'])
+        {
             $faker = Faker::create();
             $userData =[
                 "name"=>$row['employee_name'],
@@ -102,8 +107,8 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                 ];
                 $addressData = EmpAddress::updateOrCreate($addressData);
             }
-           
-            return $user;
+        }
+            return null;
 
     }
     // }
