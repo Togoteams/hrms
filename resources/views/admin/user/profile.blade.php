@@ -34,6 +34,8 @@
 
             <h3 class="text-center font-weight-bold txt-color .mr-m-2p">Profile Update</h3>
             <div class="mx-5 row justify-content-center">
+                @can('profile-update')
+                    
                 <div class="col-6">
                     <form action="{{ route('admin.image.update') }}" method="post" enctype='multipart/form-data'>
                         {{ csrf_field() }}
@@ -81,6 +83,8 @@
                         </div>
                     </form>
                 </div>
+                @endcan
+                @can('change-password')
                 <div class="col-6">
                     <div class="overflow-hidden card w-75 position-relative">
                         <div class="p-4 card-body">
@@ -174,6 +178,7 @@
                         </div>
                     </div>
                 </div>
+                @endcan
             </div>
 
         </div>

@@ -170,10 +170,10 @@
             "name": "Change Status Designations","module": "Designations", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
-            "name": "Profile Update","module": "Profile Update", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+            "name": "Profile Update","module": "Profile", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
-            "name": "Change Password","module": "Change Password", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
+            "name": "Change Password","module": "Profile", "permissions_for":"admin,chief_manager,hr_head,branch_head,branch_supervisor,employee"
         },
         {
             "name": "Add Department","module": "Department", "permissions_for":"admin,chief_manager"

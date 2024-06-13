@@ -76,9 +76,14 @@ $(document).ready(function (e) {
         console.log("this is reload");
         location.reload();
     });
+    $(document).on("click", ".btn-close", function (e) {
+        console.log("this is reload");
+        location.reload();
+    });
     $(document).on("click", ".addBtn", function (e) {
         var $this = $(this);
         var modalName = $this.data('modalname');
+        console.log(modalName);
         $('#' + modalName).modal('show');
         $("#" + modalName).find('form.formsubmit').trigger('reset');
         $("#" + modalName).find('form .form-control').removeClass('is-invalid');
