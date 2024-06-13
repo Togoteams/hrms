@@ -216,13 +216,13 @@
                                      class="nav-collapse collapse {{ show(['employee-kra.index', 'kra-attributes.index']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                                     @canany(['add-attributes', 'edit-attributes', 'delete-attributes', 'view-attributes',
-                                         'change-status-attributes'])
+                                     @canany(['add-kra-attributes', 'edit-kra-attributes', 'delete-kra-attributes', 'view-kra-attributes',
+                                         'change-status-kra-attributes'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.kra-attributes.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.kra-attributes.index') }}"> Attributes</a>
                                      @endcanany
-                                     @canany(['add-employee-kra', 'edit-employee-kra', 'delete-employee-kra',
-                                         'view-employee-kra', 'change-status-employee-kra', 'print-employee-kra'])
+                                     @canany(['add-delete-employee-performance', 'edit-delete-employee-performance', 'delete-delete-employee-performance',
+                                         'view-delete-employee-performance', 'change-status-delete-employee-performance', 'print-delete-employee-performance'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-kra.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.employee-kra.index') }}"> Employee Performance</a>
                                      @endcanany
