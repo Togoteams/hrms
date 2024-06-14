@@ -14,4 +14,12 @@ class Branch extends Model
         return $query
             ->where('status', 'active');
     }
+    public function scopeGetFilter($query)
+    {
+        if(auth()->user()->role_slug=='branch-head')
+        {
+            $query->where('id', auth()->user()->employee->branch_id);
+        }
+        return $query;
+    }
 }

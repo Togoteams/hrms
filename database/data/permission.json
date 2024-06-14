@@ -336,6 +336,9 @@
             "name": "Edit Tax Slab Settings","module": "Tax Slab Settings", "permissions_for":"admin"
         },
         {
+            "name": "Delete Tax Slab Settings","module": "Tax Slab Settings", "permissions_for":"admin"
+        },
+        {
             "name": "View Tax Slab Settings","module": "Tax Slab Settings", "permissions_for":"admin"
         },
         {

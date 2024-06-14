@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="form_data" action="{{ route('admin.overtime-settings.store') }}">
+                <form id="form_data" class="formsubmit" action="{{ route('admin.overtime-settings.store') }}">
                     @csrf
                     <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}">
 
@@ -30,14 +30,14 @@
                         <div class="mb-2 col-sm-6">
                             <div class="form-group">
                                 <label for="date" class="required">Date</label>
-                                <input type="date" name="date" id="date" required class="form-control"
+                                <input type="date" name="date" id="date"  class="form-control"
                                     placeholder="Enter date of overtime">
                             </div>
                         </div>
                         <div class="mb-2 col-sm-6">
                             <div class="form-group">
                                 <label for="working_hours" class="required">Working Hours</label>
-                                <input type="number" name="working_hours" required id="working_hours"
+                                <input type="number" name="working_hours"  id="working_hours"
                                     class="form-control" placeholder="Enter working hours" min="0">
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="mb-2 col-sm-6">
                             <div class="form-group">
                                 <label for="overtime_type" class="required">Overtime Type</label>
-                                <select name="overtime_type" class=" form-control" required id="overtime_type"
+                                <select name="overtime_type" class=" form-control"  id="overtime_type"
                                     placeholder="Employee overtime type">
                                     <option value="">Select Option</option>
                                     <option value="holiday">Holiday</option>
@@ -60,7 +60,7 @@
                         </div>
                         <hr>
                         <div class="text-center ">
-                            <button onclick="ajaxCall('form_data')" type="button" class="btn btn-white">Add
+                            <button  type="sumit" class="btn btn-white">Add
                                 {{ $page }}</button>
                         </div>
                     </div>

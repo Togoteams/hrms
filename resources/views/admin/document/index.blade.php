@@ -33,7 +33,7 @@
                         <h2 class="page-header-title">{{ $page }}</h2>
                     </div>
                     <div class="col-sm-auto">
-                    @can('add-document-management')
+                    @can('add-document')
                     <button type="button" class="btn btn-white" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">
                             Add {{ $page }}
@@ -83,7 +83,7 @@
                                                     class="btn btn-edit btn-sm changeStatus" ><i class="fas  @if($item->status=="active") fa-toggle-on  @else fa-toggle-off @endif"
                                                      @if($item->status=="active") title="Active"  @else title="Inactive" @endif  data-bs-toggle="tooltip"  ></i>
                                                 </button>
-                                            @can('edit-document-management')
+                                            @can('edit-document')
                                             <button type="button"
                                                 onclick="editForm('{{ route('admin.document.edit', $item->id) }}', 'edit')"
                                                 href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
@@ -92,7 +92,7 @@
                                             @endcan
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
-                                            @can('delete-document-management')
+                                            @can('delete-document')
                                             <button type="button" id="delete{{ $item->id }}"
                                                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                                                 class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>

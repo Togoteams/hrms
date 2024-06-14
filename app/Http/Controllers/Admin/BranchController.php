@@ -33,7 +33,7 @@ class BranchController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required',
+            'name' => 'string|required|unique:branches,name',
             'description' => 'string|required'
         ]);
         if ($validator->fails()) {

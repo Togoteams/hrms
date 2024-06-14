@@ -100,6 +100,7 @@ class PayrollSalaryController extends Controller
                 'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                 'user_id' => $request->user_id,
                 'pay_for_month_year' =>  $request->pay_for_month_year,
+                'payroll_payscales_id' =>  $request->payroll_payscales_id,
                 'salary_date_pay_for' =>  date("Y-m-d",strtotime($request->pay_for_month_year."-".date('d'))),
                 'basic' =>  $request->basic,
                 'fixed_deductions' =>  $request->fixed_deductions,

@@ -22,7 +22,12 @@ class CurrentLeaveController extends BaseController
     {
         $employee = getEmployee($eid);
         // return $request;
-        $empLeaveTypes = LeaveSetting::where('emp_type',getEmpType($employee->employment_type))->where('salary_deduction_per','<>',100)->get(['id','name','slug']);
+        if($employee->gender!="female")
+        {
+            $empLeaveTypes = LeaveSetting::where('emp_type',getEmpType($employee->employment_type))->whereNotIn('slug',['maternity-leave'])->where('salary_deduction_per','<>',100)->get(['id','name','slug']);        }else
+        {
+            $empLeaveTypes = LeaveSetting::where('emp_type',getEmpType($employee->employment_type))->where('salary_deduction_per','<>',100)->get(['id','name','slug']);
+        }
         // return $empLeaveType;
         $isCurrentLeaveFound = 0 ;
         foreach($empLeaveTypes as $key => $value)

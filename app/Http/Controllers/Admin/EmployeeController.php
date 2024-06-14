@@ -69,9 +69,8 @@ class EmployeeController extends BaseController
             }
            
         $designation = Designation::getDesignation();
-        $membership = "";
-        $branch = Branch::where('status', 'active')->get();
-        return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        $branch = Branch::getBranch()->getFilter()->get();
+        return view('admin.employees.index', ['page' => $this->page_name, 'designation' => $designation, 'branch' => $branch]);
     }
 
     public function viewUserDetails($eid = null)
@@ -86,7 +85,7 @@ class EmployeeController extends BaseController
             $roles = Role::getRoles()->excludeRoles()->where('status','active')->get();
         }
         $countries = Country::getCountry()->get();
-        $branch = Branch::getBranch()->get();
+        $branch = Branch::getBranch()->getFilter()->get();
         return view('admin.employees.user-details', ['employee' =>$employee , 'branch'=> $branch,'roles'=>$roles,'countries'=>$countries]);
     }
     public function getBranchWiseRole(Request $request)
@@ -206,7 +205,6 @@ class EmployeeController extends BaseController
     public function viewEmployeeDetails($eid = null)
     {
         $designation = Designation::getDesignation()->get();
-        $membership = Membership::get();
         $bomaind = MedicalCard::getMedicalCard()->get();
         $currencySetting = CurrencySetting::getCurrency()->get();
         $employee = $this->getEmployee($eid);
@@ -214,7 +212,7 @@ class EmployeeController extends BaseController
         $allowedCurrencies = ['pula', 'usd'];
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
 
-        $branch = Branch::getBranch()->get();
+        $branch = Branch::getBranch()->getFilter()->get();
         $allowedRoles = ['managing-director'];
         $reportingAuthority = Employee::getActiveEmp()->whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
@@ -229,7 +227,6 @@ class EmployeeController extends BaseController
         return view('admin.employees.employee-details',[
                 'page'          => $this->page_name,
                 'designation'   => $designation,
-                'membership'    => $membership,
                 'branch'        => $branch,
                 'bomaind'       => $bomaind,
                 'currency_setting' =>$filteredCurrencySetting,
@@ -710,11 +707,10 @@ class EmployeeController extends BaseController
      */
     public function show(string $id)
     {
-        $designation = Designation::all();
-        $membership = Membership::all();
-        $branch = Branch::where('status', 'active')->get();
+        $designation = Designation::getDesignation()->get();
+        $branch = Branch::getBranch()->getFilter()->get();
         $data = Employee::find($id);
-        return view('admin.employees.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        return view('admin.employees.show', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'branch' => $branch]);
     }
 
     /**
@@ -722,11 +718,10 @@ class EmployeeController extends BaseController
      */
     public function edit(string $id)
     {
-        $designation = Designation::all();
-        $membership = Membership::all();
-        $branch = Branch::where('status', 'active')->get();
+        $designation = Designation::getDesignation()->get();
+        $branch = Branch::getBranch()->getFilter()->get();
         $data = Employee::find($id);
-        return view('admin.employees.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation, 'membership' => $membership, 'branch' => $branch]);
+        return view('admin.employees.edit', ['data' => $data, 'page' => $this->page_name, 'designation' => $designation,  'branch' => $branch]);
     }
 
     /**

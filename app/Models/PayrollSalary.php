@@ -10,6 +10,7 @@ class PayrollSalary extends Model
     use HasFactory;
     protected $fillable = [
         'employee_id',
+        'payroll_payscales_id',
         'user_id',
         'pay_for_month_year',
         'salary_date_pay_for',

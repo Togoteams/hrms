@@ -23,10 +23,6 @@ return new class extends Migration
             $table->timestamp('rejected_at')->nullable();
             $table->timestamp('transfer_request_at')->nullable();
             $table->timestamps();
-
-            $table->foreign('emp_id')->references('id')->on('employees');
-            $table->foreign('department_id')->references('id')->on('designations');
-            $table->foreign('branch_id')->references('id')->on('branches');
         });
     }
 

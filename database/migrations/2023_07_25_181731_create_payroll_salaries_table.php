@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payroll_salaries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('payroll_payscales_id')->nullable();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('employment_type')->nullable();
             $table->string('status')->default('active');
@@ -45,7 +46,6 @@ return new class extends Migration
             $table->foreignId('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->foreign('deleted_by')->references('id')->on('users');
-            $table->foreign('branch_id')->references('id')->on('branches');
             $table->timestamps();
             $table->softDeletes();
         });

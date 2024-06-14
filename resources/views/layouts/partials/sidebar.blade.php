@@ -120,11 +120,11 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employees.index' ? 'active' : '' }} "
                                              href="{{ route('admin.employees.index') }}">Employees</a>
                                      @endcanany
-                                    
+                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
+                                        href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
                                      @canany(['add-employees-transfer', 'edit-employees-transfer',
                                          'view-employees-transfer', 'delete-employees-transfer'])
-                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.employee-transfer.index' ? 'active' : '' }} "
-                                            href="{{ route('admin.employee-transfer.index') }}">Employee Transfer </a>
+                                         
                                      @endcanany
                                      @canany(['add-department', 'edit-department', 'view-department', 'delete-department'])
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.department.index' ? 'active' : '' }} "
@@ -444,8 +444,8 @@
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document-type.index' ? 'active' : '' }}  "
                                              href="{{ route('admin.document-type.index') }}">Document Type</a>
                                      @endcanany
-                                     @canany(['add-document-management', 'edit-document-management',
-                                         'view-document-management', 'delete-document-management'])
+                                     @canany(['add-document', 'edit-document',
+                                         'view-document', 'delete-document'])
                                          <div class="nav-item">
                                              <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.document.list' ? 'active' : '' }}"
                                                  href="{{ route('admin.document.index') }}" data-placement="left">

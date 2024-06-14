@@ -175,9 +175,7 @@
                                         placeholder="Enter correct union_membership_id   "
                                         name="unique_membership_id" class="form-control form-control-sm ">
                                         <option selected disabled> - Select unique_membership_id - </option>
-                                        @foreach ($membership as $mem)
-                                            <option value="{{ $mem->id }}">{{ $mem->name }}</option>
-                                        @endforeach
+                                       
                                     </select>
                                 </div>
                             </div>

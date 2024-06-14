@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\OvertimeSetting;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use OCILob;
 use Yajra\DataTables\Facades\DataTables;
 
-class OvertimeController extends Controller
+class OvertimeController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -55,17 +56,17 @@ class OvertimeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        
+        $request->validate( [
             'user_id' => 'required|numeric',
             'date' => 'required|date|before_or_equal:today',
             'working_hours' => 'required|numeric|gt:0',
-            'working_min' => 'nullable|numeric|gt:0|max:59',
             'overtime_type' => 'required|string',
         ]);
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
+        // if ($validator->fails()) {
+        //     return $validator->errors();
+        // } else {
             try {
                 //request user_id
                 $userId = $request->user_id;
@@ -75,7 +76,7 @@ class OvertimeController extends Controller
                 ->where('date', $request->date)
                 ->exists();
                 if ($overlapDate) {
-                    return response()->json(['error' => 'Overlap with an existing record.']);
+                       return $this->responseJson(false,200, 'Overlap with an existing record.');
                 }
 
                 //employee details based on the user_id
@@ -89,14 +90,14 @@ class OvertimeController extends Controller
 
                     OvertimeSetting::create($request->except('_token'));
 
-                    return response()->json(['success' => $this->page_name . " Added Successfully"]);
+                    return $this->responseJson(true,200,$this->page_name . " Added Successfully");
                 } else {
-                    return response()->json(['error' => 'Employee not found for the given user_id']);
+                     return $this->responseJson(false,200, 'Employee not found for the given user_id');
                 }
             } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+                 return $this->responseJson(false,200, $e->getMessage());
             }
-        }
+        // }
     }
 
 
@@ -127,7 +128,6 @@ class OvertimeController extends Controller
             'user_id' => 'required|numeric',
             'date' => 'required|date|before_or_equal:today',
             'working_hours' => 'required|numeric|gt:0',
-            'working_min' => 'nullable|numeric|gt:0|max:59',
             'overtime_type' => 'required|string',
         ]);
 

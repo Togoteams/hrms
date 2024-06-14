@@ -78,8 +78,14 @@
                                                 class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
                                             </button>
                                             @endcan
+                                            @can('delete-tax-slab-settings')
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
+                                            <button type="button" id="delete{{ $item->id }}"
+                                                onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')" class="btn btn-delete btn-sm"><i
+                                                    class="fas fa-trash-alt"></i>
+                                            </button>
+                                             @endcan
                                         </form>                                     
                                     </td>
                                 </tr>
