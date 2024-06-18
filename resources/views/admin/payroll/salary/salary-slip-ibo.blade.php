@@ -80,6 +80,8 @@
                 color: #000;
                 /* background: #f2f0f8; */
                 text-align: left;
+                background: #dce2e8;
+                /* border: 1px solid #a1a1a1; */
             }
 
             .payslipcard td {
@@ -88,6 +90,7 @@
                 padding-top: 4px;
                 padding-bottom: 4px;
                 font-weight: 300;
+                border: 1px solid #a1a1a1;
             }
 
             .marksheetAlign {
@@ -97,7 +100,7 @@
            
 
             .payslipcard {
-                border: 1px solid #fff;
+                /* border: 1px solid #fff; */
                 color: #000;
                 font-size: 12px;
                 width: 100%;
@@ -150,18 +153,18 @@
                             <td>
                                 <h3 class="mb-2 text-left text-dark"
                                     style="font-weight: 800;
-                                color: #f94f00!important;">
+                                color: #f94f00!important;     font-size: 25px;">
                                     Bank of Baroda Ltd.
                                     <br>
                                     <span>(Botswana)</span>
                                 </h3>
-                                <p class="mb-0 text-left" style="text-align: left;">
-                                    PAYSLIP For the month of -
-                                    {{ strtoupper(date('M-Y', strtotime($data->pay_for_month_year))) }}</p>
+                                <p class="mb-0 text-left text-uppercase" style="text-align: left;    text-transform: uppercase;">
+                                    PAYSLIP For the month of
+                                    <u>{{ strtoupper(date('F-Y', strtotime($data->pay_for_month_year))) }}</u></p>
                             </td>
                             <td style="text-align: right;">
                                 <img src="{{ asset('assets/img/logo-cropped.svg') }}" class="img-fluid"
-                                    style="height: auto; width: 200px;">
+                                    style="height: auto; width: 16rem;">
 
                             </td>
                         </tr>
@@ -173,18 +176,18 @@
                 <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18px;font-weight: bold;">
                     <thead>
                         <tr>
-                            <td class="payslip" colspan="3"><strong><u>EMPLOYEE DETAILS</u></strong>
+                            <td class=" payslip" colspan="3" style="padding-bottom: 6px;"><strong><u>EMPLOYEE DETAILS</u></strong>
                             </td>
                         </tr>
                         <tr>
                             @if (!empty($data['user']->name))
-                                <td class="payslip">Employee Name :</td>
-                                <td class="payslip">{{ $data['user']->name }}</td>
+                                <td class="payslip" style="width: 20%;">Employee Name :</td>
+                                <td class="" style="width: 40%;">{{ $data['user']->name }}</td>
                             @endif
 
                             @if (!empty($data['employee']->ec_number))
-                                <td class="payslip"> EC Number. :</td>
-                                <td class="payslip">{{ $data['employee']->ec_number }}</td>
+                                <td class="payslip" style="width: 20%;"> EC Number. :</td>
+                                <td class="" style="width: 40%;">{{ $data['employee']->ec_number }}</td>
                             @endif
 
 
@@ -204,7 +207,7 @@
                 <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18px;font-weight: bold;">
                     <thead>
                         <tr>
-                            <td class="payslip" colspan="3"><strong><u>OTHER DETAILS</u></strong>
+                            <td class="payslip" colspan="3" style="padding-bottom: 6px;"><strong><u>OTHER DETAILS</u></strong>
                             </td>
                         </tr>
                         <tr>
@@ -218,7 +221,7 @@
                         <tr>
 
 
-                            <td class="payslip" width="50%">Loss Of Pay :</td>
+                            <td class="payslip" width="20%">Loss Of Pay :</td>
                             <td class="payslip">{{ $data->total_loss_of_pay }}</td>
                             {{-- <td class="payslip">    </td> --}}
                             {{-- <td class="payslip">Total Absent : </td>
@@ -226,8 +229,10 @@
                             {{-- <td class="payslip">No. Availed Leave :</td>
                             <td class="payslip">{{$data->no_availed_leave}}</td> --}}
                         </tr>
+                        <tr><td colspan="3" ></td></tr>
                     </thead>
                 </table>
+                <hr>
                 @php
                 $noOfIncome=0;
                 $noOfDeduction=0;
@@ -252,24 +257,28 @@
                     $extraIncomes =  $noOfDeduction -  $noOfIncome;
                 }
             @endphp
-                <table width="100%">
+                <table width="100%" >
+                    <tr>
+                        <td class=" payslip" colspan="3" style="padding-bottom: 6px;"><strong><u>SALARY DETAILS</u></strong>
+                        </td>
+                    </tr>
                     <tr>
                         <td width="50%">
                             <table class="payslipcard" width="100%" border="1"
-                            style="font-size: 18px;font-weight: bold;">
+                            style="font-size: 18px;font-weight: bold;border-collapse: collapse;">
                             <tbody>
                                 <tr>
-                                    <th class="marksheetAlign">EARNINGS </th>
+                                    <th class="marksheetAlign" style="padding-left: 10%;">EARNINGS </th>
                                     <!-- <th style="text-align: right;">PAY SCALE</th> -->
-                                    <th style="text-align: right;">EARNED</th>
+                                    <th style="text-align: right; padding-right: 5%;">AMOUNT</th>
                                 </tr>
                                 @php
                                     $noOfIncome = 0;
                                     $totalIncomeAmount = $data->basic;
                                 @endphp
                                 <tr>
-                                    <td style="font-weight: 600;"><strong>Basic</strong></td>
-                                    <td style="text-align: right;">{{ $data->basic }}</td>
+                                    <td style=" padding-left: 10%;">Basic</td>
+                                    <td style="text-align: right;padding-right: 5%;">{{ number_format($data->basic,2) }}</td>
                                 </tr>
                                 @foreach ($data['payrollSalaryHead'] as $key => $value)
                                     @if ($value->payroll_head->head_type == 'income')
@@ -285,18 +294,18 @@
                                         @endphp
                                         <tr>
                                             @if ($value->payroll_head->slug == 'education_allowance')
-                                                <td style="font-weight: 600;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                <td style=" padding-left: 10%;">
+                                                    {{ $value->payroll_head->name }}
                                                 </td>
                                                 <!-- <td style="text-align: right;">{{ $value->value }}</td> -->
-                                                <td style="text-align: right;">{{ number_format($edu_allow,2) }}
+                                                <td style="text-align: right;padding-right: 5%;">{{ number_format($edu_allow,2) }}
                                                 </td>
                                             @else
-                                                <td style="font-weight: 600;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                <td style="padding-left: 10%;">
+                                                    {{ $value->payroll_head->name }}
                                                 </td>
                                                 <!-- <td style="text-align: right;">{{ $value->value }}</td> -->
-                                                <td style="text-align: right;">{{ $value->value }}</td>
+                                                <td style="text-align: right;padding-right: 5%;">{{ number_format($value->value,2) }}</td>
                                             @endif
 
                                         </tr>
@@ -304,27 +313,28 @@
                                 @endforeach
                                     @for ($j = 0; $j < $extraIncomes-1; $j++)
                                     <tr>
-                                        <td style="font-weight: 600;">
+                                        <td style=" padding-left: 10%;">
                                             <strong>&nbsp; &nbsp;</strong>
                                         </td>
-                                        <td style="text-align: right;">&nbsp; &nbsp;</td>
+                                        <td style="text-align: right; padding-right: 5%; ">&nbsp; &nbsp;</td>
                                     </tr>
                                     @endfor
                                 <tr>
-                                    <th style="font-weight: 600;"><strong>Gross Earning</strong></th>
+                                    <th class="marksheetAlign" style=" padding-left: 10%; font-size: 15px !important;">Gross Earning
+                                    </th>
                                     <!-- <th style="text-align: right;">{{ $totalIncomeAmount }}</th> -->
-                                    <th style="text-align: right;">{{ $totalIncomeAmount }}</th>
+                                    <th style="text-align: right;padding-right: 5%;">{{ number_format($totalIncomeAmount,2) }}</th>
                                 </tr>
                             </tbody>
                         </table>
                         </td>
                         <td>
-                            <table class="payslipcard" width="100%" border="1"
-                            style="font-size: 18px;font-weight: bold;">
+                            <table class="payslipcard" width="100%" border="1" 
+                            style="font-size: 18px;font-weight: bold; border-collapse: collapse;">
                             <tbody>
                                 <tr>
                                     <th class="marksheetAlign" style="padding-left: 10%;">DEDUCTIONS</th>
-                                    <th></th>
+                                    <th style="text-align: right;padding-right: 5%;">AMOUNT</th>
                                 </tr>
                                 @php
                                     $noOfDescription = 0;
@@ -345,32 +355,32 @@
                                         @endphp
                                         <tr>
                                             @if ($value->payroll_head->slug == 'other_deductions')
-                                                <td style="font-weight: 600; padding-left: 10%;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                <td style=" padding-left: 10%;">
+                                                    {{ $value->payroll_head->name }}
                                                 </td>
-                                                <td style="text-align: right;">{{ $otherDeducation }}
+                                                <td style="text-align: right;padding-right: 5%;">{{ $otherDeducation }}
                                                 </td>
                                             @else
-                                                <td style="font-weight: 600; padding-left: 10%;">
-                                                    <strong>{{ $value->payroll_head->name }}</strong>
+                                                <td style=" padding-left: 10%;">
+                                                    {{ $value->payroll_head->name }}
                                                 </td>
-                                                <td style="text-align: right;">{{ $value->value }}</td>
+                                                <td style="text-align: right;padding-right: 5%;">{{ number_format($value->value,2) }}</td>
                                             @endif
                                         </tr>
                                     @endif
                                 @endforeach
                                 @for ($i = 0; $i < $extraDeduction; $i++)
                                     <tr>
-                                        <td style="font-weight: 600;">
-                                            <strong> &nbsp; &nbsp;</strong>
+                                        <td style="">
+                                            &nbsp; &nbsp;
                                         </td>
-                                        <td style="text-align: right;">&nbsp; &nbsp;</td>
+                                        <td style="text-align: right;padding-right: 5%;">&nbsp; &nbsp;</td>
                                     </tr>
                                 @endfor
                                 <tr>
-                                    <th style="font-weight: 600; padding-left: 10%;">Total Deduction
+                                    <th class="marksheetAlign" style=" padding-left: 10%;font-size: 15px !important;">Total Deduction
                                     </th>
-                                    <th style="text-align: right;">{{ $totalDeductionAmount }}</th>
+                                    <th style="text-align: right;padding-right: 5%;">{{ number_format($totalDeductionAmount,2) }}</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -378,22 +388,22 @@
                     </tr>
                 </table>
               
-                <div class="row">
-
+                <div class="row" style="padding-top:1em">
+                    <hr>
                     <div class="col-md-12">
                         <table class="payslipcard" width="100%" border="0"
                             style="font-size: 18px;font-weight: bold;">
                             <tbody>
                               
                                 <tr>
-                                    <th style="padding-left: 1%;">Net Take Home (Gross Earning - Total Deduction) : $
-                                        {{ $data->net_take_home }} <span
+                                    <th style="padding-left: 1%;background:white !important">Net Take Home (Gross Earning - Total Deduction) : $
+                                        {{ number_format($data->net_take_home,2) }} <span
                                             style="font-weight: 100;">({{ convertNumberToWords($data->net_take_home) }}
                                             )</span></th>
                                 </tr>
                                 <tr>
-                                    <th style="padding-left: 1%;">Net Take Home (In Pula) (Gross Earning - Total
-                                        Deduction) : P {{ number_format($data->net_take_home_in_pula, 2, '.', '') }}
+                                    <th style="padding-left: 1%; background:white !important">Net Take Home (In Pula) (Gross Earning - Total
+                                        Deduction) : P {{ number_format($data->net_take_home_in_pula, 2) }}
                                         <span
                                             style="font-weight: 100;">({{ convertNumberToWords(number_format($data->net_take_home_in_pula, 2, '.', '')) }}
                                             )</span></th>
@@ -402,7 +412,8 @@
                         </table>
                     </div>
                 </div>
-                <p class="mt-3 mb-0 text-dark" style="font-weight: 600; text-align: left;">Note:</p>
+                <hr>
+                <p class="mt-4 mb-0 text-dark" style=" text-align: left;">Note:</p>
                 <ul style="padding-left: 12px;">
                     {{-- <li>1. The student are expected to keep this cardneat and clean</li>
                     <li>2. In case the card is lost the duplicate card will be issued on payment of extra report card
@@ -410,7 +421,10 @@
                     <li>3. Promotion will be granted on the weight of both examination. To pass the monthly test is also
                         compulsary.</li> --}}
                     <li>This is computer generated pay slip.</li>
+                    {{-- <li style="text-align: center">  **********************************************</li> --}}
                 </ul>
+                <br>
+                <p style="text-align: center">  ***************************************************************************</p>
             </div>
         </page>
     </body>
