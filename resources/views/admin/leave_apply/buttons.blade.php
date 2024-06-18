@@ -28,7 +28,6 @@
     @endif
     @endcan
     
-    @if (!isemplooye())
         {{-- @if (approvalBtnEnable($item->id) == 1) --}}
             @if($item->status=='approved' && $item->is_reversal==0 && $item->user?->employee?->employment_type=="local" )
                 @if($item->leave_type->slug=="leave-without-pay")
@@ -37,16 +36,15 @@
                 </button>
                 @endif
             @endif
-            {{-- @if($item->approval_authority==auth()->user()->id) --}}
-            {{-- @can('change-status-leave-apply') --}}
+            @if($item->approval_authority==auth()->user()->id)
+            @can('leave-approval')
                 <button type="button"
                     @if ($item->status != 'approved') onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"
             href="#" data-bs-toggle="modal" data-bs-target="#modalstatus" @endif
                     class="btn @if ($item->status == 'pending') btn-warning @elseif ($item->status == 'reject') btn-danger @elseif($item->status == 'approved') btn-success @else btn-secondary @endif btn-sm">
                     {{ ucfirst($item->status) }} </button>
-            {{-- @endcan --}}
-            {{-- @endif  --}}
+            @endcan
+            @endif 
         {{-- @endif --}}
-    @endif
 
 </form>

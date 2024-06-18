@@ -11,8 +11,8 @@
             <form id="edit{{ $item->id }}"
                 action="{{ route('admin.leave-time-approved.destroy', $item->id) }}">
 
-                @if(!isemplooye())
-                @can('change-status-leave-type-approval')
+                @if($item->approval_authority==auth()->user()->id)
+                @can('leave-maternity-approval')
                 <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
                 @endcan
                 @endif
@@ -22,13 +22,13 @@
                 @endcan --}}
 
 
-                @can('view-leave-type-approval')
+                @can('view-maternity-leave-apply')
                 <button type="button" onclick="editForm('{{ route('admin.leave-time-approved.show', $item->id) }}', 'show')" href="#"
                     data-bs-toggle="modal" data-bs-target="#modalshow" class="btn btn-info btn-sm"><i class="fas fa-eye"></i>
                 </button>
                 @endcan
 
-                @if($item->status == 'pending' && Gate::allows('edit-leave-type-approval'))
+                @if($item->status == 'pending' && Gate::allows('edit-maternity-leave-apply'))
                 <button type="button"
                     onclick="editForm('{{ route('admin.leave-time-approved.edit', $item->id) }}', 'edit')"
                     href="#" data-bs-toggle="modal" data-bs-target="#modaledit"
@@ -39,12 +39,14 @@
 
                 @csrf
                 <input type="hidden" name="_method" value="DELETE">
-                @can('delete-leave-type-approval')
+                @if($item->status == 'pending')
+                @can('delete-maternity-leave-apply')
                 <button type="button" id="delete{{ $item->id }}"
                     onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                     class="btn btn-delete btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="fas fa-trash-alt"></i>
                 </button>
                 @endcan
+                @endif
             </form>
         </div>
     </div>

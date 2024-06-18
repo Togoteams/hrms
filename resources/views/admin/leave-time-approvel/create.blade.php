@@ -20,7 +20,7 @@
                                 <label for="user_id" class="required">Employee</label>
                                 <select name="user_id" id="user_id" class="form-control form-control-sm">
                                     <option value="">- Select -</option>
-                                    @foreach ($Employees as $employee)
+                                    @foreach ($employees as $employee)
                                         <option value="{{ $employee->user_id }}"
                                             data-employee-type="{{ $employee->employment_type }}">
                                             {{ $employee->user->name }}({{ $employee->ec_number }})

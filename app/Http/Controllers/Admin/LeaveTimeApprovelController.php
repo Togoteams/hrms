@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\CurrentLeave;
+use App\Models\EmpCurrentLeave;
 use App\Models\Employee;
 use App\Models\LeaveSetting;
 use App\Models\LeaveApply;
@@ -44,16 +46,17 @@ class LeaveTimeApprovelController extends BaseController
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        $Employees = Employee::whereHas('user', function ($query) {
+        $employees = Employee::getList()->whereHas('user', function ($query) {
             $query->where('gender', 'female');
         })->getActiveEmp()->get();
         $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'branch-supervisor'];
 
         $approvalAuthority = Employee::getActiveEmp()->whereHas('user.roles', function ($q) use ($allowedRoles) {
             $q->whereIn('slug', $allowedRoles);
-        })->get();
-        $maternityLeaveTypes = LeaveSetting::where('name', 'MATERNITY LEAVE')->get();
-        return view('admin.leave-time-approvel.index', ['page' => $this->page_name,'approvalAuthority'=>$approvalAuthority, 'leave_setting' => $maternityLeaveTypes,'Employees'=> $Employees]);
+        })->whereNotIn('user_id',[auth()->user()->id])->get();
+        
+        $maternityLeaveTypes = LeaveSetting::where('slug', 'maternity-leave')->get();
+        return view('admin.leave-time-approvel.index', ['page' => $this->page_name,'approvalAuthority'=>$approvalAuthority, 'leave_setting' => $maternityLeaveTypes,'employees'=> $employees]);
 
     }
 
@@ -111,6 +114,7 @@ class LeaveTimeApprovelController extends BaseController
             'end_date' => ['required', 'date','no_date_overlap','after_or_equal:start_date'],
             "document" => ["max:10000",'required'],
         ]);
+        // return $request;
         // $validator = Validator::make($request->all(), [
         //     'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
         //     'user_id' => ['required', 'numeric', 'exists:users,id'],
@@ -221,14 +225,15 @@ class LeaveTimeApprovelController extends BaseController
             'description_reason' => ['nullable','string'],
         ]);
         $leave = LeaveTimeApprovel::find($request->leave_id);
-        // return $leave;
+        // return count(getAllDates($leave->start_date,$leave->end_date));
         $leave->description_reason = $request['description_reason'];
         $leave->status = $request['status'];
         $request->merge(['leave_reason'=>$leave->reason]);
         $request->merge(['approval_authority'=>$leave->approval_authority]);
         if($request->status=='approved')
         {
-            $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id,'remaining_leave'=>0,'leave_applies_for'=>count(getAllDates($leave->start_date,$leave->end_date))]);
+            $remaining_leave = EmpCurrentLeave::where('leave_type_id',$leave->leave_type_id)->value('leave_count');
+            $request->merge(['leave_type_id'=>$leave->leave_type_id,'start_date'=>$leave->start_date,'end_date'=>$leave->end_date,'user_id'=>$leave->user_id,'remaining_leave'=>$remaining_leave,'leave_applies_for'=>count(getAllDates($leave->start_date,$leave->end_date))]);
 
             $leave->approved_at = date('Y-m-d h:i:s');
             $leaveType = LeaveSetting::find($request->leave_type_id);
@@ -276,6 +281,7 @@ class LeaveTimeApprovelController extends BaseController
            ]);
         //    return $request;
           $response =  app('App\Http\Controllers\Admin\LeaveApplyController')->store($request);
+          
         //   if($response)
         //   re
         }

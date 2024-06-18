@@ -89,21 +89,31 @@ class Employee extends Model
     }
     public function scopeGetList($query)
     {
+        if(auth()->user()->role_slug=='managing-director' || auth()->user()->role_slug=='hr-head-ho')
+        {
+         return $query;
+        }
+        elseif(auth()->user()->role_slug=='branch-head')
+        {
+            $query->where('branch_id', auth()->user()->employee->branch_id);
+        }else
+        {
+            $query->where('user_id', auth()->user()->id);
+        }
+        return $query;
+    }
+    public function scopeGetApprovalAuthority($query)
+    {
         if(auth()->user()->role_slug=='branch-head')
         {
-            $query->where('branch_id', auth()->user()->employee->branch_id)->whereHas('user.usersRoles',function($q){
-                $q->where('role_id','!=','1');
-            });
+            $query->where('branch_id', auth()->user()->employee->branch_id);
         }
         return $query;
     }
 
     public function scopeGetActiveEmp($query)
     {
-        if(auth()->user()->role_slug=='branch-head')
-        {
-            $query->where('branch_id', auth()->user()->employee->branch_id);
-        }
+       
         return $query->where('status', 'active');
     }
 }

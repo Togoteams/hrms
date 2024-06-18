@@ -37,8 +37,10 @@
                                 </a>
                                 {{-- </button> --}}
                             @endcan
+                            @can('import-employees')
                             <button class="btn btn-primary " data-bs-toggle="modal" data-action="add"
                                 data-bs-target="#importEmployeeModal">Import Employee</button>
+                            @endif
                         </div>
                     </div>
                 </div>

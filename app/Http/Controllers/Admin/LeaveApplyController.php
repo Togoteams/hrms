@@ -35,11 +35,11 @@ class LeaveApplyController extends BaseController
     {
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
-            if (isemplooye()) {
-                $data = LeaveApply::with('user', 'user.employee', 'leave_type')->where('user_id', Auth::user()->id)->select('*');
-            } else {
-                $data = LeaveApply::with('user', 'user.employee', 'leave_type')->select('*');
-            }
+            // if (isemplooye()) {
+            //     $data = LeaveApply::with('user', 'user.employee', 'leave_type')->getList()->where('user_id', Auth::user()->id)->select('*');
+            // } else {
+                $data = LeaveApply::with('user', 'user.employee', 'leave_type')->getList()->select('*');
+            // }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -68,10 +68,10 @@ class LeaveApplyController extends BaseController
         $all_users = Employee::getActiveEmp()->get();
         $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'hr_head'];
 
-        $approvalAuthority = Employee::getActiveEmp()->whereHas('user.roles', function ($q) use ($allowedRoles) {
+        $approvalAuthority = Employee::whereHas('user.roles', function ($q) use ($allowedRoles) {
             $q->whereIn('slug', $allowedRoles);
-        })->get();
-        // return $leave_type;
+        })->whereNotIn('user_id',[auth()->user()->id])->get();
+        // return $approvalAuthority;
         return view('admin.leave_apply.index', [
             'page' => $this->page_name,
             'leave_type' => $leave_type,
@@ -176,7 +176,7 @@ class LeaveApplyController extends BaseController
             $value = Str::headline(Str::camel($attribute));
             return "The $value docuement is required.";
         });
-
+        // return $request;
         $request->validate([
                 'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
                 'user_id' => ['required', 'numeric', 'exists:users,id'],

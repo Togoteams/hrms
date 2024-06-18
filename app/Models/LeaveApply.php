@@ -37,13 +37,17 @@ class LeaveApply extends Model
         {
             $query->whereHas('user.employee',function($q){
                 $q->where('branch_id', auth()->user()->employee->branch_id);
-            })->orWhere('approval_authority',auth()->user()->id)->orWhere('user_id',auth()->user()->id);
+            })
+            ->orWhere(function ($q) {
+                $q->where('approval_authority',auth()->user()->id)->orWhere('user_id',auth()->user()->id);
+            });
         }elseif(auth()->user()->role_slug=='hr_head' || auth()->user()->role_slug=='admin'){
             $query;
         }else
         {
             $query->where('user_id',auth()->user()->id);
         }
+        
         return $query;
     }
     public static function boot()

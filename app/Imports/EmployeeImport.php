@@ -39,6 +39,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
     public function model(array $row)
     {
         set_time_limit(0);
+        // dd($row['employment_type']);
         // dd($row['date_of_joining']);
           // Check if all values in the row are empty
         if (empty(array_filter($row))) {
@@ -75,6 +76,14 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                 }
                 $designation = Designation::where('slug', str::slug($row['designation']))->first();
                 $branch = Branch::where('name', $row['branch'])->first();
+                $employmentType = str::slug($row['employment_type']);
+                if($employmentType=="local-confirmed")
+                {
+                    $employmentType = 'local';
+                }else
+                {
+                    $employmentType = $employmentType; 
+                }
                 $employeeData =[
                     "user_id"=>$user->id,
                     "emp_id"=>'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1,
@@ -86,7 +95,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                     "ec_number"=>$row['ec_number'],
                     "start_date"=>$dateOfJoining,
                     "start_date"=>$dateOfJoining,
-                    "employment_type"=> str::lower($row['employment_type']),
+                    "employment_type"=> str::slug($row['employment_type']),
                     "bank_account_number"=>$row['bank_account_no'],
                     "place_of_domicile"=>$row['place_of_domicile'],
                     "branch_id"=>$branch?->id,
@@ -96,7 +105,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                     'basic_salary'=>$row['basic_salary'],
                     'date_of_current_basic'=>date('Y-m-d'),
                     'user_id'=>$user->id,
-                    'currency_salary'=>str::lower($row['employment_type'])=="expatriate" ? "usd" : "tshs",
+                    'currency_salary'=>(str::lower($row['employment_type'])=="expatriate") ? "usd" : "pula",
                     'pension_contribution'=>str::lower($row['is_pension_contribution']),
                     'pension_opt'=>(int)$row['pension_contribution_percantage'],
                     'union_membership_id'=>str::lower($row['is_union_membership']),

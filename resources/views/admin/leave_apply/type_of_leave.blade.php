@@ -35,7 +35,7 @@
     @if (isemplooye())
     <div class="col-lg-2">
         <a href="#" class="">
-            <div class="py-3 card card-leavtype">Total Remaining - 
+            <div class="py-3 card card-leavtype">Total Leave - 
                 {{ total_remaining_leave(auth()->user()->id) }} </div>
         </a>
     </div>

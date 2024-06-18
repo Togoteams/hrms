@@ -62,7 +62,7 @@ class EmployeeController extends BaseController
                     return $actionBtn;
                 })
                 ->editColumn('start_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->start_date)->isoFormat('DD-MM-YYYY');
+                    return ($data->start_date)  ? \Carbon\Carbon::parse($data->start_date)->isoFormat('DD-MM-YYYY') : "";
                 })
                 ->rawColumns(['action'])
                 ->make(true);

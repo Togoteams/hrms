@@ -88,6 +88,10 @@
                                                                     <div class="col-3">
                                                                         {{ ucfirst($salaryhistory->union_membership_id) }}
                                                                     </div>
+                                                                    <div class="col-3 fw-semibold">Bomaid</div>
+                                                                    <div class="col-3">
+                                                                        {{ ($salaryhistory->is_medical_insuarance) ?"Yes" :"No" }}
+                                                                    </div>
                                                                     <div class="col-3 fw-semibold">Status</div>
                                                                     <div class="col-3">
                                                                         {{ ucfirst($salaryhistory->status) }}

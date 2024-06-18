@@ -457,7 +457,8 @@ class PayrollSalaryController extends Controller
         $noOfPayableDays = 0;
         $noOfAvailedLeaves = 0;
         $totalMonthDays = date('t');
-        if ($emp->employment_type == "local") {
+        // return $emp->employment_type ;
+        if ($emp->employment_type == "local" || $emp->employment_type=="local-contractual") {
             $totalMonthDays = 24;
         }
 

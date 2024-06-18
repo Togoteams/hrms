@@ -930,7 +930,7 @@ function total_remaining_leave($user_id = '')
         // for autheticated user
         $user_id = auth()->user()->id;
     }
-    $totalNoOfLeaveInBucket = EmpCurrentLeave::where('user_id',$user_id)->value('leave_count');
+    $totalNoOfLeaveInBucket = EmpCurrentLeave::where('user_id',$user_id)->value('leave_count') ?? 0;
    
    
     return $totalNoOfLeaveInBucket;
@@ -1067,7 +1067,7 @@ function approvalBtnEnable($leaveId)
 function islocal()
 {
     $user_id = auth()->user()->id;
-    if (Employee::where('user_id', $user_id)->first()?->employment_type == "local") {
+    if (Employee::where('user_id', $user_id)->first()?->employment_type != "expatriate") {
         return true;
     } else {
         return  false;
@@ -1123,9 +1123,9 @@ function isHolidayDate($date)
 
 function getEmpType($type)
 {
-    $text = 0;
-    if ($type == "local") {
-        $text = 1;
+    $text = 1;
+    if ($type == "expatriate") {
+        $text = 0;
     }
     return $text;
 }
