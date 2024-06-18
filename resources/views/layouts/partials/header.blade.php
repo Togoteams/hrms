@@ -22,7 +22,7 @@
     <!-- CSS HRMS Template -->
 
     <link rel="stylesheet" href="{{ asset('assets/css/theme.min.css') }}" as="style">
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.csss') }}" as="style">
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}" as="style">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" >
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>

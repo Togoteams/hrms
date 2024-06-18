@@ -39,9 +39,9 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
     public function model(array $row)
     {
         set_time_limit(0);
-        // dd($row['basic_salary']);
+        // dd($row['date_of_joining']);
           // Check if all values in the row are empty
-          if (empty(array_filter($row))) {
+        if (empty(array_filter($row))) {
             return null; // Skip this row if all values are empty
         }
         if($row['employee_name'] && $row['email'] && $row['mobile_no'])
@@ -54,14 +54,16 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                 "email_verified_at"=>$faker->dateTime(),
                 "password"=>Hash::make('User@123'),
             ];
-            if(!empty($row["date_of_birth"]) && !is_string($row["date_of_birth"]))
+            $dateOfBirth = "";
+            $dateOfJoining = "";
+            if(!empty(@$row["date_of_birth"]) && !is_string(@$row["date_of_birth"]))
             {
-                $dateOfBirth = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row["date_of_birth"]));
+                $dateOfBirth = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(@$row["date_of_birth"]));
                 $dateOfBirth = date('Y-m-d',strtotime($dateOfBirth));
             }
-            if(!empty($row["date_of_joining"]) &&  !is_string($row["date_of_joining"]))
+            if(!empty(@$row["date_of_joining"]) &&  !is_string(@$row["date_of_joining"]))
             {
-                $dateOfJoining = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row["date_of_joining"]));
+                $dateOfJoining = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(@$row["date_of_joining"]));
                 $dateOfJoining = date('Y-m-d',strtotime($dateOfJoining));
             }
             $role = Role::where('slug', str::slug($row['role']))->first();
@@ -83,7 +85,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                     "emergency_contact"=>$row['emergency_contact_no'],
                     "ec_number"=>$row['ec_number'],
                     "start_date"=>$dateOfJoining,
-                    "date_of_joining"=>$dateOfJoining,
+                    "start_date"=>$dateOfJoining,
                     "employment_type"=> str::lower($row['employment_type']),
                     "bank_account_number"=>$row['bank_account_no'],
                     "place_of_domicile"=>$row['place_of_domicile'],
