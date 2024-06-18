@@ -89,17 +89,17 @@ class Employee extends Model
     }
     public function scopeGetList($query)
     {
-        if(auth()->user()->role_slug=='managing-director' || auth()->user()->role_slug=='hr-head-ho')
-        {
-         return $query;
-        }
-        elseif(auth()->user()->role_slug=='branch-head')
-        {
-            $query->where('branch_id', auth()->user()->employee->branch_id);
-        }elseif(auth()->user()->role_slug!='managing-director' || auth()->user()->role_slug!='hr-head-ho'|| auth()->user()->role_slug!='branch-head')
-        {
-            $query->where('user_id', auth()->user()->id);
-        }
+        // if(auth()->user()->role_slug=='managing-director' || auth()->user()->role_slug=='hr-head-ho')
+        // {
+        //  return $query;
+        // }
+        // elseif(auth()->user()->role_slug=='branch-head')
+        // {
+        //     $query->where('branch_id', auth()->user()->employee->branch_id);
+        // }elseif(auth()->user()->role_slug!='managing-director' || auth()->user()->role_slug!='hr-head-ho'|| auth()->user()->role_slug!='branch-head')
+        // {
+        //     $query->where('user_id', auth()->user()->id);
+        // }
         return $query;
     }
     public function scopeGetApprovalAuthority($query)
