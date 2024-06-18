@@ -37,6 +37,9 @@
             "name": "Add Employees","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
         },
         {
+            "name": "Edit Employees","module": "Employees", "permissions_for":"admin,hr_head,chief_manager"
+        },
+        {
             "name": "Import Employees","module": "Employees", "permissions_for":"admin,hr_head"
         },
         {
