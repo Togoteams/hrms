@@ -8,11 +8,6 @@
             <div class="page-header">
                 <div class="row align-items-center">
 
-                    {{-- <div class="welcome-text">
-                        <h2 class="tit">Welcome back, Bank Of Baroda 👋</h2>
-                        <p class="des">Your progress this week is Awesome. let's keep it up and get a lot of points</p>
-                    </div> --}}
-
                     <!-- End Col -->
                     <!-- End Page Header -->
 
@@ -21,15 +16,15 @@
                         <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.profile')}}">
-                                <div class="text-center card-body">
-                                    <h6 class="card-subtitle">
+                                <div class="text-center ">
+                                    <div class="card-subtitle">
                                     {{-- <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}}" alt=""> --}}
                                     @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
-                                        <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 65px; width: 70px;">
+                                        <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 130px; width: 130px;border-radius: 50%;">
                                     @else
-                                        <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/prof.png') }}" alt="Default Icon" style="height:70px; width: 70px;">
+                                        <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}" alt="Default Icon" style="height:130px; width: 130px;border-radius: 50%;">
                                     @endif
-                                    </h6>
+                                    </div>
                                     <h2 class="text-white card-title">Profile</h2>
 
 
@@ -50,9 +45,9 @@
                             <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ url('admin/personal-info/employee-details')}}">
                                 <div class="text-center card-body">
-                                    <h6 class="card-subtitle">
+                                    <div class="card-subtitle">
                                     <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}" alt="">
-                                    </h6>
+                                    </div>
                                     <h2 class="text-white card-title">Personal Information</h2>
 
                                     <div class="row align-items-center gx-2">
@@ -76,7 +71,6 @@
                                 <div class="text-center card-body">
                                     <h6 class="card-subtitle">
                                     <img class="dashboard-icon" src="{{ asset('assets/img/dashboard/icon2.png') }}" alt="">
-
                                     </h6>
                                     <h2 class="text-white card-title">Personal Profile</h2>
 

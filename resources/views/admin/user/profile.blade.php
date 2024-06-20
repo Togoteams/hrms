@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @push('styles')
+<link href="{{ asset('admin/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
     <style>
         .mr-2p {
             margin-top: 10%;
@@ -13,8 +15,17 @@
             padding: 20px;
         }
 
-        .mr-bot {
-            margin-bottom: 20px;
+        .form-profile-image {
+            height: 155px;
+            width: 155px;
+            align-items: center;
+            text-align: center;
+            border-radius: 50%;
+            box-shadow: 1px 1px 1rem 1px rgb(220 161 131 / 29%);
+        }
+
+        .profile-image-text {
+            font-size: 10px;
         }
 
         @media only screen and (max-width: 768px) {
@@ -31,153 +42,161 @@
         <!-- Content -->
         <div class="container-fluid">
 
-
-            <h3 class="text-center font-weight-bold txt-color .mr-m-2p">Profile Update</h3>
-            <div class="mx-5 row justify-content-center">
+            <div class=" row justify-content-center">
                 @can('profile-update')
-                    
-                <div class="col-6">
-                    <form action="{{ route('admin.image.update') }}" method="post" enctype='multipart/form-data'>
-                        {{ csrf_field() }}
-                        <div class="overflow-hidden card w-75 position-relative">
-                            <div class="p-4 card-body">
+                @endcan
+                @can('change-password')
+                    <div class="col-3">
+                    </div>
+                    <div class="col-6">
 
-                                <h5 class="card-title fw-semibold">Change Profile</h5>
-                                <p class="mb-4 card-subtitle">Change your profile picture from here</p>
-                                <div class="form-group" id="image_preview_section">
-                                    @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
-                                    <img class="dashboard-icon img-profile rounded-circle"
-                                        src="{{ asset('assets/profile/' . $data->image) }}"
-                                        alt="Profile Image" id="user_img" style="height: 75px; width: 75px;">
-                                @else
-                                    <img class="dashboard-icon img-profile rounded-circle"
-                                        src="{{ asset('assets/profile/profileImage.png') }}"
-                                        alt="Default Icon"  id="user_img" style="height: 75px; width: 75px;">
-                                @endif
-                                  
+
+                        <div class="card">
+                            <div class="p-3 card-body">
+                                <h3 class="text-center font-weight-bold txt-color">Profile Update</h3>
+                                <div class="form-group" id="image_preview_sectionggg">
+
                                 </div>
-                                <div class="text-center">
-                                    <div class="form-group mr-bot d-flex">
-                                        <div class="col-md-7">
+                                <form action="{{ route('admin.image.update') }}" method="post" enctype='multipart/form-data'>
+                                    {{ csrf_field() }}
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="text-center">
+                                                @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
+                                                    <img class="form-profile-image"
+                                                        src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image"
+                                                        id="user_img">
+                                                @else
+                                                    <img class="form-profile-image"
+                                                        src="{{ asset('assets/profile/profileImage.png') }}" alt="Default Icon"
+                                                        id="user_img">
+                                                @endif
+                                            </div>
 
-                                            <input type="file" name="image" id="image" accept="image/*"
-                                                onchange="validateimg(this)" required>
-                                            @error('image')
-                                                <div class=" text-danger">{{ $message }}</div>
-                                            @enderror
                                         </div>
-                                        <div class="col-md-5">
-                                            <h6 class="card-subtitle">
-                                               
+
+                                        <div class="col-md-8">
+                                            <div class="mt-1">
+                                                <input type="file" name="image" id="image" accept="image/*"
+                                                    onchange="validateimg(this)" required>
+                                                @error('image')
+                                                    <div class=" text-danger">{{ $message }}</div>
+                                                @enderror
+                                                <p class="profile-image-text">Allowed JPG, GIF or PNG. Max size of 800KB</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="mt-1 card-subtitle">
+                                                <button type="submit" class="btn btn-sm btn-primary">
+                                                    Update Profile
+                                                </button>
                                             </h6>
                                         </div>
+
+
                                     </div>
-                                    <p class="mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-sm btn-primary">
-                                        Update
-                                    </button>
+                                </form>
+                                {{-- <hr> --}}
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{-- <h5 class="card-title fw-semibold">Update Password</h5> --}}
+                                        {{-- <p class="card-subtitle">To change your password please confirm here</p> --}}
+                                        <form action="{{ route('admin.password.reset') }}" method="post">
+                                            @csrf()
+
+
+                                            <div class="mb-1 form-group">
+
+                                                <!-- Label -->
+                                                <label class="" for="password" />
+                                                Current Password<span style="color:red;">*</span>
+                                                </label>
+
+                                                <!-- Input group -->
+                                                <div class="input-group">
+                                                    <!-- Input -->
+                                                    <input class="form-control" type="password" id="current_password"
+                                                        placeholder="Enter current password" minlength="8"
+                                                        name="current_password" required autocomplete="off" />
+                                                        <button class="btn btn-light btn-eye password-addon" type="button" id="password-addon">
+                                                            <i class="mdi mdi-eye-outline"></i>
+                                                        </button>
+                                                    <p class="invalid-feedback" id="password_error"></p>
+                                                    @error('current_password')
+                                                        <span class="d-block invalid-feedback">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-1 form-group">
+
+                                                <!-- Label -->
+                                                <label class="" for="password" />
+                                                New Password<span style="color:red;">*</span>
+                                                </label>
+
+                                                <!-- Input group -->
+                                                <div class="input-group">
+                                                    <!-- Input -->
+                                                    <input class="form-control" type="password" id="password"
+                                                        placeholder="Enter New password" minlength="8" name="password" required
+                                                        autocomplete="off" />
+                                                        <button class="btn btn-light btn-eye password-addon" type="button" id="">
+                                                            <i class="mdi mdi-eye-outline"></i>
+                                                        </button>
+                                                    <p class="invalid-feedback" id="password_error"></p>
+                                                    @error('password')
+                                                        <span class="d-block invalid-feedback">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group mr-bot">
+
+                                                <!-- Label -->
+                                                <label class="" for="password_confirmation">
+                                                    Confirm Password<span style="color:red;">*</span>
+                                                </label>
+
+                                                <!-- Input group -->
+                                                <div class="input-group">
+                                                    <!-- Input -->
+                                                    <input class="form-control" type="password" id="password_confirmation"
+                                                        placeholder="Confirm Your Password" name="password_confirmation"
+                                                        required autocomplete="off" />
+                                                        <button class="btn btn-light btn-eye password-addon" type="button" id="">
+                                                            <i class="mdi mdi-eye-outline"></i>
+                                                        </button>
+                                                    <p class="invalid-feedback" id="password_confirmation_error"></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <center>
+                                                        <button type="submit" class="mt-2 btn btn-sm btn-primary" id="formSubmit"
+                                                            onclick="return formValidate();">
+                                                            Reset Password
+                                                        </button>
+                                                    </center>
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-                @endcan
-                @can('change-password')
-                <div class="col-6">
-                    <div class="overflow-hidden card w-75 position-relative">
-                        <div class="p-4 card-body">
-                            <h5 class="card-title fw-semibold">Change Password</h5>
-                            <p class="mb-4 card-subtitle">To change your password please confirm here</p>
-                            <form action="{{ route('admin.password.reset') }}" method="post">
-                                @csrf()
 
-                                {{-- <div class="mb-4 form-group">
-                                    <label for="exampleInputPassword1" class="form-label">Current
-                                        Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1"
-                                        value="12345678910">
-                                </div> --}}
 
-                                <div class="mb-4 form-group">
-
-                                    <!-- Label -->
-                                    <label class="" for="password" />
-                                    Current Password<span style="color:red;">*</span>
-                                    </label>
-
-                                    <!-- Input group -->
-                                    <div class="input-group">
-                                        <!-- Input -->
-                                        <input class="form-control" type="password" id="current_password"
-                                            placeholder="Enter current password" minlength="8" name="current_password"
-                                            required autocomplete="off" />
-                                        <p class="invalid-feedback" id="password_error"></p>
-                                        @error('current_password')
-                                            <span class="d-block invalid-feedback">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="mb-4 form-group">
-
-                                    <!-- Label -->
-                                    <label class="" for="password" />
-                                    New Password<span style="color:red;">*</span>
-                                    </label>
-
-                                    <!-- Input group -->
-                                    <div class="input-group">
-                                        <!-- Input -->
-                                        <input class="form-control" type="password" id="password"
-                                            placeholder="Enter New password" minlength="8" name="password" required
-                                            autocomplete="off" />
-                                        <p class="invalid-feedback" id="password_error"></p>
-                                        @error('password')
-                                            <span class="d-block invalid-feedback">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group mr-bot">
-
-                                    <!-- Label -->
-                                    <label class="" for="password_confirmation">
-                                        Confirm Password<span style="color:red;">*</span>
-                                    </label>
-
-                                    <!-- Input group -->
-                                    <div class="input-group">
-                                        <!-- Input -->
-                                        <input class="form-control" type="password" id="password_confirmation"
-                                            placeholder="Confirm Your Password" name="password_confirmation" required
-                                            autocomplete="off" />
-                                        <p class="invalid-feedback" id="password_confirmation_error"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <center>
-                                                    <button class="mb-3 btn btn-sm btn-primary" id="formSubmit"
-                                                        onclick="return formValidate();">
-                                                        Reset
-                                                    </button>
-                                                </center>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
                     </div>
-                </div>
+                    <div class="col-3">
+                    </div>
                 @endcan
             </div>
 
@@ -185,6 +204,7 @@
         </div>
     @endsection
     @push('custom-scripts')
+    <script src="http://127.0.0.1:8000/admin/assets/js/app.js"></script>
 
         @if (!empty(Session::get('success')))
             <script>

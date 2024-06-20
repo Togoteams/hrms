@@ -103,7 +103,6 @@
             (console.log("pressed"),
             s("body").removeClass("fullscreen-enable"));
     }
-    s("#side-menu").metisMenu(),
         s("#vertical-menu-btn").on("click", function (e) {
             e.preventDefault(),
                 s("body").toggleClass("sidebar-enable"),
@@ -242,7 +241,7 @@
         ).on("change", function (e) {
             r(e.target.id);
         }),
-        s("#password-addon").on("click", function () {
+        s(".password-addon").on("click", function () {
             0 < s(this).siblings("input").length &&
                 ("password" == s(this).siblings("input").attr("type")
                     ? s(this).siblings("input").attr("type", "input")
@@ -261,7 +260,6 @@
         s(window).on("load", function () {
             s("#status").fadeOut(), s("#preloader").delay(350).fadeOut("slow");
         }),
-        Waves.init(),
         s("#checkAll").on("change", function () {
             s(".table-check .form-check-input").prop(
                 "checked",

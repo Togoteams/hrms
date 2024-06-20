@@ -103,8 +103,7 @@ label {
 }
 .dashboard-icon{
     height: auto;
-    width: 55px;
-    margin-bottom: 10px;
+    width: 100px;
 
 }
 .card-bg{
@@ -343,9 +342,10 @@ linear-gradient(0deg, #FFF7F4, #FFF7F4);
     font-size: 17px !important;
     color: #BA765C !important;
     font-weight: 500 !important;
-}a.card.card-hover-shadow.card-dashboard.card-bg img.dashboard-icon {
-    max-height: 60px !important;
-    max-width: 60px !important;
+}
+a.card.card-hover-shadow.card-dashboard.card-bg img.dashboard-icon {
+    /* max-height: 60px !important;
+    max-width: 60px !important; */
 }
 img.card-overlay-bg.img-fluid {
     position: absolute !important;

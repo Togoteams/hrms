@@ -108,7 +108,7 @@
                                                 class="form-control @error('password') is-invalid @enderror"
                                                 name="password" required autocomplete="current-password"
                                                 placeholder="Enter Password">
-                                            <button class="btn btn-light btn-eye" type="button" id="password-addon">
+                                            <button class="btn btn-light btn-eye password-addon" type="button" id="password-addon">
                                                 <i class="mdi mdi-eye-outline"></i>
                                             </button>
                                             @error('password')
@@ -170,6 +170,5 @@
     <script src="{{ asset('admin/assets/js/app.js') }}"></script>
 </body>
 
-<!-- Mirrored from themesbrand.com/skote/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Mar 2022 05:51:25 GMT -->
 
 </html>
