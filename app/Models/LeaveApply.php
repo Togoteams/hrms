@@ -41,7 +41,7 @@ class LeaveApply extends Model
             ->orWhere(function ($q) {
                 $q->where('approval_authority',auth()->user()->id)->orWhere('user_id',auth()->user()->id);
             });
-        }elseif(auth()->user()->role_slug=='hr_head' || auth()->user()->role_slug=='admin'){
+        }elseif(auth()->user()->role_slug=='hr_head' || auth()->user()->role_slug=='managing-director' ||   auth()->user()->id==1){
             $query;
         }else
         {

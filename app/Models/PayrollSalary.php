@@ -92,8 +92,7 @@ class PayrollSalary extends Model
             $query->whereHas('user.employee',function($q){
                 $q->where('branch_id', auth()->user()->employee->branch_id);
             });
-            
-        }elseif(auth()->user()->role_slug=='hr_head' || auth()->user()->role_slug=='admin'){
+        }elseif(auth()->user()->role_slug=='hr_head' || auth()->user()->role_slug=='managing-director' ||   auth()->user()->id==1){
             $query;
         }else
         {

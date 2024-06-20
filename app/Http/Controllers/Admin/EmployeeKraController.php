@@ -31,7 +31,7 @@ class EmployeeKraController extends BaseController
         if ($request->ajax()) {
             if(isemplooye())
             {
-                $data = EmployeeKra::with('user')->where('user_id',auth()->user()->id)
+                $data = EmployeeKra::with('user')->where('user_id',auth()->user()->id)->groupBy('user_id')
                 ->get();
             }else
             {

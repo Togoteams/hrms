@@ -158,7 +158,7 @@
                                     <br>
                                     <span>(Botswana)</span>
                                 </h3>
-                                <p class="mb-0 text-left text-uppercase" style="text-align: left;    text-transform: uppercase;">
+                                <p class="mb-0 text-left text-uppercase" style="text-align: left;text-transform: uppercase;">
                                     PAYSLIP For the month of
                                     <u>{{ strtoupper(date('F-Y', strtotime($data->pay_for_month_year))) }}</u></p>
                             </td>

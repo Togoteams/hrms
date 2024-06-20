@@ -122,7 +122,7 @@
                                     <td></td>
                                 </tr>
                                 <tr style="height: 19pt; line-height: 24px">
-                                    <td>Branch: <strong>{{ $data[0]->employee->branch->name }}</strong> </td>
+                                    <td>Branch: <strong>{{ $data[0]->employee?->branch?->name }}</strong> </td>
                                     <td></td>
                                 </tr>
                             </table>
@@ -131,7 +131,7 @@
                         <div class="col-4" style="width: 33.33%">
                             <table style="border-collapse: collapse; margin-left: 5.704pt; width: 100%" cellspacing="0">
                                 <tr style="height: 19pt; line-height: 24px">
-                                    <td>Designation: <strong> {{ $data[0]->employee->designation->name }}</strong> </td>
+                                    <td>Designation: <strong> {{ $data[0]?->employee?->designation?->name }}</strong> </td>
                                     <td></td>
                                 </tr>
                                 <tr style="height: 19pt; line-height: 24px">
@@ -205,7 +205,7 @@
                                 <table style="border-collapse: collapse; margin-left: 5.704pt; width: 100%"
                                     cellspacing="0">
                                     <tr style="height: 19pt; line-height: 24px">
-                                        <td>Designation: <strong> {{ $data[0]->employee->designation->name }}</strong></td>
+                                        <td>Designation: <strong> {{ $data[0]?->employee?->designation?->name }}</strong></td>
                                         <td></td>
                                     </tr>
                                     <tr style="height: 19pt; line-height: 24px">

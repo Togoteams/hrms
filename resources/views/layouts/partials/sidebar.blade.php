@@ -540,8 +540,8 @@
                                         href="{{ route('admin.reports.branch-wise-employee-report') }}">Employees branch wise report</a>
                                     <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.leave-report' ? 'active' : '' }}  "
                                         href="{{ route('admin.reports.leave-report') }}">Leave report</a>
-                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.employee-arrear-report' ? 'active' : '' }}  "
-                                        href="{{ route('admin.reports.employee-arrear-report') }}">Arrear report</a>
+                                    {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.reports.employee-arrear-report' ? 'active' : '' }}  "
+                                        href="{{ route('admin.reports.employee-arrear-report') }}">Arrear report</a> --}}
                             </div>
                         </div>
                      </div>

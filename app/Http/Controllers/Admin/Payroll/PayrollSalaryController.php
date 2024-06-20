@@ -399,7 +399,7 @@ class PayrollSalaryController extends Controller
         $usdToPulaAmount = getCurrencyValue("usd", "pula");
         $usdToInrAmount = getCurrencyValue("usd", "inr");
         // $usdToPullAmount = getCurrencyValue("usd", "pula");
-
+        // return $data->employee->employment_type;
         if ($data->employee->employment_type == "local") {
             return view('admin.payroll.salary.salary-slip-local', compact('data'));
         } else {
