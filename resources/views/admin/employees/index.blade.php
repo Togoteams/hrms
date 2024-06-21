@@ -191,7 +191,7 @@
                                         <input type="file" name="import_employee" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <a href="{{ asset('admin/assets/excel-formate/Hrms-Data-Master-Format.xlsx') }}"
+                                        <a href="{{ asset('admin/assets/excel-formate/Hrms-bob-emp-excel-import-formate.xlsx') }}"
                                             for="fileUploadPassbook">Download Execel Formate</a>
                                     </div>
                                 </div>
