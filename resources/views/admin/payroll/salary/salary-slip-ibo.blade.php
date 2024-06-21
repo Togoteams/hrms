@@ -257,7 +257,7 @@
                     $extraIncomes =  $noOfDeduction -  $noOfIncome;
                 }
             @endphp
-                <table width="100%" >
+                <table width="100%">
                     <tr>
                         <td class=" payslip" colspan="3" style="padding-bottom: 6px;"><strong><u>SALARY DETAILS</u></strong>
                         </td>

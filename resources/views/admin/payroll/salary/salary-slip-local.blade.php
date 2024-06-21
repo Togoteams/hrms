@@ -8,9 +8,7 @@
         <meta name="viewport" content="width=device-width" />
         <meta charset="UTF-8">
         <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.ico') }}">
-        {{-- 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> --}}
+
         <link
             href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
             rel="stylesheet" />
@@ -107,7 +105,6 @@
             }
 
             .payslipcard {
-                border: 1px solid #fff;
                 color: #000;
                 font-size: 12px;
                 width: 100%;
@@ -163,8 +160,8 @@
                                     <span>(Botswana)</span>
                                 </h3>
                                 <p class="mb-0 text-left text-uppercase" style="text-align: left;text-transform: uppercase;">
-                                    PAYSLIP For the month of -
-                                    {{ strtoupper(date('M-Y', strtotime($data->pay_for_month_year))) }}</p>
+                                    PAYSLIP For the month of 
+                                    {{ strtoupper(date('F-Y', strtotime($data->pay_for_month_year))) }}</p>
                             </td>
                             <td style="text-align: right;">
                                 <img src="{{ asset('assets/img/logo-cropped.svg') }}" class="img-fluid"
@@ -208,27 +205,43 @@
                     </thead>
                 </table>
                 <hr>
-                <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18px;font-weight: bold; padding:0px">
+                <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18px;font-weight: bold;">
                     <thead>
                         <tr>
                             <td class="payslip" colspan="3" style="padding-bottom: 6px;"><strong><u>OTHER DETAILS</u></strong>
                             </td>
                         </tr>
-
                         <tr>
-                            <td class="payslip"  width="20%">Loss Of Pay :</td>
-                            <td class="payslip">{{ $data->total_loss_of_pay }}</td>
-
-                            {{-- <td class="payslip">&nbsp;&nbsp;&nbsp;</td>
-                            <td class="payslip">&nbsp;&nbsp;&nbsp;</td> --}}
-
+                            {{-- <td class="payslip">Salary Date :</td>
+                            <td class="payslip">{{date("d-m-Y",strtotime($data->created_at))}}</td> --}}
+                            {{-- <td class="payslip">No. of Payable days :</td>
+                            <td class="payslip">{{$data->no_of_payable_days}}</td>
+                            <td class="payslip">Annual Balanced Leave :</td>
+                            <td class="payslip">{{$data->annual_balanced_leave}}</td> --}}
                         </tr>
-                        <tr><td colspan="3" ></td></tr>
+                        <tr>
+
+
+                            <td class="payslip" width="20%">Loss Of Pay :</td>
+                            <td class="payslip">{{ $data->total_loss_of_pay }}</td>
+                            {{-- <td class="payslip">    </td> --}}
+                            {{-- <td class="payslip">Total Absent : </td>
+                            <td class="payslip">0</td> --}}
+                            {{-- <td class="payslip">No. Availed Leave :</td>
+                            <td class="payslip">{{$data->no_availed_leave}}</td> --}}
+                        </tr>
                     </thead>
+                </table>
+                <hr>
+                <table class="mt-4 mb-4" width="100%" border="0" style="font-size: 18px;font-weight: bold; padding:0px">
+                    <tr>
+                        <td class=" payslip" colspan="3" style="padding-bottom: 6px;"><strong><u>SALARY DETAILS</u></strong>
+                        </td>
+                    </tr>
                     <tbody>
                         <tr>
                             <td  style="width: 50%">
-                                <table class="payslipcard" border="1" style="font-size: 18px;font-weight: bold; padding:0px">
+                                <table class="payslipcard" border="1" style="font-size: 18px;font-weight: bold; padding:0px;border-collapse: collapse;">
                                     <tbody>
                                         {{-- <tr>
                                             <td class=" payslip" colspan="3" style="padding-bottom: 6px;"><strong><u>SALARY DETAILS</u></strong>
@@ -300,7 +313,7 @@
                                 </table>
                             </td>
                             <td  style="width: 50%">
-                                <table class="payslipcard" border="1" style="font-size: 18px;font-weight: bold;padding:0px ">
+                                <table class="payslipcard" border="1" style="font-size: 18px;font-weight: bold;padding:0px;border-collapse: collapse; ">
                                     <tbody>
                                         <tr>
                                             <th class="slipAlign"  style="padding-left: 10%;">DEDUCTIONS</th>
@@ -353,7 +366,7 @@
                                     <tbody>
                                         <tr>
 
-                                            <th style="padding-left: 1%;background:white !important">Net Take Home (Gross Earning - Total
+                                            <th style="background:white !important">Net Take Home (Gross Earning - Total
                                                 Deduction) :P {{ number_format($data->net_take_home,2) }} <span
                                                     style="font-weight: 100;">(
                                                     {{ convertNumberToWords($data->net_take_home) }} PULA )</span></th>

@@ -95,7 +95,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                     "ec_number"=>$row['ec_number'],
                     "start_date"=>$dateOfJoining,
                     "start_date"=>$dateOfJoining,
-                    "employment_type"=> str::slug($row['employment_type']),
+                    "employment_type"=>$employmentType,
                     "bank_account_number"=>$row['bank_account_no'],
                     "place_of_domicile"=>$row['place_of_domicile'],
                     "branch_id"=>$branch?->id,
