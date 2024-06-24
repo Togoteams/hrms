@@ -69,7 +69,8 @@ class KraAttributesController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'string|required',
             'description' => 'string|required',
-            'max_marks'=>'required|numeric'
+            'max_marks'=>'required|numeric',
+            'min_marks'=>'required|numeric'
         ]);
         if ($validator->fails()) {
             return $validator->errors();

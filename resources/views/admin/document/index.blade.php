@@ -30,7 +30,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="mb-2 col-sm mb-sm-0">
-                        <h2 class="page-header-title">{{ $page }}</h2>
+                        <h2 class="page-header-title">{{ $page }} Management</h2>
                     </div>
                     <div class="col-sm-auto">
                     @can('add-document')
@@ -70,13 +70,12 @@
                                         No Document Available
                                     @endif
                                 </td>
-                                <td style="text-align:right;">
-
+                                <td >
                                     <form id="edit{{ $item->id }}"
                                         action="{{ route('admin.document.destroy', $item->id) }}">
-                                            <button type="button" class="btn btn-white assign_doc" href="#" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-white btn-sm assign_doc" href="#" data-bs-toggle="modal"
                                             data-bs-target="#staticBackdrop1" onclick="editForm('{{ route('admin.document.get.asign', $item->id) }}', 'assign_doc')" doc_id="{{$item->id}}">
-                                                    Asign Employee Document
+                                                    Asign 
                                                 </button>
                                                 <button type="button" data-table="documents" data-uuid="{{$item->id}}"
                                                     @if($item->status=="active") data-value="inactive" data-message="Inactive"  @else data-value="active" data-message="Active" @endif
@@ -222,11 +221,5 @@
 @endsection
 @push('custom-scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#select-all').change(function() {
-            $('.emp-checkbox').prop('checked', $(this).prop('checked'));
-        });
-    });
-</script>
+
 @endpush

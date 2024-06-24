@@ -7,41 +7,62 @@
         return Number(document.getElementById(id).value);
     }
 
-    function taxCalCalculation(e){
+    function taxCalCalculation(e) {
         var basicAmount = getValue('basic');
         employmentType = document.getElementById('employment_type').value;
-        var taxCalcUrl ="{{route('admin.payroll.payscale.tax.cal')}}";
+        var taxCalcUrl = "{{ route('admin.payroll.payscale.tax.cal') }}";
         var taxAbleAmount = 0;
-
-
-        if(employmentType=="local")
-        {
-            taxAbleAmount = (basicAmount + getValue('allowance') + getValue('others_arrears') + getValue('over_time')- (getValue('pension_own') - getValue('pension_bank')));
-            // taxAbleAmount = (basicAmount + getValue('allowance') + getValue('pension_bank')+getValue('bomaid_bank'))- (getValue('bomaid') + getValue('pension_own'));
-        }else{
-            taxAbleAmount = (basicAmount + getValue('entertainment_expenses') + getValue('house_up_keep_allow') + getValue('education_allowance'));
-        } 
+        var montlyIncome = 0;
+        var salaryHead;
+        if (employmentType == "local") {
+            salaryHead ={
+                'basicAmount':basicAmount,
+                'allowance': getValue('allowance'),
+                'pension_own':getValue('pension_own'),
+                'pension_bank':getValue('pension_bank'),
+                'others_arrears':getValue('others_arrears'),
+                'over_time':getValue('over_time')
+            };
+            montlyIncome = (basicAmount + getValue('allowance') -(getValue('pension_own') - getValue('pension_bank'))) * 12;
+            taxAbleAmount = (montlyIncome+getValue('others_arrears') + getValue('over_time'));
+        } else {
+             salaryHead ={
+                'basicAmount':basicAmount,
+                'house_up_keep_allow': getValue('house_up_keep_allow'),
+                'entertainment_expenses':getValue('entertainment_expenses'),
+                'education_allowance':getValue('education_allowance'),
+                'others_arrears':getValue('others_arrears')
+            };
+            montlyIncome = (basicAmount + getValue('house_up_keep_allow')) *12;
+            taxAbleAmount = (montlyIncome + getValue('entertainment_expenses')+
+                getValue('education_allowance'));
+        }
 
         $.ajax({
             url: taxCalcUrl,
             type: "get",
-            data:{"taxable_amount":taxAbleAmount,'employment_type':employmentType},
+            data: {
+                "taxable_amount": taxAbleAmount,
+                "salary_head": salaryHead,
+                'employment_type': employmentType
+            },
             dataType: "json",
-            success: function (result) {
-               console.log(result);
-               if(result.status==true)
-               {
-                var data = result.data;
-                $("#tax").val(data.tax_amount);
-                console.log(data.tax_amount);
-               }else
-               {
-                $("#tax").val(0);
-               }
-               amount_cal(e);
+            success: function(result) {
+                console.log(result);
+                if (result.status == true) {
+                    var data = result.data;
+                    $("#tax").val(data.tax_amount);
+                    $("#taxable_amount_in_pula").val(data.monthly_taxable_amount);
+                    $("#tax_amount_in_pula").val(data.tax_amount);
+                    console.log(data.tax_amount);
+                } else {
+                    $("#tax").val(0);
+                }
+                amount_cal(e);
             },
         });
     }
+
 
 
     function amount_cal() {
@@ -70,14 +91,11 @@
             var otherDeductions = getValue('other_deductions');
             var othersArrears = getValue('others_arrears');
             var usdToInrAmount = getValue('usdToInrAmount');
-            var reimbursement = Number(getValue('reimbursement'));
             var usdToPulaAmount = getValue('usdToPulaAmount');
             var educationAllowanceAmount = (parseFloat(educationAllowanceAmount) / usdToInrAmount);
             var otherDeductions = (parseFloat(otherDeductions) / usdToPulaAmount);
-             reimbursement = (parseFloat(reimbursement) / usdToPulaAmount);
 
-            totalEarning = basicAmount + getValue('entertainment_expenses')+ Number(othersArrears) + Number(reimbursement)
-             getValue('house_up_keep_allow')+  educationAllowanceAmount;
+            totalEarning = basicAmount + getValue('entertainment_expenses')+ Number(othersArrears) + getValue('house_up_keep_allow')+  educationAllowanceAmount;
              totalDeduction = getValue('provident_fund') + otherDeductions + getValue('recovery_for_car') ;
         }
 

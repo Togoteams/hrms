@@ -7,7 +7,7 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
-                    <span class="name-title">Employee Form</span>
+                    <span class="name-title">Domicile of {{ !empty($employee) ? $employee->user->name : '' }}</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
                             <div class="py-4 border rounded col-xxl-2 col-xl-2 border-1 border-color">

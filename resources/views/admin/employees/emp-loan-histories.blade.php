@@ -12,7 +12,7 @@
                     <!-- End Page Header -->
 
                     <!-- Stats -->
-                    <span class="name-title">Employee Form</span>
+                    <span class="name-title">Loan History of {{ !empty($employee) ? $employee->user->name : '' }}</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
                             <div class="py-4 border rounded col-xxl-2 col-xl-2 border-1 border-color">

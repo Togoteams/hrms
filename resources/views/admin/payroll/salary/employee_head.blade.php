@@ -69,7 +69,7 @@
         <h4>Earning</h4>
     </div>
     @php
-    $readonlyArr = ['bomaid','pension_bank','pension_own','union_fee','over_time','tax','bomaid_bank'];
+    $readonlyArr = ['bomaid','pension_bank','pension_own','union_fee','over_time','tax','bomaid_bank','personal_loan','car_loan','mortgage_loan','salary_advance'];
     $fixedHeadsArr = ['bomaid','over_time'];
     @endphp
     @foreach ($emp_head as $head)

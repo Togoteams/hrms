@@ -296,9 +296,10 @@ function backEndValidate(responseData, target_id) {
             let value;
             // get the value
             value = obj[key];
+            // console.log(value);
             var return_element = document.getElementsByName(key)
             var element = return_element[return_element.length - 1];
-            setError(element, value, "red")
+            setError(element, value, "red",'back')
         }
     }
 
@@ -334,12 +335,16 @@ function setErrorMsg(errr_message, form_id) {
 }
 
 
-function setError(el, errr_message, bcolor) {
+function setError(el, errr_message, bcolor,source='front') {
 
     el.style.borderColor = bcolor;
-    if (errr_message != ' ') {
-        errr_message = el.name.replaceAll("_", " ") + " " + errr_message;
-    }
+    if(source=='front')
+        {
+            if (errr_message != ' ') {
+                errr_message = el.name.replaceAll("_", " ") + " " + errr_message;
+            }
+        }
+    
     el.insertAdjacentHTML('afterend', "<span class='text-danger error" + el.name + "'>" + errr_message + "</span>");
     var all_errors = document.getElementsByClassName("error" + el.name);
     for (i = 1; i < all_errors.length; i++) {

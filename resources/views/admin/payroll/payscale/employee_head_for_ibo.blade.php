@@ -16,7 +16,7 @@
     // $pulaInsertionArr = ['education_allowance','other_deductions'];
     $usdInsertionArr =['house_up_keep_allow','entertainment_expenses','provident_fund','recovery_for_car'];
 
-    $readonlyArr = ['bomaid','pension_own','pension_bank','union_fee','tax','over_time','provident_fund'];
+    $readonlyArr = ['bomaid','pension_own','pension_bank','provident_fund','union_fee','tax','over_time','provident_fund'];
     $fixedHeadsArr = ['bomaid','over_time'];
     $inrCurrencyHead = ['provident_fund'];
     $pulaCurrencyHead = ['provident_fund'];

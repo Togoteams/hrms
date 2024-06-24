@@ -191,7 +191,7 @@
                                         <td></td>
                                     </tr>
                                     <tr style="height: 19pt; line-height: 24px">
-                                        <td>Branch/office: <strong>{{ $data[0]->employee->branch->name }}</strong> </td>
+                                        <td>Branch/office: <strong>{{ $data[0]?->employee?->branch?->name }}</strong> </td>
                                         <td></td>
                                     </tr>
                                     <tr style="height: 19pt; line-height: 24px">

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @push('styles')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" />
 @endpush
 @section('content')
     <main id="content" role="main" class="main">
@@ -56,6 +57,7 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Employee Name</th>
+                                <th>Ec Number</th>
                                 <th>Date</th>
                                 <th>working Hours</th>
                                 <th>Overtime Type</th>
@@ -119,6 +121,10 @@
                                 {
                                     data: 'user.name',
                                     name: 'user.name'
+                                },
+                                {
+                                    data: 'user.employee.ec_number',
+                                    name: 'user.employee.ec_number'
                                 },
 
                                 {
@@ -202,10 +208,11 @@
     </main>
 @endsection
 @push('custom-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        // $(document).ready(function() {
-        //     $('.employees').select2();
-        // });
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+></script>
+<script>
+    $(document).ready(function() {
+        $(".select-search").selectize({ sortField: 'text' });
+    });
+</script>
 @endpush

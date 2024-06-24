@@ -40,7 +40,7 @@
                             <!-- End Card -->
                         </div>
                         @if(isemplooye())
-                        <div class="mb-3 col-sm-6 col-lg-2">
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ url('admin/personal-info/employee-details')}}">
@@ -61,10 +61,10 @@
                                 </div>
                             </a>
                             <!-- End Card -->
-                        </div>
+                        </div> --}}
                         @endif
                         @if(isemplooye())
-                        <div class="mb-3 col-sm-6 col-lg-2">
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ url('admin/person-profile/qualifications') }}">
@@ -86,7 +86,7 @@
                                 </div>
                             </a>
                             <!-- End Card -->
-                        </div>
+                        </div> --}}
                         @endif
                         {{-- @if(isemplooye())
                         <div class="mb-3 col-sm-6 col-lg-2">

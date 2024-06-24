@@ -201,7 +201,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
-                                    <select name="status" class="form-control" id="status">
+                                    <select name="status" class="form-control form-control-sm" id="status">
                                         <option value="" disabled>Selected Option</option>
                                         <option value="pending"> Pending</option>
                                         <option value="approved">Approved</option>
@@ -218,11 +218,11 @@
                                 <label for="reimbursement_currency">Reimbursement Currency <small
                                         class="required-field">*</small></label>
 
-                                <select id="reimbursement_currency" placeholder="Select reimbursement_currency"
+                                <select id="reimbursement_currency" placeholder="Select Reimbursement Currency"
                                     name="reimbursement_currency" class="form-control form-control-sm" required>
                                     <option selected disabled> - Select Currency - </option>
                                     <option value="usd">USD</option>
-                                    <option value="pula">PULL</option>
+                                    <option value="pula">PULA</option>
                                
 
                                 </select>
@@ -230,13 +230,13 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
-                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="reimbursement amount" value="{{ old('reimbursement_amount') }}">
+                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control form-control-sm" placeholder="Reimbursement amount" value="{{ old('reimbursement_amount') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="expenses">Reimbursement Reason</label>
-                                    <textarea name="reimbursement_reason" id="reimbursement_reason" cols="30" rows="3" class="form-control" placeholder="Reimbursement Reason"></textarea>
+                                    <label for="expenses">Approval Reason</label>
+                                    <textarea name="reimbursement_reason" id="reimbursement_reason" cols="30" rows="3" class="form-control form-control-sm" placeholder="Approval Reason"></textarea>
                                 </div>
                                 <span class="text-danger">
                                     @error('reimbursement_reason')

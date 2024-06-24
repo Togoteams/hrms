@@ -7,7 +7,7 @@
             <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
-                    <span class="name-title">Employee Form</span>
+                    <span class="name-title">Leave Details of {{ !empty($employee) ? $employee->user->name : '' }}</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
                             <div class="py-4 border rounded col-xxl-2 col-xl-2 border-1 border-color">
@@ -19,10 +19,13 @@
 
                                 <div class="tab-content" id="v-pills-tabContent">
                                     @if ($isCurrentLeaveFound)
-                                    <button type="button" class="btn btn-white btn-sm" title="Add Emp Leave"
-                                        onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
-                                        Creadit Leave
-                                    </button>
+                                    @can('employee-credit-current-leave')
+                                        <button type="button" class="btn btn-white btn-sm" title="Add Emp Leave"
+                                            onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
+                                            Creadit Leave
+                                        </button>
+                                    @endcan
+                                    
                                     @endif
                                     <form id="form_id" class="formsubmit" method="post"
                                         action="{{ route('admin.employee.current-leaves.post') }}">
@@ -64,76 +67,79 @@
                                         </div>
                                     </form>
                                 </div>
-                                @if ($isCurrentLeaveFound)
-                                <div class="p-2 mt-3 table-responsive">
-                                    <div>
-                                        <h3> Leave Log  of {{$employee?->user?->name}}  </h3>
+                                @can('employee-leave-log-history')
+                                    @if ($isCurrentLeaveFound)
+                                    <div class="p-2 mt-3 table-responsive">
+                                        <div>
+                                            <h3> Leave Log  of {{$employee?->user?->name}}  </h3>
+                                        </div>
+                                        <table
+                                            class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
+                                            <thead>
+                                                <tr>
+                                                    
+                                                    <th>Date</th>
+                                                    <th>Leave</th>
+                                                    <th>Count</th>
+                                                    <th>Transaction Type</th>
+                                                    {{-- <th>Description</th> --}}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <table
-                                        class="table data-table table-thead-bordered table-nowrap table-align-middle card-table">
-                                        <thead>
-                                            <tr>
+                                    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        
+                                    <script type="text/javascript">
+                                        $(function() {
+                                            var i = 1;
+                                            var table = $('.data-table').DataTable({
+                                                processing: true,
+                                                serverSide: true,
+                                                autowidth: false,
+                                                ajax: {
+                                                    "url": "{{ route('admin.employee.current-leaves-log.list') }}",
+                                                    "type": "get",
+                                                    "data": function(d) {
+                                                        // Add your parameters here
+                                                        d.employee_id = "{{ $employee->id }}"
+                                                        d.user_id = "{{ $employee->user_id }}"
+        
+                                                        // Add more parameters as needed
+                                                    }
+                                                },
+                                                columns: [
+                                                    {
+                                                        data: 'activity_at',
+                                                        width: '12%',
+                                                        name: 'activity_at'
+                                                    },
+                                                    {
+                                                        data: 'leave_type.name',
+                                                        width: '12%',
+                                                        name: 'leave_type.name'
+                                                    },
+                                                    {
+                                                        data: 'leave_count',
+                                                        width: '12%',
+                                                        name: 'leave_count'
+                                                    },
+                                                    {
+                                                        data: 'leave_transaction_type',
+                                                        width: '12%',
+                                                        name: 'leave_transaction_type'
+                                                    },
+                                                    
                                                 
-                                                <th>Date</th>
-                                                <th>Leave</th>
-                                                <th>Count</th>
-                                                <th>Transaction Type</th>
-                                                {{-- <th>Description</th> --}}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    
-                                <script type="text/javascript">
-                                    $(function() {
-                                        var i = 1;
-                                        var table = $('.data-table').DataTable({
-                                            processing: true,
-                                            serverSide: true,
-                                            autowidth: false,
-                                            ajax: {
-                                                "url": "{{ route('admin.employee.current-leaves-log.list') }}",
-                                                "type": "get",
-                                                "data": function(d) {
-                                                    // Add your parameters here
-                                                    d.employee_id = "{{ $employee->id }}"
-                                                    d.user_id = "{{ $employee->user_id }}"
-    
-                                                    // Add more parameters as needed
-                                                }
-                                            },
-                                            columns: [
-                                                {
-                                                    data: 'activity_at',
-                                                    width: '12%',
-                                                    name: 'activity_at'
-                                                },
-                                                {
-                                                    data: 'leave_type.name',
-                                                    width: '12%',
-                                                    name: 'leave_type.name'
-                                                },
-                                                {
-                                                    data: 'leave_count',
-                                                    width: '12%',
-                                                    name: 'leave_count'
-                                                },
-                                                {
-                                                    data: 'leave_transaction_type',
-                                                    width: '12%',
-                                                    name: 'leave_transaction_type'
-                                                },
-                                                
-                                               
-                                            ]
+                                                ]
+                                            });
+        
                                         });
-    
-                                    });
-                                </script>
-                                @endif
+                                    </script>
+                                    @endif
+                                @endcan
+                               
                             </div>
                            
 

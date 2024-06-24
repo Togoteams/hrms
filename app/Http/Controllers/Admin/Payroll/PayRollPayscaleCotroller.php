@@ -68,7 +68,7 @@ class PayRollPayscaleCotroller extends BaseController
 
     public function payscaleTaxCal(Request $request){
 
-        $taxableAmount = $request->taxable_amount;
+        $taxableAmount = 0;
         $salary_head = $request->salary_head;
         // return $salary_head['basicAmount'];
         $employment_type = $request->employment_type;
@@ -97,6 +97,7 @@ class PayRollPayscaleCotroller extends BaseController
     {
 
         $salaryHistory = SalaryHistory::where('user_id', $request?->user_id)->orderBy('id','desc')->first();
+        // return $salaryHistory?->date_of_current_basic;
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|numeric',
             'basic' => 'required|numeric',
@@ -118,6 +119,10 @@ class PayRollPayscaleCotroller extends BaseController
             if (!$employee) {
                 return response()->json(['error' => 'Employee not found for the given user']);
             }
+                if(PayRollPayscale::where('payscale_date',$request->payscale_date)->where('user_id',$request->user_id)->exists())
+                {
+                    return response()->json(['error' => 'Payscale has been already created of '.date('d-M-Y',strtotime($request->payscale_date))]);
+                }
                 $payroll = PayRollPayscale::create([
                     'employee_id' => $employee->id,
                     'user_id' => $request->user_id,

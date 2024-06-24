@@ -19,24 +19,24 @@
                     <input type="hidden" name="document_id" value="{{ $data->id }}" class="document_id">
 
                     @foreach ($all_users as $user)
-                    <?php 
+                        <?php
                         $cond = [
                             'document_id' => $data->id,
-                            'emp_id' => $user->id
+                            'emp_id' => $user->id,
                         ];
                         $check = DB::table('document_emps')->where($cond)->select('emp_id')->first();
-
-                        if(!empty($check)){
+                        
+                        if (!empty($check)) {
                             $checked = 'checked';
-                        }else{
+                        } else {
                             $checked = '';
                         }
-                    ?>
+                        ?>
                         <tr>
                             <td>{{ $user->user->name }}</td>
                             <td>
                                 <input type="checkbox" class="emp-checkbox" id="emp_id" name="emp_id[]"
-                                    value="{{ $user->user->id }}" {{$checked}}>
+                                    value="{{ $user->user->id }}" {{ $checked }}>
                             </td>
                         </tr>
                     @endforeach
@@ -56,17 +56,11 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function() {
-                $('#select-all').change(function() {
+                console.log("test");
+                $('#select-all').click(function() {
+                    console.log("test");
                     $('.emp-checkbox').prop('checked', $(this).prop('checked'));
                 });
             });
         </script>
     @endpush
-
-
-
-
-
-
-    
-
