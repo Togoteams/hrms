@@ -204,7 +204,8 @@
         </div>
     @endsection
     @push('custom-scripts')
-    <script src="http://127.0.0.1:8000/admin/assets/js/app.js"></script>
+    
+    <script src="{{ asset('/admin/assets/js/app.js')}}"></script>
 
         @if (!empty(Session::get('success')))
             <script>

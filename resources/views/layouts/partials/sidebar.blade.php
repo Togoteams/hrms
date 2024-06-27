@@ -609,7 +609,7 @@
                          </div>
                      @endcanany
 
-                     {{-- @canany(['aaaa']) --}}
+                     @canany(['download-backup','view-backup'])
                      <div class="nav-item">
                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.backups.index' ? 'active' : '' }}"
                              href="{{ route('admin.backups.index') }}" data-placement="left">
@@ -617,7 +617,7 @@
                              <span class="nav-link-title">Backup</span>
                          </a>
                      </div>
-                     {{-- @endcanany --}}
+                     @endcanany
 
 
 
