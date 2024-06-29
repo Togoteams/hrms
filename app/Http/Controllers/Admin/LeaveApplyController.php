@@ -185,7 +185,7 @@ class LeaveApplyController extends BaseController
                 'end_date' => ['required', 'date', 'no_date_overlap', 'after_or_equal:start_date'],
                 'approval_authority' => [ Rule::when($roleSlug != ('managing-director'), 'required'),'numeric', 'exists:employees,user_id'],
                 "doc1" => ["mimetypes:application/pdf", "max:10000", 'nullable', 'sick_leave_document'],
-                'leave_applies_for' => ['required', 'numeric','lte:remaining_leave', Rule::when($leaveSlug == ('bereavement-leave'), 'max:3')],
+                'leave_applies_for' => ['required', 'numeric', Rule::when($leaveSlug == ('bereavement-leave'), 'max:3')],
                 'remaining_leave' => ['required', 'numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave'), 'min:1')]
             ],
             [
