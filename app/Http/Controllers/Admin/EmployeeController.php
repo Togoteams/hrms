@@ -316,8 +316,7 @@ class EmployeeController extends BaseController
             }
             $employee = Employee::firstWhere('user_id', $request->user_id);
 
-            return $this->responseJson(
-                true,
+            return $this->responseJson( true,
                 200,
                 $message,
                 ["employee" => $employee,'redirect_url' => route('admin.employee.domicile.form', $employee->emp_id)]

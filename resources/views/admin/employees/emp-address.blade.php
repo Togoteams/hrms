@@ -74,7 +74,7 @@
                                                                     <!-- Your content for right div goes here -->
                                                                     <button class="btn btn-edit btn-sm bt" title="Edit"
                                                                         id="editButton" data-id="{{ $empAddress->id }}"
-                                                                        data-user_id="{{ $employee->user_id }}"
+                                                                        data-user_id="{{ $empAddress->user_id }}"
                                                                         data-address_type="{{ $empAddress->address_type }}"
                                                                         data-address="{{ $empAddress->address }}"
                                                                         data-post_box="{{ $empAddress->post_box }}"

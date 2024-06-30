@@ -15,15 +15,15 @@
                     <span class="name-title">Personal Profile</span>
                     <div class="mt-5">
                         <div class="row d-flex align-items-start">
-                            <div class="col-xxl-2 col-xl-3  border border-1 border-color rounded py-4">
+                            <div class="py-4 border rounded col-xxl-2 col-xl-3 border-1 border-color">
                                 @include('admin.dashboard.person-profile.aside')
                                 <div class="tab-pane fade ms-5 show active">
                                 </div>
                             </div>
-                            <div class="col-xl-8 col-xxl-9 border border-1 border-color rounded mx-3">
+                            <div class="mx-3 border rounded col-xl-8 col-xxl-9 border-1 border-color">
 
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <div class="row py-3">
+                                    <div class="py-3 row">
                                         <div class="text-left">
                                             {{-- <button type="button" class="btn btn-white btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#formModal" title="Add ">
@@ -33,13 +33,27 @@
                                     </div>
                                     <div class="row">
                                         <div class="pb-4">
-                                            <div class="card p-3">
+                                            <div class="p-3 card">
                                                 <div class="row">
                                                     <div class="col-10">
                                                         <div class="row text-dark">
                                                             <div class="col-3 fw-semibold">Employment Type</div>
                                                             <div class="col-7">
-                                                                {{ $data->employment_type == 'local-contractual' ? 'Contractual' : 'Permanent' }}
+                                                                @php
+                                                                    $employment_type = $data->employment_type;
+                                                                    $employeeType = "Permanent";
+                                                                    if($employment_type=='local-contractual')
+                                                                    {
+                                                                        $employeeType = "Local Contractual";
+                                                                    }elseif($employment_type=='local') {
+                                                                        # code...
+                                                                        $employeeType = "Local Permanent";
+                                                                    }else {
+                                                                        # code...
+                                                                        $employeeType = $data->employment_typ;
+                                                                    }
+                                                                @endphp
+                                                                {{ ucfirst($employeeType) }}
                                                             </div>
 
                                                             @if ($data->employment_type == 'local-contractual' && !empty($data->contract_duration))

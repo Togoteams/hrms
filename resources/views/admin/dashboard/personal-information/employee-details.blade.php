@@ -80,9 +80,9 @@
                                                                     echo $age . " years";
                                                                     ?>
                                                                 </div>
-
+{{-- 
                                                                 <div class="col-3 fw-semibold">Blood Group</div>
-                                                                <div class="col-3">{{ $data->blood_group ?? "N/A" }}</div>
+                                                                <div class="col-3">{{ $data->blood_group ?? "N/A" }}</div> --}}
                                                                 {{-- <div class="col-3 fw-semibold">Basic Salary</div>
                                                                 <div class="col-3">{{getCurrencyIcon($data->currency_salary)}}  {{ $data->basic_salary }}</div> --}}
                                                             </div>
@@ -91,14 +91,14 @@
                                                         No data to show
                                                     @endif
                                                 </div>
-                                                <div class="col-md-2 text-end">
+                                                {{-- <div class="col-md-2 text-end">
                                                     <div class="pt-2">
                                                         <!-- Your content for right div goes here -->
                                                         <button class="btn btn-edit btn-sm bt" data-bs-toggle="modal"
                                                             data-bs-target="#modaledit">
                                                             <i class="fas fa-edit"></i></button>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>

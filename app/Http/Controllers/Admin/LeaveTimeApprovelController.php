@@ -135,7 +135,7 @@ class LeaveTimeApprovelController extends BaseController
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
                 $filename = $file->getClientOriginalName();
-                $file->move('assets/leave_document', $filename);
+                $file->move(asset('assets/leave_document'), $filename);
                 $leaveData['document'] = $filename;
             }
 
@@ -195,7 +195,7 @@ class LeaveTimeApprovelController extends BaseController
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
                 $filename = $file->getClientOriginalName();
-                $file->move('assets/leave_document', $filename);
+                $file->move(asset('assets/leave_document'), $filename);
                 $leaveData['document'] = $filename;
             }
             LeaveTimeApprovel::where('id', $id)->update($leaveData);

@@ -135,7 +135,7 @@
                                     <td></td>
                                 </tr>
                                 <tr style="height: 19pt; line-height: 24px">
-                                    <td>Department: </td>
+                                    <td>Department: <strong>{{ $data[0]?->employee?->departmentHistory?->first()?->department_name }}</strong> </td>
                                     <td></td>
                                 </tr>
                             </table>
@@ -147,7 +147,7 @@
                                 <tr style="height: 19pt; line-height: 24px">
                                     <td>Since:</td>
                                     <td></td>
-                                </tr>
+                                </tr>   
                                 <tr style="height: 19pt; line-height: 24px">
                                     <td>DOJ: <strong>{{ $data[0]->employee->start_date }}</strong> </td>
                                     <td></td>
@@ -187,7 +187,7 @@
                                     cellspacing="0">
                                     <tr style="height: 19pt; line-height: 24px">
                                         <td>Reporting Authority: <strong>
-                                            {{ $data[0]->user->name }} </strong></td>
+                                            {{ $data[0]?->reportingAuthority?->name }} </strong></td>
                                         <td></td>
                                     </tr>
                                     <tr style="height: 19pt; line-height: 24px">
@@ -195,7 +195,8 @@
                                         <td></td>
                                     </tr>
                                     <tr style="height: 19pt; line-height: 24px">
-                                        <td>Reviewing Authority: </td>
+                                        <td>Reviewing Authority: <strong>
+                                            {{ $data[0]?->reviewAuthority?->name }} </strong></td>
                                         <td></td>
                                     </tr>
                                 </table>

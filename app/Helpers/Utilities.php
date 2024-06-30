@@ -1085,7 +1085,7 @@ function get_day($date1, $date2)
 function max_min_range($max, $min, $number)
 {
     if ($max < $number && $min > $number) {
-        return $number;
+        return number_format($number,2);
     }
 }
 

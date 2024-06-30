@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Dashboard;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Designation;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class PersonalInformationController extends Controller
+class PersonalInformationController extends BaseController
 {
 
     public function viewEmployeeDetails()
@@ -213,7 +214,7 @@ class PersonalInformationController extends Controller
         $page_name = "Contact";
         $validator = Validator::make($request->all(), [
            // 'email' => ['string', 'email', 'max:255', 'unique:users'],
-            'email' =>'required|email|max:255|unique:users,email,'.$request->user_id,
+            // 'email' =>'required|email|max:255|unique:users,email,'.$request->user_id,
             'mobile' => ['numeric', 'min:10'],
             'emergency_contact' => ['numeric', 'min:10'],
         ]);
@@ -222,7 +223,7 @@ class PersonalInformationController extends Controller
             return $validator->errors();
         } else {
             try {
-                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'id', 'emergency_contact']));
+                User::where('id', $request->user_id)->update($request->except(['_token', 'user_id', 'id','email', 'emergency_contact']));
                 Employee::where('id', $request->id)->update($request->except(['_token', 'user_id', 'email', 'mobile']));
                 return response()->json(['success' => $page_name . " Updated Successfully"]);
             } catch (Exception $e) {
@@ -233,30 +234,33 @@ class PersonalInformationController extends Controller
 
     public function postAddress(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'address'   => ['required', 'string'],
-            'zip'       => ['required', 'numeric','digits_between:5,10'],
+            'post_box'       => ['nullable'],
             'city'      => ['required', 'string', 'regex:/^[a-zA-Z. ]+$/'],
             'state'     => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
-            'country'   => ['required', 'string','regex:/^[a-zA-Z. ]+$/'],
+            'country'   => ['required', 'string'],
         ]);
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
-            try {
-                if ($request->id == '') {
-                    EmpAddress::insertGetId($request->except(['_token', 'id']));
-                    $message = "Address Created Successfully";
-                } else {
-                    EmpAddress::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
-                    $message = "Address Updated Successfully";
-                }
-                return response()->json(['success' => $message]);
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+        try {
+            if ($request->id == '') {
+                EmpAddress::insertGetId($request->except(['_token', 'id']));
+                $message = "Address Created Successfully";
+            } else {
+                EmpAddress::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
+                $message = "Address Updated Successfully";
             }
+            return $this->responseJson( true,
+                200,
+                $message,
+                []
+            );
+        } catch (Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
+
+
+           
     }
 
     public function updatePassport(Request $request)

@@ -65,6 +65,14 @@ class Employee extends Model
     {
         return $this->belongsTo(EmpMedicalInsurance::class, 'user_id', 'user_id');
     }
+    public function reviewAuthority()
+    {
+        return $this->belongsTo(User::class, 'review_authority', 'id');
+    }
+    public function reportingAuthority()
+    {
+        return $this->belongsTo(User::class, 'reporting_authority', 'id');
+    }
 
     public function qualification()
     {
@@ -82,7 +90,7 @@ class Employee extends Model
 
     public function departmentHistory()
     {
-        return $this->hasMany(EmpDepartmentHistory::class, 'user_id', 'user_id');
+        return $this->hasMany(EmpDepartmentHistory::class, 'user_id', 'user_id')->orderBy('id','desc');
     }
     public function branch(){
         return $this->belongsTo(Branch::class);

@@ -13,12 +13,11 @@
 
                     <!-- Stats -->
                     <div class="row card-sec-das">
-                        <div class="mb-3 col-sm-6 col-lg-2">
+                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg " href="{{route('admin.profile')}}">
                                 <div class="text-center ">
                                     <div class="card-subtitle">
-                                    {{-- <img class="dashboard-icon" src="{{ asset('assets/profile/profileImage.png') }}}" alt=""> --}}
                                     @if ($data->image && file_exists(public_path('assets/profile/' . $data->image)))
                                         <img class="dashboard-icon" src="{{ asset('assets/profile/' . $data->image) }}" alt="Profile Image" style="height: 130px; width: 130px;border-radius: 50%;">
                                     @else
@@ -30,17 +29,14 @@
 
                                     <div class="row align-items-center gx-2">
 
-                                        <!-- End Col -->
-                                        <!-- End Col -->
+                                     
                                     </div>
-                                    <!-- End Row -->
                                 </div>
                                 <img class="card-overlay-bg img-fluid" src="{{ asset('assets/img/card-bg-img.png') }}" alt="">
                             </a>
-                            <!-- End Card -->
-                        </div>
+                        </div> --}}
                         @if(isemplooye())
-                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ url('admin/personal-info/employee-details')}}">
@@ -59,12 +55,13 @@
                                     </div>
                                     <!-- End Row -->
                                 </div>
+                                <img class="card-overlay-bg img-fluid" src="{{ asset('assets/img/card-bg-img.png') }}" alt="">
                             </a>
                             <!-- End Card -->
-                        </div> --}}
+                        </div>
                         @endif
                         @if(isemplooye())
-                        {{-- <div class="mb-3 col-sm-6 col-lg-2">
+                        <div class="mb-3 col-sm-6 col-lg-2">
                             <!-- Card -->
                             <a class="card card-hover-shadow card-dashboard card-bg"
                                 href="{{ url('admin/person-profile/qualifications') }}">
@@ -84,9 +81,10 @@
                                     </div>
                                     <!-- End Row -->
                                 </div>
+                                <img class="card-overlay-bg img-fluid" src="{{ asset('assets/img/card-bg-img.png') }}" alt="">
                             </a>
                             <!-- End Card -->
-                        </div> --}}
+                        </div>
                         @endif
                         {{-- @if(isemplooye())
                         <div class="mb-3 col-sm-6 col-lg-2">

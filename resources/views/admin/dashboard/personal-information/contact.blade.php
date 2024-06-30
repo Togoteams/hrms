@@ -44,12 +44,12 @@
                                                 <div class="col-md-2 text-end">
                                                     <div class="pt-2">
                                                     
-                                                        {{-- <button class="btn btn-edit btn-sm bt" id="editButton"
+                                                        <button class="btn btn-edit btn-sm bt" id="editButton"
                                                             onclick="openForm()">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
                                                         <i class="bi bi-x-square-fill fs-2 text-danger pointer d-none"
-                                                            title="Cancel" id="closeButton" onclick="closeForm()"></i> --}}
+                                                            title="Cancel" id="closeButton" onclick="closeForm()"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -62,7 +62,7 @@
                                                 <div class="row text-dark">
                                                     <div class="py-4 col-md-10">
                                                         <div class="left-div">
-                                                            <div class="row">
+                                                            {{-- <div class="row">
                                                                 <div class="pt-2 col-3 fw-semibold">Email</div>
                                                                 <div class="col-7">
                                                                     <input required id="email"
@@ -73,7 +73,7 @@
                                                                 </div>
                                                                 <div class="col-2">
                                                                 </div>
-                                                            </div>
+                                                            </div> --}}
                                                             <div class="pt-2 row">
                                                                 <div class="pt-2 col-3 fw-semibold">Mobile No
                                                                     <small class="required-field">*</small>

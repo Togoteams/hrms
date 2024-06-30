@@ -5,23 +5,23 @@
         Qualifications
     </button>
 
-    <button
+    {{-- <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/place-of-domicile') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ url('admin/person-profile/place-of-domicile') }}';">
         Place of Domicile
-    </button>
-
-    <button
+    </button> --}}
+{{-- 
+    <button 
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/training-details') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ url('admin/person-profile/training-details') }}';">
         Training
-    </button>
+    </button> --}}
 
-    <button
+    {{-- <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/award-details') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ url('admin/person-profile/award-details') }}';">
         Award Details
-    </button>
+    </button> --}}
 
     {{-- <button
         class="nav-link text-left mb-2 {{ Request::is('admin/person-profile/union-details') ? 'active-class' : '' }}"
