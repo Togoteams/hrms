@@ -253,7 +253,7 @@
                              </a>
 
                              <div id="leave"
-                                 class="nav-collapse collapse {{ show(['leavesettings.list', 'leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave', 'leave-time-approved.index']) }} "
+                                 class="nav-collapse collapse {{ show(['leavesettings.list', 'leave_type.index', 'leave_apply.index', 'leave_encashment.index', 'leave_apply.balance_history', 'leave_apply.request_history', 'leave_reports.index', 'leave_apply.get_rejected_leave', 'maternity-leave-apply.index']) }} "
                                  data-bs-parent="#navbarVerticalMenuPagesMenu">
 
                                  {{-- @canany(['add-leave-types', 'edit-leave-types', 'delete-leave-types', 'view-leave-types', 'change-status-leave-types'])
@@ -320,8 +320,8 @@
                                  @canany(['add-maternity-leave-apply', 'delete-maternity-leave-apply',
                                      'edit-maternity-leave-apply', 'view-maternity-leave-apply',
                                      'leave-maternity-approval'])
-                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.leave-time-approved.index' ? 'active' : '' }}"
-                                         href="{{ route('admin.leave-time-approved.index') }}" data-placement="left">
+                                     <a class="nav-link  {{ Route::getCurrentRoute()->getName() == 'admin.maternity-leave-apply.index' ? 'active' : '' }}"
+                                         href="{{ route('admin.maternity-leave-apply.index') }}" data-placement="left">
                                          <span class="nav-link-title">Maternity leave Request</span>
                                      </a>
                                  @endcanany

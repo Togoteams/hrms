@@ -1,7 +1,7 @@
 {{-- Model --}}
 
 
-<form id="form_edit" action="{{ route('admin.leave-time-approved.update', $leave->id) }}">
+<form id="form_edit" action="{{ route('admin.maternity-leave-apply.update', $leave->id) }}">
     @csrf
     <input type="hidden" name="_method" value="PUT">
     <input type="hidden" name="updated_at" value="{{ date('Y-m-d h:s:i') }}">

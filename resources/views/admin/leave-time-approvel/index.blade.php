@@ -76,7 +76,7 @@
                         var table = $('.data-table').DataTable({
                             processing: true,
                             serverSide: true,
-                            ajax: "{{ route('admin.leave-time-approved.index') }}",
+                            ajax: "{{ route('admin.maternity-leave-apply.index') }}",
 
                             columns: [{
                                     data: 'DT_RowIndex',
@@ -272,6 +272,15 @@
             });
         });
     });
+    $(document).ready(function() {
+                $('#user_id').selectize({
+                    onChange: function(value) {
+                        // getApprovalAuthrity();
+                        // Your event handling code here
+                    }
+                });
+               
+            });
 </script>
 {{-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> --}}
 <script>

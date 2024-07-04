@@ -20,7 +20,7 @@
                                         <select
                                             onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_leave') }}', 'leave_type_id')"
                                             id="user_id" placeholder="Enter correct User name" name="user_id"
-                                            class=" user_id">
+                                            class="user_id">
                                             <option selected disabled value=""> -Select Employee - </option>
                                             @foreach ($all_user as $user)
                                                 <option value="{{ $user->user->id }}"
@@ -96,8 +96,8 @@
                             </div>
                             <div class="mb-2 col-sm-4">
                                 <div class="form-group">
-                                    <label for="doc">Document</label>
-                                    <input accept="application/pdf" id="doc"
+                                    <label for="doc1">Document</label>
+                                    <input accept="application/pdf" id="doc1"
                                         placeholder="Enter correct Document   " type="file" name="doc1"
                                         class="form-control form-control-sm ">
                                 </div>
@@ -153,13 +153,13 @@
                 var leave_applies_for = $("#leave_applies_for").val() ?? 1;
                 console.log(leave_applies_for);
                 if (employment_type == "expatriate" && leaveSlug == "sick-leave" && leave_applies_for >= 2) {
-                    document.getElementById('doc').setAttribute("required", "");
+                    document.getElementById('doc1').setAttribute("required", "");
                     console.log("expatriate");
                 } else if (employment_type == "local" && (leaveSlug == "sick-leave" || leaveSlug == "maternity-leave")) {
-                    document.getElementById('doc').setAttribute("required", "");
+                    document.getElementById('doc1').setAttribute("required", "");
                     console.log("local");
                 } else {
-                    document.getElementById('doc').removeAttribute("required", "");
+                    document.getElementById('doc1').removeAttribute("required", "");
                 }
                 var getBalanceUrl = "{{ route('admin.leave_apply.get_balance_leave') }}";
                 var user_id = $("#user_id").val();

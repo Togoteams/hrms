@@ -24,20 +24,11 @@
                     @forelse($notifications as $notification )
                     <div class="list-group-item">
                         <div class="row">
-                            <div class="col-auto">
-
-                                <!-- Avatar -->
-                                <div class="avatar avatar-sm">
-                                    <img src="{{ asset('assets/img/160x160/img3.jpg') }}" alt="..."
-                                        class="avatar-img rounded-circle">
-                                </div>
-
-                            </div>
+                           
                             <div class="col ms-n2">
-
                                 <!-- Content -->
                                 <div class="small">
-                                    <strong>{{$notification->title}}</strong> {{$notification->description}}
+                                    <a href="{{route('admin.notification.index')}}"><strong>{{$notification->title}}</strong> {{$notification->description}}</a> 
                                 </div>
 
                                 <!-- Time -->

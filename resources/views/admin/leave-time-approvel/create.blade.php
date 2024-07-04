@@ -8,17 +8,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form  class="formsubmit fileupload" action="{{ route('admin.leave-time-approved.store') }}" id="leave_store">
+                <form  class="formsubmit fileupload" action="{{ route('admin.maternity-leave-apply.store') }}" id="leave_store">
                     @csrf
                     {{-- <input type="hidden" name="created_at" value="{{ date('Y-m-d h:s:i') }}"> --}}
                     <input type="hidden" name="request_date" readonly id="request_date"
                     class="form-control" value="{{ old('request_date', now()->format('Y-m-d')) }}">
 
                     <div class="row">
+                        @if (!isemplooye())
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="user_id" class="required">Employee</label>
-                                <select name="user_id" id="user_id" class="form-control form-control-sm">
+                                <select name="user_id" id="user_id" >
                                     <option value="">- Select -</option>
                                     @foreach ($employees as $employee)
                                         <option value="{{ $employee->user_id }}"
@@ -29,7 +30,7 @@
                                 </select>
                             </div>
                         </div>
-
+                        @endif
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="leave_type_id" class="required">Leave Type</label>

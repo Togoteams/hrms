@@ -15,6 +15,10 @@ class Notification extends Model
     {
         return $this->morphToMany(LeaveApply::class, 'reference');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     public function scopeGetList($q){
         // $user = User::find(auth()->id());
         // if(isemplooye())

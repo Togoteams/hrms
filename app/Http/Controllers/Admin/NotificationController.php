@@ -19,7 +19,7 @@ class NotificationController extends Controller
     public function index(Request $request)
     { 
         if ($request->ajax()) {
-            $data = Notification::where('user_id',auth()->user()->id)->get();
+            $data = Notification::where('user_id',auth()->user()->id)->with('user')->get();
             return DataTables::of($data)
                 ->addIndexColumn()              
                 ->make(true);

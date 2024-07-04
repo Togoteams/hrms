@@ -180,12 +180,12 @@
                              <div class="dropdown-divider"></div>
 
                              <a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a>
-                             <a class="dropdown-item" href="{{ route('admin.password') }}">Password Setting</a>
+                             {{-- <a class="dropdown-item" href="{{ route('admin.password') }}">Password Setting</a> --}}
 
                              <div class="dropdown-divider"></div>
                              <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
                                  @csrf
-                                 <button class="border border-0 bg-none">Sign Out</button>
+                                 <button class="border border-0 bg-none" type="submit">Sign Out</button>
                              </form>
                              {{-- <a class="dropdown-item" href="#">Sign out</a> --}}
                          </div>

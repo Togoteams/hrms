@@ -27,11 +27,11 @@ class LeaveTimeApprovelController extends BaseController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = LeaveTimeApprovel::with('leaveSetting','user')->get();
+            $data = LeaveTimeApprovel::with('leaveSetting','user')->getList()->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = view('admin.leave-time-approvel.buttons', ['item' => $row, "route" => 'leave-time-approved']);
+                    $actionBtn = view('admin.leave-time-approvel.buttons', ['item' => $row, "route" => 'maternity-leave-apply']);
                     return $actionBtn;
                 })
                 ->editColumn('request_date', function ($data) {
@@ -104,6 +104,7 @@ class LeaveTimeApprovelController extends BaseController
             $leaveName = $this->overLapsLeave;
             return "The $value date range overlaps with an existing record.";
         });
+        $request->user_id = $request->user_id ?? auth()->user()->id;
         $request->validate([
             'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
             'user_id' => ['required', 'numeric', 'exists:users,id'],
@@ -114,20 +115,7 @@ class LeaveTimeApprovelController extends BaseController
             'end_date' => ['required', 'date','no_date_overlap','after_or_equal:start_date'],
             "document" => ["max:10000",'required'],
         ]);
-        // return $request;
-        // $validator = Validator::make($request->all(), [
-        //     'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
-        //     'user_id' => ['required', 'numeric', 'exists:users,id'],
-        //     'request_date' => ['required', 'date'],
-        //     'reason' => ['required', 'date'],
-        //     'start_date' => ['required', 'date','after_or_equal:'.date('Y-m-d'),'no_date_overlap','after:today'],
-        //     'end_date' => ['required', 'date', 'after_or_equal:'.date('Y-m-d'),'no_date_overlap'],
-        //     "document" => ["mimetypes:application/pdf", "max:10000",'nullable'],
-        //     'remaining_leave' =>['required','numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave') , 'min:1','nullable')]
-        // ]);
-        // if ($validator->fails()) {
-        //     return $validator->errors();
-        // } else {
+       
 
             $leaveData = $request->except('_token');
 
@@ -142,7 +130,6 @@ class LeaveTimeApprovelController extends BaseController
             $request->request->add(['status' =>"pending"]);
             LeaveTimeApprovel::create($leaveData);
             return response()->json(['status'=>true,'message' => $this->page_name . " Added Successfully",'data'=>[]]);
-        // }
     }
 
     /**

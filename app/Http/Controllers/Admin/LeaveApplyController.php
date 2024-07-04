@@ -34,12 +34,7 @@ class LeaveApplyController extends BaseController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // if user is not equal to employee then show all data
-            // if (isemplooye()) {
-            //     $data = LeaveApply::with('user', 'user.employee', 'leave_type')->getList()->where('user_id', Auth::user()->id)->select('*');
-            // } else {
-                $data = LeaveApply::with('user', 'user.employee', 'leave_type')->getList()->select('*');
-            // }
+            $data = LeaveApply::with('user', 'user.employee', 'leave_type')->getList()->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -70,7 +65,7 @@ class LeaveApplyController extends BaseController
 
         $approvalAuthority = Employee::whereHas('user.roles', function ($q) use ($allowedRoles) {
             $q->whereIn('slug', $allowedRoles);
-        })->whereNotIn('user_id',[auth()->user()->id])->get();
+        })->whereNotIn('user_id', [auth()->user()->id])->get();
         // return $approvalAuthority;
         return view('admin.leave_apply.index', [
             'page' => $this->page_name,
@@ -105,7 +100,7 @@ class LeaveApplyController extends BaseController
         } else {
             $user = Auth::user();
         }
-        $request->merge(['user_id'=>$user->id]);
+        $request->merge(['user_id' => $user->id]);
         $leaveType = LeaveSetting::find($request->leave_type_id);
         $leaveSlug = $leaveType?->slug;
         $employee = Employee::where('user_id', $user->id)->first();
@@ -115,7 +110,7 @@ class LeaveApplyController extends BaseController
             $start_date = $data['start_date'];
             $end_date = $data['end_date'];
             $userId = $data['user_id'] ?? auth()->id();
-        
+
             // Query for overlapping leave records
             $overlappingRecord = LeaveApply::where('user_id', $userId)
                 ->where(function ($query) use ($start_date, $end_date) {
@@ -123,18 +118,18 @@ class LeaveApplyController extends BaseController
                         $q->whereBetween('start_date', [$start_date, $end_date])
                             ->orWhereBetween('end_date', [$start_date, $end_date]);
                     })
-                    ->orWhere(function ($q) use ($start_date, $end_date) {
-                        $q->where('start_date', '<=', $start_date)
-                            ->where('end_date', '>=', $end_date);
-                    });
+                        ->orWhere(function ($q) use ($start_date, $end_date) {
+                            $q->where('start_date', '<=', $start_date)
+                                ->where('end_date', '>=', $end_date);
+                        });
                 })
                 ->whereNotIn('status', ['reject'])
                 ->orderByDesc('id')
                 ->first();
-        
+
             // Set overlapping leave name for reference
             $this->overLapsLeave = optional($overlappingRecord?->leave_type)->name;
-        
+
             // Return validation result
             return !$overlappingRecord;
         });
@@ -144,7 +139,7 @@ class LeaveApplyController extends BaseController
             return " $value   overlaps with  $leaveName .";
         });
 
-        
+
 
         Validator::extend('sick_leave_document', function ($attribute, $value, $parameters, $validator) {
             $userId = $validator->getData()['user_id'] ?? "";
@@ -177,13 +172,14 @@ class LeaveApplyController extends BaseController
             return "The $value docuement is required.";
         });
         // return $request;
-        $request->validate([
+        $request->validate(
+            [
                 'leave_type_id' => ['required', 'numeric', 'exists:leave_settings,id'],
                 'user_id' => ['required', 'numeric', 'exists:users,id'],
                 'leave_reason' => ['required', 'string'],
                 'start_date' => ['required', 'date', 'no_date_overlap', 'after_or_equal:' . $employee?->start_date],
                 'end_date' => ['required', 'date', 'no_date_overlap', 'after_or_equal:start_date'],
-                'approval_authority' => [ Rule::when($roleSlug != ('managing-director'), 'required'),'numeric', 'exists:employees,user_id'],
+                'approval_authority' => [Rule::when($roleSlug != ('managing-director'), 'required'), 'numeric', 'exists:employees,user_id'],
                 "doc1" => ["mimetypes:application/pdf", "max:10000", 'nullable', 'sick_leave_document'],
                 'leave_applies_for' => ['required', 'numeric', Rule::when($leaveSlug == ('bereavement-leave'), 'max:3')],
                 'remaining_leave' => ['required', 'numeric', Rule::when($leaveSlug != ('leave-without-pay' || 'bereavement-leave' || 'maternity-leave'), 'min:1')]
@@ -192,7 +188,7 @@ class LeaveApplyController extends BaseController
                 'start_date.after_or_equal' => 'You cannot apply for leave before the date of joining.'
             ]
         );
-      
+
         // if ($validator->fails()) {
         //     return $validator->errors();
         // }
@@ -201,42 +197,42 @@ class LeaveApplyController extends BaseController
             // if ($validator->fails()) {
             //     return $validator->errors();
             // } else {
-                try {
-                    // return response()->json(['error' => "Something wrong heppend"]);
-                    $remainingLeave = (int)getAvailableLeaveCount($request->leave_type_id, $user->id);
-                    $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
+            try {
+                // return response()->json(['error' => "Something wrong heppend"]);
+                $remainingLeave = (int)getAvailableLeaveCount($request->leave_type_id, $user->id);
+                $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
 
-                    if (!in_array($leaveSlug, $balanceLeaveHideArr)) {
-                        $remainingLeave = $remainingLeave -  $request->leave_applies_for;
-                    }
-
-                    $allDate = getAllDates($request->start_date, $request->end_date);
-                    $request->request->add([
-                        'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
-                        'uuid' => $user->uuid,
-                        'user_id' => $user->id,
-                        'created_by' => Auth::user()->id,
-                        'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
-                        'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
-                        'remaining_leave' => $remainingLeave
-                    ]);
-                    $leaveId  =  LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method', 'leave_id', 'description_reason']));
-
-                    foreach ($allDate as $date) {
-                        $isHoliday = isHolidayDate($date);
-                        $payType = $request->pay_type ?? "";
-                        $leaveDate = LeaveDate::create(['leave_id' => $leaveId, 'leave_date' => $date, 'is_holiday' => $isHoliday, 'pay_type' => $payType]);
-                    }
-                    return $this->responseJson(true,200,$this->page_name . " Added Successfully",$leaveDate);
-                    // return response()->json(['success' => $this->page_name . " Added Successfully", 'status' => true]);
-                } catch (Exception $e) {
-                    return $this->responseJson(false,200,$e->getMessage());
-
-                    // return response()->json(['error' => $e->getMessage()]);
+                if (!in_array($leaveSlug, $balanceLeaveHideArr)) {
+                    $remainingLeave = $remainingLeave -  $request->leave_applies_for;
                 }
+
+                $allDate = getAllDates($request->start_date, $request->end_date);
+                $request->request->add([
+                    'doc' => $request->has('doc1') ? $this->insert_image($request->file('doc1'), 'leave_doc') : '',
+                    'uuid' => $user->uuid,
+                    'user_id' => $user->id,
+                    'created_by' => Auth::user()->id,
+                    'is_paid' => getPaidString(LeaveSetting::find($request->leave_type_id)->is_salary_deduction),
+                    'is_leave_counted_on_holiday' => (LeaveSetting::find($request->leave_type_id)->is_count_holyday),
+                    'remaining_leave' => $remainingLeave
+                ]);
+                $leaveId  =  LeaveApply::insertGetId($request->except(['_token', 'doc1', '_method', 'leave_id', 'description_reason']));
+
+                foreach ($allDate as $date) {
+                    $isHoliday = isHolidayDate($date);
+                    $payType = $request->pay_type ?? "";
+                    $leaveDate = LeaveDate::create(['leave_id' => $leaveId, 'leave_date' => $date, 'is_holiday' => $isHoliday, 'pay_type' => $payType]);
+                }
+                return $this->responseJson(true, 200, $this->page_name . " Added Successfully", $leaveDate);
+                // return response()->json(['success' => $this->page_name . " Added Successfully", 'status' => true]);
+            } catch (Exception $e) {
+                return $this->responseJson(false, 200, $e->getMessage());
+
+                // return response()->json(['error' => $e->getMessage()]);
+            }
             // }
         } else {
-            return $this->responseJson(false,200,"You have Applied Maximum number of leave",[]);
+            return $this->responseJson(false, 200, "You have Applied Maximum number of leave", []);
 
             // return response()->json(['error' => "You have Applied Maximum number of leave"]);
         }
@@ -301,11 +297,11 @@ class LeaveApplyController extends BaseController
         $request->merge(['id' => $id, 'leave_type_id' => $leaveApplies->leave_type_id, 'remaining_leave' => $leaveApplies->remaining_leave]);
         // return  $request->id;
         $user_id = $request->user_id;
-        
+
         $employee = Employee::where('user_id', $request->user_id)->first();
         $validator = Validator::make($request->all(), [
             "doc1" => ["mimetypes:application/pdf", "max:10000", 'nullable', 'sick_leave_document'],
-            'leave_reason' => ['required','string'],
+            'leave_reason' => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -313,9 +309,9 @@ class LeaveApplyController extends BaseController
         } else {
             try {
                 // return "dda";
-               
+
                 // return $remainingLeave;
-                LeaveApply::where('id', $id)->update(['leave_reason'=>$request->leave_reason,'remark'=>$request->remark,'approval_authority'=>$request->approval_authority]);
+                LeaveApply::where('id', $id)->update(['leave_reason' => $request->leave_reason, 'remark' => $request->remark, 'approval_authority' => $request->approval_authority]);
                 // $request->has('doc1') ? $this->update_images('leave_applies', $id, $request->file('doc1'), 'leave_doc', 'doc') : LeaveApply::find($id)->doc;
                 return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
@@ -347,7 +343,7 @@ class LeaveApplyController extends BaseController
                 'status_remarks' => $request->status_remarks,
                 'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
             ]);
-            
+
             $this->saveNotification([
                 'reference_id' => $id,
                 'user_id' => $leave_apply->user_id,
@@ -361,9 +357,9 @@ class LeaveApplyController extends BaseController
         if ($request->status == "approved") {
             $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
             $isIgnoreBalanced = in_array($leaveSlug, $balanceLeaveHideArr) ? 1 : 0;
-            
+
             if ((getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id, 'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
-                
+
                 LeaveApply::where('id', $id)->update([
                     'status_remarks' => $request->status_remarks,
                     'status' => $request->status,
@@ -372,27 +368,24 @@ class LeaveApplyController extends BaseController
                     'is_approved' => 1,
                     'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
                 ]);
-               
-                $currentLeave = EmpCurrentLeave::where('user_id',$leave_apply->user_id)->where('leave_type_id',$leave_apply->leave_type_id)->first();
+
+                $currentLeave = EmpCurrentLeave::where('user_id', $leave_apply->user_id)->where('leave_type_id', $leave_apply->leave_type_id)->first();
                 $currentLeaveCount = $currentLeave?->leave_count ?? 0;
                 $appliedLeaveCount = $leave_apply->leaveDate()->count();
-                if(!empty($currentLeave))
-                {
-                    if($currentLeaveCount >=$appliedLeaveCount)
-                    {
+                if (!empty($currentLeave)) {
+                    if ($currentLeaveCount >= $appliedLeaveCount) {
                         $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
-                        $currentLeave->update(['leave_count'=>$remaining_leave]);
+                        $currentLeave->update(['leave_count' => $remaining_leave]);
                         $this->leaveActivityLog([
-                            'user_id'=>$leave_apply->user_id,
-                            'leave_type_id'=>$leave_apply->leave_type_id,
-                            'is_credit'=>0,
-                            'leave_count'=>count($leave_apply->leaveDate),
-                          ]);
-                    }else
-                    {
+                            'user_id' => $leave_apply->user_id,
+                            'leave_type_id' => $leave_apply->leave_type_id,
+                            'is_credit' => 0,
+                            'leave_count' => count($leave_apply->leaveDate),
+                        ]);
+                    } else {
                         return response()->json([
-                            'error' => "Leave Approval Failed: Insufficient Leave Balance. You currently have ".$currentLeaveCount." leave remaining."
-                        ]);      
+                            'error' => "Leave Approval Failed: Insufficient Leave Balance. You currently have " . $currentLeaveCount . " leave remaining."
+                        ]);
                     }
                 }
                 $this->saveNotification([
@@ -461,8 +454,7 @@ class LeaveApplyController extends BaseController
 
         $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'branch-supervisor'];
         $employee =  Employee::where('user_id', $user_id)->first();
-        if($employee->user->role_slug=="managing-director")
-        {
+        if ($employee->user->role_slug == "managing-director") {
             return response()->json(['status' => false, 'data' => []]);
         }
         $approvalAuthority = Employee::getActiveEmp()->with('user')->whereHas('user.roles', function ($q) use ($allowedRoles) {
@@ -488,9 +480,8 @@ class LeaveApplyController extends BaseController
         $isIboSickLeave = false;
 
         // return $leave_type_slug; 
-        if($request->pay_type=="full_pay")
-        {
-            $remaining_leave = ceil($remaining_leave/2);
+        if ($request->pay_type == "full_pay") {
+            $remaining_leave = ceil($remaining_leave / 2);
         }
 
         if (in_array($leave_type_slug, $balanceLeaveHideArr)) {
