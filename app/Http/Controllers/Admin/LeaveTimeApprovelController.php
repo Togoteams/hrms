@@ -123,7 +123,11 @@ class LeaveTimeApprovelController extends BaseController
                 $file = $request->file('document');
                 $extension = $file->getClientOriginalExtension();
                 $filename = $file->getClientOriginalName();
-                $file->move(asset('assets/leave_document'), $filename);
+                $dir = asset('assets/leave_document');
+                if (!file_exists($dir)) {
+                    mkdir($dir, 0755, true);
+                }
+                $file->move($dir, $filename);
                 $leaveData['document'] = $filename;
             }
 
