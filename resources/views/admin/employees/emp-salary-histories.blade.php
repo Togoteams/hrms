@@ -69,7 +69,7 @@
                                                                             India
                                                                         </div>
                                                                         <div class="col-3">
-                                                                            {{ ucfirst($salaryhistory->currency_salary_for_india) }}
+                                                                            {{ Str::upper($salaryhistory->currency_salary_for_india) }}
                                                                             {{ $salaryhistory->basic_salary_for_india }}
                                                                         </div>
                                                                     @endif

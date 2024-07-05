@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @push('styles')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" />
+
 @endpush
 @section('content')
     <main id="content" role="main" class="main">
@@ -196,3 +199,7 @@
 
     </main>
 @endsection
+@push('custom-scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+
+@endpush

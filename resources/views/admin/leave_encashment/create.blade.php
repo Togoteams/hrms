@@ -22,7 +22,7 @@
                                         <select
                                             onchange="selectDrop('form_data','{{ route('admin.leave_apply.get_encash_leave') }}', 'leave_type_id')"
                                             required id="user_id" placeholder="Enter correct user_id   "
-                                            type="text" name="user_id" class="form-control form-control-sm ">
+                                            type="text" name="user_id">
                                             <option selected disabled> -Select User - </option>
                                             @foreach ($allowedEmps as $user)
                                                 <option value="{{ $user->user_id }}">{{ $user->user->name }} -
@@ -124,5 +124,10 @@
                     },
                 });
             }
+            $(document).ready(function() {
+                $('#user_id').selectize();
+               
+            });
         </script>
+        
     @endpush

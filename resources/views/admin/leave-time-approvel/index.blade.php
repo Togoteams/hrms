@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @push('styles')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" />
+
 @endpush
 @section('content')
     <main id="content" role="main" class="main">
@@ -244,11 +247,12 @@
     </main>
 @endsection
 @push('custom-scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#user_id').change(function () {
             const selectedEmployeeType = $('#user_id option:selected').data('employee-type');
-            $('#leave_type_id option').each(function () {
+                $('#leave_type_id option').each(function () {
                 const leaveTypeEmployeeType = $(this).data('employee-type');
                 console.log("leaveTypeEmployeeType",leaveTypeEmployeeType);
                 console.log("selectedEmployeeType",selectedEmployeeType);
@@ -275,8 +279,29 @@
     $(document).ready(function() {
                 $('#user_id').selectize({
                     onChange: function(value) {
-                        // getApprovalAuthrity();
-                        // Your event handling code here
+                        const selectedEmployeeType = $('#user_id option:selected').data('employee-type');
+                            $('#leave_type_id option').each(function () {
+                            const leaveTypeEmployeeType = $(this).data('employee-type');
+                            console.log("leaveTypeEmployeeType",leaveTypeEmployeeType);
+                            console.log("selectedEmployeeType",selectedEmployeeType);
+                            if (selectedEmployeeType === 'local') {
+                                if(leaveTypeEmployeeType == 1)
+                                {
+                                    $(this).show();
+                                }else
+                                {
+                                    $(this).hide();
+                                }
+                            } else {
+                                if(leaveTypeEmployeeType == 0)
+                                {
+                                    $(this).show();
+                                }else
+                                {
+                                    $(this).hide();
+                                }
+                            }
+                        });
                     }
                 });
                

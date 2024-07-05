@@ -44,11 +44,10 @@ class Role extends Model
     public function scopeExcludeRoles($query)
     {
         $roleIds = Employee::with('user.roles')->pluck('id')->toArray();
-        // dd($roleIds);
-         if(in_array(1,$roleIds))
-         {
-            $query->whereNotIn('id',[1]);
-         }
+        //  if(in_array(1,$roleIds))
+        //  {
+        //     $query->whereNotIn('id',[1]);
+        //  }
         return $query;
     }
  
