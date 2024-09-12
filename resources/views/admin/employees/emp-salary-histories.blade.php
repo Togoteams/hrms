@@ -32,7 +32,7 @@
                                                 <button type="button" class="btn btn-white btn-sm"
                                                     title="Add Emp Salary History"
                                                     onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
-                                                    Add Salary Revisions
+                                                   Define New Salary
                                                 </button>
                                             @endcan
                                             
@@ -342,14 +342,14 @@
             $('#form_id').trigger("reset");
             $("#id").val("");
             $('#formModal').modal('show');
-            $("#modalTitle").html("Add: Salary Revisions");
+            $("#modalTitle").html("Define New Salary");
             $("#btnSave").html("CREATE");
             $("#user_id").val(user_id);
         }
         $(document).ready(() => {
             $(document).on("click", "#editButton", (event) => {
                 $('#form_id').trigger("reset");
-                $("#modalTitle").html("Edit: Salary Revisions");
+                $("#modalTitle").html("Edit: Salary History");
                 $("#btnSave").html("UPDATE");
 
                 let id = $(event.currentTarget).data("id");
