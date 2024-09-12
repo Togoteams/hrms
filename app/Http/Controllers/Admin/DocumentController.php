@@ -23,7 +23,7 @@ class DocumentController extends Controller
     {
         $data = Document::with('documentType')->get();
         $documentType = DocumentType::getDocumentType()->get();
-        $all_users = Employee::with('user')->getActiveEmp()->get();
+        $all_users = Employee::with('user')->getActiveEmp()->getList()->get();
         return view('admin.document.index', ['page' => $this->page_name,'data' => $data,'all_users'=>$all_users, 'documentType' => $documentType]);
 
     }
@@ -88,7 +88,7 @@ class DocumentController extends Controller
     {
         $data = Document::find($id);
         // return $data;
-        $all_users = Employee::with('user')->getActiveEmp()->get();
+        $all_users = Employee::with('user')->getActiveEmp()->getList()->get();
         return view('admin.document.asign_emp', ['data' => $data, 'page' => $this->page_name,'all_users'=>$all_users]);
     }
 

@@ -37,7 +37,7 @@ class OvertimeController extends BaseController
             }
 
         // $data = OvertimeSetting::all();
-        $all_users = Employee::with('user')->where('employment_type','local')->getActiveEmp()->get();
+        $all_users = Employee::with('user')->where('employment_type','local')->getActiveEmp()->getList()->get();
         // dd($all_users);
         return view('admin.overtime_settings.index', ['page' => $this->page_name,'all_users' => $all_users]);
 
@@ -115,7 +115,7 @@ class OvertimeController extends BaseController
     public function edit(string $id)
     {
         $item = OvertimeSetting::find($id);
-        $all_users = Employee::with('user')->where('employment_type','local')->getActiveEmp()->get();
+        $all_users = Employee::with('user')->where('employment_type','local')->getList()->getActiveEmp()->get();
         return view('admin.overtime_settings.edit', ['item'=>$item,'all_users'=>$all_users,'page' => $this->page_name]);
     }
 

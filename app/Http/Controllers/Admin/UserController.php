@@ -24,7 +24,7 @@ class UserController extends BaseController
             return $q->whereNotIn('role_id',[1]);
         })->get();
 
-        $employees = Employee::getActiveEmp()->get(); 
+        $employees = Employee::getActiveEmp()->getList()->get(); 
         $roles = Role::where('role_type','!=','superadmin')->get();
         return view('admin.user.users', compact('users','roles','employees'));
     }

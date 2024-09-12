@@ -159,7 +159,7 @@ class PayrollSalaryController extends Controller
      */
     public function show(string $id)
     {
-        $all_users = Employee::getActiveEmp()->whereHas('empPayscale')->get();
+        $all_users = Employee::getActiveEmp()->getList()->whereHas('empPayscale')->get();
         $loans = Loans::where('status', 'active')->get();
         $data = PayrollSalary::find($id);
 
