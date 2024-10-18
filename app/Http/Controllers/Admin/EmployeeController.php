@@ -137,6 +137,7 @@ class EmployeeController extends BaseController
                 'gender' => ['required'],
                 'role_id' => ['required', 'numeric'],
                 'marital_status' => ['required'],
+                'password' => ['sometimes','nullable', 'confirmed', Password::defaults()],
                 'date_of_birth' => ['required','date','before:today',
                     function ($attribute, $value, $fail) {
                         $date = new \DateTime($value);
@@ -163,6 +164,10 @@ class EmployeeController extends BaseController
         } else {
             $user = User::find($request->user_id);
             // return $user->role_id;
+            if($request->password!="")
+            {
+                $user->password = Hash::make($request->password);
+            }
             $user->roles()->detach($user->role_id);
         }
         $user->email = $request->email;
