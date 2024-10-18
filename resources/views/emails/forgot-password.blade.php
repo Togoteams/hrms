@@ -168,13 +168,7 @@
                     <tr>
                         <td style="height:10px;">&nbsp;</td>
                     </tr>
-                    <tr>
-                        <td style="text-align:center;">
-                            <p
-                                style="font-size:14px; color:rgba(69, 80, 86, 0.7411764705882353); line-height:18px; margin:0 0 0;">
-                                &copy; <strong>www.togoteams.com</strong></p>
-                        </td>
-                    </tr>
+                   
 
                     <tr>
                         <td><p style="text-align: center; font-size: 13px; color: #999;">This email template was sent to you becouse we want to make the world a better place.<br> You could change your subscription settings anytime.</p></td>
@@ -203,9 +197,9 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    {{-- <tr>
                         <td><p style="text-align: center; font-size: 13px; color: #999;"><u>Unsubscribes</u></p></td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td style="height:40px;">&nbsp;</td>
                     </tr>
