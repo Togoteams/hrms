@@ -236,7 +236,7 @@
                                                         </div>
                                                         <div class="pl-0 col-md-9">
                                                             <input id="basic_salary_for_india" placeholder="Enter "
-                                                                type="number" name="basic_salary_for_india"
+                                                                type="number" name="basic_salary_for_india"  step="0.1"
                                                                 class="form-control form-control-sm">
                                                         </div>
                                                     </div>
@@ -249,7 +249,7 @@
                                                     <label for="da"><span>DA(%)</span></label>
                                                     <small class="required-field">*</small>
                                                     <input id="da" placeholder="Enter " type="number"
-                                                        name="da" maxlength="3" minlength="1" min="1"
+                                                        name="da" maxlength="3" minlength="1" min="1" step="0.1"
                                                         max="99" pattern="[0-9]+"
                                                         class="form-control form-control-sm">
                                                 </div>
