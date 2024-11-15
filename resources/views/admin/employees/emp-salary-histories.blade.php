@@ -32,7 +32,7 @@
                                                 <button type="button" class="btn btn-white btn-sm"
                                                     title="Add Emp Salary History"
                                                     onclick="addSalaryhistory({{ !empty($employee) ? $employee->user_id : '' }})">
-                                                   Define New Salary
+                                                    Add Salary Revisions
                                                 </button>
                                             @endcan
                                             
@@ -236,7 +236,7 @@
                                                         </div>
                                                         <div class="pl-0 col-md-9">
                                                             <input id="basic_salary_for_india" placeholder="Enter "
-                                                                type="number" name="basic_salary_for_india"
+                                                                type="number" name="basic_salary_for_india"  step="0.1"
                                                                 class="form-control form-control-sm">
                                                         </div>
                                                     </div>
@@ -249,7 +249,7 @@
                                                     <label for="da"><span>DA(%)</span></label>
                                                     <small class="required-field">*</small>
                                                     <input id="da" placeholder="Enter " type="number"
-                                                        name="da" maxlength="3" minlength="1" min="1"
+                                                        name="da" maxlength="3" minlength="1" min="1" step="0.1"
                                                         max="99" pattern="[0-9]+"
                                                         class="form-control form-control-sm">
                                                 </div>
@@ -342,14 +342,14 @@
             $('#form_id').trigger("reset");
             $("#id").val("");
             $('#formModal').modal('show');
-            $("#modalTitle").html("Define New Salary");
+            $("#modalTitle").html("Add: Salary Revisions");
             $("#btnSave").html("CREATE");
             $("#user_id").val(user_id);
         }
         $(document).ready(() => {
             $(document).on("click", "#editButton", (event) => {
                 $('#form_id').trigger("reset");
-                $("#modalTitle").html("Edit: Salary History");
+                $("#modalTitle").html("Edit: Salary Revisions");
                 $("#btnSave").html("UPDATE");
 
                 let id = $(event.currentTarget).data("id");
