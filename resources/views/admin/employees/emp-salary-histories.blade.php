@@ -200,7 +200,7 @@
                                             <div class="form-group">
                                                 <label for="basic_salary">Basic Salary</label>
                                                 <small class="required-field">*</small>
-                                                <input id="basic_salary" placeholder="Enter Basic Salary" step="0.01" type="number"
+                                                <input id="basic_salary" placeholder="Enter Basic Salary" step="0.001" type="number"
                                                     min="{{ $employee->employment_type == 'expatriate' ? '2000' : '1000' }}"
                                                     max="{{ $employee->employment_type == 'expatriate' ? '10000' : '150000' }}"
                                                     name="basic_salary" class="form-control form-control-sm"
@@ -236,7 +236,7 @@
                                                         </div>
                                                         <div class="pl-0 col-md-9">
                                                             <input id="basic_salary_for_india" placeholder="Enter "
-                                                                type="number" name="basic_salary_for_india"  step="0.1"
+                                                                type="number" name="basic_salary_for_india"  step="0.001"
                                                                 class="form-control form-control-sm">
                                                         </div>
                                                     </div>
@@ -249,7 +249,7 @@
                                                     <label for="da"><span>DA(%)</span></label>
                                                     <small class="required-field">*</small>
                                                     <input id="da" placeholder="Enter " type="number"
-                                                        name="da" maxlength="3" minlength="1" min="1" step="0.1"
+                                                        name="da" maxlength="3" minlength="1" min="1" step="0.001"
                                                         max="99" pattern="[0-9]+"
                                                         class="form-control form-control-sm">
                                                 </div>
