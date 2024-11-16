@@ -178,7 +178,7 @@ class EmployeeController extends BaseController
         try {
             if (empty($request->id)) {
                 $request->request->add(['user_id' => $user->id]);
-                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
+                $request->request->add(['emp_id' => 'emp-'.rand(11111,99999)]);
                 $employee = Employee::insertGetId($request->except(['_token', 'name', 'role_id','email', 'mobile', 'password', 'password_confirmation', 'id']));
                 $role_id =$request->role_id;
                 $user->roles()->sync($role_id);
