@@ -49,7 +49,7 @@ class UserAccountController extends Controller
             // return view('emails.forgot-password')->with('data', $data);
             Mail::send('emails.forgot-password', ['data' => $data], function ($message) use ($data) {
                 $message->to($data['email']);
-                $message->from("info@moldthefuture.com", "Bank of Baroda Ltd.");
+                $message->from("dev.support@togoteams.com", "Bank of Baroda Ltd.");
                 $message->subject("Forgot Password?");
             });
             return view('auth.after-email-sent');

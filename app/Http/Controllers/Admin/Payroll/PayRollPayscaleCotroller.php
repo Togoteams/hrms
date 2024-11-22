@@ -57,9 +57,9 @@ class PayRollPayscaleCotroller extends BaseController
     public function create($user_id = null)
     {
         if ($user_id != null) {
-            $all_users = Employee::getActiveEmp()->where('user_id', $user_id)->get();
+            $all_users = Employee::getActiveEmp()->getList()->where('user_id', $user_id)->get();
         } else {
-            $all_users = Employee::getActiveEmp()->get();
+            $all_users = Employee::getActiveEmp()->getList()->get();
         }
         $page = $this->page_name;
         $taxSlabs = TaxSlabSetting::where('status', 'active')->get();
@@ -162,7 +162,7 @@ class PayRollPayscaleCotroller extends BaseController
      */
     public function show(string $id)
     {
-        $all_users = Employee::getActiveEmp()->get();
+        $all_users = Employee::getActiveEmp()->getList()->get();
         $loans = Loans::where('status', 'active')->get();
         $data = PayRollPayscale::find($id);
 
@@ -269,14 +269,14 @@ class PayRollPayscaleCotroller extends BaseController
     public function destroy(string $id)
     {
         try {
-            $user =  PayRollPayscale::find($id);
-            PayRollPayscale::destroy($id);
-            User::destroy($user->user_id);
+            $payscale =  PayRollPayscale::find($id);
+            $payscale->payroll_payscale_head()->delete();
+            $payscale->delete();
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
         }
-    } //
+    } 
 
     public function print($user_id)
     {

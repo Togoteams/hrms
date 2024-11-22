@@ -54,7 +54,7 @@ class LeaveEncashmentController extends Controller
         $leave_type = LeaveSetting::where('emp_type',0)->whereIn('slug',$leaveHideArr)->get();
         $allowedEmp = [];
 
-        $all_users = Employee::getActiveEmp()->with('leaveEncashments','user')->get();
+        $all_users = Employee::getActiveEmp()->getList()->with('leaveEncashments','user')->get();
         foreach($all_users as $key => $value)
         {
                 $employementType = $value->employment_type;

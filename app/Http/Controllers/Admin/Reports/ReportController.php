@@ -32,7 +32,7 @@ class ReportController extends Controller
     }
     public function salaryReport(Request $request)
     {
-        $employees = Employee::getList()->get();
+        $employees = Employee::getList()->getActiveEmp->get();
         $search_text = $request->search_text;
         $employee_id = $request->employee_id;
         $search_type = $request->search_type;
@@ -49,7 +49,7 @@ class ReportController extends Controller
     }
     public function employeeArrearReport(Request $request)
     {
-        $employees = Employee::getList()->get();
+        $employees = Employee::getList()->getActiveEmp()->get();
         $search_text = $request->search_text;
         $employee_id = $request->employee_id;
         $financial_year = $request->financial_year;
@@ -95,7 +95,7 @@ class ReportController extends Controller
         $to_date = $request->to_date;
         $employee_data="";
         $leaveReportArr = [];
-        $employees = Employee::getList()->get();
+        $employees = Employee::getList()->getActiveEmp()->get();
         if($employee_id && $financial_year)
         {
             $employee_data = Employee::find($employee_id);
@@ -184,7 +184,7 @@ class ReportController extends Controller
         }
         // return $empAnnualPayReport;
         $to_date = $request->to_date;
-        $employees = Employee::getList()->get();
+        $employees = Employee::getList()->getActiveEmp()->get();
         // $empSalary = PayrollSalary::where('employee_id',$employee_id)->
         return view('admin.reports.annual-pay-report',[
             'employees' => $employees,
@@ -210,7 +210,7 @@ class ReportController extends Controller
         $financial_year = $request->financial_year;
         $pay_for_month_year = $request->pay_for_month_year;
         $to_date = $request->to_date;
-        $employees = Employee::getActiveEmp()->get();
+        $employees = Employee::getActiveEmp()->getList()->get();
         $empAnnualTaxReport =[];
         if($financial_year)
         {
@@ -311,7 +311,7 @@ class ReportController extends Controller
         $financial_year = $request->financial_year;
 
         $to_date = $request->to_date;
-        $employees = Employee::getList()->get();
+        $employees = Employee::getList()->getActiveEmp()->get();
         $emp13ChequeReport =[];
         $financial_year_text ="";
         $months =[];

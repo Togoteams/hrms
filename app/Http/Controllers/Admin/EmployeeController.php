@@ -137,6 +137,7 @@ class EmployeeController extends BaseController
                 'gender' => ['required'],
                 'role_id' => ['required', 'numeric'],
                 'marital_status' => ['required'],
+                'password' => ['sometimes','nullable', 'confirmed', Password::defaults()],
                 'date_of_birth' => ['required','date','before:today',
                     function ($attribute, $value, $fail) {
                         $date = new \DateTime($value);
@@ -163,6 +164,10 @@ class EmployeeController extends BaseController
         } else {
             $user = User::find($request->user_id);
             // return $user->role_id;
+            if($request->password!="")
+            {
+                $user->password = Hash::make($request->password);
+            }
             $user->roles()->detach($user->role_id);
         }
         $user->email = $request->email;
@@ -173,7 +178,7 @@ class EmployeeController extends BaseController
         try {
             if (empty($request->id)) {
                 $request->request->add(['user_id' => $user->id]);
-                $request->request->add(['emp_id' => 'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1]);
+                $request->request->add(['emp_id' => 'emp-'.rand(11111,99999)]);
                 $employee = Employee::insertGetId($request->except(['_token', 'name', 'role_id','email', 'mobile', 'password', 'password_confirmation', 'id']));
                 $role_id =$request->role_id;
                 $user->roles()->sync($role_id);
@@ -213,15 +218,15 @@ class EmployeeController extends BaseController
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
 
         $branch = Branch::getBranch()->getFilter()->get();
-        $allowedRoles = ['managing-director'];
-        $reportingAuthority = Employee::getActiveEmp()->whereHas('user.roles',function($q)use ($allowedRoles){
+        $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
+        $reportingAuthority = Employee::getActiveEmp()->getList()->whereHas('user.roles',function($q)use ($allowedRoles){
             $q->whereIn('slug',$allowedRoles);
         })->whereNotIn('user_id',[$employee->user_id])->get();
-
-        $allowedRoles = ['managing-director','chief-manager-ho','branch-head','branch-supervisor'];
+        
         // if()
-        $reviewAuthority = Employee::getActiveEmp()->whereHas('user.roles',function($q)use ($allowedRoles){
-            $q->whereIn('slug',$allowedRoles);
+        $reviewAllowedRoles = ['managing-director'];
+        $reviewAuthority = Employee::getActiveEmp()->getList()->whereHas('user.roles',function($q)use ($reviewAllowedRoles){
+            $q->whereIn('slug',$reviewAllowedRoles);
         })->whereNotIn('user_id',[$employee->user_id])->get();
 
         return view('admin.employees.employee-details',[

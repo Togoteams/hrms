@@ -59,9 +59,9 @@ class EmployeeKraController extends BaseController
     public function create($user_id = null)
     {
         if ($user_id != null) {
-            $all_users = Employee::getActiveEmp()->where('user_id', $user_id)->get();
+            $all_users = Employee::getActiveEmp()->getList()->where('user_id', $user_id)->get();
         } else {
-            $all_users = Employee::getActiveEmp()->get();
+            $all_users = Employee::getActiveEmp()->getList()->get();
         }
         $page = $this->page_name;
         $kra_attributes = KraAttributes::where('deleted_at', null)->get();
@@ -130,7 +130,7 @@ class EmployeeKraController extends BaseController
      */
     public function show(string $id)
     {
-        $all_users = Employee::getActiveEmp()->get();
+        $all_users = Employee::getActiveEmp()->getList()->get();
         $loans = Loans::where('status', 'active')->get();
         // $data = EmployeeKra::find($id);
         $data = EmployeeKra::with(['user','employee','employee.branch','employee.designation'])->where('id', $id)->get();

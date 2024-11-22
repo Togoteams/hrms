@@ -60,10 +60,10 @@ class LeaveApplyController extends BaseController
             $leave_type = LeaveSetting::where('emp_type', 1)->whereNotIn('slug', $leaveHideArr)->get();
         }
 
-        $all_users = Employee::getActiveEmp()->get();
+        $all_users = Employee::getActiveEmp()->getList()->get();
         $allowedRoles = ['managing-director', 'chief-manager-ho', 'branch-head', 'hr_head'];
 
-        $approvalAuthority = Employee::whereHas('user.roles', function ($q) use ($allowedRoles) {
+        $approvalAuthority = Employee::getActiveEmp()->whereHas('user.roles', function ($q) use ($allowedRoles) {
             $q->whereIn('slug', $allowedRoles);
         })->whereNotIn('user_id', [auth()->user()->id])->get();
         // return $approvalAuthority;
@@ -521,7 +521,7 @@ class LeaveApplyController extends BaseController
                 ->make(true);
         }
         $leave_type = LeaveSetting::get();
-        $all_users = Employee::getActiveEmp()->get();
+        $all_users = Employee::getActiveEmp()->getList()->get();
         return view('admin.leave_apply.leave_balance_history', ['page' => 'Balance Reports', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
 
@@ -551,7 +551,7 @@ class LeaveApplyController extends BaseController
                 ->make(true);
         }
         $leave_type = LeaveSetting::get();
-        $all_users = Employee::getActiveEmp()->get();
+        $all_users = Employee::getActiveEmp()->getList()->get();
         return view('admin.leave_apply.leave_request_history', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
 
@@ -580,7 +580,7 @@ class LeaveApplyController extends BaseController
                 ->make(true);
         }
         $leave_type = LeaveSetting::get();
-        $all_users = Employee::getActiveEmp()->get();
+        $all_users = Employee::getActiveEmp()->getList()->get();
         return view('admin.leave_apply.leave_request_rejected', ['page' => 'Request History', 'leave_type' => $leave_type, 'all_user' => $all_users]);
     }
     public function reverseLeaveWithoutPay(Request $request)

@@ -68,7 +68,7 @@ class PayrollIboTaxController extends Controller
             }
         }
         $pageName = "Calculate IBO Tax";
-        $users = Employee::where('employment_type','expatriate')->getActiveEmp()->get();
+        $users = Employee::where('employment_type','expatriate')->getList()->getActiveEmp()->get();
         return view('admin.payroll.ibo-tax.create',['page' => $pageName, 'all_users' => $users]);
     }
 

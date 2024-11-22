@@ -209,7 +209,6 @@
                                                 </select>
                                             </div>
 
-                                            @if (!isHideCheck($employee))
                                                 <div class="pt-3 col-3 fw-semibold">
                                                     <label for="password">Password<small
                                                             class="required-field">*</small></label>
@@ -229,7 +228,6 @@
                                                         name="password_confirmation"
                                                         class="form-control form-control-sm ">
                                                 </div>
-                                            @endif
                                             <div class="pt-5 text-center">
                                                 <button type="submit" class="btn btn-white btn-sm">SUBMIT</button>
                                             </div>

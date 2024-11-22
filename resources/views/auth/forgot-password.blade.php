@@ -40,8 +40,8 @@
 
     </div>
     <div class="col-4"></div>
-    <p class="text-center">
-        &copy; <strong>www.togoteams.com</strong></p>
+    {{-- <p class="text-center">
+        &copy; <strong>www.togoteams.com</strong></p> --}}
 
     <p style="text-align: center; font-size: 13px; color: #999;">This email template was sent to
         you becouse we want to make the world a better place.<br> You could change your

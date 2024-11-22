@@ -22,7 +22,7 @@
     <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/salary-history*') ? 'active-class' : '' }}"
         type="button" onclick="window.location.href='{{ route('admin.employee.salary-history.list', $empId) }}';"
         {{ empty($empId) ? 'disabled' : '' }}>
-        Salary Revisions
+        Salary History
     </button>
     @endcanany
     @canany(['list-employee-loan', 'add-employee-loan', 'edit-employee-loan','delete-employee-loan'])
