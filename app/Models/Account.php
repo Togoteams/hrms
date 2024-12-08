@@ -18,6 +18,7 @@ class Account extends Model
     protected $fillable = [
         'account_number',
         'name',
+        'branch_id',
         'slug',
         'account_type',
         'is_credit',
@@ -25,14 +26,16 @@ class Account extends Model
         'description',
         'status'
     ];
+
     /**
      * The accessors to append to the model's array form.
      *
      * @var array
      */
     protected $appends = [
-        'type_label', // role -> name
+        'type_label','branch_name' // role -> name
     ];
+   
 
     // public function getStatusAttribute($showStatus)
     // {
@@ -45,6 +48,15 @@ class Account extends Model
     public function getTypeLabelAttribute()
     {
         return ($this->is_credit == 1) ? self::TYPE_ARR[self::CREDIT] : self::TYPE_ARR[self::DEBIT];
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class,'branch_id');
+    }
+    public function getBranchNameAttribute()
+    {
+        return $this->branch?->name;
     }
     
 }

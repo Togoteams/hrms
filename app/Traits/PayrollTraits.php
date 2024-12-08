@@ -18,10 +18,10 @@ trait PayrollTraits
     public function saveTtumData($data = [])
     {
         $ttumMonth = $data['ttum_month'];
+        $branchId = $data['branch_id'];
         $accountId = $data['account_id'];
         $data['transaction_amount'] = $data['transaction_amount'] ?? 0;
-        Log::info("account_id-" . $accountId);
-        $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->first();
+        $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->where('branch_id',$branchId)->first();
 
         if (!empty($ttumExist)) {
             $data['transaction_amount'] = $data['transaction_amount'] + $ttumExist->transaction_amount;
@@ -38,7 +38,7 @@ trait PayrollTraits
     public function createTTum($salaryId)
     {
         $salary = PayrollSalary::find($salaryId);
-        $accounts = Account::getList()->get();
+        $accounts = Account::where('branch_id',$salary->branch_id)->getList()->get();
         $emp = Employee::where('user_id', $salary->user_id)->first();
         $currencyValue = 1;
         if ($emp->employment_type == "expatriate") {
@@ -226,7 +226,7 @@ trait PayrollTraits
                     }
                     break;
             }
-            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id];
             $saveOfficeTTUM  = $this->saveTtumData($data);
             Log::info("Personal_account_id" . json_encode($saveOfficeTTUM));
         }
@@ -237,7 +237,7 @@ trait PayrollTraits
         $empName = $emp->user->name;
         $empAccount = $this->getEmpAccount($empName, $emp->bank_account_number);
         $netTakeAmountInPula = $salary->net_take_home_in_pula;
-        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula, 2, ".", ""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP'];
+        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula, 2, ".", ""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id];
         $saveEmpTTUM  =  $this->saveTtumData($data);
     }
     public function getEmpAccount($accountName, $accountNumber)

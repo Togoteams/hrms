@@ -54,6 +54,7 @@
                     <thead>
                             <tr>
                                 <th>SI.</th>
+                                <th>Branch Name</th>
                                 <th>Account Number</th>
                                 <th>Account Name</th>
                                 <th>Account Type</th>
@@ -83,7 +84,10 @@
                                     orderable: false,
                                     searchable: false
                                 },
-
+                                {
+                                    data: 'branch_name',
+                                    name: 'branch_name'
+                                },
                                 {
                                     data: 'account_number',
                                     name: 'account_number'

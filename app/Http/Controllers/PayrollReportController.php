@@ -8,6 +8,7 @@ use App\Models\PayrollTtumSalaryReport;
 use Carbon\Carbon;
 use Excel;
 use App\Exports\PayrollTtumSalaryReportExport;
+use App\Models\Branch;
 use Illuminate\Support\Facades\Validator;
 
 class PayrollReportController extends Controller
@@ -29,16 +30,18 @@ class PayrollReportController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-        return view('admin.payroll.report.ttum',['page' => $this->page_name]);
+        $branches= Branch::get();
+        return view('admin.payroll.report.ttum',['page' => $this->page_name,'branches'=>$branches]);
     }
     
     public function ttumReportExport(Request $request)
     {
         $ttumMonth = $request->transaction_at;
+        $branchId = $request->branch_id;
        
         $request->validate([
             'transaction_at' => 'required|date_format:Y-m',
         ]);
-        return Excel::download(new PayrollTtumSalaryReportExport($ttumMonth), 'ttumReport'.$ttumMonth.'.xlsx');
+        return Excel::download(new PayrollTtumSalaryReportExport($ttumMonth,$branchId), 'ttumReport'.$ttumMonth.'.xlsx');
     }
 }

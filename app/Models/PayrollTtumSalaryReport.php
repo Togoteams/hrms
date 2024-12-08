@@ -10,6 +10,16 @@ class PayrollTtumSalaryReport extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'branch_name' // role -> name
+    ];
+   
     public function account()
     {
         return $this->belongsTo(Account::class,'account_id');
@@ -17,5 +27,16 @@ class PayrollTtumSalaryReport extends Model
     public function emp()
     {
         return $this->belongsTo(Account::class,'account_id');
+    }
+
+
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class,'branch_id');
+    }
+    public function getBranchNameAttribute()
+    {
+        return $this->branch?->name;
     }
 }

@@ -47,6 +47,7 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
+                                <th>Branch</th>
                                 <th>TTUM Month</th>
                                 <th>Account Name</th>
                                 <th>Account Number No.</th>
@@ -75,6 +76,10 @@
                                     name: 'DT_RowIndex',
                                     orderable: false,
                                     searchable: false
+                                },
+                                {
+                                    data: 'branch_name',
+                                    name: 'branch_name'
                                 },
                                 {
                                     data: 'ttum_month',
@@ -171,6 +176,18 @@
                                         <div class="form-group">
                                             <label for="gender">Report Date </label>
                                             <input type="month" class="form-control" name="transaction_at" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="branch_id">Branch <sup class="text-danger">*</sup></label>
+                                            <select name="branch_id" class="form-control" id="branch_id" required>
+                                                <option value="">--select--</option>
+                                                @foreach ($branches as $branch )
+                                                    <option value="{{$branch->id}}">{{$branch->name}}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

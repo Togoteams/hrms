@@ -24,14 +24,16 @@ class PayrollTtumSalaryReportExport implements FromView
     //     ];
     // } 
     public $ttumMonth;
+    public $branchId;
 
-    public function __construct($ttumMonth)
+    public function __construct($ttumMonth,$branchId)
     {
         $this->ttumMonth = $ttumMonth;
+        $this->branchId = $branchId;
     }
     public function view():view
     {
-        $reports = PayrollTtumSalaryReport::where('ttum_month', $this->ttumMonth)->get();
+        $reports = PayrollTtumSalaryReport::where('ttum_month', $this->ttumMonth)->where('branch_id',$this->branchId)->get();
         return view('admin.payroll.report.export.ttum-export',['reports'=>$reports]);
     }
 
