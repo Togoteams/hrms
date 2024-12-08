@@ -20,16 +20,16 @@ aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 </div>
                             </div>
                            
-                            {{-- <div class="mb-2 col-sm-3">
+                            <div class="mb-2 col-sm-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
-                                    <select name="status" class="form-control" id="exampleInputName">
+                                    <label for="is_tax_exempt">Is Tax Exempt<sup class="text-danger">*</sup></label>
+                                    <select name="status" class="form-control" id="is_tax_exempt">
                                         <option value="">Selected Option</option>
-                                        <option value="0">Active</option>
-                                        <option value="1">Inactive</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
                                     </select>
                                 </div>
-                            </div> --}}
+                            </div>
                             <hr>
                             <div class="text-center ">
                                 <button onclick="ajaxCall('form_data')" type="button" class="btn btn-white">Add

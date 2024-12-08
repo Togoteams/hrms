@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payroll_ttum_salary_reports', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('account_id');
+            $table->bigInteger('branch_id');
             $table->string('transaction_type')->comment('credit,debit');
             $table->decimal('transaction_amount',10,2);
             $table->string('transaction_currency');

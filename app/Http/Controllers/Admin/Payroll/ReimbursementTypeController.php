@@ -31,6 +31,9 @@ class ReimbursementTypeController extends Controller
                     $actionBtn = view('admin.payroll.reimbursement_type.buttons', ['item' => $row, "route" => 'payroll.reimbursement_type']);
                     return $actionBtn;
                 })
+                ->editColumn('is_tax_exempt_text', function ($data) {
+                    return $data->is_tax_exempt ? "Yes":"No";
+                })
                 ->rawColumns(['action'])
                 ->make(true);
             }
@@ -97,7 +100,6 @@ class ReimbursementTypeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'type' => 'required|string|unique:reimbursement_types,type,'.$id,
-           
         ]);
         if ($validator->fails()) {
             return $validator->errors();

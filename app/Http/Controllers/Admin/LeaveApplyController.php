@@ -374,13 +374,20 @@ class LeaveApplyController extends BaseController
                 $appliedLeaveCount = $leave_apply->leaveDate()->count();
                 if (!empty($currentLeave)) {
                     if ($currentLeaveCount >= $appliedLeaveCount) {
+                        if($leave_apply->pay_type="full_pay")
+                        {
+                            $leaveCount = count($leave_apply->leaveDate) * 2;
+                            $appliedLeaveCount = $appliedLeaveCount*2;
+                        }
                         $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
                         $currentLeave->update(['leave_count' => $remaining_leave]);
+                        $leaveCount = count($leave_apply->leaveDate);
+                        
                         $this->leaveActivityLog([
                             'user_id' => $leave_apply->user_id,
                             'leave_type_id' => $leave_apply->leave_type_id,
                             'is_credit' => 0,
-                            'leave_count' => count($leave_apply->leaveDate),
+                            'leave_count' => $leaveCount
                         ]);
                     } else {
                         return response()->json([
@@ -481,7 +488,7 @@ class LeaveApplyController extends BaseController
 
         // return $leave_type_slug; 
         if ($request->pay_type == "full_pay") {
-            $remaining_leave = ceil($remaining_leave / 2);
+            $remaining_leave = floor($remaining_leave / 2);
         }
 
         if (in_array($leave_type_slug, $balanceLeaveHideArr)) {

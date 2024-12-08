@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type',75)->nullable();
             $table->text('slug',)->nullable();
+            $table->tinyInteger('is_tax_exempt')->nullable();
             $table->enum('status',["active","inactive"])->default('active');            
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();

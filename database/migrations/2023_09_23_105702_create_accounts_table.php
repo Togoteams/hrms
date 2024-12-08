@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('account_number')->nullable();
+            $table->bigInteger('branch_id')->nullable();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->string('account_type')->nullable();

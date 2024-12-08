@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             LeaveSettingSeeder::class,
             CountrySeeder::class,
+            ReimbursementTypeSeeder::class,
             AccountTableSeeder::class,
             SalarySettingSeeder::class,
         ]);

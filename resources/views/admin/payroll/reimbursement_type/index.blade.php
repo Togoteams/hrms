@@ -55,6 +55,7 @@
                             <tr>
                                 <th>SI.</th>
                                 <th>Type Name</th>
+                                <th>Is Tax Exempt</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -105,13 +106,14 @@
                                     orderable: false,
                                     searchable: false
                                 },
-
-
                                 {
                                     data: 'type',
                                     name: 'type'
                                 },
-
+                                {
+                                    data: 'is_tax_exempt_text',
+                                    name: 'is_tax_exempt_text'
+                                },
                                 {
                                     data: 'action',
                                     name: 'action',

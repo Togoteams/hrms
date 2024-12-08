@@ -12,21 +12,16 @@
                                 </div>
                             </div>
                     
-                            {{-- <div class="mb-2 col-sm-4">
+                            <div class="mb-2 col-sm-3">
                                 <div class="form-group">
-                                    <label for="exampleInputName">Status<sup class="text-danger">*</sup></label>
-                                    <select name="status" class="form-control" id="exampleInputName">
+                                    <label for="is_tax_exempt">Is Tax Exempt<sup class="text-danger">*</sup></label>
+                                    <select name="is_tax_exempt" class="form-control" id="is_tax_exempt">
                                         <option value="">Selected Option</option>
-                                        <option @if ($reimbursement->status == '0') selected  @endif value="0">Active</option>
-                                        <option @if ($reimbursement->status == '1') selected  @endif value="1">Inactive</option>
+                                        <option @if ($reimbursement->is_tax_exempt == '1') selected  @endif value="1">Yes</option>
+                                        <option @if ($reimbursement->is_tax_exempt == '0') selected  @endif value="0">No</option>
                                     </select>
-                                    <span class="text-danger">
-                                        @error('status')
-                                        {{$message}}
-                                        @enderror
-                                    </span>
                                 </div>
-                            </div> --}}
+                            </div>
                            
 
                         </div>

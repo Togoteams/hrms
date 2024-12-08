@@ -663,7 +663,7 @@ if (!function_exists('getHeadValue')) {
                 $inrBasicAmount = $inrBasicAmount +  ((($inrBasicAmount / 100)) * $emp->da);
             }
             $usdToInr = getCurrencyValue("usd", "inr");
-            $providentFound = ((($inrBasicAmount / 100)) * 10);
+            $providentFound = ((($inrBasicAmount / 100)) * 14);
             $providentFound = $providentFound / number_format($usdToInr, 3, '.', "");
             return number_format($providentFound, 2, '.', "");
         } elseif ($headSlug == "house_up_keep_allow") {

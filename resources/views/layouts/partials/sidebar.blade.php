@@ -458,7 +458,7 @@
                                  </div>
                              </div>
                          @endcanany
-                         {{-- @canany(['report-tax-for-ibo', 'calcualte-tax-for-ibo'])
+                         {{-- @canany(['report-tax-for-ibo', 'calcualte-tax-for-ibo']) --}}
                              <div class="nav-item">
                                  <a class="nav-link dropdown-toggle " href="#ibotax" role="button"
                                      data-bs-toggle="collapse" data-bs-target="#ibotax" aria-expanded="false"
@@ -469,21 +469,21 @@
                                  <div id="ibotax" class="nav-collapse collapse {{ show(['tax-for-ibo.report']) }} "
                                      data-bs-parent="#navbarVerticalMenuPagesMenu">
 
-                                     @canany(['report-tax-for-ibo'])
+                                     {{-- @canany(['report-tax-for-ibo']) --}}
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-for-ibo.report' ? 'active' : '' }}  "
                                              href="{{ route('admin.payroll.tax-for-ibo.report') }}">Reports</a>
-                                     @endcanany
+                                     {{-- @endcanany --}}
 
-                                     @canany(['calcualte-tax-for-ibo'])
+                                     {{-- @canany(['calcualte-tax-for-ibo']) --}}
                                          <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-for-ibo.calculate' ? 'active' : '' }}"
                                              href="{{ route('admin.payroll.tax-for-ibo.calculate') }}" data-placement="left">
                                              <span class="nav-link-title">Calculate</span>
                                          </a>
-                                     @endcanany
+                                     {{-- @endcanany --}}
 
                                  </div>
                              </div>
-                         @endcanany --}}
+                         {{-- @endcanany --}}
 
 
 
