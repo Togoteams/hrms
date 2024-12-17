@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label for="working_hours" class="required">Working Hours</label>
                                 <input type="number" name="working_hours"  id="working_hours"
-                                    class="form-control" placeholder="Enter working hours" min="0">
+                                    class="form-control" placeholder="Enter working hours" min="0" step="0.001">
                             </div>
                         </div>
                         {{-- <div class="mb-2 col-sm-6">

@@ -27,7 +27,7 @@
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
                     <label for="working_hours" class="required">Working Hours</label>
-                    <input type="number" name="working_hours" required id="edit_working_hours" class="form-control" placeholder="Enter working hours of overtime" min="0" value="{{$item->working_hours}}">
+                    <input type="number" name="working_hours" required id="edit_working_hours" step="0.001" class="form-control" placeholder="Enter working hours of overtime" min="0" value="{{$item->working_hours}}">
                 </div>
             </div>
             {{-- <div class="mb-2 col-sm-6">
