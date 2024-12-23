@@ -725,6 +725,22 @@ if (!function_exists('getHeadValue')) {
                 }
             }
             return $reimbursementAmount;
+        } elseif ($headSlug == "reimbursement_tax") {
+            $reimbursementAmount = 0;
+            $reimbursements = Reimbursement::whereHas('reimbursementype',function ($q) {
+                $q->where('is_tax_exempt',0);
+            })->whereBetween('claim_date', array($startDate, $endDate))
+                ->where('user_id', $emp->user_id)
+                ->where('status', 'approved')
+                ->get();
+            foreach ($reimbursements as $reimbursement) {
+                if ($reimbursement->reimbursement_currency == "usd") {
+                    $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount * $multipleValue;
+                } else {
+                    $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
+                }
+            }
+            return $reimbursementAmount;
         }
         elseif($headSlug == "personal_loan") {
             $loanAmount = 0;

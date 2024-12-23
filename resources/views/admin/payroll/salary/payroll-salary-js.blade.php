@@ -33,7 +33,7 @@
                 'entertainment_expenses':getValue('entertainment_expenses'),
                 'education_allowance':getValue('education_allowance'),
                 'others_arrears':getValue('others_arrears'),
-                'reimbursement':getValue('reimbursement')
+                'reimbursement':getValue('reimbursement_for_tax')
             };
             montlyIncome = (basicAmount + getValue('house_up_keep_allow')) *12;
             taxAbleAmount = (montlyIncome + getValue('entertainment_expenses')+

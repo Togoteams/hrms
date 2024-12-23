@@ -136,6 +136,12 @@
                             id="education_allowance_for_ind_in_pula"
                             class="form-control form-control-sm education_allowance_for_ind_in_pula">
                     @endif
+                    @if (strtolower($head->slug) == 'reimbursement')
+                    <input hidden required name="reimbursement_for_tax" type="number"
+                        value="{{ getHeadValue($emp, 'reimbursement_tax', 'salary', $basic, $value, $salary_month) }}"
+                        id="reimbursement_for_tax"
+                        class="form-control form-control-sm reimbursement_for_tax">
+                   @endif
                     <input @if (in_array($head->slug, $readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required
                         id="{{ $head->slug }}"
                         placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}"
@@ -197,6 +203,7 @@
                             $value = round(($head_data?->value / $totalMonthDays) * $noOfPayableDays);
                         }
                     @endphp
+                    
                     <input @if (in_array($head->slug, $readonlyArr)) readonly @endif onkeyup="amount_cal(this)" required
                         id="{{ $head->slug }}"
                         placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}"

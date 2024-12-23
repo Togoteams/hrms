@@ -146,6 +146,10 @@ class PayrollSalaryController extends Controller
              * This Creating TTUM Report of Each Account
              */
              $this->createTTum($payroll->id);
+            /**
+             * This Creating Tax Report of Each Salary
+             */
+            //  $this->saveTaxLog($payroll->id);
 
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
             // } catch (Exception $e) {

@@ -10,6 +10,7 @@ use App\Models\PayrollHead;
 use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalary;
 use App\Models\Employee;
+use App\Models\PayrollTaxLog;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -33,6 +34,26 @@ trait PayrollTraits
         $data['transaction_details'] = $account->name . " for " . date('M-Y', strtotime($ttumMonth . '-20'));
 
         return PayrollTtumSalaryReport::updateOrCreate(['id' => $ttumExist?->id ?? NULL], $data);
+    }
+    public function saveTaxLog($payrollId)
+    {
+        
+        $payrollSalary =PayrollSalary::find($payrollId);
+        $userId = $data['user_id'];
+        $employeeType = $data['employee_type'];
+        $branchId = $data['branch_id'];
+        $payrollId = $data['payroll_id'];
+        $month = $data['month'];
+        $year = $data['year'];
+        $salary_amount = $data['salary_amount'];
+        $taxable_amount = $data['taxable_amount'];
+        $tax_amount = $data['tax_amount'];
+        $head_name = $data['head_name'];
+        $head_value = $data['head_value'];
+
+        //    return  $account->name;
+
+        return PayrollTtumSalaryReport::updateOrCreate($data);
     }
 
     public function createTTum($salaryId)
@@ -199,7 +220,6 @@ trait PayrollTraits
                         })->value('value');
                         $amount = ($amount);
                     }
-                    Log::info("Personal_account_id" . $account->id);
                     break;
                 case "car_loan":
                     if ($emp->user_id == $account->user_id) {
