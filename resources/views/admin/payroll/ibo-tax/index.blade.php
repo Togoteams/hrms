@@ -49,7 +49,7 @@
                                 <th>Employee Code</th>
                                 <th>Employee Name</th>
                                 <th>Gross Pay</th>
-                                <th>Reimbursement Amount</th>
+                                {{-- <th>Reimbursement Amount</th> --}}
                                 <th>Taxable Amount</th>
                                 <th>Tax Amount</th>
                                 {{-- <th class="text-right">Action</th> --}}
@@ -76,8 +76,8 @@
                                     searchable: false
                                 },
                                 {
-                                    data: 'financial_year',
-                                    name: 'financial_year'
+                                    data: 'pay_for_month_year',
+                                    name: 'pay_for_month_year'
                                 },
                                 {
                                     data: 'user.employee.ec_number',
@@ -88,20 +88,17 @@
                                     name: 'user.name'
                                 },
                                 {
-                                    data: 'gross_salary',
-                                    name: 'gross_salary'
+                                    data: 'gross_earning',
+                                    name: 'gross_earning'
+                                },
+                               
+                                {
+                                    data: 'taxable_amount_in_pula',
+                                    name: 'taxable_amount_in_pula'
                                 },
                                 {
-                                    data: 'reimbursement_amount',
-                                    name: 'reimbursement_amount'
-                                },
-                                {
-                                    data: 'taxable_amount',
-                                    name: 'taxable_amount'
-                                },
-                                {
-                                    data: 'tax_amount',
-                                    name: 'tax_amount'
+                                    data: 'tax_amount_in_pula',
+                                    name: 'tax_amount_in_pula'
                                 },
                                 // {
                                 //     data: 'action',
