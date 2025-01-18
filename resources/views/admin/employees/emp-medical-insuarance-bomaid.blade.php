@@ -41,7 +41,7 @@
                                                                     <div class="col-3">
                                                                         {{ date("d-m-Y",strtotime($medicalInsuarance->medical_insurances_date)) }}
                                                                     </div>
-                                                                    <div class="col-3 fw-semibold">Card Amount
+                                                                    <div class="col-3 fw-semibold">Insurance Montly Charge
                                                                     </div>
                                                                     <div class="col-3">
                                                                         {{ $medicalInsuarance->amount }}
@@ -148,7 +148,7 @@
                                     placeholder="Enter" class="form-control form-control-sm">
                             </div>
                             <div class="pt-3 col-3 fw-semibold">
-                                <label for="amount">Insurance card Amount<small class="required-field">*</small></label>
+                                <label for="amount">Insurance Monthly Charge <small class="required-field">*</small></label>
                             </div>
                             <div class="pt-2 col-3">
                                 <input type="number" id="amount" name="amount"
