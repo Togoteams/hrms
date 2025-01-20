@@ -287,7 +287,7 @@ trait PayrollTraits
         // echo $taxSlab;
         if ($empType == "expatriate") {
             $monthly_salary = $taxableAmount; // Taxable monthly salary in Pula
-            if($noOfJoiningDays>=180)
+            if($noOfJoiningDays<=180)
             {
                 $annual_salary = $monthly_salary * 12; // Calculate annual taxable salary
                 $tax_threshold = 129150; // Threshold for tax calculation
