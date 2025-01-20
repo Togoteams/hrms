@@ -282,13 +282,64 @@ trait PayrollTraits
     {
         $taxableAmount = $data['taxable_amount'];
         $empType = $data['employment_type'];
+        $noOfJoiningDays = $data['no_of_joining_days'] ?? 180;
         // echo $taxSlab;
         if ($empType == "expatriate") {
-           
-            $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
-            $extraAmount = ($taxableAmount - $taxSlab->from);
-            $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + (($extraAmount * $taxSlab->ibo_tax_per) / 100));
-            $taxAmount = ($yearlyTaxAmount) / 12;
+            $monthly_salary = $taxableAmount; // Taxable monthly salary in Pula
+            if($noOfJoiningDays>=180)
+            {
+                $annual_salary = $monthly_salary * 12; // Calculate annual taxable salary
+                $tax_threshold = 129150; // Threshold for tax calculation
+                $base_tax = 15450; // Fixed tax on the threshold
+                $tax_rate = 25 / 75; // Tax rate on the balance salary
+    
+                // Calculate excess over the tax threshold
+                $balanceSalary = $annual_salary - $tax_threshold;
+    
+                // If annual salary is less than the threshold, no excess or balance salary
+                if ($balanceSalary < 0) {
+                    $balanceSalary = 0;
+                    $tax_on_balance_salary = 0;
+                } else {
+                    // Calculate tax on balance salary
+                    $tax_on_balance_salary = $balanceSalary * $tax_rate;
+                }
+                // Calculate total annual tax
+                $yearlyTaxAmount = $base_tax + $tax_on_balance_salary;
+    
+                // Calculate monthly tax payable
+                $taxAmount = $yearlyTaxAmount / 12;
+            }else
+            {
+                // Define the variables
+                $annual_salary = $monthly_salary * 12; // Calculate annual taxable salary
+                $tax_threshold = 142950; // Threshold for tax calculation
+                $base_tax = 13050; // Fixed tax on the threshold
+                $tax_rate = 25 / 75; // Tax rate on the balance salary
+
+                // Calculate excess over the tax threshold
+                $excess_over_threshold = $annual_salary - $tax_threshold;
+
+                // If annual salary is less than the threshold, no excess or balance salary
+                if ($excess_over_threshold < 0) {
+                    $excess_over_threshold = 0;
+                    $tax_on_balance_salary = 0;
+                } else {
+                    // Calculate tax on balance salary
+                    $tax_on_balance_salary = $excess_over_threshold * $tax_rate;
+                }
+
+                // Calculate total annual tax
+                $yearlyTaxAmount = $base_tax + $tax_on_balance_salary;
+
+                // Calculate monthly tax payable
+                $taxAmount = $yearlyTaxAmount / 12;
+            }
+
+            // $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
+            // $extraAmount = ($taxableAmount - $taxSlab->from);
+            // $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + (($extraAmount * $taxSlab->ibo_tax_per) / 100));
+            // $taxAmount = ($yearlyTaxAmount) / 12;
         } else {
             $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
             $extraAmount = (($taxableAmount - $taxSlab->from));

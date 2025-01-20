@@ -19,6 +19,7 @@
             salaryHead ={
                 'basicAmount':basicAmount,
                 'allowance': getValue('allowance'),
+                'employee_id': getValue('select_employee'),
                 'pension_own':getValue('pension_own'),
                 'pension_bank':getValue('pension_bank'),
                 'others_arrears':getValue('others_arrears'),
@@ -30,6 +31,7 @@
              salaryHead ={
                 'basicAmount':basicAmount,
                 'house_up_keep_allow': getValue('house_up_keep_allow'),
+                'employee_id': getValue('select_employee'),
                 'entertainment_expenses':getValue('entertainment_expenses'),
                 'education_allowance':getValue('education_allowance'),
                 'others_arrears':getValue('others_arrears'),

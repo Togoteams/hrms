@@ -18,6 +18,7 @@ use App\Models\User;
 use App\Traits\PayrollTraits;
 use App\Models\CurrencySetting;
 use App\Models\SalaryHistory;
+use Carbon\Carbon;
 
 class PayRollPayscaleCotroller extends BaseController
 {
@@ -72,6 +73,16 @@ class PayRollPayscaleCotroller extends BaseController
         $salary_head = $request->salary_head;
         // return $salary_head['basicAmount'];
         $employment_type = $request->employment_type;
+        $user_id = $request->employee_id;
+        $emp = Employee::where('user_id', $user_id)->first();
+        $totalDays =0;
+        if ($emp && $emp->start_date) {
+            $startDate = Carbon::parse($emp->start_date);
+            $today = Carbon::today();
+            $totalDays = $startDate->diffInDays($today);
+        } else {
+            $totalDays =0;
+        }
         if($employment_type!="expatriate")
         {
             $monthlyAmount = ($salary_head['basicAmount'] +$salary_head['allowance'] - ($salary_head['pension_own']-$salary_head['pension_bank'])) * 12;
@@ -85,7 +96,7 @@ class PayRollPayscaleCotroller extends BaseController
             $education_allowance =  (($salary_head['education_allowance'])/$usdToInrAmount) * $usdToPulaAmount;
             $taxableAmount = $monthlyAmountInPula + $extraAmount + $education_allowance;
         }
-        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$employment_type]);
+        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$employment_type,'no_of_joining_days'=>$totalDays]);
 
         return $this->responseJson(true,200,"",$taxData);
     }

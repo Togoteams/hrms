@@ -458,7 +458,7 @@
                                  </div>
                              </div>
                          @endcanany
-                         @if(auth()->user()->role_slug=="managing-director" || auth()->user()->role_slug=='branch-head')
+                         @if(auth()->user()->id==1 || auth()->user()->role_slug=='branch-head')
                          <div class="nav-item">
                             <a class="nav-link dropdown-toggle " href="#ibotax" role="button"
                                 data-bs-toggle="collapse" data-bs-target="#ibotax" aria-expanded="false"
@@ -519,7 +519,7 @@
                              </div>
                          </div>
                      </div> --}}
-                     @if(auth()->user()->role_slug=="managing-director" || auth()->user()->role_slug=='branch-head')
+                     @if(auth()->user()->id==1 || auth()->user()->role_slug=='branch-head')
                      <div id="navbarReportMenu">
                         <div class="nav-item">
                             <a class="nav-link dropdown-toggle " href="#report" role="button"
@@ -590,7 +590,7 @@
                              </a>
                          </div>
                      @endcanany
-
+                     @if(auth()->user()->id==1 || auth()->user()->role_slug=='branch-head')
                      @canany(['add-ttum-report', 'edit-ttum-report', 'view-ttum-report', 'delete-ttum-report',
                          'export-report-ttum-report'])
                          <div class="nav-item">
@@ -601,6 +601,7 @@
                              </a>
                          </div>
                      @endcanany
+                     @endif
 
                      @canany(['add-country', 'edit-country', 'view-country', 'delete-country', 'change-status-country'])
                          <div class="nav-item">
