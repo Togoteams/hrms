@@ -282,6 +282,7 @@ trait PayrollTraits
     {
         $taxableAmount = $data['taxable_amount'];
         $empType = $data['employment_type'];
+        $extraAmount =0;
         $noOfJoiningDays = $data['no_of_joining_days'] ?? 180;
         // echo $taxSlab;
         if ($empType == "expatriate") {

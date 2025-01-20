@@ -20,6 +20,7 @@
                 'allowance': getValue('allowance'),
                 'pension_own':getValue('pension_own'),
                 'pension_bank':getValue('pension_bank'),
+                'employee_id': getValue('select_employee'),
                 'others_arrears':getValue('others_arrears'),
                 'over_time':getValue('over_time')
             };
@@ -30,6 +31,7 @@
                 'basicAmount':basicAmount,
                 'house_up_keep_allow': getValue('house_up_keep_allow'),
                 'entertainment_expenses':getValue('entertainment_expenses'),
+                'employee_id': getValue('select_employee'),
                 'education_allowance':getValue('education_allowance'),
                 'others_arrears':getValue('others_arrears')
             };
