@@ -284,19 +284,22 @@ trait PayrollTraits
         $empType = $data['employment_type'];
         $extraAmount =0;
         $noOfJoiningDays = $data['no_of_joining_days'] ?? 180;
+        $totalMonthlySalary = $data['total_monthly_salary'] ?? 0;
         // echo $taxSlab;
         if ($empType == "expatriate") {
-            $monthly_salary = $taxableAmount; // Taxable monthly salary in Pula
+            $monthly_salary = $totalMonthlySalary; // Taxable monthly salary in Pula
             if($noOfJoiningDays<=180)
             {
-                $annual_salary = $monthly_salary * 12; // Calculate annual taxable salary
+                $annual_salary = $monthly_salary *12; // Calculate annual taxable salary
                 $tax_threshold = 129150; // Threshold for tax calculation
                 $base_tax = 15450; // Fixed tax on the threshold
                 // $tax_rate = 25 / 75; // Tax rate on the balance salary
                 
                 // Calculate excess over the tax threshold
                 $balanceSalary = $annual_salary - $tax_threshold;
-    
+                echo $balanceSalary."balance salary";
+                echo $annual_salary."balance salary";
+                echo $tax_threshold."tax threshold";
                 // If annual salary is less than the threshold, no excess or balance salary
                 if ($balanceSalary < 0) {
                     $balanceSalary = 0;
@@ -309,25 +312,27 @@ trait PayrollTraits
                 $yearlyTaxAmount = $base_tax + $tax_on_balance_salary;
     
                 // Calculate monthly tax payable
-                $taxAmount = $yearlyTaxAmount / 12;
+                $taxAmount = 44;
             }else
             {
                 // Define the variables
-                $annual_salary = $monthly_salary * 12; // Calculate annual taxable salary
+                $annual_salary = $monthly_salary *12; // Calculate annual taxable salary
                 $tax_threshold = 142950; // Threshold for tax calculation
                 $base_tax = 13050; // Fixed tax on the threshold
                 $tax_rate = 25 / 75; // Tax rate on the balance salary
 
                 // Calculate excess over the tax threshold
-                $excess_over_threshold = $annual_salary - $tax_threshold;
-
+                $balanceSalary = $annual_salary - $tax_threshold;
+                // echo $balanceSalary."balance salary";
+                // echo $annual_salary."annual salary";
+                // echo $tax_threshold."tax threshold";
                 // If annual salary is less than the threshold, no excess or balance salary
-                if ($excess_over_threshold < 0) {
-                    $excess_over_threshold = 0;
+                if ($balanceSalary < 0) {
+                    $balanceSalary = 0;
                     $tax_on_balance_salary = 0;
                 } else {
                     // Calculate tax on balance salary
-                    $tax_on_balance_salary = ($excess_over_threshold * 25)/75;
+                    $tax_on_balance_salary = ($balanceSalary * 25)/75;
                 }
 
                 // Calculate total annual tax
@@ -347,7 +352,7 @@ trait PayrollTraits
             $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;
         }
-        return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $yearlyTaxAmount,'monthly_taxable_amount'=>$taxableAmount/12, 'taxable_amount' => $taxableAmount];
+        return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $monthly_salary,'monthly_taxable_amount'=>$taxableAmount/12, 'taxable_amount' => $taxableAmount];
     }
     public function bankContributionOfPf($emp)
     {

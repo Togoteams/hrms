@@ -73,9 +73,11 @@ class PayRollPayscaleCotroller extends BaseController
         $salary_head = $request->salary_head;
         // return $salary_head['basicAmount'];
         $employment_type = $request->employment_type;
-        $user_id = $request->employee_id;
+        $user_id = $salary_head['employee_id'];
+        $net_take_home = $request->net_take_home;
         $emp = Employee::where('user_id', $user_id)->first();
         $totalDays =0;
+        // return $user_id;
         if ($emp && $emp->start_date) {
             $startDate = Carbon::parse($emp->start_date);
             $today = Carbon::today();
@@ -91,12 +93,13 @@ class PayRollPayscaleCotroller extends BaseController
         {
             $usdToPulaAmount = getCurrencyValue("usd", "pula");
             $usdToInrAmount = getCurrencyValue("usd", "inr");
+            $totalMonthlySalary = $request->net_take_home * $usdToPulaAmount;
             $monthlyAmountInPula = (($salary_head['basicAmount'] +$salary_head['house_up_keep_allow']) * 12)* $usdToPulaAmount;
             $extraAmount =  ($salary_head['others_arrears'] + $salary_head['entertainment_expenses'])*$usdToPulaAmount;
             $education_allowance =  (($salary_head['education_allowance'])/$usdToInrAmount) * $usdToPulaAmount;
             $taxableAmount = $monthlyAmountInPula + $extraAmount + $education_allowance;
         }
-        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$employment_type,'no_of_joining_days'=>$totalDays]);
+        $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$employment_type,'no_of_joining_days'=>$totalDays,'total_monthly_salary'=>$totalMonthlySalary]);
 
         return $this->responseJson(true,200,"",$taxData);
     }

@@ -8,7 +8,7 @@
         return Number(document.getElementById(id).value);
     }
 
-    function taxCalCalculation(e) {
+    function taxCalCalculation() {
         var basicAmount = getValue('basic');
         employmentType = document.getElementById('employment_type').value;
         var taxCalcUrl = "{{ route('admin.payroll.payscale.tax.cal') }}";
@@ -27,6 +27,7 @@
             };
             montlyIncome = (basicAmount + getValue('allowance') -(getValue('pension_own') - getValue('pension_bank'))) * 12;
             taxAbleAmount = (montlyIncome+getValue('others_arrears') + getValue('over_time'));
+            net_take_home =getValue('net_take_home');
         } else {
              salaryHead ={
                 'basicAmount':basicAmount,
@@ -38,6 +39,7 @@
                 'reimbursement':getValue('reimbursement_for_tax')
             };
             montlyIncome = (basicAmount + getValue('house_up_keep_allow')) *12;
+            net_take_home =getValue('net_take_home');
             taxAbleAmount = (montlyIncome + getValue('entertainment_expenses')+
                 getValue('education_allowance'));
         }
@@ -48,6 +50,7 @@
             data: {
                 "taxable_amount": taxAbleAmount,
                 "salary_head": salaryHead,
+                "net_take_home": net_take_home,
                 'employment_type': employmentType
             },
             dataType: "json",
@@ -62,7 +65,7 @@
                 } else {
                     $("#tax").val(0);
                 }
-                amount_cal(e);
+                amount_cal();
             },
         });
     }
@@ -152,8 +155,8 @@
             // taxCalCalculation();
             console.log(returndata);
             setTimeout(() => {
-                taxCalCalculation(2);
-            }, 1500);
+                taxCalCalculation();
+            }, 3000);
         }
     }
 
