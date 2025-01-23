@@ -297,9 +297,9 @@ trait PayrollTraits
                 
                 // Calculate excess over the tax threshold
                 $balanceSalary = $annual_salary - $tax_threshold;
-                echo $balanceSalary."balance salary";
-                echo $annual_salary."balance salary";
-                echo $tax_threshold."tax threshold";
+                // echo $balanceSalary."balance salary";
+                // echo $annual_salary."balance salary";
+                // echo $tax_threshold."tax threshold";
                 // If annual salary is less than the threshold, no excess or balance salary
                 if ($balanceSalary < 0) {
                     $balanceSalary = 0;

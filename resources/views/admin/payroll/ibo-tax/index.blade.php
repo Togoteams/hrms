@@ -48,10 +48,10 @@
                                 <th>Financial Year</th>
                                 <th>Employee Code</th>
                                 <th>Employee Name</th>
-                                <th>Gross Pay</th>
+                                <th>Salary Amount(USD)</th>
                                 {{-- <th>Reimbursement Amount</th> --}}
-                                <th>Taxable Amount</th>
-                                <th>Tax Amount</th>
+                                <th>Taxable Amount(PULA)</th>
+                                <th>Tax Amount(PULA)</th>
                                 {{-- <th class="text-right">Action</th> --}}
                             </tr>
                         </thead>

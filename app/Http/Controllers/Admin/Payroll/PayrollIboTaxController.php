@@ -22,7 +22,9 @@ class PayrollIboTaxController extends Controller
     public function iboTaxReport(Request $request)
     {
         if ($request->ajax()) {
-            $data = PayrollSalary::with('user','user.employee','payrollSalaryHead.payroll_head')->select('*');
+            $data = PayrollSalary::with('user','user.employee','payrollSalaryHead.payroll_head')->whereHas('user',function($q){
+                $q->where('employment_type','expatriate');
+            })->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->make(true);
