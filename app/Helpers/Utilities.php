@@ -659,11 +659,12 @@ if (!function_exists('getHeadValue')) {
         } elseif ($headSlug == "provident_fund") {
             $inrBasicAmount = $latestSalary->basic_salary_for_india;
 
-            if ($emp->salary_type == "nps") {
-                $inrBasicAmount = $inrBasicAmount +  ((($inrBasicAmount / 100)) * $emp->da);
+            if ($latestSalary->salary_type == "nps") {
+                $inrBasicAmount = $inrBasicAmount +  ((($inrBasicAmount / 100)) * $latestSalary->da);
             }
+            // return $inrBasicAmount;
             $usdToInr = getCurrencyValue("usd", "inr");
-            $providentFound = ((($inrBasicAmount / 100)) * 14);
+            $providentFound = ((($inrBasicAmount / 100)) * 10);
             $providentFound = $providentFound / number_format($usdToInr, 3, '.', "");
             return number_format($providentFound, 2, '.', "");
         } elseif ($headSlug == "house_up_keep_allow") {

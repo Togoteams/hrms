@@ -381,13 +381,13 @@ class LeaveApplyController extends BaseController
                         }
                         $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
                         $currentLeave->update(['leave_count' => $remaining_leave]);
-                        $leaveCount = count($leave_apply->leaveDate);
+                        // $leaveCount = count($leave_apply->leaveDate);
                         
                         $this->leaveActivityLog([
                             'user_id' => $leave_apply->user_id,
                             'leave_type_id' => $leave_apply->leave_type_id,
                             'is_credit' => 0,
-                            'leave_count' => $leaveCount
+                            'leave_count' => $appliedLeaveCount
                         ]);
                     } else {
                         return response()->json([

@@ -475,10 +475,10 @@
                                 {{-- @endcanany --}}
 
                                 {{-- @canany(['calcualte-tax-for-ibo']) --}}
-                                    <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-for-ibo.calculate' ? 'active' : '' }}"
+                                    {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.tax-for-ibo.calculate' ? 'active' : '' }}"
                                         href="{{ route('admin.payroll.tax-for-ibo.calculate') }}" data-placement="left">
                                         <span class="nav-link-title">Calculate</span>
-                                    </a>
+                                    </a> --}}
                                 {{-- @endcanany --}}
 
                             </div>
