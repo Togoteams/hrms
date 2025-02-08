@@ -25,8 +25,8 @@
                 'others_arrears':getValue('others_arrears'),
                 'over_time':getValue('over_time')
             };
-            montlyIncome = (basicAmount + getValue('allowance') -(getValue('pension_own') - getValue('pension_bank'))) * 12;
-            taxAbleAmount = (montlyIncome+getValue('others_arrears') + getValue('over_time'));
+            montlyIncome = (basicAmount +getValue('others_arrears') + getValue('over_time')+ getValue('allowance') -(getValue('pension_own') - getValue('pension_bank'))) * 12;
+            taxAbleAmount = (montlyIncome);
             net_take_home =getValue('net_take_home');
         } else {
              salaryHead ={
@@ -42,7 +42,11 @@
             net_take_home =getValue('net_take_home');
             // taxAbleAmount = (montlyIncome + getValue('entertainment_expenses')+
             //     getValue('education_allowance'));
-            taxAbleAmount = getValue('gross_earning');
+            var usdToPulaAmount = getValue('usdToPulaAmount');
+            var removetaxAmount = (getValue('reimbursement') - getValue('reimbursement_for_tax'))/usdToPulaAmount;
+            console.log("removetaxAmount",removetaxAmount);
+            console.log("usdToPulaAmount",usdToPulaAmount);
+            taxAbleAmount = getValue('gross_earning') - removetaxAmount;
         }
 
         $.ajax({

@@ -352,6 +352,7 @@ trait PayrollTraits
             $extraAmount = (($taxableAmount - $taxSlab->from));
             $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;
+            $monthly_salary = $taxableAmount/12;
             $monthly_taxable_amount = $taxableAmount/12;
         }
         return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $monthly_salary,'monthly_taxable_amount'=>$monthly_taxable_amount, 'taxable_amount' => $taxableAmount];
