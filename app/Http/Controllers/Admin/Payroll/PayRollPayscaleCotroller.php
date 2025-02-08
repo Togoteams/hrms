@@ -93,12 +93,15 @@ class PayRollPayscaleCotroller extends BaseController
         {
             $usdToPulaAmount = getCurrencyValue("usd", "pula");
             $usdToInrAmount = getCurrencyValue("usd", "inr");
-            $totalMonthlySalary = $request->net_take_home * $usdToPulaAmount;
-            $monthlyAmountInPula = (($salary_head['basicAmount'] +$salary_head['house_up_keep_allow']) * 12)* $usdToPulaAmount;
-            $extraAmount =  ($salary_head['others_arrears'] + $salary_head['entertainment_expenses'])*$usdToPulaAmount;
-            $education_allowance =  (($salary_head['education_allowance'])/$usdToInrAmount) * $usdToPulaAmount;
-            $taxableAmount = $monthlyAmountInPula + $extraAmount + $education_allowance;
+            $totalMonthlySalary = $request->taxable_amount * $usdToPulaAmount;
+            // return $totalMonthlySalary;
+            // $monthlyAmountInPula = (($salary_head['basicAmount'] +$salary_head['house_up_keep_allow']) * 12)* $usdToPulaAmount;
+            // $extraAmount =  ($salary_head['others_arrears'] + $salary_head['entertainment_expenses'])*$usdToPulaAmount;
+            // $education_allowance =  (($salary_head['education_allowance'])/$usdToInrAmount) * $usdToPulaAmount;
+            // $taxableAmount = $monthlyAmountInPula + $extraAmount + $education_allowance;
+            $taxableAmount = $totalMonthlySalary;
         }
+        
         $taxData = $this->getTaxAmount(['taxable_amount'=>$taxableAmount,'employment_type'=>$employment_type,'no_of_joining_days'=>$totalDays,'total_monthly_salary'=>$totalMonthlySalary]);
 
         return $this->responseJson(true,200,"",$taxData);

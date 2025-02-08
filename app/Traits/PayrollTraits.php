@@ -287,7 +287,8 @@ trait PayrollTraits
         $totalMonthlySalary = $data['total_monthly_salary'] ?? 0;
         // echo $taxSlab;
         if ($empType == "expatriate") {
-            $monthly_salary = $totalMonthlySalary; // Taxable monthly salary in Pula
+            $monthly_salary = $taxableAmount; // Taxable monthly salary in Pula
+            // return $monthly_salary;
             if($noOfJoiningDays<=180)
             {
                 $annual_salary = $monthly_salary *12; // Calculate annual taxable salary
@@ -341,7 +342,7 @@ trait PayrollTraits
                 // Calculate monthly tax payable
                 $taxAmount = $yearlyTaxAmount / 12;
             }
-
+                $monthly_taxable_amount = $taxableAmount;
             // $taxSlab = TaxSlabSetting::where('from', '<=', $taxableAmount)->where('to', '>=', $taxableAmount)->where('status', 'active')->first();
             // $extraAmount = ($taxableAmount - $taxSlab->from);
             // $yearlyTaxAmount =  ($taxSlab->additional_ibo_amount + (($extraAmount * $taxSlab->ibo_tax_per) / 100));
@@ -351,8 +352,9 @@ trait PayrollTraits
             $extraAmount = (($taxableAmount - $taxSlab->from));
             $yearlyTaxAmount =  ($taxSlab->additional_local_amount  + (($extraAmount * $taxSlab->local_tax_per) / 100));
             $taxAmount = ($yearlyTaxAmount) / 12;
+            $monthly_taxable_amount = $taxableAmount/12;
         }
-        return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $monthly_salary,'monthly_taxable_amount'=>$taxableAmount/12, 'taxable_amount' => $taxableAmount];
+        return ["tax_amount" => round($taxAmount, 3), 'extraAmount' => $extraAmount, 'yearlyTaxAmount' => $monthly_salary,'monthly_taxable_amount'=>$monthly_taxable_amount, 'taxable_amount' => $taxableAmount];
     }
     public function bankContributionOfPf($emp)
     {

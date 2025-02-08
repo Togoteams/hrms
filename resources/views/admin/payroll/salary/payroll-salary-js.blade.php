@@ -40,8 +40,9 @@
             };
             montlyIncome = (basicAmount + getValue('house_up_keep_allow')) *12;
             net_take_home =getValue('net_take_home');
-            taxAbleAmount = (montlyIncome + getValue('entertainment_expenses')+
-                getValue('education_allowance'));
+            // taxAbleAmount = (montlyIncome + getValue('entertainment_expenses')+
+            //     getValue('education_allowance'));
+            taxAbleAmount = getValue('gross_earning');
         }
 
         $.ajax({
