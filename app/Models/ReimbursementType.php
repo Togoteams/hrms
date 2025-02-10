@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ReimbursementType extends Model
 {
     use HasFactory;
-    protected $fillable = ['type', 'slug','status','is_tax_exempt'];
+    protected $fillable = ['type', 'slug','status','is_tax_exempt','account_no'];
 
     public function getStatusAttribute($showStatus)
     {

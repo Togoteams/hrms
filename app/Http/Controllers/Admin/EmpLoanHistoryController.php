@@ -50,13 +50,13 @@ class EmpLoanHistoryController extends BaseController
                 $request->merge(['created_by' => auth()->user()->id, 'updated_by' => auth()->user()->id]);
                 EmpLoanHistory::create($request->except(['_token', 'id']));
                 $user = User::find($request->user_id);
-                $accountData = ['account_number'=>$request->loan_account_no,'user_id'=>$request->user_id,"account_type"=>"employee",'name'=>Str::title(str_replace('-', ' ',$request->loan_types))." of ".$user->name,'slug'=>$request->loan_types,'is_credit'=>1,'description'=>ucfirst($request->loan_types)." of ".$user->name];
+                $accountData = ['account_number'=>$request->loan_account_no,'branch_id'=>$user->employee->branch_id,'user_id'=>$request->user_id,"account_type"=>"employee",'name'=>Str::title(str_replace('-', ' ',$request->loan_types))." of ".$user->name,'slug'=>$request->loan_types,'is_credit'=>1,'description'=>ucfirst($request->loan_types)." of ".$user->name];
                 $account = Account::updateOrCreate(['account_number'=>$request->loan_account_no],$accountData);
                 $message = "Loan History Created Successfully";
             } else {
                 EmpLoanHistory::where('id', $request->id)->update($request->except(['_token', 'user_id', 'id']));
                 $user = User::find($request->user_id);
-                $accountData = ['account_number'=>$request->loan_account_no,'user_id'=>$request->user_id,"account_type"=>"employee",'name'=>Str::title(str_replace('-', ' ',$request->loan_types))." of ".$user->name,'slug'=>$request->loan_types,'is_credit'=>1,'description'=>ucfirst($request->loan_types)." of ".$user->name];
+                $accountData = ['account_number'=>$request->loan_account_no,'branch_id'=>$user->employee->branch_id,'user_id'=>$request->user_id,"account_type"=>"employee",'name'=>Str::title(str_replace('-', ' ',$request->loan_types))." of ".$user->name,'slug'=>$request->loan_types,'is_credit'=>1,'description'=>ucfirst($request->loan_types)." of ".$user->name];
                 $account =Account::updateOrCreate(['account_number'=>$request->loan_account_no],$accountData);
                 $message = "Loan History Updated Successfully";
             }

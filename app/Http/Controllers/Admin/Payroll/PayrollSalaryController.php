@@ -387,6 +387,7 @@ class PayrollSalaryController extends Controller
         try {
             $payrollSalary =  PayrollSalary::find($id);
             $payrollSalary->payrollSalaryHead()->delete();
+            $payrollSalary->ttumReport()->delete();
             $payrollSalary->delete();
             // PayrollSalary::where('id',$id)->delete();
             return "Delete";

@@ -6,11 +6,13 @@ use App\Models\EmpMedicalInsurance;
 use App\Models\PayrollTtumSalaryReport;
 use App\Models\TaxSlabSetting;
 use App\Models\Account;
+use App\Models\CurrencySetting;
 use App\Models\PayrollHead;
 use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalary;
 use App\Models\Employee;
 use App\Models\PayrollTaxLog;
+use App\Models\Reimbursement;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -35,26 +37,7 @@ trait PayrollTraits
 
         return PayrollTtumSalaryReport::updateOrCreate(['id' => $ttumExist?->id ?? NULL], $data);
     }
-    public function saveTaxLog($payrollId)
-    {
-        
-        $payrollSalary =PayrollSalary::find($payrollId);
-        $userId = $data['user_id'];
-        $employeeType = $data['employee_type'];
-        $branchId = $data['branch_id'];
-        $payrollId = $data['payroll_id'];
-        $month = $data['month'];
-        $year = $data['year'];
-        $salary_amount = $data['salary_amount'];
-        $taxable_amount = $data['taxable_amount'];
-        $tax_amount = $data['tax_amount'];
-        $head_name = $data['head_name'];
-        $head_value = $data['head_value'];
-
-        //    return  $account->name;
-
-        return PayrollTtumSalaryReport::updateOrCreate($data);
-    }
+   
 
     public function createTTum($salaryId)
     {
@@ -246,18 +229,54 @@ trait PayrollTraits
                     }
                     break;
             }
-            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id];
+            $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $account->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id,'payroll_salary_id'=>$salary->id];
             $saveOfficeTTUM  = $this->saveTtumData($data);
             Log::info("Personal_account_id" . json_encode($saveOfficeTTUM));
         }
-
+        $reimbursementAccount = Account::where('account_type','reimbursement')->getList()->get();
+        Log::info("reimbursementAccount" . json_encode($reimbursementAccount));
+        foreach ($reimbursementAccount as $keyR => $accountR) {
+            $accountName = $accountR->slug;
+            $amount = 0;
+            $isAmountAdd = 1;
+            $reimbursementAmount = 0;
+            $startDate = date("Y-m-20", strtotime("-1 month"));
+            $endDate = date("Y-m-20");
+            $employmentType = $emp->employment_type;
+            $multipleValue = 1;
+            if ($employmentType == "expatriate") {
+                $currencySeeting = CurrencySetting::where('currency_name_from', 'usd')->where('currency_name_to', 'pula')->where('status', 'active')->first();
+                $multipleValue = $currencySeeting->currency_amount_to;
+            }
+            $reimbursement = Reimbursement::whereHas('reimbursementype',function($q) use($accountName){
+                $q->where('slug',$accountName);
+            })->where('user_id', $emp->user_id)->whereBetween('claim_date', array($startDate, $endDate))
+                ->where('status', 'approved')
+                ->first();
+                Log::info("reimbursement" . ($reimbursement));
+                Log::info("startDate" . ($startDate));
+                Log::info("endDate" . ($endDate));
+                Log::info("reimbursement accountName" . ($accountName));
+                if($reimbursement)
+                {
+                    if ($reimbursement->reimbursement_currency == "usd") {
+                        $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount * $multipleValue;
+                    } else {
+                        $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount;
+                    }
+                    Log::info("reimbursement amout" . ($reimbursementAmount));
+                    $amount = $reimbursementAmount;
+                    $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $accountR->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 0 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id,'payroll_salary_id'=>$salary->id];
+                    $saveOfficeTTUM  = $this->saveTtumData($data);
+                }
+        }
         /**
          * Create TTUM for Employee Account
          */
         $empName = $emp->user->name;
         $empAccount = $this->getEmpAccount($empName, $emp->bank_account_number);
         $netTakeAmountInPula = $salary->net_take_home_in_pula;
-        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula, 2, ".", ""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id];
+        $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $empAccount->id, 'transaction_amount' => number_format($netTakeAmountInPula, 2, ".", ""), 'transaction_type' => ($empAccount->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id,'payroll_salary_id'=>$salary->id];
         $saveEmpTTUM  =  $this->saveTtumData($data);
     }
     public function getEmpAccount($accountName, $accountNumber)

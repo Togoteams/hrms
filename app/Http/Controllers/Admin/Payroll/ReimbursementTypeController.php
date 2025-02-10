@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\payroll;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
+use App\Models\Branch;
 use App\Models\ReimbursementType;
 use Exception;
 use Illuminate\Http\Request;
@@ -37,7 +39,8 @@ class ReimbursementTypeController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
             }
-        return view('admin.payroll.reimbursement_type.index', ['page' => $this->page_name]);
+            $branches = Branch::getBranch()->get();
+        return view('admin.payroll.reimbursement_type.index', ['page' => $this->page_name,'branches'=>$branches]);
 
     }
 
@@ -64,6 +67,11 @@ class ReimbursementTypeController extends Controller
         } else {
             $request->request->add(['created_by'=>Auth::user()->id]);
             $request->request->add(['status' =>"active"]);
+            if($request->account_no)
+            {
+                $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>1,'description'=>ucfirst($request->type)." for Reimbursement"];
+                $account = Account::updateOrCreate(['account_number'=>$request->account_no],$accountData);
+            }
             $request->request->add(['slug' =>Str::slug($request->type,"_")]);
             ReimbursementType::create($request->except('_token'));
             return response()->json(['success' => $this->page_name . " Added Successfully"]);
@@ -107,6 +115,11 @@ class ReimbursementTypeController extends Controller
             $request->request->add(['slug' =>Str::slug($request->type,"_")]);
             // $request->request->add(['updated_by'=>Auth::user()->id]);
             ReimbursementType::where('id', $id)->update($request->except('_token', '_method'));
+            if($request->account_no)
+            {
+                $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>1,'description'=>ucfirst($request->type)." for Reimbursement"];
+                $account = Account::updateOrCreate(['account_number'=>$request->account_no],$accountData);
+            }
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }
        

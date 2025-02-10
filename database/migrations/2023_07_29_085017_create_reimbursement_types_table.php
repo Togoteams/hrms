@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('reimbursement_types', function (Blueprint $table) {
             $table->id();
             $table->string('type',75)->nullable();
-            $table->text('slug',)->nullable();
+            $table->text('slug')->nullable();
+            $table->string('account_no')->nullable();
             $table->tinyInteger('is_tax_exempt')->nullable();
             $table->enum('status',["active","inactive"])->default('active');            
             $table->timestamps();

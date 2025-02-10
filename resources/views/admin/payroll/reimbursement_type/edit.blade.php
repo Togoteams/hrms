@@ -11,6 +11,12 @@
                                     <input type="text" name="type" id="type" class="form-control" placeholder="Reimbursement type" value="{{$reimbursement->type}}">
                                 </div>
                             </div>
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
+                                    <label for="type" class="required">Account No</label>
+                                    <input type="text"  name="account_no" id="account_no" class="form-control" placeholder="Account No." value="{{$reimbursement->account_no}}">
+                                </div>
+                            </div>
                     
                             <div class="mb-2 col-sm-3">
                                 <div class="form-group">

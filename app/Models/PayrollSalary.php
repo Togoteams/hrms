@@ -80,6 +80,9 @@ class PayrollSalary extends Model
     public function payrollSalaryHead(){
         return $this->hasMany(PayrollSalaryHead::class,'payroll_salary_id');
     }
+    public function ttumReport(){
+        return $this->hasMany(PayrollTtumSalaryReport::class,'payroll_salary_id');
+    }
 
     public function payroll_payscale_head(){
         return $this->hasMany(PayrollPayscaleHead::class,'payroll_payscale_id');
@@ -116,6 +119,7 @@ class PayrollSalary extends Model
 
         self::deleted(function ($model) {
             $model->payrollSalaryHead();
+            $model->ttumReport();
         });
     }
 }
