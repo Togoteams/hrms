@@ -73,6 +73,15 @@ function getMonthName($month)
     ];
     return $monthNames[$month];
 }
+function getReimbursementFor()
+{
+    $types = [
+        ['value'=>1, 'lable' => 'Payable'],
+        ['value'=>2, 'lable' => 'Unpaid'],
+        ['value'=>3, 'lable' => 'Notional']
+    ];
+    return $types;
+}
 if (!function_exists('convertNumberToWords')) {
     function convertNumberToWords($number)
     {
@@ -728,12 +737,19 @@ if (!function_exists('getHeadValue')) {
             return $reimbursementAmount;
         } elseif ($headSlug == "reimbursement_tax") {
             $reimbursementAmount = 0;
-            $reimbursements = Reimbursement::whereHas('reimbursementype',function ($q) {
-                $q->where('is_tax_exempt',0);
-            })->whereBetween('claim_date', array($startDate, $endDate))
-                ->where('user_id', $emp->user_id)
+            $reimbursements = Reimbursement::whereHas('reimbursementype', fn($q) => 
+                $q->where('is_tax_exempt', 0)
+                )->where('user_id', $emp->user_id)
                 ->where('status', 'approved')
+                ->where(fn($query) => 
+                    $query->where('reimbursement_for', 3)
+                        ->orWhere(fn($q) => 
+                            $q->whereIn('reimbursement_for', [1, 2])
+                                ->whereBetween('claim_date', [$startDate, $endDate])
+                        )
+                )
                 ->get();
+    
             foreach ($reimbursements as $reimbursement) {
                 if ($reimbursement->reimbursement_currency == "usd") {
                     $reimbursementAmount = $reimbursementAmount + $reimbursement->reimbursement_amount * $multipleValue;

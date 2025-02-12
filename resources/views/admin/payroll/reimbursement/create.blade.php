@@ -17,6 +17,19 @@
                             @if (!isemplooye())
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
+                                    <label for="reimbursement_for" class="required">Reimbursement For</label>
+                                    <select name="reimbursement_for" class="form-control" id="reimbursement_for">
+                                        <option value="">- Select -</option>
+                                        @foreach ($reimbursementFor as $key=> $for)
+                                            <option value="{{ $for['value'] }}">
+                                                {{ $for['lable'] }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-6">
+                                <div class="form-group">
                                     <label for="user_id" class="required">Employee</label>
                                     <select name="user_id" class="form-control" id="user_id">
                                         <option value="">- Select -</option>
@@ -62,7 +75,24 @@
                                     <input type="number" required name="expenses_amount" id="expenses_amount" class="form-control" placeholder="Expenses Amount" value="{{ old('expenses_amount') }}">
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-6">
+                            <div class="col-sm-6 reimbursement_currency_section ">
+                                <label for="reimbursement_currency">Reimbursement Currency <small
+                                        class="required-field">*</small></label>
+
+                                <select id="reimbursement_currency" placeholder="Select Reimbursement Currency"
+                                    name="reimbursement_currency" class="form-control form-control-sm" required>
+                                    <option selected disabled> - Select Currency - </option>
+                                    <option value="usd">USD</option>
+                                    <option value="pula">PULA</option>
+                                </select>
+                            </div>
+                            <div class="mb-2 col-sm-6 reimbursement_amount_section">
+                                <div class="form-group">
+                                    <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
+                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="Reimbursement Amount" value="{{ old('reimbursement_amount') }}">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-sm-6 claim_date_section">
                                 <div class="form-group">
                                     <label for="claim_date" class="required">Claim date</label>
                                     <input type="date" name="claim_date"  required id="claim_date" class="form-control" placeholder="claim_date" value="{{ old('claim_date', now()->format('Y-m-d')) }}">
@@ -83,7 +113,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-6">
+                            <div class="mb-2 col-sm-6 claim_for_period_from_month_section">
                                 <div class="form-group">
                                     <label for="claim_from_month" class="required">Claim for period from month</label>
                                     <select name="claim_from_month" id="claim_from_month" class="form-control"  required>
@@ -103,7 +133,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="mb-2 col-sm-6">
+                            <div class="mb-2 col-sm-6 claim_for_period_to_month_section">
                                 <div class="form-group">
                                     <label for="claim_to_month" class="required">Claim for period to month</label>
                                     <select name="claim_to_month" id="claim_to_month" class="form-control" required >

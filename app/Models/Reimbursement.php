@@ -18,6 +18,7 @@ class Reimbursement extends Model
     'user_id',
     'claim_from_month',
     'claim_to_month',
+    'reimbursement_for',
     'reimbursement_currency',
     'reimbursement_amount',
     'reimbursement_notes',
@@ -40,7 +41,7 @@ class Reimbursement extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
+   
     public function reimbursementype()
     {
         return $this->belongsTo(ReimbursementType::class, 'type_id');

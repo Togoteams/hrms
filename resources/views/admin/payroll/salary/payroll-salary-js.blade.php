@@ -44,7 +44,7 @@
             //     getValue('education_allowance'));
             var usdToPulaAmount = getValue('usdToPulaAmount');
             var removetaxAmount = (getValue('reimbursement') - getValue('reimbursement_for_tax'))/usdToPulaAmount;
-            console.log("removetaxAmount",removetaxAmount);
+            console.log("reimbursement_for_tax",getValue('reimbursement_for_tax'));
             console.log("usdToPulaAmount",usdToPulaAmount);
             taxAbleAmount = getValue('gross_earning') - removetaxAmount;
         }

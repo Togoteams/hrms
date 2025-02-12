@@ -49,11 +49,12 @@ class ReimbursementController extends BaseController
         $allowedExpenseCurrencies = ['pula'];
         $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
         $expenseCurrency = $currencies->whereIn('currency_name_from', $allowedExpenseCurrencies);
-
+        $reimbursementFor = getReimbursementFor();
         return view('admin.payroll.reimbursement.index', ['page' => $this->page_name,
         'reimbursementType' => $reimbursementType,
         'currencies' => $filteredCurrencySetting,
         'reimbursement' => $reimbursement,
+        'reimbursementFor' => $reimbursementFor,
         'expenseCurrency' => $expenseCurrency,
         'allowedCurrencies' => $allowedCurrencies,
          'Employees' => $employees]);
@@ -85,14 +86,6 @@ class ReimbursementController extends BaseController
             'expenses_amount' => 'required|numeric|gt:0',
             'financial_year' => 'required|string',
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
-            'claim_from_month' => [
-                'required',
-                'numeric',
-            ],
-            'claim_to_month' => [
-                'required',
-                'numeric',
-            ],
             'reimbursement_notes' => 'required|string',
         ]);
         $userId = $request->user_id;
@@ -128,6 +121,24 @@ class ReimbursementController extends BaseController
                     'created_by' => auth()->user()->id,
                     'status' => "pending",
                 ]);
+                if($request->reimbursement_for==2 || $request->reimbursement_for==3)
+                {
+                    $request->merge([
+                        'reimbursement_currency' => $request->reimbursement_currency,
+                        'reimbursement_amount' => $request->reimbursement_amount,
+                        'status' => "approved",
+                        'approved_at' => date('Y-m-d h:i:s'),
+                        
+                    ]);  
+                    if($request->reimbursement_for==3)
+                    {
+                        $request->merge([
+                            'claim_date' =>"",
+                            'claim_from_month' =>"",
+                            'claim_to_month' =>""
+                        ]);   
+                    }
+                }
                 Reimbursement::create($request->except(['_token', '_method']));
                 return response()->json(['success' => $this->page_name . " Added Successfully"]);
             } catch (Exception $e) {
@@ -277,7 +288,7 @@ class ReimbursementController extends BaseController
         $reimbursement->status = $request['status'];
         if($request->status=='approved')
         {
-           $reimbursement->approved_at=date('Y-m-d h:i:s');
+           $reimbursement->approved_at= date('Y-m-d h:i:s');
         }
         if($request->status=='rejected')
         {

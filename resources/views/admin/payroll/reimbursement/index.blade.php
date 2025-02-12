@@ -272,4 +272,34 @@
         $('#status_id').val(stat_id);
         $('#statusModal').modal('show');
     });
+    $(document).on('change', '#reimbursement_for', function(e) {
+        // $(".alert").show();
+        // e.preventDefault();
+        var reimbursement_for = $(this).val();
+        // claim_date_section
+        if(reimbursement_for ==1)
+        {
+            $(".claim_date_section").css('display','block');
+            $(".reimbursement_amount_section").css('display','none');
+            $(".reimbursement_currency_section").css('display','none');
+            $(".claim_for_period_to_month_section").css('display','block');
+            $(".claim_for_period_from_month_section").css('display','block');
+
+        }else if(reimbursement_for ==2)
+        {
+            $(".claim_date_section").css('display','block');
+            $(".reimbursement_amount_section").css('display','block');
+            $(".reimbursement_currency_section").css('display','block');
+            $(".claim_for_period_to_month_section").css('display','block');
+            $(".claim_for_period_from_month_section").css('display','block');
+        }else if(reimbursement_for ==3)
+        {
+            $(".claim_date_section").css('display','none');
+            $(".reimbursement_amount_section").css('display','block');
+            $(".reimbursement_currency_section").css('display','block');
+            $(".claim_for_period_to_month_section").css('display','none');
+            $(".claim_for_period_from_month_section").css('display','none');
+        }
+       
+    });
 </script>

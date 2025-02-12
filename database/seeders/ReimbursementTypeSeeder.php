@@ -23,14 +23,19 @@ class ReimbursementTypeSeeder extends Seeder
             ['type'=>"Diem Allowance",'slug'=>"diem_allowance",'account_no'=>"95222354561004","is_tax_exempt"=>0],
             ['type'=>"Travelling Expenses",'slug'=>"travelling_expenses",'account_no'=>"95222354561004","is_tax_exempt"=>0],
             ['type'=>"Car Benefit",'slug'=>"car_benefit",'account_no'=>"95222354511016","is_tax_exempt"=>0],
+            ['type'=>"Housing Benefit",'slug'=>"housing_benefit",'account_no'=>"","is_tax_exempt"=>0],
+            ['type'=>"Furniture Benefit",'slug'=>"furniture_benefit",'account_no'=>"","is_tax_exempt"=>0],
             ['type'=>"TELEPHONES RESIDENCE",'account_no'=>"95222354201008",'slug'=>"mobile_internet_charges_landline","is_tax_exempt"=>1],
             ];
         DB::table('reimbursement_types')->delete();
         foreach($reimbursementType as $key => $value)
         {
             ReimbursementType::updateOrCreate(['slug'=>$value['slug']],$value);
-            $accountData = ['account_number'=>$value['account_no'],"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$value['type'])),'slug'=>Str::slug($value['type'],"_"),'is_credit'=>0,'description'=>ucfirst($value['type'])." for Reimbursement"];
-            $account = Account::updateOrCreate(['account_number'=>$value['account_no']],$accountData);
+            if($value['slug']!='housing_benefit' || $value['slug']!='furniture_benefit')
+            {
+                $accountData = ['account_number'=>$value['account_no'],"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$value['type'])),'slug'=>Str::slug($value['type'],"_"),'is_credit'=>0,'description'=>ucfirst($value['type'])." for Reimbursement"];
+                $account = Account::updateOrCreate(['account_number'=>$value['account_no']],$accountData);
+            }
         }
 
     }
