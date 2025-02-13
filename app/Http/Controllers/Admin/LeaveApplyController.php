@@ -357,37 +357,46 @@ class LeaveApplyController extends BaseController
         if ($request->status == "approved") {
             $balanceLeaveHideArr = ['leave-without-pay', 'bereavement-leave'];
             $isIgnoreBalanced = in_array($leaveSlug, $balanceLeaveHideArr) ? 1 : 0;
-
             if ((getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id, 'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
 
-                LeaveApply::where('id', $id)->update([
-                    'status_remarks' => $request->status_remarks,
-                    'status' => $request->status,
-                    'approved_at' => now(),
-                    'approved_by' => auth()->id(),
-                    'is_approved' => 1,
-                    'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
-                ]);
+               
 
                 $currentLeave = EmpCurrentLeave::where('user_id', $leave_apply->user_id)->where('leave_type_id', $leave_apply->leave_type_id)->first();
                 $currentLeaveCount = $currentLeave?->leave_count ?? 0;
                 $appliedLeaveCount = $leave_apply->leaveDate()->count();
+                // return $currentLeave->leave_count;
                 if (!empty($currentLeave)) {
-                    if ($currentLeaveCount >= $appliedLeaveCount) {
-                        if($leave_apply->pay_type="full_pay")
+                    $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
+                    if ($remaining_leave >=0) {
+                        if($leave_apply->pay_type=="full_pay")
                         {
-                            $leaveCount = count($leave_apply->leaveDate) * 2;
                             $appliedLeaveCount = $appliedLeaveCount*2;
                         }
                         $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
+                        // return $remaining_leave;
                         $currentLeave->update(['leave_count' => $remaining_leave]);
                         // $leaveCount = count($leave_apply->leaveDate);
-                        
+                        LeaveApply::where('id', $id)->update([
+                            'status_remarks' => $request->status_remarks,
+                            'status' => $request->status,
+                            'approved_at' => now(),
+                            'approved_by' => auth()->id(),
+                            'is_approved' => 1,
+                            'remaining_leave' => $remaining_leave,
+                        ]);
                         $this->leaveActivityLog([
                             'user_id' => $leave_apply->user_id,
                             'leave_type_id' => $leave_apply->leave_type_id,
                             'is_credit' => 0,
                             'leave_count' => $appliedLeaveCount
+                        ]);
+                        $this->saveNotification([
+                            'reference_id' => $id,
+                            'reference_type' => get_class($leave_apply),
+                            'user_id' => $leave_apply->user_id,
+                            'notification_type' => 'leave_approval',
+                            'title' => "Leave Approved",
+                            'description' => "Dear " . $leave_apply->user->name . " Your " . $leave_apply->leave_type->name . " is Approved On Date " . date("d-m-Y", strtotime($leave_apply->start_date)) . " between " . date("d-m-Y", strtotime($leave_apply->end_date)),
                         ]);
                     } else {
                         return response()->json([
@@ -395,16 +404,9 @@ class LeaveApplyController extends BaseController
                         ]);
                     }
                 }
-                $this->saveNotification([
-                    'reference_id' => $id,
-                    'reference_type' => get_class($leave_apply),
-                    'user_id' => $leave_apply->user_id,
-                    'notification_type' => 'leave_approval',
-                    'title' => "Leave Approved",
-                    'description' => "Dear " . $leave_apply->user->name . " Your " . $leave_apply->leave_type->name . " is Approved On Date " . date("d-m-Y", strtotime($leave_apply->start_date)) . " between " . date("d-m-Y", strtotime($leave_apply->end_date)),
-                ]);
+                
             } else {
-                return response()->json(['error' => "Applied leave is " . (get_day($leave_apply->start_date, $leave_apply->end_date) + 1) . " but they have only " . getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
+                return response()->json(['error' => "Applied leave fff is " . (get_day($leave_apply->start_date, $leave_apply->end_date) + 1) . " but they have only " . getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id) . " leave"]);
             }
         }
 
