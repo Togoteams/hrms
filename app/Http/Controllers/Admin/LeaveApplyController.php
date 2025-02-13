@@ -360,7 +360,14 @@ class LeaveApplyController extends BaseController
             if ((getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id, 'update_status') >= get_day($leave_apply->start_date, $leave_apply->end_date)) || $isIgnoreBalanced) {
 
                
-
+                LeaveApply::where('id', $id)->update([
+                    'status_remarks' => $request->status_remarks,
+                    'status' => $request->status,
+                    'approved_at' => now(),
+                    'approved_by' => auth()->id(),
+                    'is_approved' => 1,
+                    'remaining_leave' => (int)getAvailableLeaveCount($leave_apply->leave_type_id, $leave_apply->user_id),
+                ]);
                 $currentLeave = EmpCurrentLeave::where('user_id', $leave_apply->user_id)->where('leave_type_id', $leave_apply->leave_type_id)->first();
                 $currentLeaveCount = $currentLeave?->leave_count ?? 0;
                 $appliedLeaveCount = $leave_apply->leaveDate()->count();
@@ -376,14 +383,7 @@ class LeaveApplyController extends BaseController
                         // return $remaining_leave;
                         $currentLeave->update(['leave_count' => $remaining_leave]);
                         // $leaveCount = count($leave_apply->leaveDate);
-                        LeaveApply::where('id', $id)->update([
-                            'status_remarks' => $request->status_remarks,
-                            'status' => $request->status,
-                            'approved_at' => now(),
-                            'approved_by' => auth()->id(),
-                            'is_approved' => 1,
-                            'remaining_leave' => $remaining_leave,
-                        ]);
+                     
                         $this->leaveActivityLog([
                             'user_id' => $leave_apply->user_id,
                             'leave_type_id' => $leave_apply->leave_type_id,

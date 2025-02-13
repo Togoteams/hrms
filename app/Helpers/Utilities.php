@@ -77,7 +77,7 @@ function getReimbursementFor()
 {
     $types = [
         ['value'=>1, 'lable' => 'Payable'],
-        ['value'=>2, 'lable' => 'Unpaid'],
+        ['value'=>2, 'lable' => 'Already Paid'],
         ['value'=>3, 'lable' => 'Notional']
     ];
     return $types;
@@ -724,7 +724,7 @@ if (!function_exists('getHeadValue')) {
         } elseif ($headSlug == "reimbursement") {
             $reimbursementAmount = 0;
             $reimbursements = Reimbursement::whereBetween('claim_date', array($startDate, $endDate))
-                ->where('user_id', $emp->user_id)
+                ->where('user_id', $emp->user_id)->whereIn('reimbursement_for', [1])
                 ->where('status', 'approved')
                 ->get();
             foreach ($reimbursements as $reimbursement) {
