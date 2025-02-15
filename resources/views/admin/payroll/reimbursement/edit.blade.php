@@ -34,7 +34,7 @@
             <div class="mb-2 col-sm-6">
                 <div class="form-group">
                     <label for="expenses_amount" class="required">Expense Amount</label>
-                    <input type="number" required name="expenses_amount" id="expenses_amount" class="form-control" placeholder="Expenses Amount" value="{{$reimbursement->expenses_amount}}">
+                    <input type="number" required name="expenses_amount" step="0.001" id="expenses_amount" class="form-control" placeholder="Expenses Amount" value="{{$reimbursement->expenses_amount}}">
                 </div>
             </div>
             <div class="mb-2 col-sm-6">

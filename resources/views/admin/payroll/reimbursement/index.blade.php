@@ -230,7 +230,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
-                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control form-control-sm" placeholder="Reimbursement amount" value="{{ old('reimbursement_amount') }}">
+                                    <input type="number" step="0.001" required name="reimbursement_amount" id="reimbursement_amount" class="form-control form-control-sm" placeholder="Reimbursement amount" value="{{ old('reimbursement_amount') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">

@@ -72,7 +72,7 @@
                             <div class="mb-2 col-sm-6">
                                 <div class="form-group">
                                     <label for="expenses_amount" class="required">Expense Amount</label>
-                                    <input type="number" required name="expenses_amount" id="expenses_amount" class="form-control" placeholder="Expenses Amount" value="{{ old('expenses_amount') }}">
+                                    <input type="number" required name="expenses_amount" id="expenses_amount" step="0.001" class="form-control" placeholder="Expenses Amount" value="{{ old('expenses_amount') }}">
                                 </div>
                             </div>
                             <div class="col-sm-6 reimbursement_currency_section ">
@@ -89,7 +89,7 @@
                             <div class="mb-2 col-sm-6 reimbursement_amount_section">
                                 <div class="form-group">
                                     <label for="reimbursement_amount" class="required">Reimbursement Amount</label>
-                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" class="form-control" placeholder="Reimbursement Amount" value="{{ old('reimbursement_amount') }}">
+                                    <input type="number" required name="reimbursement_amount" id="reimbursement_amount" step="0.001" class="form-control" placeholder="Reimbursement Amount" value="{{ old('reimbursement_amount') }}">
                                 </div>
                             </div>
                             <div class="mb-2 col-sm-6 claim_date_section">

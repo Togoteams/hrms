@@ -7,7 +7,7 @@
         return Number(document.getElementById(id).value);
     }
 
-    function taxCalCalculation(e) {
+    function taxCalCalculation() {
         var basicAmount = getValue('basic');
         employmentType = document.getElementById('employment_type').value;
         var taxCalcUrl = "{{ route('admin.payroll.payscale.tax.cal') }}";
@@ -60,7 +60,9 @@
                 } else {
                     $("#tax").val(0);
                 }
-                amount_cal(e);
+                
+                amount_cal();
+                return true;
             },
         });
     }
@@ -128,11 +130,9 @@
         }
 
         if(empId!=""){
-            editForm(editUrl+empId+"/"+payscale_date, 'edit');
-            // taxCalCalculation();
-            setTimeout(() => {
-                 taxCalCalculation(2);
-            }, 1500);
+           
+          editForm(editUrl+empId+"/"+payscale_date, 'edit',"GET","",taxCalCalculation);
+           
         }
     }
 </script>

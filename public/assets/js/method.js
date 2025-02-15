@@ -27,7 +27,7 @@ function ajaxCall(form_id, target_id = "", method = "POST") {
 }
 
 
-function editForm(url_name, target_id, method = "GET", table_id = '') {
+function editForm(url_name, target_id, method = "GET", table_id = '',callback ="") {
 
     preloader('', target_id);
     // getting the button of the form and passing into the preloader function
@@ -37,7 +37,13 @@ function editForm(url_name, target_id, method = "GET", table_id = '') {
             try {
                 document.getElementById(target_id).innerHTML = this.responseText;
                 underscore_remover();
+        
+                if (typeof(callback) == "function") {
+                    console.log(typeof(callback));
+                    callback();
+                }
                 stopPreloader('', target_id);
+                // Call the callback function if provided
             } catch (error) {
 
             }

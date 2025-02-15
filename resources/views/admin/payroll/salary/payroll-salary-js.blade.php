@@ -156,12 +156,13 @@
         }
 
         if (pay_for_month_year != "" && empId != "") {
-            var returndata = editForm(editUrl + empId + "/" + pay_for_month_year, 'edit');
+            editForm(editUrl+empId+"/"+pay_for_month_year, 'edit',"GET","",taxCalCalculation);
+            // var returndata = editForm(editUrl + empId + "/" + pay_for_month_year, 'edit');
             // taxCalCalculation();
-            console.log(returndata);
-            setTimeout(() => {
-                taxCalCalculation();
-            }, 3000);
+            // console.log(returndata);
+            // setTimeout(() => {
+            //     taxCalCalculation();
+            // }, 3000);
         }
     }
 
