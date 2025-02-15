@@ -134,6 +134,7 @@
         setId('gross_earning', Number(Number(totalEarning) + (leaveEncashAmount)).toFixed(2));
         setId('total_deduction', Number(totalDeduction).toFixed(2));
         setId('net_take_home', (Number((Number(totalEarning) + (leaveEncashAmount)) - totalDeduction)).toFixed(2));
+        console.log('calculating net_take_home',getValue('net_take_home'));
 
     }
 

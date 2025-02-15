@@ -194,7 +194,5 @@
 </div>
 @endif
 <script>
-      $(document).ready(function() {
-        taxCalCalculation("e");
-    });
+
 </script>
