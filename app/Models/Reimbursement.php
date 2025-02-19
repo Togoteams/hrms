@@ -30,6 +30,9 @@ class Reimbursement extends Model
     'created_by',
     'updated_by',
 ];
+protected $appends = [
+    'reimbursement_for_name'
+];
 
     public function scopeGetReimbursement($query)
     {
@@ -46,6 +49,12 @@ class Reimbursement extends Model
     {
         return $this->belongsTo(ReimbursementType::class, 'type_id');
     }
+
+    public function getReimbursementForNameAttribute()
+    {
+        return getReimbursementFor($this->reimbursement_for ?? 1)['lable'];
+    }
+
 
     public function currency()
     {

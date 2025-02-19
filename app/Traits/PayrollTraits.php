@@ -251,7 +251,7 @@ trait PayrollTraits
             $reimbursement = Reimbursement::whereHas('reimbursementype',function($q) use($accountName){
                 $q->where('slug',$accountName);
             })->where('user_id', $emp->user_id)->whereBetween('claim_date', array($startDate, $endDate))
-                ->where('status', 'approved')
+                ->where('status', 'approved')->where('reimbursement_for',1)
                 ->first();
                 Log::info("reimbursement" . ($reimbursement));
                 Log::info("startDate" . ($startDate));

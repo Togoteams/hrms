@@ -73,13 +73,17 @@ function getMonthName($month)
     ];
     return $monthNames[$month];
 }
-function getReimbursementFor()
+function getReimbursementFor($value="")
 {
     $types = [
-        ['value'=>1, 'lable' => 'Payable'],
-        ['value'=>2, 'lable' => 'Already Paid'],
-        ['value'=>3, 'lable' => 'Notional']
+        1 => ['value' => 1, 'lable' => 'Payable'],
+        2 => ['value' => 2, 'lable' => 'Already Paid'],
+        3 => ['value' => 3, 'lable' => 'Notional']
     ];
+    if (!empty($value) && isset($types[$value])) {
+        return $types[$value];
+    }
+    
     return $types;
 }
 if (!function_exists('convertNumberToWords')) {

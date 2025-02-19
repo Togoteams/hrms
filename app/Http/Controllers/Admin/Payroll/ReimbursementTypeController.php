@@ -117,8 +117,11 @@ class ReimbursementTypeController extends Controller
             ReimbursementType::where('id', $id)->update($request->except('_token', '_method'));
             if($request->account_no)
             {
-                $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>1,'description'=>ucfirst($request->type)." for Reimbursement"];
-                $account = Account::updateOrCreate(['account_number'=>$request->account_no],$accountData);
+                if(!empty($request->account_no))
+                {
+                    $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>1,'description'=>ucfirst($request->type)." for Reimbursement"];
+                    $account = Account::updateOrCreate(['account_number'=>$request->account_no],$accountData);
+                }
             }
             return response()->json(['success' => $this->page_name . " Updated Successfully"]);
         }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('expenses_currency')->nullable();
             $table->string('financial_year')->nullable();
-            $table->string('reimbursement_for')->comment('1=>Paid,2=>Unpaid,3=>One Time')->nullable();
+            $table->string('reimbursement_for')->default(1)->comment('1=>Paid,2=>Unpaid,3=>One Time')->nullable();
             $table->decimal('expenses_amount', 10, 3)->nullable();
             $table->date('claim_date')->nullable();
             $table->string('claim_from_month')->nullable();

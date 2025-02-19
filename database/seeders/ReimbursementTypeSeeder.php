@@ -31,7 +31,7 @@ class ReimbursementTypeSeeder extends Seeder
         foreach($reimbursementType as $key => $value)
         {
             ReimbursementType::updateOrCreate(['slug'=>$value['slug']],$value);
-            if($value['slug']!='housing_benefit' || $value['slug']!='furniture_benefit')
+            if($value['slug']!='housing_benefit' || $value['slug']!='furniture_benefit' || $value['account_no']!="")
             {
                 $accountData = ['account_number'=>$value['account_no'],"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$value['type'])),'slug'=>Str::slug($value['type'],"_"),'is_credit'=>0,'description'=>ucfirst($value['type'])." for Reimbursement"];
                 $account = Account::updateOrCreate(['account_number'=>$value['account_no']],$accountData);

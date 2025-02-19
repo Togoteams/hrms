@@ -51,6 +51,7 @@
                         <tr>
                             <th>SI.</th>
                             <th>Type</th>
+                            <th>Reimbursement For</th>
                             <th>Empolyee Code</th>
                             <th>Empolyee Name</th>
                             <th>Financial Year</th>
@@ -87,6 +88,10 @@
                             {
                                 data: 'reimbursementype.type',
                                 name: 'reimbursementype.type'
+                            },
+                            {
+                                data: 'reimbursement_for_name',
+                                name: 'reimbursement_for_name'
                             },
                             {
                                 data: 'user.employee.ec_number',
