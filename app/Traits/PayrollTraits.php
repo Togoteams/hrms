@@ -273,7 +273,7 @@ trait PayrollTraits
                     }
                     Log::info("reimbursement amout" . ($reimbursementAmount));
                     $amount = $reimbursementAmount;
-                    $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $accountR->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 0 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id,'payroll_salary_id'=>$salary->id];
+                    $data = ['ttum_month' => $salary->pay_for_month_year, 'account_id' => $accountR->id, 'transaction_amount' => number_format($amount, 2, ".", ""), 'transaction_type' => ($account->is_credit == 1 ? "credit" : "debit"), 'transaction_currency' => 'BWP','branch_id'=>$salary->branch_id,'payroll_salary_id'=>$salary->id];
                     $saveOfficeTTUM  = $this->saveTtumData($data);
                 }
         }
