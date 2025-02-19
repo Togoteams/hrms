@@ -288,9 +288,15 @@
                                             if ($value->payroll_head->slug == 'education_allowance') {
                                                 $edu_allow = number_format($value->value / $usdToInrAmount,2);
                                                 $totalIncomeAmount = $totalIncomeAmount + $edu_allow;
-                                            } else {
+                                            } elseif ($value->payroll_head->slug == 'reimbursement') {
+                                                $reimbursementAmount = $value->value;
+                                               $reimbursementAmountInUsd= ($reimbursementAmount / $usdToPulaAmount);
+                                                $value->value = $reimbursementAmountInUsd;
+                                                $totalIncomeAmount = $totalIncomeAmount + $reimbursementAmountInUsd;
+                                            }else {
                                                 $totalIncomeAmount = $totalIncomeAmount + $edu_allow;
                                             }
+                                            
                                         @endphp
                                         <tr>
                                             @if ($value->payroll_head->slug == 'education_allowance')
@@ -349,7 +355,23 @@
                                             if ($value->payroll_head->slug == 'other_deductions') {
                                                 $otherDeducation = number_format($value->value / $usdToPulaAmount,2);
                                                 $totalDeductionAmount = $totalDeductionAmount + $otherDeducation;
-                                            } else {
+                                            } else  if ($value->payroll_head->slug == 'personal_loan') {
+                                                $amountInUsd = number_format($value->value / $usdToPulaAmount,2);
+                                                $value->value = $amountInUsd;
+                                                $totalDeductionAmount = $totalDeductionAmount + $amountInUsd;
+                                            }else  if ($value->payroll_head->slug == 'car_loan') {
+                                                $amountInUsd = number_format($value->value / $usdToPulaAmount,2);
+                                                $value->value = $amountInUsd;
+                                                $totalDeductionAmount = $totalDeductionAmount + $amountInUsd;
+                                            }else  if ($value->payroll_head->slug == 'mortgage_loan') {
+                                                $amountInUsd = number_format($value->value / $usdToPulaAmount,2);
+                                                $value->value = $amountInUsd;
+                                                $totalDeductionAmount = $totalDeductionAmount + $amountInUsd;
+                                            }else  if ($value->payroll_head->slug == 'salary_advance') {
+                                                $amountInUsd = number_format($value->value / $usdToPulaAmount,2);
+                                                $value->value = $amountInUsd;
+                                                $totalDeductionAmount = $totalDeductionAmount + $amountInUsd;
+                                            }else {
                                                 $totalDeductionAmount = $totalDeductionAmount + $value->value;
                                             }
                                         @endphp
