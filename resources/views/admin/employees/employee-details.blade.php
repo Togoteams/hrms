@@ -171,7 +171,7 @@
                                                         value="expatriate">Expatriate</option>
                                                     <option
                                                         {{ !empty($employee) ? ($employee->employment_type == 'local-contractual' ? 'selected' : '') : '' }}
-                                                        value="local-contractual">Local-Contractual </option>
+                                                        value="local">Local-Contractual </option>
 
                                                 </select>
                                             </div>

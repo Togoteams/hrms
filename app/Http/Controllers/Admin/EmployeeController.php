@@ -265,9 +265,9 @@ class EmployeeController extends BaseController
         ]);
 
         if ($request->employment_type == 'local-contractual') {
-            $request->validate([
-                'contract_duration' => ['required', 'numeric', 'gt:0'],
-            ]);
+            // $request->validate([
+            //     'contract_duration' => ['required', 'numeric', 'gt:0'],
+            // ]);
         }
 
         try {
