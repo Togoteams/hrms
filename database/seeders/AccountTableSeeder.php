@@ -72,7 +72,7 @@ class AccountTableSeeder extends Seeder
             ['name'=>"Income tax",'slug'=>"income_tax",'account_number'=>'95232352451013','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account  of Income tax",'branch_id'=>3],
             ['name'=>"SPECIAL ADVANCE TO STAFF",'slug'=>"special_advance_to_staff",'account_number'=>'95232326681010','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for SPECIAL ADVANCE TO STAFF",'branch_id'=>3],
             ['name'=>"TDS Staff",'slug'=>"tds_staff",'account_number'=>'95232352451013','account_type'=>"office",'is_credit'=>0,"description"=>"This is Account for TDS TO STAFF",'branch_id'=>3],
-            ['name'=>"Inter Branch account Credit originating",'slug'=>"inter_branch_account",'account_number'=>'95232331106001','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for Inter Branch account Credit originating",'branch_id'=>4],
+            ['name'=>"Inter Branch account Credit originating",'slug'=>"inter_branch_account",'account_number'=>'95232331106001','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for Inter Branch account Credit originating",'branch_id'=>3],
         
            
             // Palaype- 9524
