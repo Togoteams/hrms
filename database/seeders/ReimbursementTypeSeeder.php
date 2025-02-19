@@ -27,7 +27,7 @@ class ReimbursementTypeSeeder extends Seeder
             ['type'=>"Furniture Benefit",'slug'=>"furniture_benefit",'account_no'=>"","is_tax_exempt"=>0],
             ['type'=>"TELEPHONES RESIDENCE",'account_no'=>"95222354201008",'slug'=>"mobile_internet_charges_landline","is_tax_exempt"=>1],
             ];
-        DB::table('reimbursement_types')->delete();
+        // DB::table('reimbursement_types')->delete();
         foreach($reimbursementType as $key => $value)
         {
             ReimbursementType::updateOrCreate(['slug'=>$value['slug']],$value);

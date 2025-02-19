@@ -220,6 +220,13 @@ trait PayrollTraits
                         $amount = ($amount);
                     }
                     break;
+                case "tds_staff":
+                     
+                    $amount = ($salary->tax_amount_in_pula);
+                    break;
+                case "inter_branch_account":
+                        $amount = ($salary->tax_amount_in_pula);
+                    break;
                 case "mortgage_loan":
                     if ($emp->user_id == $account->user_id) {
                         $amount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
