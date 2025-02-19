@@ -69,7 +69,7 @@ class ReimbursementTypeController extends Controller
             $request->request->add(['status' =>"active"]);
             if($request->account_no)
             {
-                $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>1,'description'=>ucfirst($request->type)." for Reimbursement"];
+                $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>0,'description'=>ucfirst($request->type)." for Reimbursement"];
                 $account = Account::updateOrCreate(['account_number'=>$request->account_no],$accountData);
             }
             $request->request->add(['slug' =>Str::slug($request->type,"_")]);
@@ -119,7 +119,7 @@ class ReimbursementTypeController extends Controller
             {
                 if(!empty($request->account_no))
                 {
-                    $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>1,'description'=>ucfirst($request->type)." for Reimbursement"];
+                    $accountData = ['account_number'=>$request->account_no,"account_type"=>"reimbursement",'name'=>Str::title(str_replace('-', ' ',$request->type)),'slug'=>Str::slug($request->type,"_"),'is_credit'=>0,'description'=>ucfirst($request->type)." for Reimbursement"];
                     $account = Account::updateOrCreate(['account_number'=>$request->account_no],$accountData);
                 }
             }
