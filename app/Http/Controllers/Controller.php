@@ -38,6 +38,7 @@ class Controller extends BaseController
             $image_name = $image_name->$column_name;
         }
         $image->move($destinationPath, $image_name);
+        return $image_name;
     }
 
     public function web_url()
