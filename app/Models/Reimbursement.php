@@ -13,6 +13,7 @@ class Reimbursement extends Model
     'type_id',
     'expenses_currency',
     'financial_year',
+    'document_file',
     'expenses_amount',
     'claim_date',
     'user_id',

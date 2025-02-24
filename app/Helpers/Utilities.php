@@ -695,7 +695,10 @@ if (!function_exists('getHeadValue')) {
             $hoursInMonth = 192;
             $perHoursRate = $basicAmout / $hoursInMonth;
             $overTimeAmount = 0;
-            $overtimes = OvertimeSetting::where('date', ">=", $startDate)->where('user_id', $emp->user_id)->where('date', '<=', $endDate)->get();
+            $overtimes = OvertimeSetting::whereBetween('date', [$startDate, $endDate])
+            ->where('user_id', $emp->user_id)
+            ->get();
+        
             foreach ($overtimes  as $key => $overtime) {
                 if ($overtime->overtime_type == "holiday") {
                     $overTimeAmount = $overTimeAmount + $overtime->working_hours * ($perHoursRate * 2);

@@ -9,6 +9,7 @@
     }
 
     function taxCalCalculation() {
+        $('#table_data_btn').attr('disabled', true);
         var basicAmount = getValue('basic');
         employmentType = document.getElementById('employment_type').value;
         var taxCalcUrl = "{{ route('admin.payroll.payscale.tax.cal') }}";
@@ -71,6 +72,7 @@
                     $("#tax").val(0);
                 }
                 amount_cal();
+                $('#table_data_btn').attr('disabled', true);
             },
         });
     }

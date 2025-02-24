@@ -124,7 +124,7 @@ $(document).ready(function (e) {
             commonOption["processData"] = false;
             commonOption["contentType"] = false;
         }
-        // console.log(commonOption);
+        console.log(commonOption);
         // return false;
         // console.log($($this).attr('id'));
         $.ajax({
@@ -219,6 +219,7 @@ $(document).ready(function (e) {
             } */
         });
     });
+    
 
     $(document).ready(function () {
         $("#country_name").on("change", function () {

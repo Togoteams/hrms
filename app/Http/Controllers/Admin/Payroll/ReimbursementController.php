@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\payroll;
 use App\Http\Controllers\BaseController;
 use App\Models\CurrencySetting;
 use App\Models\Employee;
+use App\Models\LeaveApply;
 use App\Models\Reimbursement;
 use App\Models\ReimbursementType;
 use Exception;
@@ -23,7 +24,7 @@ class ReimbursementController extends BaseController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-        $data = Reimbursement::with('reimbursementype','user','user.employee')->getList()->select('*');
+        $data = Reimbursement::with('reimbursementype','user','user.employee')->orderBy('id','desc')->getList()->select('*');
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -57,7 +58,8 @@ class ReimbursementController extends BaseController
         'reimbursementFor' => $reimbursementFor,
         'expenseCurrency' => $expenseCurrency,
         'allowedCurrencies' => $allowedCurrencies,
-         'Employees' => $employees]);
+         'Employees' => $employees
+        ]);
 
 
     }
@@ -78,13 +80,14 @@ class ReimbursementController extends BaseController
     public function store(Request $request)
     {
         // $user = Auth::user();
-
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'type_id' => 'required|numeric',
+            'reimbursement_for' => 'required|numeric',
             'user_id' => 'required|numeric|exists:users,id',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
             'financial_year' => 'required|string',
+            "document_file" => ["mimetypes:application/pdf", "max:10000", 'nullable'],
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
             'reimbursement_notes' => 'required|string',
         ]);
@@ -111,15 +114,16 @@ class ReimbursementController extends BaseController
         //     }
         // });
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
+        // if ($validator->fails()) {
+        //     return $validator->errors();
+        // } else {
             try {
                 $request->merge([
                     'user_id' => $userId,
                     'branch_id' => $employee->branch_id,
                     'created_by' => auth()->user()->id,
                     'status' => "pending",
+                    'document_file' => $request->has('document_file') ? $this->insert_image($request->file('document_file'), 'document_file') : '',
                 ]);
                 if($request->reimbursement_for==2 || $request->reimbursement_for==3)
                 {
@@ -128,7 +132,6 @@ class ReimbursementController extends BaseController
                         'reimbursement_amount' => $request->reimbursement_amount,
                         'status' => "approved",
                         'approved_at' => date('Y-m-d h:i:s'),
-                        
                     ]);  
                     if($request->reimbursement_for==3)
                     {
@@ -140,11 +143,12 @@ class ReimbursementController extends BaseController
                     }
                 }
                 Reimbursement::create($request->except(['_token', '_method']));
-                return response()->json(['success' => $this->page_name . " Added Successfully"]);
-            } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+                return $this->responseJson(true, 200, $this->page_name . " Added Successfully","");
+
+            } catch (Exception $e) {  
+                return $this->responseJson(false, 200, $e->getMessage());
             }
-        }
+        // }
 
     }
 
@@ -179,11 +183,20 @@ class ReimbursementController extends BaseController
         $reimbursement = Reimbursement::find($id);
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
+        $reimbursementFor = getReimbursementFor();
+        $currencies = CurrencySetting::getCurrency()->get();
+        // return $currencies;
+        // Filter currencies to include only 'pula' and 'usd'
+        $allowedCurrencies = ['pula', 'usd'];
+        $allowedExpenseCurrencies = ['pula'];
+        $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
+        $expenseCurrency = $currencies->whereIn('currency_name_from', $allowedExpenseCurrencies);
+        $employees = Employee::where('employment_type','expatriate')->getActiveEmp()->getList()->get();
 
          // Filter currencies to include only 'pula' and 'usd'
          $allowedCurrencies = ['pula', 'usd'];
          $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
-        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'reimbursementType' => $reimbursementType,'currencies'=>$filteredCurrencySetting, 'page' => $this->page_name]);
+        return view('admin.payroll.reimbursement.edit', ['reimbursement' => $reimbursement, 'expenseCurrency' => $expenseCurrency, 'Employees' => $employees,'reimbursementFor'=>$reimbursementFor,'editData'=>$reimbursement,'reimbursementType' => $reimbursementType,'currencies'=>$filteredCurrencySetting, 'page' => $this->page_name]);
     }
 
 
@@ -191,24 +204,18 @@ class ReimbursementController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         $user = Auth::user();
-
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'type_id' => 'required|numeric',
+            'reimbursement_for' => 'required|numeric',
+            'user_id' => 'required|numeric|exists:users,id',
             'expenses_currency' => 'required|string',
             'expenses_amount' => 'required|numeric|gt:0',
             'financial_year' => 'required|string',
+            "document_file" => ["mimetypes:application/pdf", "max:10000", 'nullable'],
             'claim_date' => 'required|date|before_or_equal:' . now()->format('Y-m-d'),
-            'claim_from_month' => [
-                'required',
-                'numeric',
-            ],
-            'claim_to_month' => [
-                'required',
-                'numeric',
-            ],
             'reimbursement_notes' => 'required|string',
         ]);
 
@@ -234,27 +241,30 @@ class ReimbursementController extends BaseController
         //     }
         // });
 
-        if ($validator->fails()) {
-            return $validator->errors();
-        } else {
+        // if ($validator->fails()) {
+        //     return $validator->errors();
+        // } else { 
             try {
+                $id = $request->reimbursement_id;
+              
+                $documentFile = $request->has('document_file') ? $this->update_images('reimbursements', $id, $request->file('document_file'), 'document_file', 'document_file') : Reimbursement::find($id)->document_file;
                 Reimbursement::where('id', $id)->update([
                     'type_id' => $request->type_id,
                     'expenses_currency' => $request->expenses_currency,
                     'expenses_amount' => $request->expenses_amount,
                     'financial_year' => $request->financial_year,
                     'claim_date' => $request->claim_date,
+                    'document_file' => $documentFile,
                     'claim_from_month' => $request->claim_from_month,
                     'claim_to_month' => $request->claim_to_month,
                     'reimbursement_notes' => $request->reimbursement_notes,
                     'updated_by' => $user->id,
                 ]);
+                return $this->responseJson(true, 200, $this->page_name . " Updated Successfully","");
 
-                return response()->json(['success' => $this->page_name . " Updated Successfully"]);
             } catch (Exception $e) {
-                return response()->json(['error' => $e->getMessage()]);
+                return $this->responseJson(false, 200, $e->getMessage());
             }
-        }
     }
 
 

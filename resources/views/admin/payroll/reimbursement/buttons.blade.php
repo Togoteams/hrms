@@ -49,6 +49,6 @@
         @endcan
         @endif
         @can('approval-reimbursement')
-        <button type="button" value="{{$item['id']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
+        <button type="button" value="{{$item['id']}}" data-expense-amount="{{$item['expenses_amount']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
         @endcan
 </form>

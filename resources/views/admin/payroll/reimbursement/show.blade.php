@@ -14,6 +14,13 @@
 
         </div>
     </div>
+    <div class="mb-2 col-sm-6">
+        <div class="form-group">
+            <label for="type_id">Reimbursement For :- </label>
+            <label for="">{{ $data->reimbursement_for_name}}</label>
+
+        </div>
+    </div>
    
     <div class="mb-2 col-sm-6">
         <div class="form-group">
@@ -40,6 +47,17 @@
 
         </div>
     </div>
+    @if ($data->document_file != '')
+    <div class="mb-2 col-sm-4">
+        <div class="">
+            <label>Required Document</label>
+            <label>
+                <iframe class="img-fluid" src="{{ asset('upload/document_file/' . $data->document_file) }}"
+                    frameborder="1"></iframe>
+            </label>
+        </div>
+    </div>
+@endif
     <div class="col-sm-6">
         <div class="form-group">
             <label for="status">Status :- </label>

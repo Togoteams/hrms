@@ -338,6 +338,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
 
         // Pay Roll ReimbursementController start
         Route::resource('reimbursement', ReimbursementController::class);
+        Route::post('/reimbursement-update', [ReimbursementController::class, 'update'])->name('reimbursement.updatedata');
         Route::post('/admin/payroll/reimbursement', [ReimbursementController::class, 'status'])->name('status');
 
         // payRoll salary setting

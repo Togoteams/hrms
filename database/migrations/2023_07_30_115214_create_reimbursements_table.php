@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->string('branch_id')->nullable();
+            $table->string('document_file')->nullable();
             $table->string('status')->default('pending');
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
