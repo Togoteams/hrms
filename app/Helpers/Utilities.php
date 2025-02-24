@@ -951,17 +951,18 @@ function getSeetingValue()
 
 function isemplooye()
 {
-    try {
-        $id = Auth::user()->id;
-        $check = Role::where('id', UsersRoles::where('user_id', $id)->first()->role_id)->whereNotIn('short_code', ['MD'])->first();
-        if ($check != '') {
+    // try {
+        $user = Auth::user();
+        // $check = Role::where('id', UsersRoles::where('user_id', $id)->value('role_id'))->where('short_code', 'E')->first();
+        // return $user->role_slug;
+        if ($user->role_slug == 'employee') {
             return true;
         } else {
             return false;
         }
-    } catch (Exception $e) {
-        return  false;
-    }
+    // } catch (Exception $e) {
+    //     return  false;
+    // }
 }
 
 function total_remaining_leave($user_id = '')
