@@ -59,15 +59,19 @@ trait PayrollTraits
                     $allowanceAmoumt = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'allowance');
                     })->value('value');
-                    $overTimeAmoumt = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
-                        $q->where('slug', 'over_time');
-                    })->value('value');
+                   
                     $othersArrearsAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
                         $q->where('slug', 'others_arrears');
                     })->value('value');
                     $leaveEnCashAmount = $salary->leave_encashment_amount  * $currencyValue;
                     $emp13ChequeAmount = $salary->emp_13_cheque_amount  * $currencyValue;
-                    $amount = $basic + $allowanceAmoumt + $overTimeAmoumt + $othersArrearsAmount + $emp13ChequeAmount + $leaveEnCashAmount;
+                    $amount = $basic + $allowanceAmoumt  + $othersArrearsAmount + $emp13ChequeAmount + $leaveEnCashAmount;
+                    break;
+                case "overtime":
+                    $overTimeAmoumt = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
+                        $q->where('slug', 'over_time');
+                    })->value('value');
+                    $amount =$overTimeAmoumt;
                     break;
                 case "entertainment":
                     $salaryHeadAmount = PayrollSalaryHead::where('payroll_salary_id', $salary->id)->whereHas('payroll_head', function ($q) {
