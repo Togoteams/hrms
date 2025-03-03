@@ -53,7 +53,7 @@ class AccountTableSeeder extends Seeder
             ['name'=>"SPECIAL ADVANCE TO STAFF",'slug'=>"special_advance_to_staff",'account_number'=>'95222326681010','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for SPECIAL ADVANCE TO STAFF",'branch_id'=>2],
             ['name'=>"TDS Staff",'slug'=>"tds_staff",'account_number'=>'95222352451013','account_type'=>"office",'is_credit'=>0,"description"=>"This is Account for TDS TO STAFF",'branch_id'=>2],
             ['name'=>"Inter Branch account Credit originating",'slug'=>"inter_branch_account",'account_number'=>'95222331106001','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for Inter Branch account Credit originating",'branch_id'=>2],
-            ['name'=>"Overtime Account",'slug'=>"overtime",'account_number'=>'95222352401034','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Overtime Amount",'branch_id'=>1],
+            ['name'=>"Overtime Account",'slug'=>"overtime",'account_number'=>'95222352401034','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Overtime Amount",'branch_id'=>2],
 
 
 
@@ -75,7 +75,7 @@ class AccountTableSeeder extends Seeder
             ['name'=>"SPECIAL ADVANCE TO STAFF",'slug'=>"special_advance_to_staff",'account_number'=>'95232326681010','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for SPECIAL ADVANCE TO STAFF",'branch_id'=>3],
             ['name'=>"TDS Staff",'slug'=>"tds_staff",'account_number'=>'95232352451013','account_type'=>"office",'is_credit'=>0,"description"=>"This is Account for TDS TO STAFF",'branch_id'=>3],
             ['name'=>"Inter Branch account Credit originating",'slug'=>"inter_branch_account",'account_number'=>'95232331106001','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for Inter Branch account Credit originating",'branch_id'=>3],
-            ['name'=>"Overtime Account",'slug'=>"overtime",'account_number'=>'95232352401034','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Overtime Amount",'branch_id'=>1],
+            ['name'=>"Overtime Account",'slug'=>"overtime",'account_number'=>'95232352401034','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Overtime Amount",'branch_id'=>3],
 
            
             // Palaype- 9524
@@ -96,7 +96,7 @@ class AccountTableSeeder extends Seeder
             ['name'=>"SPECIAL ADVANCE TO STAFF",'slug'=>"special_advance_to_staff",'account_number'=>'95242326681010','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for SPECIAL ADVANCE TO STAFF",'branch_id'=>4],
             ['name'=>"TDS Staff",'slug'=>"tds_staff",'account_number'=>'95242352451013','account_type'=>"office",'is_credit'=>0,"description"=>"This is Account for TDS TO STAFF",'branch_id'=>4],
             ['name'=>"Inter Branch account Credit originating",'slug'=>"inter_branch_account",'account_number'=>'95242331106001','account_type'=>"office",'is_credit'=>1,"description"=>"This is Account for Inter Branch account Credit originating",'branch_id'=>4],
-            ['name'=>"Overtime Account",'slug'=>"overtime",'account_number'=>'95242352401034','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Overtime Amount",'branch_id'=>1],
+            ['name'=>"Overtime Account",'slug'=>"overtime",'account_number'=>'95242352401034','account_type'=>"office",'is_credit'=>0,"description"=>"This  Account is for  Overtime Amount",'branch_id'=>4],
 
         ];
         DB::table('accounts')->delete();
