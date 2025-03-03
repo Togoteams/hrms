@@ -305,6 +305,7 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
             Route::get('/ttum-view', 'ttumReport')->name('ttum.list');
             Route::post('/ttum-export', 'ttumReportExport')->name('ttum.exports');
             Route::get('/export-payroll-salary-ttum', 'reportExport')->name('export');
+            Route::get('/ttum-delete', 'deleteReport')->name('delete');
         });
 
         /*--------------------------------------------- Pay Roll Tax slab Settting Crud Start---------------------------------------------------------------*/

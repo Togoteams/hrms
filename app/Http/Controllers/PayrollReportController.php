@@ -56,9 +56,15 @@ class PayrollReportController extends Controller
             'branch_id' => $branchId,
             'ttum_month' => $ttumMonth,
         ];
-        
-        foreach($salaries as $key => $salary){
-           $ttum = $this->createTTum($salary->id);
+        $ttumExist = PayrollTtumReport::where([
+            'branch_id' => $branchId,
+            'ttum_month' => $ttumMonth,
+        ])->first();
+        if(empty($ttumExist))
+        {
+            foreach($salaries as $key => $salary){
+               $ttum = $this->createTTum($salary->id);
+            }
         }
         return Excel::download(new PayrollTtumSalaryReportExport($ttumMonth,$branchId), 'ttumReport'.$ttumMonth.'.xlsx');
     }
@@ -71,5 +77,14 @@ class PayrollReportController extends Controller
         $branchId = $ttumReport->branch_id;
 
         return Excel::download(new PayrollTtumSalaryReportExport($ttumMonth,$branchId), 'ttumReport'.$ttumMonth.'.xlsx');
+    }
+    public function deleteReport(Request $request)
+    {
+        ini_set('max_execution_time', 300); // Increase to 5 minutes
+        $ttumId = $request->ttum_id;
+        $ttumReport = PayrollTtumReport::find($ttumId);
+        $ttumReport->payrollTtumSalaryReport()->delete();
+        $ttumReport->delete();
+        return back();
     }
 }
