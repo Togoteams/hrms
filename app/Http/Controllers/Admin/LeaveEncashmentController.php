@@ -29,11 +29,8 @@ class LeaveEncashmentController extends Controller
     {
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
-            if (isemplooye()) {
-                $data = LeaveEncashment::with('user', 'leave_settings', 'employee', 'employee.designation')->where('user_id', Auth::user()->id)->select('*');
-            } else {
-                $data = LeaveEncashment::with('user', 'leave_settings', 'employee', 'employee.designation')->select('*');
-            }
+         
+            $data = LeaveEncashment::with('user', 'leave_settings', 'employee', 'employee.designation')->getList()->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
 

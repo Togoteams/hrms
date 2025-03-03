@@ -64,12 +64,23 @@ protected $appends = [
     
     public function scopeGetList($query)
     {
-        if(isemplooye())
+        // if(isemplooye())
+        // {
+        //     return $query->where('user_id', auth()->user()->id);
+        // }else
+        // {
+        //     return $query;
+        // }
+        if(auth()->user()->role_slug=='branch-head')
         {
-            return $query->where('user_id', auth()->user()->id);
+            $query->whereHas('user.employee',function($q){
+                $q->where('branch_id', auth()->user()->employee->branch_id);
+            });
+        }elseif(auth()->user()->role_slug=='hr_head' || auth()->user()->role_slug=='managing-director' ||   auth()->user()->id==1){
+            $query;
         }else
         {
-            return $query;
+            $query->where('user_id',auth()->user()->id);
         }
     }
 

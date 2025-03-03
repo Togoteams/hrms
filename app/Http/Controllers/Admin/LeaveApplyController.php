@@ -509,11 +509,9 @@ class LeaveApplyController extends BaseController
 
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
-            if (isemplooye()) {
-                $data = LeaveApply::with('user', 'user.employee', 'leave_type')->where('user_id', Auth::user()->id)->where('leave_applies.status', 'approved')->select('*');
-            } else {
-                $data = LeaveApply::with('user', 'user.employee', 'leave_type')->where('leave_applies.status', 'approved')->select('*');
-            }
+           
+            $data = LeaveApply::with('user', 'user.employee', 'leave_type')->getList()->where('status', 'approved')->select('*');
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -539,11 +537,9 @@ class LeaveApplyController extends BaseController
     {
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
-            if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type', 'user.employee')->where('user_id', Auth::user()->id)->where('status', 'pending')->get();
-            } else {
-                $data = LeaveApply::with('user', 'leave_type', 'user.employee')->where('status', 'pending')->get();
-            }
+            
+            $data = LeaveApply::with('user', 'user.employee', 'leave_type')->getList()->where('status', 'pending')->getList()->select('*');
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -568,11 +564,9 @@ class LeaveApplyController extends BaseController
     {
         if ($request->ajax()) {
             // if user is not equal to employee then show all data
-            if (isemplooye()) {
-                $data = LeaveApply::with('user', 'leave_type')->where('user_id', Auth::user()->id)->where('status', 'reject')->get();
-            } else {
-                $data = LeaveApply::with('user', 'leave_type')->where('status', 'reject')->get();
-            }
+            
+            $data = LeaveApply::with('user', 'user.employee', 'leave_type')->where('status', 'reject')->getList()->select('*');
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
