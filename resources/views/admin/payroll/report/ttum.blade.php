@@ -34,7 +34,7 @@
                             @can('export-report-ttum-report')
                                 <button type="button" class="btn btn-white" data-bs-toggle="modal"
                                     data-bs-target="#reportReport">
-                                    Export Report
+                                    Genrate TTUM 
                                 </button>
                             @endcan
 

@@ -22,7 +22,7 @@ class OvertimeController extends BaseController
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = OvertimeSetting::with('user')->select('*');
+            $data = OvertimeSetting::with('user')->getList()->select('*');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

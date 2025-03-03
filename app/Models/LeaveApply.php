@@ -48,7 +48,7 @@ class LeaveApply extends Model
             $query->where('user_id',auth()->user()->id);
         }
         
-        return $query;
+        return $query->orderBy('id','desc');
     }
     public static function boot()
     {
