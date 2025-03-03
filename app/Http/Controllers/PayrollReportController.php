@@ -9,6 +9,9 @@ use Carbon\Carbon;
 use Excel;
 use App\Exports\PayrollTtumSalaryReportExport;
 use App\Models\Branch;
+use App\Models\PayrollSalary;
+use App\Models\PayrollTtumReport;
+use App\Traits\PayrollTraits;
 use Illuminate\Support\Facades\Validator;
 
 class PayrollReportController extends Controller
@@ -19,15 +22,20 @@ class PayrollReportController extends Controller
     public $page_name = "Salary TTUM Report";
     //
     private $salaryMonth;
+    use PayrollTraits;
 
     public function ttumReport(Request $request)
     {
         if ($request->ajax()) {
 
-            $data = PayrollTtumSalaryReport::with('account')->orderBy('id', 'ASC');
+            $data = PayrollTtumReport::orderBy('id', 'ASC');
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = view('admin.payroll.report.buttons', ['item' => $row, "route" => 'payroll.salary']);
+                    return $actionBtn;
+                })
                 ->make(true);
         }
         $branches= Branch::get();
@@ -36,12 +44,32 @@ class PayrollReportController extends Controller
     
     public function ttumReportExport(Request $request)
     {
+        ini_set('max_execution_time', 300); // Increase to 5 minutes
         $ttumMonth = $request->transaction_at;
         $branchId = $request->branch_id;
-       
+
         $request->validate([
             'transaction_at' => 'required|date_format:Y-m',
         ]);
+        $salaries = PayrollSalary::where('branch_id',$branchId)->where('pay_for_month_year',$ttumMonth)->get();
+        $data = [
+            'branch_id' => $branchId,
+            'ttum_month' => $ttumMonth,
+        ];
+        
+        foreach($salaries as $key => $salary){
+           $ttum = $this->createTTum($salary->id);
+        }
+        return Excel::download(new PayrollTtumSalaryReportExport($ttumMonth,$branchId), 'ttumReport'.$ttumMonth.'.xlsx');
+    }
+    public function reportExport(Request $request)
+    {
+        ini_set('max_execution_time', 300); // Increase to 5 minutes
+        $ttumId = $request->ttum_id;
+        $ttumReport = PayrollTtumReport::find($ttumId);
+        $ttumMonth = $ttumReport->ttum_month;
+        $branchId = $ttumReport->branch_id;
+
         return Excel::download(new PayrollTtumSalaryReportExport($ttumMonth,$branchId), 'ttumReport'.$ttumMonth.'.xlsx');
     }
 }

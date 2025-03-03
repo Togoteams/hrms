@@ -12,6 +12,7 @@ use App\Models\PayrollSalaryHead;
 use App\Models\PayrollSalary;
 use App\Models\Employee;
 use App\Models\PayrollTaxLog;
+use App\Models\PayrollTtumReport;
 use App\Models\Reimbursement;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -23,7 +24,16 @@ trait PayrollTraits
         $ttumMonth = $data['ttum_month'];
         $branchId = $data['branch_id'];
         $accountId = $data['account_id'];
+
+        $ttum = PayrollTtumReport::updateOrCreate([
+            'branch_id' => $branchId,
+            'ttum_month' => $ttumMonth,
+        ],[
+            'branch_id' => $branchId,
+            'ttum_month' => $ttumMonth,
+        ]);
         $data['transaction_amount'] = $data['transaction_amount'] ?? 0;
+        $data['payroll_ttum_report_id'] = $ttum->id;
         $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->where('branch_id',$branchId)->first();
 
         if (!empty($ttumExist)) {

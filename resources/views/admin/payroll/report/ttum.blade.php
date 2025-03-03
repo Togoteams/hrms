@@ -49,11 +49,12 @@
                                 <th>SL</th>
                                 <th>Branch</th>
                                 <th>TTUM Month</th>
-                                <th>Account Name</th>
+                                <th>Action</th>
+                                {{-- <th>Account Name</th>
                                 <th>Account Number No.</th>
                                 <th>Transacation Type</th>
                                 <th>Transacation Amount</th>
-                                <th>Transacation Currency</th>
+                                <th>Transacation Currency</th> --}}
 
                             </tr>
                         </thead>
@@ -86,26 +87,11 @@
                                     name: 'ttum_month'
                                 },
                                 {
-                                    data: 'account.name',
-                                    name: 'account.name'
+                                    data: 'action',
+                                    name: 'action',
+                                    orderable: false,
+                                    searchable: true
                                 },
-                                {
-                                    data: 'account.account_number',
-                                    name: 'account.account_number'
-                                },
-
-                                {
-                                    data: 'transaction_type',
-                                    name: 'transaction_type'
-                                },
-                                {
-                                    data: 'transaction_amount',
-                                    name: 'transaction_amount'
-                                },
-                                {
-                                    data: 'transaction_currency',
-                                    name: 'transaction_currency'
-                                }
                             ]
                         });
 

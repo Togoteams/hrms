@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('account_id');
             $table->bigInteger('branch_id');
             $table->bigInteger('payroll_salary_id');
+            $table->bigInteger('payroll_ttum_report_id');
             $table->string('transaction_type')->comment('credit,debit');
             $table->decimal('transaction_amount',10,2);
             $table->string('transaction_currency');
