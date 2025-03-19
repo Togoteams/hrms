@@ -14,6 +14,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Log;
 
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -40,7 +41,6 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
     {
         set_time_limit(0);
         // dd($row['employment_type']);
-        // dd($row['date_of_joining']);
           // Check if all values in the row are empty
         if (empty(array_filter($row))) {
             return null; // Skip this row if all values are empty
@@ -55,13 +55,14 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                 "email_verified_at"=>$faker->dateTime(),
                 "password"=>Hash::make('User@123'),
             ];
-            $dateOfBirth = "";
-            $dateOfJoining = "";
+            $dateOfBirth = @$row["date_of_birth"];
+            $dateOfJoining = @str_replace(".",'-', $row["date_of_joining"]);
             if(!empty(@$row["date_of_birth"]) && !is_string(@$row["date_of_birth"]))
             {
                 $dateOfBirth = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(@$row["date_of_birth"]));
                 $dateOfBirth = date('Y-m-d',strtotime($dateOfBirth));
             }
+            
             if(!empty(@$row["date_of_joining"]) &&  !is_string(@$row["date_of_joining"]))
             {
                 $dateOfJoining = Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(@$row["date_of_joining"]));
@@ -89,7 +90,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                 }
                 $employeeData =[
                     "user_id"=>$user->id,
-                    "emp_id"=>'emp-' . date('Y') . "-" . Employee::count('emp_id') + 1,
+                    "emp_id"=>'emp-' . date('Y') . "-" . $user->id,
                     "designation_id"=>$designation?->id,
                     "date_of_birth"=>$dateOfBirth,
                     "gender"=> str::lower($row['gender']),
@@ -97,13 +98,13 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                     "emergency_contact"=>$row['emergency_contact_no'],
                     "ec_number"=>$row['ec_number'],
                     "start_date"=>$dateOfJoining,
-                    "start_date"=>$dateOfJoining,
                     "employment_type"=>$employmentType,
                     "bank_account_number"=>$row['bank_account_no'],
                     "place_of_domicile"=>$row['place_of_domicile'],
                     "branch_id"=>$branch?->id,
                 ];
                 $employee = Employee::updateOrCreate(['user_id'=>$user->id],$employeeData);
+                Log::info("employee" . ($employee));
                 $salaryData = [
                     'basic_salary'=>$row['basic_salary'],
                     'date_of_current_basic'=>date('Y-m-d'),

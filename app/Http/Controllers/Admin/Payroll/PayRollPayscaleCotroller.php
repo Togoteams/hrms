@@ -36,7 +36,7 @@ class PayRollPayscaleCotroller extends BaseController
         }
 
         if ($request->ajax()) {
-            $data = PayRollPayscale::with('user', 'employee')->get();
+            $data = PayRollPayscale::with('user', 'employee')->getList()->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
