@@ -113,14 +113,15 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                     'pension_opt'=>(int)$row['pension_contribution_percantage'],
                     'union_membership_id'=>str::lower($row['is_union_membership']),
                 ];
-                $salaryData = SalaryHistory::updateOrCreate($salaryData);
+                $salaryData = SalaryHistory::updateOrCreate(['user_id'=>$user->id],$salaryData);
                 $addressData =[
                     'address'=>$row['address'],
                     'city'=>$row['city'],
+                    'user_id'=>$user->id,
                     'state'=>$row['state'],
                     'country'=>$row['country'],
                 ];
-                $addressData = EmpAddress::updateOrCreate($addressData);
+                $addressData = EmpAddress::updateOrCreate(['user_id'=>$user->id],$addressData);
             }
         }
             return null;
