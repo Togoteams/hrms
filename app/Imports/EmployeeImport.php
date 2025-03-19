@@ -68,7 +68,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                 $dateOfJoining = date('Y-m-d',strtotime($dateOfJoining));
             }
             $role = Role::where('slug', str::slug($row['role']))->first();
-            $user = User::updateOrCreate($userData);
+            $user = User::updateOrCreate(['email'=>$row['email']],$userData);
             if($user){
                 if($role)
                 {
@@ -78,6 +78,9 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                 $branch = Branch::where('name', $row['branch'])->first();
                 $employmentType = str::slug($row['employment_type']);
                 if($employmentType=="local-confirmed")
+                {
+                    $employmentType = 'local';
+                }elseif($employmentType=="local-contractual")
                 {
                     $employmentType = 'local';
                 }else
@@ -100,7 +103,7 @@ class EmployeeImport implements ToModel, WithHeadingRow,WithMultipleSheets,WithC
                     "place_of_domicile"=>$row['place_of_domicile'],
                     "branch_id"=>$branch?->id,
                 ];
-                $employee = Employee::updateOrCreate($employeeData);
+                $employee = Employee::updateOrCreate(['user_id'=>$user->id],$employeeData);
                 $salaryData = [
                     'basic_salary'=>$row['basic_salary'],
                     'date_of_current_basic'=>date('Y-m-d'),
