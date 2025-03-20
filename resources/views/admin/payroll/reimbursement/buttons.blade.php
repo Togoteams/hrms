@@ -44,7 +44,7 @@
         @can('approval-reimbursement')
         <button type="button" value="{{$item['id']}}" data-expense-amount="{{$item['expenses_amount']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
         @endcan
-        @if(auth::user()->id==1)
+        @if(auth()->user()->id==1)
         @csrf
         <input type="hidden" name="_method" value="DELETE">
         @can('delete-reimbursement')
