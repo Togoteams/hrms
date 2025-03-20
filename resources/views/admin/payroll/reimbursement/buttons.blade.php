@@ -39,7 +39,13 @@
             class="btn btn-edit btn-sm"><i class="fas fa-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i>
         </button>
         @endcan
-            @csrf
+      
+        @endif
+        @can('approval-reimbursement')
+        <button type="button" value="{{$item['id']}}" data-expense-amount="{{$item['expenses_amount']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
+        @endcan
+        @if(auth::user()->id==1)
+        @csrf
         <input type="hidden" name="_method" value="DELETE">
         @can('delete-reimbursement')
         <button type="button" id="delete{{ $item->id }}"
@@ -48,7 +54,4 @@
         </button>
         @endcan
         @endif
-        @can('approval-reimbursement')
-        <button type="button" value="{{$item['id']}}" data-expense-amount="{{$item['expenses_amount']}}" class="@if($item['status']=='pending') status_change @endif btn btn-success btn-sm">{{ucfirst($item['status'])}}</button>
-        @endcan
 </form>
