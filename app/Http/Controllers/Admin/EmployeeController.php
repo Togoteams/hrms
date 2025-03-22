@@ -40,10 +40,10 @@ class EmployeeController extends BaseController
 {
     public $page_name = "Employees";
 
-    public function getEmployee($emp_id = null)
+    public function getEmployee($ecNumber = null)
     {
-        if (!empty($emp_id)) {
-            return Employee::firstWhere('emp_id', $emp_id);
+        if (!empty($ecNumber)) {
+            return Employee::firstWhere('ec_number', $ecNumber);
         } else {
             return '';
         }

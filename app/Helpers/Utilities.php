@@ -602,10 +602,10 @@ if (!function_exists('getLeavesSalary')) {
         return ['total_avail_leave_count' => $totalAvailLeave, 'no_of_paid_leave' => $noOfPaidLeave, 'no_of_unpaid_leave' => $noOfUnpaidLeave];
     }
 }
-function getEmployee($emp_id = null)
+function getEmployee($ec_number = null)
 {
-    if (!empty($emp_id)) {
-        return Employee::firstWhere('emp_id', $emp_id);
+    if (!empty($ec_number)) {
+        return Employee::firstWhere('ec_number', $ec_number);
     } else {
         return '';
     }
