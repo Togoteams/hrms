@@ -26,6 +26,25 @@ class ReimbursementController extends BaseController
         if ($request->ajax()) {
         $data = Reimbursement::with('reimbursementype','user','user.employee')->orderBy('id','desc')->getList()->select('*');
         return DataTables::of($data)
+                ->filter(function ($query) use ($request) {
+                    if ($request->has('search') && $request->input('search')['value']) {
+                        $search = $request->input('search')['value'];
+                        $query->whereHas('reimbursementype', function ($q) use ($search) {
+                            $q->where('type', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('user.employee', function ($q) use ($search) {
+                            $q->where('ec_number', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('user', function ($q) use ($search) {
+                            $q->where('name', 'like', "%{$search}%");
+                        })
+                        ->orWhere('financial_year', 'like', "%{$search}%")
+                        ->orWhere('expenses_currency', 'like', "%{$search}%")
+                        ->orWhere('expenses_amount', 'like', "%{$search}%")
+                        ->orWhere('reimbursement_notes', 'like', "%{$search}%")
+                        ->orWhere('status', 'like', "%{$search}%");
+                    }
+                })
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $actionBtn = view('admin.payroll.reimbursement.buttons', ['item' => $row, "route" => 'payroll.reimbursement']);
@@ -44,8 +63,6 @@ class ReimbursementController extends BaseController
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
-        // return $currencies;
-        // Filter currencies to include only 'pula' and 'usd'
         $allowedCurrencies = ['pula', 'usd'];
         $allowedExpenseCurrencies = ['pula'];
         $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);

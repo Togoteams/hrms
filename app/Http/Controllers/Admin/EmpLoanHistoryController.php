@@ -65,7 +65,7 @@ class EmpLoanHistoryController extends BaseController
                 true,
                 200,
                 $message,
-                ["employee" => $employee, 'redirect_url' => route('admin.employee.current-leaves.list', $employee->emp_id)]
+                ["employee" => $employee, 'redirect_url' => route('admin.employee.current-leaves.list', $employee->ec_number)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

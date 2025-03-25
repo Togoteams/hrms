@@ -198,7 +198,7 @@ class EmployeeController extends BaseController
                     $message,
                     [
                         "employee" => $employee,
-                        'redirect_url' => route('admin.employee.employeeDetails.form', $employee->emp_id)
+                        'redirect_url' => route('admin.employee.employeeDetails.form', $employee->ec_number)
                     ]
                 );
             }
@@ -279,12 +279,12 @@ class EmployeeController extends BaseController
 
             if (!empty($employee)) {
                 $message = "Employee Details Added Successfully";
-                // return route('admin.employee.address.form', $employee->emp_id);
+                // return route('admin.employee.address.form', $employee->ec_number);
                 return $this->responseJson(
                     true,
                     200,
                     $message,
-                    ["employee" => $employee,'redirect_url' => route('admin.employee.salary-history.list', $employee->emp_id)]
+                    ["employee" => $employee,'redirect_url' => route('admin.employee.salary-history.list', $employee->ec_number)]
                 );
             }
         } catch (Exception $e) {
@@ -324,7 +324,7 @@ class EmployeeController extends BaseController
             return $this->responseJson( true,
                 200,
                 $message,
-                ["employee" => $employee,'redirect_url' => route('admin.employee.domicile.form', $employee->emp_id)]
+                ["employee" => $employee,'redirect_url' => route('admin.employee.domicile.form', $employee->ec_number)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -394,7 +394,7 @@ class EmployeeController extends BaseController
                 true,
                 200,
                 $message,
-                ["employee" => $employee,'redirect_url' => route('admin.employee.qualification.form', $employee->emp_id)]
+                ["employee" => $employee,'redirect_url' => route('admin.employee.qualification.form', $employee->ec_number)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -431,7 +431,7 @@ class EmployeeController extends BaseController
                 true,
                 200,
                 $message,
-                ["employee" => $employee,'redirect_url' => route('admin.employee.medicalInsuaranceBomaid.form', $employee->emp_id)]
+                ["employee" => $employee,'redirect_url' => route('admin.employee.medicalInsuaranceBomaid.form', $employee->ec_number)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -491,7 +491,7 @@ class EmployeeController extends BaseController
                 true,
                 200,
                 $message,
-                ["employee" => $employee,'redirect_url' => route('admin.employee.departmentHistory.form', $employee->emp_id)]
+                ["employee" => $employee,'redirect_url' => route('admin.employee.departmentHistory.form', $employee->ec_number)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -543,7 +543,7 @@ class EmployeeController extends BaseController
                     true,
                     200,
                     $message,
-                    ["employee" => $employee,'redirect_url' => route('admin.employee.passportOmang.form', $employee->emp_id)]
+                    ["employee" => $employee,'redirect_url' => route('admin.employee.passportOmang.form', $employee->ec_number)]
                 );
             }
         } catch (Exception $e) {
@@ -618,7 +618,7 @@ class EmployeeController extends BaseController
                 true,
                 200,
                 $message,
-                ["employee" => $employee,'redirect_url' => route('admin.employee.departmentHistory.form', $employee->emp_id)]
+                ["employee" => $employee,'redirect_url' => route('admin.employee.departmentHistory.form', $employee->ec_number)]
             );
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
