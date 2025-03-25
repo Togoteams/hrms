@@ -401,6 +401,7 @@
         {
             "name": "Add Salary","module": "Salary", "permissions_for":"admin,branch_head,hr_head"
         },
+       
         {
             "name": "View Salary","module": "Salary", "permissions_for":"admin,employee"
         },
@@ -557,6 +558,9 @@
         },
         {
             "name": "Download Backup","module": "Backup", "permissions_for":"admin"
+        },
+        {
+            "name": "Salary Setting","module": "Salary", "permissions_for":"admin,branch_head,hr_head"
         }
     ]
 }

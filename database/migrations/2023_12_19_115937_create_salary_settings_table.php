@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('bank_pension_contribution')->nullable();
             $table->string('local_bank_bomaid_contribution')->nullable();
             $table->string('ibo_bank_bomaid_contribution')->nullable();
+            $table->double('da_per',8,2)->default(0)->nullable();
             $table->string('salary_date')->nullable();
             $table->timestamps();
         });

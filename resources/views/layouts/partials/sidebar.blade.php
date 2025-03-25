@@ -416,10 +416,10 @@
                                  @endcanany
                                  {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.index' ? 'active' : '' }}  "
                                      href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a> --}}
-                                 {{-- @canany(['salary-setting'])
+                                 @canany(['salary-setting'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary_setting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary_setting.index') }}">Salary Setting</a>
-                                 @endcanany --}}
+                                 @endcanany
 
                              </div>
                          </div>

@@ -673,7 +673,8 @@ if (!function_exists('getHeadValue')) {
             $inrBasicAmount = $latestSalary->basic_salary_for_india;
 
             if ($latestSalary->salary_type == "nps") {
-                $inrBasicAmount = $inrBasicAmount +  ((($inrBasicAmount / 100)) * $latestSalary->da);
+                $daPer = getSeetingValue()->da_per;
+                $inrBasicAmount = $inrBasicAmount +  ((($inrBasicAmount / 100)) * $daPer);
             }
             // return $inrBasicAmount;
             $usdToInr = getCurrencyValue("usd", "inr");

@@ -408,7 +408,8 @@ trait PayrollTraits
         $inrBasicAmount = $latestSalary->basic_salary_for_india;
         $pfContibutionForBank = 10;
         if ($latestSalary->salary_type == "nps") {
-            $inrBasicAmount = $latestSalary->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $latestSalary->da);
+            $daPer = getSeetingValue()->da_per;
+            $inrBasicAmount = $latestSalary->basic_salary_for_india  +  ((($inrBasicAmount / 100)) * $daPer);
             $pfContibutionForBank = 14;
         }
         $usdToInrAmount = getCurrencyValue("usd", "inr");

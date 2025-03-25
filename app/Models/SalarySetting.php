@@ -13,6 +13,7 @@ class SalarySetting extends Model
         'ibo_bank_bomaid_contribution',
         'local_bank_bomaid_contribution',
         'salary_date',
+        'da_per',
     ];
 
 }

@@ -37,12 +37,11 @@ class SalarySettingController extends BaseController
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'bank_pension_contribution' => 'required|numeric',
-            'local_bank_bomaid_contribution' => 'required|numeric',
-            'ibo_bank_bomaid_contribution' => 'required|numeric',
-            'salary_date' => 'required|numeric',
-
-
+            // 'bank_pension_contribution' => 'required|numeric',
+            // 'local_bank_bomaid_contribution' => 'required|numeric',
+            // 'ibo_bank_bomaid_contribution' => 'required|numeric',
+            // 'salary_date' => 'required|numeric',
+            'da_per' => 'required'
         ]);
         if ($validator->fails()) {
             return $validator->errors();
