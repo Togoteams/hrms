@@ -16,13 +16,13 @@
                         </a>/ {{ $page }}
                     </div>
                     <!-- End Col -->
+                  
                 </div>
                 <!-- Button trigger modal -->
 
                 <!-- End Row -->
             </div>
 
-            @include('admin.account.create')
 
             <!-- Card -->
             <div class="mb-3 card mb-lg-5">
@@ -31,8 +31,13 @@
                         <div class="mb-2 col-sm mb-sm-0">
                             <h2 class="page-header-title">{{ $page }}</h2>
                         </div>
-                       
-
+                        <div class="col-sm-auto">
+                        @can('add-salary')
+                        <a class="text-white btn btn-white" href="{{ route('admin.payroll.emp-13th-cheque.create') }}">
+                            Add {{ $page }}
+                        </a>
+                        @endcan
+                        </div>
                     </div>
                 </div>
                 {{-- Table --}}
@@ -43,6 +48,8 @@
                                 <th>SI.</th>
                                 <th>Employee Name</th>
                                 <th>Employee Code</th>
+                                <th>Total Salary</th>
+                                <th>Average Amount</th>
                                 <th>13th Cheques Amount</th>
                                 <th>Cheques Month Year</th>
                                 {{-- <th>Status</th> --}}
@@ -79,8 +86,16 @@
                                     name: 'user.employee.ec_number'
                                 },
                                 {
-                                    data: 'amount',
-                                    name: 'amount'
+                                    data: 'total_amount',
+                                    name: 'total_amount'
+                                },
+                                {
+                                    data: 'average_amount',
+                                    name: 'average_amount'
+                                },
+                                {
+                                    data: 'net_payable_amount',
+                                    name: 'net_payable_amount'
                                 },
                                 {
                                     data: 'cheques_month_year',

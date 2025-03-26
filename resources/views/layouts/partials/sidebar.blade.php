@@ -414,8 +414,8 @@
                                  @endcanany
                                  @canany(['add-13-cheque', 'edit-13-cheque', 'delete-13-cheque', 'view-13-cheque'])
                                  @endcanany
-                                 {{-- <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.index' ? 'active' : '' }}  "
-                                     href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a> --}}
+                                 <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.emp-13th-cheque.index' ? 'active' : '' }}  "
+                                     href="{{ route('admin.payroll.emp-13th-cheque.index') }}">13th Cheque</a>
                                  @canany(['salary-setting'])
                                      <a class="nav-link {{ Route::getCurrentRoute()->getName() == 'admin.payroll.salary_setting.index' ? 'active' : '' }}  "
                                          href="{{ route('admin.payroll.salary_setting.index') }}">Salary Setting</a>

@@ -350,6 +350,9 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'changed.password'])->
         /*--------------------------------------------- Pay Roll Payscal Crud Start---------------------------------------------------------------*/
         Route::resource('salary', PayrollSalaryController::class);
         Route::get('emp-13th-cheque', [Emp13thChequeController::class, 'index'])->name('emp-13th-cheque.index');
+        Route::get('create-branch-wise-13-cheque', [Emp13thChequeController::class, 'create13Cheque'])->name('emp-13th-cheque.create');
+        Route::get('generate-branch-wise-13-cheque', [Emp13thChequeController::class, 'genrate13Cheque'])->name('emp-13th-cheque.generate');
+        Route::post('save-13-cheque', [Emp13thChequeController::class, 'save13Cheque'])->name('emp-13th-cheque.save');
 
         Route::get('salary/status/{id}', [PayrollSalaryController::class, 'status'])->name('salary.status');
         Route::get('tax-for-ibo/report', [PayrollIboTaxController::class, 'iboTaxReport'])->name('tax-for-ibo.report');
