@@ -75,9 +75,9 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="mb-2 col-sm-4" id="generate_btn">
+                        <div class="mb-2 col-sm-4">
                             <div class="mt-4 form-group">
-                                <button type="button" onclick="generate()" class="btn btn-primary btn-sm">Search</button>
+                                <button type="button" onclick="generate()" class="btn btn-primary btn-sm" id="generate_btn">Search</button>
                             </div>
                         </div>
                         <span id="append_data">
@@ -85,7 +85,7 @@
                         </span>
                     </div>
                     <hr>
-                    <div class="mt-1 text-center" id="table_data_btn">
+                    <div class="mt-1 text-center d-none" id="table_data_btn">
                         <button type="submit" class="btn btn-primary btn-sm">Save 13 Cheque</button>
                     </div>
                 </form>
@@ -100,6 +100,11 @@
     function generate()
     {
         var url = "{{route('admin.payroll.emp-13th-cheque.generate')}}"
+        var $button = $('#generate_btn');
+        var orgButtonHtml = $button.html();
+        $button.prop('disabled', true); // Button Disabled after submission the form
+        $button.html('<span class="spinner-border spinner-border-sm" style="color: #ff5722" role="status" aria-hidden="true"></span><span style="color: #ff5722"> Processing...</span>');
+    
         $.ajax({
             type: "get",
             url: url,
@@ -112,10 +117,12 @@
             dataType: "json",
             beforeSend: function () {},
             success: function (response) {
+                $button.prop('disabled', false); // Loader Disabled
+                $button.html(orgButtonHtml);
                 if (response.status) {
                     $("#append_data")
                         .html(response.data.html_view);
-                 $("#table_data_btn").css('display','block');
+                 $("#table_data_btn").removeClass('d-none');
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -123,9 +130,13 @@
                         showConfirmButton: false,
                         timer: 1500,
                     });
+                    $button.prop('disabled', false); // Loader Disabled
+                    $button.html(orgButtonHtml);
                 }
             },
             error: function (response) {
+                $button.prop('disabled', false); // Loader Disabled
+                $button.html(orgButtonHtml);
                 Swal.fire({
                     icon: "error",
                     title: "We are facing some technical issue now. Please try again after some time",

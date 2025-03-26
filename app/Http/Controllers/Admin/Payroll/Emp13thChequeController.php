@@ -92,10 +92,10 @@ class Emp13thChequeController extends BaseController
                     $emp13ChequeReport[$ekey]['months'][$key]['month_key'] = $month['month']['key'];
                 }
                 $emp13ChequeReport[$ekey]['total_amount'] = $totalBasicAmount;
-                $emp13ChequeReport[$ekey]['average_amount'] = number_format($totalBasicAmount/12,2);
+                $emp13ChequeReport[$ekey]['average_amount'] = ($totalBasicAmount/12);
                 // $totalITaxAmount = $this->getTaxAmount(['taxable_amount'=>$totalBasicAmount,'employment_type'=>$employe->employment_type])['tax_amount'];
                 $emp13ChequeReport[$ekey]['total_i_tax_amount'] = $totalITaxAmount;
-                $emp13ChequeReport[$ekey]['net_payable_amount'] = number_format($totalBasicAmount/12-$totalITaxAmount);
+                $emp13ChequeReport[$ekey]['net_payable_amount'] = ($totalBasicAmount/12-$totalITaxAmount);
             }
         }
         $view = View::make('admin.payroll.emp13th-cheque.preview-genrate-form',  [
@@ -159,7 +159,7 @@ class Emp13thChequeController extends BaseController
                 Emp13thCheque::insert($saveData);
             }
             $redirectUrl = route('admin.payroll.emp-13th-cheque.index');
-            return $this->responseJson(true, 200, "Saved Successfully",['data'=>$redirectUrl]);
+            return $this->responseJson(true, 200, "Saved Successfully",['redirect_url'=>$redirectUrl]);
 
 
     }
