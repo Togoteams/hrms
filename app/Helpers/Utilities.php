@@ -251,6 +251,20 @@ function generateMonthArray($start_date, $end_date) {
 
     return $months;
 }
+function getFinancialYear() {
+    // Convert the start and end dates to DateTime objects
+    $currentMonth = Carbon::now()->month; // Numeric month (e.g., 3 for March)
+    $currentYear = Carbon::now()->subYear()->year; // Previous year (e.g., 2024)
+    $nextYear = Carbon::now()->year; // Current year (e.g., 2025)
+    if($currentMonth>=4)
+    {
+        $currentYear = Carbon::now()->year; // Gets current year (e.g., 2025)
+        $nextYear = Carbon::now()->addYear()->year; // Gets next year (e.g., 2026)
+    }
+    $financialYear = $currentYear."-".$nextYear;
+    return $financialYear;
+}
+
 
 if (!function_exists('isMobileDevice')) {
     function isMobileDevice()

@@ -34,7 +34,7 @@
                         <div class="col-sm-auto">
                         @can('add-salary')
                         <a class="text-white btn btn-white" href="{{ route('admin.payroll.emp-13th-cheque.create') }}">
-                            Add {{ $page }}
+                            Create {{ $page }}
                         </a>
                         @endcan
                         </div>

@@ -1,11 +1,15 @@
 <style>
-    table{
+    .table{
     
+        width: 100%;
+        font-size: 10px;
         border: 1px solid black;
     }
-    td{
-        border: 1px solid black;
-    }
+    .table td{
+            border: 1px solid black;
+            padding: 2px;
+        }
+    
     
 </style>
 @if($financial_year)
@@ -13,8 +17,8 @@
     @if ($employees)
     <table class="table" >
         <tr>
-            <td colspan="12">
-                Payment of 13th Cheque {{$financial_year_text}} Of Branch  </td>
+            <td colspan="19">
+                Payment of 13th Cheque {{$financial_year_text}} Of Branch {{ $branch->name }}  </td>
         </tr>
         <tr>
             <td>Employees Name</td>
@@ -39,10 +43,10 @@
                 </div>  </td>
                 
                 @endforeach 
-                <td> {{ $employe['total_amount']}} <input type="hidden" name="total_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['total_amount'] }}"></td>
-                <td>{{ $employe['average_amount']}}  <input type="hidden" name="average_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['average_amount'] }}"></td>
-                <td>{{ $employe['total_i_tax_amount']}}  <input type="hidden" name="total_i_tax_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['total_i_tax_amount'] }}"></td>
-                <td>{{ $employe['net_payable_amount']}}  <input type="hidden" name="net_payable_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['net_payable_amount'] }}"></td>
+                <td> {{ number_format($employe['total_amount'],2)}} <input type="hidden" name="total_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['total_amount'] }}"></td>
+                <td>{{ number_format($employe['average_amount'],2)}}  <input type="hidden" name="average_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['average_amount'] }}"></td>
+                <td>{{ number_format($employe['total_i_tax_amount'],2)}}  <input type="hidden" name="total_i_tax_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['total_i_tax_amount'] }}"></td>
+                <td>{{ number_format($employe['net_payable_amount'],2)}}  <input type="hidden" name="net_payable_amount__[{{ $employe['user_id'] }}]" value="{{ $employe['net_payable_amount'] }}"></td>
                 <td>{{ $employe['bank_account_number']}}</td>
 
             </tr>

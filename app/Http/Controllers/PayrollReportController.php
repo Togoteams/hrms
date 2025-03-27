@@ -56,6 +56,7 @@ class PayrollReportController extends Controller
             'branch_id' => $branchId,
             'ttum_month' => $ttumMonth,
         ];
+        // return $data;
         $ttumExist = PayrollTtumReport::where([
             'branch_id' => $branchId,
             'ttum_month' => $ttumMonth,

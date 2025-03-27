@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('ttum_month');
             $table->string('transaction_details');           
             $table->bigInteger('refrence_id');
+            $table->bigInteger('is_13th_cheque_account')->nullable()->default(0);
             $table->timestamps();
         });
     }

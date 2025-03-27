@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Emp13thCheque;
 use App\Models\Employee;
 use App\Models\PayrollSalary;
+use App\Traits\PayrollTraits;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -19,7 +20,8 @@ class Emp13thChequeController extends BaseController
      /**
      * Display a listing of the resource.
      */
-    public $page_name = "Employee 13th Cheque";
+    public $page_name = "13th Cheque";
+    use PayrollTraits;
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -42,14 +44,21 @@ class Emp13thChequeController extends BaseController
     public function genrate13Cheque(Request $request)
     {
         $search_text = $request->search_text;
-        $employee_id = $request->employee_id;
+        $user_id = $request->user_id;
         $branch_id = $request->branch_id;
         $search_type = $request->search_type;
         $from_date = $request->from_date;
         $financial_year = $request->financial_year;
 
         $to_date = $request->to_date;
-        $employees = Employee::getList()->where('employment_type','local')->where('branch_id',$branch_id)->getActiveEmp()->get();
+        $branch = Branch::find($branch_id);
+        if(!empty($user_id))
+        {
+            $employees = Employee::getList()->where('employment_type','local')->where('user_id',$user_id)->where('branch_id',$branch_id)->getActiveEmp()->get();
+        }else
+        {
+            $employees = Employee::getList()->where('employment_type','local')->where('branch_id',$branch_id)->getActiveEmp()->get();
+        }
         $emp13ChequeReport =[];
         $financial_year_text ="";
         $months =[];
@@ -87,22 +96,22 @@ class Emp13thChequeController extends BaseController
                     $basicAmount = $data?->basic ?? 0;
                     $taxAmount = $data?->tax_amount_in_pula ?? 0;
                     $totalBasicAmount +=$basicAmount;
-                    $totalITaxAmount +=$taxAmount;
+                    // $totalITaxAmount +=$taxAmount;
                     $emp13ChequeReport[$ekey]['months'][$key]['basic'] = $basicAmount;
                     $emp13ChequeReport[$ekey]['months'][$key]['month_key'] = $month['month']['key'];
                 }
                 $emp13ChequeReport[$ekey]['total_amount'] = $totalBasicAmount;
                 $emp13ChequeReport[$ekey]['average_amount'] = ($totalBasicAmount/12);
-                // $totalITaxAmount = $this->getTaxAmount(['taxable_amount'=>$totalBasicAmount,'employment_type'=>$employe->employment_type])['tax_amount'];
-                $emp13ChequeReport[$ekey]['total_i_tax_amount'] = $totalITaxAmount;
-                $emp13ChequeReport[$ekey]['net_payable_amount'] = ($totalBasicAmount/12-$totalITaxAmount);
+                $totalITaxAmount = $this->getTaxAmount(['taxable_amount'=>$totalBasicAmount,'employment_type'=>$employe->employment_type])['tax_amount'];
+                $emp13ChequeReport[$ekey]['total_i_tax_amount'] = ($totalITaxAmount);
+                $emp13ChequeReport[$ekey]['net_payable_amount'] = ($totalBasicAmount/12 - $totalITaxAmount);
             }
         }
         $view = View::make('admin.payroll.emp13th-cheque.preview-genrate-form',  [
             'employees' => $employees,
-            'employee_id' => $employee_id,
             'search_type' => $search_type,
             'to_date' => $to_date,
+            'branch' => $branch,
             'months' => $months,
             'emp13ChequeReport' => $emp13ChequeReport,
             'financial_year' => $financial_year,
@@ -119,7 +128,6 @@ class Emp13thChequeController extends BaseController
             $financial_year = $request->financial_year;
             $user_id = $request->user_id;
             $employee_users_ids = $request->employee_users_ids;
-            // return $employee_users_ids[0];
             $financialYears = explode("-",$financial_year);
 
             $months =[
