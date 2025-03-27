@@ -35,8 +35,14 @@ trait PayrollTraits
         ]);
         $data['transaction_amount'] = $data['transaction_amount'] ?? 0;
         $data['payroll_ttum_report_id'] = $ttum->id;
-        $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->where('is_13th_cheque_account', 0)->where('branch_id', $branchId)->first();
+        if (isset($data['is_13th_cheque_account']) && $data['is_13th_cheque_account'] == 1) {
 
+        $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->where('is_13th_cheque_account', 1)->where('branch_id', $branchId)->first();
+        }
+        else{
+            $ttumExist = PayrollTtumSalaryReport::where('ttum_month', $ttumMonth)->where('account_id', $accountId)->where('is_13th_cheque_account', 0)->where('branch_id', $branchId)->first();
+ 
+        }
         if (!empty($ttumExist)) {
             $data['transaction_amount'] = $data['transaction_amount'] + $ttumExist->transaction_amount;
         }
