@@ -28,7 +28,7 @@ class PayrollReportController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = PayrollTtumReport::orderBy('id', 'ASC');
+            $data = PayrollTtumReport::getList()->orderBy('id', 'Desc');
 
             return DataTables::of($data)
                 ->addIndexColumn()

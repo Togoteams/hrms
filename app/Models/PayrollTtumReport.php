@@ -33,4 +33,18 @@ class PayrollTtumReport extends Model
     {
         return $this->branch?->name;
     }
+    public function scopeGetList($query)
+    {
+        if(auth()->user()->role_slug=='branch-head')
+        {
+            $query->where('branch_id', auth()->user()->employee->branch_id);
+        }elseif(auth()->user()->role_slug=='hr_head' || auth()->user()->role_slug=='managing-director' ||   auth()->user()->id==1){
+            $query;
+        }else
+        {
+            $query->where('branch_id',auth()->user()->employee->branch_id);
+        }
+        
+        return $query;
+    }
 }
