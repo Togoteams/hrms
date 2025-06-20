@@ -1,5 +1,6 @@
 @php
     $ecNumber = !empty($employee) ? $employee->ec_number : '';
+    $ecId = !empty($employee) ? $employee->id : '';
     $isBomaid = !empty($employee) ? $employee->getLatestSalary()?->is_medical_insuarance ?? 0 : '';
 @endphp
 
@@ -12,10 +13,10 @@
     @endcan
     
     @can('employee-details')
-    <button class="nav-link text-left mb-2 {{ Request::is('admin/employee/employee-details*') ? 'active-class' : '' }}"
-        type="button" onclick="window.location.href='{{ route('admin.employee.employeeDetails.form', $ecNumber) }}';"
+    <button class="nav-link text-left {{ $ecId }} mb-2 {{ Request::is('admin/employee/employee-details*') ? 'active-class' : '' }}"
+        type="button" onclick="window.location.href='{{ route('admin.employee.employeeDetails.form', $ecId) }}';"
         {{ empty($ecNumber) ? 'disabled' : '' }}>
-        Employee Details
+        Employee Details  
     </button>
     @endcan
     @canany(['list-employee-salary-revision', 'add-employee-salary', 'delete-employee-salary'])
