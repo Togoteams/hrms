@@ -198,7 +198,7 @@ class EmployeeController extends BaseController
                     $message,
                     [
                         "employee" => $employee,
-                        'redirect_url' => route('admin.employee.employeeDetails.form', $employee->ec_number)
+                        'redirect_url' => route('admin.employee.employeeDetails.form', $employee->id)
                     ]
                 );
             }
@@ -212,7 +212,8 @@ class EmployeeController extends BaseController
         $designation = Designation::getDesignation()->get();
         $bomaind = MedicalCard::getMedicalCard()->get();
         $currencySetting = CurrencySetting::getCurrency()->get();
-        $employee = $this->getEmployee($eid);
+        // $employee = $this->getEmployee($eid);
+        $employee = Employee::where('id', $eid)->first();
         // Filter currencies to include only 'pula' and 'usd'
         $allowedCurrencies = ['pula', 'usd'];
         $filteredCurrencySetting = $currencySetting->whereIn('currency_name_from', $allowedCurrencies);
