@@ -80,6 +80,7 @@ class PayrollSalaryController extends Controller
             'total_deduction' => 'required|numeric',
             'gross_earning' => 'required|numeric',
         ]);
+      
         if ($validator->fails()) {
             return $validator->errors();
         } else {
@@ -96,6 +97,13 @@ class PayrollSalaryController extends Controller
             $pulaToInr = getCurrencyValue("pula", "inr");
             //  dd(date("Y-m-d",strtotime($request->pay_for_month_year."-".date('d'))));
             $net_take_home_in_pula = number_format($request->net_take_home * $currencyValue, 2, '.', '');
+            $pfBankContribution = $pfEmpContribution = $pfBankContributionInr = $pfEmpContributionInr =0;
+             if ($emp->employment_type == "expatriate") {
+                $pfBankContribution =  $this->bankContributionOfPf($emp) * $currencyValue;
+                $pfEmpContribution = $request->provident_fund * $currencyValue;
+                $pfBankContributionInr =  $pfBankContribution * $pulaToInr;
+                $pfEmpContributionInr = $pfEmpContribution * $pulaToInr;
+            }
             $payroll = PayrollSalary::create([
                 'employee_id' => Employee::where('user_id', $request->user_id)->first()->id,
                 'user_id' => $request->user_id,
@@ -113,6 +121,11 @@ class PayrollSalaryController extends Controller
                 'total_working_days' =>  $request->total_working_days,
                 'education_allowance_for_ind_in_pula' =>  $request->education_allowance_for_ind_in_pula,
                 'taxable_amount_in_pula' =>  $request->taxable_amount_in_pula,
+                'tax_amount_in_pula' =>  $request->tax_amount_in_pula,
+                'pf_contribution_emp' =>  $pfEmpContribution,
+                'pf_contribution_bank' =>  $pfBankContribution,
+                'pf_contribution_emp_inr' =>  $pfEmpContributionInr,
+                'pf_contribution_bank_inr' =>  $pfBankContributionInr,
                 'tax_amount_in_pula' =>  $request->tax_amount_in_pula,
                 'net_take_home' =>  $request->net_take_home,
                 'leave_encashment_amount' =>  $request->leave_encashment_amount,

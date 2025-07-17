@@ -14,6 +14,7 @@ use App\Models\PayrollTtumReport;
 use App\Traits\PayrollTraits;
 use Illuminate\Support\Facades\Validator;
 
+
 class PayrollReportController extends Controller
 {
     /**
@@ -87,5 +88,17 @@ class PayrollReportController extends Controller
         $ttumReport->payrollTtumSalaryReport()->delete();
         $ttumReport->delete();
         return back();
+    }
+     public function iboPFReport(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = PayrollSalary::with('user','user.employee','payrollSalaryHead.payroll_head')->whereHas('user',function($q){
+                $q->where('employment_type','expatriate');
+            })->select('*');
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->make(true);
+        }
+        return view('admin.payroll.report.monthly-pf-report', ['page' => $this->page_name]);
     }
 }

@@ -40,6 +40,10 @@ return new class extends Migration
             $table->double('education_allowance_for_ind_in_pula',10,2)->nullable()->default(0);
             $table->double('taxable_amount_in_pula',10,2)->nullable()->default(0);
             $table->double('tax_amount_in_pula',10,2)->nullable()->default(0);
+            $table->double('pf_contribution_emp',10,2)->nullable()->default(0);
+            $table->double('pf_contribution_bank',10,2)->nullable()->default(0);
+            $table->double('pf_contribution_emp_inr',10,2)->nullable()->default(0);
+            $table->double('pf_contribution_bank_inr',10,2)->nullable()->default(0);
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->unsignedBigInteger('branch_id')->nullable();
