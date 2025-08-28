@@ -51,7 +51,7 @@
                                                     value="{{ $empLeaveType->id }}">
                                                 <div class="pt-2 col-4">
                                                     <input id="{{ $empLeaveType->slug }}"
-                                                        placeholder="Enter {{ $empLeaveType->name }}" max="100"
+                                                        placeholder="Enter {{ $empLeaveType->name }}" step="0.1"  max="100"
                                                         type="number"
                                                         name="emp_leave_component[{{ $key }}][leave_count]"
                                                         required value="{{ $empLeaveType->leave_count }}"
@@ -197,7 +197,7 @@
                                                 <div class="form-group">
                                                     <label for="date_of_current_basic">Leave Count</label>
                                                     <small class="required-field">*</small>
-                                                    <input type="number" name="leave_count" id="leave_count"
+                                                    <input type="number" name="leave_count" step="0.1" id="leave_count"
                                                         class="form-control" required>
                                                 </div>
                                             </div>

@@ -113,8 +113,7 @@
                                 $("#available_leave_for_encashment").val(0);
                             } else {
                                 $("#balance_leave1").val(data.remaining_leave);
-                                $("#available_leave_for_encashment").val(Math.round(Number(data.remaining_leave /
-                                    2)));
+                                $("#available_leave_for_encashment").val(Number(data.remaining_leave));
                             }
                         } else {
                             $("#balance_leave1").val(0);
