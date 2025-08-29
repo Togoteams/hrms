@@ -5,3 +5,11 @@ ADD COLUMN pf_contribution_bank DOUBLE(10,2) DEFAULT 0 NULL;
 ALTER TABLE payroll_salaries
 ADD COLUMN pf_contribution_emp_inr DOUBLE(10,2) DEFAULT 0 NULL,
 ADD COLUMN pf_contribution_bank_inr DOUBLE(10,2) DEFAULT 0 NULL;
+
+
+//28-08-25
+
+INSERT INTO payroll_heads 
+(`name`, `slug`, `placeholder`, `employment_type`, `for`, `is_dropdown`, `head_type`, `created_by`, `status`, `created_at`, `updated_at`) 
+VALUES 
+('Leave Encashment', 'leave_encashment', 'Leave Encashment', 'both', 'salary', 'no', 'income', 1, 'active', NOW(), NOW());

@@ -68,7 +68,6 @@
                 value="{{ $noOfAvailedLeaves ?? 0 }}" class="form-control form-control-sm ">
         </div>
     </div>
-    @if ($noOfEncashLeave)
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="leave_encashment_days">Leave Encashment Days</label>
@@ -76,7 +75,6 @@
                     value="{{ $noOfEncashLeave ?? 0 }}" class="form-control form-control-sm">
             </div>
         </div>
-    @endif
     <div class="col-sm-3">
         <div class="form-group">
             <label for="no_availed_leave">No. Loss Of Pay Leave :</label>
@@ -154,7 +152,6 @@
             </div>
         @endif
     @endforeach
-    @if ($noOfEncashLeave)
         <div class="col-sm-3">
             <div class="form-group">
                 <label for="leave_encashment_amount">Leave Encashment Amount(In USD)</label>
@@ -163,7 +160,6 @@
                     class="form-control form-control-sm leave_encashment_amount">
             </div>
         </div>
-    @endif
     @if ($emp13thChequeAmount)
     <div class="col-sm-3">
         <div class="form-group">

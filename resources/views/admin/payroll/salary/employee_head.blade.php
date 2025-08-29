@@ -48,14 +48,12 @@
             <input readonly  required max="2"  name="no_availed_leave"  type="number" value="{{$noOfAvailedLeaves ?? 0}}"  class="form-control form-control-sm ">
         </div>
     </div>
-    @if($noOfEncashLeave)
     <div class="col-sm-3">
         <div class="form-group">
             <label for="leave_encashment_days">Leave Encashment Days</label>
             <input readonly required max="2" name="leave_encashment_days"   type="number"  value="{{ $noOfEncashLeave ?? 0 }}" class="form-control form-control-sm">
         </div>
     </div>
-    @endif
     <div class="col-sm-3">
         <div class="form-group">
             <label for="no_availed_leave">No. Loss Of Pay Leave :</label>
@@ -108,14 +106,12 @@
     </div>
     @endif
     @endforeach
-    @if($noOfEncashLeave)
     <div class="col-sm-3">
         <div class="form-group">
             <label for="leave_encashment_amount">Leave Encashment Amount ({{"In PULA"}})</label>
             <input readonly required  name="leave_encashment_amount"    type="number"  value="{{ $totalEnCashAmount ?? 0 }}" class="form-control form-control-sm leave_encashment_amount">
         </div>
     </div>
-    @endif
     @if ($emp13thChequeAmount)
     <div class="col-sm-3">
         <div class="form-group">

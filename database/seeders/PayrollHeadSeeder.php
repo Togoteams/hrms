@@ -36,6 +36,7 @@ class PayrollHeadSeeder extends Seeder
             ['name' => 'Provident Fund', 'slug' => 'provident_fund', 'placeholder' => 'Provident Fund', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
             ['name' => 'Education Allowance For IND', 'slug' => 'education_allowance', 'placeholder' => 'Education Allowance', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1],
             ['name' => 'Recovery for Car', 'slug' => 'recovery_for_car', 'placeholder' => 'Recovery for Car', 'employment_type' => 'expatriate', 'for' => 'payscale', 'is_dropdown' => 'no','head_type'=>"deduction", 'created_by' => 1],
+            ['name' => 'Leave Encashment', 'slug' => 'leave_encashment', 'placeholder' => 'Leave Encashment', 'employment_type' => 'both', 'for' => 'salary', 'is_dropdown' => 'no','head_type'=>"income", 'created_by' => 1],
 
         );
         $head = \DB::table('payroll_heads')->delete();
