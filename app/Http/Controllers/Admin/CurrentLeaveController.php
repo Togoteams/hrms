@@ -93,19 +93,26 @@ class CurrentLeaveController extends BaseController
             $currentLeave = EmpCurrentLeave::where('user_id', $userId)->where('employee_id',$employeeId)->where('leave_type_id',$leaveTypeId)->first();
             if(!empty($currentLeave))
             {
-                $currentLeave->leave_count = $currentLeave->leave_count + $request->leave_count;
-                $currentLeave->action_date = date('Y-m-d');
-                $currentLeave->save();
+            
                 if($request->leave_credit_type=='adjustment')
-                {
-
+                { 
+                    if( $currentLeave->leave_count >= $request->leave_count)
+                    {
+                    $currentLeave->leave_count = $currentLeave->leave_count - $request->leave_count;
                     $isAdjustment =1;
                     $isCredit =0;
+                    }else{
+                        return response()->json(['status'=>false,'message' => "You don't have available balance for adjustment."]);
+                    }
+
                 }else
                 {
                     $isCredit =1;
                     $isAdjustment =0;
+                    $currentLeave->leave_count = $currentLeave->leave_count + $request->leave_count;
                 }
+                  $currentLeave->action_date = date('Y-m-d');
+                $currentLeave->save();
                 $this->leaveActivityLog([
                     'user_id'=>$request->user_id,
                     'leave_type_id'=>$leaveTypeId,
