@@ -59,7 +59,7 @@ class ReimbursementController extends BaseController
             ->rawColumns(['action'])
             ->make(true);
         }
-        $employees = Employee::where('employment_type','expatriate')->getActiveEmp()->getList()->get();
+        $employees = Employee::->getActiveEmp()->getList()->get();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();
@@ -208,7 +208,7 @@ class ReimbursementController extends BaseController
         $allowedExpenseCurrencies = ['pula'];
         $filteredCurrencySetting = $currencies->whereIn('currency_name_from', $allowedCurrencies);
         $expenseCurrency = $currencies->whereIn('currency_name_from', $allowedExpenseCurrencies);
-        $employees = Employee::where('employment_type','expatriate')->getActiveEmp()->getList()->get();
+        $employees = Employee::getActiveEmp()->getList()->get();
 
          // Filter currencies to include only 'pula' and 'usd'
          $allowedCurrencies = ['pula', 'usd'];
