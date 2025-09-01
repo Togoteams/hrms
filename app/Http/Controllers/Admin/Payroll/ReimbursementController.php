@@ -59,7 +59,7 @@ class ReimbursementController extends BaseController
             ->rawColumns(['action'])
             ->make(true);
         }
-        $employees = Employee::->getActiveEmp()->getList()->get();
+        $employees = Employee::getActiveEmp()->getList()->get();
         $reimbursement = Reimbursement::with('reimbursementype')->get()->toArray();
         $reimbursementType = ReimbursementType::getReimbursementType()->get();
         $currencies = CurrencySetting::getCurrency()->get();

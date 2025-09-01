@@ -8,6 +8,7 @@
                 $basic = round(($data->basic / $totalMonthDays) * $noOfPayableDays);
                 $perDaysAmount = round($data->basic / $totalMonthDays);
                 $totalEnCashAmount = $perDaysAmount * $noOfEncashLeave;
+                $totalGrossEarning = $data->gross_earning + $totalEnCashAmount ?? 0;
             @endphp
             <input value="{{ $usdToPulaAmount }}" readonly id="usdToPulaAmount" type="hidden" name="usdToPulaAmount"
                 class="form-control form-control-sm">
@@ -218,7 +219,7 @@
         <div class="form-group">
             <label for="gross_earning">Gross Earning ({{ 'In USD' }})</label>
             <input required id="gross_earning" readonly placeholder="Enter correct Gross Earning" type="number"
-                value="{{ $data->gross_earning ?? '' }}" name="gross_earning" class="form-control form-control-sm ">
+                value="{{ $totalGrossEarning ?? 0 }}" name="gross_earning" class="form-control form-control-sm ">
         </div>
     </div>
     <div class="col-sm-3">

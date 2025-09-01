@@ -49,6 +49,7 @@
             console.log("usdToPulaAmount",usdToPulaAmount);
             taxAbleAmount = getValue('gross_earning') - removetaxAmount;
         }
+        console.log("gross_earning",getValue('gross_earning'));
 
         $.ajax({
             url: taxCalcUrl,

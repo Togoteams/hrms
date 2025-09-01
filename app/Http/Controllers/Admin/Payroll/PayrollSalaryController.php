@@ -314,7 +314,7 @@ class PayrollSalaryController extends Controller
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
         $salary_month = $salaryMonth;
         $pulaToInr = getCurrencyValue("pula", "inr");
-        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
+        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('request_leave_for_encashement');
 
         if ($emp->employment_type == "expatriate") {
             $viewComponent = view('admin.payroll.salary.employee_head_for_ibo', compact('emp_head', 'edit', 'noOfEncashLeave', 'salary_month', 'totalLosOfPayLeave', 'noOfAvailedLeaves','pulaToInr', 'page', 'noOfPayableDays', 'totalBalancedLeave', 'arrearsNoOfMonth', 'presentDay', 'noOfHoliday', 'totalMonthDays', 'data', 'emp', 'usdToPulaAmount', 'usdToInrAmount'));
@@ -574,7 +574,7 @@ class PayrollSalaryController extends Controller
         $pulaToInr = getCurrencyValue("pula", "inr");
         // return $noOfReversalLeave;
         $noOfPayableDays = $totalMonthDays  - ($noOfHoliday + $noOfUnPaidLeave + $noOfUnapprovedLeave + ($halfPayLeave / 2) + ($quarterPayLeave * 0.25));
-        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('available_leave_for_encashment');
+        $noOfEncashLeave = LeaveEncashment::whereBetween('approval_at', array($salaryStartDate, $salaryEndDate))->where('user_id', $user_id)->whereIn('status', ['approved'])->sum('request_leave_for_encashement');
         $emp13thChequeAmount =0;
         if($month==12)
         {
