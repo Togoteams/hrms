@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('leave_type_id');
             $table->tinyInteger('is_credit')->default(0)->nullable();
             $table->tinyInteger('is_adjustment')->default(0)->nullable();
+            $table->tinyInteger('is_encash')->default(0)->nullable();
             $table->float('leave_count')->nullable()->default(0);
             $table->date('activity_at');
             $table->string('description')->nullable();

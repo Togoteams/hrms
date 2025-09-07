@@ -13,6 +13,7 @@ class LeaveActivityLog extends Model
         'leave_type_id',
         'is_credit',
         'leave_count',
+        'is_encash',
         'is_adjustment',
         'leave_update_reason',
         'activity_at',

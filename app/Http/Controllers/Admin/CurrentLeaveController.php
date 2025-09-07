@@ -62,6 +62,9 @@ class CurrentLeaveController extends BaseController
                   }elseif($row->is_adjustment)
                   {
                     return "Leave adjusted";
+                  }elseif($row->is_encash)
+                  {
+                    return "Leave Encashed";
                   }else
                   {
                     return "Leave Availed";

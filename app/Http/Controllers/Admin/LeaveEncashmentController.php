@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Designation;
+use App\Models\EmpCurrentLeave;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\Employee;
@@ -16,11 +17,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\LeaveEncashment;
 use App\Models\LeaveSetting;
 use App\Traits\LeaveTraits;
+use App\Traits\NotificationTraits;
 use Carbon\Carbon;
 
 class LeaveEncashmentController extends Controller
 {
     use LeaveTraits;
+        use NotificationTraits;
+
     public $page_name = "Leave Encashment";
     /**
      * Display a listing of the resource.
@@ -215,7 +219,7 @@ class LeaveEncashmentController extends Controller
         try {
             $leave_encashment = LeaveEncashment::find($id);
             if ($request->status == "approved") {
-                if (getAvailableLeaveCount($leave_encashment->leave_type_id, $leave_encashment->user_id) >= $leave_encashment->available_leave_for_encashment) {
+                if (getAvailableLeaveCount($leave_encashment->leave_type_id, $leave_encashment->user_id) >= $leave_encashment->request_leave_for_encashement) {
 
                     LeaveEncashment::where('id', $id)->update([
                         'status' => $request->status,
@@ -223,8 +227,50 @@ class LeaveEncashmentController extends Controller
                         'approved_by' =>auth()->user()->id,
                         'status_remarks' => $request->status_remarks,
                     ]);
+
+
+
+
+
+                   
+                $currentLeave = EmpCurrentLeave::where('user_id', $leave_encashment->user_id)->where('leave_type_id', $leave_encashment->leave_type_id)->first();
+                $currentLeaveCount = $currentLeave?->leave_count ?? 0;
+                $appliedLeaveCount = $leave_encashment->request_leave_for_encashement;
+                // return $currentLeave->leave_count;
+                if (!empty($currentLeave)) {
+                    $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
+                    if ($remaining_leave >=0) {
+                       
+                        $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
+                        // return $remaining_leave;
+                        $currentLeave->update(['leave_count' => $remaining_leave]);
+                        // $leaveCount = count($leave_apply->leaveDate);
+                     
+                        $this->leaveActivityLog([
+                            'user_id' => $leave_encashment->user_id,
+                            'leave_type_id' => $leave_encashment->leave_type_id,
+                            'is_credit' => 0,
+                            'is_encash' => 1,
+                            'leave_count' => $appliedLeaveCount
+                        ]);
+                        $this->saveNotification([
+                            'reference_id' => $id,
+                            'reference_type' => get_class($leave_encashment),
+                            'user_id' => $leave_encashment->user_id,
+                            'notification_type' => 'leave_approval',
+                            'title' => "Leave Approved",
+                            'description' => "Dear " . $leave_encashment->user->name . " Your " . $leave_encashment->leave_type->name . " is Encashed On Date " . date("d-m-Y", strtotime($leave_encashment->approval_at)),
+                        ]);
+                    } else {
+                        return response()->json([
+                            'error' => "Leave Approval Failed: Insufficient Leave Balance. You currently have " . $currentLeaveCount . " leave remaining."
+                        ]);
+                    }
+                }
+
+
                 } else {
-                    return response()->json(['error' => " Applied leave is " . $leave_encashment->available_leave_for_encashment . " but  they have only " . getAvailableLeaveCount($leave_encashment->leave_type_id, $leave_encashment->user_id) . " leave"]);
+                    return response()->json(['error' => " Applied leave is " . $leave_encashment->request_leave_for_encashement . " but  they have only " . getAvailableLeaveCount($leave_encashment->leave_type_id, $leave_encashment->user_id) . " leave"]);
                 }
             } else if ($request->status != "approved") {
                 LeaveEncashment::where('id', $id)->update([

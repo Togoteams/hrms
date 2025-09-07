@@ -17,6 +17,9 @@ class LeaveEncashment extends Model
     function leave_settings(){
         return $this->belongsTo(LeaveSetting::class,'leave_type_id');
     }
+    function leave_type(){
+        return $this->belongsTo(LeaveSetting::class);
+    }
     function employee(){
         return $this->belongsTo(Employee::class);
     }

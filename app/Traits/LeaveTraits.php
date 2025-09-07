@@ -173,6 +173,7 @@ trait LeaveTraits
     $leaveTypeId = $data['leave_type_id'];
     $isCredit = $data['is_credit'] ?? 0;
     $isDelete = @$data['is_delete'] ?? 0;
+    $isEncash = @$data['is_encash'] ?? 0;
     $isAdjustment = $data['is_adjustment'] ?? 0;
     $leaveCount = $data['leave_count'];
     $activityAt = currentDateTime('Y-m-d');
@@ -188,6 +189,9 @@ trait LeaveTraits
     }elseif($isAdjustment)
     {
       $description =$user->name." ".$leaveCount." ".$leaveSetting->name." Leave is adjusted on ". currentDateTime('d-m-Y');
+    }elseif($isEncash){
+            $description =$user->name." is Encash ".$leaveCount." ".$leaveSetting->name." Leave on ". currentDateTime('d-m-Y');
+
     }else
     {
       $description =$user->name." is avail ".$leaveCount." ".$leaveSetting->name." Leave on ". currentDateTime('d-m-Y');
@@ -196,6 +200,7 @@ trait LeaveTraits
       'user_id'=>$userId,
       'leave_type_id'=>$leaveTypeId,
       'is_credit'=>$isCredit,
+      'is_encash'=>$isEncash,
       'is_adjustment'=>$isAdjustment,
       'leave_count'=>$leaveCount,
       'activity_at'=>$activityAt,

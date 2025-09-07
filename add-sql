@@ -13,3 +13,8 @@ INSERT INTO payroll_heads
 (`name`, `slug`, `placeholder`, `employment_type`, `for`, `is_dropdown`, `head_type`, `created_by`, `status`, `created_at`, `updated_at`) 
 VALUES 
 ('Leave Encashment', 'leave_encashment', 'Leave Encashment', 'both', 'salary', 'no', 'income', 1, 'active', NOW(), NOW());
+
+//08-09-2025
+
+ALTER TABLE `leave_activity_logs` ADD `is_encash` TINYINT NULL DEFAULT '0' AFTER `user_id`;
+
