@@ -42,7 +42,7 @@ class LeaveEncashmentController extends Controller
                     return \Carbon\Carbon::parse($data->employee->start_date)->isoFormat('DD-MM-YYYY');
                 })
                 ->addColumn('apply_date', function ($data) {
-                    return \Carbon\Carbon::parse($data->created_at)->isoFormat('DD-MM-YYY');
+                    return \Carbon\Carbon::parse($data->created_at)->isoFormat('DD-MM-YYYY');
                 })
                 ->addColumn('action', function ($row) {
                     $actionBtn = view('admin.leave_encashment.buttons', ['item' => $row, "route" => 'leave_encashment']);
@@ -292,9 +292,42 @@ class LeaveEncashmentController extends Controller
     public function destroy(string $id)
     {
         try {
-            $user =  LeaveEncashment::find($id);
+            $leave_encashment =  LeaveEncashment::find($id);
             LeaveEncashment::destroy($id);
-            User::destroy($user->user_id);
+                $currentLeave = EmpCurrentLeave::where('user_id', $leave_encashment->user_id)->where('leave_type_id', $leave_encashment->leave_type_id)->first();
+                $currentLeaveCount = $currentLeave?->leave_count ?? 0;
+                $appliedLeaveCount = $leave_encashment->request_leave_for_encashement;
+                // return $currentLeave->leave_count;
+                if (!empty($currentLeave)) {
+                    $remaining_leave = $currentLeaveCount + $appliedLeaveCount;
+                    if ($remaining_leave >=0) {
+                       
+                        $remaining_leave = $currentLeaveCount - $appliedLeaveCount;
+                        // return $remaining_leave;
+                        $currentLeave->update(['leave_count' => $remaining_leave]);
+                        // $leaveCount = count($leave_apply->leaveDate);
+                     
+                        $this->leaveActivityLog([
+                            'user_id' => $leave_encashment->user_id,
+                            'leave_type_id' => $leave_encashment->leave_type_id,
+                            'is_credit' => 0,
+                            'is_encash' => 1,
+                            'leave_count' => $appliedLeaveCount
+                        ]);
+                        $this->saveNotification([
+                            'reference_id' => $id,
+                            'reference_type' => get_class($leave_encashment),
+                            'user_id' => $leave_encashment->user_id,
+                            'notification_type' => 'leave_approval',
+                            'title' => "Leave Approved",
+                            'description' => "Dear " . $leave_encashment->user->name . " Your " . $leave_encashment->leave_type->name . " is Encashed On Date " . date("d-m-Y", strtotime($leave_encashment->approval_at)),
+                        ]);
+                    } else {
+                        return response()->json([
+                            'error' => "Leave Approval Failed: Insufficient Leave Balance. You currently have " . $currentLeaveCount . " leave remaining."
+                        ]);
+                    }
+                }
             return "Delete";
         } catch (Exception $e) {
             return ["error" => $this->page_name . "Can't Be Delete this May having some Employee"];
