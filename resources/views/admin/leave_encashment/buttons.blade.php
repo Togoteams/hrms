@@ -16,18 +16,18 @@
     @csrf
 
     @if (!isemplooye())
+        @can('delete-leave-encashment')
         <input type="hidden" name="_method" value="DELETE">
             <button type="button" id="delete{{ $item->id }}"
                 onclick="deleteRow('edit{{ $item->id }}','delete{{ $item->id }}')"
                 class="btn btn-delete btn-sm"><i class="fas fa-trash-alt"></i>
             </button>
-        @can('delete-leave-encashment')
+            @endcan
         <button type="button"
             onclick="editForm('{{ route('admin.' . $route . '.status_modal', $item->id) }}', 'statuschange')"
             href="#" data-bs-toggle="modal" data-bs-target="#modalstatus"
             class="btn @if ($item->status == 'pending') btn-warning @elseif ($item->status == 'reject') btn-danger @elseif($item->status == 'approved') btn-success @else btn-secondary @endif btn-sm">
             {{ ucfirst($item->status) }}</button>
-        @endcan
     @endif
    
 </form>
