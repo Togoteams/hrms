@@ -96,22 +96,33 @@
                 $value = 0;
             }
             @endphp
+            @if( $head->slug=='leave_encashment' )
+                   <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this),taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="number" name="{{ strtolower($head->slug) }}" 
+             
+             value="{{ $totalEnCashAmount ?? 0 }}"
+          
+             class="form-control form-control-sm {{$head->head_type}}">
+            
+            @else
+           
             <input @if(in_array($head->slug,$readonlyArr)) readonly @endif onkeyup="amount_cal(this),taxCalCalculation(this)" required id="{{ $head->slug }}" placeholder="{{ $head->placeholder ?? 'Enter' . $head->name . 'of' . $page . '' }}" type="number" name="{{ strtolower($head->slug) }}" 
              
              
              value="{{getHeadValue($emp,$head->slug,'salary',$basic, $value,$salary_month)}}"
           
              class="form-control form-control-sm {{$head->head_type}}">
+              @endif
+            
         </div>
     </div>
     @endif
     @endforeach
-    <div class="col-sm-3">
+    {{-- <div class="col-sm-3">
         <div class="form-group">
             <label for="leave_encashment_amount">Leave Encashment Amount ({{"In PULA"}})</label>
             <input readonly required  name="leave_encashment_amount"    type="number"  value="{{ $totalEnCashAmount ?? 0 }}" class="form-control form-control-sm leave_encashment_amount">
         </div>
-    </div>
+    </div> --}}
     @if ($emp13thChequeAmount)
     <div class="col-sm-3">
         <div class="form-group">

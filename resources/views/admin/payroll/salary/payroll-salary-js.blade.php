@@ -17,7 +17,7 @@
         var montlyIncome = 0;
         var salaryHead;
         if (employmentType == "local") {
-            var leaveEncashAmount = parseFloat(getValue("leave_encashment_amount"));
+            var leaveEncashAmount = parseFloat(getValue("leave_encashment"));
             salaryHead ={
                 'basicAmount':basicAmount,
                 'allowance': getValue('allowance'),
@@ -26,7 +26,7 @@
                 'pension_bank':getValue('pension_bank'),
                 'others_arrears':getValue('others_arrears'),
                 'over_time':getValue('over_time'),
-                'leave_encashment_amount':getValue('leave_encashment_amount')
+                'leave_encashment_amount':getValue('leave_encashment')
             };
             montlyIncome = (basicAmount +getValue('others_arrears') + leaveEncashAmount + getValue('over_time')+ getValue('allowance') -(getValue('pension_own') - getValue('pension_bank'))) * 12;
             taxAbleAmount = (montlyIncome);
