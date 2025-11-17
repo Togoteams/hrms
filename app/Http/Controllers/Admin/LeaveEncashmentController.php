@@ -63,26 +63,26 @@ class LeaveEncashmentController extends Controller
                 $isApplicableForLeave = true;
                 $approvalData = "";
                 $newApprovalDate = "";
-                foreach($leaveEncashments as $leave_encashment)
-                {
-                    if($leave_encashment->approval_at!=""){
-                        $approvalData = $leave_encashment->approval_at;
-                        if($employementType=="local")
-                        {
-                            $approvalDate = Carbon::parse($approvalData);
-                            $newApprovalDate = $approvalDate->addYear(3);
-                        }else
-                        {
-                            $approvalDate = Carbon::parse($approvalData);
-                            $newApprovalDate = $approvalDate->addYear(2);
-                        }
-                    }
-                    $currentDateTime = currentDateTime();
-                    if($currentDateTime <= $newApprovalDate)
-                    {
-                        $isApplicableForLeave = false;
-                    }
-                }
+                // foreach($leaveEncashments as $leave_encashment)
+                // {
+                //     if($leave_encashment->approval_at!=""){
+                //         $approvalData = $leave_encashment->approval_at;
+                //         if($employementType=="local")
+                //         {
+                //             $approvalDate = Carbon::parse($approvalData);
+                //             $newApprovalDate = $approvalDate->addYear(3);
+                //         }else
+                //         {
+                //             $approvalDate = Carbon::parse($approvalData);
+                //             $newApprovalDate = $approvalDate->addYear(2);
+                //         }
+                //     }
+                //     $currentDateTime = currentDateTime();
+                //     if($currentDateTime <= $newApprovalDate)
+                //     {
+                //         $isApplicableForLeave = false;
+                //     }
+                // }
                 if($isApplicableForLeave)
                 {
                     $allowedEmp[] =$value;

@@ -87,7 +87,7 @@ class PayRollPayscaleCotroller extends BaseController
         }
         if($employment_type!="expatriate")
         {
-            $monthlyAmount = ($salary_head['basicAmount'] + $salary_head['others_arrears'] + $salary_head['over_time'] +$salary_head['allowance'] - ($salary_head['pension_own']-$salary_head['pension_bank'])) * 12;
+            $monthlyAmount = ($salary_head['basicAmount'] + $salary_head['others_arrears'] + $salary_head['over_time']+ $salary_head['leave_encashment_amount'] +$salary_head['allowance'] - ($salary_head['pension_own']-$salary_head['pension_bank'])) * 12;
             $taxableAmount = $monthlyAmount;
             $totalMonthlySalary = $monthlyAmount;
         }else
