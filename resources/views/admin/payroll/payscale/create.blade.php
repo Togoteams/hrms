@@ -74,7 +74,7 @@
   var inputDate = document.getElementById('payscale_date');
 
 // Set the min attribute to today's date
-inputDate.min = new Date().toISOString().split('T')[0];
+// inputDate.min = new Date().toISOString().split('T')[0];
 </script>
 @include('admin.payroll.payscale.payroll-payscale-js')
 @endpush
