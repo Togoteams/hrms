@@ -18,7 +18,7 @@ class RolePermissionSeeder extends Seeder
         $roles = Role::get();
         foreach($roles as $role)
         {
-            $rolePermissionArray = Permission::whereRaw('JSON_CONTAINS(permissions_for, ?)', [json_encode($role->role_type)])->pluck('slug')->toArray();
+            $rolePermissionArray = Permission::whereJsonContains('permissions_for', $role->role_type)->pluck('slug')->toArray();
             $role->permissions()->detach();
                 $isPermissionAttached = $role->givePermissionsTo( (array) $rolePermissionArray);
         }
