@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id')->nullable();
             $table->string('employee_type')->nullable();
             $table->integer('leave_type_id')->nullable();          // For Both
-            $table->integer('leave_count')->nullable();
+            $table->double('leave_count')->nullable();
             $table->double('leave_count_decimal')->nullable();
             $table->double('leave_rounded_value')->default(0)->nullable();
             $table->date('action_date')->nullable();
